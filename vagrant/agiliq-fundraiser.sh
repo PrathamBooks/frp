@@ -45,7 +45,7 @@ fi
 if [ ! -e ${PIP_INSTALL_STATUS} ];then
     cd /tmp/ && 
     wget https://www.dropbox.com/s/a00hdlerdnz07gd/agiliq-fundraiser.pybundle &&
-    pip install /vagrant/agiliq-fundraiser.pybundle &&
+    pip install /tmp/agiliq-fundraiser.pybundle &&
     touch ${PIP_INSTALL_STATUS}
 fi
 
