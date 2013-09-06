@@ -15,7 +15,7 @@ class User(db.Model):
         self.email = email
     
     def __repr__(self):
-        return "<User '%r'>\n"%self.name
+        return "<User %r>\n"%self.name
 
 class Product(db.Model):
     id   = db.Column(db.Integer, primary_key = True)
@@ -31,7 +31,7 @@ class Product(db.Model):
         self.by = user
         
     def __repr__(self):
-        return "<Product '%r' by '%r'>"%(self.name, self.by)
+        return "<Product %r by %r>"%(self.name, self.by)
 
 
         
