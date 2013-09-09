@@ -4,13 +4,30 @@
     <title>{{config['SITE_NAME']}}</title>
   </head>
   <body>
+    {% with flashes = get_flashed_messages() %}
+      {% if flashes %}
+	<ul class=flashes>
+	  {% for message in flashes %}
+            <li>{{ message }}
+	  {% endfor %}
+	</ul>
+      {% endif %}
+    {% endwith %}
+
+    {% if 'user_id' in session %}
+      <blockquote>
+	You're logged in.
+      </blockquote>
+    {% endif %}
+
     <h1>{{config['SITE_NAME']}}</h1>
     {% block body %}
     {% endblock %}
     <hr>
-    <a href="/product/add">Add product</a>|<a href="/register">Register user</a>
-    <footer>
-      <p>&copy; Pratham Books 2013. All rights reserved.</p>
-    </footer>
+      <a href="/product/add">Add product</a>|<a href="/login">Login</a>|<a href="/register">Register user</a>
+      <footer>
+	<p>&copy; Pratham Books 2013. All rights reserved.</p>
+	<p>Software version {{version}}</p>
+      </footer>
   </body>
 </html>

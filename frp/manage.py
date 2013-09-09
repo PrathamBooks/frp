@@ -6,7 +6,7 @@ manager = Manager(app)
 
 @manager.command
 def resetdb():
-    from models import db
+    db = app.models.db
     print "Dropping all tables"
     db.drop_all()
     print "Creating them afresh"
