@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+  <h2>Create new product</h2>
+<form method="post" action="{{ url_for('product_add') }}">
+  <label for="name">Name</label><input id ="name" type="text" name="name"/><br/>
+  <label for="description">Description</label><input id = "description" type="text" name="description"/><br/>
+  <input type="submit" name="submit" value="Create product">
+</form>
+{% endblock body %}

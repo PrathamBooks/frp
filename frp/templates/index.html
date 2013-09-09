@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
-  <p>
-    Hello, {{name}}
-  </p>
+  {% if products %}
+    <h2> List of available products </h2>
+    <ol>
+      {% for product in products %}
+	<li> {{product}} </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    No products available.
+  {% endif %}
 {% endblock body %}
