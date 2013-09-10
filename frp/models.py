@@ -1,28 +1,31 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.lastuser.sqlalchemy import UserBase
 
 from frp import app
 
 db=SQLAlchemy(app)
 
-class User(db.Model):
-    name = db.Column(db.String(10), primary_key=True)
-    email = db.Column(db.String(20), unique=True)
-    password = db.Column(db.String(120))
-    
-    def __init__(self, name, email, password):
-        self.name = name
-        self.email = email
-        self.password = password
-    
+class BaseMixin(object):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=db.func.now(), nullable=False)
+    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now(), nullable=False)
+
+
+# --- Models ------------------------------------------------------------------
+
+class User(UserBase, db.Model):
+    __tablename__ = 'user'
+    description = db.Column(db.Text, default=u'', nullable=False)
+
     def __repr__(self):
-        return "<User %r>\n"%self.name
+        return "<User %r>\n"%self.username
 
 class Product(db.Model):
     id   = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(10))
     description = db.Column(db.String(200))
-    user_id = db.Column(db.String, db.ForeignKey("user.name"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     by = db.relationship('User', 
                          backref = db.backref('user', lazy="dynamic"))
     

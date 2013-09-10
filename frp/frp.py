@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, session, g, abort, flash, url_for, redirect
 from werkzeug import check_password_hash, generate_password_hash
+from flask.ext.lastuser import Lastuser
+from flask.ext.lastuser.sqlalchemy import UserManager
+# from coaster.views import get_next_url, jsonp, load_models, load_model
 
 import settings
 import models
@@ -7,10 +10,12 @@ import models
 app = Flask(__name__)
 app.config.from_object(settings)
 
+lastuser = Lastuser()
+
 __VERSION__ = "0.1"
 
 @app.context_processor
-def inject_user():
+def inject_version():
     return dict(version=__VERSION__)
 
 @app.before_request
@@ -27,10 +32,8 @@ def index():
     
     
 @app.route("/product/add", methods=['GET', 'POST'])
+@lastuser.requires_login
 def product_add():
-    if request.method == "GET":
-        if not g.user:
-            abort(401)
     if request.method == "POST":
         name = request.form['name'] 
         user = g.user
@@ -42,48 +45,44 @@ def product_add():
     return render_template("create_product.html")
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route('/login')
+@lastuser.login_handler
 def login():
-    if g.user:
-        flash("You're already logged in")
-        return redirect("/")
-    if request.method == "POST":
-        user = models.User.query.get(request.form['name'])
-        if user and check_password_hash(user.password, request.form['password']):
-            session['user_id'] = user.name
-            flash("Welcome %s"%user.name)
-            return redirect("/")
-    return render_template("login_form.html")
+    return {'scope': 'id email'}
 
-
-@app.route("/logout")
-def logout():
-    del session['user_id']
+@app.route('/login/redirect')
+@lastuser.auth_handler
+def lastuserauth():
+    # Save the user object
+    models.db.session.commit()
+    print dir(request.form)
     return redirect("/")
+
+
+@app.route('/logout')
+@lastuser.logout_handler
+def logout():
+    flash("You are now logged out", category='info')
+    return "/"
     
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    if request.method == "POST":
-        print request.form['name']
-        print request.form['email']
-        print request.form['password']
-
-        user = models.User(name = request.form['name'],
-                           email = request.form['email'],
-                           password = generate_password_hash(request.form['password']))
-        models.db.session.add(user)
-        models.db.session.commit()
-        session['user_id'] = user.name
-
-        
-        flash("Thanks for registering")
-        return redirect(url_for('register'))
-    return render_template("register_user.html")
-
+@lastuser.auth_error_handler
+def lastuser_error(error, error_description=None, error_uri=None):
+    if error == 'access_denied':
+        flash("You denied the request to login", category='error')
+        return redirect("/")
+    print error
+    print error_description
+    print error_uri
+    return render_template("autherror.html",
+        error=error,
+        error_description=error_description,
+        error_uri=error_uri)
 
      
 
 
 if __name__ == "__main__":
+    lastuser.init_app(app)
+    lastuser.init_usermanager(UserManager(models.db, models.User))
     app.run()
