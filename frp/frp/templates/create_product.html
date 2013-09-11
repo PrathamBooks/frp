@@ -2,8 +2,26 @@
 {% block body %}
   <h2>Create new product</h2>
 <form method="post" action="{{ url_for('product_add') }}">
-  <label for="name">Name</label><input id ="name" type="text" name="name"/><br/>
-  <label for="description">Description</label><input id = "description" type="text" name="description"/><br/>
+  {{ form.hidden_tag() }}
+  {{ form.name.label }} {{form.name(size = 20)}}
+  {% if form.name.errors %}
+    <ul class=errors>
+    {% for error in form.name.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  <br/>
+
+  {{ form.description.label }} {{form.name(size = 120)}}<br/>
+  {% if form.description.errors %}
+    <ul class=errors>
+    {% for error in form.description.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  <br/>
   <input type="submit" name="submit" value="Create product">
 </form>
 {% endblock body %}

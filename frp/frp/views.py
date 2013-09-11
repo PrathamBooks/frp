@@ -5,6 +5,7 @@ from flask.ext.lastuser.sqlalchemy import UserManager
 from . import app, lastuser
 from . import models
 from .models import db
+from .forms import ProductForm
 
 @app.before_request
 def before_request():
@@ -22,15 +23,18 @@ def index():
 @app.route("/product/add", methods=['GET', 'POST'])
 @lastuser.requires_login
 def product_add():
+    form = ProductForm()
     if request.method == "POST":
-        name = request.form['name'] 
-        user = g.user
-        description = request.form['description']
-        product = models.Product(name, description, user = user)
-        db.session.add(product)
-        db.session.commit()
-        flash("%s added to catalogue"%name)
-    return render_template("create_product.html")
+        if form.validate_on_submit():
+            name = form.name.data
+            description = form.description.data
+            user = g.user
+            product = models.Product(name, description, user)
+            db.session.add(product)
+            db.session.commit()
+            flash("%s added to catalogue"%form.name.data)
+            return redirect("/")
+    return render_template("create_product.html", form = form)
 
 
 @app.route('/login')
