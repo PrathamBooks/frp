@@ -1,10 +1,9 @@
-from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.lastuser.sqlalchemy import UserBase
 
-from frp import app
+from . import app
 
-db=SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 class BaseMixin(object):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,22 +1,10 @@
-from flask import Flask, render_template, request, session, g, abort, flash, url_for, redirect
+from flask import render_template, request, session, g, abort, flash, url_for, redirect
 from werkzeug import check_password_hash, generate_password_hash
-from flask.ext.lastuser import Lastuser
 from flask.ext.lastuser.sqlalchemy import UserManager
-# from coaster.views import get_next_url, jsonp, load_models, load_model
 
-import settings
-import models
-
-app = Flask(__name__)
-app.config.from_object(settings)
-
-lastuser = Lastuser()
-
-__VERSION__ = "0.1"
-
-@app.context_processor
-def inject_version():
-    return dict(version=__VERSION__)
+from . import app, lastuser
+from . import models
+from .models import db
 
 @app.before_request
 def before_request():
@@ -39,8 +27,8 @@ def product_add():
         user = g.user
         description = request.form['description']
         product = models.Product(name, description, user = user)
-        models.db.session.add(product)
-        models.db.session.commit()
+        db.session.add(product)
+        db.session.commit()
         flash("%s added to catalogue"%name)
     return render_template("create_product.html")
 
@@ -54,7 +42,7 @@ def login():
 @lastuser.auth_handler
 def lastuserauth():
     # Save the user object
-    models.db.session.commit()
+    db.session.commit()
     print dir(request.form)
     return redirect("/")
 
@@ -78,11 +66,3 @@ def lastuser_error(error, error_description=None, error_uri=None):
         error=error,
         error_description=error_description,
         error_uri=error_uri)
-
-     
-
-
-if __name__ == "__main__":
-    lastuser.init_app(app)
-    lastuser.init_usermanager(UserManager(models.db, models.User))
-    app.run()
