@@ -15,6 +15,9 @@ def runserver(settings = "settings/development.py"):
     Defaults to settings/development.py
     """    
     app.config.from_pyfile(settings)
+    lastuser = Lastuser()
+    lastuser.init_app(app)
+    lastuser.init_usermanager(UserManager(models.db, models.User))
     app.run()
 
 @manager.command
