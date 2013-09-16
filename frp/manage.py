@@ -1,15 +1,25 @@
-from flask.ext.script import Manager
+from flask.ext.script import Manager, Command, Option
 from flask.ext.lastuser import Lastuser
 from flask.ext.lastuser.sqlalchemy import UserManager
 
 
-import models
-from frp import app
+from frp import app, models
 
 manager = Manager(app)
 
 @manager.command
-def resetdb():
+def runserver(settings = "settings/development.py"):
+    """
+    Runs the flask development server using the specified config file. 
+    
+    Defaults to settings/development.py
+    """    
+    app.config.from_pyfile(settings)
+    app.run()
+
+@manager.command
+def resetdb(settings = "settings/development.py"):
+    app.config.from_pyfile(settings)
     db = models.db
     lastuser = Lastuser()
     print "Dropping all tables"
