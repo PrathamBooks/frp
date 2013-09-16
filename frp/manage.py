@@ -3,7 +3,7 @@ from flask.ext.lastuser import Lastuser
 from flask.ext.lastuser.sqlalchemy import UserManager
 
 
-from frp import app, models
+from frp import app, models, lastuser
 
 manager = Manager(app)
 
@@ -15,7 +15,6 @@ def runserver(settings = "settings/development.py"):
     Defaults to settings/development.py
     """    
     app.config.from_pyfile(settings)
-    lastuser = Lastuser()
     lastuser.init_app(app)
     lastuser.init_usermanager(UserManager(models.db, models.User))
     app.run()
