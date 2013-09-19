@@ -1,0 +1,20 @@
+---
+- hosts: all
+  user: root
+  sudo: yes
+  tasks:
+  - name: Ensure that nginx is installed
+    apt: pkg=nginx state=installed
+  - name: Ensure that Python is installed
+    apt: pkg=python state=installed
+    apt: pkg=python-dev state=installed
+  - name: Ensure that Virtualenvwrapper is installed
+    apt: pkg=virtualenvwrapper state=installed
+  - name: Ensure that Postgresql is installed
+    apt: pkg=postgresql-server-dev-9.1 state=installed
+    apt: pkg=postgresql state=installed
+  - name: Ensure that git is installed
+    apt: pkg=git state=installed
+     
+
+

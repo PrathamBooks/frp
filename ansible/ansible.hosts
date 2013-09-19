@@ -1,0 +1,2 @@
+ec2-54-251-215-76.ap-southeast-1.compute.amazonaws.com ansible_ssh_private_key_file=/home/noufal/.ssh/id_rsa_pratham ansible_ssh_user=ubuntu
+

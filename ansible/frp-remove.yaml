@@ -1,0 +1,20 @@
+---
+- hosts: all
+  user: root
+  sudo: yes
+  tasks:
+  - name: Ensure that nginx is removed
+    apt: pkg=nginx state=removed
+  - name: Ensure that Python is removed
+    apt: pkg=python state=removed
+    apt: pkg=python-dev state=removed
+  - name: Ensure that Virtualenvwrapper is removed
+    apt: pkg=virtualenvwrapper state=removed
+  - name: Ensure that Postgresql is removed
+    apt: pkg=postgresql-server-dev-9.1 state=removed
+    apt: pkg=postgresql state=removed
+  - name: Ensure that git is removed
+    apt: pkg=git state=removed
+     
+
+
