@@ -1,6 +1,5 @@
 BeautifulSoup==3.2.1
 Flask==0.10.1
-Flask-Alembic==0.1
 Flask-Lastuser==0.3.14-dev
 Flask-Migrate==0.1.1
 Flask-SQLAlchemy==1.0
@@ -32,3 +31,4 @@ six==1.4.1
 times==0.6.2
 webassets==0.8
 wsgiref==0.1.2
+gunicorn==18.0
