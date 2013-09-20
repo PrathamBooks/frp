@@ -21,7 +21,7 @@ case $1 in
 	  -p ${PID_FILE} \
 	  --log-syslog \
 	  --log-syslog-prefix=frp \
-	  --log-syslog-facility=frp \
+	  --log-syslog-facility=local0 \
 	  --log-level=debug \
 	  wsgi:app
       ;;
