@@ -23,7 +23,7 @@ case $1 in
 	  --log-syslog-prefix=frp \
 	  --log-syslog-facility=frp \
 	  --log-level=debug \
-	  frp.wsgi:app &
+	  wsgi:app
       ;;
     stop)  
       kill `cat ${PID_FILE}` ;;
