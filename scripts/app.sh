@@ -10,8 +10,8 @@
 VENV=/opt/frp/environments/frp-app
 APP_ROOT=/opt/frp/deployed
 PID_FILE=/opt/frp/frp.pid
-ACCESS_LOG_FILE=/var/log/frp-gunicorn.access.log
-ERROR_LOG_FILE=/var/log/frp-gunicorn.error.log
+ACCESS_LOG_FILE=/var/log/frp/frp-gunicorn.access.log
+ERROR_LOG_FILE=/var/log/frp/frp-gunicorn.error.log
 # Activate virtualenv
 . ${VENV}/bin/activate
 
