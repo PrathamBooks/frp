@@ -10,7 +10,8 @@
 VENV=/opt/frp/environments/frp-app
 APP_ROOT=/opt/frp/deployed
 PID_FILE=/opt/frp/frp.pid
-
+ACCESS_LOG_FILE=/var/log/frp-gunicorn.access.log
+ERROR_LOG_FILE=/var/log/frp-gunicorn.error.log
 # Activate virtualenv
 . ${VENV}/bin/activate
 
@@ -19,9 +20,8 @@ case $1 in
       gunicorn --chdir ${APP_ROOT}/frp \
 	  -D \
 	  -p ${PID_FILE} \
-	  --log-syslog \
-	  --log-syslog-prefix=frp \
-	  --log-syslog-facility=local0 \
+	  --access-logfile=${ACCESS_LOG_FILE} \
+	  --error-logfile=${ERROR_LOG_FILE} \
 	  --log-level=debug \
 	  wsgi:app
       ;;
