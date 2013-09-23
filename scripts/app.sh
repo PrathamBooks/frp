@@ -12,6 +12,9 @@ APP_ROOT=/opt/frp/deployed
 PID_FILE=/opt/frp/frp.pid
 ACCESS_LOG_FILE=/var/log/frp/frp-gunicorn.access.log
 ERROR_LOG_FILE=/var/log/frp/frp-gunicorn.error.log
+
+FRP_CONFIG=settings/production.py
+
 # Activate virtualenv
 . ${VENV}/bin/activate
 
