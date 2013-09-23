@@ -1,4 +1,4 @@
-from fabric.api import run, cd, env, settings, sudo, local, settings
+from fabric.api import run, cd, env, settings, sudo, local, shell_env
 
 
 env.hosts = ['ubuntu@ec2-54-251-215-76.ap-southeast-1.compute.amazonaws.com']
@@ -39,8 +39,8 @@ def monit_restart():
     sudo("service monit restart")
 
 def reset_database():
-    with cd(currently_deployed_dir), settings(FRP_CONFIG = "settings/production.py"):
-        run(". {0}/{1}/bin/activate && python frp/manage.py resetdb".format(virtualenv_home, app_virtualenv))
+    with cd(currently_deployed_dir), shell_env(FRP_CONFIG = "settings/production.py"):
+        run("set && . {0}/{1}/bin/activate && python frp/manage.py resetdb".format(virtualenv_home, app_virtualenv))
 
 
 # Local commands
