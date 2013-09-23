@@ -40,7 +40,7 @@ def monit_restart():
 
 def reset_database():
     with cd(currently_deployed_dir), shell_env(FRP_CONFIG = "settings/production.py"):
-        run("set && . {0}/{1}/bin/activate && python frp/manage.py resetdb".format(virtualenv_home, app_virtualenv))
+        run(". {0}/{1}/bin/activate && python frp/manage.py resetdb".format(virtualenv_home, app_virtualenv))
 
 
 # Local commands
