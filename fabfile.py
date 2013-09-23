@@ -34,6 +34,8 @@ def update_virtualenv(tag):
 def update_monit_config():
     sudo("rm -f /etc/monit/conf.d/frp.conf")
     sudo("ln -s {0}/scripts/monit/frp.conf /etc/monit/conf.d/frp.conf".format(currently_deployed_dir))
+    sudo("rm -f /etc/monit/conf.d/lastuser.conf")
+    sudo("ln -s {0}/scripts/monit/lastuser.conf /etc/monit/conf.d/lastuser.conf".format(currently_deployed_dir))
 
 def monit_restart():
     sudo("service monit restart")
