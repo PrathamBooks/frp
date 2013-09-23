@@ -38,18 +38,25 @@ def update_monit_config():
 def monit_restart():
     sudo("service monit restart")
 
+def reset_database():
+    with cd(currently_deployed_dir)
+        run(". {0}/{1}/bin/activate && python frp/manage.py resetdb".format(virtualenv_home, app_virtualenv))
+
+
 # Local commands
 def push_code():
     local("git push --tags")
 
 # Public commands
-def deploy(tag, venv = False):
+def deploy(tag, venv = False, resetdb = False):
     "Deploy the application tagged by :tag:"
     push_code()
     obtain_code(tag)
     set_deployed_version(tag)
     if venv:
         update_virtualenv(tag)
+    if resetdb:
+        reset_database()
     update_monit_config()
     monit_restart()
 

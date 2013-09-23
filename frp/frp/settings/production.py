@@ -1,8 +1,8 @@
 # Database settings
-SQLALCHEMY_DATABASE_URI = "postgresql://noufal:noufal@localhost/frp"
+SQLALCHEMY_DATABASE_URI = "postgresql://ubuntu:ubuntu123@localhost/frp"
 
 DEBUG = True
-SECRET_KEY = "Development key"
+SECRET_KEY = "iLd3QjFqgGCJQ"
 
 SITE_NAME="Pratham Books Fund raising platform"
 
