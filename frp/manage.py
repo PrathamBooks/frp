@@ -1,3 +1,5 @@
+import os
+
 from flask.ext.script import Manager, Command, Option
 from flask.ext.lastuser import Lastuser
 from flask.ext.lastuser.sqlalchemy import UserManager
@@ -14,6 +16,8 @@ def runserver(settings = "settings/development.py"):
     
     Defaults to settings/development.py
     """    
+    settings = os.environ.get('FRP_CONFIG', settings)
+    print "Loading config from %s"%settings
     app.config.from_pyfile(settings)
     lastuser.init_app(app)
     lastuser.init_usermanager(UserManager(models.db, models.User))
