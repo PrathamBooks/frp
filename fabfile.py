@@ -39,6 +39,7 @@ def update_monit_config():
 
 def monit_restart():
     sudo("service monit restart")
+    sudo("sudo monit restart all")
 
 def reset_database():
     with cd(currently_deployed_dir), shell_env(FRP_CONFIG = "settings/production.py"):
