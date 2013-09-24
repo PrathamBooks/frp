@@ -1,6 +1,5 @@
 BeautifulSoup==3.2.1
 Flask==0.10.1
-Flask-Lastuser
 Flask-Migrate==0.1.1
 Flask-SQLAlchemy==1.0
 Flask-Script==0.6.2
@@ -32,3 +31,4 @@ times==0.6.2
 webassets==0.8
 wsgiref==0.1.2
 gunicorn==18.0
+https://github.com/hasgeek/flask-lastuser/archive/master.zip
