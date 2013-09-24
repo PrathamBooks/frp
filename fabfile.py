@@ -48,6 +48,7 @@ def reset_database():
 
 # Local commands
 def push_code():
+    local("git push --force")
     local("git push --tags")
 
 # Public commands
