@@ -7,11 +7,6 @@ from . import models
 from .models import db
 from .forms import ProductForm
 
-@app.before_request
-def before_request():
-    g.user = None
-    if 'user_id' in session:
-        g.user = models.User.query.get(session['user_id'])
 
 @app.route("/")
 def index():
