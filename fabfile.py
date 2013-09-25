@@ -31,15 +31,9 @@ def update_virtualenv(tag):
     with cd(app_base):
         run(". {0}/{1}/bin/activate && pip install -M -r {2}/requirements/production.txt".format(virtualenv_home, app_virtualenv, currently_deployed_dir))
 
-def update_monit_config():
-    sudo("rm -f /etc/monit/conf.d/frp.conf")
-    sudo("ln -s {0}/scripts/monit/frp.conf /etc/monit/conf.d/frp.conf".format(currently_deployed_dir))
-    sudo("rm -f /etc/monit/conf.d/lastuser.conf")
-    sudo("ln -s {0}/scripts/monit/lastuser.conf /etc/monit/conf.d/lastuser.conf".format(currently_deployed_dir))
-
 def monit_restart():
     sudo("service monit restart")
-    sudo("sudo monit restart all")
+    sudo("monit restart all")
 
 def reset_database():
     with cd(currently_deployed_dir), shell_env(FRP_CONFIG = "settings/production.py"):
@@ -61,7 +55,6 @@ def deploy(tag, venv = False, resetdb = False):
         update_virtualenv(tag)
     if resetdb:
         reset_database()
-    update_monit_config()
     monit_restart()
 
 def rollback(tag):
