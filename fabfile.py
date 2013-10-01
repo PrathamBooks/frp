@@ -1,5 +1,3 @@
-import time
-
 from fabric.api import run, cd, env, settings, sudo, local, shell_env
 from fabric.contrib.files import sed
 
@@ -14,7 +12,7 @@ app_base = "/opt/frp"
 deployments_dir = "{0}/deployments".format(app_base)
 currently_deployed_dir = "{0}/deployed".format(app_base)
 version_file = "{0}/frp/frp/_version.py".format(currently_deployed_dir)
-production_config_file = "/opt/config/frp/production.py"
+production_config_file = "/opt/config/deployed/frp/production.py"
 app_production_config_file = "{0}/frp/frp/settings/production.py".format(currently_deployed_dir)
 
 virtualenv_home = "/opt/frp/environments"
@@ -40,8 +38,6 @@ def update_virtualenv(tag):
         run(". {0}/{1}/bin/activate && pip install -M -r {2}/requirements/production.txt".format(virtualenv_home, app_virtualenv, currently_deployed_dir))
 
 def monit_restart():
-    sudo("service monit restart")
-    time.sleep(5)
     sudo("monit restart all")
 
 def reset_database():
