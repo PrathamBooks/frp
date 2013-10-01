@@ -1,3 +1,5 @@
+import time
+
 from fabric.api import run, cd, env, settings, sudo, local, shell_env
 
 
@@ -37,6 +39,7 @@ def update_virtualenv(tag):
 
 def monit_restart():
     sudo("service monit restart")
+    time.sleep(5)
     sudo("monit restart all")
 
 def reset_database():
