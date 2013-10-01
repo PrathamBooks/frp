@@ -8,13 +8,14 @@ from fabric.contrib.files import sed
 env.hosts = ['ubuntu@ec2-54-251-215-76.ap-southeast-1.compute.amazonaws.com']
 env.key_filename = ['/home/noufal/.ssh/id_rsa_pratham']
 
-
 app_repository = "https://github.com/PrathamBooks/frp.git"
 
 app_base = "/opt/frp"
 deployments_dir = "{0}/deployments".format(app_base)
 currently_deployed_dir = "{0}/deployed".format(app_base)
 version_file = "{0}/frp/frp/_version.py".format(currently_deployed_dir)
+production_config_file = "/opt/config/frp/production.py"
+app_production_config_file = "{0}/frp/frp/settings/production.py".format(currently_deployed_dir)
 
 virtualenv_home = "/opt/frp/environments"
 app_virtualenv = "frp-app"
@@ -47,6 +48,9 @@ def reset_database():
     with cd(currently_deployed_dir), shell_env(FRP_CONFIG = "settings/production.py"):
         run(". {0}/{1}/bin/activate && python frp/manage.py resetdb".format(virtualenv_home, app_virtualenv))
 
+def fix_config():
+    with cd(currently_deployed_dir):
+        run("ln -s {0} {1}".format(production_config_file, app_production_config_file))
 
 # Local commands
 def push_code():
@@ -63,6 +67,7 @@ def deploy(tag, venv = False, resetdb = False):
         update_virtualenv(tag)
     if resetdb:
         reset_database()
+    fix_config()
     monit_restart()
 
 def rollback(tag):
