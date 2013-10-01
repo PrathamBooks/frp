@@ -1,6 +1,8 @@
 import time
 
 from fabric.api import run, cd, env, settings, sudo, local, shell_env
+from fabric.contrib.files import sed
+
 
 
 env.hosts = ['ubuntu@ec2-54-251-215-76.ap-southeast-1.compute.amazonaws.com']
@@ -29,8 +31,7 @@ def set_deployed_version(tag):
         run("rm -f {0}".format(currently_deployed_dir))
         run("ln -s {0}/{1} {2}".format(deployments_dir, tag, currently_deployed_dir))
         # Write version file which will get loaded by the application.
-        with open(version_file,"w") as f:
-            f.write("__version__ = '{0}'".format(tag))
+        sed(version_file, "development", tag)
     
 
 def update_virtualenv(tag):
