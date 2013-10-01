@@ -10,6 +10,7 @@ app_repository = "https://github.com/PrathamBooks/frp.git"
 app_base = "/opt/frp"
 deployments_dir = "{0}/deployments".format(app_base)
 currently_deployed_dir = "{0}/deployed".format(app_base)
+version_file = "{0}/frp/frp/_version.py".format(currently_deployed_dir)
 
 virtualenv_home = "/opt/frp/environments"
 app_virtualenv = "frp-app"
@@ -25,6 +26,9 @@ def set_deployed_version(tag):
     with cd(app_base):
         run("rm -f {0}".format(currently_deployed_dir))
         run("ln -s {0}/{1} {2}".format(deployments_dir, tag, currently_deployed_dir))
+        # Write version file which will get loaded by the application.
+        with open(version_file,"w") as f:
+            f.write("__version__ = '{0}'".format(tag))
     
 
 def update_virtualenv(tag):
