@@ -28,6 +28,7 @@
       <footer>
 	<p>&copy; Pratham Books 2013. All rights reserved.</p>
 	<p>Software version {{version}}</p>
+	<p>{% if testing %} Faking authentication since <code>LASTUSER_TEST</code> is set. This shouldn't happen on a production server. {% endif%}
       </footer>
   </body>
 </html>

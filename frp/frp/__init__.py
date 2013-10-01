@@ -7,7 +7,8 @@ lastuser = Lastuser()
 
 @app.context_processor
 def inject_version():
-    return dict(version=__version__)
+    return dict(version = __version__,
+                testing = app.config.get('LASTUSER_TEST'))
 
 
 from . import views, models
