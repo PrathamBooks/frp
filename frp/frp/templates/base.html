@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}"/>
+    {% assets "css_site" %}
+    <link rel=stylesheet type=text/css href="{{ ASSET_URL }}"/>
+    {% endassets %}
     <title>{{config['SITE_NAME']}}</title>
   </head>
   <body>
