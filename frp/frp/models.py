@@ -18,7 +18,7 @@ class User(UserBase, db.Model):
     description = db.Column(db.Text, default=u'', nullable=False)
 
     def __repr__(self):
-        return "<User %r>\n"%self.username
+        return "%s"%self.username
 
 class Product(db.Model):
     id   = db.Column(db.Integer, primary_key = True)
@@ -34,9 +34,4 @@ class Product(db.Model):
         self.by = user
         
     def __repr__(self):
-        return "<Product %r by %r>"%(self.name, self.by)
-
-
-        
-
-
+        return "'%s' (%s) added by %s"%(self.name, self.description, self.by) 

@@ -2,11 +2,18 @@
 {% block body %}
   {% if products %}
     <h2> List of available products </h2>
-    <ol>
+    <ul id="products">
       {% for product in products %}
-	<li> {{product}} </li>
+	<li> 
+	  <div class="header">
+	    <span class="name">{{product.name}}</span> <span class="by">{{product.by}}</span>
+	  </div>
+	  <p class="description">
+	    {{product.description}}
+	  </p>
+	</li>
       {% endfor %}
-    </ol>
+    </ul>
   {% else %}
     No products available.
   {% endif %}

@@ -60,3 +60,32 @@ div#header {
 div#header a { 
                padding: 0 15pt;
  }
+
+
+ul#products li { 
+                 border: 1px solid #aaaa11;
+                 margin-top: 2em;
+ }
+
+ul#products div.header { 
+                         background-color: #dddd44;
+                         border-bottom: 1px solid #aaaa11;
+                         
+                         }
+
+ul#products div.header span.name { 
+                                   display: inline-block;
+                                   width: 25%;
+
+}
+
+ul#products div.header span.by { 
+                                 width: 25%;
+                                 margin-left: 50%;
+                                 
+ } 
+
+img { 
+      display: block;
+      margin: 1px auto;
+ }
