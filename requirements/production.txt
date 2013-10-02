@@ -33,3 +33,5 @@ wsgiref==0.1.2
 gunicorn==18.0
 https://github.com/hasgeek/flask-lastuser/archive/master.zip
 Flask-Assets==0.8
+cssmin==0.1.4
+jsmin==2.0.4
