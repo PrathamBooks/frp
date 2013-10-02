@@ -4,3 +4,5 @@ ghostdriver.log
 *.pyc
 __pycache__/
 build/
+frp/frp/static/gen/*
+frp/frp/static/.webassets-cache/*
