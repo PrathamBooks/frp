@@ -10,7 +10,7 @@ from .forms import ProductForm
 
 @app.route("/")
 def index():
-    products = models.Product.query.all()
+    products = models.Product.query.order_by(models.Product.id.desc())
     return render_template('index.html', 
                            products = products)
     
