@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
   <h2>Create new product</h2>
-<form id = "create_product" method="post">
+  <form id = "create_product" method="post">
   {{ form.hidden_tag() }}
-  {{ form.name.label }} {{form.name(size = 20)}}
+  {{form.name(size = 20)}}  {{ form.name.label }} 
   {% if form.name.errors %}
     <ul class=errors>
     {% for error in form.name.errors %}
@@ -11,8 +11,8 @@
     {% endfor %}
     </ul>
   {% endif %}
-  <br/>
-  {{ form.description.label }} {{form.description(size = 120)}}<br/>
+  <br/><br/>
+  {{form.description(size = 70)}} {{ form.description.label }} 
   {% if form.description.errors %}
     <ul class=errors>
     {% for error in form.description.errors %}
@@ -20,7 +20,7 @@
     {% endfor %}
     </ul>
   {% endif %}
-  <br/>
+  <br/><br/>
   <button form ="create_product" formaction="{{ url_for('product_add') }}"  type="submit" value="create product" name="submit" formmethod="post">
     Create product
     </button>

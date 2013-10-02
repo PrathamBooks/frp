@@ -1,14 +1,18 @@
 <!doctype html>
 <html>
   <head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}"/>
     <title>{{config['SITE_NAME']}}</title>
   </head>
   <body>
+    <div id="header">
+      <a name="add" href="/product/add">Add product</a>|<a href="/login">Login</a>|<a href="/logout">Logout</a>
+    </div>
     {% with flashes = get_flashed_messages() %}
       {% if flashes %}
-	<ul class=flashes>
+	<ul class="flashes">
 	  {% for message in flashes %}
-            <li>{{ message }}
+            <li>{{ message }}</li>
 	  {% endfor %}
 	</ul>
       {% endif %}
@@ -24,11 +28,12 @@
     {% block body %}
     {% endblock %}
     <hr>
-      <a name="add" href="/product/add">Add product</a>|<a href="/login">Login</a>|<a href="/logout">Logout</a>
       <footer>
 	<p>&copy; Pratham Books 2013. All rights reserved.</p>
-	<p>Software version {{version}}</p>
-	<p>{% if testing %} Faking authentication since <code>LASTUSER_TEST</code> is set. This shouldn't happen on a production server. {% endif%}
+	<p>Software version <span class="version">{{version}}<span></p>
+	{% if testing %}
+	<p class="warn">Faking authentication since <code>LASTUSER_TEST</code> is set. This shouldn't happen on a production server.</p>
+	{% endif%}
       </footer>
   </body>
 </html>
