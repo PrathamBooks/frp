@@ -1,6 +1,4 @@
 from flask import render_template, request, session, g, abort, flash, url_for, redirect
-from werkzeug import check_password_hash, generate_password_hash
-from flask.ext.lastuser.sqlalchemy import UserManager
 
 from .. import app, lastuser
 from .. import models
