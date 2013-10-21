@@ -8,9 +8,9 @@ from .. import app
 api = Api(app)
 
 class User(Resource):
-    def get(self):
+    def get(self, user_id):
         return {
-            "id" : 0,
+            "id" : userid,
             "username" : '',
             "firstname" : '',
             "lastname" : '',
@@ -25,13 +25,13 @@ class User(Resource):
         }
 
 class Campaign(Resource):
-    def get(self):
+    def get(self, campaign_id):
         lat, lon = "10.00N", "25.00E"
         now = calendar.timegm(datetime.datetime.now().utctimetuple())
         approvedBy = lambda:0 ; approvedBy.id = 10
         verifiedBy = lambda:0 ; verifiedBy.id = 20
         return {
-            id: 0,
+            "id": campaign_id,
             "name" : '',
             "subheading" : '',
             "brief" : '',
@@ -58,19 +58,19 @@ class Campaign(Resource):
         }
 
 class Category(Resource):
-    def get(self):
+    def get(self, category_id):
         return {
-            id: 0,
+            "id": category_id,
             "name" : '',
             "icon" : 'cssClass',
             "campaigns" : [{}]
         }
 
 class Location(Resource):
-    def get(self):
+    def get(self, location_id):
         lat, lon = "10.00N", "25.00E"
         return {
-            id: 0,
+            "id": location_id,
             "name" : '',
             "photo" : "",#{url},
             "latlng" : [lat, lon],
@@ -85,10 +85,10 @@ def add_resources(base_url, resources):
         
 # Tuples of the form (resource, url)
 v1_base_url = "/api/v1"
-routes = [(User, "user"),
-          (Campaign, "campaign"),          
-          (Category, "category"),
-          (Location, "location")]
+routes = [(User, "user/<int:user_id>"),
+          (Campaign, "campaign/<int:campaign_id>"),          
+          (Category, "category/<int:category_id>"),
+          (Location, "location/<int:location_id>")]
 
 
 
