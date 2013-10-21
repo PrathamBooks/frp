@@ -10,7 +10,7 @@ api = Api(app)
 class User(Resource):
     def get(self, user_id):
         return {
-            "id" : userid,
+            "id" : user_id,
             "username" : '',
             "firstname" : '',
             "lastname" : '',
