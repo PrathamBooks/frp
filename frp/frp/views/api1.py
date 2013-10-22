@@ -1,3 +1,7 @@
+"""
+Implements endpoints for API version 1.
+"""
+
 import calendar
 import datetime
 
