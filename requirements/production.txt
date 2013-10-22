@@ -5,7 +5,7 @@ Flask-Admin==1.0.6
 Flask-Assets==0.8
 https://github.com/nibrahim/flask-lastuser/archive/133ffa36ab1f5bc3663f1cb7972071151d02e6b1.zip
 Flask-Migrate==0.1.1
-Flask-RESTful==0.1.7
+https://github.com/nibrahim/flask-restful/archive/ee67ec68f8aec1cd6694fa6307f090f290d62209.zip
 Flask-SQLAlchemy==1.0
 Flask-Script==0.6.2
 Flask-WTF==0.9.1
