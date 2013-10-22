@@ -5,11 +5,13 @@ Implements endpoints for API version 1.
 import calendar
 import datetime
 
+from flask import Blueprint, make_response, jsonify
 from flask.ext.restful import Api, Resource
 
-from .. import app
 
-api = Api(app)
+
+blueprint = Blueprint("apiv1", __name__)
+api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
 
 class User(Resource):
     def get(self, user_id):
@@ -82,17 +84,13 @@ class Location(Resource):
         }
 
 
-def add_resources(base_url, resources):
+def add_resources(resources):
     for resource, url in resources:
-        api.add_resource(resource, 
-                         "%s/%s"%(base_url, url))
+        api.add_resource(resource, url)
+
         
 # Tuples of the form (resource, url)
-v1_base_url = "/api/v1"
 routes = [(User, "user/<int:user_id>"),
           (Campaign, "campaign/<int:campaign_id>"),          
           (Category, "category/<int:category_id>"),
           (Location, "location/<int:location_id>")]
-
-
-

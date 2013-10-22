@@ -1,9 +1,20 @@
 from flask import render_template, request, session, g, abort, flash, url_for, redirect
+from flask import make_response, jsonify
 
 from .. import app, lastuser
 from .. import models
 from ..models import db
 from ..forms import ProductForm
+
+
+@app.errorhandler(404)
+def http_404(error):
+    if 'text/html' in request.headers.get("Accept", ""):
+        return render_template('404.html', 
+                               error = error, error_description = "", error_uri = "")
+    else:
+        return make_response(jsonify({'error' : str(error)}), 404)
+
 
 
 @app.route("/")
