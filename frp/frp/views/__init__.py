@@ -1,5 +1,5 @@
 from .. import app
-from . import human, api1
+from . import human, api1, admin
 
 # Enable the API resources.
 api1.add_resources(api1.routes)
