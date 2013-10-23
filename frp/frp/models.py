@@ -1,9 +1,12 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.lastuser.sqlalchemy import UserBase
+from flask.ext.gravatar import Gravatar
+
 
 from . import app
 
 db = SQLAlchemy(app)
+gravatar = Gravatar()
 
 class BaseMixin(object):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,9 +16,13 @@ class BaseMixin(object):
 
 # --- Models ------------------------------------------------------------------
 
-class User(UserBase, db.Model):
+class User(UserBase, db.Model, BaseMixin):
     __tablename__ = 'user'
     description = db.Column(db.Text, default=u'', nullable=False)
+
+    def gravatar(self, **kargs):
+        return gravatar(self.email, **kargs)
+        
 
     def __repr__(self):
         return "%s"%self.username
