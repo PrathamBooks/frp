@@ -5,29 +5,31 @@ Implements endpoints for API version 1.
 import calendar
 import datetime
 
-from flask import Blueprint, make_response, jsonify
+from flask import Blueprint, make_response, jsonify, abort
 from flask.ext.restful import Api, Resource
 
-
+from .. import models
 
 blueprint = Blueprint("apiv1", __name__)
 api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
 
 class User(Resource):
     def get(self, user_id):
+        user = models.User.query.get(user_id)
+        if not user:
+            abort(404)
         return {
-            "id" : user_id,
-            "username" : '',
-            "firstname" : '',
-            "lastname" : '',
-            "avatar" : "", #TBD
-            "email" : '',
-            "twitter" : '',
-            "authService" : 0,
-            "lastLogin" : calendar.timegm(datetime.datetime.now().utctimetuple()),
-            "created" : calendar.timegm(datetime.datetime(2013, 5, 1, 10, 00, 00).utctimetuple()),
+            "id" : user.id,
+            "username" : user.username,
+            "fullname" : user.fullname,
+            "avatar" : user.gravatar(size=20),
+            "email" : user.email,
+            "twitter" : 'not implemented',
+            "authService" : -1,
+            "lastLogin" : calendar.timegm(user.updated_at.utctimetuple()),
+            "created" : calendar.timegm(user.created_at.utctimetuple()),
             "campaigns" : [],
-            "currency" : 'INR'
+            "currency" : 'not implemented' 
         }
 
 class Campaign(Resource):

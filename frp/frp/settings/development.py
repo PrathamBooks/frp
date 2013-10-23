@@ -7,11 +7,11 @@ SECRET_KEY = "Development key"
 SITE_NAME="Pratham Books Fund raising platform"
 
 #: LastUser server
-LASTUSER_SERVER = 'http://lastuser.io'
+LASTUSER_SERVER = 'http://frp-auth.prathambooks.org/'
 #: LastUser client id
-LASTUSER_CLIENT_ID = 'Eg7rNU2xRim8ZJ2nwCupeQ'
+LASTUSER_CLIENT_ID = 'z6Ke4mDiSBGxRvBurAvVkQ'
 #: LastUser client secret
-LASTUSER_CLIENT_SECRET = 'oB-6wY-wSiqhtTJLdRUG-gz00oiFNyRuG2IlANh_Dvlg'
+LASTUSER_CLIENT_SECRET = 'Rxog-fYPQWyHscQL_qGmSg7esBJCHnRoCOYiwfL_bLug'
 
 # Bypass actual lastuser server 
 LASTUSER_TEST = True
