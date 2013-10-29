@@ -10,8 +10,7 @@
     <div id="header">
       <a name="add" href="/product/add">Add product</a>|<a href="/login">Login</a>|<a href="/logout">Logout</a> 
       {% if g.user %}
-      {{ g.user.gravatar(size='20') }}
-      <img src=""/>
+      <img src="{{ g.user.gravatar(size='20') }}"/>
       {% endif %}
     </div>
     {% with flashes = get_flashed_messages() %}
