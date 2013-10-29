@@ -21,11 +21,23 @@ class User(UserBase, db.Model, BaseMixin):
     description = db.Column(db.Text, default=u'', nullable=False)
 
     def gravatar(self, **kargs):
-        return gravatar(self.email, **kargs)
-        
+        if self.email:
+            return gravatar(self.email, **kargs)
+        else:
+            return ""
 
     def __repr__(self):
         return "%s"%self.username
+
+
+class Campaign(db.Model, BaseMixin):
+    __tablename__ = "campaign"
+    id   = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.Text, nullable = False)
+    subheading = db.Column(db.Text)
+    brief = db.Column(db.Text)
+    description = db.Column(db.Text, nullable = False)
+    
 
 class Product(db.Model):
     id   = db.Column(db.Integer, primary_key = True)
