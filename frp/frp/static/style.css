@@ -39,8 +39,6 @@ form {
 
 form label { 
         background-color: #eeeeee;
-        
-        
  }
 
 ul.flashes li { 
@@ -92,4 +90,8 @@ ul#products div.header span.by {
 img { 
       display: block;
       margin: 1px auto;
+ }
+
+span.required { 
+                color: red;
  }

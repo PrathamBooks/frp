@@ -8,9 +8,10 @@ assets = Environment(app)
 lastuser = Lastuser()
 
 css = Bundle('style.css', filters='cssmin', output='gen/all.css')
+js = Bundle('js/main.js', output='gen/all.js')
 
 assets.register('css_site', css)
-
+assets.register('js_site', js)
 
 @app.context_processor
 def inject_version():
