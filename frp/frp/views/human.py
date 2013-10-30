@@ -28,16 +28,17 @@ def index():
 @lastuser.requires_login
 def campaign_add():
     form = CampaignForm()
+
     if request.method == "POST":
         if form.validate_on_submit():
-            name = form.name.data
-            description = form.description.data
-            user = g.user
-            product = models.Product(name, description, user)
-            db.session.add(product)
+            campaign = models.Campaign()
+            form.populate_obj(campaign)
+            campaign.created_by = g.user
+            db.session.add(campaign)
             db.session.commit()
-            flash("%s added to catalogue"%form.name.data)
+            flash("%s added to campaign list"%form.name.data)
             return redirect("/")
+
     return render_template("create_campaign.html", form = form)
 
 
