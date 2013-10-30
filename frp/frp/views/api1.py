@@ -13,6 +13,10 @@ from .. import models
 blueprint = Blueprint("apiv1", __name__)
 api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
 
+def utc_timestamp(d):
+    "Converts datetime from UTC to timestamp"
+    return calendar.timegm(d.utctimetuple())
+
 class User(Resource):
     def get(self, user_id):
         user = models.User.query.get(user_id)
@@ -26,8 +30,8 @@ class User(Resource):
             "email" : user.email,
             "twitter" : 'not implemented',
             "authService" : -1,
-            "lastLogin" : calendar.timegm(user.updated_at.utctimetuple()),
-            "created" : calendar.timegm(user.created_at.utctimetuple()),
+            "lastLogin" : utc_timestamp(user.updated_at),
+            "created" : utc_timestamp(user.created_at),
             "campaigns" : [],
             "currency" : 'not implemented' 
         }
