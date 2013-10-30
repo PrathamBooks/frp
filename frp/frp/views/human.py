@@ -4,7 +4,7 @@ from flask import make_response, jsonify
 from .. import app, lastuser
 from .. import models
 from ..models import db
-from ..forms import ProductForm
+from ..forms import CampaignForm
 
 
 @app.errorhandler(404)
@@ -24,10 +24,10 @@ def index():
                            products = products)
     
     
-@app.route("/product/add", methods=['GET', 'POST'])
+@app.route("/campaign/add", methods=['GET', 'POST'])
 @lastuser.requires_login
-def product_add():
-    form = ProductForm()
+def campaign_add():
+    form = CampaignForm()
     if request.method == "POST":
         if form.validate_on_submit():
             name = form.name.data
@@ -38,7 +38,7 @@ def product_add():
             db.session.commit()
             flash("%s added to catalogue"%form.name.data)
             return redirect("/")
-    return render_template("create_product.html", form = form)
+    return render_template("create_campaign.html", form = form)
 
 
 @app.route('/login')
