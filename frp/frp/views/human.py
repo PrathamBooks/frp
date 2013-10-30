@@ -19,7 +19,7 @@ def http_404(error):
 
 @app.route("/")
 def index():
-    products = models.Product.query.order_by(models.Product.id.desc())
+    products = models.Campaign.query.order_by(models.Campaign.id.desc())
     return render_template('index.html', 
                            products = products)
     
