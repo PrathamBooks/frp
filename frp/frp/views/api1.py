@@ -7,6 +7,7 @@ import datetime
 
 from flask import Blueprint, make_response, jsonify, abort
 from flask.ext.restful import Api, Resource
+import markdown
 
 from .. import models
 
@@ -39,34 +40,33 @@ class User(Resource):
 class Campaign(Resource):
     def get(self, campaign_id):
         lat, lon = "10.00N", "25.00E"
-        now = calendar.timegm(datetime.datetime.now().utctimetuple())
-        approvedBy = lambda:0 ; approvedBy.id = 10
-        verifiedBy = lambda:0 ; verifiedBy.id = 20
+        campaign = models.Campaign.query.get(campaign_id)
+        if not campaign:
+            abort(404)        
         return {
             "id": campaign_id,
-            "name" : '',
-            "subheading" : '',
-            "brief" : '',
-            "description" : '<html>',
-            "latlng" : [lat, lon],
-            "gallery" : [{
-                "heading" : '',
-                "description" : '',
-                "url" : "", #{url},
-                "alt" : '',
-                "verified" : True
-            }],
-           "start" : now,
-            "end" : now,
-            "pledged" : 0,
-            "target" : 0,
-            "email" : '',
-            "twitter" : '',
-            "authService" : 0,
-            "approvedBy" : approvedBy.id,
-            "approvedOn" : now,
-            "verifiedBy" : verifiedBy.id,
-            "verifiedOn" : now,
+            "name" : campaign.name,
+            "subheading" : campaign.subheading,
+            "brief" : campaign.brief,
+            "description" : markdown.markdown(campaign.description),
+            "latlng" : "not implemented",
+            "gallery" : [dict(heading = image.heading,
+                              description = image.description,
+                              url = image.url,
+                              alt = image.alt,
+                              verified = image.verified)
+                         for image in campaign.gallery],
+            "start" : utc_timestamp(campaign.start),
+            "end" : utc_timestamp(campaign.end),
+            "pledged" : str(campaign.pledged),
+            "target" : str(campaign.target),
+            "email" : campaign.created_by.email,
+            "twitter" : 'not implemented',
+            "authService" : -1,
+            "approvedBy" : campaign.approved_by and campaign.approved_by.username or None,
+            "approvedOn" : campaign.approved_by and utc_timestamp(campaign.approved_on) or None,
+            "verifiedBy" : campaign.verified_by and campaign.verified_by.username or None,
+            "verifiedOn" : campaign.verified_by and utc_timestamp(campaign.verified_on) or None,
         }
 
 class Category(Resource):
