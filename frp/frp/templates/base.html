@@ -1,16 +1,24 @@
 <!doctype html>
 <html>
   <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel=stylesheet type=text/css href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
     {% assets "css_site" %}
     <link rel=stylesheet type=text/css href="{{ ASSET_URL }}"/>
+    {% endassets %}
+    {% assets "js_site" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"/></script>
     {% endassets %}
     <title>{{config['SITE_NAME']}}</title>
   </head>
   <body>
     <div id="header">
-      <a name="add" href="/product/add">Add product</a>|<a href="/login">Login</a>|<a href="/logout">Logout</a> 
+      <a name="add" href="{{url_for('campaign_add')}}">Add Campaign</a>|<a href="{{url_for('login')}}">Login</a>|<a href="{{url_for('logout')}}">Logout</a> 
       {% if g.user %}
-      <img src="{{ g.user.gravatar(size='20') }}"/>
+      (logged in as {{g.user.username}} <img src="{{ g.user.gravatar(size='20') }}"/>)
+      {% else %}
+      (not logged in)
       {% endif %}
     </div>
     {% with flashes = get_flashed_messages() %}
