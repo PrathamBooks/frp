@@ -71,11 +71,15 @@ class Campaign(Resource):
 
 class Category(Resource):
     def get(self, category_id):
+        category = models.Category.query.get(category_id)
+        if not category:
+            abort(404)        
         return {
-            "id": category_id,
-            "name" : '',
-            "icon" : 'cssClass',
-            "campaigns" : [{}]
+            "id": category.id,
+            "name" : category.name,
+            "icon" : category.icon,
+            "campaigns" : [dict(id = campaign.id) 
+                           for campaign in category.campaigns]
         }
 
 class Location(Resource):
