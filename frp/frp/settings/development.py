@@ -6,6 +6,9 @@ SECRET_KEY = "Development key"
 
 SITE_NAME="Pratham Books Fund raising platform"
 
+UPLOAD_DIRECTORY = "/home/noufal/projects/pratham/pratham_frp/frp/frp/static/uploads"
+ALLOWED_EXTENSIONS = set("jpg jpeg png gif".split())
+
 #: LastUser server (frp-auth)
 LASTUSER_SERVER = 'http://frp-auth.prathambooks.org/'
 LASTUSER_CLIENT_ID = 'z6Ke4mDiSBGxRvBurAvVkQ' 

@@ -1,10 +1,14 @@
+import os
+
 from flask import render_template, request, session, g, abort, flash, url_for, redirect
 from flask import make_response, jsonify
+from werkzeug import secure_filename
 
 from .. import app, lastuser
 from .. import models
 from ..models import db
-from ..forms import CampaignForm
+from ..forms import CampaignForm, CategoryForm
+from ..helpers import allowed_file
 
 
 @app.errorhandler(404)
@@ -28,7 +32,6 @@ def index():
 @lastuser.requires_login
 def campaign_add():
     form = CampaignForm()
-
     if request.method == "POST":
         if form.validate_on_submit():
             campaign = models.Campaign()
@@ -40,6 +43,27 @@ def campaign_add():
             return redirect("/")
 
     return render_template("create_campaign.html", form = form)
+
+@app.route("/category/add", methods=['GET', 'POST'])
+@lastuser.requires_login
+def category_add():
+    form = CategoryForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            icon = request.files['icon']
+            filename = secure_filename(icon.filename)
+            if allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'icons', filename)
+                icon.save(full_save_path)
+                category = models.Category(icon = filename)
+                category.name = form.name.data
+                db.session.add(category)
+                db.session.commit()
+                flash("category %s added"%form.name.data)
+                return redirect("/")
+            else:
+                abort(415)
+    return render_template("create_category.html", form = form)
 
 
 @app.route('/login')

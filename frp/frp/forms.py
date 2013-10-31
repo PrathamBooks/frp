@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import TextField, DecimalField, TextAreaField, DateField
+from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField
 from wtforms.validators import DataRequired
 from wtforms.widgets import TextInput
 
@@ -28,4 +28,9 @@ class CampaignForm(Form):
     end = DatePickerField('end', format='%Y-%m-%d')
     target =  DecimalField('target', validators = [DataRequired()])
 
+class CategoryForm(Form):
+    name = TextField('name', validators = [DataRequired()])
+    icon = FileField('icon', validators = [DataRequired()])
+
+    # campaigns = relationship("Campaign", secondary = category_campaign_table, backref = "categories")
 
