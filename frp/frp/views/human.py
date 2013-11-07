@@ -20,8 +20,9 @@ def http_404(error):
 @app.route("/")
 def index():
     products = models.Product.query.order_by(models.Product.id.desc())
+    nproducts = models.Product.query.count()
     return render_template('index.html', 
-                           products = products)
+                           products = products, nproducts = nproducts)
     
     
 @app.route("/product/add", methods=['GET', 'POST'])
