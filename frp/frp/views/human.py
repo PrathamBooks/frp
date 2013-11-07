@@ -42,7 +42,7 @@ def product_add():
     return render_template("create_product.html", form = form)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 @lastuser.login_handler
 def login():
     return {'scope': 'id email'}
