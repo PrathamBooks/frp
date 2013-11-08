@@ -7,3 +7,4 @@ build/
 frp/frp/static/gen/*
 frp/frp/static/.webassets-cache/*
 frp/frp/static/uploads/*
+scratch
