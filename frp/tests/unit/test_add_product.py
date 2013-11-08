@@ -14,6 +14,5 @@ def test_add_product(test_db, test_client, last_user):
         token_type = u'bearer',
         scope = u'email id')
 
-    test_client.post("/login", follow_redirects=True)
     op = test_client.get("/product/add")
     print op.data
