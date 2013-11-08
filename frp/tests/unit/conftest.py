@@ -20,7 +20,7 @@ def test_client(request):
     tc = app.test_client()
     return tc
 
-@pytest.fixture
+@pytest.fixture(scope="module", autouse=True)
 def last_user(request):
     app.config.from_pyfile("settings/test.py")
     lastuser.init_app(app)
