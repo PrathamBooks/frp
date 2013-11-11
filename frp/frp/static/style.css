@@ -64,24 +64,24 @@ div#header a {
  }
 
 
-ul#products li { 
+ul li { 
                  border: 1px solid #aaaa11;
                  margin-top: 2em;
  }
 
-ul#products div.header { 
-                         background-color: #dddd44;
-                         border-bottom: 1px solid #aaaa11;
-                         
-                         }
+ul div.header { 
+                background-color: #dddd44;
+                border-bottom: 1px solid #aaaa11;
+                
+                }
 
-ul#products div.header span.name { 
-                                   display: inline-block;
-                                   width: 25%;
+ul div.header span.name { 
+                          display: inline-block;
+                          width: 25%;
 
 }
 
-ul#products div.header span.by { 
+ul div.header span.by { 
                                  width: 25%;
                                  margin-left: 50%;
                                  

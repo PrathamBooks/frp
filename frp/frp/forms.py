@@ -37,7 +37,7 @@ class CampaignForm(Form):
 
 class CategoryForm(Form):
     name = TextField('name', validators = [DataRequired()])
-    icon = FileField('icon', validators = [DataRequired()])
+    icon = FileField('icon')
 
     # campaigns = relationship("Campaign", secondary = category_campaign_table, backref = "categories")
 

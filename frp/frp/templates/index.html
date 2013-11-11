@@ -17,5 +17,22 @@
   {% else %}
     No products available.
   {% endif %}
-    <img src="{{ url_for('static', filename='images/copperplate-4.jpg')}}" alt = "Copperplate"/>
+
+  {% if categories %}
+    <h2> List of available categories </h2>
+    <ul id="categories">
+      {% for category in categories %}
+      <li>
+        <div class="header">
+          <span class="name">{{category.name}}</span>
+        </div>
+        <p class="icon">
+          <img src="{{category.icon_url}}"/>
+        </p>
+      </li>
+      {% endfor %}
+    </ul>
+{% else %}
+  No categories available
+{% endif %}
 {% endblock body %}

@@ -1,6 +1,6 @@
 import os
 
-from flask import render_template, request, session, g, abort, flash, url_for, redirect
+from flask import render_template, request, session, g, abort, flash, url_for, redirect, send_from_directory
 from flask import make_response, jsonify
 from werkzeug import secure_filename
 
@@ -24,8 +24,10 @@ def http_404(error):
 @app.route("/")
 def index():
     products = models.Campaign.query.order_by(models.Campaign.id.desc())
+    categories = models.Category.query.order_by(models.Category.id.desc())
     return render_template('index.html', 
-                           products = products)
+                           products = products,
+                           categories = categories)
     
     
 @app.route("/campaign/add", methods=['GET', 'POST'])
@@ -50,20 +52,27 @@ def category_add():
     form = CategoryForm()
     if request.method == "POST":
         if form.validate_on_submit():
+            category = models.Category(name = form.name.data)
             icon = request.files['icon']
             filename = secure_filename(icon.filename)
-            if allowed_file(filename):
+            if filename and allowed_file(filename):
                 full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'icons', filename)
                 icon.save(full_save_path)
-                category = models.Category(icon = filename)
-                category.name = form.name.data
-                db.session.add(category)
-                db.session.commit()
-                flash("category %s added"%form.name.data)
-                return redirect("/")
-            else:
-                abort(415)
+                category.icon = filename
+            db.session.add(category)
+            db.session.commit()
+            flash("category %s added"%form.name.data)
+            return redirect("/")
     return render_template("create_category.html", form = form)
+
+@app.route("/category/<cat_id>/icon", methods=['GET'])
+def category_icon(cat_id):
+    category = models.Category.query.filter_by(id = cat_id).first()
+    if category and category.icon:
+        return send_from_directory(app.config['UPLOAD_DIRECTORY']+"/icons/", category.icon)
+        
+
+
 
 
 @app.route('/login')

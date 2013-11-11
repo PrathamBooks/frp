@@ -1,3 +1,5 @@
+from flask import url_for
+
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.lastuser.sqlalchemy import UserBase
 from flask.ext.gravatar import Gravatar
@@ -86,6 +88,13 @@ class Category(db.Model, BaseMixin):
     icon = db.Column(db.Text)
 
     campaigns = relationship("Campaign", secondary = category_campaign_table, backref = "categories")
+
+    @property
+    def icon_url(self):
+        if self.icon:
+            return "/category/%s/icon"%(self.id)
+        else:
+            return url_for('static', filename='images/unspecified.png')
 
     def __repr__(self):
         return "%s"%self.name
