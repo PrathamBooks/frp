@@ -1,7 +1,7 @@
 BeautifulSoup==3.2.1
 Flask==0.10.1
 Flask-Alembic==0.1
-Flask-Lastuser==0.3.14-dev
+https://github.com/nibrahim/flask-lastuser/archive/133ffa36ab1f5bc3663f1cb7972071151d02e6b1.zip
 Flask-SQLAlchemy==1.0
 Flask-Script==0.5.3
 Flask-WTF==0.9.1
