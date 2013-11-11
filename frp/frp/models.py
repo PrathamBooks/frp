@@ -52,14 +52,17 @@ class Campaign(db.Model, BaseMixin):
     subheading = db.Column(db.Text)
     brief = db.Column(db.Text)
     description = db.Column(db.Text, nullable = False)
-    # TBD lat_LNG
+    latitude = db.Column(psql.NUMERIC(precision = 4, scale = 2, asdecimal = True), nullable = False)
+    latitude_hem = db.Column(db.VARCHAR(1), nullable = False)
+    longitude = db.Column(psql.NUMERIC(precision = 4, scale = 2, asdecimal = True), nullable = False)
+    longitude_hem = db.Column(db.VARCHAR(1), nullable = False)
     # TBD gallery
-    start = db.Column(db.DateTime)
-    end = db.Column(db.DateTime)
+    start = db.Column(db.DateTime, nullable = False)
+    end = db.Column(db.DateTime, nullable = False)
     pledged = db.Column(psql.NUMERIC(precision = 200, scale = 2, asdecimal = True))
     target =  db.Column(psql.NUMERIC(precision = 200, scale = 2, asdecimal = True))
-    # TBD email
-    # TBD twitter
+    # email (from created_by)
+    # twitter (from created_by)
     # TBD authservice
     created_by = relationship("User", backref = backref('campaigns_created', order_by = id),
                               foreign_keys = [creator_id])

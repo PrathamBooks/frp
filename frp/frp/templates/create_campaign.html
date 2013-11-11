@@ -1,17 +1,19 @@
 {% extends "base.html" %}
-{% from "_formhelpers.html" import render_field %}
+{% from "_formhelpers.html" import render_field, render_bullets, render_field_row %}
 {% block body %}
   <h2>Create new product</h2>
   <form id = "create_campaign" method="post">
   {{ form.hidden_tag() }}
   <table>
-  {{render_field(form.name)}}
-  {{render_field(form.subheading)}}
-  {{render_field(form.brief)}}
-  {{render_field(form.description)}}
-  {{render_field(form.start)}}
-  {{render_field(form.end)}}
-  {{render_field(form.target)}}
+  {{render_field_row(form.name)}}
+  {{render_field_row(form.subheading)}}
+  {{render_field_row(form.brief)}}
+  {{render_field_row(form.description)}}
+  <tr>{{render_field(form.latitude)}}  <td>{{render_bullets(form.latitude_hem)}} </td></tr>
+  <tr>{{render_field(form.longitude)}} <td>{{render_bullets(form.longitude_hem)}} </td></tr>
+  {{render_field_row(form.start)}}
+  {{render_field_row(form.end)}}
+  {{render_field_row(form.target)}}
   </table>
   <button form ="create_campaign" formaction="{{ url_for('campaign_add') }}"  type="submit" value="create campaign" name="submit" formmethod="post">
     Create product

@@ -1,6 +1,6 @@
 from flask_wtf import Form
-from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField
-from wtforms.validators import DataRequired
+from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField
+from wtforms.validators import DataRequired, Regexp
 from wtforms.widgets import TextInput
 
 
@@ -24,9 +24,16 @@ class CampaignForm(Form):
     subheading = TextField('subheading')
     brief = TextAreaField('brief')
     description = TextAreaField('description', validators = [DataRequired()])
+    latitude = TextField('latitude', validators=[DataRequired()])
+    latitude_hem = RadioField(choices=[('N','N'), 
+                                       ('S','S')], validators=[DataRequired(), Regexp(r'N|S')])
+    longitude = TextField('longitude', validators=[DataRequired()])
+    longitude_hem = RadioField(choices=[('E','E'), 
+                                        ('W','W')], validators=[DataRequired(), Regexp(r'E|W')])
     start = DatePickerField('start', format='%Y-%m-%d')
     end = DatePickerField('end', format='%Y-%m-%d')
     target =  DecimalField('target', validators = [DataRequired()])
+
 
 class CategoryForm(Form):
     name = TextField('name', validators = [DataRequired()])
