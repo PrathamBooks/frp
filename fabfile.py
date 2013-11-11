@@ -59,11 +59,11 @@ def deploy(tag, venv = False, resetdb = False):
     push_code()
     obtain_code(tag)
     set_deployed_version(tag)
+    fix_config()
     if venv:
         update_virtualenv(tag)
     if resetdb:
         reset_database()
-    fix_config()
     monit_restart()
 
 def rollback(tag):
