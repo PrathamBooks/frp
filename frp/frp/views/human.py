@@ -25,10 +25,11 @@ def http_404(error):
 def index():
     products = models.Campaign.query.order_by(models.Campaign.id.desc())
     categories = models.Category.query.order_by(models.Category.id.desc())
+    nproducts = models.Product.query.count()
     return render_template('index.html', 
                            products = products,
-                           categories = categories)
-    
+                           categories = categories,
+                           nproducts = nproducts)
     
 @app.route("/campaign/add", methods=['GET', 'POST'])
 @lastuser.requires_login
@@ -75,7 +76,7 @@ def category_icon(cat_id):
 
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 @lastuser.login_handler
 def login():
     return {'scope': 'id email'}
