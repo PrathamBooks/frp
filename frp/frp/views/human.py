@@ -25,7 +25,7 @@ def http_404(error):
 def index():
     products = models.Campaign.query.order_by(models.Campaign.id.desc())
     categories = models.Category.query.order_by(models.Category.id.desc())
-    nproducts = models.Product.query.count()
+    nproducts = models.Campaign.query.count()
     return render_template('index.html', 
                            products = products,
                            categories = categories,
