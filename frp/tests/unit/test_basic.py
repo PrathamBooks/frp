@@ -22,5 +22,5 @@ def test_add_product(test_db, test_client, last_user):
         token_type = u'bearer',
         scope = u'email id')
 
-    op = test_client.get("/product/add", follow_redirects=True)
+    op = test_client.get("/campaign/add", follow_redirects=True)
     assert "Create new product" in op.data   
