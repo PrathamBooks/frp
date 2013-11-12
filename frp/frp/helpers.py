@@ -1,3 +1,5 @@
+import calendar
+
 from . import app
 
 def allowed_file(fname):
@@ -10,6 +12,7 @@ def allowed_file(fname):
     return extension in app.config['ALLOWED_EXTENSIONS']
         
     
-    
-    
+def utc_timestamp(d):
+    "Converts datetime from UTC to timestamp"
+    return calendar.timegm(d.utctimetuple())
     

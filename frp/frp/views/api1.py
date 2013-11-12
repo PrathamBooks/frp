@@ -10,13 +10,13 @@ from flask.ext.restful import Api, Resource
 import markdown
 
 from .. import models
+from ..helpers import utc_timestamp
 
 blueprint = Blueprint("apiv1", __name__)
 api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
 
-def utc_timestamp(d):
-    "Converts datetime from UTC to timestamp"
-    return calendar.timegm(d.utctimetuple())
+
+
 
 class User(Resource):
     def get(self, user_id):
