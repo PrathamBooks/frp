@@ -9,6 +9,7 @@ from flask import Blueprint, make_response, jsonify, abort
 from flask.ext.restful import Api, Resource
 import markdown
 
+from .. import lastuser
 from .. import models
 from ..helpers import utc_timestamp
 
@@ -36,6 +37,7 @@ class User(Resource):
             "campaigns" : [],
             "currency" : 'not implemented' 
         }
+
 
 class Campaign(Resource):
     def get(self, campaign_id):
@@ -81,6 +83,12 @@ class Category(Resource):
             "campaigns" : [dict(id = campaign.id) 
                            for campaign in category.campaigns]
         }
+
+    def post(self, *largs, **kargs):
+        print "We posted information here!"
+        return {'message' : 'posted'}
+        
+
 
 class Location(Resource):
     def get(self, location_id):
