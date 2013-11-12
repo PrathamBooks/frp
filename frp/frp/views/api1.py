@@ -11,11 +11,10 @@ import markdown
 
 from .. import lastuser
 from .. import models
-from ..helpers import utc_timestamp
+from ..helpers import utc_timestamp, requires_login
 
 blueprint = Blueprint("apiv1", __name__)
 api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
-
 
 
 
@@ -84,10 +83,10 @@ class Category(Resource):
                            for campaign in category.campaigns]
         }
 
+    @requires_login
     def post(self, *largs, **kargs):
         print "We posted information here!"
         return {'message' : 'posted'}
-        
 
 
 class Location(Resource):
