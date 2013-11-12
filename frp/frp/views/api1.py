@@ -7,6 +7,7 @@ import datetime
 
 from flask import Blueprint, make_response, jsonify, abort
 from flask.ext.restful import Api, Resource
+from flask.views import MethodView
 import markdown
 
 from .. import lastuser
@@ -15,7 +16,6 @@ from ..helpers import utc_timestamp, requires_login
 
 blueprint = Blueprint("apiv1", __name__)
 api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
-
 
 
 class User(Resource):
@@ -70,23 +70,25 @@ class Campaign(Resource):
             "verifiedOn" : campaign.verified_by and utc_timestamp(campaign.verified_on) or None,
         }
 
-class Category(Resource):
+
+
+class Category(MethodView):
     def get(self, category_id):
+        print category_id
         category = models.Category.query.get(category_id)
         if not category:
             abort(404)        
-        return {
+        return jsonify({
             "id": category.id,
             "name" : category.name,
             "icon" : category.icon,
-            "campaigns" : [dict(id = campaign.id) 
-                           for campaign in category.campaigns]
-        }
+            "campaigns" : [dict(id = campaign.id) for campaign in category.campaigns]
+        })
 
     @requires_login
-    def post(self, *largs, **kargs):
+    def post(self):
         print "We posted information here!"
-        return {'message' : 'posted'}
+        return jsonify({'message' : 'posted'})
 
 
 class Location(Resource):
@@ -102,12 +104,23 @@ class Location(Resource):
 
 
 def add_resources(resources):
-    for resource, url in resources:
-        api.add_resource(resource, url)
+    for resource, url, options in resources:
+        api.add_resource(resource, url, **options)
 
+    category = Category.as_view("category")
+    blueprint.add_url_rule("category/<int:category_id>", 
+                           view_func = category,
+                           methods = ["GET"])
+
+    blueprint.add_url_rule("category", 
+                           view_func = category,
+                           methods = ["POST"])
         
 # Tuples of the form (resource, url)
-routes = [(User, "user/<int:user_id>"),
-          (Campaign, "campaign/<int:campaign_id>"),          
-          (Category, "category/<int:category_id>"),
-          (Location, "location/<int:location_id>")]
+routes = [(User, "user/<int:user_id>", {}),
+          (Campaign, "campaign/<int:campaign_id>", {}),          
+          # (Category, "category/<int:category_id>", {'methods':['GET']}),
+          # (Category, "category/", {'methods':['POST']}),
+          (Location, "location/<int:location_id>", {})]
+
+

@@ -1,7 +1,7 @@
 from functools import wraps
 import calendar
 
-from flask import g
+from flask import g, jsonify, make_response
 
 from . import app
 
@@ -29,8 +29,10 @@ def requires_login(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if g.lastuserinfo is None:
-            return {"errors" : [
+            resp = jsonify({"errors" : [
                 {"message": "Request was not authenticated"}
-            ]}, 401, {'WWW-Authenticate' : 'Oauth realm="Pratham books FRP"'}
+            ]})
+            resp.headers['WWW-Authenticate'] =  'Oauth realm="Pratham books FRP"'
+            return resp, 401
         return f(*args, **kwargs)
     return decorated_function
