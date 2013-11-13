@@ -4,15 +4,20 @@ Implements endpoints for API version 1.
 
 import calendar
 import datetime
+import os
 
-from flask import Blueprint, make_response, jsonify, abort
+from flask import Blueprint, make_response, jsonify, abort, request
 from flask.ext.restful import Api, Resource
 from flask.views import MethodView
 import markdown
+from werkzeug import secure_filename
 
-from .. import lastuser
+
+from .. import app, lastuser
 from .. import models
-from ..helpers import utc_timestamp, requires_login
+from ..models import db
+from ..helpers import utc_timestamp, requires_login, allowed_file
+from ..forms import CategoryForm
 
 blueprint = Blueprint("apiv1", __name__)
 api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
@@ -85,10 +90,23 @@ class Category(MethodView):
             "campaigns" : [dict(id = campaign.id) for campaign in category.campaigns]
         })
 
-    @requires_login
+    @requires_login    
     def post(self):
-        print "We posted information here!"
-        return jsonify({'message' : 'posted'})
+        form = CategoryForm()
+        if form.validate_on_submit():
+            category = models.Category(name = form.name.data)
+            icon = request.files['icon']
+            filename = secure_filename(icon.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'icons', filename)
+                icon.save(full_save_path)
+                category.icon = filename
+            db.session.add(category)
+            db.session.commit()
+            return jsonify({'message' : 'successfully validated'})
+        else:
+            return jsonify({'message' : 'Error in form'})
+
 
 
 class Location(Resource):
