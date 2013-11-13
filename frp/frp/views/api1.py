@@ -11,6 +11,7 @@ from flask.ext.restful import Api, Resource
 from flask.views import MethodView
 import markdown
 from werkzeug import secure_filename
+from flask_negotiate import produces
 
 
 from .. import app, lastuser
@@ -78,6 +79,7 @@ class Campaign(Resource):
 
 
 class Category(MethodView):
+    @produces("application/json", "*/*")
     def get(self, category_id):
         print category_id
         category = models.Category.query.get(category_id)
@@ -91,6 +93,7 @@ class Category(MethodView):
         })
 
     @requires_login    
+    @produces("application/json", "*/*")
     def post(self):
         form = CategoryForm()
         if form.validate_on_submit():
