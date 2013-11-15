@@ -15,7 +15,8 @@ def test_add_product(test_db, test_client, last_user):
         userid = u'1', 
         username = u'alokk', 
         email = u'kuchlous@gmail.com', 
-        fullname = u'Alok Kuchlous'
+        fullname = u'Alok Kuchlous',
+        permissions = u'view admin'
         )
     app.lastuser_auth_token = dict(
         access_token = u'pAfGGWHzRtqRmdSQ_CdrWA',
