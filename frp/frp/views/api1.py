@@ -7,12 +7,10 @@ import datetime
 import os
 
 from flask import Blueprint, make_response, jsonify, abort, request
-from flask.ext.restful import Api, Resource
 from flask.views import MethodView
 import markdown
 from werkzeug import secure_filename
 from flask_negotiate import produces
-
 
 from .. import app, lastuser
 from .. import models
@@ -21,15 +19,14 @@ from ..helpers import utc_timestamp, requires_login, allowed_file
 from ..forms import CategoryForm
 
 blueprint = Blueprint("apiv1", __name__)
-api = Api(blueprint, default_mediatype = "") #, catch_all_404s=True)
 
-
-class User(Resource):
+class User(MethodView):
+    @produces("application/json", "*/*")
     def get(self, user_id):
         user = models.User.query.get(user_id)
         if not user:
             abort(404)
-        return {
+        return jsonify({
             "id" : user.id,
             "username" : user.username,
             "fullname" : user.fullname,
@@ -41,16 +38,17 @@ class User(Resource):
             "created" : utc_timestamp(user.created_at),
             "campaigns" : [],
             "currency" : 'not implemented' 
-        }
+        })
 
 
-class Campaign(Resource):
+class Campaign(MethodView):
+    @produces("application/json", "*/*")
     def get(self, campaign_id):
         lat, lon = "10.00N", "25.00E"
         campaign = models.Campaign.query.get(campaign_id)
         if not campaign:
             abort(404)        
-        return {
+        return jsonify({
             "id": campaign_id,
             "name" : campaign.name,
             "subheading" : campaign.subheading,
@@ -74,7 +72,7 @@ class Campaign(Resource):
             "approvedOn" : campaign.approved_by and utc_timestamp(campaign.approved_on) or None,
             "verifiedBy" : campaign.verified_by and campaign.verified_by.username or None,
             "verifiedOn" : campaign.verified_by and utc_timestamp(campaign.verified_on) or None,
-        }
+        })
 
 
 
@@ -112,36 +110,34 @@ class Category(MethodView):
 
 
 
-class Location(Resource):
+class Location(MethodView):
+    @produces("application/json", "*/*")
     def get(self, location_id):
         lat, lon = "10.00N", "25.00E"
-        return {
+        return jsonify({
             "id": location_id,
             "name" : '',
             "photo" : "",#{url},
             "latlng" : [lat, lon],
             "campaigns" : [{}]
-        }
+        })
 
 
 def add_resources(resources):
-    for resource, url, options in resources:
-        api.add_resource(resource, url, **options)
+    for view, endpoints in resources:
+        name = view.__name__.lower()
+        view_func = view.as_view(name)
+        for endpoint, methods in endpoints:
+            blueprint.add_url_rule(endpoint,
+                                   view_func = view_func,
+                                   methods = [methods])
 
-    category = Category.as_view("category")
-    blueprint.add_url_rule("category/<int:category_id>", 
-                           view_func = category,
-                           methods = ["GET"])
 
-    blueprint.add_url_rule("category", 
-                           view_func = category,
-                           methods = ["POST"])
-        
-# Tuples of the form (resource, url)
-routes = [(User, "user/<int:user_id>", {}),
-          (Campaign, "campaign/<int:campaign_id>", {}),          
-          # (Category, "category/<int:category_id>", {'methods':['GET']}),
-          # (Category, "category/", {'methods':['POST']}),
-          (Location, "location/<int:location_id>", {})]
-
+# TBD. This needs cleaning
+routes = [  [ Category, [ ("category/<int:category_id>", "GET"),
+                          ("category", "POST")]],
+            [ Location, [ ("location", "POST") ]],
+            [ User,     [ ("user/<int:user_id>", "GET") ]],
+            [ Campaign, [ ("campaign/<int:campaign_id>", "GET") ]]
+]
 
