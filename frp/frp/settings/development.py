@@ -1,5 +1,5 @@
 # Database settings
-SQLALCHEMY_DATABASE_URI = "postgresql://noufal:noufal@localhost/frp"
+SQLALCHEMY_DATABASE_URI = "postgresql://noufal:abcdef@localhost/frp"
 
 DEBUG = True
 SECRET_KEY = "Development key"
