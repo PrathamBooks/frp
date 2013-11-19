@@ -123,21 +123,28 @@ class Location(MethodView):
         })
 
 
-def add_resources(resources):
-    for view, endpoints in resources:
-        name = view.__name__.lower()
-        view_func = view.as_view(name)
-        for endpoint, methods in endpoints:
-            blueprint.add_url_rule(endpoint,
-                                   view_func = view_func,
-                                   methods = [methods])
+def register_api():
+    #Category 
+    category_func = Category.as_view('category')
+    blueprint.add_url_rule("category/<int:category_id>", 
+                           view_func=category_func,
+                           methods = ['GET'])
+    blueprint.add_url_rule("category",
+                           view_func = category_func,
+                           methods = ["POST"])
 
+    #Location
+    location_func = Location.as_view('location')
+    blueprint.add_url_rule("location", view_func = location_func,
+                           methods = ["POST"])
+    
+    #User
+    user_func = User.as_view('user')
+    blueprint.add_url_rule("user/<int:user_id>", view_func = user_func,
+                           methods = ["GET"])
 
-# TBD. This needs cleaning
-routes = [  [ Category, [ ("category/<int:category_id>", "GET"),
-                          ("category", "POST")]],
-            [ Location, [ ("location", "POST") ]],
-            [ User,     [ ("user/<int:user_id>", "GET") ]],
-            [ Campaign, [ ("campaign/<int:campaign_id>", "GET") ]]
-]
+    #Campaign
+    campaign_func = Campaign.as_view('campaign')
+    blueprint.add_url_rule("campaign/<int:campaign_id>", view_func = campaign_func,
+                           methods = ["GET"])
 
