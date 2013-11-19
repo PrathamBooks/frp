@@ -8,11 +8,9 @@ assets = Environment(app)
 lastuser = Lastuser()
 
 css = Bundle("css/bootstrap.css", filters='cssmin', output='gen/all.css')
-js = Bundle('js/main.js', filters="jsmin", output='gen/all.js')
-lib = Bundle("lib/bootstrap/bootstrap.min.js", "lib/angular/angular.js", "lib/angular/angular-route.js", "js/app.js", "js/services.js", "js/controllers.js", "js/filters.js", "js/directives.js", filters="jsmin", output="gen/lib.js")
+lib = Bundle("lib/bootstrap/bootstrap.min.js", "lib/angular/angular.js", "lib/angular/angular-route.js", "js/app.js", "js/services.js", "js/controllers.js", "js/filters.js", "js/directives.js", output="gen/lib.js")
 
 assets.register('css_site', css)
-assets.register('js_site', js)
 assets.register('lib_site', lib)
 
 @app.context_processor
