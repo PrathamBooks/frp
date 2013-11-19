@@ -1,6 +1,6 @@
 import os
 
-from flask import render_template, request, session, g, abort, flash, url_for, redirect, send_from_directory
+from flask import render_template, request, session, g, abort, flash, url_for, redirect, send_from_directory, send_file
 from flask import make_response, jsonify
 from werkzeug import secure_filename
 
@@ -73,8 +73,9 @@ def category_icon(cat_id):
         return send_from_directory(app.config['UPLOAD_DIRECTORY']+"/icons/", category.icon)
         
 
-
-
+@app.route("/partials/<path:page>", methods = ['GET'])
+def angular_partials(page):
+    return send_file("%s/partials/%s"%(app.static_folder,page))
 
 @app.route('/login', methods=['GET', 'POST'])
 @lastuser.login_handler
