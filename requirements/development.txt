@@ -33,4 +33,5 @@ times==0.6.2
 webassets==0.8
 Flask-Gravatar==0.4.0
 Flask-Admin==1.0.7
-
+hiredis==0.1.1
+Flask-Cache==0.12

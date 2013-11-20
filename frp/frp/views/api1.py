@@ -12,7 +12,7 @@ import markdown
 from werkzeug import secure_filename
 from flask_negotiate import produces
 
-from .. import app, lastuser
+from .. import app, lastuser, cache
 from .. import models
 from ..models import db
 from ..helpers import utc_timestamp, requires_login, allowed_file
@@ -43,6 +43,7 @@ class User(MethodView):
 
 class Campaign(MethodView):
     @produces("application/json", "*/*")
+    @cache.cached(timeout = 5000)
     def get(self, campaign_id):
         lat, lon = "10.00N", "25.00E"
         campaign = models.Campaign.query.get(campaign_id)
