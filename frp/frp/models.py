@@ -4,9 +4,10 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.lastuser.sqlalchemy import UserBase
 from flask.ext.gravatar import Gravatar
 
+from sqlalchemy.types import UserDefinedType
 from sqlalchemy.dialects import postgresql as psql
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy import Table
+from sqlalchemy import Table, func, Index, DDL, event
 
 
 
@@ -20,7 +21,37 @@ category_campaign_table = Table('category_campaign', db.metadata,
                                 db.Column('category', db.Integer, db.ForeignKey('category.id')),
                                 db.Column('campaign', db.Integer, db.ForeignKey('campaign.id'))
 )
-                                          
+
+# --- Custom types ------------------------------------------------------------------
+class TsVector(UserDefinedType):
+    "Holds a TsVector column"
+
+    name = "TSVECTOR"
+
+    class comparator_factory(UserDefinedType.Comparator):
+        """Defines custom types for tsvectors.
+
+        Specifically, the ability to search for ts_query strings using
+        the @@ operator.
+
+        On the Python side, this is implemented simply as a `==` operation.
+
+        So, you can do
+          Table.tsvector_column == "string"
+        to get the same effect as
+          tsvector_column @@ to_tsquery('string')
+        in SQL
+
+        """
+
+        def __eq__(self, other):
+            return self.op('@@')(func.to_tsquery(other))
+
+
+    def get_col_spec(self):
+        return self.name
+
+
 class BaseMixin(object):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=db.func.now(), nullable=False)
@@ -30,8 +61,11 @@ class BaseMixin(object):
 # --- Models ------------------------------------------------------------------
 
 class User(UserBase, db.Model, BaseMixin):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     description = db.Column(db.Text, default=u'', nullable=False)
+    full_text = db.Column(TsVector)
+
+    __table_args__ = (Index('user_full_text_idx', 'full_text', postgresql_using = 'gin'),)
 
     def gravatar(self, **kargs):
         if self.email:
@@ -42,13 +76,23 @@ class User(UserBase, db.Model, BaseMixin):
     def __repr__(self):
         return "%s"%self.username
 
+user_trigger_snippet = DDL("""
+CREATE TRIGGER full_text_update BEFORE INSERT OR UPDATE
+ON users
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(full_text,'pg_catalog.english', 'description')
+""")
+
+event.listen(User.__table__, 'after_create', user_trigger_snippet.execute_if(dialect = 'postgresql'))
+
+    
 
 class Campaign(db.Model, BaseMixin):
     __tablename__ = "campaign"
     id   = db.Column(db.Integer, primary_key = True)
-    creator_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    approver_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    verifier_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    creator_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    approver_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    verifier_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     name = db.Column(db.Text, nullable = False)
     subheading = db.Column(db.Text)
@@ -74,9 +118,24 @@ class Campaign(db.Model, BaseMixin):
     verified_by = relationship("User", backref = backref('campaigns_verified', order_by = id),
                                foreign_keys = [verifier_id])
     verified_on = db.Column(db.DateTime)
+    full_text = db.Column(TsVector)
+
+    __table_args__ = (Index('campaign_full_text_idx', 'full_text', postgresql_using = 'gin'),)
+
+
 
     def __repr__(self):
         return "%s"%self.name
+
+campaign_trigger_snippet = DDL("""
+CREATE TRIGGER full_text_update BEFORE INSERT OR UPDATE
+ON campaign
+FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(full_text,'pg_catalog.english', 'name', 'subheading', 'brief', 'description')
+""")
+
+event.listen(Campaign.__table__, 'after_create', campaign_trigger_snippet.execute_if(dialect = 'postgresql'))
+
     
 
 class Category(db.Model, BaseMixin):
@@ -84,10 +143,11 @@ class Category(db.Model, BaseMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable = False)
-    
+
     icon = db.Column(db.Text)
 
     campaigns = relationship("Campaign", secondary = category_campaign_table, backref = "categories")
+
 
     @property
     def icon_url(self):
@@ -98,12 +158,12 @@ class Category(db.Model, BaseMixin):
 
     def __repr__(self):
         return "%s"%self.name
-    
+
 
 class Image(db.Model, BaseMixin):
     __tablename__ = "image"
     id = db.Column(db.Integer, primary_key=True)
-    uploader_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    uploader_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     campaign_id = db.Column(db.Integer, db.ForeignKey("campaign.id"))
 
     heading = db.Column(db.Text)
@@ -118,10 +178,3 @@ class Image(db.Model, BaseMixin):
 
     def __repr__(self):
         return "%s"%self.heading
-
-
-
-
-    
-    
-
