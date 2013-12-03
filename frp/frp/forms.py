@@ -1,8 +1,22 @@
-from flask_wtf import Form
-from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField
-from wtforms.validators import DataRequired, Regexp
-from wtforms.widgets import TextInput
+import json
 
+from flask_wtf import Form
+from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField, ValidationError, BooleanField, Field
+from wtforms.validators import DataRequired, Regexp,  AnyOf
+from wtforms.widgets import TextInput
+from wtforms import Form as WTFForm
+
+
+class JsonField(TextField):
+    def process_formdata(self, values):
+        if values:
+            value = values[0]
+            try:
+                self.data = json.loads(value)
+            except ValueError:
+                raise ValidationError("Malformed JSON")
+        else:
+            self.data = ""
 
 
 class DatePickerWidget(TextInput):
@@ -41,3 +55,8 @@ class CategoryForm(Form):
 
     # campaigns = relationship("Campaign", secondary = category_campaign_table, backref = "categories")
 
+class SearchForm(Form):
+    item = TextField("item", validators = [DataRequired(), AnyOf(["User", "Campaign", "Category"])])
+    expand = BooleanField('expand')
+    params = JsonField('params')
+    text = TextField("text")

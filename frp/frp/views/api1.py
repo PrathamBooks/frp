@@ -15,8 +15,8 @@ from flask_negotiate import produces
 from .. import app, lastuser, cache
 from .. import models
 from ..models import db
-from ..helpers import utc_timestamp, requires_login, allowed_file
-from ..forms import CategoryForm
+from ..helpers import utc_timestamp, requires_login, allowed_file, create_search_response_v1
+from ..forms import CategoryForm, SearchForm
 
 blueprint = Blueprint("apiv1", __name__)
 
@@ -37,7 +37,7 @@ class User(MethodView):
             "lastLogin" : utc_timestamp(user.updated_at),
             "created" : utc_timestamp(user.created_at),
             "campaigns" : [],
-            "currency" : 'not implemented' 
+            "currency" : 'not implemented'
         })
 
 
@@ -48,7 +48,7 @@ class Campaign(MethodView):
         lat, lon = "10.00N", "25.00E"
         campaign = models.Campaign.query.get(campaign_id)
         if not campaign:
-            abort(404)        
+            abort(404)
         return jsonify({
             "id": campaign_id,
             "name" : campaign.name,
@@ -80,10 +80,9 @@ class Campaign(MethodView):
 class Category(MethodView):
     @produces("application/json", "*/*")
     def get(self, category_id):
-        print category_id
         category = models.Category.query.get(category_id)
         if not category:
-            abort(404)        
+            abort(404)
         return jsonify({
             "id": category.id,
             "name" : category.name,
@@ -91,7 +90,7 @@ class Category(MethodView):
             "campaigns" : [dict(id = campaign.id) for campaign in category.campaigns]
         })
 
-    @requires_login    
+    @requires_login
     @produces("application/json", "*/*")
     def post(self):
         form = CategoryForm()
@@ -123,11 +122,30 @@ class Location(MethodView):
             "campaigns" : [{}]
         })
 
+class Search(MethodView):
+    @produces("application/json", "*/*")
+    def post(self):
+        form = SearchForm(csrf_enabled = False)
+        if form.validate_on_submit():
+            obj = {'Campaign' : models.Campaign,
+                   'User'     : models.User,
+                   'Category' : models.Category}[form.item.data]
+            query = obj.query
+            if form.params.data:
+                for k,v in form.params.data.iteritems():
+                    d = {k:v}
+                    query = query.filter_by(**d)
+            return jsonify(create_search_response_v1(query.all(), form.item.data, form.expand.data))
+        else:
+            print form.errors #TBD. Put this in the error
+            return jsonify({'message' : 'Error in query'})
+
+
 
 def register_api():
-    #Category 
+    #Category
     category_func = Category.as_view('category')
-    blueprint.add_url_rule("category/<int:category_id>", 
+    blueprint.add_url_rule("category/<int:category_id>",
                            view_func=category_func,
                            methods = ['GET'])
     blueprint.add_url_rule("category",
@@ -138,7 +156,7 @@ def register_api():
     location_func = Location.as_view('location')
     blueprint.add_url_rule("location", view_func = location_func,
                            methods = ["POST"])
-    
+
     #User
     user_func = User.as_view('user')
     blueprint.add_url_rule("user/<int:user_id>", view_func = user_func,
@@ -149,3 +167,7 @@ def register_api():
     blueprint.add_url_rule("campaign/<int:campaign_id>", view_func = campaign_func,
                            methods = ["GET"])
 
+    #Search
+    search_func = Search.as_view('search')
+    blueprint.add_url_rule("search", view_func = search_func,
+                           methods = ["POST"])
