@@ -59,9 +59,13 @@ class BaseMixin(object):
 
 
 # --- Models ------------------------------------------------------------------
+# The verbose_fields attribute specifies which attributes to return when a search
+# query is done with expand = true
+
 
 class User(UserBase, db.Model, BaseMixin):
     __tablename__ = 'users'
+
     description = db.Column(db.Text, default=u'', nullable=False)
     full_text = db.Column(TsVector)
 
@@ -72,6 +76,14 @@ class User(UserBase, db.Model, BaseMixin):
             return gravatar(self.email, **kargs)
         else:
             return ""
+
+    def verbose_fields(self):
+        """Returns data that will be returned to client when this item
+        matches a search with expand = True"""
+        return dict(username = self.username,
+                    fullname = self.fullname,
+                    email = self.email,
+                    description = self.description)
 
     def __repr__(self):
         return "%s"%self.username
@@ -85,7 +97,7 @@ tsvector_update_trigger(full_text,'pg_catalog.english', 'description')
 
 event.listen(User.__table__, 'after_create', user_trigger_snippet.execute_if(dialect = 'postgresql'))
 
-    
+
 
 class Campaign(db.Model, BaseMixin):
     __tablename__ = "campaign"
@@ -124,6 +136,7 @@ class Campaign(db.Model, BaseMixin):
 
 
 
+
     def __repr__(self):
         return "%s"%self.name
 
@@ -136,7 +149,7 @@ tsvector_update_trigger(full_text,'pg_catalog.english', 'name', 'subheading', 'b
 
 event.listen(Campaign.__table__, 'after_create', campaign_trigger_snippet.execute_if(dialect = 'postgresql'))
 
-    
+
 
 class Category(db.Model, BaseMixin):
     __tablename__ = "category"
