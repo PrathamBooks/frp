@@ -146,7 +146,7 @@ class Search(MethodView):
                 print "Text filtering using '{}'".format(text)
                 q = q.filter(obj.full_text == text)
             print "Final query ", q
-            return jsonify(create_search_response_v1(q.all(), item, query['expand']))
+            return jsonify(create_search_response_v1(q.all(), obj, query['expand']))
         else:
             print form.errors #TBD. Put this in the error
             return jsonify({'message' : 'Error in query'})
