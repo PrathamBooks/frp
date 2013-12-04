@@ -42,19 +42,28 @@ def create_search_response_v1(data, typ, expand = False):
     Converts a list of results into json that we can send back to the
     client. (API version 1).
     """
+    messages = []
+    object_name = getattr(typ, "__name__").lower()
+    if not hasattr(typ, "verbose_fields"):
+        expand = False
+        messages.append("Cannot expand '{}' objects".format(object_name))
 
-    typ = typ.lower()
+    matches = []
     if expand:
-        matches = [{'id'  : x.id,
-                    'url' : "{}api/v1/{}/{}".format(request.url_root, typ, x.id),
-                    'other' : 'something'
-                    } for x in data]
+        for x in data:
+            details = x.verbose_fields()
+            details['id'] = x.id
+            details['url'] = "{}api/v1/{}/{}".format(request.url_root, object_name, x.id)
+            matches.append(details)
     else:
         matches = [{'id'  : x.id,
-                    'url' : "{}api/v1/{}/{}".format(request.url_root, typ, x.id)
+                    'url' : "{}api/v1/{}/{}".format(request.url_root, object_name, x.id)
                     } for x in data]
         
-    return dict(item = typ,
-                matches = matches)
+    retval =  dict(item = object_name,
+                   expand = expand,
+                   matches = matches,
+                   messages = messages)
+    return retval
     
 
