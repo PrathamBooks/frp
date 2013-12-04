@@ -1,4 +1,6 @@
+import datetime
 import os
+import subprocess
 
 from flask.ext.script import Manager, Command, Option
 from flask.ext.lastuser import Lastuser
@@ -25,6 +27,30 @@ def runserver():
     lastuser.init_app(app)
     lastuser.init_usermanager(UserManager(models.db, models.User))
     app.run()
+
+@manager.command
+def gendata():
+    """
+    Creates a few campaigns that we can use to run our tests on.
+    """
+    app.config.from_pyfile(settings)
+    lastuser.init_app(app)
+    user = models.User.query.all()[0]
+    for i in range(1, 100):
+        m = models.Campaign(name = "campaign-{}".format(i),
+                            subheading = "Subheading {}".format(i),
+                            brief = subprocess.Popen("/usr/games/fortune -s".split(), stdout = subprocess.PIPE).stdout.read(),
+                            description = subprocess.Popen("/usr/games/fortune -l".split(), stdout = subprocess.PIPE).stdout.read(),
+                            latitude = i,
+                            latitude_hem = "N",
+                            longitude = i,
+                            longitude_hem = "E",
+                            start = datetime.datetime.now(),
+                            end = datetime.datetime.now() + datetime.timedelta(days = 10),
+                            created_by = user)
+        models.db.session.add(m)
+    models.db.session.commit()
+    
 
 @manager.command
 def resetdb():
