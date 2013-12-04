@@ -139,6 +139,13 @@ class Search(MethodView):
                     d = {k:v}
                     print "Filtering by ", d
                     q = q.filter_by(**d)
+            text = query.get('text')
+            if text:
+                if not hasattr(obj, 'full_text'):
+                    return jsonify({'message' : 'Cannot do full text search on {}'.format(item)})
+                print "Text filtering using '{}'".format(text)
+                q = q.filter(obj.full_text == text)
+            print "Final query ", q
             return jsonify(create_search_response_v1(q.all(), item, query['expand']))
         else:
             print form.errors #TBD. Put this in the error
