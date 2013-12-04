@@ -1,4 +1,4 @@
-from flask import url_for
+from flask import url_for, request
 
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.lastuser.sqlalchemy import UserBase
@@ -10,9 +10,8 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Table, func, Index, DDL, event
 
 
-
-
 from . import app
+from .helpers import utc_timestamp
 
 db = SQLAlchemy(app)
 gravatar = Gravatar()
@@ -135,6 +134,20 @@ class Campaign(db.Model, BaseMixin):
     __table_args__ = (Index('campaign_full_text_idx', 'full_text', postgresql_using = 'gin'),)
 
 
+    def verbose_fields(self):
+        return dict(
+            created_by = {'id' : self.created_by.id,
+                          'url' : "/api/v1/user/{}".format(self.created_by.id)}, #Fix the URL here
+            name = self.name,
+            subheading = self.subheading,
+            brief = self.brief,
+            description = self.description,
+            latitude = "{} {}".format(self.latitude, self.latitude_hem),
+            longitude = "{} {}".format(self.longitude, self.longitude_hem),
+            start = utc_timestamp(self.start),
+            end = utc_timestamp(self.end),
+            pledged = self.pledged,
+            target = self.target)
 
 
     def __repr__(self):
