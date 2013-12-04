@@ -7,17 +7,25 @@ from wtforms.widgets import TextInput
 from wtforms import Form as WTFForm
 
 
-class JsonField(TextField):
+class SearchQueryField(TextField):
     def process_formdata(self, values):
         if values:
             value = values[0]
+            print value, type(value)
             try:
-                self.data = json.loads(value)
-            except ValueError:
-                raise ValidationError("Malformed JSON")
+                self.data = json.loads(value) # Make sure that it's in JSON
+            except ValueError, e:
+                raise ValidationError("Sorry. Malformed JSON")
+            # Check 'item' key
+            if not self.data.has_key("item"):
+                raise ValidationError("No 'item' in query.")
+            if not self.data['item'] in ['User', 'Campaign', 'Category']:
+                raise ValidationError("Can't query on '{}'".format(self.data['item']))
+            # Check 'expand' key
+            self.data['expand'] = self.data.get('expand', False)
+            # The rest should be valid.
         else:
             self.data = ""
-
 
 class DatePickerWidget(TextInput):
     """
@@ -56,7 +64,4 @@ class CategoryForm(Form):
     # campaigns = relationship("Campaign", secondary = category_campaign_table, backref = "categories")
 
 class SearchForm(Form):
-    item = TextField("item", validators = [DataRequired(), AnyOf(["User", "Campaign", "Category"])])
-    expand = BooleanField('expand')
-    params = JsonField('params')
-    text = TextField("text")
+    query = SearchQueryField("query")

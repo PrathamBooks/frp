@@ -127,15 +127,19 @@ class Search(MethodView):
     def post(self):
         form = SearchForm(csrf_enabled = False)
         if form.validate_on_submit():
+            query = form.query.data
+            item = query['item']
             obj = {'Campaign' : models.Campaign,
                    'User'     : models.User,
-                   'Category' : models.Category}[form.item.data]
-            query = obj.query
-            if form.params.data:
-                for k,v in form.params.data.iteritems():
+                   'Category' : models.Category}[item]
+            q = obj.query
+            params = query.get('params')
+            if params:
+                for k,v in params.iteritems():
                     d = {k:v}
-                    query = query.filter_by(**d)
-            return jsonify(create_search_response_v1(query.all(), form.item.data, form.expand.data))
+                    print "Filtering by ", d
+                    q = q.filter_by(**d)
+            return jsonify(create_search_response_v1(q.all(), item, query['expand']))
         else:
             print form.errors #TBD. Put this in the error
             return jsonify({'message' : 'Error in query'})
