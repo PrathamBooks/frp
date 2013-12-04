@@ -142,7 +142,7 @@ class Search(MethodView):
             text = query.get('text')
             if text:
                 if not hasattr(obj, 'full_text'):
-                    return jsonify({'message' : 'Cannot do full text search on {}'.format(item)})
+                    return jsonify({'message' : 'Full text search on {} unsupported'.format(item)})
                 print "Text filtering using '{}'".format(text)
                 q = q.filter(obj.full_text == text)
             print "Final query ", q
