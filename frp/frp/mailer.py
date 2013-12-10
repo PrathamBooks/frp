@@ -21,18 +21,24 @@ class Mailer(object):
         subdirectory of templates) and the provided subject. All other
         values are used to fill in the template.
         """
-
         if not isinstance(to, list):
             to = [to]
+        message_content = render_template("email/{}".format(template), **vals)
+        if self.app.config.get('DEBUG', False):
+            print "------------------- Email ------------------ "
+            print "To:{}".format(",".join(to))
+            print "Subject: {}".format(subject)
+            print message_content
+            print "------------------- End ------------------ "
+            return
         try:
-            message_content = render_template("email/{}".format(template), **vals)
             message = FlaskMailMessage(body = message_content,
                                        subject = subject,
                                        recipients = to)
             self.flask_mail.send(message)
         except socket.error:
             print "Trying sendmail callback"
-            message_content = render_template("email/{}".format(template), **vals)
+
             message = FlaskSendmailMessage(body = message_content,
                                            subject = subject,
                                            recipients = to)
