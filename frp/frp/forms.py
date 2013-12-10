@@ -15,7 +15,7 @@ class SearchQueryField(TextField):
             try:
                 self.data = json.loads(value) # Make sure that it's in JSON
             except ValueError, e:
-                raise ValidationError("Sorry. Malformed JSON")
+                raise ValidationError("Malformed JSON")
             # Check 'item' key
             if not self.data.has_key("item"):
                 raise ValidationError("No 'item' in query.")
