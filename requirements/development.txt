@@ -35,3 +35,5 @@ Flask-Gravatar==0.4.0
 Flask-Admin==1.0.7
 hiredis==0.1.1
 Flask-Cache==0.12
+Flask-Mail==0.9.0
+Flask-Sendmail==0.1
