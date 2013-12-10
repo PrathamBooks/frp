@@ -3,10 +3,12 @@ from flask.ext.lastuser import Lastuser
 from flask.ext.assets import Environment, Bundle
 from flask.ext.cache import Cache
 from ._version import __version__
+from .mailer import Mailer
 
 app = Flask(__name__)
 assets = Environment(app)
 lastuser = Lastuser()
+mailer = Mailer(app)
 cache = Cache(app, config = {'CACHE_TYPE' : 'redis'})
 
 css = Bundle("css/bootstrap.css", filters='cssmin', output='gen/all.css')

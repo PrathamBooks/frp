@@ -12,7 +12,7 @@ import markdown
 from werkzeug import secure_filename
 from flask_negotiate import produces
 
-from .. import app, lastuser, cache
+from .. import app, lastuser, cache, mailer
 from .. import models
 from ..models import db
 from ..helpers import utc_timestamp, requires_login, allowed_file, create_search_response_v1
@@ -146,6 +146,8 @@ class Search(MethodView):
                 print "Text filtering using '{}'".format(text)
                 q = q.filter(obj.full_text == text)
             print "Final query ", q
+            # This is not necessary but was put here to test the mail framework.
+            mailer.send_email('noufal@gmail.com', 'Search conducted', 'search.txt', query = q)
             return jsonify(create_search_response_v1(q.all(), obj, query['expand']))
         else:
             print form.errors #TBD. Put this in the error

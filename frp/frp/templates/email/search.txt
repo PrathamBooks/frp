@@ -1,0 +1,8 @@
+Hi there,
+   This was the query that was run
+
+     {{ query }}
+
+   Thanks for your time!
+
+Bye.
