@@ -75,7 +75,7 @@ def category_icon(cat_id):
 
 @app.route("/partials/<path:page>", methods = ['GET'])
 def angular_partials(page):
-    return send_file("%s/partials/%s"%(app.static_folder,page))
+    return render_template("partials/{}".format(page))
 
 @app.route('/login', methods=['GET', 'POST'])
 @lastuser.login_handler
