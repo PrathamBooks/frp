@@ -13,7 +13,7 @@ config(['$routeProvider', '$locationProvider', function($routeProvider, $locatio
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'baseCtrl'});
   $routeProvider.when('/browse', {templateUrl: 'partials/base.html', controller: 'baseCtrl'});
   $routeProvider.when('/browse/:type', {templateUrl: 'partials/base.html', controller: 'baseCtrl'});
-  $routeProvider.when('/create', {templateUrl: 'partials/base.html', controller: 'baseCtrl'});
+  $routeProvider.when('/create', {templateUrl: 'partials/form.html', controller: 'baseCtrl'});
   $routeProvider.when('/create/:sub', {templateUrl: 'partials/base.html', controller: 'baseCtrl'});
   $routeProvider.when('/learn', {templateUrl: 'partials/base.html', controller: 'baseCtrl'});
   $routeProvider.when('/learn/:sub', {templateUrl: 'partials/base.html', controller: 'baseCtrl'});
