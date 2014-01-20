@@ -11,11 +11,31 @@ lastuser = Lastuser()
 mailer = Mailer(app)
 cache = Cache(app, config = {'CACHE_TYPE' : 'redis'})
 
-css = Bundle("css/bootstrap.css", filters='cssmin', output='gen/all.css')
-lib = Bundle("lib/bootstrap/bootstrap.min.js", "lib/angular/angular.js", "lib/angular/angular-route.js", "js/app.js", "js/services.js", "js/controllers.js", "js/filters.js", "js/directives.js", output="gen/lib.js")
+css = Bundle("css/bootstrap.min.css",
+             "css/bootstrap-theme.min.css",
+             "css/slider.css",
+             filters='cssmin',
+             output='gen/all.css')
+
+jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
+bootstrap = Bundle("lib/bootstrap/bootstrap.min.js", "lib/bootstrap/bootstrap-slider.js", output="gen/bootstrap.js")
+angular = Bundle("lib/angular/angular.js", "lib/angular/angular-route.js", output="gen/angular.js")
+
+app_js = Bundle("js/app.js",
+                "js/services.js",
+                "js/controllers.js",
+                "js/filters.js",
+                "js/directives.js",
+                output="gen/lib.js")
 
 assets.register('css_site', css)
-assets.register('lib_site', lib)
+
+assets.register('app_js', app_js)
+assets.register('jquery', jquery)
+assets.register('bootstrap', bootstrap)
+assets.register('angular', angular)
+
+
 
 @app.context_processor
 def inject_version():
