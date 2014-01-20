@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pratham Books Sign-up Form</title>
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/slider.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Pratham Books Sign-up Form</a>
-        </div>
 
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#step1">Step 1</a></li>
-            <li><a href="#step2">Step 2</a></li>
-            <li><a href="#step3">Step 3</a></li>
-            <li><a href="#step4">Step 4</a></li>
-          </ul>
-        </div><!-- /.nav-collapse -->
-      </div><!-- /.container -->
-    </div><!-- /.navbar -->
-    
-    <div class="container">
       <div class="row">
         <div class="col-xs-6 col-sm-3" id="sidebar" role="navigation">
           <div class="list-group">
@@ -743,44 +703,4 @@
             <!-- Step 4 ends here-->     
         </form>        
       </div><!--/row-->
-      <hr>
-      <footer class="col-xs-12">
-        <p>Pratham Books &copy; 2013</p>
-      </footer>
-    </div><!--/.container-->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-slider.js"></script>
-    <script>        
-        $(function() {
-            $('.percentageSlider').slider();
 
-            $('div.list-group a').click(function (e) {
-                e.preventDefault();
-                $('div.list-group a').removeClass('active');
-                $(this).addClass('active');
-                $('section').addClass('hide');
-                $('section' + $(this).attr('href')).removeClass('hide');
-            });
-
-            $('#bookCounts input').keyup(function(e) {
-                var count = 0;
-                $('#bookCounts input').each(function(i, e) {
-                    if (i==1) {
-                        if (parseInt(e.value)) count += parseInt(e.value) * 125;
-                    } else {
-                        if (parseInt(e.value)) count += parseInt(e.value);
-                    }
-                });
-
-                $('#bookAmount').html(count * 30);
-                $('#noOfBooks').html(count);
-                $('#booksLeft').html(count);
-            });
-        });
-    </script>
-  </body>
-</html>

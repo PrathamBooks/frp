@@ -141,5 +141,38 @@
     <script type="text/javascript" src="{{ ASSET_URL }}"/></script>
     {% endassets %}
 
+
+
+<!-- This is code specific to the create campaign form and probably shouldn't be here -->
+
+<script>
+        $(function() {
+            $('.percentageSlider').slider();
+
+            $('div.list-group a').click(function (e) {
+                e.preventDefault();
+                $('div.list-group a').removeClass('active');
+                $(this).addClass('active');
+                $('section').addClass('hide');
+                $('section' + $(this).attr('href')).removeClass('hide');
+            });
+
+            $('#bookCounts input').keyup(function(e) {
+                var count = 0;
+                $('#bookCounts input').each(function(i, e) {
+                    if (i==1) {
+                        if (parseInt(e.value)) count += parseInt(e.value) * 125;
+                    } else {
+                        if (parseInt(e.value)) count += parseInt(e.value);
+                    }
+                });
+
+                $('#bookAmount').html(count * 30);
+                $('#noOfBooks').html(count);
+                $('#booksLeft').html(count);
+            });
+        });
+</script>
+
   </body>
 </html>
