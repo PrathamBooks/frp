@@ -96,7 +96,15 @@ def lastuserauth():
 def logout():
     flash("You are now logged out", category='info')
     return "/"
-    
+
+
+@app.route("/campaign/newadd", methods=['GET', 'POST'])
+@lastuser.requires_login
+def create_campaign():
+    """
+    Temporary function to test the create campaign page
+    """
+    return render_template("tmp/form.html")
 
 @lastuser.auth_error_handler
 def lastuser_error(error, error_description=None, error_uri=None):
