@@ -55,7 +55,7 @@
         </div><!--/span-->
 
         <form role="form" class="col-xs-12 col-sm-9" method="post" action="test.php">
-		<div class="alert hide">&nbsp;</div>
+        <div class="alert hide">&nbsp;</div>
             <!-- Step 1 starts here-->
             <section id="step1">
                 <div class="jumbotron row">
@@ -427,51 +427,51 @@
                     </p>
                     <div class="col-xs-12">
                         <select class="form-control" name="days">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-							<option value="13">13</option>
-							<option value="14">14</option>
-							<option value="15">15</option>
-							<option value="16">16</option>
-							<option value="17">17</option>
-							<option value="18">18</option>
-							<option value="19">19</option>
-							<option value="20">20</option>
-							<option value="21">21</option>
-							<option value="22">22</option>
-							<option value="23">23</option>
-							<option value="24">24</option>
-							<option value="25">25</option>
-							<option value="26">26</option>
-							<option value="27">27</option>
-							<option value="28">28</option>
-							<option value="29">29</option>
-							<option value="30">30</option>
-							<option value="31">31</option>
-							<option value="32">32</option>
-							<option value="33">33</option>
-							<option value="34">34</option>
-							<option value="35">35</option>
-							<option value="36">36</option>
-							<option value="37">37</option>
-							<option value="38">38</option>
-							<option value="39">39</option>
-							<option value="40">40</option>
-							<option value="41">41</option>
-							<option value="42">42</option>
-							<option value="43">43</option>
-							<option value="44">44</option>
-							<option value="45">45</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
                     </select>
                     </div>
                 </div>
@@ -510,8 +510,8 @@
                     <!--<img src="..." alt="..." class="img-responsive img-thumbnail img-rounded" width="220px" height="194px" required />-->
                     <p class="help-block">PNG, JPG, or GIF 220x190px cropped to 90x90 on campaign page</p>
                     <div class="alert alert-warning hide">
-					<p>Not valid file.</p>
-					</div>
+                    <p>Not valid file.</p>
+                    </div>
                 </div>
                 <div class="well">
                     <h3>Video Upload</h3>
@@ -520,8 +520,8 @@
                     <p class="help-block">Mpeg file not more than XX mb and xx seconds</p>
                     <video></video>
                     <div class="alert alert-warning hide">
-						<p>Not valid file.</p>
-					</div>
+                        <p>Not valid file.</p>
+                    </div>
                 </div>
                 <div class="well">
                     <h3>Funding Goal</h3>
@@ -736,7 +736,7 @@
                     <input type="radio" name="options" value="Add Photos" id="addPhoto"> Add Photos
                   </label>
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" value="Create Albums" id="addAlbum"> Create Albums
+                    <input type="radio" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums
                   </label>
                   <label class="btn btn-primary">
                     <input type="radio" name="options" value="Add Videos" id="addVideo"> Add Videos
@@ -748,9 +748,9 @@
               <div class="well">
                 <h2>Reporting Back:</h2><br/>
                 <!-- Indicates a successful or positive action -->
-                <button type="submit" class="btn btn-success btn-lg btn-block">Go Live &amp; Get Funded</button>
+                <button type="submit" id="goLive" class="btn btn-success btn-lg btn-block">Go Live &amp; Get Funded</button>
                 <div class="alert alert-warning hide">
-                  <p>Your campaign is not ready to go live quite yet. <a href="#">Show me what's left to do</a></p>
+                  <p>Your campaign is not ready to go live quite yet. <a href="#" id="showLeft">Show me what's left to do</a></p>
                 </div>
               </div>
             </section>
