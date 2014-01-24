@@ -1,3 +1,7 @@
+/*****      Declaration of global variables     *****/
+var eachStagePostDataURL = 'http://example.com/';
+var wholeFormPostDataURL = 'http://activelement.com/';
+
 function getFileSize(fSize){
     var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
     i=0;while(fSize>900){fSize/=1024;i++;}
@@ -5,31 +9,37 @@ function getFileSize(fSize){
     return ((Math.round(fSize*100)/100)+' '+fSExt[i]);
 }
 function showBottomNavigation(){
-    console.log($("section:visible").prev().attr('id')!= undefined+" : "+$("section:visible").prev().attr('id'))
     if($("section:visible").prev().attr('id')!== undefined && $("section:visible").prev().attr('id').indexOf('step')!== -1) {
         $("#previous").removeClass('hide');
         $("#previous").attr('href','#'+$("section:visible").prev().attr('id'));
     }else $("#previous").addClass('hide');
     if($("section:visible").next().attr('id')!== undefined && $("section:visible").next().attr('id').indexOf('step')!== -1) {
         $("#next").removeClass('hide');
-        console.log(123);
         $("#next").attr('href','#'+$("section:visible").next().attr('id'));
     }else $("#next").addClass('hide');
 }
 $(function() {
-    $("form.col-sm-9 .btn:last").click(function(event){
+    $("#goLive").click(function(event){
     	event.preventDefault();
     	if($("input:invalid, textarea:invalid, checkbox:invalid, radio:invalid").length > 0){
-    		$("form.col-sm-9 .alert-warning:last").removeClass('hide').delay(5000).fadeOut(2000,function(){ 
+    		$(this).parent().find('.alert').removeClass('hide').delay(5000).fadeOut(2000,function(){ 
                 $(this).addClass('hide');
                 $(this).removeAttr('style'); 
             });
+            $("input:invalid, textarea:invalid, checkbox:invalid, radio:invalid").css('border-color','#FF0004');
+            $("input:valid, textarea:valid, checkbox:valid, radio:valid").css('border-color','#CCCCCC');
     	}
     	else {
-    		$.post("test.php", $("form.col-sm-9").serialize(), function(data){
+            $("input:valid, textarea:valid, checkbox:valid, radio:valid").css('border-color','#CCCCCC');
+    		$.post(wholeFormPostDataURL, $("form.col-sm-9").serializeArray(), function(data){
     			//console.log(data);
     		});
     	}
+    });
+    $("a#showLeft").click(function(event){
+        event.preventDefault();
+        $("section").addClass('hide');
+        $(":invalid").eq(1).parents('section').removeClass('hide');
     });
     $("input[name=imageUpload]").change(function(){        
         var ext = this.files[0].type;
@@ -42,7 +52,6 @@ $(function() {
     $("input[name=addVideo]").change(function(){
         var fileSize = getFileSize(this.files[0].size);
         var ext = this.files[0].type;
-        console.log(ext); 
         if(ext=='video/mpeg'){
             $(this).parent().find('.alert').addClass('hide');
             /*  For setting video source we need to upload it.
@@ -54,25 +63,27 @@ $(function() {
         }
     });
 
-
     $('.percentageSlider').slider();
-showBottomNavigation();
-    $('div.list-group a').click(function (e) {
+    showBottomNavigation();
+
+	$('div.list-group a, .nav li a, #previous, #next').click(function (e) {
         e.preventDefault();
-        $('div.list-group a, .nav li a').removeClass('active');
-        console.log("a[href="+$(this).attr('href')+"]");
-        $("a[href="+$(this).attr('href')+"]").addClass('active');
-        $('section').addClass('hide');
-        $('section' + $(this).attr('href')).removeClass('hide');
-        showBottomNavigation();
-    });
-	$('.nav li a, #previous, #next').click(function (e) {
-        e.preventDefault();
-        $('div.list-group a, .nav li a').removeClass('active');
-        $("a[href="+$(this).attr('href')+"]").addClass('active');
-        $('section').addClass('hide');
-        $('section' + $(this).attr('href')).removeClass('hide');
-        showBottomNavigation();
+        var id = $('section:visible').attr('id');
+        if($('section#' + id + ' :invalid').length > 0){
+            $('section#' + id + ' :invalid').css('border-color','#FF0004');
+            $('section#' + id + ' :valid').css('border-color','#CCCCCC');
+        }
+        else {
+            $('section#' + id + ' :valid').css('border-color','#CCCCCC');
+            $.post(eachStagePostDataURL, $('section#' + id + ' :valid').serializeArray(), function(data){
+                //console.log(data);
+            });
+            $('div.list-group a, .nav li a').removeClass('active');
+            $("a[href="+$(this).attr('href')+"]").addClass('active');
+            $('section').addClass('hide');
+            $('section' + $(this).attr('href')).removeClass('hide');
+            showBottomNavigation();
+        }        
     });
 
 	$("#addLanguage").click(function(){
