@@ -14,7 +14,6 @@ cache = Cache(app, config = {'CACHE_TYPE' : 'redis'})
 css = Bundle("css/bootstrap.css",
              # "css/bootstrap-theme.min.css",
              "css/slider.css",
-             filters='cssmin',
              output='gen/all.css')
 
 jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
