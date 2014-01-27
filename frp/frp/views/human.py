@@ -7,7 +7,7 @@ from werkzeug import secure_filename
 from .. import app, lastuser
 from .. import models
 from ..models import db
-from ..forms import CampaignForm, CategoryForm
+from ..forms import CampaignForm, CategoryForm, CampaignForm2
 from ..helpers import allowed_file
 
 
@@ -105,6 +105,16 @@ def create_campaign():
     Temporary function to test the create campaign page
     """
     return render_template("tmp/form.html")
+
+@app.route("/campaign/newadd2", methods=['GET', 'POST'])
+@lastuser.requires_login
+def create_campaign2():
+    """
+    Temporary function to test the create campaign page
+    """
+    form = CampaignForm2()
+    return render_template("create_campaign.html", 
+                           form = form)
 
 @lastuser.auth_error_handler
 def lastuser_error(error, error_description=None, error_uri=None):

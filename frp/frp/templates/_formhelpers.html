@@ -1,3 +1,29 @@
+{% macro render_text_field(field)  %}
+<div class="form-group row">
+  <div class="col-xs-4">
+    {{field.label}}
+  </div>
+  <div class="col-xs-8">
+    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" required />
+    {% if field.help_text %}
+    <p class="help-block">{{field.help_text}}</p>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro render_text_area(field)  %}
+<div class="form-group row">
+  {{ field.label }}
+  <textarea class="form-control" rows="3" name="{{field.name}}"></textarea>
+  {% if field.help_text %}
+  <p class="help-block">{{field.help_text}}</p>
+  {% endif %}
+</div>
+{% endmacro %}
+
+
+
 {% macro render_field(field)%}
   <th>
     {{ field.label }}{% if field.flags.required %}<span class="required">*</span>{% endif %}
@@ -33,7 +59,15 @@
 {% endmacro %}
 
 {%macro render_bullets(field)%}
+{% if field.flags.required %}<span class="required">*</span>{% endif %}
 {% for subfield in field %}
-  {{subfield.label}} {{subfield}}
+<div class="radio"><label><input type="radio" name="{{subfield.name}}" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
 {% endfor %}
+{% if field.errors %}
+<ul class=errors>
+  {% for error in field.errors %}
+  <li>{{ error }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 {%endmacro%}

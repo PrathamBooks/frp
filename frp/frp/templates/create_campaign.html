@@ -1,22 +1,575 @@
-{% extends "base.html" %}
-{% from "_formhelpers.html" import render_field, render_bullets, render_field_row %}
+{% extends "base2.html" %}
+{% from "_formhelpers.html" import render_field, render_bullets, render_field_row, render_text_field, render_text_area%}
 {% block body %}
-  <h2>Create new product</h2>
-  <form id = "create_campaign" method="post">
-  {{ form.hidden_tag() }}
-  <table>
-  {{render_field_row(form.name)}}
-  {{render_field_row(form.subheading)}}
-  {{render_field_row(form.brief)}}
-  {{render_field_row(form.description)}}
-  <tr>{{render_field(form.latitude)}}  <td>{{render_bullets(form.latitude_hem)}} </td></tr>
-  <tr>{{render_field(form.longitude)}} <td>{{render_bullets(form.longitude_hem)}} </td></tr>
-  {{render_field_row(form.start)}}
-  {{render_field_row(form.end)}}
-  {{render_field_row(form.target)}}
-  </table>
-  <button form ="create_campaign" formaction="{{ url_for('campaign_add') }}"  type="submit" value="create campaign" name="submit" formmethod="post">
-    Create product
-    </button>
-</form>
+        <form role="form" class="col-xs-12 col-sm-9" method="post" action="test.php">
+        <div class="alert hide">&nbsp;</div>
+            <!-- Step 1 starts here-->
+            <section id="step1">
+                <div class="jumbotron row">
+                    <h1>Step 1: Knowing you better</h1>
+                    <p>This section deals with setting up your Organization, the first step to setting up your campaign! Answer each question as best you can and if you have a query you can always write to <a href="mailto:give@prathambooks.org">give@prathambooks.org</a>.</p>
+                </div><!-- Jumbo-->
+                
+                <div class="row form-group">
+                    <h3>Which category best describes you?</h3>
+                    <p>Pick one category that best describes you and the reason you are raising funds. Please take your time to select this as this impacts the next steps.</p>
+                    {{render_bullets(form.category)}}
+
+                </div> <!--row-->
+                
+                <div class="well">
+                    <h3>Tell us a little more about you/your organization</h3>
+                    {{render_text_field(form.name)}}
+                    
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                            <label for="status">Organisation Status</label>
+                            {{render_bullets(form.org_status)}}
+                        </div>
+                    </div>
+                    
+                    {{ render_text_field(form.ho_address) }}
+                    {{ render_text_field(form.ho_phone) }}
+                    {{ render_text_field(form.ho_email) }}
+                    {{ render_text_field(form.website ) }}
+                    {{ render_text_field(form.fb_page) }}
+                    {{ render_text_field(form.blog) }}
+
+                </div><!--well-->
+                
+                <div class="well">
+                    <h3>Update us on your certifications:</h3>
+                    <p>Does your organisation have 80g certification (relevant only for registered NGO's)</p>
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                            {{render_bullets(form.eightyg_cert)}}
+                        </div>
+                    </div>
+                </div><!--well-->
+
+                <div class="well">
+                    <h3>Stay in touch</h3>
+                    <p>Give us more details about person filling the form so that we can stay in touch with you</p>
+                    {{render_text_field(form.creator_name) }}
+                    {{render_text_field(form.creator_position) }}
+                    {{render_text_field(form.creator_email) }}
+                    {{render_text_field(form.creator_phone) }}
+                    <h4>Who should we get in touch with once your books are ready for shipping?</h4>
+                    {{render_text_field(form.shipping_name) }}
+                    {{render_text_field(form.shipping_email) }}
+                    {{render_text_field(form.shipping_phone) }}
+
+                </div><!--well-->
+                
+                <div class="well">
+                    <h3>A little more about what you/your organization does</h3>
+                    {{render_text_area(form.how_changed)}}
+
+                    <h3>Overall impact numbers</h3>
+                    {{render_text_field(form.children_number)}}
+                    {{render_text_field(form.children_age)}}
+
+                    <div class="form-group row">
+                      <div class="col-xs-12">
+                      <label for="age">Do you/your organization do any work for following (check all that apply):</label>
+                        {{form.children_special}}
+                      </div><!--well-->
+                    </div>
+            </section>
+            <!-- Step 1 ends here-->
+
+            <!-- Step 2 starts here-->
+        <section id="step2" class="hide">
+                <div class="jumbotron row">
+                    <h1>Step 2: Get Started</h1>
+                    <p>You are just a few simple steps away from getting fabulous stories to the children that you work with!</p>
+                </div>
+                <div class="well">
+                    <h3>What are you raising money for?</h3>
+                    <p>Please select what you wish to raise money for. For your convenience we have four types of donations to choose from. 
+                    If you already have a functional library we recommend you choose just Books.
+                    If you wish to build a classroom library or need a modular unit with books try our 'Library-in-a-classroom or Books-in-a-bag.
+                    <a href="#">Click here</a> to see how functional a little bag can be!
+                    If you are a school or an NGO that would like to raise money to give away books as prizes or distribute books 
+                    choose the option titles Prizes. And lastly if you are a <a href="#">Reading champion</a> who wants to raise books to promote the habit of reading choose the last option titled Reading Sessions. 
+                    You can also choose a mix of different product offerings in the same funding campaign!
+                    </p>
+                    <div class="form-group row" id="bookCounts">
+                        <div class="col-xs-9 row">
+                            <div class="col-xs-6">
+                                <label for="Library">Books for a library</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" name="library" placeholder="No. of books" />
+                            </div>
+                        </div>
+                        <div class="col-xs-9 row">
+                            <div class="col-xs-6">
+                                <label for="bookbag">Books-in-a-bag/classroom library</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" name="bookbag" placeholder="No. of bags" />
+                            </div>
+                        </div>
+                        <div class="col-xs-9 row">
+                            <div class="col-xs-6">
+                                <label for="prizes">Books as prize/give-aways</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" name="prizes" placeholder="No. of books" />
+                            </div>
+                        </div>
+                        <div class="col-xs-9 row">
+                            <div class="col-xs-6">
+                                <label for="sessions">Books for reading sessions</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" name="sessions" placeholder="No. of books" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                        <h3>Based on your requirement your funding goal is</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            Amount (in Rupees)
+                        </div>
+                        <div class="col-xs-8">
+                            <span id="bookAmount"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            Number of Books
+                        </div>
+                        <div class="col-xs-8">
+                            <span id="noOfBooks"></span>
+                        </div>
+                    </div>
+                    <p><strong>PLEASE NOTE:</strong>
+                      If the above amount is not what you had in mind please change your requirement in the previous question.
+                      The minimum amount you can raise on this site is Rs. 5000.
+                      If this is the first time you are raising funds the maximum you can raise is Rs. 25,000.
+                      For our repeat patrons the fund raising limit is Rs. 50,000.<br/><i>Add 2 lines on logic why.</i>
+                      Please read the <a href="#">terms and conditions</a> before proceeding.
+                    </p>
+                </div>
+                <div class="well">
+                    <h3>Languages</h3>
+                    <p>Pratham Books publishes books in upto 12 Indian languages.Your donation will entitle you to choose any books 
+                    across the languages that are in stock. You will appreciate that the in-stock items keep changing but letting us know which 
+                    languages and across which levels will help us serve you better. Reserve books now!
+                    </p>
+                        <div class="form-group row">
+                            <div class="col-xs-4">
+                                <select class="form-control" name="language1[]">
+                                    <option value="Hindi">Hindi</option>
+                                    <option value="English">English</option>
+                                    <option value="Marathi">Marathi</option>
+                                    <option value="Telugu">Telugu</option>
+                                    <option value="Gujarati">Gujarati</option>
+                                    <option value="Malayalam">Malayalam</option>
+                                </select>                                
+                            </div>
+                            <div class="col-xs-4">
+                                Number of books in this language (<span id="booksLeft"></span> left)
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" name="library[]" placeholder="No. of books" />
+                            </div>
+                        </div>
+                        
+                        <table class="table">
+                        <tr>
+                          <th>Level</th>
+                          <th>Percentage</th>
+                          <th>Number of Books</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td><input type="text" class="percentageSlider" name="percentageSlider1[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td><span class="level1"></span></td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td><input type="text" class="percentageSlider" name="percentageSlider2[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td><span class="level2"></span></td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td><input type="text" class="percentageSlider" name="percentageSlider3[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td><span class="level3"></span></td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td><input type="text" class="percentageSlider" name="percentageSlider4[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td><span class="level4"></span></td>
+                        </tr>
+                        <tr>
+                          <td>Total</td>
+                          <td><input type="text" class="percentageSlider" name="percentageSlider5[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td><span class="level5"></span></td>
+                        </tr>
+                        </table>
+
+                        <button type="button" id="addLanguage" class="btn btn-success btn-lg">Add another language</button>
+                    </div>
+                <div class="well">
+                    <h3>Impact</h3>
+                    <p>How many children will be impacted through this specific funding.
+                    Please ensure that you don't put in the overall organization impact numbers. Please note our champions will be verifying the same. Discrepancies are subject to the campaign being rejected.
+                    </p>
+                     <div class="col-xs-12">
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="impact[]" value="Less than 100">Less than 100</label><br />
+                        <label><input type="checkbox" name="impact[]" value="101 - 250">101 - 250</label><br />
+                        <label><input type="checkbox" name="impact[]" value="251 - 500">251 - 500</label><br />
+                        <label><input type="checkbox" name="impact[]" value="Above 500">Above 500</label>
+                    </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <h3>Duration of Campaign</h3>
+                    <p>A campaign can raise funds for up to 60 days, but the average fully-funded campaign is only 47 days long.
+                    You campaign will run for the number of days that you select and will start from the day the campaign goes live.
+                    Please note that there will be a 30-45 day lead time after campaign ends and before you get your books.
+                    Therefore plan your campaign time wisely!
+                    </p>
+                    <div class="col-xs-12">
+                        <select class="form-control" name="days">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="well">
+                    <h3>Multi-center funding</h3>
+                    <p>Are you raising funds for multiple centres? If yes please list the city and town names.
+                    Also note that shipping for all the books will be to one central location.
+                    If you have any special instructions for packaging please mention them here. e.g. 
+                    If you are raising books in tamil for chennai centre and telugu for Hyderabad centre then you can add a note – Please pack the tamil and chennai books separately.</p>
+                </div>
+                <div class="well">
+                    <h3>Shipping address</h3>
+                    <p>Please ensure that you mention the correct address and contact details including a office number and a cell phone number.
+                    </p>
+                </div>
+            </section>
+            <!-- Step 2 ends here-->
+
+            <!-- Step 3 starts here-->
+            <section id="step3" class="hide">
+                <div class="jumbotron row">
+                    <h1>Step 3: Set-up your campaign</h1>
+                </div>
+                <div class="row form-group">
+                    <p>Campaign Basics</p>
+                    <p class="help-block">(* means required before you 'Go Live')</p>
+                    <p>Add all the basic facts about your campaign here. Remember that your campaign title and short description show up 
+                    both on your campaign card and your campaign profile page</p>
+                    <p>Your campaign page is where we showcase the awesome work you do. Make sure you take some time out to fill this section as this 
+                    is what donors will review before deciding to support you)
+                    </p>
+                </div>
+                <div class="well">
+                    <h3>Image upload</h3>
+                    <input type="file" name="imageUpload" required class="img-responsive img-thumbnail img-rounded">
+                    <!--<img src="..." alt="..." class="img-responsive img-thumbnail img-rounded" width="220px" height="194px" required />-->
+                    <p class="help-block">PNG, JPG, or GIF 220x190px cropped to 90x90 on campaign page</p>
+                    <div class="alert alert-warning hide">
+                    <p>Not valid file.</p>
+                    </div>
+                </div>
+                <div class="well">
+                    <h3>Video Upload</h3>
+                    <!--<button type="button" class="btn btn-primary">Add Video</button>-->
+                    <input type="file" name="addVideo" class="btn btn-primary">
+                    <p class="help-block">Mpeg file not more than XX mb and xx seconds</p>
+                    <video></video>
+                    <div class="alert alert-warning hide">
+                        <p>Not valid file.</p>
+                    </div>
+                </div>
+                <div class="well">
+                    <h3>Funding Goal</h3>
+                    <div  class=" row form-group">
+                      <input class="form-control" name="fundingGoal" type="text" placeholder="Rupee + Books Based on Previous Selection" disabled>
+                    </div><!--form-group-->
+                </div>
+                <div class="well">
+                    <h3>Duration Of Campaign</h3>
+                    <div class="row form-group">
+                      <input class="form-control" name="campaignDuration" type="text" placeholder="Duration Of Campaign based on previous selection" disabled>
+                    </div><!--form-group-->
+                </div>
+                <div class="well">
+                    <h3>Category</h3>
+                    <p>should be added directly based on previous section</p>
+                    <div class="checkbox">
+                      <label><input type="checkbox" name="category[]" value="Books for a library">Books for a library</label><br />
+                      <label><input type="checkbox" name="category[]" value="Books in a bag / Classroom Library">Books in a bag / Classroom Library</label><br />
+                      <label><input type="checkbox" name="category[]" value="Prizes/give-aways">Prizes/give-aways</label><br />
+                      <label><input type="checkbox" name="category[]" value="Reading Sessions">Reading Sessions</label>
+                    </div><!--checkbox-->
+                </div>
+                <div class="well">
+                    <h3>Languages Books Reqiuired in</h3>
+                    <select multiple class="form-control" name="bookLanguages">
+                        <option value="0" selected="selected">All Languages</option>
+                        <option value="Assamese">Assamese</option>
+                        <option value="Bengali">Bengali</option>
+                        <option value="Gujarathi">Gujarathi</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Kannada">Kannada</option>
+                        <option value="Konkani">Konkani</option>
+                        <option value="Malayalam">Malayalam</option>
+                        <option value="Marathi">Marathi</option>
+                        <option value="Oriya">Oriya</option>
+                        <option value="Punjabi">Punjabi</option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="Telugu">Telugu</option>
+                    </select>
+                    <p class="help-block">Can this also be added by default? Multicity centers to also be shown</p>
+                </div>
+                <div class="well">
+                    <h3>State/ City</h3>
+                    <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
+                    This link will work for the city of respective states-->
+                    <select multiple class="form-control" name="stateCity">
+                      <option value="2169" >Andhra Pradesh</option>
+                      <option value="2196" >Arunachal Pradesh</option>
+                      <option value="2170" >Assam</option>
+                      <option value="2171" >Bihar</option>
+                      <option value="5267" >Chhattisgarh</option>
+                      <option value="2174" >Delhi</option>
+                      <option value="2199" >Goa</option>
+                      <option value="2175" >Gujarat</option>
+                      <option value="2176" >Haryana</option>
+                      <option value="2177" >Himachal Pradesh</option>
+                      <option value="2178" >Jammu and Kashmir</option>
+                      <option value="5268" >Jharkhand</option>
+                      <option value="2185" >Karnataka</option>
+                      <option value="2179" >Kerala</option>
+                      <option value="2181" >Madhya Pradesh</option>
+                      <option value="2182" >Maharashtra</option>
+                      <option value="2183" >Manipur</option>
+                      <option value="2184" >Meghalaya</option>
+                      <option value="2197" >Mizoram</option>
+                      <option value="2186" >Nagaland</option>
+                      <option value="2187" >Orissa</option>
+                      <option value="2189" >Punjab</option>
+                      <option value="2190" >Rajasthan</option>
+                      <option value="2195" >Sikkim</option>
+                      <option value="2191" >Tamil Nadu</option>
+                      <option value="2192" >Tripura</option>
+                      <option value="5269" >UNION TERRITORY</option>
+                      <option value="2193" >Uttar Pradesh</option>
+                      <option value="5259" >Uttaranchal</option>
+                      <option value="2194" >West Bengal</option>
+                    </select> 
+                </div>
+                <div class="well">
+                    <h3>Project Title</h3>
+                    <div class="row form-group">
+                      <input class="form-control" name="projectTitle" type="text">
+                    <p class="help-block">Enter Project Title (Max of 80 characters)</p>
+                    </div>
+                </div>
+                <div class="well">
+                    <h3>Short Description</h3>
+                    <textarea class="form-control" rows="3" name="description"></textarea>
+                    <p class="help-block">Shorter is better - You will be able to explain more in your main pitch text 160 characters</p>
+                </div>
+                <div class="well">
+                    <h3>Your Story</h3>
+                    <p>Tell potenital contributors more about your campaign<br/>
+                    Contributors fund ideas they can be passionate about and to people they trust. Here are some things to do in this section:
+                    </p>
+                    <div class="row form-group">
+                        <label for="introduce">Introduce</label>
+                        <textarea class="form-control" rows="3" name="introduce"></textarea>
+                        <p class="help-block">Introduce yourself / your organization background.</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="introduce">Describe Campaign</label>
+                        <textarea class="form-control" rows="3" name="introduce"></textarea>
+                        <p class="help-block">Briefly describe your campaign and why it’s important.</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="express">Express</label>
+                        <textarea class="form-control" rows="3" name="express"></textarea>
+                        <p class="help-block">Express the magnitude of what contributors will help you achieve.</p>
+                    </div><!--form-group-->
+                    <p class="help-block">Remember, keep it concise, yet personal. Ask yourself: if someone stopped reading here would they be ready to make a contribution?</p>
+                </div>
+                <div class="well">
+                    <h3>What We Need &amp; What You Get</h3>
+                    <p>Break it down for folks in more detail:</p>
+                    <div class="row form-group">
+                        <label for="explain">Explain</label>
+                        <textarea class="form-control" rows="3" name="explain"></textarea>
+                        <p class="help-block">Explain how much funding you need and where it’s going. Be transparent and specific people need to trust you to want to fund you.</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="perks">Perks</label>
+                        <textarea class="form-control" rows="3" name="perks"></textarea>
+                        <p class="help-block">Tell people about your unique perks. Get them excited!</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="describeFunds">Describe Funds</label>
+                        <textarea class="form-control" rows="3" name="describeFunds"></textarea>
+                        <p class="help-block">Describe where the funds go if you don’t reach your entire goal.</p>
+                    </div><!--form-group-->
+                </div>
+                <div class="well">
+                    <h3>The Impact</h3>
+                    <p>Feel free to explain more about your campaign and let people know how much difference their contribution will make:</p>
+                    <div class="row form-group">
+                        <label for="projectValue">Project Value</label>
+                        <textarea class="form-control" rows="3" name="projectValue"></textarea>
+                        <p class="help-block">Explain why your project is valuable to the contributor and to the world.</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="trackRecord">Track Record</label>
+                        <textarea class="form-control" rows="3" name="trackRecord"></textarea>
+                        <p class="help-block">Point out your successful track record with projects like this (if you have one).</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="trust">Make it real for people and build trust.</label>
+                        <textarea class="form-control" rows="3" name="trust"></textarea>
+                        <p class="help-block">Make it real for people and build trust.</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="stories">Give impact stories from the field</label>
+                        <textarea class="form-control" rows="3" name="stories"></textarea>
+                        <p class="help-block">Field Stories.</p>
+                    </div><!--form-group-->
+                </div>
+                <div class="well">
+                    <h3>Other Ways You Can Help</h3>
+                    <p>Some people just can’t contribute, but that doesn’t mean they can’t help:</p>
+                    <div class="row form-group">
+                        <label for="campaignNoise">Ask folks to get the word out and make some noise about your campaign.</label>
+                        <textarea class="form-control" rows="3" name="campaignNoise" ></textarea>
+                        <p class="help-block">Make some noise about your campaign.</p>
+                    </div><!--form-group-->
+                    <div class="row form-group">
+                        <label for="tools">Remind them to use the PBGiving share tools!</label>
+                        <textarea class="form-control" rows="3" name="tools"></textarea>
+                        <p class="help-block">Share Tools.</p>
+                    </div><!--form-group-->
+                    <h4>And that's all there is to it</h4>
+                    <h3>PERKS</h3>
+                </div>
+            </section>
+            <!-- Step 3 ends here-->
+
+            <!-- Step 4 starts here-->
+            <section id="step4" class="hide">
+              <div class="jumbotron row">
+                    <h1>Step 4: Get Funded</h1>
+                    <p>Now is your chance to amplify your campaign by adding team members, adding a gallery etc.
+                    Everything here will improve your campaign, but it is all optional.
+                    </p>
+              </div>
+              <div class="row form-group">
+                  <h3>Campaign Preview</h3>
+                  <p>Use this link to share your draft campaign with friends, get feedback on your campaign or to generate buzz.
+                  Only people with this URL can access your campaign preview.
+                  <br/><a href="#">Enable review</a>
+                  </p>
+              </div>
+              <div class="well">
+                  <h3>Campaign Team</h3>
+                  <p>Add the other people that you are working with here. Campaigns with a team raise 80% more funding than those without,
+                  so be sure to invite everyone you are working with or want to work with!
+                  </p>
+              </div>
+              <div class="well">
+                  <h3>Google Analytics</h3>
+                  <p>Using Google Analytics will allow you to gain more insight about your campaign. 
+                  Within Google Analytics create a new property for your campaign URL, and insert its Tracking ID below.
+                  <div class="row form-group">
+                      <input type="text" class="form-control" name="trakingId" placeholder="Enter Traking Id. Here" />
+                  </div>
+                  </p>
+              </div>
+              <div class="well">
+                  <h3>Media Gallery</h3>
+                  <p>Add more media here. Campaigns that post media after going live raise 80% more funding than those that don’t.
+                  </p>
+                  <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" value="Add Photos" id="addPhoto"> Add Photos
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" value="Add Videos" id="addVideo"> Add Videos
+                  </label>
+                  </div>
+                  <div class="prathma-media">
+                  </div>
+              </div>
+              <div class="well">
+                <h2>Reporting Back:</h2><br/>
+                <!-- Indicates a successful or positive action -->
+                <button type="submit" id="goLive" class="btn btn-success btn-lg btn-block">Go Live &amp; Get Funded</button>
+                <div class="alert alert-warning hide">
+                  <p>Your campaign is not ready to go live quite yet. <a href="#" id="showLeft">Show me what's left to do</a></p>
+                </div>
+              </div>
+            </section>
+            <!-- Step 4 ends here-->
+            <a type="button" id="previous" class="btn btn-primary hide">Previous</a>
+            <a type="button" id="next" class="btn btn-primary hide">Next</a>
+        </form>        
+
 {% endblock body %}
