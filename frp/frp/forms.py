@@ -1,7 +1,7 @@
 import json
 
 from flask_wtf import Form
-from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField, ValidationError, BooleanField, Field, SelectMultipleField
+from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField, ValidationError, BooleanField, Field, SelectMultipleField, SelectField
 from wtforms.validators import DataRequired, Regexp,  AnyOf
 from wtforms.widgets import TextInput
 from wtforms.widgets.core import HTMLString
@@ -141,7 +141,22 @@ class CampaignForm2(Form):
                                       choices = [("special_needs", "Children with special needs"),
                                                  ("tribal", "Children living in tribal areas"),
                                                  ("xxx", "Children XXX")])
-    #(default field arguments, choices=[], coerce=unicode, option_widget=None)
+
+    library = TextField("Books for a a library")
+    bookbag = TextField("Books in a bag")
+    prize = TextField("Books as a prize")
+    reading = TextField("Books for reading sessions")
+    language = SelectField("language", choices = [("Hindi","Hindi"),
+                                                  ("English","English"),
+                                                  ("Marathi","Marathi"),
+                                                  ("Telugu","Telugu"),
+                                                  ("Gujarati","Gujarati"),
+                                                  ("Malayalam","Malayalam")])
+    slider1 = TextField("")
+    slider2 = TextField("")
+    slider3 = TextField("")
+    slider4 = TextField("")
+    slidertotal = TextField("")
 
 
 

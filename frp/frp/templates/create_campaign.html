@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-{% from "_formhelpers.html" import render_field, render_bullets, render_field_row, render_text_field, render_text_area%}
+{% from "_formhelpers.html" import render_field, render_bullets, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider%}
 {% block body %}
         <form role="form" class="col-xs-12 col-sm-9" method="post" action="test.php">
         <div class="alert hide">&nbsp;</div>
@@ -95,38 +95,10 @@
                     You can also choose a mix of different product offerings in the same funding campaign!
                     </p>
                     <div class="form-group row" id="bookCounts">
-                        <div class="col-xs-9 row">
-                            <div class="col-xs-6">
-                                <label for="Library">Books for a library</label>
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="text" class="form-control" name="library" placeholder="No. of books" />
-                            </div>
-                        </div>
-                        <div class="col-xs-9 row">
-                            <div class="col-xs-6">
-                                <label for="bookbag">Books-in-a-bag/classroom library</label>
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="text" class="form-control" name="bookbag" placeholder="No. of bags" />
-                            </div>
-                        </div>
-                        <div class="col-xs-9 row">
-                            <div class="col-xs-6">
-                                <label for="prizes">Books as prize/give-aways</label>
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="text" class="form-control" name="prizes" placeholder="No. of books" />
-                            </div>
-                        </div>
-                        <div class="col-xs-9 row">
-                            <div class="col-xs-6">
-                                <label for="sessions">Books for reading sessions</label>
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="text" class="form-control" name="sessions" placeholder="No. of books" />
-                            </div>
-                        </div>
+                      {{render_narrow_field(form.library)}}
+                      {{render_narrow_field(form.bookbag)}}
+                      {{render_narrow_field(form.prize)}}
+                      {{render_narrow_field(form.reading)}}
                     </div>
                 </div>
                 <div class="well">
@@ -164,21 +136,12 @@
                     languages and across which levels will help us serve you better. Reserve books now!
                     </p>
                         <div class="form-group row">
-                            <div class="col-xs-4">
-                                <select class="form-control" name="language1[]">
-                                    <option value="Hindi">Hindi</option>
-                                    <option value="English">English</option>
-                                    <option value="Marathi">Marathi</option>
-                                    <option value="Telugu">Telugu</option>
-                                    <option value="Gujarati">Gujarati</option>
-                                    <option value="Malayalam">Malayalam</option>
-                                </select>                                
-                            </div>
+                              {{render_select(form.language)}}
                             <div class="col-xs-4">
                                 Number of books in this language (<span id="booksLeft"></span> left)
                             </div>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" name="library[]" placeholder="No. of books" />
+                                <input type="text" class="form-control" name="library[]" placeholder="No. of books" /> 
                             </div>
                         </div>
                         
@@ -190,27 +153,27 @@
                         </tr>
                         <tr>
                           <td>1</td>
-                          <td><input type="text" class="percentageSlider" name="percentageSlider1[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td>{{render_slider(form.slider1)}}</td>
                           <td><span class="level1"></span></td>
                         </tr>
                         <tr>
                           <td>2</td>
-                          <td><input type="text" class="percentageSlider" name="percentageSlider2[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td>{{render_slider(form.slider2)}}</td>
                           <td><span class="level2"></span></td>
                         </tr>
                         <tr>
                           <td>3</td>
-                          <td><input type="text" class="percentageSlider" name="percentageSlider3[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td>{{render_slider(form.slider3)}}</td>
                           <td><span class="level3"></span></td>
                         </tr>
                         <tr>
                           <td>4</td>
-                          <td><input type="text" class="percentageSlider" name="percentageSlider4[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td>{{render_slider(form.slider4)}}</td>
                           <td><span class="level4"></span></td>
                         </tr>
                         <tr>
                           <td>Total</td>
-                          <td><input type="text" class="percentageSlider" name="percentageSlider5[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show"></td>
+                          <td>{{render_slider(form.slidertotal)}}</td>
                           <td><span class="level5"></span></td>
                         </tr>
                         </table>

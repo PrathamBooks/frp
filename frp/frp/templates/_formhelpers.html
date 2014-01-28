@@ -1,10 +1,36 @@
+{% macro render_select(field) %}
+<div class="col-xs-4">
+  <select class="form-control" name="{{field.name}}[]">
+  {% for subfield in field %}
+  <option value="{{subfield.data}}">{{subfield.label.text}}</option>
+  {% endfor %}
+</select>
+</div>
+{% endmacro %}
+
+{% macro render_slider(field) %}
+<input type="text" class="percentageSlider" name="{{field.name}}[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show">
+{% endmacro %}
+
+{% macro render_narrow_field(field) %}
+<div class="col-xs-9 row">
+  <div class="col-xs-6">
+    {{field.label}}
+  </div>
+  <div class="col-xs-3">
+    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" />
+  </div>
+</div>
+{% endmacro %}
+
+
 {% macro render_text_field(field)  %}
 <div class="form-group row">
   <div class="col-xs-4">
     {{field.label}}
   </div>
   <div class="col-xs-8">
-    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" required />
+    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" /> <!-- 'required' attribute sometimes necessary -->
     {% if field.help_text %}
     <p class="help-block">{{field.help_text}}</p>
     {% endif %}
