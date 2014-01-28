@@ -158,6 +158,14 @@ class CampaignForm2(Form):
     slider4 = TextField("")
     slidertotal = TextField("")
 
+    impact = RadioField("Impact", choices = [("less100", "Less than 100"),
+                                             ("b100-250", "101 to 250"),
+                                             ("b251-500", "251 to 500"),
+                                             ("above500", "Above 500")])
+    days = SelectField("duration", choices = [(str(x), str(x)) for x in range(1,46)])
+    
+    
+
 
 
 class CategoryForm(Form):
