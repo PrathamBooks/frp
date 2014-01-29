@@ -2,6 +2,7 @@
 {% from "_formhelpers.html" import render_field, render_bullets, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea%}
 {% block body %}
         <form role="form" class="col-xs-12 col-sm-9" method="post" action="test.php">
+          {{ form.hidden_tag() }}
         <div class="alert hide">&nbsp;</div>
             <!-- Step 1 starts here-->
             <section id="step1">
@@ -80,6 +81,7 @@
 
             <!-- Step 2 starts here-->
         <section id="step2" class="hide">
+                    
                 <div class="jumbotron row">
                     <h1>Step 2: Get Started</h1>
                     <p>You are just a few simple steps away from getting fabulous stories to the children that you work with!</p>

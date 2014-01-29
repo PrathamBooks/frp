@@ -16,7 +16,7 @@ from .. import app, lastuser, cache, mailer
 from .. import models
 from ..models import db
 from ..helpers import utc_timestamp, requires_login, allowed_file, create_search_response_v1
-from ..forms import CategoryForm, SearchForm
+from ..forms import CategoryForm, SearchForm, CampaignForm
 
 blueprint = Blueprint("apiv1", __name__)
 
@@ -75,7 +75,17 @@ class Campaign(MethodView):
             "verifiedOn" : campaign.verified_by and utc_timestamp(campaign.verified_on) or None,
         })
 
-
+    @requires_login
+    @produces("application/json", "*/*")
+    def post(self):
+        form = CampaignForm(request.form)
+        import pdb; pdb.set_trace()        
+        if form.validate_on_submit():
+            print "yup"
+        else:
+            print "nope"
+        print form
+        return ("{}")
 
 class Category(MethodView):
     @produces("application/json", "*/*")
@@ -107,7 +117,7 @@ class Category(MethodView):
             return jsonify({'message' : 'successfully validated'})
         else:
             return jsonify({'message' : 'Error in form'})
-
+        
 
 
 class Location(MethodView):
@@ -181,6 +191,8 @@ def register_api():
     campaign_func = Campaign.as_view('campaign')
     blueprint.add_url_rule("campaign/<int:campaign_id>", view_func = campaign_func,
                            methods = ["GET"])
+    blueprint.add_url_rule("campaign", view_func = campaign_func,
+                           methods = ["POST"])
 
     #Search
     search_func = Search.as_view('search')

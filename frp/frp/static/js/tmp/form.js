@@ -1,5 +1,5 @@
 /*****      Declaration of global variables     *****/
-var eachStagePostDataURL = 'http://example.com/';
+var eachStagePostDataURL = '/api/v1/campaign';
 var wholeFormPostDataURL = 'http://activelement.com/';
 
 function getFileSize(fSize){
@@ -75,9 +75,10 @@ $(function() {
         }
         else {
             $('section#' + id + ' :valid').css('border-color','#CCCCCC');
-            $.post(eachStagePostDataURL, $('section#' + id + ' :valid').serializeArray(), function(data){
-                //console.log(data);
-            });
+            $.post(eachStagePostDataURL, $('form').serializeArray());
+            //, function(data){
+            //     //console.log(data);
+            // });
             $('div.list-group a, .nav li a').removeClass('active');
             $("a[href="+$(this).attr('href')+"]").addClass('active');
             $('section').addClass('hide');
