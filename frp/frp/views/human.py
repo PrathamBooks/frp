@@ -7,7 +7,7 @@ from werkzeug import secure_filename
 from .. import app, lastuser
 from .. import models
 from ..models import db
-from ..forms import CampaignForm, CategoryForm, CampaignForm2
+from ..forms import CategoryForm, CampaignForm
 from ..helpers import allowed_file
 
 
@@ -31,21 +31,21 @@ def index():
                            categories = categories,
                            nproducts = nproducts)
     
-@app.route("/campaign/add", methods=['GET', 'POST'])
-@lastuser.requires_login
-def campaign_add():
-    form = CampaignForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            campaign = models.Campaign()
-            form.populate_obj(campaign)
-            campaign.created_by = g.user
-            db.session.add(campaign)
-            db.session.commit()
-            flash("%s added to campaign list"%form.name.data)
-            return redirect("/")
+# @app.route("/campaign/add", methods=['GET', 'POST'])
+# @lastuser.requires_login
+# def campaign_add():
+#     form = CampaignForm()
+#     if request.method == "POST":
+#         if form.validate_on_submit():
+#             campaign = models.Campaign()
+#             form.populate_obj(campaign)
+#             campaign.created_by = g.user
+#             db.session.add(campaign)
+#             db.session.commit()
+#             flash("%s added to campaign list"%form.name.data)
+#             return redirect("/")
 
-    return render_template("create_campaign.html", form = form)
+#     return render_template("create_campaign.html", form = form)
 
 @app.route("/category/add", methods=['GET', 'POST'])
 @lastuser.requires_login
@@ -98,21 +98,13 @@ def logout():
     return "/"
 
 
-@app.route("/campaign/newadd", methods=['GET', 'POST'])
+@app.route("/campaign/add", methods=['GET', 'POST'])
 @lastuser.requires_login
-def create_campaign():
+def campaign_add():
     """
     Temporary function to test the create campaign page
     """
-    return render_template("tmp/form.html")
-
-@app.route("/campaign/newadd2", methods=['GET', 'POST'])
-@lastuser.requires_login
-def create_campaign2():
-    """
-    Temporary function to test the create campaign page
-    """
-    form = CampaignForm2()
+    form = CampaignForm()
     return render_template("create_campaign.html", 
                            form = form)
 
