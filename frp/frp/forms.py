@@ -232,7 +232,6 @@ class CampaignForm2(Form):
     describeFunds = TextAreaField()
 
 
-
     projectValue=TextAreaField()
     trackRecord=TextAreaField()
     trust=TextAreaField()
@@ -240,6 +239,13 @@ class CampaignForm2(Form):
 
     campaignNoise = TextAreaField()
     tools = TextAreaField()
+
+    trackingID = TextField("Enter tracking Id here")
+    options = RadioField(choices= [("addPhoto", "Add Photos"),
+                                   ("addAlbum", "Add Albums"),
+                                   ("addVideo", "Add Videos")])
+
+
 
 class CategoryForm(Form):
     name = TextField('name', validators = [DataRequired()])

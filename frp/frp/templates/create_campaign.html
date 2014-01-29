@@ -397,7 +397,7 @@
                   <p>Using Google Analytics will allow you to gain more insight about your campaign. 
                   Within Google Analytics create a new property for your campaign URL, and insert its Tracking ID below.
                   <div class="row form-group">
-                      <input type="text" class="form-control" name="trakingId" placeholder="Enter Traking Id. Here" />
+                    {{form.trackingID(class="form-control")}}
                   </div>
                   </p>
               </div>
@@ -406,15 +406,11 @@
                   <p>Add more media here. Campaigns that post media after going live raise 80% more funding than those that don’t.
                   </p>
                   <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary">
-                    <input type="radio" name="options" value="Add Photos" id="addPhoto"> Add Photos
-                  </label>
-                  <label class="btn btn-primary">
-                    <input type="radio" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums
-                  </label>
-                  <label class="btn btn-primary">
-                    <input type="radio" name="options" value="Add Videos" id="addVideo"> Add Videos
-                  </label>
+                    {% for option in form.options %}
+                    <label class="btn btn-primary">
+                      <input type="radio" name="options" value="{{option.value}}" id="{{option.value}}"/> {{option.label.text}}
+                    </label>
+                    {% endfor %}
                   </div>
                   <div class="prathma-media">
                   </div>
