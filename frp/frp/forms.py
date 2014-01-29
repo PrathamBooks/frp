@@ -1,7 +1,7 @@
 import json
 
 from flask_wtf import Form
-from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField, ValidationError, BooleanField, Field, SelectMultipleField, SelectField
+from wtforms import TextField, DecimalField, TextAreaField, DateField, FileField, RadioField, ValidationError, BooleanField, Field, SelectMultipleField, SelectField, FileField
 from wtforms.validators import DataRequired, Regexp,  AnyOf
 from wtforms.widgets import TextInput
 from wtforms.widgets.core import HTMLString
@@ -16,6 +16,14 @@ class TextFieldWithHelp(TextField):
         else:
             self.help_text = None
         super(TextFieldWithHelp, self).__init__(*largs, **kargs)
+
+class TextAreaWithHelp(TextAreaField):
+    def __init__(self, *largs, **kargs):
+        if "help" in kargs:
+            self.help_text = kargs.pop("help")
+        else:
+            self.help_text = None
+        super(TextAreaWithHelp, self).__init__(*largs, **kargs)
 
 class SearchQueryField(TextField):
     def process_formdata(self, values):
@@ -165,8 +173,73 @@ class CampaignForm2(Form):
     days = SelectField("duration", choices = [(str(x), str(x)) for x in range(1,46)])
     
     
+    image = FileField()
+    video = FileField()
+
+    bookLanguages = SelectMultipleField("language", choices = [("0","All Languages"),
+                                                               ("Assamese","Assamese"),
+                                                               ("Bengali","Bengali"),
+                                                               ("Gujarathi","Gujarathi"),
+                                                               ("Hindi","Hindi"),
+                                                               ("Kannada","Kannada"),
+                                                               ("Konkani","Konkani"),
+                                                               ("Malayalam","Malayalam"),
+                                                               ("Marathi","Marathi"),
+                                                               ("Oriya","Oriya"),
+                                                               ("Punjabi","Punjabi"),
+                                                               ("Tamil","Tamil"),
+                                                               ("Telugu","Telugu")])
+
+    stateCity = SelectMultipleField("states",choices = [("2169","Andhra Pradesh"),
+                                                        ("2196","Arunachal Pradesh"),
+                                                        ("2170","Assam"),
+                                                        ("2171","Bihar"),
+                                                        ("5267","Chhattisgarh"),
+                                                        ("2174","Delhi"),
+                                                        ("2199","Goa"),
+                                                        ("2175","Gujarat"),
+                                                        ("2176","Haryana"),
+                                                        ("2177","Himachal Pradesh"),
+                                                        ("2178","Jammu and Kashmir"),
+                                                        ("5268","Jharkhand"),
+                                                        ("2185","Karnataka"),
+                                                        ("2179","Kerala"),
+                                                        ("2181","Madhya Pradesh"),
+                                                        ("2182","Maharashtra"),
+                                                        ("2183","Manipur"),
+                                                        ("2184","Meghalaya"),
+                                                        ("2197","Mizoram"),
+                                                        ("2186","Nagaland"),
+                                                        ("2187","Orissa"),
+                                                        ("2189","Punjab"),
+                                                        ("2190","Rajasthan"),
+                                                        ("2195","Sikkim"),
+                                                        ("2191","Tamil Nadu"),
+                                                        ("2192","Tripura"),
+                                                        ("5269","UNION TERRITORY"),
+                                                        ("2193","Uttar Pradesh"),
+                                                        ("5259","Uttaranchal"),
+                                                        ("2194","West Bengal")])
+    
+    projectTitle = TextFieldWithHelp("Project Title", help="Enter Project Title (Max of 80 characters)")
+    description = TextAreaWithHelp("Short description", help="Shorter is better - You will be able to explain more in your main pitch text 160 characters")
+    introduce = TextAreaField()
+    describe = TextAreaField()
+    express = TextAreaField()
+
+    explain = TextAreaField()
+    perks = TextAreaField()
+    describeFunds = TextAreaField()
 
 
+
+    projectValue=TextAreaField()
+    trackRecord=TextAreaField()
+    trust=TextAreaField()
+    stories=TextAreaField()
+
+    campaignNoise = TextAreaField()
+    tools = TextAreaField()
 
 class CategoryForm(Form):
     name = TextField('name', validators = [DataRequired()])

@@ -1,3 +1,27 @@
+{% macro render_heading_textarea(field) %}
+<div class="well">
+  <h3>{{field.label.text}}</h3>
+  <div class="row form-group">
+    <textarea class="form-control" rows="3" name="{{field.name}}"></textarea>
+    {% if field.help_text %}
+    <p class="help-block">{{field.help_text}}</p>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro render_heading_textfield(field) %}
+<div class="well">
+  <h3>{{field.label.text}}</h3>
+  <div class="row form-group">
+    <input class="form-control" name="field.name" type="text"/>
+    {% if field.help_text %}
+    <p class="help-block">{{field.help_text}}</p>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
 {% macro render_select(field) %}
 <div class="col-xs-4">
   <select class="form-control" name="{{field.name}}[]">

@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-{% from "_formhelpers.html" import render_field, render_bullets, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider%}
+{% from "_formhelpers.html" import render_field, render_bullets, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea%}
 {% block body %}
         <form role="form" class="col-xs-12 col-sm-9" method="post" action="test.php">
         <div class="alert hide">&nbsp;</div>
@@ -231,8 +231,7 @@
                 </div>
                 <div class="well">
                     <h3>Image upload</h3>
-                    <input type="file" name="imageUpload" required class="img-responsive img-thumbnail img-rounded">
-                    <!--<img src="..." alt="..." class="img-responsive img-thumbnail img-rounded" width="220px" height="194px" required />-->
+                    {{form.image(class="img-responsive img-thumbnail img-rounded")}}
                     <p class="help-block">PNG, JPG, or GIF 220x190px cropped to 90x90 on campaign page</p>
                     <div class="alert alert-warning hide">
                     <p>Not valid file.</p>
@@ -241,7 +240,7 @@
                 <div class="well">
                     <h3>Video Upload</h3>
                     <!--<button type="button" class="btn btn-primary">Add Video</button>-->
-                    <input type="file" name="addVideo" class="btn btn-primary">
+                    {{form.video(class="btn btn-primary")}}
                     <p class="help-block">Mpeg file not more than XX mb and xx seconds</p>
                     <video></video>
                     <div class="alert alert-warning hide">
@@ -264,80 +263,27 @@
                     <h3>Category</h3>
                     <p>should be added directly based on previous section</p>
                     <div class="checkbox">
-                      <label><input type="checkbox" name="category[]" value="Books for a library">Books for a library</label><br />
-                      <label><input type="checkbox" name="category[]" value="Books in a bag / Classroom Library">Books in a bag / Classroom Library</label><br />
-                      <label><input type="checkbox" name="category[]" value="Prizes/give-aways">Prizes/give-aways</label><br />
-                      <label><input type="checkbox" name="category[]" value="Reading Sessions">Reading Sessions</label>
+                      <label><input disabled type="checkbox" name="category[]" value="Books for a library">Books for a library</label><br />
+                      <label><input disabled type="checkbox" name="category[]" value="Books in a bag / Classroom Library">Books in a bag / Classroom Library</label><br />
+                      <label><input disabled type="checkbox" name="category[]" value="Prizes/give-aways">Prizes/give-aways</label><br />
+                      <label><input disabled type="checkbox" name="category[]" value="Reading Sessions">Reading Sessions</label>
                     </div><!--checkbox-->
                 </div>
                 <div class="well">
                     <h3>Languages Books Reqiuired in</h3>
-                    <select multiple class="form-control" name="bookLanguages">
-                        <option value="0" selected="selected">All Languages</option>
-                        <option value="Assamese">Assamese</option>
-                        <option value="Bengali">Bengali</option>
-                        <option value="Gujarathi">Gujarathi</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Kannada">Kannada</option>
-                        <option value="Konkani">Konkani</option>
-                        <option value="Malayalam">Malayalam</option>
-                        <option value="Marathi">Marathi</option>
-                        <option value="Oriya">Oriya</option>
-                        <option value="Punjabi">Punjabi</option>
-                        <option value="Tamil">Tamil</option>
-                        <option value="Telugu">Telugu</option>
-                    </select>
+                    {{form.bookLanguages(class="form-control")}}
                     <p class="help-block">Can this also be added by default? Multicity centers to also be shown</p>
                 </div>
                 <div class="well">
                     <h3>State/ City</h3>
                     <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
                     This link will work for the city of respective states-->
-                    <select multiple class="form-control" name="stateCity">
-                      <option value="2169" >Andhra Pradesh</option>
-                      <option value="2196" >Arunachal Pradesh</option>
-                      <option value="2170" >Assam</option>
-                      <option value="2171" >Bihar</option>
-                      <option value="5267" >Chhattisgarh</option>
-                      <option value="2174" >Delhi</option>
-                      <option value="2199" >Goa</option>
-                      <option value="2175" >Gujarat</option>
-                      <option value="2176" >Haryana</option>
-                      <option value="2177" >Himachal Pradesh</option>
-                      <option value="2178" >Jammu and Kashmir</option>
-                      <option value="5268" >Jharkhand</option>
-                      <option value="2185" >Karnataka</option>
-                      <option value="2179" >Kerala</option>
-                      <option value="2181" >Madhya Pradesh</option>
-                      <option value="2182" >Maharashtra</option>
-                      <option value="2183" >Manipur</option>
-                      <option value="2184" >Meghalaya</option>
-                      <option value="2197" >Mizoram</option>
-                      <option value="2186" >Nagaland</option>
-                      <option value="2187" >Orissa</option>
-                      <option value="2189" >Punjab</option>
-                      <option value="2190" >Rajasthan</option>
-                      <option value="2195" >Sikkim</option>
-                      <option value="2191" >Tamil Nadu</option>
-                      <option value="2192" >Tripura</option>
-                      <option value="5269" >UNION TERRITORY</option>
-                      <option value="2193" >Uttar Pradesh</option>
-                      <option value="5259" >Uttaranchal</option>
-                      <option value="2194" >West Bengal</option>
-                    </select> 
+                    {{form.stateCity(class="form-control")}}
+
                 </div>
-                <div class="well">
-                    <h3>Project Title</h3>
-                    <div class="row form-group">
-                      <input class="form-control" name="projectTitle" type="text">
-                    <p class="help-block">Enter Project Title (Max of 80 characters)</p>
-                    </div>
-                </div>
-                <div class="well">
-                    <h3>Short Description</h3>
-                    <textarea class="form-control" rows="3" name="description"></textarea>
-                    <p class="help-block">Shorter is better - You will be able to explain more in your main pitch text 160 characters</p>
-                </div>
+                {{render_heading_textfield(form.projectTitle)}}
+                {{render_heading_textarea(form.description)}}
+
                 <div class="well">
                     <h3>Your Story</h3>
                     <p>Tell potenital contributors more about your campaign<br/>
@@ -345,37 +291,38 @@
                     </p>
                     <div class="row form-group">
                         <label for="introduce">Introduce</label>
-                        <textarea class="form-control" rows="3" name="introduce"></textarea>
+                        {{form.introduce(class = "form-control")}}
                         <p class="help-block">Introduce yourself / your organization background.</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="introduce">Describe Campaign</label>
-                        <textarea class="form-control" rows="3" name="introduce"></textarea>
+                        {{form.describe(class="form-control")}}
                         <p class="help-block">Briefly describe your campaign and why it’s important.</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="express">Express</label>
-                        <textarea class="form-control" rows="3" name="express"></textarea>
+                        {{form.express(class="form-control")}}
                         <p class="help-block">Express the magnitude of what contributors will help you achieve.</p>
                     </div><!--form-group-->
                     <p class="help-block">Remember, keep it concise, yet personal. Ask yourself: if someone stopped reading here would they be ready to make a contribution?</p>
                 </div>
+
                 <div class="well">
                     <h3>What We Need &amp; What You Get</h3>
                     <p>Break it down for folks in more detail:</p>
                     <div class="row form-group">
                         <label for="explain">Explain</label>
-                        <textarea class="form-control" rows="3" name="explain"></textarea>
+                        {{form.explain(class="form-control")}}
                         <p class="help-block">Explain how much funding you need and where it’s going. Be transparent and specific people need to trust you to want to fund you.</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="perks">Perks</label>
-                        <textarea class="form-control" rows="3" name="perks"></textarea>
+                        {{form.perks(class="form-control")}}
                         <p class="help-block">Tell people about your unique perks. Get them excited!</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="describeFunds">Describe Funds</label>
-                        <textarea class="form-control" rows="3" name="describeFunds"></textarea>
+                        {{form.describeFunds(class="form-control")}}
                         <p class="help-block">Describe where the funds go if you don’t reach your entire goal.</p>
                     </div><!--form-group-->
                 </div>
@@ -384,22 +331,22 @@
                     <p>Feel free to explain more about your campaign and let people know how much difference their contribution will make:</p>
                     <div class="row form-group">
                         <label for="projectValue">Project Value</label>
-                        <textarea class="form-control" rows="3" name="projectValue"></textarea>
+                        {{form.projectValue(class="form-control")}}
                         <p class="help-block">Explain why your project is valuable to the contributor and to the world.</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="trackRecord">Track Record</label>
-                        <textarea class="form-control" rows="3" name="trackRecord"></textarea>
+                        {{form.trackRecord(class="form-control")}}
                         <p class="help-block">Point out your successful track record with projects like this (if you have one).</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="trust">Make it real for people and build trust.</label>
-                        <textarea class="form-control" rows="3" name="trust"></textarea>
+                        {{form.trust(class="form-control")}}
                         <p class="help-block">Make it real for people and build trust.</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="stories">Give impact stories from the field</label>
-                        <textarea class="form-control" rows="3" name="stories"></textarea>
+                        {{form.stories(class="form-control")}}
                         <p class="help-block">Field Stories.</p>
                     </div><!--form-group-->
                 </div>
@@ -408,12 +355,14 @@
                     <p>Some people just can’t contribute, but that doesn’t mean they can’t help:</p>
                     <div class="row form-group">
                         <label for="campaignNoise">Ask folks to get the word out and make some noise about your campaign.</label>
-                        <textarea class="form-control" rows="3" name="campaignNoise" ></textarea>
+                        {{form.campaignNoise(class="form-control")}}
+
                         <p class="help-block">Make some noise about your campaign.</p>
                     </div><!--form-group-->
                     <div class="row form-group">
                         <label for="tools">Remind them to use the PBGiving share tools!</label>
-                        <textarea class="form-control" rows="3" name="tools"></textarea>
+                        {{form.tools(class="form-control")}}
+
                         <p class="help-block">Share Tools.</p>
                     </div><!--form-group-->
                     <h4>And that's all there is to it</h4>
