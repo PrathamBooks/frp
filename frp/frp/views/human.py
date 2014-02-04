@@ -4,7 +4,7 @@ from flask import render_template, request, session, g, abort, flash, url_for, r
 from flask import make_response, jsonify
 from werkzeug import secure_filename
 
-from .. import app, lastuser
+from .. import app, lastuser, cache
 from .. import models
 from ..models import db
 from ..forms import CategoryForm, CampaignForm
@@ -87,7 +87,6 @@ def login():
 def lastuserauth():
     # Save the user object
     db.session.commit()
-    print dir(request.form)
     return redirect("/")
 
 
@@ -104,7 +103,9 @@ def campaign_add():
     """
     Temporary function to test the create campaign page
     """
-    form = CampaignForm()
+    userid = g.lastuserinfo.userid
+    data = cache.get(userid)
+    form = CampaignForm(data = data)
     return render_template("create_campaign.html", 
                            form = form)
 

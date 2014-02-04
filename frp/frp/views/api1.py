@@ -6,7 +6,7 @@ import calendar
 import datetime
 import os
 
-from flask import Blueprint, make_response, jsonify, abort, request
+from flask import Blueprint, make_response, jsonify, abort, request, g
 from flask.views import MethodView
 import markdown
 from werkzeug import secure_filename
@@ -79,13 +79,13 @@ class Campaign(MethodView):
     @produces("application/json", "*/*")
     def post(self):
         form = CampaignForm(request.form)
-        import pdb; pdb.set_trace()        
         if form.validate_on_submit():
-            print "yup"
+            userid = g.lastuserinfo.userid
+            data = form.data
+            cache.set(userid, data, timeout = 15*60)
         else:
-            print "nope"
-        print form
-        return ("{}")
+            print "nope" # TBD: Need information logged here.
+        return ("{}") # TBD: Return status information.
 
 class Category(MethodView):
     @produces("application/json", "*/*")

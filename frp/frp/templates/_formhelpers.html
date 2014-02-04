@@ -2,7 +2,7 @@
 <div class="well">
   <h3>{{field.label.text}}</h3>
   <div class="row form-group">
-    <textarea class="form-control" rows="3" name="{{field.name}}"></textarea>
+    <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|safe}}</textarea>
     {% if field.help_text %}
     <p class="help-block">{{field.help_text}}</p>
     {% endif %}
@@ -14,7 +14,7 @@
 <div class="well">
   <h3>{{field.label.text}}</h3>
   <div class="row form-group">
-    <input class="form-control" name="field.name" type="text"/>
+    <input class="form-control" name="field.name" type="text" value="{{field.data|safe}}"/>
     {% if field.help_text %}
     <p class="help-block">{{field.help_text}}</p>
     {% endif %}
@@ -24,16 +24,20 @@
 
 {% macro render_select(field) %}
 <div class="col-xs-4">
-  <select class="form-control" name="{{field.name}}[]">
+  <select class="form-control" name="{{field.name}}">
   {% for subfield in field %}
+  {% if subfield.data == field.data %}
+  <option selected="selected" value="{{subfield.data}}">{{subfield.label.text}}</option>
+  {%else%}
   <option value="{{subfield.data}}">{{subfield.label.text}}</option>
+  {%endif%}
   {% endfor %}
 </select>
 </div>
 {% endmacro %}
 
 {% macro render_slider(field) %}
-<input type="text" class="percentageSlider" name="{{field.name}}[]" value="" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="none" data-slider-tooltip="show">
+<input type="text" class="percentageSlider" name="{{field.name}}" value="{{field.data|default('',True)}}" style="width: 300px;" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="{{field.data|default(0,True)}}" data-slider-selection="none" data-slider-tooltip="show">
 {% endmacro %}
 
 {% macro render_narrow_field(field) %}
@@ -42,7 +46,7 @@
     {{field.label}}
   </div>
   <div class="col-xs-3">
-    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" />
+    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" value="{{field.data|default('',True)}}"/>
   </div>
 </div>
 {% endmacro %}
@@ -54,7 +58,7 @@
     {{field.label}}
   </div>
   <div class="col-xs-8">
-    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" /> <!-- 'required' attribute sometimes necessary -->
+    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
     {% if field.help_text %}
     <p class="help-block">{{field.help_text}}</p>
     {% endif %}
@@ -65,7 +69,7 @@
 {% macro render_text_area(field)  %}
 <div class="form-group row">
   {{ field.label }}
-  <textarea class="form-control" rows="3" name="{{field.name}}"></textarea>
+  <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|default('',True)}}</textarea>
   {% if field.help_text %}
   <p class="help-block">{{field.help_text}}</p>
   {% endif %}
@@ -111,7 +115,11 @@
 {%macro render_bullets(field)%}
 {% if field.flags.required %}<span class="required">*</span>{% endif %}
 {% for subfield in field %}
+{% if subfield.data == field.data %}
+<div class="radio"><label><input type="radio" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
+{% else %}
 <div class="radio"><label><input type="radio" name="{{subfield.name}}" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
+{% endif %}
 {% endfor %}
 {% if field.errors %}
 <ul class=errors>

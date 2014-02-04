@@ -143,7 +143,7 @@
                                 Number of books in this language (<span id="booksLeft"></span> left)
                             </div>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" name="library[]" placeholder="No. of books" /> 
+                                <input type="text" class="form-control" name="lang_books" placeholder="No. of books" /> 
                             </div>
                         </div>
                         
@@ -409,8 +409,13 @@
                   </p>
                   <div class="btn-group" data-toggle="buttons">
                     {% for option in form.options %}
-                    <label class="btn btn-primary">
+                      {% if option.data == form.options.data %}
+                      <label class="btn btn-primary active">
+                      <input type="radio" checked="checked" name="options" value="{{option.value}}" id="{{option.value}}"/> {{option.label.text}}
+                      {% else %}
+                      <label class="btn btn-primary">
                       <input type="radio" name="options" value="{{option.value}}" id="{{option.value}}"/> {{option.label.text}}
+                      {% endif %}
                     </label>
                     {% endfor %}
                   </div>
