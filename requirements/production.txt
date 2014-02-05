@@ -14,7 +14,7 @@ Markdown==2.3.1
 MarkupSafe==0.18
 PyYAML==3.10
 SQLAlchemy==0.8.2
-WTForms==1.0.5
+https://github.com/wtforms/wtforms/archive/wtforms2.zip
 Werkzeug==0.9.4
 alembic==0.6.0
 argparse==1.2.1
