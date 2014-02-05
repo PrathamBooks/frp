@@ -2,7 +2,7 @@
 <div class="well">
   <h3>{{field.label.text}}</h3>
   <div class="row form-group">
-    <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|safe}}</textarea>
+    <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|default("",True)}}</textarea>
     {% if field.help_text %}
     <p class="help-block">{{field.help_text}}</p>
     {% endif %}
@@ -14,7 +14,7 @@
 <div class="well">
   <h3>{{field.label.text}}</h3>
   <div class="row form-group">
-    <input class="form-control" name="field.name" type="text" value="{{field.data|safe}}"/>
+    <input class="form-control" name="{{field.name}}" type="text" value="{{field.data|default('',True)}}"/>
     {% if field.help_text %}
     <p class="help-block">{{field.help_text}}</p>
     {% endif %}

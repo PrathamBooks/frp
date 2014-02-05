@@ -1,6 +1,6 @@
 /*****      Declaration of global variables     *****/
 var eachStagePostDataURL = '/api/v1/campaign';
-var wholeFormPostDataURL = 'http://activelement.com/';
+var wholeFormPostDataURL = '/campaign/add';
 
 function getFileSize(fSize){
     var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');

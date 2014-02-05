@@ -100,14 +100,31 @@ def logout():
 @app.route("/campaign/add", methods=['GET', 'POST'])
 @lastuser.requires_login
 def campaign_add():
-    """
-    Temporary function to test the create campaign page
-    """
-    userid = g.lastuserinfo.userid
-    data = cache.get(userid)
-    form = CampaignForm(data = data)
-    return render_template("create_campaign.html", 
-                           form = form)
+    if request.method == "POST":
+        form = CampaignForm()
+        if form.validate_on_submit():
+            campaign = models.Campaign()
+            form.populate_obj(campaign)
+            campaign.created_by = g.user
+            db.session.add(campaign)
+            db.session.commit()
+            flash("%s added to campaign list"%form.name.data)
+            userid = g.lastuserinfo.userid # Remove from cache
+            data = cache.delete(userid)
+            return redirect("/")
+        else:
+            print form.errors
+            return render_template('create_campaign.html', 
+                                   form = form)
+    else:
+        userid = g.lastuserinfo.userid
+        data = cache.get(userid)
+        form = CampaignForm(data = data)
+        return render_template("create_campaign.html", 
+                               form = form)
+        
+
+
 
 @lastuser.auth_error_handler
 def lastuser_error(error, error_description=None, error_uri=None):

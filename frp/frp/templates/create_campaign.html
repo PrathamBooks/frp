@@ -411,15 +411,15 @@
                     {% for option in form.options %}
                       {% if option.data == form.options.data %}
                       <label class="btn btn-primary active">
-                      <input type="radio" checked="checked" name="options" value="{{option.value}}" id="{{option.value}}"/> {{option.label.text}}
+                      <input type="radio" checked="checked" name="options" value="{{option.data}}" id="{{option.data}}"/> {{option.label.text}}
                       {% else %}
                       <label class="btn btn-primary">
-                      <input type="radio" name="options" value="{{option.value}}" id="{{option.value}}"/> {{option.label.text}}
+                      <input type="radio" name="options" value="{{option.data}}" id="{{option.data}}"/> {{option.label.text}}
                       {% endif %}
                     </label>
                     {% endfor %}
                   </div>
-                  <div class="prathma-media">
+                  <div class="pratham-media">
                   </div>
               </div>
               <div class="well">

@@ -85,6 +85,7 @@ class Campaign(MethodView):
             cache.set(userid, data, timeout = 15*60)
         else:
             print "nope" # TBD: Need information logged here.
+            print form.errors
         return ("{}") # TBD: Return status information.
 
 class Category(MethodView):
