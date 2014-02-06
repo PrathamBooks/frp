@@ -1,0 +1,111 @@
+#+TITLE: Architecture notes for FRP
+
+* Introduction
+This document is an attemt to describe the architecture and services
+needed for the FRP platform.
+
+* Software and services
+This is a list of all the pieces of software that we need to run the
+app as it's run on the Pratham website.
+ - Postgresql (database)
+ - redis (caching and temporary store)
+ - gunicorn (app server for the app)
+ - lastuser (SSO using Oauth2 for AAA) - This is touched upon later.
+ - nginx (front facing webserver)
+ - monit (service management)
+ - fabric (Tool used for deployment)
+
+* Repositories
+  There are currently two repositories. 
+  - One is the main project repository on https://github.com/PrathamBooks/frp
+  - The other is the config repository at
+    =/home/ubuntu/repos/config.git= on the primary AWS server on which
+    this runs.
+
+* Development
+
+** Setting up your environment
+   - Once your Python is setup with a [[http://stackoverflow.com/questions/5844869/comprehensive-beginners-virtualenv-tutorial][virtualenv]], you can install the
+     requirements specified in the =requirements/development.txt= file
+     using =pip install -r requirements/development.txt=. The official
+     site for virtualenv is http://www.virtualenv.org/en/latest/.
+   - This will require some extra libraries on your system (python
+     headers and libs, postgresql client dev libraries etc.)
+   - Once this goes through smoothly, you can edit the
+     =frp/frp/settings/development.py= file which has some settings
+     that you might want to configure (e.g. database URL etc.)
+   - Make a user and database which you can connect to.
+   - Once this is done, run =python frp/manage.py resetdb=. This will
+     create the database.
+   - Then you can start a dev server using =python frp/manage.py
+     runserver=. A dev server will start on http://localhost:5000
+     which you can play with.
+
+** Editing
+   - The =frp= directory contains the actual project. The
+     =requirements= directory contains the requirements
+     files. =scratch= is throwaway scripts. =scripts= contains various
+     scripts that are used in the general deployment and
+     work. e.g. the =app.sh= is used by monit to start the actual
+     application.
+   - Inside =frp=, =frp= is the actual app package. =migrations= is a
+     directory where we can store database schema migration
+     scripts. The =alembic.ini= file is a config file for alembic
+     schema migrations. =pytest.ini= is a config file for =py.test=
+     which is the test runner for the tests inside the =tests=
+     directory. =manage.py= is for entry level scripts that we can run
+     (runserver, resetdb etc.). =wsgi.py= is a wsgi driver that's used
+     by gunicorn to launch the application on the production server.
+   - =fabfile.py= is a fabric command file which has rules on how to
+     deploy the application. This allows one command
+     deployment/rollback.
+   - The =frp= package contains the following
+     - =static= - static assets. The assets will be bundled and
+       packaged into the =gen= directory when they're changed (refer
+       =frp/__init__.py= for details).
+     - =templates= contains server side templates for the app and the
+       angular.js partials.
+     - =views= contains the actual business logic. This is split into
+       two files. There are 2 important files there =human.py= which
+       is the regular web stuff for human consumption, =api1.py= which
+       is version of the REST API and a (non functional) =admin.py=
+       for the admin interface.
+     - =forms.py= contains the forms that the site uses.
+     - =helpers.py= contain common functions used all over the place.
+     - =mailer.py= contains a failsafe function to send emails.
+     - =models.py= contains database models.
+     - =_version.py= contains a version string that will get updated
+       on deployment.
+   - Hack on the code that you need to and then deploy it. 
+** Deployment
+   - The =fabfile.py= contains the functions necessary to deploy the
+     application. When you've made your last commit, tag the release
+     (say [[http://semver.org/][0.1.37-a]]) and then push and push tags.
+   - Then, deploy using =fab deploy:tag=0.1.37-a=. This will deploy
+     version =0.1.37-a=, you also have to extra options -- =fab
+     deploy:tag=0.1.37,resetdb=True= which will also drop and recreate
+     the db (useful during early dev where we keep changing the
+     schema - in the future, we'll have to use migrations) and =fab
+     deploy:tag=0.1.37,venv=True= which will reinstall package
+     dependencies on the server (useful when you change the production
+     requirements).
+   - Just like =deploy=, there is a =rollback= command which can
+     rollback the deployment to a given tag. So, =fab
+     rollback:tag=0.1.30-a= will rollback the deployment to =0.1.30-a=.
+   - You can deploy to any git treeish (so a commit or branch will do
+     too) but it's best to use a tag. The config repository can be
+     similarly deployed.
+* Lastuser
+  - Lastuser is a separate service that runs on a separate domain. It
+    can also be deployed like the above but please use the fork at
+    https://github.com/nibrahim/lastuser rather than the official
+    hasgeek one.
+  - There are a few settings in the config file that specify how to
+    communicate with lastuser.
+
+
+   
+
+
+
+
