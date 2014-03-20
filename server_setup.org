@@ -1,0 +1,88 @@
+#+TITLE: Server setup for the FRP app
+
+This is some documentation on what needs to be run on the server for
+the FRP app to run as well as config necessary.
+
+* Software needed
+  The following things are needed for the FRP app to run.
+
+** postgresql (database)
+    The config files for these are under /etc/postgresql* and haven't
+    been modified from the system settings. A new user and database
+    for the app have been created upfront. Nothing more.
+
+** Redis (Cache and temporary store)
+   =/etc/redis/redis.conf= is the config file and it's not been modified.
+
+** monit (Process management)
+   Config files are in =/etc/monit= and a new one has been added for
+   the frp app (=frp.conf=) and lastuser (=lastuser.conf=).
+
+   Some systems don't start the monit daemon monit in the default run
+   level. This might have to be set manually. The default config file
+   =/etc/monit/monitrc= might have to be tweaked to allow the http
+   server to run so that we can monitor the apps at
+   =http://frp-test.prathambooks.org/monitor/=
+
+** lastuser (AAA)
+   Is a complete app that needs to be set up similar to the FRP app
+   itself (which is detailed below). It's also a flask application.
+
+** nginx (front facing web server) Config files are in =/etc/nginx=
+   and two extra files =/etc/nginx/sites-available/pratham-frp= and
+   =/etc/nginx/sites-available/pratham-lastuser= have been added for
+   the FRP and lastuser applications.
+
+** Postfix or exim (to send emails)
+   This is not configured or set up yet but needs to be done.
+
+
+* Config management.
+  The config files specified above viz. 
+  - /etc/monit/conf.d/frp.conf
+  - /etc/monit/conf.d/lastuser.conf
+  - lastuser config files
+  - =/etc/nginx/sites-available/frp.conf= (symlinked to =sites-enabled=)
+  - =/etc/nginx/sites-available/lastuser.conf= (symlinked to =sites-enabled=)
+  are stored in a private git repository currently at =ip-10-130-181-238:/home/ubuntu/repos/config.git=
+  
+  The files are managed similar to the way the application is using a
+  =fabfile.py= with the same commands (like =deploy=, =rollback=
+  etc.).
+
+  Deploying a version of the config file checkout the config to a
+  fixed location (=/opt/config=) and then symlink the system files to
+  the ones that are checked out. After that, services will be restarted.
+
+* Application layout
+  All our code is deployed inside the =/opt= directory. It contains three subdirectories.
+  - config - For configuration files mentioned above
+  - lastuser - For the actual lastuser application
+  - frp - For the frp application
+
+  The setup and deployment strategies are similar in all three cases
+  so I'll detail just the =frp= one.
+
+** Deployment strategy
+   Inside the frp directory, there is a directory called
+   =deployments=. This will contain subdirectories that are named by
+   the tags which we deploy. e.g. If we run =fab deploy:tag=v1.0=,
+   there will be a =1.0= directory in here. The =deployed= link points
+   to the current active version of the software that is running. 
+
+   A deploy operation will clone the code into a new directory with
+   the given tag name and then =git checkout= to that tag. After that,
+   it will make the =deployed= link point to this clone and then
+   restart services.
+
+   A rollback operation will make this link point back to another
+   available deployment and restart services.
+
+   The =environments= directory contains virtualenvs to run the
+   application. These are generated when the =venv=True= option is
+   passed while deploying.
+
+   The =frp.pid= file is the process id of the server process. This is
+   created by the =app.sh= script present inside the =scripts=
+   directory of the frp app which in turn is managed by monit.
+     
