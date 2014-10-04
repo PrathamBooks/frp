@@ -1,32 +1,36 @@
+#!/usr/bin/env python
+
 import datetime
 import os
 import subprocess
 
-from flask.ext.script import Manager, Command, Option
-from flask.ext.lastuser import Lastuser
-from flask.ext.lastuser.sqlalchemy import UserManager
+from flask.ext.script import Manager
 
-
-from frp import app, models, lastuser
+from frp import app
+from frp.models import db
 
 manager = Manager(app)
+db.init_app(app)
+db.app = app
 
 settings = "settings/development.py"
+test_settings = "settings/testing.py"
 settings = os.environ.get('FRP_CONFIG', settings)
-print "Loading config from %s"%settings
+print "Loading config from %s" % settings
+
 
 @manager.command
 def runserver():
     """
-    Runs the flask development server using the specified config file. 
-    
+    Runs the flask development server using the specified config file.
+
     Defaults to settings/development.py
     """
     global settings
     app.config.from_pyfile(settings)
-    lastuser.init_app(app)
-    lastuser.init_usermanager(UserManager(models.db, models.User))
+    db.create_all()
     app.run()
+
 
 @manager.command
 def gendata():
@@ -50,7 +54,7 @@ def gendata():
                             created_by = user)
         models.db.session.add(m)
     models.db.session.commit()
-    
+
 
 @manager.command
 def resetdb():
@@ -69,4 +73,3 @@ def resetdb():
 
 if __name__ == '__main__':
     manager.run()
-

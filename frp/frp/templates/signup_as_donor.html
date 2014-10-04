@@ -1,12 +1,5 @@
 {% extends "base.html" %}
 {% block body %}
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-             {{ message }}
-        {% endfor %}
-    {% endif %}
-{% endwith %}
 <form method="POST" action="#">
 {% for field in form %}
 {{ field.label }}: {{ field }}<br/>

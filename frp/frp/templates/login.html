@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <a class="btn btn-default btn-lg btn-block "
-   href="{{ url_for('login') }}"> Login </a>
+   href="{{ url_for('login_via_webform') }}"> Login </a>
 <a class="btn btn-default btn-lg btn-block "
-   href="{{ url_for('signup') }}"> Signup </a>
+   href="{{ url_for('login_via_facebook') }}"> Login Via Facebook </a>
 {% endblock body %}
