@@ -15,7 +15,7 @@ db.app = app
 
 settings = "settings/development.py"
 test_settings = "settings/testing.py"
-settings = os.environ.get('FRP_CONFIG', settings)
+settings = os.environ.get('APP_SETTINGS', settings)
 print "Loading config from %s" % settings
 
 
