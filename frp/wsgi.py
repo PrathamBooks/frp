@@ -1,8 +1,8 @@
 import os
 
-from frp import app
+from frp import app as application
 
 settings = "settings/production.py"
-settings = os.environ.get('FRP_CONFIG', settings)
+settings = os.environ.get('APP_SETTINGS', settings)
 
-app.config.from_pyfile(settings)
+application.config.from_pyfile(settings)
