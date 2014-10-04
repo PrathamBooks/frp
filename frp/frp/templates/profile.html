@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
+<h3> Details </h3>
+First Name: {{ g.user.userinfo[0].first_name }}<br/>
+Last Name: {{ g.user.userinfo[0].last_name }}<br/>
+User Name: {{ g.user.username or '' }}<br/>
+Email: {{ g.user.email }}<br/>
+Address: {{ g.user.userinfo[0].address }}<br/>
+Contact Number: {{ g.user.userinfo[0].contact_number }}<br/>
+Pan Number: {{ g.user.userinfo[0].pan_number }}<br/>
 <h3>Donated Projects</h3>
 Nothing yet
 <br/>

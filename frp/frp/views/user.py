@@ -33,6 +33,7 @@ def get_facebook_token():
 def pop_login_session():
     flask.session.pop('logged_in', None)
     flask.session.pop('facebook_token', None)
+    flask.session.pop('email', None)
 
 
 # Signup views
@@ -83,6 +84,7 @@ def facebook_authorized(resp):
     data = facebook.get('me')
 
     signup_service.create_donor_from_facebook(data.data)
+    flask.session['email'] = data.data.get('email')
     return flask.redirect(flask.url_for('profile'))
 
 
