@@ -1,13 +1,23 @@
+# -*- coding: utf-8 -*-
+
+import os
+
 from flask import Flask
-from flask.ext.lastuser import Lastuser
 from flask.ext.assets import Environment, Bundle
 from flask.ext.cache import Cache
 from ._version import __version__
 from .mailer import Mailer
 
-app = Flask(__name__)
+
+def create_app(settings='settings/development.py'):
+    app = Flask(__name__)
+    app.config.from_pyfile(settings)
+    return app
+
+app = create_app(
+    os.environ.get('APP_SETTINGS', 'settings/development.py'))
 assets = Environment(app)
-lastuser = Lastuser()
+
 mailer = Mailer(app)
 cache = Cache(app, config = {'CACHE_TYPE' : 'redis'})
 
@@ -36,11 +46,5 @@ assets.register('jquery', jquery)
 assets.register('bootstrap', bootstrap)
 assets.register('angular', angular)
 
-
-
-@app.context_processor
-def inject_version():
-    return dict(version = __version__,
-                testing = app.config.get('LASTUSER_TEST'))
 
 from . import views, models

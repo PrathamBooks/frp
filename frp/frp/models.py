@@ -105,7 +105,7 @@ class Campaign(db.Model, BaseMixin):
     creator_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     approver_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     verifier_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    
+
     # Fields from forms.
     category = db.Column(db.VARCHAR(20))
     name = db.Column(db.Text)
@@ -133,7 +133,7 @@ class Campaign(db.Model, BaseMixin):
 
     children_number = db.Column(db.VARCHAR(10))
     children_age = db.Column(db.VARCHAR(20))
-    
+
     children_special = db.Column(db.VARCHAR(20))
 
     library = db.Column(db.VARCHAR(10))
@@ -143,34 +143,34 @@ class Campaign(db.Model, BaseMixin):
     language = db.Column(db.VARCHAR(20))
 
     slider1 = db.Column(db.VARCHAR(10))
-    slider2 = db.Column(db.VARCHAR(10))    
-    slider3 = db.Column(db.VARCHAR(10))    
-    slider4 = db.Column(db.VARCHAR(10))    
+    slider2 = db.Column(db.VARCHAR(10))
+    slider3 = db.Column(db.VARCHAR(10))
+    slider4 = db.Column(db.VARCHAR(10))
     slidertotal = db.Column(db.VARCHAR(10))
-    
-    impact = db.Column(db.VARCHAR(10))    
+
+    impact = db.Column(db.VARCHAR(10))
 
     days = db.Column(db.VARCHAR(5))
-    
+
     image_file = db.Column(db.VARCHAR(150))
     video_file = db.Column(db.VARCHAR(150))
 
-    bookLanguages = db.Column(db.VARCHAR(15))    
+    bookLanguages = db.Column(db.VARCHAR(15))
 
     stateCity = db.Column(db.VARCHAR(15))
 
-    projectTitle = db.Column(db.VARCHAR(50))    
+    projectTitle = db.Column(db.VARCHAR(50))
     description = db.Column(db.Text)
     introduce = db.Column(db.Text)
-    describe = db.Column(db.Text)    
-    express = db.Column(db.Text)    
+    describe = db.Column(db.Text)
+    express = db.Column(db.Text)
 
     explain = db.Column(db.Text)
     perks = db.Column(db.Text)
     describeFunds = db.Column(db.Text)
 
     projectValue = db.Column(db.Text)
-    trackRecord = db.Column(db.Text)    
+    trackRecord = db.Column(db.Text)
     trust = db.Column(db.Text)
     stories = db.Column(db.Text)
 
@@ -198,7 +198,7 @@ class Campaign(db.Model, BaseMixin):
     # # email (from created_by)
     # # twitter (from created_by)
     # # TBD authservice
-    
+
     # Relationships
     created_by = relationship("User", backref = backref('campaigns_created', order_by = id),
                               foreign_keys = [creator_id])
