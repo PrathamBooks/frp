@@ -29,6 +29,7 @@ class ProfileForm(DonorSignupForm):
         self.address.data = user.userinfo.address
         self.contact_number.data = user.userinfo.contact_number
         self.pan_number.data = user.userinfo.pan_number
+        self.need_80g_certificate.data = user.userinfo.need_80g_certificate
 
     def delete_fields(self, *fields):
         for field in fields:

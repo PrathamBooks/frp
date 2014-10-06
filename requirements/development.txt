@@ -57,3 +57,5 @@ six==1.4.1
 times==0.6.2
 webassets==0.8
 wsgiref==0.1.2
+Flask-Migrate==1.2.0
+ipdb

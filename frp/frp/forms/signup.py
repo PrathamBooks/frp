@@ -15,7 +15,8 @@ class DonorSignupForm(wtforms.Form):
                                         wtforms.validators.Length(max=160)])
     last_name = wtforms.TextField(
         label='Last Name', validators=[wtforms.validators.Optional(),
-                                       wtforms.validators.Length(max=160)])
+                                       wtforms.validators.Length(max=160)],
+        default=u'')
     user_name = wtforms.TextField(
         label='User Name', validators=[wtforms.validators.Required(),
                                        wtforms.validators.Length(max=80)])
@@ -28,13 +29,23 @@ class DonorSignupForm(wtforms.Form):
                                    wtforms.validators.Length(max=254)])
     address = wtforms.TextField(
         label='Address', validators=[wtforms.validators.Optional(),
-                                     wtforms.validators.Length(max=500)])
+                                     wtforms.validators.Length(max=500)],
+        default=u'')
     contact_number = wtforms.TextField(
         label='Contact Number', validators=[wtforms.validators.Optional(),
-                                            wtforms.validators.Length(max=15)])
+                                            wtforms.validators.Length(max=15)],
+        default=u'')
     pan_number = wtforms.TextField(
         label='Pan Number', validators=[wtforms.validators.Optional(),
-                                        wtforms.validators.Length(max=10)])
+                                        wtforms.validators.Length(max=10)],
+        default=u'')
+    need_80g_certificate = wtforms.RadioField(
+        label='Would you like us to send you a Tax Exemption Certificate?',
+        default=False,
+        validators=[wtforms.validators.Required()],
+        coerce=bool,
+        choices=[(True, 'Yes'),
+                 (False, 'No')])
 
     def validate_user_name(self, field):
         username = field.data.strip()

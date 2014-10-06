@@ -29,20 +29,14 @@ def update_profile(profile):
 
     :param profile `forms.user.ProfileForm`: Form object with data.
     """
-    first_name = profile.first_name.data
-    last_name = profile.last_name.data
-    username = profile.user_name.data
-    address = profile.address.data
-    contact_number = profile.contact_number.data
-    pan_number = profile.pan_number.data
-
     user = g.user
-    user.username = username
-    user.userinfo.first_name = first_name
-    user.userinfo.last_name = last_name
-    user.userinfo.address = address
-    user.userinfo.contact_number = contact_number
-    user.userinfo.pan_number = pan_number
-
+    user.username = profile.user_name.data
+    user.userinfo.first_name = profile.first_name.data
+    user.userinfo.last_name = profile.last_name.data
+    user.userinfo.address = profile.address.data
+    user.userinfo.contact_number = profile.contact_number.data
+    user.userinfo.pan_number = profile.pan_number.data
+    user.userinfo.need_80g_certificate = profile.need_80g_certificate.data
     db.session.add(user)
     db.session.commit()
+    return True
