@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+
+<form method="POST" action="#">
+{% for field in form %}
+{{ field.label }}: {{ field }}<br/>
+
+{% if field.name in form.errors %}
+    {{ form.errors[field.name][0] }}<br/>
+{% endif %}
+<br/>
+{% endfor %}
+    <button>Submit</button>
+</form>
+{% endblock body %}
