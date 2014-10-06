@@ -124,7 +124,7 @@ class UserInfo(IdMixin, TimestampMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     first_name = db.Column(db.String(160), nullable=False)
-    last_name = db.Column(db.String(160), nullable=True)
-    address = db.Column(db.String(500), nullable=True)
-    contact_number = db.Column(db.String(15), nullable=True)
-    pan_number = db.Column(db.String(10), nullable=True)
+    last_name = db.Column(db.String(160), nullable=True, default=u'')
+    address = db.Column(db.String(500), nullable=True, default=u'')
+    contact_number = db.Column(db.String(15), nullable=True, default=u'')
+    pan_number = db.Column(db.String(10), nullable=True, default=u'')
