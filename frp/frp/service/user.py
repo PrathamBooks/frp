@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask import session
+from flask import session, g
 
-from ..models import User
+from ..models import User, db
 
 
 def is_valid_login(email, password):
@@ -22,3 +22,27 @@ def is_valid_login(email, password):
         return True
 
     return False
+
+
+def update_profile(profile):
+    """Update the profile.
+
+    :param profile `forms.user.ProfileForm`: Form object with data.
+    """
+    first_name = profile.first_name.data
+    last_name = profile.last_name.data
+    username = profile.user_name.data
+    address = profile.address.data
+    contact_number = profile.contact_number.data
+    pan_number = profile.pan_number.data
+
+    user = g.user
+    user.username = username
+    user.userinfo.first_name = first_name
+    user.userinfo.last_name = last_name
+    user.userinfo.address = address
+    user.userinfo.contact_number = contact_number
+    user.userinfo.pan_number = pan_number
+
+    db.session.add(user)
+    db.session.commit()
