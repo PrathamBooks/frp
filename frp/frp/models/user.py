@@ -49,6 +49,11 @@ class User(BaseMixin, db.Model):
     status = db.Column(
         db.SmallInteger, nullable=False, default=USER_STATUS.ACTIVE)
 
+    # One-one relationship
+    userinfo = db.relationship("UserInfo", backref=db.backref("user"),
+                               uselist=False)
+
+
     # Don't load these columns by default
     _defercols = [
         defer('created_at'),
@@ -116,10 +121,7 @@ class User(BaseMixin, db.Model):
 class UserInfo(IdMixin, TimestampMixin, db.Model):
     __tablename__ = 'userinfo'
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship(
-        User,
-        backref=db.backref('userinfo', cascade="all, delete-orphan"))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     first_name = db.Column(db.String(160), nullable=False)
     last_name = db.Column(db.String(160), nullable=True)
