@@ -52,6 +52,9 @@ class User(BaseMixin, db.Model):
     # One-one relationship
     userinfo = db.relationship("UserInfo", backref=db.backref("user"),
                                uselist=False)
+    organization_created = db.relationship("Organization",
+                                           backref=db.backref("created_by"),
+                                           uselist=False)
 
 
     # Don't load these columns by default

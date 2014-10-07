@@ -117,7 +117,7 @@ class BeneficarySignupForm(wtforms.Form):
         label='facebook', validators=[wtforms.validators.Optional(),
                                       wtforms.validators.URL(),
                                       wtforms.validators.Length(max=500)])
-    website = wtforms.TextField(
+    blog = wtforms.TextField(
         label='website', validators=[wtforms.validators.Optional(),
                                      wtforms.validators.URL(),
                                      wtforms.validators.Length(max=500)])
@@ -127,6 +127,46 @@ class BeneficarySignupForm(wtforms.Form):
         coerce=bool,
         choices=[(True, 'Yes'),
                  (False, 'No')])
+    person1_name = wtforms.TextField(
+        label='Your Name', validators=[wtforms.validators.Optional(),
+                                       wtforms.validators.URL(),
+                                       wtforms.validators.Length(max=160)])
+    person1_position = wtforms.TextField(
+        label='Position in the organization',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Length(max=160)])
+
+    person1_email = wtforms.TextField(
+        label='Your Email Id',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Email(),
+                    wtforms.validators.Length(max=254)])
+
+    person1_phone = wtforms.TextField(
+        label='Your Phone no',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Length(max=15)])
+
+    person2_name = wtforms.TextField(
+        label='Your Name', validators=[wtforms.validators.Optional(),
+                                       wtforms.validators.URL(),
+                                       wtforms.validators.Length(max=160)])
+    person2_position = wtforms.TextField(
+        label='Position in the organization',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Length(max=160)])
+
+    person2_email = wtforms.TextField(
+        label='Your Email Id',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Email(),
+                    wtforms.validators.Length(max=254)])
+
+    person2_phone = wtforms.TextField(
+        label='Your Phone no',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Length(max=15)])
+
     org_intro = wtforms.TextField(
         label='Please explain briefly the impact that your organisation\'s work is having on children / community it is serving .',
         validators=[wtforms.validators.Required(),

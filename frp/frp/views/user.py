@@ -50,10 +50,23 @@ def signup():
     return render_template('signup.html')
 
 
-@app.route('/signup/beneficary')
-def signup_as_beneficary():
-    form = BeneficarySignupForm()
-    return render_template('signup_as_beneficary.html', form=form)
+class SignupAsBeneficary(views.MethodView):
+    @login_required
+    def get(self):
+        form = BeneficarySignupForm()
+        return render_template('signup_as_beneficary.html', form=form)
+
+    @login_required
+    def post(self):
+        form = BeneficarySignupForm(request.form)
+        if form.validate():
+            user_service.update_profile(form)
+            return redirect(url_for('profile'))
+        return render_template('signup_as_beneficary.html', form=form)
+
+
+app.add_url_rule('/signup/beneficary',
+                 view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
 
 
 @app.route('/signup/donor', methods=['GET', 'POST'])

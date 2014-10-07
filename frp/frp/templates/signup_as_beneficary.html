@@ -111,7 +111,91 @@ Congratulations on your first step towards setting up your very own Campaign on 
                 <li>{{ error }}</li>
                 {% endfor %}
             </ul>
-        {% endif %}
+            {% endif %}
+        </fieldset>
+    </div>
+    <br/>
+    <div>
+        <fieldset>
+            <legend>Stay in touch:</legend>
+            <br/>
+            Person1
+            <br/>
+            {{ form.person1_name.label}}: {{ form.person1_name() }}
+            {% if form.person1_name.errors %}
+            <ul class="errors">
+                {% for error in form.person1_name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            {{ form.person1_position.label}}: {{ form.person1_position() }}
+            {% if form.person1_position.errors %}
+            <ul class="errors">
+                {% for error in form.person1_position.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            {{ form.person1_email.label}}: {{ form.person1_email() }}
+            {% if form.person1_email.errors %}
+            <ul class="errors">
+                {% for error in form.person1_email.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            {{ form.person1_phone.label}}: {{ form.person1_phone() }}
+            {% if form.person1_phone.errors %}
+            <ul class="errors">
+                {% for error in form.person1_phone.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            Person2
+            <br/>
+            <br/>
+            {{ form.person2_name.label}}: {{ form.person2_name() }}
+            {% if form.person2_name.errors %}
+            <ul class="errors">
+                {% for error in form.person2_name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            {{ form.person2_position.label}}: {{ form.person2_position() }}
+            {% if form.person2_position.errors %}
+            <ul class="errors">
+                {% for error in form.person2_position.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            {{ form.person2_email.label}}: {{ form.person2_email() }}
+            {% if form.person2_email.errors %}
+            <ul class="errors">
+                {% for error in form.person2_email.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
+            {{ form.person2_phone.label}}: {{ form.person2_phone() }}
+            {% if form.person2_phone.errors %}
+            <ul class="errors">
+                {% for error in form.person2_phone.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br/>
         </fieldset>
     </div>
     <br/>

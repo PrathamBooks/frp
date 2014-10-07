@@ -2,8 +2,11 @@
 
 import inspect
 
+from . import db, BaseNameMixin, BaseMixin
 
-__all__ = ['ORG_STATUS', 'ORG_STATUS_CHOICES']
+
+__all__ = ['ORG_STATUS', 'ORG_STATUS_CHOICES', 'Organization',
+           'OrganizationInfo', 'OrganizationWork']
 
 
 def get_attrs(cls):
@@ -23,10 +26,54 @@ class ORG_STATUS:
         'desc': 'Budget Private School (fee structure less than Rs.500 per month)',
         'value': 4}
     government_school = {'desc': 'Government School',
-                          'value': 5}
+                         'value': 5}
     reading_centre = {'desc': 'Reading centre / library',
-                          'value': 6}
+                      'value': 6}
 
 
 ORG_STATUS_CHOICES = sorted(map(lambda x: (x[1]['value'], x[1]['desc']),
                                 get_attrs(ORG_STATUS)))
+
+
+class Organization(BaseNameMixin, db.Model):
+    __tablename__ = 'organization'
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    info = db.relationship("OrganizationInfo",
+                           backref=db.backref("org"),
+                           uselist=False)
+
+
+class OrganizationInfo(BaseMixin, db.Model):
+    __tablename__ = 'organization_info'
+
+    organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
+    category = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.Integer, nullable=False)
+    address = db.Column(db.String(500), nullable=True, default=u'')
+    contact_number = db.Column(db.String(15), nullable=True, default=u'')
+    website = db.Column(db.Unicode(500), nullable=True, default=u'')
+    facebook = db.Column(db.Unicode(500), nullable=True, default=u'')
+    blog = db.Column(db.Unicode(500), nullable=True, default=u'')
+    has_80g_certificate = db.Column(db.Boolean(), nullable=False)
+
+    person1_name = db.Column(db.Unicode(160), nullable=True, default=u'')
+    person1_position = db.Column(db.Unicode(160), nullable=True, default=u'')
+    person1_email = db.Column(db.Unicode(254), nullable=True, default=u'')
+    person1_phone = db.Column(db.Unicode(15), nullable=True, default=u'')
+
+    person2_name = db.Column(db.Unicode(160), nullable=True, default=u'')
+    person2_position = db.Column(db.Unicode(160), nullable=True, default=u'')
+    person2_email = db.Column(db.Unicode(254), nullable=True, default=u'')
+    person2_phone = db.Column(db.Unicode(15), nullable=True, default=u'')
+
+    intro = db.Column(db.Unicode(10000), nullable=True, default=u'')
+    total_impact_on_children = db.Column(db.Integer, nullable=True)
+    age_group_of_children = db.Column(db.Unicode(20), nullable=True, default=u'')
+
+
+class OrganizationWork(BaseMixin, db.Model):
+    __tablename__ = 'organization_work'
+
+    organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
+    choice_id = db.Column(db.Integer, nullable=False)
