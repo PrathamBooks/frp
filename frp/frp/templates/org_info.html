@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block body %}
+{% for org in orgs %}
+Admin >> Organization Details <br/>
+This page is here to verify data is stored  and retrieved properly.
+<br/><br/>
+Title: {{ org.title }}<br/>
+Name: {{ org.name }}<br/>
+Category: {{ category[org.info.category] }}<br/>
+Email: {{ org.info.email }}<br/>
+Status: {{ status[org.info.status] }}<br/>
+Address: {{ org.info.address }}<br/>
+Contact Number: {{ org.info.contact_number }}<br/>
+Website: {{ org.info.website }}<br/>
+Facebook: {{ org.info.facebook }}<br/>
+blog: {{ org.info.blog }}<br/>
+has_80g_certificate: {{ org.info.has_80g_certificate }}<br/>
+
+person1_name: {{ org.info.person1_name }}<br/>
+person1_position: {{ org.info.person1_position }}<br/>
+person1_email: {{ org.info.person1_email }}<br/>
+person1_phone: {{ org.info.person1_phone }}<br/>
+person2_name: {{ org.info.person2_name }}<br/>
+person2_position: {{ org.info.person2_position }}<br/>
+person2_email: {{ org.info.person2_email }}<br/>
+person2_phone: {{ org.info.person2_phone }}<br/>
+
+intro: {{ org.info.intro }}<br/>
+total_impact_on_children: {{ org.info.total_impact_on_children }}<br/>
+age_group_of_children: {{ org.info.age_group_of_children }}<br/>
+
+Work<br/>
+{% for work in org.works %}
+- {{ work_choices[work.choice_id] }}<br/>
+{% endfor %}
+{% else %}
+You haven't created any org.
+{% endfor %}
+
+{% endblock body %}

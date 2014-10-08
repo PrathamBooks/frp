@@ -60,8 +60,11 @@ class SignupAsBeneficary(views.MethodView):
     def post(self):
         form = BeneficarySignupForm(request.form)
         if form.validate():
-            user_service.update_profile(form)
-            return redirect(url_for('profile'))
+            result = signup_service.create_beneficary(form)
+            if not result['error']:
+                return redirect(url_for('org_info'))
+            else:
+                flash('Oops something went wrong, please try again')
         return render_template('signup_as_beneficary.html', form=form)
 
 

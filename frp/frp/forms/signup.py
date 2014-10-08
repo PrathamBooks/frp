@@ -3,10 +3,13 @@
 import wtforms
 import coaster
 
-from ..models import is_username_exists, is_email_exists, ORG_STATUS_CHOICES
+from ..models import (is_username_exists, is_email_exists, ORG_STATUS_CHOICES,
+                      is_org_email_exists, is_org_name_exists)
 
 
-__all__ = ['DonorSignupForm', 'BeneficarySignupForm']
+
+__all__ = ['DonorSignupForm', 'BeneficarySignupForm', 'BENEFICARY_CATEGORY',
+           'ORG_WORK_CHOICES']
 
 
 class DonorSignupForm(wtforms.Form):
@@ -87,11 +90,11 @@ class BeneficarySignupForm(wtforms.Form):
         validators=[wtforms.validators.Required()],
         coerce=int,
         choices=BENEFICARY_CATEGORY)
-    name = wtforms.TextField(
+    title = wtforms.TextField(
         label='Name of the Organisation/Individual ',
         validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=160)])
-    orginaztion_status = wtforms.RadioField(
+    organization_status = wtforms.RadioField(
         label='Organisation Status',
         validators=[wtforms.validators.Required()],
         coerce=int,
@@ -110,7 +113,7 @@ class BeneficarySignupForm(wtforms.Form):
                     wtforms.validators.Email(),
                     wtforms.validators.Length(max=254)])
     website = wtforms.TextField(
-        label='Address', validators=[wtforms.validators.Optional(),
+        label='Website', validators=[wtforms.validators.Optional(),
                                      wtforms.validators.URL(),
                                      wtforms.validators.Length(max=500)])
     facebook = wtforms.TextField(
@@ -118,18 +121,18 @@ class BeneficarySignupForm(wtforms.Form):
                                       wtforms.validators.URL(),
                                       wtforms.validators.Length(max=500)])
     blog = wtforms.TextField(
-        label='website', validators=[wtforms.validators.Optional(),
+        label='Blog', validators=[wtforms.validators.Optional(),
                                      wtforms.validators.URL(),
                                      wtforms.validators.Length(max=500)])
     has_80g_certificate = wtforms.RadioField(
         label='Does your organisation have 80G certification',
         validators=[wtforms.validators.Required()],
         coerce=bool,
+        default=True,
         choices=[(True, 'Yes'),
                  (False, 'No')])
     person1_name = wtforms.TextField(
         label='Your Name', validators=[wtforms.validators.Optional(),
-                                       wtforms.validators.URL(),
                                        wtforms.validators.Length(max=160)])
     person1_position = wtforms.TextField(
         label='Position in the organization',
@@ -149,7 +152,6 @@ class BeneficarySignupForm(wtforms.Form):
 
     person2_name = wtforms.TextField(
         label='Your Name', validators=[wtforms.validators.Optional(),
-                                       wtforms.validators.URL(),
                                        wtforms.validators.Length(max=160)])
     person2_position = wtforms.TextField(
         label='Position in the organization',
@@ -184,3 +186,18 @@ class BeneficarySignupForm(wtforms.Form):
         validators=[wtforms.validators.Required()],
         coerce=int,
         choices=ORG_WORK_CHOICES)
+
+    def validate_name(self, field):
+        name = field.data.strip()
+
+        # Check username is in db.
+        if is_org_name_exists(name):
+            msg = u'{} already exists'.format(name)
+            raise wtforms.ValidationError(msg)
+
+    def validate_email(self, field):
+        email = field.data.strip()
+
+        # Check organization email exists
+        if is_org_email_exists(email):
+            raise wtforms.ValidationError(u'{} already exists.'.format(email))

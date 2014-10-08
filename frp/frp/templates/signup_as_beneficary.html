@@ -20,19 +20,19 @@ Congratulations on your first step towards setting up your very own Campaign on 
     <div><br/>
         <fieldset>
             <legend>Tell us a little more about you/your organization</legend>
-        {{ form.name.label}}: {{ form.name() }}
-        {% if form.name.errors %}
+        {{ form.title.label}}: {{ form.title() }}
+        {% if form.title.errors %}
         <ul class="errors">
-            {% for error in form.category.errors %}
+            {% for error in form.title.errors %}
             <li>{{ error }}</li>
             {% endfor %}
         </ul>
         {% endif %}
         <br/>
-        {{ form.orginaztion_status.label}}: {{ form.orginaztion_status() }}
-        {% if form.orginaztion_status.errors %}
+        {{ form.organization_status.label}}: {{ form.organization_status() }}
+        {% if form.organization_status.errors %}
         <ul class="errors">
-            {% for error in form.orginaztion_status.errors %}
+            {% for error in form.organization_status.errors %}
             <li>{{ error }}</li>
             {% endfor %}
         </ul>
@@ -201,21 +201,6 @@ Congratulations on your first step towards setting up your very own Campaign on 
     <br/>
     <div>
         <fieldset>
-            <legend>Stay in Touch</legend>
-            <br/>
-            {{ form.has_80g_certificate.label}}: {{ form.has_80g_certificate() }}
-            {% if form.has_80g_certificate.errors %}
-            <ul class="errors">
-                {% for error in form.has_80g_certificate.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        </fieldset>
-    </div>
-    <br/>
-    <div>
-        <fieldset>
             <br/>
             <h2>A little more about what you/your organization does</h2>
             {{ form.org_intro.label}}: {{ form.org_intro() }}
@@ -256,5 +241,6 @@ Congratulations on your first step towards setting up your very own Campaign on 
             {% endif %}
         </fieldset>
     </div>
+        <button>Submit</button>
 </form>
 {% endblock body %}

@@ -53,8 +53,7 @@ class User(BaseMixin, db.Model):
     userinfo = db.relationship("UserInfo", backref=db.backref("user"),
                                uselist=False)
     organization_created = db.relationship("Organization",
-                                           backref=db.backref("created_by"),
-                                           uselist=False)
+                                           backref=db.backref("created_by"))
 
 
     # Don't load these columns by default

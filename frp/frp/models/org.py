@@ -6,7 +6,24 @@ from . import db, BaseNameMixin, BaseMixin
 
 
 __all__ = ['ORG_STATUS', 'ORG_STATUS_CHOICES', 'Organization',
-           'OrganizationInfo', 'OrganizationWork']
+           'OrganizationInfo', 'OrganizationWork', 'is_org_name_exists',
+           'is_org_email_exists']
+
+
+def is_org_name_exists(name):
+    """Check the username exists in db.
+
+    :param name `unicode`: name to check in db.
+    """
+    return Organization.query.filter_by(name=name).first()
+
+
+def is_org_email_exists(email):
+    """Check the email exists in db.
+
+    :param email `unicode`: org info email to check in db.
+    """
+    return OrganizationInfo.query.filter_by(email=email).first()
 
 
 def get_attrs(cls):
@@ -38,7 +55,7 @@ ORG_STATUS_CHOICES = sorted(map(lambda x: (x[1]['value'], x[1]['desc']),
 class Organization(BaseNameMixin, db.Model):
     __tablename__ = 'organization'
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     info = db.relationship("OrganizationInfo",
                            backref=db.backref("org"),
                            uselist=False)
@@ -48,6 +65,7 @@ class OrganizationInfo(BaseMixin, db.Model):
     __tablename__ = 'organization_info'
 
     organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
+    email = db.Column(db.Unicode(254), unique=True, nullable=False)
     category = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(500), nullable=True, default=u'')
@@ -76,4 +94,5 @@ class OrganizationWork(BaseMixin, db.Model):
     __tablename__ = 'organization_work'
 
     organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
+    organization = db.relationship("Organization", backref='works')
     choice_id = db.Column(db.Integer, nullable=False)
