@@ -72,6 +72,27 @@ app.add_url_rule('/signup/beneficary',
                  view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
 
 
+class SignupAsBeneficaryTemp(views.MethodView):
+    @login_required
+    def get(self):
+        form = BeneficarySignupForm()
+        return render_template('sigup_as_beneficary_old.html', form=form)
+
+    @login_required
+    def post(self):
+        form = BeneficarySignupForm(request.form)
+        if form.validate():
+            result = signup_service.create_beneficary(form)
+            if not result['error']:
+                return redirect(url_for('org_info'))
+            else:
+                flash('Oops something went wrong, please try again')
+        return render_template('sigup_as_beneficary_old.html', form=form)
+
+app.add_url_rule('/signup/beneficarytemp',
+                 view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
+
+
 @app.route('/signup/donor', methods=['GET', 'POST'])
 def signup_as_donor():
     if request.method == 'GET':

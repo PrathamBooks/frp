@@ -14,20 +14,20 @@ __all__ = ['DonorSignupForm', 'BeneficarySignupForm', 'BENEFICARY_CATEGORY',
 
 class DonorSignupForm(wtforms.Form):
     first_name = wtforms.TextField(
-        label='First Name', validators=[wtforms.validators.Required(),
+        label='First Name', validators=[wtforms.validators.Required('Enter first name'),
                                         wtforms.validators.Length(max=160)])
     last_name = wtforms.TextField(
-        label='Last Name', validators=[wtforms.validators.Optional(),
+        label='Last Name', validators=[wtforms.validators.Required('Enter last name'),
                                        wtforms.validators.Length(max=160)],
         default=u'')
     user_name = wtforms.TextField(
-        label='User Name', validators=[wtforms.validators.Required(),
+        label='User Name', validators=[wtforms.validators.Required('Enter user name'),
                                        wtforms.validators.Length(max=80)])
     password = wtforms.PasswordField(
-        label='Password', validators=[wtforms.validators.Required(),
+        label='Password', validators=[wtforms.validators.Required('Enter password'),
                                       wtforms.validators.Length(max=80)])
     email = wtforms.TextField(
-        label='Email', validators=[wtforms.validators.Required(),
+        label='Email', validators=[wtforms.validators.Required('Enter email Id'),
                                    wtforms.validators.Email(),
                                    wtforms.validators.Length(max=254)])
     address = wtforms.TextField(

@@ -22,8 +22,13 @@ mailer = Mailer(app)
 cache = Cache(app, config = {'CACHE_TYPE' : 'redis'})
 
 css = Bundle("css/bootstrap.css",
-             # "css/bootstrap-theme.min.css",
+             #"css/bootstrap-theme.css",
+             "css/bForm.css",
              "css/slider.css",
+             "css/fonts.css",
+             "css/jquery-ui.css",
+             "css/style.css",
+             "css/prathambooks.css",
              output='gen/all.css')
 
 jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")

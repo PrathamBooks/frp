@@ -6,7 +6,7 @@
   > sudo aptitude install libpq-dev
   > sudo aptitude install lib64ffi6 lib64ffi-dev
 # Install virtualenv
-  > sudo aptitude install python-virtualenv 
+  > sudo aptitude install python-virtualenv
 # Create a virtual env
   > virtualenv frp-env
 # Activate the virtualenv
@@ -20,7 +20,9 @@
 # Create db frp in postgres with owner as <user>
 # Set user and path for postgres in settings/development.py
 # Create your client/user on http://frp-auth.prathambooks.org and update in settings/development.py
-# Initialize db tables
-  > python manage.py resetdb
+# Set facebook secret/key
+  >export FACEBOOK_CONSUMER_SECRET='secret'
+  >export FACEBOOK_CONSUMER_KEY='appid'
+  >export APP_SETTINGS='settings/development.py'
 # Start dev server
   > python manage.py runserver
