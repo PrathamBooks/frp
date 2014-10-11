@@ -1,0 +1,338 @@
+<section id="step1" class="tab-pane active">
+  <div class="alert hide">&nbsp;</div>
+  <!-- Step 1 starts here-->
+  <div class="jumbotron row" tabindex="1">
+    <h1>Step 1: Getting to know you </h1>
+    <p>Congratulations  on  your first step towards setting up your very own Campaign on Pratham Book’s  Donate – A –Book.
+      We want to know more about your organization and the work you do. Answer each question as best you can and if you have a query
+      please write to us at <a href="mailto:donateabook@prathambooks.org">donateabook@prathambooks.org</a>.
+    </p>
+  </div><!-- Jumbo-->
+
+  <div class="well">
+
+    <div class="row form-group" >
+      <h3>Which category best describes you? <strong>*</strong></h3>
+
+      <p>Pick one category that best describes you and the reason you are raising funds. Please take your time to select this as this
+        impacts the next steps.</p>
+      <div class="alert alert-warning hide alertleft">Please select any one option below.</div>
+      <div class="radio">
+        <label>
+          <input type="radio" required ng-model="signup.org" name="org" value="Organization/school raising books for a single library">
+          I am an organization/school raising books for a single library
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" required ng-model="signup.org" name="org" value="You are an organization raising books for multiple centres">
+          I am an organization raising books for multiple centres
+        </label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" required ng-model="signup.org" name="org" value="You are a Reading Champion needing books for your sessions">
+          I  am a Reading Champion needing books for my storytelling  sessions
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" required ng-model="signup.org" name="org" value="Individual raising books on behalf of a school/NGO/others">
+          I am an Individual raising books on behalf of a school/NGO/others
+        </label>
+      </div>
+    </div> <!--row-->
+  </div><!--well-->
+  <hr/>
+
+  <div class="well">
+    <h3>Tell us a little more about you/your organization</h3>
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="name">Name of the Organisation/Individual <strong>*</strong></label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.name" name="name" placeholder="Name of organisation / Individual" required />
+        <div class="alert alert-warning hide">Enter Name of organisation.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-12">
+        <label for="status">Organisation Status <strong>*</strong></label>
+        <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+        <div class="radio">
+          <label>
+            <input type="radio" required ng-model="signup.status" name="status" id="optionsRadios1" value="Registered non-profit">
+            Registered non-profit
+          </label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" required  ng-model="signup.status" name="status" value="Section 25 Company">
+            Section 25 Company
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" required ng-model="signup.status" name="status" value="Private School">Private School
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" required ng-model="signup.status" name="status" value="Budget Private School (fee structure less than Rs.500 per month)">
+            Budget Private School (fee structure less than Rs.500 per month)
+        </label></div>
+        <div class="radio">
+          <label>
+            <input type="radio" required ng-model="signup.status" name="status" value="Government School">Government School
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" required ng-model="signup.status" name="status" value="Reading centre / library">Reading centre / library
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="address">Head Office Address <strong>*</strong></label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.HOaddress" name="HOaddress" placeholder="Head Office Address" required />
+        <div class="alert alert-warning hide">Enter Head Office Address.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="phone">Head Office Phone Number <strong>*</strong></label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.HOphone" name="HOphone" placeholder="Head Office Phone Number" required />
+        <div class="alert alert-warning hide">Enter Head Office Phone Number.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="infoEmail">Info Email ID <strong>*</strong></label>
+      </div>
+      <div class="col-xs-8">
+        <input type="email" class="form-control" ng-model="signup.infoEmail" name="infoEmail" placeholder="Info Email ID" required />
+        <div class="alert alert-warning hide">Invalid Info Email ID.</div>
+        <p class="help-block">Please add the organisation info ID. It should not be individual specific.</p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="website">Website</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.website" name="website" placeholder="Website" />
+        <div class="alert alert-warning hide">Invalid Website.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="facebook">Facebook page</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.facebook" name="facebook" placeholder="Facebook" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="blog">Blog Address</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.blog" name="blog" placeholder="Blog Address" />
+      </div>
+    </div>
+  </div><!--well-->
+
+  <hr/>
+
+  <div class="well">
+    <h3>Update us on your certifications:</h3>
+    <div class="form-group row">
+      <div class="col-xs-12">
+        <label>Does your organisation have 80G certification <strong>*</strong></label>
+        <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+        <div class="radio"><label><input type="radio" required  ng-model="signup.80gcert" name="80gcert" value="Y">Yes</label></div>
+        <div class="radio"><label><input required type="radio" ng-model="signup.80gcert" name="80gcert" value="N">No</label></div>
+      </div>
+    </div>
+  </div><!--well-->
+
+  <hr/>
+
+  <div class="well">
+    <h3>Stay in touch</h3>
+    <p>Give us  details about  2 people from your organization with whom we can stay in touch with</p>
+    <h4>Person 1</h4>
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="userName">Your Name</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.userName" name="userName" placeholder="Your Name" required />
+        <div class="alert alert-warning hide">Enter Name.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="position">Position in the organisation</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.position" name="position" placeholder="Position" required />
+        <div class="alert alert-warning hide">Enter Position.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="userEmail">Your Email Id.</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="email" class="form-control" ng-model="signup.userEmail" name="userEmail" placeholder="Your Email Id." required />
+        <div class="alert alert-warning hide">Invalid Email Id.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="userPhone">Your Phone</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.userPhone" name="userPhone" placeholder="Your Phone no." required />
+        <div class="alert alert-warning hide">Enter Phone Number.</div>
+      </div>
+    </div>
+
+    <h4>Person 2</h4>
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="userName">Your Name</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.userName" name="userName" placeholder="Your Name" required />
+        <div class="alert alert-warning hide">Enter Name.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="position">Position in the organisation</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.position" name="position" placeholder="Position" required />
+        <div class="alert alert-warning hide">Enter Position.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="userEmail">Your Email Id.</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="email" class="form-control" ng-model="signup.userEmail" name="userEmail" placeholder="Your Email Id." required />
+        <div class="alert alert-warning hide">Invalid Email Id.</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="userPhone">Your Phone</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" ng-model="signup.userPhone" name="userPhone" placeholder="Your Phone no." required />
+        <div class="alert alert-warning hide">Enter Phone Number.</div>
+      </div>
+    </div>
+
+  </div><!--well-->
+
+  <hr/>
+
+  <div class="well">
+    <h3>A little more about what you/your organization does <strong>*</strong></h3>
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="aboutYou">Please explain briefly the impact that your organisation’s work is having on children / community it is serving .</label>
+      </div>
+      <div class="col-xs-8">
+        <textarea class="form-control" rows="3" ng-model="signup.aboutYou" name="aboutYou" required></textarea>
+        <div class="alert alert-warning hide">Share how childern are affected with your work.</div>
+      </div>
+    </div>
+
+    <h3>Overall impact numbers <strong>*</strong></h3>
+    <div class="form-group row">
+      <div class="col-xs-4">
+        <label for="childrenNumber">Number of children that you/your organization have impacted since commencement / impacts currently</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" required class="form-control" ng-model="signup.childrenNumber" name="childrenNumber" placeholder="Number of Children that you / your organization impacts" />
+        <div class="alert alert-warning hide">Enter number of children being impacted.</div>
+      </div>
+    </div>
+
+    <div class="form-group row age">
+      <div class="col-xs-4">
+        <label for="age">Age group of children you impact</label>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" required class="form-control" ng-model="signup.age" name="age" placeholder="Age group of children you impact" />
+        <div class="alert alert-warning hide">Enter age group of childern</div>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <div class="col-xs-12">
+        <label for="age">Do you/your organization do any work for following (check all that apply):<strong>*</strong></label>
+        <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in Rural areas">
+            Children in Rural areas
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in low income Urban area">
+            Children in low income Urban area
+          </label>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children living in tribal areas">
+            Children living in tribal areas
+          </label>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children  with special needs ">
+            Children  with special needs
+          </label>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children who are  differently abled ">
+            Children who are  differently abled
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div><!--well-->
+</section>
+<!-- Step 1 ends here-->

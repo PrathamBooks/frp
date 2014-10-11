@@ -1,0 +1,226 @@
+<section id="step3" class="tab-pane hide" tabindex=3>
+  <div class="jumbotron row">
+    <h1>Step 3: Set-up your campaign</h1>
+    <p>
+      You are now ready to fill in all the detail that will go live on your Campaign Page. Your campaign page is where
+      we showcase the awesome work you do. Make sure you take some time out to fill this section as this is what donors
+      will review before deciding to support you.
+    </p>
+  </div>
+
+  <div class="well upload">
+    <h3>Image upload</h3>
+    <div class="alert alert-warning  alertleft hide">Please upload a valid image related to the campaign.</div>
+    <div class="col-md-12">
+      <input type="file" ng-model="signup.imageUpload" name="imageUpload" class="img-responsive img-thumbnail img-rounded btn btnFile" required>
+      <!--<img src="..." alt="..." class="img-responsive img-thumbnail img-rounded" width="220px" height="194px" required />-->
+      <p class="help-block">PNG, JPG, or GIF 220x190px cropped to 90x90 on campaign page.</p>
+      <div class="alert alert-warning hide">Select an image for your campaign.</div>
+    </div>
+  </div><!--well-->
+
+  <div class="well upload">
+    <h3>Video Upload</h3>
+    <!--<button type="button" class="btn btn-primary">Add Video</button>-->
+    <input type="file" ng-model="signup.addVideo" name="addVideo" class="btn btnFile">
+    <p class="help-block">Mpeg file not more than 5 mb and 30 seconds.</p>
+    <video class="hide"></video>
+    <div class="alert alert-warning hide"> Not valid file.</div>
+  </div><!--well-->
+
+  <div class="well">
+    <div class=" row form-group">
+      <div class="col-xs-4">
+        <h3>Funding Goal</h3>
+      </div>
+      <div class="col-xs-8">
+        <input class="form-control" ng-model="signup.fundingGoal" name="fundingGoal" type="text" placeholder="Rupee + Books Based on Previous Selection" readonly>
+      </div>
+    </div><!--form-group-->
+  </div><!--well-->
+
+
+  <div id="category" class="well">
+    <div class="row form-group">
+      <div class="col-xs-12">
+        <h3>Category</h3>
+      </div>
+      <!-- <p>should be added directly based on previous section</p>-->
+      <div class="checkbox">
+        <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Books for a library" checked>Books for a library</label><br />
+        <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Books in a bag / Classroom Library" checked>Books in a bag / Classroom Library</label><br />
+        <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Prizes/give-aways" checked >Prizes/give-aways</label><br />
+        <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Reading Sessions" checked >Reading Sessions</label>
+      </div><!--checkbox-->
+    </div><!--form-group-->
+  </div><!--well-->
+
+  <div class="well">
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <h3>State</h3>
+        <div class="alert alert-warning  alertleft hide">Please select any one state in the list</div>
+        <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
+             This link will work for the city of respective states-->
+      </div>
+      <div class="col-xs-8">
+        <select class="form-control" ng-model="signup.stateCity" name="stateCity" required>
+          <option value="2169" >Andhra Pradesh</option>
+          <option value="2196" >Arunachal Pradesh</option>
+          <option value="2170" >Assam</option>
+          <option value="2171" >Bihar</option>
+          <option value="5267" >Chhattisgarh</option>
+          <option value="2174" >Delhi</option>
+          <option value="2199" >Goa</option>
+          <option value="2175" >Gujarat</option>
+          <option value="2176" >Haryana</option>
+          <option value="2177" >Himachal Pradesh</option>
+          <option value="2178" >Jammu and Kashmir</option>
+          <option value="5268" >Jharkhand</option>
+          <option value="2185" >Karnataka</option>
+          <option value="2179" >Kerala</option>
+          <option value="2181" >Madhya Pradesh</option>
+          <option value="2182" >Maharashtra</option>
+          <option value="2183" >Manipur</option>
+          <option value="2184" >Meghalaya</option>
+          <option value="2197" >Mizoram</option>
+          <option value="2186" >Nagaland</option>
+          <option value="2187" >Orissa</option>
+          <option value="2189" >Punjab</option>
+          <option value="2190" >Rajasthan</option>
+          <option value="2195" >Sikkim</option>
+          <option value="2191" >Tamil Nadu</option>
+          <option value="2192" >Tripura</option>
+          <option value="5269" >UNION TERRITORY</option>
+          <option value="2193" >Uttar Pradesh</option>
+          <option value="5259" >Uttaranchal</option>
+          <option value="2194" >West Bengal</option>
+        </select>
+      </div>
+      <div class="col-xs-4" style="display:none;" >
+        <h3>City</h3>
+        <div class="alert alert-warning  alertleft hide">Please select any one city in the list</div>
+        <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
+             This link will work for the city of respective states-->
+      </div>
+      <div class="col-xs-8" style="display:none;">
+        <select multiple class="form-control" ng-model="signup.stateCity">
+          <option value="2169" >City Populated</option>
+        </select>
+
+      </div>
+      <button type="button" value="Add State" class="btn btnAdd">Add State</button>
+    </div><!--form-group-->
+  </div><!--well-->
+
+  <div class="well title">
+    <div class="row form-group">
+      <div class="col-xs-12">
+        <h3>Project Title</h3>
+      </div>
+
+      <div class="col-xs-4">
+        <label>
+          Please enter the project title here. This is the first thing your Donor sees and you can also be searched with it.
+
+        </label>
+      </div>
+      <div class="col-xs-8">
+        <input class="form-control" ng-model="signup.projectTitle" name="projectTitle" type="text" required>
+        <div class="alert alert-warning  alertleft hide">Please give a suitable title to your campaign</div>
+        <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 80 characters)</p>
+      </div>
+
+      <!--<div class="col-xs-12">
+          <p>
+            This is what goes right under your Project Title and gives the Donor the info that will help generate interest
+            in your cause. The shorter, the better. Give a snapshot of what your project is all about and why it is important.
+            E.g :  We are a  class of 25 bright young minds from an underprivileged community studying in a Govt school in Delhi.
+            We require books for our classroom library. We want to read better and need books which are of our interest and
+            our levels. Help us  become readers for life. (Max. 160 characters)
+          </p>
+      </div>-->
+
+    </div><!--form-group-->
+  </div><!--well-->
+
+  <div class="well upload">
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <h3>Short Description</h3>
+      </div>
+
+      <div class="col-xs-8">
+        <textarea class="form-control" rows="3" ng-model="signup.description" name="description" required></textarea>
+        <div class="alert alert-warning  alertleft hide">Enter a small description about your project</div>
+        <p class="help-block">Brief description of your project for which you are seeking funding</p>
+      </div>
+    </div><!--form-group-->
+  </div><!--well-->
+
+  <!--<div class="well">
+      <h3>Your Story</h3>
+      <p>Tell potenital contributors more about your campaign<br/>
+        Contributors fund ideas they can be passionate about and to people they trust. Here are some things to do in this section:
+      </p>
+
+
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <label for="introduce">Your Story</label>
+        </div>
+        <div class="col-xs-8">
+          <textarea class="form-control" rows="3" ng-model="signup.introduce" name="introduce" required></textarea>
+          <div class="alert alert-warning  alertleft hide">Please type in your story</div>
+          <p class="help-block">Examples / Tutorials / Tips</p>
+        </div>
+      </div>form-group
+
+  </div>-->
+
+
+
+  <div class="well story">
+    <h3>My Story</h3>
+    <p>
+      Share your story in this column below and tell potential contributors why your campaign is important.
+      Introduce yourself and describe your work. Explain how do you plan to utilize the funding and how will it impact
+      the children / community your work with. Be specific and transparent  to earn Donor’s trust.
+    </p>
+    <p>
+      For your benefit, the ‘My Story’  column is divided into 3 simple guiding questions to help you present your story better.
+    </p>
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <label for="orgIntro">Who are you ?</label>
+      </div>
+      <div class="col-xs-8">
+        <textarea class="form-control" rows="3" ng-model="signup.projectValue" name="orgIntro" required></textarea>
+        <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
+        <p class="help-block">Introduce your organization.</p>
+      </div>
+    </div><!--form-group-->
+
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <label for="impactStory">What work do you do and how does it impact society ?</label>
+      </div>
+      <div class="col-xs-8">
+        <textarea class="form-control" rows="3" ng-model="" name="impactStory" required></textarea>
+        <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
+        <p class="help-block">Share your work and  Impact stories here.</p>
+      </div>
+    </div><!--form-group-->
+
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <label for="fundsUtilize">How will the funds be utilized ?</label>
+      </div>
+      <div class="col-xs-8">
+        <textarea class="form-control" rows="3" ng-model="" name="fundsUtilize" required></textarea>
+        <div class="alert alert-warning  alertleft hide">Explain the way you are utilizing the funda</div>
+        <p class="help-block">Answer the need for this funding and the way in which you plan to utilize these funds.</p>
+      </div>
+    </div><!--form-group-->
+  </div><!--well-->
+</section>

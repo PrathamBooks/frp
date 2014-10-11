@@ -1,0 +1,254 @@
+<!-- Step 4 starts here-->
+<section id="step4" class="tab-pane hide">
+  <div class="jumbotron row">
+    <h1>Step 4: Get Funded</h1>
+    <p>
+      You have reached the final step towards getting your campaign up and running.
+      You can add additional team members or upload a few more pictures / videos of your work.
+      Do preview how will your campaign page look before submitting it.
+
+    </p>
+  </div>
+
+  <div class="well">
+    <div class="col-xs-4">
+      <h3>Campaign Team</h3>
+    </div>
+
+    <div class="col-xs-8">
+      <input type="text" class="form-control disabled" placeholder="This will have comma separated Indiviual email ids" /> <!-- Wani asked to add input box instead of select tag -->
+      <p class="help-block">
+        Add the email ids of other people who will be running the campaign along with you.
+        Doing this is helpful as multiple people can keep track of your campaign and even if anyone is on a leave,
+        your campaign is looked after.
+      </p>
+    </div>
+  </div><!--well-->
+
+  <div class="well">
+    <div class="row form-group">
+      <div class="col-xs-12">
+        <h3>Media Gallery</h3>
+        <p>
+          Add more pictures/video here.
+          Donors would be more interested in your campaign as they see more of your work.
+        </p>
+
+        <div class="btn-group btnMedia disabled" data-toggle="buttons">
+          <label class="btn" disabled="">
+            <input type="radio" ng-model="signup.options" name="options" value="Add Photos" id="addPhoto"> Add Photos
+          </label>
+          <label class="btn" disabled="">
+            <input type="radio" ng-model="signup.options" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums
+          </label>
+          <label class="btn" disabled="">
+            <input type="radio" ng-model="signup.options" name="options" value="Add Videos" id="addVideo"> Add Videos
+          </label>
+        </div>
+
+      </div>
+
+      <div class="col-xs-8">
+
+      </div>
+    </div>
+  </div><!--well-->
+  <!-- Preview -->
+
+  <div class="well">
+    <h3>Preview Your Campaign Page :</h3>
+    <p>
+      Before you press the final submission button click here to see how will your Campaign page look and do edits if required.
+      Once you have pressed the submit button, your application will go in the screening process and you will not be able to
+      make any edits.
+    </p>
+
+    <!-- Preview -->
+    <button class="btn btnPreview" data-toggle="modal" data-target=".bs-example-modal-lg">Preview</button>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h3 class="modal-title" id="myLargeModalLabel">Preview of Beneficiary Form </h3>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <h5>Category best describes you.</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Category</label>
+            </div>
+          </div> <!--row-->
+
+          <div class="row">
+            <div class="col-xs-6">
+              <h5>Name of the Organisation/Individual</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Name of the Organisation/Individual</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Organisation Status</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Organisation Status</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Head Office Address</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Head Office Address</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Head Office Phone Number </h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Head Office Phone Number </label>
+            </div>
+
+
+            <div class="col-xs-6">
+              <h5>Info Email ID</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Info Email ID</label>
+            </div>
+          </div> <!--row-->
+
+          <div class="row">
+            <div class="col-xs-6">
+              <h5>Does your organisation have 80G certification</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Yes / No</label>
+            </div>
+          </div> <!--row-->
+
+          <div class="row">
+            <div class="col-xs-12"><h4>Details about 2 people from your organization </h4></div>
+            <div class="col-xs-12"><h5>Person 1</h5></div>
+            <div class="col-xs-6">
+              <h5>Name</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Name</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Position in Organisation</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Position in Organisation</label>
+            </div>
+
+
+            <div class="col-xs-6">
+              <h5>Email Id</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Email Id</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Phone</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Phone</label>
+            </div>
+
+            <!--Details of person 2!-->
+            <div class="col-xs-12"><h5>Person 1</h5></div>
+            <div class="col-xs-6">
+              <h5>Name</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Name</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Position in Organisation</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Position in Organisation</label>
+            </div>
+
+
+            <div class="col-xs-6">
+              <h5>Email Id</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Email Id</label>
+            </div>
+
+            <div class="col-xs-6">
+              <h5>Phone</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Phone</label>
+            </div>
+
+
+          </div> <!--row-->
+
+          <div class="row">
+            <div class="col-xs-12">
+              <h4>Funding Goal</h4>
+            </div>
+            <div class="col-xs-6">
+              <h5>Total books selected</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Total books selected</label>
+            </div>
+
+
+            <div class="col-xs-6">
+              <h5>Total Amount in Rupees</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Total Amount in Rupees</label>
+            </div>
+          </div> <!--row-->
+
+          <div class="row">
+            <div class="col-xs-6">
+              <h5>Project Title</h5>
+            </div>
+            <div class="col-xs-6">
+              <label>Project Title</label>
+            </div>
+          </div> <!--row-->
+
+        </div>
+      </div> <!--modal-->
+    </div>
+
+  </div><!--well-->
+
+  <div class="well">
+    <h3>Good to know  :</h3>
+    <ol>
+      <li>Please read the Terms and Conditions before you submit your campaign for review.(T&C doc to open as a separate link)</li>
+      <li>Your project will be reviewed to  ensure it meets our Project Guidelines</li>
+      <li>Within 3-4 working days, we'll send you a message about the status of your application</li>
+      <li>If approved, the project will Go Live and you will get a message on the same. Once it is Live, you can share your campaign page on social media and invite friends to view and contribute.</li>
+
+    </ol>
+
+  </div><!--well-->
+
+  <div class="well">
+    <h3>I have read the T&C and I want to submit this campaign page . </h3>
+    <button type="submit" id="goLive" class="btn btn-lg btn-block btnLive">Go Live &amp; Get Funded</button>
+    <p>Your campaign is not ready to go live quite yet. <br/>
+      <a href="#" id="showWhatsLeft">Show me what's left to do</a>
+    </p>
+  </div><!--well-->
+
+</section>
+<!-- Step 4 ends here-->
