@@ -43,7 +43,7 @@ oauth2==1.5.211
 paramiko==1.11.0
 passlib==1.6.2
 psycopg2==2.5.1
-py==1.4.15
+py==1.4.25
 pycparser==2.10
 pycrypto==2.6
 python-dateutil==2.1

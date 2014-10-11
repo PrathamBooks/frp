@@ -19,10 +19,10 @@ app = create_app(
 assets = Environment(app)
 
 mailer = Mailer(app)
-cache = Cache(app, config = {'CACHE_TYPE' : 'redis'})
+cache = Cache(app, config={'CACHE_TYPE': 'redis'})
 
 css = Bundle("css/bootstrap.css",
-             #"css/bootstrap-theme.css",
+             # "css/bootstrap-theme.css",
              "css/bForm.css",
              "css/slider.css",
              "css/fonts.css",
@@ -32,8 +32,12 @@ css = Bundle("css/bootstrap.css",
              output='gen/all.css')
 
 jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
-bootstrap = Bundle("lib/bootstrap/bootstrap.min.js", "lib/bootstrap/bootstrap-slider.js", output="gen/bootstrap.js")
-angular = Bundle("lib/angular/angular.js", "lib/angular/angular-route.js", output="gen/angular.js")
+bootstrap = Bundle("lib/bootstrap/bootstrap.min.js",
+                   "lib/bootstrap/bootstrap-slider.js",
+                   output="gen/bootstrap.js")
+angular = Bundle("lib/angular/angular.js",
+                 "lib/angular/angular-route.js",
+                 output="gen/angular.js")
 app_js = Bundle("js/tmp/form.js", output="gen/lib.js")
 
 
