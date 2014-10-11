@@ -17,10 +17,8 @@
         <div id="internalContent" class="row beneficiary">
           <div  id="internalCampaign" class="row ">
             <div class="col-md-12">
-              {% include "signup_as_beneficary_step1.html" %}
-              {% include "signup_as_beneficary_step2.html" %}
-              {% include "signup_as_beneficary_step3.html" %}
-              {% include "signup_as_beneficary_step4.html" %}
+              {% block signup_as_beneficary_step %}
+              {% endblock %}
 
               <a type="button" id="next" class="btn">Next</a>
               <a type="button" id="previous" class="btn">Previous</a>

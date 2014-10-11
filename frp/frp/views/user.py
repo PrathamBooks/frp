@@ -7,6 +7,7 @@ from flask import (render_template,
                    session,
                    flash,
                    views,
+                   abort,
                    request)
 from flask.ext.oauth import OAuth
 
@@ -52,12 +53,15 @@ def signup():
 
 class SignupAsBeneficary(views.MethodView):
     @login_required
-    def get(self):
+    def get(self, step):
+        if step not in range(1, 5):
+            abort(404)
         form = BeneficarySignupForm()
-        return render_template('signup_as_beneficary.html', form=form)
+        return render_template('signup_as_beneficary_step{}.html'.format(step),
+                               form=form)
 
     @login_required
-    def post(self):
+    def post(self, step):
         form = BeneficarySignupForm(request.form)
         if form.validate():
             result = signup_service.create_beneficary(form)
@@ -68,7 +72,7 @@ class SignupAsBeneficary(views.MethodView):
         return render_template('signup_as_beneficary.html', form=form)
 
 
-app.add_url_rule('/signup/beneficary',
+app.add_url_rule('/signup/beneficary/<int:step>',
                  view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
 
 
