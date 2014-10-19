@@ -14,8 +14,8 @@ from flask.ext.oauth import OAuth
 from .. import app
 from ..forms import (DonorSignupForm,
                      LoginForm,
-                     BeneficarySignupForm,
                      ProfileForm)
+from ..forms import beneficiary_signup_forms
 from ..service import signup as signup_service
 from ..service import user as user_service
 from ..service.decorators import login_required
@@ -51,50 +51,81 @@ def signup():
     return render_template('signup.html')
 
 
+# @app.route('/signup/beneficary/')
+# def beneficiary_signup():
+#     form = BeneficarySignupForm()
+#     import ipdb;ipdb.set_trace()
+#     return render_template(
+#         'signup_as_beneficary_step{}.html'.format(1),
+#         form=form)
+
+
 class SignupAsBeneficary(views.MethodView):
+
+    def validate_and_get_redirect_step(self, step):
+        accepted_keys = [
+            'beneficary_signup_step{}_data'.format(step-1),
+            'beneficary_signup_step{}_data'.format(step)]
+        if accepted_keys[0] in session or accepted_keys[1] in session:
+            return
+
+        for st in range(step-1, 0, -1):
+            key = 'beneficary_signup_step{}_data'.format(st)
+            if key in session:
+                url = url_for('signup_as_beneficary', step=st+1)
+                return url
+
     @login_required
-    def get(self, step):
+    def get(self, step=1):
         if step not in range(1, 5):
-            abort(404)
-        form = BeneficarySignupForm()
-        return render_template('signup_as_beneficary_step{}.html'.format(step),
-                               form=form)
+            step = 1
+
+        redirect_url = self.validate_and_get_redirect_step(step)
+        if redirect_url:
+            return redirect(redirect_url)
+
+        form = beneficiary_signup_forms.BeneficarySignupForm1()
+        return render_template(
+            'signup_as_beneficary_step{}.html'.format(step),
+            form=form)
 
     @login_required
-    def post(self, step):
-        form = BeneficarySignupForm(request.form)
+    def post(self, step=1):
+        if step not in range(1, 5):
+            step = 1
+
+        form = beneficiary_signup_forms.BeneficarySignupForm1(request.form)
         if form.validate():
-            result = signup_service.create_beneficary(form)
-            if not result['error']:
-                return redirect(url_for('org_info'))
-            else:
-                flash('Oops something went wrong, please try again')
-        return render_template('signup_as_beneficary.html', form=form)
+            session['beneficary_signup_step{}_data'.format(step)] = form.data
+            return redirect(url_for('signup_as_beneficary', step=step+1))
+        return render_template(
+            'signup_as_beneficary_step{}.html'.format(step),
+            form=form)
+
+app.add_url_rule(
+    '/signup/beneficary/<int:step>/',
+    view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
 
 
-app.add_url_rule('/signup/beneficary/<int:step>',
-                 view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
+# class SignupAsBeneficaryTemp(views.MethodView):
+#     @login_required
+#     def get(self):
+#         form = beneficiary_signup_forms.BeneficarySignupForm1()
+#         return render_template('sigup_as_beneficary_old.html', form=form)
 
+#     @login_required
+#     def post(self):
+#         form = beneficiary_signup_forms.BeneficarySignupForm1(request.form)
+#         if form.validate():
+#             result = signup_service.create_beneficary(form)
+#             if not result['error']:
+#                 return redirect(url_for('org_info'))
+#             else:
+#                 flash('Oops something went wrong, please try again')
+#         return render_template('sigup_as_beneficary_old.html', form=form)
 
-class SignupAsBeneficaryTemp(views.MethodView):
-    @login_required
-    def get(self):
-        form = BeneficarySignupForm()
-        return render_template('sigup_as_beneficary_old.html', form=form)
-
-    @login_required
-    def post(self):
-        form = BeneficarySignupForm(request.form)
-        if form.validate():
-            result = signup_service.create_beneficary(form)
-            if not result['error']:
-                return redirect(url_for('org_info'))
-            else:
-                flash('Oops something went wrong, please try again')
-        return render_template('sigup_as_beneficary_old.html', form=form)
-
-app.add_url_rule('/signup/beneficarytemp',
-                 view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
+# app.add_url_rule('/signup/beneficarytemp',
+#                  view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
 
 
 @app.route('/signup/donor', methods=['GET', 'POST'])

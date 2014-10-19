@@ -1,5 +1,6 @@
 {% extends "signup_as_beneficary.html" %}
 {% block signup_as_beneficary_step %}
+{% from "_formhelpers.html" import render_field %}
 <section id="step1" class="tab-pane active">
   <div class="alert hide">&nbsp;</div>
   <!-- Step 1 starts here-->
@@ -15,33 +16,19 @@
 
     <div class="row form-group" >
       <h3>Which category best describes you? <strong>*</strong></h3>
-
+      {% if form.category.errors %}
+          <div class="alert alert-warning alertleft">{% for error in form.category.errors %}{{ error }}{% endfor %}</div>
+      {% endif %}
       <p>Pick one category that best describes you and the reason you are raising funds. Please take your time to select this as this
         impacts the next steps.</p>
-      <div class="alert alert-warning hide alertleft">Please select any one option below.</div>
+      {% for subfield in form.category %}
       <div class="radio">
         <label>
-          <input type="radio" required ng-model="signup.org" name="org" value="Organization/school raising books for a single library">
-          I am an organization/school raising books for a single library
+        {{subfield}}
+        {{subfield.label.text}}
         </label>
       </div>
-      <div class="radio">
-        <label>
-          <input type="radio" required ng-model="signup.org" name="org" value="You are an organization raising books for multiple centres">
-          I am an organization raising books for multiple centres
-        </label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" required ng-model="signup.org" name="org" value="You are a Reading Champion needing books for your sessions">
-          I  am a Reading Champion needing books for my storytelling  sessions
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" required ng-model="signup.org" name="org" value="Individual raising books on behalf of a school/NGO/others">
-          I am an Individual raising books on behalf of a school/NGO/others
-        </label>
-      </div>
+      {% endfor %}
     </div> <!--row-->
   </div><!--well-->
   <hr/>
@@ -53,76 +40,59 @@
         <label for="name">Name of the Organisation/Individual <strong>*</strong></label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.name" name="name" placeholder="Name of organisation / Individual" required />
-        <div class="alert alert-warning hide">Enter Name of organisation.</div>
+        {{form.organization_name(class_='form-control', placeholder="Name of organisation / Individual")}}
+        {% if form.organization_name.errors %}<div class="alert alert-warning">Enter Name of organisation.</div>{% endif %}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-12">
         <label for="status">Organisation Status <strong>*</strong></label>
-        <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+        {% if form.organization_status.errors %}<div class="alert alert-warning alertleft ">Please select any one option below.</div>{%endif%}
+        {% for subfield in form.organization_status %}
         <div class="radio">
           <label>
-            <input type="radio" required ng-model="signup.status" name="status" id="optionsRadios1" value="Registered non-profit">
-            Registered non-profit
+            {{subfield}}
+            {{subfield.label.text}}
           </label>
         </div>
-        <div class="radio">
-          <label><input type="radio" required  ng-model="signup.status" name="status" value="Section 25 Company">
-            Section 25 Company
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" required ng-model="signup.status" name="status" value="Private School">Private School
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" required ng-model="signup.status" name="status" value="Budget Private School (fee structure less than Rs.500 per month)">
-            Budget Private School (fee structure less than Rs.500 per month)
-        </label></div>
-        <div class="radio">
-          <label>
-            <input type="radio" required ng-model="signup.status" name="status" value="Government School">Government School
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" required ng-model="signup.status" name="status" value="Reading centre / library">Reading centre / library
-          </label>
-        </div>
+        {% endfor %}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-4">
-        <label for="address">Head Office Address <strong>*</strong></label>
+        <label for="head_off_address">Head Office Address <strong>*</strong></label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.HOaddress" name="HOaddress" placeholder="Head Office Address" required />
-        <div class="alert alert-warning hide">Enter Head Office Address.</div>
+        {{form.head_off_address(class_='form-control', placeholder="Head Office Address")}}
+        {% if form.head_off_address.errors %}
+        <div class="alert alert-warning">Enter Head Office Address.</div>
+        {%endif%}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-4">
-        <label for="phone">Head Office Phone Number <strong>*</strong></label>
+        <label for="head_off_phone_number">Head Office Phone Number <strong>*</strong></label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.HOphone" name="HOphone" placeholder="Head Office Phone Number" required />
-        <div class="alert alert-warning hide">Enter Head Office Phone Number.</div>
+        {{form.head_off_phone_number(class_='form-control', placeholder="Head Office Phone Number")}}
+        {% if form.head_off_phone_number.errors %}
+        <div class="alert alert-warning">Enter Head Office Phone Number.</div>
+        {% endif %}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-4">
-        <label for="infoEmail">Info Email ID <strong>*</strong></label>
+        <label for="info_email">Info Email ID <strong>*</strong></label>
       </div>
       <div class="col-xs-8">
-        <input type="email" class="form-control" ng-model="signup.infoEmail" name="infoEmail" placeholder="Info Email ID" required />
-        <div class="alert alert-warning hide">Invalid Info Email ID.</div>
+        {{form.info_email(class_='form-control', placeholder="Info Email ID")}}
+        {% if form.info_email.errors %}
+        <div class="alert alert-warning">Invalid Info Email ID.</div>
+        {% endif %}
         <p class="help-block">Please add the organisation info ID. It should not be individual specific.</p>
       </div>
     </div>
@@ -132,26 +102,32 @@
         <label for="website">Website</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.website" name="website" placeholder="Website" />
-        <div class="alert alert-warning hide">Invalid Website.</div>
+        {{form.website(class_='form-control', placeholder="Website")}}
+        {% if form.website.errors %}
+        <div class="alert alert-warning">Invalid Website.</div>
+        {% endif %}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-4">
-        <label for="facebook">Facebook page</label>
+        <label for="facebook_page">Facebook page</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.facebook" name="facebook" placeholder="Facebook" />
+        {{form.facebook_page(class_='form-control', placeholder="Facebook Page")}}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-4">
-        <label for="blog">Blog Address</label>
+        <label for="blog_address">Blog Address</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.blog" name="blog" placeholder="Blog Address" />
+        {{form.blog_address(class_='form-control', placeholder="Blog Address")}}
+        {% if form.blog_address.errors %}
+        <div class="alert alert-warning">Invalid blog address.</div>
+        {% endif %}
+
       </div>
     </div>
   </div><!--well-->
@@ -163,9 +139,18 @@
     <div class="form-group row">
       <div class="col-xs-12">
         <label>Does your organisation have 80G certification <strong>*</strong></label>
-        <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
-        <div class="radio"><label><input type="radio" required  ng-model="signup.80gcert" name="80gcert" value="Y">Yes</label></div>
-        <div class="radio"><label><input required type="radio" ng-model="signup.80gcert" name="80gcert" value="N">No</label></div>
+        {% if form.has_80g_certificate.errors %}
+        <div class="alert alert-warning alertleft">Please select any one option below.</div>
+        {% endif %}
+
+        {% for subfield in form.has_80g_certificate %}
+        <div class="radio">
+          <label>
+            {{subfield}}
+            {{subfield.label.text}}
+          </label>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div><!--well-->
@@ -181,8 +166,10 @@
         <label for="userName">Your Name</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.userName" name="userName" placeholder="Your Name" required />
-        <div class="alert alert-warning hide">Enter Name.</div>
+        {{form.person1_name(class_='form-control', placeholder="Your Name")}}
+        {% if form.person1_name.errors %}
+        <div class="alert alert-warning">Enter Name.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -191,8 +178,10 @@
         <label for="position">Position in the organisation</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.position" name="position" placeholder="Position" required />
-        <div class="alert alert-warning hide">Enter Position.</div>
+        {{form.person1_position(class_='form-control', placeholder="Position")}}
+        {% if form.person1_position.errors %}
+        <div class="alert alert-warning">Enter Position.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -201,8 +190,10 @@
         <label for="userEmail">Your Email Id.</label>
       </div>
       <div class="col-xs-8">
-        <input type="email" class="form-control" ng-model="signup.userEmail" name="userEmail" placeholder="Your Email Id." required />
-        <div class="alert alert-warning hide">Invalid Email Id.</div>
+        {{form.person1_email(class_='form-control', placeholder="Your Email Id")}}
+        {% if form.person1_email.errors %}
+        <div class="alert alert-warning">Invalid Email Id.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -211,8 +202,10 @@
         <label for="userPhone">Your Phone</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.userPhone" name="userPhone" placeholder="Your Phone no." required />
-        <div class="alert alert-warning hide">Enter Phone Number.</div>
+        {{form.person1_phone(class_='form-control', placeholder="Your Phone no.")}}
+        {% if form.person1_phone.errors %}
+        <div class="alert alert-warning">Enter Phone Number.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -222,8 +215,10 @@
         <label for="userName">Your Name</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.userName" name="userName" placeholder="Your Name" required />
-        <div class="alert alert-warning hide">Enter Name.</div>
+        {{form.person2_name(class_='form-control', placeholder="Your Name")}}
+        {% if form.person2_name.errors %}
+        <div class="alert alert-warning ">Enter Name.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -232,8 +227,10 @@
         <label for="position">Position in the organisation</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.position" name="position" placeholder="Position" required />
-        <div class="alert alert-warning hide">Enter Position.</div>
+        {{form.person2_position(class_='form-control', placeholder="Position")}}
+        {% if form.person2_position.errors %}
+        <div class="alert alert-warning ">Enter Position.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -242,8 +239,10 @@
         <label for="userEmail">Your Email Id.</label>
       </div>
       <div class="col-xs-8">
-        <input type="email" class="form-control" ng-model="signup.userEmail" name="userEmail" placeholder="Your Email Id." required />
-        <div class="alert alert-warning hide">Invalid Email Id.</div>
+        {{form.person2_email(class_='form-control', placeholder="Your Email Id")}}
+        {% if form.person2_email.errors %}
+        <div class="alert alert-warning ">Invalid Email Id.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -252,8 +251,10 @@
         <label for="userPhone">Your Phone</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" class="form-control" ng-model="signup.userPhone" name="userPhone" placeholder="Your Phone no." required />
-        <div class="alert alert-warning hide">Enter Phone Number.</div>
+        {{form.person2_phone(class_='form-control', placeholder="Your Phone no.")}}
+        {% if form.person2_phone.errors %}
+        <div class="alert alert-warning ">Enter Phone Number.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -268,8 +269,10 @@
         <label for="aboutYou">Please explain briefly the impact that your organisation’s work is having on children / community it is serving .</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="signup.aboutYou" name="aboutYou" required></textarea>
-        <div class="alert alert-warning hide">Share how childern are affected with your work.</div>
+        {{form.org_intro(class_='form-control')}}
+        {% if form.org_intro.errors %}
+        <div class="alert alert-warning">Share how childern are affected with your work.</div>
+        {% endif %}
       </div>
     </div>
 
@@ -279,62 +282,67 @@
         <label for="childrenNumber">Number of children that you/your organization have impacted since commencement / impacts currently</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" required class="form-control" ng-model="signup.childrenNumber" name="childrenNumber" placeholder="Number of Children that you / your organization impacts" />
-        <div class="alert alert-warning hide">Enter number of children being impacted.</div>
+        {{form.total_impact_on_children(class_='form-control', placeholder="Number of Children that you / your organization impacts")}}
+        {% if form.total_impact_on_children.errors %}
+        <div class="alert alert-warning">Enter number of children being impacted.</div>
+        {% endif %}
       </div>
     </div>
 
     <div class="form-group row age">
       <div class="col-xs-4">
-        <label for="age">Age group of children you impact</label>
+        <label for="age_group_of_children">Age group of children you impact</label>
       </div>
       <div class="col-xs-8">
-        <input type="text" required class="form-control" ng-model="signup.age" name="age" placeholder="Age group of children you impact" />
-        <div class="alert alert-warning hide">Enter age group of childern</div>
+        {{form.age_group_of_children(class_='form-control', placeholder="Age group of children you impact")}}
+        {% if form.age_group_of_children.errors %}
+        <div class="alert alert-warning">Enter age group of children.</div>
+        {% endif %}
       </div>
     </div>
 
 
-    <div class="form-group row">
-      <div class="col-xs-12">
-        <label for="age">Do you/your organization do any work for following (check all that apply):<strong>*</strong></label>
-        <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in Rural areas">
-            Children in Rural areas
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in low income Urban area">
-            Children in low income Urban area
-          </label>
-        </div>
+    <!-- <div class="form-group row"> -->
+    <!--   <div class="col-xs-12"> -->
+    <!--     <label for="age">Do you/your organization do any work for following (check all that apply):<strong>*</strong></label> -->
+    <!--     <div class="alert alert-warning  alertleft hide">Please select any one option below.</div> -->
 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children living in tribal areas">
-            Children living in tribal areas
-          </label>
-        </div>
+        <!-- <div class="checkbox"> -->
+        <!--   <label> -->
+        <!--     <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in Rural areas"> -->
+        <!--     Children in Rural areas -->
+        <!--   </label> -->
+        <!-- </div> -->
+        <!-- <div class="checkbox"> -->
+        <!--   <label> -->
+        <!--     <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in low income Urban area"> -->
+        <!--     Children in low income Urban area -->
+        <!--   </label> -->
+        <!-- </div> -->
 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children  with special needs ">
-            Children  with special needs
-          </label>
-        </div>
+        <!-- <div class="checkbox"> -->
+        <!--   <label> -->
+        <!--     <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children living in tribal areas"> -->
+        <!--     Children living in tribal areas -->
+        <!--   </label> -->
+        <!-- </div> -->
 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children who are  differently abled ">
-            Children who are  differently abled
-          </label>
-        </div>
+        <!-- <div class="checkbox"> -->
+        <!--   <label> -->
+        <!--     <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children  with special needs "> -->
+        <!--     Children  with special needs -->
+        <!--   </label> -->
+        <!-- </div> -->
 
-      </div>
-    </div>
+        <!-- <div class="checkbox"> -->
+        <!--   <label> -->
+        <!--     <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children who are  differently abled "> -->
+        <!--     Children who are  differently abled -->
+        <!--   </label> -->
+        <!-- </div> -->
+
+    <!--   </div> -->
+    <!-- </div> -->
   </div><!--well-->
 </section>
 {% endblock %}
