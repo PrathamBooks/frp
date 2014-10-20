@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+import uuid
 from flask import (render_template,
                    g,
                    url_for,
@@ -54,10 +56,19 @@ def signup():
 # @app.route('/signup/beneficary/')
 # def beneficiary_signup():
 #     form = BeneficarySignupForm()
-#     import ipdb;ipdb.set_trace()
 #     return render_template(
 #         'signup_as_beneficary_step{}.html'.format(1),
 #         form=form)
+
+def save_file_to_disk(file_object):
+    if not file_object:
+        return None
+    directory = os.path.join(app.config['UPLOAD_DIRECTORY'], uuid.uuid4().hex)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    file_path = os.path.join(directory, file_object.filename)
+    file_object.save(file_path)
+    return file_path
 
 
 class SignupAsBeneficary(views.MethodView):
@@ -66,12 +77,14 @@ class SignupAsBeneficary(views.MethodView):
         accepted_keys = [
             'beneficary_signup_step{}_data'.format(step-1),
             'beneficary_signup_step{}_data'.format(step)]
-        if accepted_keys[0] in session or accepted_keys[1] in session:
+        if step == 1 or accepted_keys[0] in session or accepted_keys[1] in session:
             return
+        if step == 2:
+            return url_for('signup_as_beneficary', step=1)
 
         for st in range(step-1, 0, -1):
             key = 'beneficary_signup_step{}_data'.format(st)
-            if key in session:
+            if key in session or st == 1:
                 url = url_for('signup_as_beneficary', step=st+1)
                 return url
 
@@ -79,53 +92,46 @@ class SignupAsBeneficary(views.MethodView):
     def get(self, step=1):
         if step not in range(1, 5):
             step = 1
-
         redirect_url = self.validate_and_get_redirect_step(step)
         if redirect_url:
             return redirect(redirect_url)
 
-        form = beneficiary_signup_forms.BeneficarySignupForm1()
+        form = getattr(
+            beneficiary_signup_forms,
+            "BeneficarySignupForm{}".format(step))(request.form)
+        if session.get('beneficary_signup_step{}_data'.format(step)):
+            # form.data = session.get('beneficary_signup_step{}_data'.format(step))
+            pass
+
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),
-            form=form)
+            form=form, step=step)
 
     @login_required
     def post(self, step=1):
         if step not in range(1, 5):
             step = 1
 
-        form = beneficiary_signup_forms.BeneficarySignupForm1(request.form)
+        form = getattr(
+            beneficiary_signup_forms,
+            "BeneficarySignupForm{}".format(step))(request.form)
         if form.validate():
-            session['beneficary_signup_step{}_data'.format(step)] = form.data
+            data = form.data
+            if step == 3:
+                image_file = request.files.get('image_file')
+                video_file = request.files.get('video_file')
+                data['image_file_path'] = save_file_to_disk(image_file)
+                data['video_file_path'] = save_file_to_disk(video_file)
+
+            session['beneficary_signup_step{}_data'.format(step)] = data
             return redirect(url_for('signup_as_beneficary', step=step+1))
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),
-            form=form)
+            form=form, step=step)
 
 app.add_url_rule(
     '/signup/beneficary/<int:step>/',
     view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
-
-
-# class SignupAsBeneficaryTemp(views.MethodView):
-#     @login_required
-#     def get(self):
-#         form = beneficiary_signup_forms.BeneficarySignupForm1()
-#         return render_template('sigup_as_beneficary_old.html', form=form)
-
-#     @login_required
-#     def post(self):
-#         form = beneficiary_signup_forms.BeneficarySignupForm1(request.form)
-#         if form.validate():
-#             result = signup_service.create_beneficary(form)
-#             if not result['error']:
-#                 return redirect(url_for('org_info'))
-#             else:
-#                 flash('Oops something went wrong, please try again')
-#         return render_template('sigup_as_beneficary_old.html', form=form)
-
-# app.add_url_rule('/signup/beneficarytemp',
-#                  view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
 
 
 @app.route('/signup/donor', methods=['GET', 'POST'])

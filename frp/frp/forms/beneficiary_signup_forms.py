@@ -2,7 +2,9 @@
 
 import wtforms
 from ..models import (
-    ORG_STATUS_CHOICES, is_org_email_exists, is_org_name_exists)
+    ORG_STATUS_CHOICES, )
+
+from wtforms import widgets
 
 
 BENEFICARY_CATEGORY = [
@@ -106,12 +108,11 @@ class BeneficarySignupForm1(wtforms.Form):
         validators=[wtforms.validators.Optional(),
                     wtforms.validators.Length(max=15)])
 
-    from wtforms.widgets import TextArea, CheckboxInput
     org_intro = wtforms.TextField(
         label='Please explain briefly the impact that your organisation\'s work is having on children / community it is serving .',
         validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=500)],
-        widget=TextArea()
+        widget=widgets.TextArea()
     )
     total_impact_on_children = wtforms.IntegerField(
         label='Number of children that you/your organization have impacted since commencement / impacts currently',
@@ -128,5 +129,151 @@ class BeneficarySignupForm1(wtforms.Form):
     #     choices=ORG_WORK_CHOICES)
 
 
-class GetStartedBeneficarySignupForm(wtforms.Form):
-    pass
+PRODUCT_OFFERING_CHOICES = [
+    (1, "Books for library"),
+    (2, "Library in a Classroom/Books in a Bag"),
+    (3, "Books as Prize/Give-Aways"),
+    (4, "Books for reading sessions"),
+]
+LANGUAGE_CHOICES = [
+    ("", "Select any Language"),
+    ("Hindi", "Hindi"),
+    ("English", "English"),
+    ("Marathi", "Marathi"),
+    ("Telugu", "Telugu"),
+    ("Gujrathi", "Gujrathi"),
+    ("Malayalam", "Malayalam")
+]
+
+
+class BeneficarySignupForm2(wtforms.Form):
+    product_offerings = wtforms.SelectMultipleField(
+        label='Do you/your organization do any work for following (check all that apply)',
+        validators=[wtforms.validators.Required()],
+        coerce=int,
+        option_widget=widgets.CheckboxInput(),
+        widget=widgets.ListWidget(prefix_label=False),
+        choices=PRODUCT_OFFERING_CHOICES)
+
+    product_offerings1 = wtforms.TextField()
+    product_offerings2 = wtforms.TextField()
+    product_offerings3 = wtforms.TextField()
+    product_offerings4 = wtforms.TextField()
+
+    language1 = wtforms.SelectField(
+        validators=[wtforms.validators.Required()],
+        choices=LANGUAGE_CHOICES)
+    begining_to_read1 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    learning_to_read1 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    reading_independently1 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    reading_proficiently1 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+
+    language2 = wtforms.SelectField(
+        choices=LANGUAGE_CHOICES)
+    begining_to_read2 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    learning_to_read2 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    reading_independently2 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    reading_proficiently2 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+
+    language3 = wtforms.SelectField(
+        choices=LANGUAGE_CHOICES)
+    begining_to_read3 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    learning_to_read3 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    reading_independently3 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+    reading_proficiently3 = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()])
+
+    gross_total = wtforms.IntegerField()
+
+    def validate_product_offerings(self, field):
+        for val in field.data:
+            num_field = getattr(self, "product_offerings{}".format(val))
+            if not num_field.data or not num_field.data.isdigit():
+                raise wtforms.validators.ValidationError(
+                    "Must enter the number of books for the selected option!")
+
+    def validate_gross_total(self, field):
+        num_product_offerings = 0
+        if self.product_offerings1.data:
+            num_product_offerings = num_product_offerings + int(
+                self.product_offerings1.data)
+        if self.product_offerings2.data:
+            num_product_offerings = num_product_offerings + int(
+                self.product_offerings1.data)
+        if self.product_offerings3.data:
+            num_product_offerings = num_product_offerings + int(
+                self.product_offerings1.data)
+        if self.product_offerings4.data:
+            num_product_offerings = num_product_offerings + int(
+                self.product_offerings1.data)
+
+        num_books_across_languages = 0
+
+        if self.begining_to_read1.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.begining_to_read1.data
+        if self.learning_to_read1.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.learning_to_read1.data
+        if self.reading_independently1.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.reading_independently1.data
+        if self.reading_proficiently1.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.reading_proficiently1.data
+
+        if self.begining_to_read2.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.begining_to_read2.data
+        if self.learning_to_read2.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.learning_to_read2.data
+        if self.reading_independently2.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.reading_independently2.data
+        if self.reading_proficiently2.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.reading_proficiently2.data
+
+        if self.begining_to_read3.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.begining_to_read3.data
+        if self.learning_to_read3.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.learning_to_read3.data
+        if self.reading_independently3.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.reading_independently3.data
+        if self.reading_proficiently3.data:
+            num_books_across_languages = num_books_across_languages \
+                + self.reading_proficiently3.data
+
+        if num_books_across_languages != num_product_offerings:
+            raise wtforms.validators.ValidationError(
+                "The Gross total is not equal to the number of product offerings")
+
+
+class BeneficarySignupForm3(wtforms.Form):
+    image_file = wtforms.FileField()
+    video_file = wtforms.FileField()
+    state = wtforms.TextField()
+    project_title = wtforms.TextField()
+    short_description = wtforms.TextField()
+    org_intro = wtforms.TextField()
+    impact_society = wtforms.TextField()
+    funds_utilize = wtforms.TextField()
+
+
+class BeneficarySignupForm4(wtforms.Form):
+    campaign_team = wtforms.TextField()

@@ -14,7 +14,8 @@
     <h3>Image upload</h3>
     <div class="alert alert-warning  alertleft hide">Please upload a valid image related to the campaign.</div>
     <div class="col-md-12">
-      <input type="file" ng-model="signup.imageUpload" name="imageUpload" class="img-responsive img-thumbnail img-rounded btn btnFile" required>
+      {{ form.image_file(class_="img-responsive img-thumbnail img-rounded btn btnFile")}}
+      <!-- <input type="file" ng-model="signup.imageUpload" name="imageUpload" class="img-responsive img-thumbnail img-rounded btn btnFile" required> -->
       <!--<img src="..." alt="..." class="img-responsive img-thumbnail img-rounded" width="220px" height="194px" required />-->
       <p class="help-block">PNG, JPG, or GIF 220x190px cropped to 90x90 on campaign page.</p>
       <div class="alert alert-warning hide">Select an image for your campaign.</div>
@@ -24,7 +25,8 @@
   <div class="well upload">
     <h3>Video Upload</h3>
     <!--<button type="button" class="btn btn-primary">Add Video</button>-->
-    <input type="file" ng-model="signup.addVideo" name="addVideo" class="btn btnFile">
+    {{ form.video_file(class_="img-responsive img-thumbnail img-rounded btn btnFile")}}
+    <!-- <input type="file" ng-model="signup.addVideo" name="addVideo" class="btn btnFile"> -->
     <p class="help-block">Mpeg file not more than 5 mb and 30 seconds.</p>
     <video class="hide"></video>
     <div class="alert alert-warning hide"> Not valid file.</div>
@@ -66,7 +68,7 @@
              This link will work for the city of respective states-->
       </div>
       <div class="col-xs-8">
-        <select class="form-control" ng-model="signup.stateCity" name="stateCity" required>
+        <select class="form-control" ng-model="signup.stateCity" name="state">
           <option value="2169" >Andhra Pradesh</option>
           <option value="2196" >Arunachal Pradesh</option>
           <option value="2170" >Assam</option>
@@ -128,7 +130,7 @@
         </label>
       </div>
       <div class="col-xs-8">
-        <input class="form-control" ng-model="signup.projectTitle" name="projectTitle" type="text" required>
+        <input class="form-control" ng-model="signup.projectTitle" name="project_title" type="text" required>
         <div class="alert alert-warning  alertleft hide">Please give a suitable title to your campaign</div>
         <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 80 characters)</p>
       </div>
@@ -153,7 +155,7 @@
       </div>
 
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="signup.description" name="description" required></textarea>
+        <textarea class="form-control" rows="3" ng-model="signup.description" name="short_description" required></textarea>
         <div class="alert alert-warning  alertleft hide">Enter a small description about your project</div>
         <p class="help-block">Brief description of your project for which you are seeking funding</p>
       </div>
@@ -197,7 +199,7 @@
         <label for="orgIntro">Who are you ?</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="signup.projectValue" name="orgIntro" required></textarea>
+        <textarea class="form-control" rows="3" ng-model="signup.projectValue" name="org_intro" required></textarea>
         <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
         <p class="help-block">Introduce your organization.</p>
       </div>
@@ -208,7 +210,7 @@
         <label for="impactStory">What work do you do and how does it impact society ?</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="" name="impactStory" required></textarea>
+        <textarea class="form-control" rows="3" ng-model="" name="impact_society" required></textarea>
         <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
         <p class="help-block">Share your work and  Impact stories here.</p>
       </div>
@@ -219,7 +221,7 @@
         <label for="fundsUtilize">How will the funds be utilized ?</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="" name="fundsUtilize" required></textarea>
+        <textarea class="form-control" rows="3" ng-model="" name="funds_utilize" required></textarea>
         <div class="alert alert-warning  alertleft hide">Explain the way you are utilizing the funda</div>
         <p class="help-block">Answer the need for this funding and the way in which you plan to utilize these funds.</p>
       </div>

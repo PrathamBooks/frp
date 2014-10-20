@@ -17,7 +17,9 @@
     </div>
 
     <div class="col-xs-8">
-      <input type="text" class="form-control disabled" placeholder="This will have comma separated Indiviual email ids" /> <!-- Wani asked to add input box instead of select tag -->
+      {{ form.campaign_team(class_="form-control", placeholder="This will have comma separated Indiviual email ids")}}
+      <!-- <input type="text" class="form-control disabled" placeholder="This will have comma separated Indiviual email ids" /> -->
+      <!-- Wani asked to add input box instead of select tag -->
       <p class="help-block">
         Add the email ids of other people who will be running the campaign along with you.
         Doing this is helpful as multiple people can keep track of your campaign and even if anyone is on a leave,

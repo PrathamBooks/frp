@@ -4,25 +4,27 @@
   <div class="row">
     <h2 class="affix">Beneficiary Form</h2>
     <div id="sidebar" class="list-group col-xs-6 col-sm-3 affix"  role="navigation">
-      <a href="#step1" class="list-group-item active">Step 1 : Getting To Know You </a>
-      <a  class="list-group-item" href="#step2">Step 2 : Get Started</a>
-      <a  class="list-group-item" href="#step3">Step 3 : Set-up Your Campaign</a>
-      <a  class="list-group-item" href="#step4">Step 4 : Get Funded</a>
+      <a href="#step1" class="list-group-item {% if step == 1%}active{% endif %}">Step 1 : Getting To Know You </a>
+      <a  class="list-group-item {% if step == 2%}active{% endif %}" href="#step2">Step 2 : Get Started</a>
+      <a  class="list-group-item {% if step == 3%}active{% endif %}" href="#step3">Step 3 : Set-up Your Campaign</a>
+      <a  class="list-group-item {% if step == 4%}active{% endif %}" href="#step4">Step 4 : Get Funded</a>
     </div>
 
     <div ng-controller="signupController" class="col-xs-12 col-sm-9"><!-- ng-controller=signupController -->
 
-      <form role="form" novalidate class="col-md-12" method="post" action="">
+      <form role="form" novalidate class="col-md-12" method="post" action="" enctype="multipart/form-data">
 
         <div id="internalContent" class="row beneficiary">
           <div  id="internalCampaign" class="row ">
             <div class="col-md-12">
               {% block signup_as_beneficary_step %}
               {% endblock %}
-
+              {% if step != 4%}
               <button type="submit" id="next" class="btn">Next</button>
+              {% endif %}
+              {% if step != 1%}
               <button type="button" id="previous" class="btn">Previous</button>
-
+              {% endif %}
             </div><!--col-md-12 -->
           </div><!--Internal Campaign row -->
         </div><!--/internalContent-->
