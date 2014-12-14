@@ -23,7 +23,7 @@
               <button type="submit" id="next" class="btn">Next</button>
               {% endif %}
               {% if step != 1%}
-              <button type="button" id="previous" class="btn">Previous</button>
+              <button type="button" id="previous" onclick="gotoBeneficiaryStep({{ step - 1 }})" class="btn">Previous</button>
               {% endif %}
             </div><!--col-md-12 -->
           </div><!--Internal Campaign row -->

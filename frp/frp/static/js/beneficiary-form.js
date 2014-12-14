@@ -4,10 +4,7 @@ function addNumberOfBooks(col_num) {
     $('.js-no-books-col-' + col_num).each( function ( index,  el ) {
         sum += parseInt(el.value) ? parseInt(el.value) : 0;
     } );
-    console.log(sum);
     $('#js-total-books-col-' + col_num).val(sum);
-
-    updateGrossTotal();
 }
 
 function updateGrossTotal() {
@@ -22,14 +19,19 @@ function updateGrossTotal() {
 
 function displayTotalCount() {
     $('.js-no-books-col-1').on('change keyup paste', function () {
-        addNumberOfBooks('1');
-    });
+        addNumberOfBooks('1'); updateGrossTotal();
+    }).change();
     $('.js-no-books-col-2').on('change keyup paste', function () {
-        addNumberOfBooks('2');
-    });
+        addNumberOfBooks('2'); updateGrossTotal();
+    }).change();
     $('.js-no-books-col-3').on('change keyup paste', function () {
-        addNumberOfBooks('3');
-    });
+        addNumberOfBooks('3'); updateGrossTotal();
+    }).change();
 }
 
 $(document).ready( displayTotalCount );
+
+
+function gotoBeneficiaryStep(step) {
+    window.location = "/signup/beneficary/" + step + "/";
+}

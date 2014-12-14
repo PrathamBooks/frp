@@ -100,8 +100,14 @@ class SignupAsBeneficary(views.MethodView):
             beneficiary_signup_forms,
             "BeneficarySignupForm{}".format(step))(request.form)
         if session.get('beneficary_signup_step{}_data'.format(step)):
-            # form.data = session.get('beneficary_signup_step{}_data'.format(step))
-            pass
+            session_data = session.get(
+                'beneficary_signup_step{}_data'.format(step)
+            )
+            for field_name, value in session_data.items():
+                field = getattr(form, field_name, None)
+                if field:
+                    field.data = value
+            print session.get('beneficary_signup_step{}_data'.format(step))
 
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),
