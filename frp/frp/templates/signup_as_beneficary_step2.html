@@ -157,17 +157,17 @@
       <div class="col-xs-8">
         <div class="col-xs-4">
           <span class="level1">
-            {{ form.begining_to_read1(class_="form-control", placeholder="No. of books") }}
+            {{ form.begining_to_read1(class_="form-control js-no-books-col-1", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level1">
-            {{ form.begining_to_read2(class_="form-control", placeholder="No. of books") }}
+            {{ form.begining_to_read2(class_="form-control js-no-books-col-2", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level1">
-            {{ form.begining_to_read3(class_="form-control", placeholder="No. of books") }}
+            {{ form.begining_to_read3(class_="form-control js-no-books-col-3", placeholder="No. of books") }}
           </span>
         </div>
       </div><!--End of Level 1 -->
@@ -183,17 +183,17 @@
       <div class="col-xs-8">
         <div class="col-xs-4">
           <span class="level2">
-            {{ form.learning_to_read1(class_="form-control", placeholder="No. of books") }}
+            {{ form.learning_to_read1(class_="form-control js-no-books-col-1", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level2">
-            {{ form.learning_to_read2(class_="form-control", placeholder="No. of books") }}
+            {{ form.learning_to_read2(class_="form-control js-no-books-col-2", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level2">
-            {{ form.learning_to_read3(class_="form-control", placeholder="No. of books") }}
+            {{ form.learning_to_read3(class_="form-control js-no-books-col-3", placeholder="No. of books") }}
           </span>
         </div>
       </div><!--End of Level 2 -->
@@ -208,17 +208,17 @@
       <div class="col-xs-8">
         <div class="col-xs-4">
           <span class="level3">
-            {{ form.reading_independently1(class_="form-control", placeholder="No. of books") }}
+            {{ form.reading_independently1(class_="form-control js-no-books-col-1", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level3">
-            {{ form.reading_independently2(class_="form-control", placeholder="No. of books") }}
+            {{ form.reading_independently2(class_="form-control js-no-books-col-2", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level3">
-            {{ form.reading_independently3(class_="form-control", placeholder="No. of books") }}
+            {{ form.reading_independently3(class_="form-control js-no-books-col-3", placeholder="No. of books") }}
           </span>
         </div>
       </div><!--End of Level 3 -->
@@ -233,17 +233,17 @@
       <div class="col-xs-8">
         <div class="col-xs-4">
           <span class="level4">
-            {{ form.reading_proficiently1(class_="form-control", placeholder="No. of books") }}
+            {{ form.reading_proficiently1(class_="form-control js-no-books-col-1", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level4">
-            {{ form.reading_proficiently2(class_="form-control", placeholder="No. of books") }}
+            {{ form.reading_proficiently2(class_="form-control js-no-books-col-2", placeholder="No. of books") }}
           </span>
         </div>
         <div class="col-xs-4">
           <span class="level4">
-            {{ form.reading_proficiently3(class_="form-control", placeholder="No. of books") }}
+            {{ form.reading_proficiently3(class_="form-control js-no-books-col-3", placeholder="No. of books") }}
           </span>
         </div>
       </div><!--End of Level 4 -->
@@ -253,13 +253,13 @@
       </div>
       <div class="col-xs-8">
         <div class="col-xs-4">
-          <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books" readonly /></span>
+          <span class="level5"><input type="text" id="js-total-books-col-1" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books" readonly /></span>
         </div>
         <div class="col-xs-4">
-          <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
+          <span class="level5"><input type="text" id="js-total-books-col-2" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
         </div>
         <div class="col-xs-4">
-          <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
+          <span class="level5"><input type="text" id="js-total-books-col-3" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
         </div>
       </div><!--End of Total -->
 
@@ -273,7 +273,7 @@
         </div>
         <div class="col-xs-8">
           <div class="col-xs-12">
-            <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Gross Total of Books" readonly/></span>
+            <span class="level5"><input type="text" id="js-books-gross-total" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Gross Total of Books" readonly/></span>
           </div>
         </div><!--Gross Total -->
 
