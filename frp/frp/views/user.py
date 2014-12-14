@@ -109,9 +109,20 @@ class SignupAsBeneficary(views.MethodView):
                     field.data = value
             print session.get('beneficary_signup_step{}_data'.format(step))
 
+        preview_data = {}
+        if step == 4:
+            preview_data = session.get('beneficary_signup_step1_data')
+            preview_data.update(
+                session.get('beneficary_signup_step2_data', {}))
+            preview_data.update(
+                session.get('beneficary_signup_step3_data', {}))
+            preview_data.update(
+                session.get('beneficary_signup_step4_data', {}))
+            print preview_data
+
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),
-            form=form, step=step)
+            form=form, step=step, preview_data=preview_data)
 
     @login_required
     def post(self, step=1):

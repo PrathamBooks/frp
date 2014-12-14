@@ -28,34 +28,34 @@
     </div>
   </div><!--well-->
 
-  <div class="well">
-    <div class="row form-group">
-      <div class="col-xs-12">
-        <h3>Media Gallery</h3>
-        <p>
-          Add more pictures/video here.
-          Donors would be more interested in your campaign as they see more of your work.
-        </p>
+  <!-- <div class="well"> -->
+  <!--   <div class="row form-group"> -->
+  <!--     <div class="col-xs-12"> -->
+  <!--       <h3>Media Gallery</h3> -->
+  <!--       <p> -->
+  <!--         Add more pictures/video here. -->
+  <!--         Donors would be more interested in your campaign as they see more of your work. -->
+  <!--       </p> -->
 
-        <div class="btn-group btnMedia disabled" data-toggle="buttons">
-          <label class="btn" disabled="">
-            <input type="radio" ng-model="signup.options" name="options" value="Add Photos" id="addPhoto"> Add Photos
-          </label>
-          <label class="btn" disabled="">
-            <input type="radio" ng-model="signup.options" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums
-          </label>
-          <label class="btn" disabled="">
-            <input type="radio" ng-model="signup.options" name="options" value="Add Videos" id="addVideo"> Add Videos
-          </label>
-        </div>
+  <!--       <div class="btn-group btnMedia disabled" data-toggle="buttons"> -->
+  <!--         <label class="btn" disabled=""> -->
+  <!--           <input type="radio" ng-model="signup.options" name="options" value="Add Photos" id="addPhoto"> Add Photos -->
+  <!--         </label> -->
+  <!--         <label class="btn" disabled=""> -->
+  <!--           <input type="radio" ng-model="signup.options" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums -->
+  <!--         </label> -->
+  <!--         <label class="btn" disabled=""> -->
+  <!--           <input type="radio" ng-model="signup.options" name="options" value="Add Videos" id="addVideo"> Add Videos -->
+  <!--         </label> -->
+  <!--       </div> -->
 
-      </div>
+  <!--     </div> -->
 
-      <div class="col-xs-8">
+  <!--     <div class="col-xs-8"> -->
 
-      </div>
-    </div>
-  </div><!--well-->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </div><\!--well-\-> -->
   <!-- Preview -->
 
   <div class="well">
@@ -81,7 +81,7 @@
               <h5>Category best describes you.</h5>
             </div>
             <div class="col-xs-6">
-              <label>Category</label>
+              <label>{{ preview_data.category }}</label>
             </div>
           </div> <!--row-->
 
@@ -90,28 +90,28 @@
               <h5>Name of the Organisation/Individual</h5>
             </div>
             <div class="col-xs-6">
-              <label>Name of the Organisation/Individual</label>
+              <label>{{ preview_data.organization_name }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Organisation Status</h5>
             </div>
             <div class="col-xs-6">
-              <label>Organisation Status</label>
+              <label>{{ preview_data.organization_status }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Head Office Address</h5>
             </div>
             <div class="col-xs-6">
-              <label>Head Office Address</label>
+              <label>{{ preview_data.head_off_address }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Head Office Phone Number </h5>
             </div>
             <div class="col-xs-6">
-              <label>Head Office Phone Number </label>
+              <label>{{ preview_data.head_off_phone_number }}</label>
             </div>
 
 
@@ -119,7 +119,7 @@
               <h5>Info Email ID</h5>
             </div>
             <div class="col-xs-6">
-              <label>Info Email ID</label>
+              <label>{{ preview_data.info_email }}</label>
             </div>
           </div> <!--row-->
 
@@ -139,14 +139,14 @@
               <h5>Name</h5>
             </div>
             <div class="col-xs-6">
-              <label>Name</label>
+              <label>{{ preview_data.person1_name }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Position in Organisation</h5>
             </div>
             <div class="col-xs-6">
-              <label>Position in Organisation</label>
+              <label>{{ preview_data.person1_position }}</label>
             </div>
 
 
@@ -154,30 +154,30 @@
               <h5>Email Id</h5>
             </div>
             <div class="col-xs-6">
-              <label>Email Id</label>
+              <label>{{ preview_data.person1_email }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Phone</h5>
             </div>
             <div class="col-xs-6">
-              <label>Phone</label>
+              <label>{{ preview_data.person1_phone }}</label>
             </div>
 
             <!--Details of person 2!-->
-            <div class="col-xs-12"><h5>Person 1</h5></div>
+            <div class="col-xs-12"><h5>Person 2</h5></div>
             <div class="col-xs-6">
               <h5>Name</h5>
             </div>
             <div class="col-xs-6">
-              <label>Name</label>
+              <label>{{ preview_data.person2_name }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Position in Organisation</h5>
             </div>
             <div class="col-xs-6">
-              <label>Position in Organisation</label>
+              <label>{{ preview_data.person2_position }}</label>
             </div>
 
 
@@ -185,14 +185,14 @@
               <h5>Email Id</h5>
             </div>
             <div class="col-xs-6">
-              <label>Email Id</label>
+              <label>{{ preview_data.person2_email }}</label>
             </div>
 
             <div class="col-xs-6">
               <h5>Phone</h5>
             </div>
             <div class="col-xs-6">
-              <label>Phone</label>
+              <label>{{ preview_data.person2_phone }}</label>
             </div>
 
 
@@ -206,7 +206,7 @@
               <h5>Total books selected</h5>
             </div>
             <div class="col-xs-6">
-              <label>Total books selected</label>
+              <label>{{ preview_data.gross_total }}</label>
             </div>
 
 
@@ -223,7 +223,7 @@
               <h5>Project Title</h5>
             </div>
             <div class="col-xs-6">
-              <label>Project Title</label>
+              <label>{{ preview_data.project_title }}</label>
             </div>
           </div> <!--row-->
 
