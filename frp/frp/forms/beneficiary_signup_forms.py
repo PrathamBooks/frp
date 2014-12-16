@@ -277,3 +277,17 @@ class BeneficarySignupForm3(wtforms.Form):
 
 class BeneficarySignupForm4(wtforms.Form):
     campaign_team = wtforms.TextField()
+
+
+def get_category_text(category_id):
+    for category in BENEFICARY_CATEGORY:
+        if category_id == category[0]:
+            return category[1]
+    return ''
+
+
+def get_org_status_text(category_id):
+    for category in ORG_STATUS_CHOICES:
+        if category_id == category[0]:
+            return category[1]
+    return ''

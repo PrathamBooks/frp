@@ -12,29 +12,23 @@ from wtforms.validators import DataRequired
 
 from .. import app
 from .. import models
+from ..service.decorators import login_required_admin
+from ..service.campaign import get_campaign_rendering_data
 
 
 class IndexView(AdminIndexView):
     @expose("/")
+    @login_required_admin
     def index(self):
-        return self.render('admin_index.html')
+        campaign_data = get_campaign_rendering_data()
+        return self.render('admin_index.html', campaign_data=campaign_data)
 
 
 class BaseAuthModelView(ModelView):
     def is_accessible(self):
         return hasattr(g, "lastuserinfo") and g.lastuserinfo
-    
-    
+
+
 
 admin = Admin(app, name="Pratham Fundraiser", index_view = IndexView(name="Home"))
 admin.add_view(BaseAuthModelView(models.User, models.db.session, endpoint = "user"))
-admin.add_view(BaseAuthModelView(models.Campaign, models.db.session, endpoint = "campaign" ))
-admin.add_view(BaseAuthModelView(models.Category, models.db.session, endpoint = "category" ))
-admin.add_view(BaseAuthModelView(models.Image, models.db.session, endpoint = "image" ))
-
-
-
-
-
-
-

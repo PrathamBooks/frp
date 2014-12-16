@@ -19,6 +19,7 @@ from ..forms import (DonorSignupForm,
                      ProfileForm)
 from ..forms import beneficiary_signup_forms
 from ..service import signup as signup_service
+from ..service import campaign as campaign_service
 from ..service import user as user_service
 from ..service.decorators import login_required
 
@@ -107,7 +108,6 @@ class SignupAsBeneficary(views.MethodView):
                 field = getattr(form, field_name, None)
                 if field:
                     field.data = value
-            print session.get('beneficary_signup_step{}_data'.format(step))
 
         preview_data = {}
         if step == 4:
@@ -118,6 +118,21 @@ class SignupAsBeneficary(views.MethodView):
                 session.get('beneficary_signup_step3_data', {}))
             preview_data.update(
                 session.get('beneficary_signup_step4_data', {}))
+            preview_data.update(
+                {
+                    'category_text': beneficiary_signup_forms.get_category_text(
+                        preview_data.get('category')
+                    ),
+                    'organization_status_text': beneficiary_signup_forms
+                    .get_org_status_text(
+                        preview_data.pop('organization_status')
+                    ),
+                    'gross_total': preview_data.get('product_offerings1', 0) +
+                    preview_data.get('product_offerings2', 0) +
+                    preview_data.get('product_offerings3', 0) +
+                    preview_data.get('product_offerings4', 0)
+                }
+            )
             print preview_data
 
         return render_template(
@@ -133,14 +148,32 @@ class SignupAsBeneficary(views.MethodView):
             beneficiary_signup_forms,
             "BeneficarySignupForm{}".format(step))(request.form)
         if form.validate():
-            data = form.data
+            form_data = form.data
             if step == 3:
                 image_file = request.files.get('image_file')
                 video_file = request.files.get('video_file')
-                data['image_file_path'] = save_file_to_disk(image_file)
-                data['video_file_path'] = save_file_to_disk(video_file)
+                form_data['image_file_path'] = save_file_to_disk(image_file)
+                form_data['video_file_path'] = save_file_to_disk(video_file)
 
-            session['beneficary_signup_step{}_data'.format(step)] = data
+            session['beneficary_signup_step{}_data'.format(step)] = form_data
+
+            if step == 4:
+                data = session.get('beneficary_signup_step1_data')
+                data.update(
+                    session.get('beneficary_signup_step2_data', {}))
+                data.update(
+                    session.get('beneficary_signup_step3_data', {}))
+                data.update(
+                    session.get('beneficary_signup_step4_data', {}))
+                data.update(
+                    {
+                        'gross_total': data.get('product_offerings1', 0) +
+                        data.get('product_offerings2', 0) +
+                        data.get('product_offerings3', 0) +
+                        data.get('product_offerings4', 0)
+                    }
+                )
+                campaign_service.create_campaign_from_webform(data=data)
             return redirect(url_for('signup_as_beneficary', step=step+1))
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),

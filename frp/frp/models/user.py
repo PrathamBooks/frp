@@ -48,6 +48,7 @@ class User(BaseMixin, db.Model):
     pw_hash = db.Column(db.String(80), nullable=True)
     status = db.Column(
         db.SmallInteger, nullable=False, default=USER_STATUS.ACTIVE)
+    is_staff = db.Column(db.Boolean, default=False)
 
     # One-one relationship
     userinfo = db.relationship("UserInfo", backref=db.backref("user"),
