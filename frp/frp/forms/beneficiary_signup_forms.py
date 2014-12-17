@@ -56,7 +56,7 @@ class BeneficarySignupForm1(wtforms.Form):
                                      wtforms.validators.URL(),
                                      wtforms.validators.Length(max=500)])
     facebook_page = wtforms.TextField(
-        label='facebook', validators=[wtforms.validators.Optional(),
+        label='facebook_page', validators=[wtforms.validators.Optional(),
                                       wtforms.validators.URL(),
                                       wtforms.validators.Length(max=500)])
     blog_address = wtforms.TextField(

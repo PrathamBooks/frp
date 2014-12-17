@@ -54,8 +54,8 @@ class DonorSignupForm(wtforms.Form):
         username = field.data.strip()
 
         # Check if the username is valid
-        if not coaster.valid_username(username):
-            raise wtforms.ValidationError('Invalid username.')
+        # if not coaster.valid_username(username):
+        #     raise wtforms.ValidationError('Invalid username.')
 
         # Check username is in db.
         if is_username_exists(username):

@@ -115,6 +115,10 @@
       </div>
       <div class="col-xs-8">
         {{form.facebook_page(class_='form-control', placeholder="Facebook Page")}}
+        {% if form.facebook_page.errors %}
+        <div class="alert alert-warning">Invalid link.</div>
+        {% endif %}
+
       </div>
     </div>
 
