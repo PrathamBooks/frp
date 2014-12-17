@@ -22,6 +22,22 @@ ORG_WORK_CHOICES = [
     (5, 'Children who are differently abled')]
 
 
+STATES = [
+    ('{}'.format(index), state) for index, state in enumerate(
+        [
+            'Andhra Pradesh', 'Arunachal Pradesh', 'Assam',
+            'Bihar', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat',
+            'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir',
+            'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh',
+            'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+            'Nagaland', 'Orissa', 'Punjab', 'Rajasthan', 'Sikkim',
+            'Tamil Nadu', 'Tripura', 'UNION TERRITORY', 'Uttar Pradesh',
+            'Uttaranchal', 'West Bengal'
+        ]
+    )
+]
+
+
 class BeneficarySignupForm1(wtforms.Form):
     ##22
     category = wtforms.RadioField(
@@ -267,12 +283,12 @@ class BeneficarySignupForm2(wtforms.Form):
 class BeneficarySignupForm3(wtforms.Form):
     image_file = wtforms.FileField()
     video_file = wtforms.FileField()
-    state = wtforms.TextField()
+    state = wtforms.SelectMultipleField(choices=STATES)
     project_title = wtforms.TextField()
-    short_description = wtforms.TextField()
-    org_intro = wtforms.TextField()
-    impact_society = wtforms.TextField()
-    funds_utilize = wtforms.TextField()
+    short_description = wtforms.TextField(widget=widgets.TextArea())
+    org_intro = wtforms.TextField(widget=widgets.TextArea())
+    impact_society = wtforms.TextField(widget=widgets.TextArea())
+    funds_utilize = wtforms.TextField(widget=widgets.TextArea())
 
 
 class BeneficarySignupForm4(wtforms.Form):

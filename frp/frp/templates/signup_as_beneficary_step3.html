@@ -68,38 +68,7 @@
              This link will work for the city of respective states-->
       </div>
       <div class="col-xs-8">
-        <select class="form-control" ng-model="signup.stateCity" name="state">
-          <option value="2169" >Andhra Pradesh</option>
-          <option value="2196" >Arunachal Pradesh</option>
-          <option value="2170" >Assam</option>
-          <option value="2171" >Bihar</option>
-          <option value="5267" >Chhattisgarh</option>
-          <option value="2174" >Delhi</option>
-          <option value="2199" >Goa</option>
-          <option value="2175" >Gujarat</option>
-          <option value="2176" >Haryana</option>
-          <option value="2177" >Himachal Pradesh</option>
-          <option value="2178" >Jammu and Kashmir</option>
-          <option value="5268" >Jharkhand</option>
-          <option value="2185" >Karnataka</option>
-          <option value="2179" >Kerala</option>
-          <option value="2181" >Madhya Pradesh</option>
-          <option value="2182" >Maharashtra</option>
-          <option value="2183" >Manipur</option>
-          <option value="2184" >Meghalaya</option>
-          <option value="2197" >Mizoram</option>
-          <option value="2186" >Nagaland</option>
-          <option value="2187" >Orissa</option>
-          <option value="2189" >Punjab</option>
-          <option value="2190" >Rajasthan</option>
-          <option value="2195" >Sikkim</option>
-          <option value="2191" >Tamil Nadu</option>
-          <option value="2192" >Tripura</option>
-          <option value="5269" >UNION TERRITORY</option>
-          <option value="2193" >Uttar Pradesh</option>
-          <option value="5259" >Uttaranchal</option>
-          <option value="2194" >West Bengal</option>
-        </select>
+        {{ form.state(class_="form-control") }}
       </div>
       <div class="col-xs-4" style="display:none;" >
         <h3>City</h3>
@@ -113,7 +82,6 @@
         </select>
 
       </div>
-      <button type="button" value="Add State" class="btn btnAdd">Add State</button>
     </div><!--form-group-->
   </div><!--well-->
 
@@ -130,7 +98,7 @@
         </label>
       </div>
       <div class="col-xs-8">
-        <input class="form-control" ng-model="signup.projectTitle" name="project_title" type="text" required>
+        {{ form.project_title(class_="form-control") }}
         <div class="alert alert-warning  alertleft hide">Please give a suitable title to your campaign</div>
         <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 80 characters)</p>
       </div>
@@ -155,7 +123,7 @@
       </div>
 
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="signup.description" name="short_description" required></textarea>
+        {{ form.short_description(class_="form-control") }}
         <div class="alert alert-warning  alertleft hide">Enter a small description about your project</div>
         <p class="help-block">Brief description of your project for which you are seeking funding</p>
       </div>
@@ -199,7 +167,7 @@
         <label for="orgIntro">Who are you ?</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="signup.projectValue" name="org_intro" required></textarea>
+        {{ form.org_intro(class_="form-control") }}
         <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
         <p class="help-block">Introduce your organization.</p>
       </div>
@@ -210,7 +178,7 @@
         <label for="impactStory">What work do you do and how does it impact society ?</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="" name="impact_society" required></textarea>
+        {{ form.impact_society(class_="form-control") }}
         <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
         <p class="help-block">Share your work and  Impact stories here.</p>
       </div>
@@ -221,7 +189,7 @@
         <label for="fundsUtilize">How will the funds be utilized ?</label>
       </div>
       <div class="col-xs-8">
-        <textarea class="form-control" rows="3" ng-model="" name="funds_utilize" required></textarea>
+        {{ form.funds_utilize(class_="form-control") }}
         <div class="alert alert-warning  alertleft hide">Explain the way you are utilizing the funda</div>
         <p class="help-block">Answer the need for this funding and the way in which you plan to utilize these funds.</p>
       </div>

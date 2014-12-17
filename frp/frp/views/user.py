@@ -125,7 +125,7 @@ class SignupAsBeneficary(views.MethodView):
                     ),
                     'organization_status_text': beneficiary_signup_forms
                     .get_org_status_text(
-                        preview_data.pop('organization_status')
+                        preview_data.get('organization_status')
                     ),
                     'gross_total': preview_data.get('product_offerings1', 0) +
                     preview_data.get('product_offerings2', 0) +
@@ -141,7 +141,7 @@ class SignupAsBeneficary(views.MethodView):
 
     @login_required
     def post(self, step=1):
-        if step not in range(1, 5):
+        if step not in range(1, 6):
             step = 1
 
         form = getattr(
@@ -174,6 +174,7 @@ class SignupAsBeneficary(views.MethodView):
                     }
                 )
                 campaign_service.create_campaign_from_webform(data=data)
+                return render_template('beneficiary_sucess.html')
             return redirect(url_for('signup_as_beneficary', step=step+1))
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),

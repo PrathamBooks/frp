@@ -19,10 +19,10 @@
             <div class="col-md-12">
               {% block signup_as_beneficary_step %}
               {% endblock %}
-              {% if step != 4%}
+              {% if step != 4 and step %}
               <button type="submit" id="next" class="btn">Next</button>
               {% endif %}
-              {% if step != 1%}
+              {% if step != 1 and step %}
               <button type="button" id="previous" onclick="gotoBeneficiaryStep({{ step - 1 }})" class="btn">Previous</button>
               {% endif %}
             </div><!--col-md-12 -->

@@ -34,7 +34,7 @@ def runserver():
     global settings
     app.config.from_pyfile(settings)
     db.create_all()
-    app.run()
+    app.run(host="0.0.0.0")
 
 
 # @manager.command
@@ -49,7 +49,7 @@ def runserver():
 
 
 @manager.command
-def resetdb():
+def resetdb(**kwargs):
     global settings, db
     app.config.from_pyfile(settings)
     print "Dropping all tables"
@@ -57,6 +57,13 @@ def resetdb():
     print "Creating them afresh"
     db.create_all()
     print "Creating lastuser tables"
+    from frp.models.user import User
+    user = User(email="admin@example.com", status=0, is_staff=True)
+    user.username = "prathamadmin"
+    user.password = "password"
+    db.session.add(user)
+    db.session.commit()
+    print "{}".format(kwargs)
 
 
 if __name__ == '__main__':
