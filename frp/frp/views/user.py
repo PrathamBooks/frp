@@ -227,6 +227,8 @@ def facebook_authorized(resp):
 
 @app.route('/login')
 def login():
+    if session.get('logged_in'):
+        return redirect(url_for('profile'))
     return render_template('login.html')
 
 

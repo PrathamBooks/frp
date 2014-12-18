@@ -621,7 +621,9 @@
                                                   {% if camp.image_file_path %}
                                                   <div class="well upload">
                                                       <h3>Image upload</h3>
-                                                      <a href="{{ camp.image_file_path }}" target="_blank">{{ camp.image_file_path }}</a>
+                                                      <div class="col-md-12">
+                                                        <div class="col-md-3"><img src="{{ camp.image_file_path }}" alt="imga" class="img-thumbnail"></div>
+                                                      </div>
                                                   </div><!--well-->
                                                   {% endif %}
 

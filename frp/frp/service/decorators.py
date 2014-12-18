@@ -27,6 +27,8 @@ def login_required_admin(f):
     def inner(*args, **kwargs):
         if session.get('logged_in'):
             g.user = User.query.filter_by(email=session.get('email')).first()
+            if not g.user:
+                return redirect(url_for('login'))
             if not g.user.is_staff:
                 return redirect(url_for('login'))
             return f(*args, **kwargs)

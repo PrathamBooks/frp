@@ -32,4 +32,6 @@ def get_campaign_preview_data(id):
 
     camp_dict = json.loads(camp.data)
     camp_dict['id'] = camp.id
+    if camp_dict.get('image_file_path'):
+        camp_dict['image_file_path'] = '/static{}'.format(camp_dict.get('image_file_path').split('static')[-1])
     return camp_dict
