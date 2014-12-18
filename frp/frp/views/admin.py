@@ -13,7 +13,7 @@ from wtforms.validators import DataRequired
 from .. import app
 from .. import models
 from ..service.decorators import login_required_admin
-from ..service.campaign import get_campaign_rendering_data
+from ..service.campaign import get_campaign_rendering_data, get_campaign_preview_data
 
 
 class IndexView(AdminIndexView):
@@ -22,6 +22,12 @@ class IndexView(AdminIndexView):
     def index(self):
         campaign_data = get_campaign_rendering_data()
         return self.render('admin_index.html', campaign_data=campaign_data)
+
+    @expose("/campaign_preview/<int:id>/")
+    @login_required_admin
+    def campaign_preview(self, id):
+        data = get_campaign_preview_data(id=id)
+        return self.render('admin_preview.html', camp=data)
 
 
 class BaseAuthModelView(ModelView):

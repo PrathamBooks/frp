@@ -18,68 +18,72 @@
                                             <th>Campaign Preview</th>
                                             <th><span class="arrDown"></span>Beneficiary Type </th>
                                             <th><span class="arrDown"></span>Location</th>
-                                            <th><span class="arrDown"></span>Fund Raising Amount</th>
-                                            <th><span class="arrUp"></span>Start Date </th>
-                                            <th><span class="arrUp"></span> End Date</th>
-                                            <th><span class="arrDown"></span> Current Status</th>
-                                            <th><span class="arrUp"></span> Action Required</th>
-                                            <th>Update Status / Comment</th>
-                                            <th>Number Of Donors</th>
-                                            <th>Submit Your Comment</th>
+                                            <!-- <th><span class="arrDown"></span>Fund Raising Amount</th> -->
+                                            <!-- <th><span class="arrUp"></span>Start Date </th> -->
+                                            <!-- <th><span class="arrUp"></span> End Date</th> -->
+                                            <!-- <th><span class="arrDown"></span> Current Status</th> -->
+                                            <!-- <th><span class="arrUp"></span> Action Required</th> -->
+                                            <!-- <th>Update Status / Comment</th> -->
+                                            <!-- <th>Number Of Donors</th> -->
+                                            <!-- <th>Submit Your Comment</th> -->
 
                                         </tr>
                                         {% for camp in campaign_data %}
                                         <tr>
-                                            <td><a href="campaignPage.html">{{ camp.id }}</a></td>
+                                          <td>
+                                            <a href="#">{{ camp.id }}</a>
+                                          </td>
                                             <td>{{ camp.project_title }}</td>
-                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                          <td>
+                                            <a href="/admin/campaign_preview/{{ camp.id }}/" class="btn btnPreview">Preview</a>
+                                          </td>
                                             <td>{{ camp.category_text }}</td>
                                             <td>{{ camp.head_off_address }}</td>
-                                            <td>2000</td>
-                                            <td>27 / 12 /2014</td>
-                                            <td>27 / 05 / 2015</td>
-                                            <td><span class="label label-info">Submitted</span></td>
-                                            <td><button type="button" class="btn approve">Approve</button></td>
-                                            <td>
-                                            	<select class="label label-info">
-                                            	<option>Submitted</option>
-                                                <option>Approved</option>
-                                                <option>Completed</option>
-                                                <option>Ended</option>
-                                                <option>Delivered</option>
-                                                <option>Not Approved</option>
-                                                <option>Closed</option>
-                                                <option>Extended</option>
-                                                <option>Shipped</option>
-                                                <option>Flagged</option>
-                                            </select>
-                                            </td>
-                                            <td>15</td>
-                                            <td>
-                                                <!-- Small modal -->
-                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            <!-- <td>2000</td> -->
+                                            <!-- <td>27 / 12 /2014</td> -->
+                                            <!-- <td>27 / 05 / 2015</td> -->
+                                            <!-- <td><span class="label label-info">Submitted</span></td> -->
+                                            <!-- <td><button type="button" class="btn approve">Approve</button></td> -->
+                                            <!-- <td> -->
+                                            <!-- 	<select class="label label-info"> -->
+                                            <!-- 	<option>Submitted</option> -->
+                                            <!--     <option>Approved</option> -->
+                                            <!--     <option>Completed</option> -->
+                                            <!--     <option>Ended</option> -->
+                                            <!--     <option>Delivered</option> -->
+                                            <!--     <option>Not Approved</option> -->
+                                            <!--     <option>Closed</option> -->
+                                            <!--     <option>Extended</option> -->
+                                            <!--     <option>Shipped</option> -->
+                                            <!--     <option>Flagged</option> -->
+                                            <!-- </select> -->
+                                            <!-- </td> -->
+                                            <!-- <td>15</td> -->
+                                            <!-- <td> -->
+                                            <!--     <\!-- Small modal -\-> -->
+                                            <!--     <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button> -->
 
-                                                <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
+                                            <!--     <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"> -->
+                                            <!--         <div class="modal-dialog"> -->
+                                            <!--         <div class="modal-content"> -->
 
-                                                    <div class="modal-header">
-                                                    <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                    <h3 id="myLargeModalLabel" class="modal-title">Preview of Beneficiary Form </h3>
-                                                    </div>
+                                            <!--         <div class="modal-header"> -->
+                                            <!--         <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button> -->
+                                            <!--         <h3 id="myLargeModalLabel" class="modal-title">Preview of Beneficiary Form </h3> -->
+                                            <!--         </div> -->
 
-                                                    <div class="form-group">
-                                                    <textarea id="comments" placeholder="Enter Comment here"  class="form-control"></textarea>
-                                                    <p class="text-danger">Add Your Comment</p>
-                                                    <p class="text-success">Comment submitted successfully!</p>
-                                                    <button class="btn btn-send pull-right" type="submit"></button>
-                                                    </div>
+                                            <!--         <div class="form-group"> -->
+                                            <!--         <textarea id="comments" placeholder="Enter Comment here"  class="form-control"></textarea> -->
+                                            <!--         <p class="text-danger">Add Your Comment</p> -->
+                                            <!--         <p class="text-success">Comment submitted successfully!</p> -->
+                                            <!--         <button class="btn btn-send pull-right" type="submit"></button> -->
+                                            <!--         </div> -->
 
-                                                    </div>
-                                                    </div>
-                                                    </div>
+                                            <!--         </div> -->
+                                            <!--         </div> -->
+                                            <!--         </div> -->
 
-                                            </td>
+                                            <!-- </td> -->
 
                                         </tr>
                                         {% endfor %}
