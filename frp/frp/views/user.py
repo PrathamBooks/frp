@@ -14,9 +14,9 @@ from flask import (render_template,
 from flask.ext.oauth import OAuth
 
 from .. import app
-from ..forms import (DonorSignupForm,
-                     LoginForm,
-                     ProfileForm)
+from ..forms import (
+    DonorSignupForm, LoginForm, SignupForm,
+    ProfileForm)
 from ..forms import beneficiary_signup_forms
 from ..service import signup as signup_service
 from ..service import campaign as campaign_service
@@ -48,19 +48,6 @@ def pop_login_session():
     session.pop('email', None)
 
 
-# Signup views
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
-
-
-# @app.route('/signup/beneficary/')
-# def beneficiary_signup():
-#     form = BeneficarySignupForm()
-#     return render_template(
-#         'signup_as_beneficary_step{}.html'.format(1),
-#         form=form)
-
 def save_file_to_disk(file_object):
     if not file_object:
         return None
@@ -70,6 +57,21 @@ def save_file_to_disk(file_object):
     file_path = os.path.join(directory, file_object.filename)
     file_object.save(file_path)
     return file_path
+
+
+@app.route('/signup/', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'GET':
+        form = SignupForm()
+        return render_template('signup.html', form=form)
+    elif request.method == 'POST':
+        form = SignupForm(request.form)
+        if form.validate():
+            # Create the new user and create userinfo
+            signup_service.create_donor_from_webform(form)
+            return redirect(url_for('profile'))
+        else:
+            return render_template('signup.html', form=form)
 
 
 class SignupAsBeneficary(views.MethodView):

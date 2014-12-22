@@ -61,22 +61,21 @@ def create_beneficary(form):
     return {'error': False}
 
 
-def create_donor_from_webform(donor):
+def create_donor_from_webform(signup_form):
     """Given an `forms.signup.DonorSignupForm` object create user and userinfo
     object.
 
     :param donor `forms.signup.DonorSignupForm`: donor form object.
     """
     user = User(
-        status=USER_STATUS.INVITED, email=donor.email.data,
-        password=donor.password.data, _username=donor.user_name.data)
+        status=USER_STATUS.INVITED, email=signup_form.email.data,
+        password=signup_form.password.data,
+        _username=signup_form.email.data)
     db.session.add(user)
 
     user_info = UserInfo(
-        user=user, first_name=donor.first_name.data,
-        last_name=donor.last_name.data, address=donor.address.data,
-        contact_number=donor.contact_number.data,
-        pan_number=donor.pan_number.data)
+        user=user, first_name=signup_form.first_name.data,
+        last_name=signup_form.last_name.data)
     db.session.add(user_info)
 
     # TODO: Send user activation email

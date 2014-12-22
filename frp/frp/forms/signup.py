@@ -1,15 +1,40 @@
 # -*- coding: utf-8 -*-
 
 import wtforms
-import coaster
 
 from ..models import (is_username_exists, is_email_exists, ORG_STATUS_CHOICES,
                       is_org_email_exists, is_org_name_exists)
 
 
-
 __all__ = ['DonorSignupForm', 'BeneficarySignupForm', 'BENEFICARY_CATEGORY',
-           'ORG_WORK_CHOICES']
+           'ORG_WORK_CHOICES', 'SignupForm']
+
+
+class SignupForm(wtforms.Form):
+    first_name = wtforms.TextField(
+        label='First Name',
+        validators=[wtforms.validators.Required('Enter first name'),
+                    wtforms.validators.Length(max=160)])
+    last_name = wtforms.TextField(
+        label='Last Name',
+        validators=[wtforms.validators.Required('Enter last name'),
+                    wtforms.validators.Length(max=160)],
+        default=u'')
+    password = wtforms.PasswordField(
+        label='Password',
+        validators=[wtforms.validators.Required('Enter password'),
+                    wtforms.validators.Length(max=80)])
+    email = wtforms.TextField(
+        label='Email',
+        validators=[wtforms.validators.Required('Enter email Id'),
+                    wtforms.validators.Email(),
+                    wtforms.validators.Length(max=254)])
+
+    def validate_email(self, field):
+        email = field.data.strip()
+
+        if is_email_exists(email):
+            raise wtforms.ValidationError(u'{} already exists.'.format(email))
 
 
 class DonorSignupForm(wtforms.Form):
