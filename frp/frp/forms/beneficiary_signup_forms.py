@@ -210,7 +210,7 @@ class BeneficarySignupForm2(wtforms.Form):
     reading_proficiently3 = wtforms.IntegerField(
         validators=[wtforms.validators.Optional()])
 
-    gross_total = wtforms.IntegerField()
+    gross_total = wtforms.IntegerField(validators=[wtforms.validators.Optional()])
 
     def validate_product_offerings(self, field):
         for val in field.data:

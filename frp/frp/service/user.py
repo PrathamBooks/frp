@@ -5,6 +5,10 @@ from flask import session, g
 from ..models import User, db
 
 
+def get_user_dict():
+    return {"is_staff": g.user.is_staff}
+
+
 def is_valid_login(email, password):
     """If the username and password hash is matched `g.user` is set else
     False is returned.

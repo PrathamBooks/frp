@@ -23,6 +23,8 @@ from ..service import campaign as campaign_service
 from ..service import user as user_service
 from ..service.decorators import login_required
 
+get_user_dict = user_service.get_user_dict
+
 # Facebook requirements
 oauth = OAuth()
 
@@ -35,6 +37,7 @@ facebook = oauth.remote_app(
     consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
     consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
     request_token_params={'scope': 'email, '})
+
 
 
 @facebook.tokengetter
@@ -139,7 +142,8 @@ class SignupAsBeneficary(views.MethodView):
 
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),
-            form=form, step=step, preview_data=preview_data)
+            form=form, step=step, preview_data=preview_data,
+            user=get_user_dict())
 
     @login_required
     def post(self, step=1):
@@ -149,6 +153,9 @@ class SignupAsBeneficary(views.MethodView):
         form = getattr(
             beneficiary_signup_forms,
             "BeneficarySignupForm{}".format(step))(request.form)
+        if step == 2:
+            if not form.data.get("gross_total"):
+                form.data['gross_total'] = 0
         if form.validate():
             form_data = form.data
             if step == 3:
@@ -176,11 +183,12 @@ class SignupAsBeneficary(views.MethodView):
                     }
                 )
                 campaign_service.create_campaign_from_webform(data=data)
-                return render_template('beneficiary_sucess.html')
+                return render_template('beneficiary_sucess.html',
+                                       user=get_user_dict())
             return redirect(url_for('signup_as_beneficary', step=step+1))
         return render_template(
             'signup_as_beneficary_step{}.html'.format(step),
-            form=form, step=step)
+            form=form, step=step, user=get_user_dict())
 
 app.add_url_rule(
     '/signup/beneficary/<int:step>/',
@@ -242,7 +250,8 @@ def login_via_webform():
 
     form = LoginForm()
     if request.method == "GET":
-        return render_template('login_form.html', form=form)
+        return render_template(
+            'login_form.html', form=form)
     elif request.method == "POST":
         form = LoginForm(request.form)
         if form.validate():
@@ -251,15 +260,18 @@ def login_via_webform():
                 return redirect(url_for('profile'))
             else:
                 flash('Invalid credentials')
-                return render_template('login_form.html', form=form)
+                return render_template(
+                    'login_form.html', form=form)
         else:
-            return render_template('login_form.html', form=form)
+            return render_template(
+                'login_form.html', form=form)
 
 
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    return render_template(
+        'profile.html', user=get_user_dict())
 
 
 class EditProfile(views.MethodView):

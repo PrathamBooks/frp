@@ -32,6 +32,14 @@
     <script src="/static/js/bootstrap.js"></script>
     <!-- <script type="text/javascript" src="/static/js/form.js"></script> -->
     <script type="text/javascript" src="/static/js/beneficiary-form.js"></script>
+
+    <style>
+      .header-menu {
+          width: auto;
+          padding: 10px;
+      }
+    </style>
+
   </head>
 
   <body>
@@ -47,29 +55,25 @@
 
           <nav class="nav">
             <ul>
-              <li  class="darkOrange">
-                <a href="about.html">about
-                  <span class="caret"></span>
-                </a>
-              </li>
 
-              <li class="orange">
-                <a href="start.html">start
-                  <span class="caret"></span>
-                </a>
-              </li>
+              {% if user %}
+                    <li  class="darkYellow header-menu">
+                        <a href="/logout">log out
+                    </a>
+                    </li>
+                    <li  class="darkOrange header-menu">
+                        <a href="/signup/beneficary/1/">Beneficiary Signup
+                    </a>
+                    </li>
 
-              <li class="lightOrange">
-                <a href="discover.html" >discover
-                  <span class="caret"></span>
-                </a>
-              </li>
+                    {% if user.is_staff %}
+                    <li  class="darkYellow header-menu">
+                        <a href="/admin">Admin
+                    </a>
+                    </li>
+                    {% endif %}
+              {% endif %}
 
-              <li  class="darkYellow">
-                <a href="/">home
-                  <span class="caret"></span>
-                </a>
-              </li>
             </ul>
           </nav>
           <!-- <div id="login">
