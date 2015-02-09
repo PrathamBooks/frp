@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pratham Books">
+	<meta name="author" content="">
+    
+    <title>Pratham Books</title>
+    
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    
+    <link href="css/slider.css" rel="stylesheet">
+    <link href="css/bForm.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        
+    <script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="js/bootstrap-slider.js"></script>
+	<script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/paymentform.js"></script>
+  </head>
+
+  <body>  
+      <div id="wrapperOut">
+      
+          <header class="affix">
+    	<div class="headerIn">
+        	<h1 class="logo">
+                <a href="index.html">Pratham <span></span></a>
+            </h1>
+                  <nav class="nav">
+                      <ul>
+                          <li  class="darkOrange">
+                              <a href="about.html">about
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                          
+                          <li class="orange">
+                              <a href="start.html">start
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                          
+                          <li class="lightOrange">
+                              <a href="discover.html" >discover
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                          
+                          <li  class="darkYellow">
+                              <a href="index.html">home
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                      </ul>
+                  </nav>
+                  
+                  <div id="login">
+                      <a href="signup.html" class="btn btn-warning">sign up</a>
+                      <a href="login.html" class="btn btn-default">log in</a>
+                      <!--<a class="btn btn-default" href="login.html">log out</a>-->
+                  
+                  </div>
+              </div>
+          </header>
+          
+          <div id="wrapper">
+          
+              <div class="container internal">
+              
+                  <div id="pratham-form" class="container">
+                      <div class="row">
+                          <h2 class="affix">Proceed For Payment</h2>
+                          <div id="sidebar" class="list-group col-xs-6 col-sm-3 affix"  role="navigation">
+                              <a href="#debit" class="list-group-item active">Debit Card</a>
+                              <a  class="list-group-item" href="#credit">Credit Card</a>
+                              <a  class="list-group-item" href="#netBanking">Net Banking</a>
+                          </div>
+                          
+                          <div ng-controller="signupController" class="col-xs-12 col-sm-9"><!-- ng-controller=signupController -->
+                          
+                              <form role="form" novalidate class="col-md-12" method="post" action="">
+                              
+                                  <div id="internalContent" class="row beneficiary payment">
+                                      <div  id="internalCampaign" class="row">
+                                          <div class="col-md-12">
+                                              <!-- Step 1 starts here-->
+                                              <section id="debit"  class="tab-pane active" tabindex="1">
+                                                  <div class="jumbotron row">
+                                                      <h1>Debit Card Details</h1>
+                                                      <p><span>Your payment details are secured!</span></p>
+                                                  </div>
+                                                  
+                                                <div class="well">
+                                                    
+                                                    <h3>Enter Debit Card Details</h3>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcNum">Enter Debit Card Number<strong>*</strong></label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" required="" placeholder="Enter Debit Card Number" name="dcNum" ng-model="signup.name" class="form-control">
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                            <label for="dcExpiryMonth">Expiry Date<strong>*</strong></label>
+                                                            <div class="alert alert-warning hide">Select Month &amp; year</div>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <select required name="dcExpiryMonth" ng-model="" class="form-control">
+                                                                    <option value="0">Select Expiry Month</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                    <option value="08">08</option>
+                                                                    <option value="09">09</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                
+                                                                <select required name="dcExpiryYear" ng-model="" class="form-control">
+                                                                    <option value="0">Select Expiry Year</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2022">2022</option>
+                                                                    <option value="2023">2023</option>
+                                                                    <option value="2024">2024</option>
+                                                                    <option value="2025">2025</option>
+                                                                    <option value="2026">2026</option>
+                                                                    <option value="2027">2027</option>
+                                                                    <option value="2028">2028</option>
+                                                                    <option value="2029">2029</option>
+                                                                    <option value="2030">2030</option>
+                                                                    <option value="2031">2031</option>
+                                                                    <option value="2032">2032</option>
+                                                                    <option value="2033">2033</option>
+                                                                    <option value="2034">2034</option>
+                                                                    <option value="2035">2035</option>
+                                                                    <option value="2036">2036</option>
+                                                                    <option value="2037">2037</option>
+                                                                    <option value="2038">2038</option>
+                                                                    <option value="2039">2039</option>
+                                                                    <option value="2040">2040</option>
+                                                                    <option value="2041">2041</option>
+                                                                    <option value="2042">2042</option>
+                                                                    <option value="2043">2043</option>
+                                                                    <option value="2044">2044</option>
+                                                                    <option value="2045">2045</option>
+                                                                    <option value="2046">2046</option>
+                                                                    <option value="2047">2047</option>
+                                                                    <option value="2048">2048</option>
+                                                                    <option value="2049">2049</option>
+                                                                </select>
+                                                            </div>
+                                                            
+                                                            <a type="button" id="proceed" class="btn">Proceed Securely</a>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div><!--well-->
+                                                
+                                                <div class="well">
+                                                    
+                                                    <h3>Verified by VISA</h3>
+                                                    <div class="row form-group">
+                                                    	<p>
+                                                        	Please enter the One-Time Password (OTP) sent via SMS to your mobile number. Primary Credit cardholders please enter the OTP OR your registered Securepay password. 
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="mname">Merchant Name</label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="" name="mname" placeholder="Merchant Name should be already there"  disabled>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                    <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcN">Card Number</label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="" name="dcN" placeholder="Card Number Automatically displayed" disabled>
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcNum">Payment<strong>*</strong></label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="signup.name" name="dcNum" placeholder="Enter Debit Card Number" required="">
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcNum">SMS OTP / Securepay Password</label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="signup.name" name="dcNum" placeholder="Enter SMS OTP / Securepay Password" required="">
+                                                                <a type="button" id="proceed" class="btn">Confirm</a>
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-12">
+                                                                <h3>Did not receive SMS-OTP?</h3>
+                                                                <a href="#" class="std">Get Another SMS OTP / Securepay Password</a>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                </div><!--well -->
+                                                  
+                                              </section>
+                                              <!-- Step 1 ends here-->
+                                              
+                                              <!-- Step 2 starts here-->
+                                              <section id="credit"  class="tab-pane hide" tabindex="2">
+                                                  <div class="jumbotron row">
+                                                      <h1>Credit Card Details</h1>
+                                                      <p><span>Your payment details are secured!</span></p>
+                                                  </div>
+                                                  
+                                                <div class="well">
+                                                    
+                                                    <h3>Enter Credit Card Details</h3>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="ccNum">Enter Credit Card Number<strong>*</strong></label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" required="" placeholder="Enter Credit Card Number" name="ccNum" ng-model="signup.name" class="form-control">
+                                                                <div class="alert alert-warning hide">Enter Credit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                            <label for="ccExpiryMonth">Expiry Date<strong>*</strong></label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <select required name="ccExpiryMonth" ng-model="" class="form-control">
+                                                                    <option value="0">Select Expiry Month</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                    <option value="08">08</option>
+                                                                    <option value="09">09</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                
+                                                                 
+                                                                <select required name="ccExpiryYear" ng-model="" class="form-control">
+                                                                    <option value="0">Select Expiry Year</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2022">2022</option>
+                                                                    <option value="2023">2023</option>
+                                                                    <option value="2024">2024</option>
+                                                                    <option value="2025">2025</option>
+                                                                    <option value="2026">2026</option>
+                                                                    <option value="2027">2027</option>
+                                                                    <option value="2028">2028</option>
+                                                                    <option value="2029">2029</option>
+                                                                    <option value="2030">2030</option>
+                                                                    <option value="2031">2031</option>
+                                                                    <option value="2032">2032</option>
+                                                                    <option value="2033">2033</option>
+                                                                    <option value="2034">2034</option>
+                                                                    <option value="2035">2035</option>
+                                                                    <option value="2036">2036</option>
+                                                                    <option value="2037">2037</option>
+                                                                    <option value="2038">2038</option>
+                                                                    <option value="2039">2039</option>
+                                                                    <option value="2040">2040</option>
+                                                                    <option value="2041">2041</option>
+                                                                    <option value="2042">2042</option>
+                                                                    <option value="2043">2043</option>
+                                                                    <option value="2044">2044</option>
+                                                                    <option value="2045">2045</option>
+                                                                    <option value="2046">2046</option>
+                                                                    <option value="2047">2047</option>
+                                                                    <option value="2048">2048</option>
+                                                                    <option value="2049">2049</option>
+                                                                </select>
+                                                            </div>
+                                                            
+                                                            <a type="button" id="proceed" class="btn">Proceed Securely</a>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div><!--well-->
+                                                
+                                                <div class="well">
+                                                    
+                                                    <h3>Verified by VISA</h3>
+                                                    <div class="row form-group">
+                                                    	<p>
+                                                        	Please enter the One-Time Password (OTP) sent via SMS to your mobile number. Primary Credit cardholders please enter the OTP OR your registered Securepay password. 
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="mname">Merchant Name</label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="" name="mname" placeholder="Merchant Name should be already there"  disabled>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                    <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcN">Card Number</label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="" name="dcN" placeholder="Card Number Automatically displayed" disabled>
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcNum">Payment<strong>*</strong></label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="signup.name" name="dcNum" placeholder="Enter Debit Card Number" required="">
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <label for="dcNum">SMS OTP / Securepay Password</label>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <input type="text" class="form-control" ng-model="signup.name" name="dcNum" placeholder="Enter SMS OTP / Securepay Password" required="">
+                                                                <a type="button" id="proceed" class="btn">Confirm</a>
+                                                                <div class="alert alert-warning hide">Enter Debit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-12">
+                                                                <h3>Did not receive SMS-OTP?</h3>
+                                                                <a href="#" class="std">Get Another SMS OTP / Securepay Password</a>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                </div><!--well -->
+                                                  
+                                              </section>
+                                              <!-- Step 2 ends here-->
+                                              
+                                               <!-- Step 3 starts here-->
+                                              <section id="netBanking"  class="tab-pane hide" tabindex="3">
+                                                  <div class="jumbotron row">
+                                                      <h1>Net Banking Details</h1>
+                                                      <p><span>Your payment details are secured!</span></p>
+                                                  </div>
+                                                  
+                                                <div class="well">
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-xs-4">
+                                                                <h3>Select Your Bank</h3>
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                 <select required name="bankList" ng-model="" class="form-control">
+                                                                    <option value="-1">Select</option>
+                                                                    <option value="SBI">State Bank of India</option>
+                                                                    <option value="HDFC">HDFC Bank</option>
+                                                                    <option value="ICICI">ICICI Bank</option>
+                                                                    <option value="AXIS">Axis Bank</option>
+                                                                    <option value="PNB">Punjab National Bank</option>
+                                                                    <option value="KOTAK">Kotak Bank</option>
+                                                                    <option value="ANDHRA">Andhra Bank</option>
+                                                                    <option value="BBK">Bank of Bahrain and Kuwait</option>
+                                                                    <option value="BOB">Bank of Baroda</option>
+                                                                    <option value="BOI">Bank of India</option>
+                                                                    <option value="BOM">Bank of Maharashtra</option>
+                                                                    <option value="CANARA">Canara Bank</option>
+                                                                    <option value="CSB">Catholic Syrian Bank</option>
+                                                                    <option value="CBI">Central Bank of India</option>
+                                                                    <option value="CITI">Citibank</option>
+                                                                    <option value="CITIUB">City Union Bank</option>
+                                                                    <option value="CORP">Corporation Bank</option>
+                                                                    <option value="COSMOS">Cosmos Bank</option>
+                                                                    <option value="DEUTS">Deutsche Bank</option>
+                                                                    <option value="DBSP">Development BankSingapore</option>
+                                                                    <option value="FDEB">Federal Bank</option>
+                                                                    <option value="IDBI">IDBI Bank</option>
+                                                                    <option value="INDB">Indian Bank</option>
+                                                                    <option value="IOB">Indian Overseas Bank</option>
+                                                                    <option value="INDS">IndusInd Bank</option>
+                                                                    <option value="ING">ING Vysya Bank</option>
+                                                                    <option value="JKB">Jammu and Kashmir Bank</option>
+                                                                    <option value="KTKB">Karnataka Bank</option>
+                                                                    <option value="KVB">Karur Vysya Bank</option>
+                                                                    <option value="LVB">Lakshmi Vilas Bank</option>
+                                                                    <option value="OBPRF">Oriental Bank of Commerce</option>
+                                                                    <option value="PAYCC">Pay Cash Card</option>
+                                                                    <option value="SVB">Shamrao Vithal Bank</option>
+                                                                    <option value="SIB">South Indian Bank</option>
+                                                                    <option value="SCB">Standard Chartered Bank</option>
+                                                                    <option value="SBJ">State Bank of Bikaner and Jaipur</option>
+                                                                    <option value="SBH">State Bank Of Hyderabad</option>
+                                                                    <option value="SBM">State Bank of Mysore</option>
+                                                                    <option value="SBOP">State Bank of Patiala</option>
+                                                                    <option value="SBT">State Bank of Travancore</option>
+                                                                    <option value="SYNBK">Syndicate Bank</option>
+                                                                    <option value="UNI">Union Bank of India</option>
+                                                                    <option value="UBI">United Bank of India</option>
+                                                                    <option value="VJYA">Vijaya Bank</option>
+                                                                    <option value="YES">Yes Bank</option>
+                                                                
+                                                                </select>
+                                                                <div class="alert alert-warning hide">Enter Credit Card Number</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            
+                                                            <a type="button" id="proceed" class="btn">Proceed Securely</a>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div><!--well-->
+                                                
+                                                
+                                                  
+                                              </section>
+                                              <!-- Step 3 ends here-->
+                                              
+                                              
+                                              
+                                          </div><!--col-md-12 -->
+                                      </div><!--Internal Campaign row -->
+                                  </div><!--/internalContent-->
+                              </form>
+                          </div><!-- xs-12 sm-9-->
+                      </div><!-- row-->
+                      
+                  </div><!-- Pratham Form-->
+                  
+              </div><!--container internal -->
+          </div><!--Wrapper-->    
+          
+          <footer>
+              <div id="infoBlock" class="row">
+                  <div class="col-md-12">
+                      <h5>Site Map</h5>
+                      
+                      <div class="siteBlock">
+                          <h6><a href="index.html">Home</a></h6>
+                      </div>
+                      
+                      <div class="siteBlock">
+                          <h6><a href="discover.html">Discover</a></h6>
+                          <ul>
+                              <li><a href="discover.html">Search/Browse Listing</a></li>
+                              <li><a href="campaignPage.html">Campaign Page</a></li>
+                          </ul>
+                      </div>
+                      
+                      
+                      <div class="siteBlock">
+                          <h6><a href="start.html">Start</a></h6>
+                          <ul>
+                              <li><a href="start.html">Donate a Book</a></li>
+                              <li><a href="start.html">Tips to Create Campaign</a></li>
+                              <li><a href="start.html">Get Started</a></li>
+                              <li><a href="start.html">FAQ</a></li>
+                              <li><a href="start.html">Guidelines</a></li>
+                          </ul>
+                      </div>
+                      
+                      <div class="siteBlock">
+                          <h6><a href="about.html">About</a></h6>
+                          <ul>
+                              <li><a href="about.html">Donate a Book</a></li>
+                               <li><a href="about.html">Pratham Books</a></li>
+                              <li><a href="about.html">Impact Stories</a></li>
+                          </ul>
+                      </div>
+                       
+                       <div class="siteBlock">
+                          <h6><a href="signup.html">Sign Up</a></h6>
+                              <ul>
+                              <li><a href="donorForm.html">Donor</a></li>
+                              <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+                             </ul>
+                      </div>
+                    
+                  </div>
+                  
+                  <div class="col-md-12 bottom">
+                  
+                       <div class="siteBlock">
+                          <h6><a href="privacy.html">Privacy Policy</a></h6>
+                      </div>
+                      
+                       <div class="siteBlock">
+                          <h6><a href="login.html">Login</a></h6>
+                      </div>
+                      
+                      <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+                      <div id="socialIcons">
+                          <h6>Connect</h6>
+                          <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+                          <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+                          <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+                          <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+                      </div>
+                  </div>
+                  
+                  
+              </div>
+          </footer>
+          
+    
+      </div>
+  </body>
+</html>

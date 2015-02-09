@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pratham Books">
+	<meta name="author" content="">
+    <title>Pratham Books</title>
+    
+    <link rel="shortcut icon" href="ico/favicon.ico" />
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/prathambooks2.css" rel="stylesheet" />
+    
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    
+	<script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+    <script src="js/bootstrap.js"></script>
+    
+	<script>
+		$(function() {
+			$( "#slider-range-max" ).slider({
+			range: "max",
+			min: 1,
+			max: 10,
+			value: 2,
+			slide: function( event, ui ) {
+			$( "#amount" ).val( ui.value );
+			}
+			});
+			$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+			
+			$('#myTab li a').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			})
+
+		});
+		
+		$(function() {
+			$( "#slider-range-max2" ).slider({
+			range: "max",
+			min: 1,
+			max: 10,
+			value: 2,
+			slide: function( event, ui ) {
+			$( "#amount" ).val( ui.value );
+			}
+			});
+			$( "#amount" ).val( $( "#slider-range-max2" ).slider( "value" ) );
+			
+			$('#myTab li a').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			})
+			
+			$('.dropdown-toggle').dropdown()
+
+		});
+		
+		
+		
+		
+    </script>
+    
+  </head>
+
+<body>  
+<div id="wrapperOut">
+	<header>
+    	<div class="headerIn">
+        	<h1 class="logo">
+                <a href="index.html">Pratham <span></span></a>
+            </h1>
+            <nav class="nav">
+                <ul>
+                	<li  class="brightOrange">
+                        <a href="about.html">Login
+                        </a>
+                    </li>
+                
+                    <li  class="darkOrange">
+                        <a href="about.html">about
+                        </a>
+                    </li>
+                    
+                    <li class="orange">
+                        <a href="start.html">start
+                        </a>
+                    </li>
+                    
+                    <li class="lightOrange">
+                        <a href="discover.html" >discover
+                    </a>
+                    </li>
+                    
+                    <li  class="darkYellow">
+                        <a href="index.html">home
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+            
+           <!-- <div id="login">
+                    <div class="btn-group">
+                      <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                       My Profile<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="donorDashboard.html">My Donations</a></li>
+                        <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
+                        <li><a href="profile.html">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                      </ul>
+                    </div>
+                </div>-->
+        </div>
+    </header>
+	<div id="wrapper">
+    
+            <div class="container">
+                <div id="featuredCampaign" class="row">
+                    <div class="col-md-12">
+                        Featured Campaign
+                    </div>
+                    <ul>
+                        <li>
+                            <img src="images/bannerImage/1.jpg" alt="banner1" />
+                        </li>
+                    </ul>
+                    <p>
+                        <span>Featured Campaign</span>
+                        An astonishing 999 individuals, and NGOs working with children have already prepared their campaigns for book
+                        donations. The most recent additions to our roster are Xxooox Oxoxxxx from Maharashtra, and Xxxoooo Xxxx from
+                        Assam.Welcome to Pratham Books Donate-a-Book! Start discovering awesome campaigns here.
+                        <br/>
+                        <strong>HELP INDIA'S CHILDREN READ</strong>
+                        <a href="donorForm.html" class="btn btn-warning btn-lg">Donate Books</a>
+                    </p>
+                </div>
+            
+            <div id="homeSearch" class="input-group pull-right">
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon">
+                  <a href="#"><i class="icon-search"></i></a>
+                </span>
+            </div>
+            
+            <div  id="contentTabs" class="row">
+                    	<ul id="myTab" class="nav nav-tabs">
+                            <!--<li><a href="#geography" class="active" data-toggle="tab">Geography driven</a></li>-->
+                            <li id="pledge"><a href="#books" data-toggle="tab">Books Pledge till date : <span>48,5786</span></a></li>
+                        </ul>
+                        
+                        <div id="myTabContent" class="tab-content">
+                        
+                            <div  id="geography" class="row tab-pane active">
+                                <div class="col-md-12">
+                                    <h2>Welcome to Pratham Book’s donate-a-book platform. 
+                                    </h2>
+                                    <p>Here you can help India’s children read books in languages they are most comfortable in.
+                                    </p>
+                                    
+                                    <p>Start discovering our campaigns <a href="discover.html">here</a>.</p>
+                                    
+                                        
+                                </div>
+                                
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+  </ol>
+  
+  <!-- Controls -->
+  <a class="left carousel-control arrL" href="#carousel-example-generic" role="button" data-slide="prev"></a>
+  <a class="right carousel-control arrR" href="#carousel-example-generic" role="button" data-slide="next"></a>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+       <div class="col-md-4">
+            <img src="images/campaignImages/campaign1.png"  alt="img1">
+            <h4><a href="campaignPage.html">Campaign One</a></h4>
+            <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know. <br />
+            You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="images/campaignImages/campaign2.png"  alt="img2">
+            <h4><a href="campaignPage.html">Campaign Two</a></h4>
+            <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+        </div>
+        <div class="col-md-4">
+            <img src="images/campaignImages/campaign3.png"  alt="img3">
+            <h4><a href="campaignPage.html">Campaign Three</a></h4>
+            <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+        </div>
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+    <div class="item">
+    
+       <div class="col-md-4">
+            <img src="images/campaignImages/campaign4.png"  alt="img4">
+            <h4><a href="campaignPage.html">Campaign One</a></h4>
+            <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know. <br />
+            You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="images/campaignImages/campaign5.png"  alt="img5">
+            <h4><a href="campaignPage.html">Campaign Two</a></h4>
+            <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+        </div>
+        <div class="col-md-4">
+            <img src="images/campaignImages/campaign6.png"  alt="img6">
+            <h4><a href="campaignPage.html">Campaign Three</a></h4>
+            <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+        </div>
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+    
+    
+    
+    
+    ...
+  </div>
+
+  
+</div>
+                                
+                            </div>
+                            
+                            <div  id="books" class="row tab-pane">
+                                <div class="col-md-12">
+                                    <h2>Activities at Pratham books</h2>
+                                    <p>
+                                    	This is the place for you to learn more about this effort, as well as what else we do at Pratham Books, 
+                                        in our mission to place a book in every child’s hand.
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="images/campaignImages/campaign7.png"  alt="img7">
+                                    <h4><a href="#">Books Pledge Till Date</a></h4>
+                                    <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="images/campaignImages/campaign8.png"  alt="img8">
+                                    <h4><a href="#">Number of children Impacted</a></h4>
+                                    <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="images/campaignImages/campaign9.png"  alt="img9">
+                                    <h4><a href="#">Social Investors</a></h4>
+                                    <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        
+                   </div>
+                   
+                   
+           
+                   
+                <div  id="easyBrowse" class="row">
+                    <form role="form">
+                        <div class="col-md-12">
+                            <h2>Easy Browse</h2>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <h5>Language</h5>
+                            <div class="form-group">
+                                <select multiple id="language" class="form-control">
+                                    <option>Hindi</option>
+                                    <option>Marathi</option>
+                                    <option>Kannada</option>
+                                    <option>Tamil</option>
+                                    <option>Urdu</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <h5>Type</h5>
+                            <div class="form-group">
+                                <select multiple id="type" class="form-control">
+                                    <option>Books for Library</option>
+                                    <option>Books for Classroom</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <h5>Value</h5>
+                            
+                            <div id="slider-range-max"></div>
+                            
+                            <div class="range">
+                                <label>&lt; 5000</label>
+                                <a href="#" class="amount">
+                                	<span>500-800 Rs.</span>
+                                </a>
+                                <label>&gt; 50,000</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <h5>Impact</h5>
+                            <div id="slider-range-max2"></div>
+                            
+                            <div class="range">
+                                <label>&lt; 100</label>
+                                <a href="#" class="amount">
+                                	<span>251-500 kids</span>
+                                </a>
+                                <label>&gt; 500</label>
+                            </div>
+                            <button type="button" class="btn btn-default btn-browse">Browse</button>
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+                <div class="row bottomBlock" id="">
+                    
+                    <div class="col-md-4"><h3>About Pratham Books</h3>
+                        <p>
+                        	Mr. Worf, you do remember how to fire phasers? Fate protects fools, little children and ships named Enterprise. 
+                            Now we know what they mean by 'advanced' tactical training. But the probability of making a six is no greater than that of rolling a seven. 
+                            You're going to be an interesting companion, Mr. Data.
+                        </p>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h3>Success Stories</h3>
+                        <div class="news">
+                            <!--<time>
+                            <a href="">March<span>20</span></a>
+                            </time>-->
+                            <a href="http://champions.prathambooks.org/" target="_blank">Champions Blog</a>
+                            <p>Some days you get the bear, and some days the bear gets you. Maybe if we felt any human loss as keenly as we feel one of those close to us, human history would be far less bloody.</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-md-4 investor">
+                        <h3>Featured Social Investor</h3>
+                        <img src="images/profilePic.png" alt="profilePic1"/>
+                        <h4>Name of the investor.</h4>
+                        <h5>Location, India</h5>
+                        <h6>Donating since : <strong>29 Nov. 1979</strong></h6>
+                        <blockquote>
+                            I believe Prathambooks because Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                        </blockquote>
+                    </div>
+                </div>
+                
+            </div>
+    </div>    
+    <footer>
+    	<div id="infoBlock" class="row">
+        	<div class="col-md-12">
+            	<h5>Site Map</h5>
+                
+                <div class="siteBlock">
+                	<h6><a href="index.html">Home</a></h6>
+                </div>
+                
+                <div class="siteBlock">
+                	<h6><a href="discover.html">Discover</a></h6>
+                    <ul>
+                    	<li><a href="discover.html">Search/Browse Listing</a></li>
+                        <li><a href="campaignPage.html">Campaign Page</a></li>
+                    </ul>
+                </div>
+                
+                
+                <div class="siteBlock">
+                	<h6><a href="start.html">Start</a></h6>
+                    <ul>
+                    	<li><a href="start.html">Donate a Book</a></li>
+                    	<li><a href="start.html">Tips to Create Campaign</a></li>
+                        <li><a href="start.html">Get Started</a></li>
+                        <li><a href="start.html">FAQ</a></li>
+                        <li><a href="start.html">Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="siteBlock">
+                	<h6><a href="about.html">About</a></h6>
+                    <ul>
+                        <li><a href="about.html">Donate a Book</a></li>
+                         <li><a href="about.html">Pratham Books</a></li>
+                    	<li><a href="about.html">Impact Stories</a></li>
+                    </ul>
+                </div>
+                 
+                 <div class="siteBlock">
+                	<h6><a href="signup.html">Sign Up</a></h6>
+                    	<ul>
+                    	<li><a href="donorForm.html">Donor</a></li>
+                        <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+                       </ul>
+                </div>
+              
+            </div>
+            
+            <div class="col-md-12 bottom">
+            
+                 <div class="siteBlock">
+                	<h6><a href="privacy.html">Privacy Policy</a></h6>
+                </div>
+                
+                 <div class="siteBlock">
+                	<h6><a href="login.html">Login</a></h6>
+                </div>
+            	
+                <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+                <div id="socialIcons">
+                	<h6>Connect</h6>
+                	<a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+                    <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+                    <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+                    <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+                </div>
+            </div>
+            
+            
+        </div>
+    </footer>    
+    
+	
+</div>
+  </body>
+</html>

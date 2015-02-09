@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pratham Books">
+	<meta name="author" content="">
+    
+    <title>Pratham Books</title>
+    
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/prathambooks.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    
+	<script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script>
+		$(function() {
+			$( "#slider-range-max" ).slider({
+			range: "max",
+			min: 1,
+			max: 10,
+			value: 2,
+			slide: function( event, ui ) {
+			$( "#amount" ).val( ui.value );
+			}
+			});
+			$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+			
+			$('#myTab li a').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			})
+
+		});
+		
+		$(function() {
+			$( "#slider-range-max2" ).slider({
+			range: "max",
+			min: 1,
+			max: 10,
+			value: 2,
+			slide: function( event, ui ) {
+			$( "#amount" ).val( ui.value );
+			}
+			});
+			$( "#amount" ).val( $( "#slider-range-max2" ).slider( "value" ) );
+			
+			$('#myTab li a').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			})
+
+		});
+		
+    </script>
+    
+  </head>
+
+<body>  
+<div id="wrapperOut">
+	<div id="wrapper">
+    		 <header>
+        	<h1 class="logo">
+                <a href="index.html">Pratham <span></span></a>
+            </h1>
+                      <nav class="nav">
+                          <ul>
+                              <li  class="darkOrange">
+                                  <a href="about.html">about
+                                  <span class="caret"></span>
+                                  </a>
+                              </li>
+                              
+                              <li class="orange">
+                                  <a href="start.html">start
+                                  <span class="caret"></span>
+                                  </a>
+                              </li>
+                              
+                              <li class="lightOrange">
+                                  <a href="discover.html" >discover
+                                  <span class="caret"></span>
+                              </a>
+                              </li>
+                              
+                              <li  class="darkYellow">
+                                  <a href="index.html">home
+                                  <span class="caret"></span>
+                              </a>
+                              </li>
+                          </ul>
+                      </nav>
+                          
+                      <div id="login">
+                          <a class="btn btn-default" href="login.html">log in</a>
+                          <!--<a class="btn btn-default" href="login.html">log out</a>-->
+                          <a class="btn btn-warning" href="signup.html">sign up</a>
+                      </div>
+                  </div>
+             </header>
+            <div class="container">
+            
+                
+                <div  id="easyBrowse" class="row sitemap">
+                    <form role="form">
+                        <div class="col-md-12">
+                            <h2>Site Map</h2>
+                        </div>
+                        
+                        <div class="col-md-12 ">
+                        	<ul>
+                            	<li><h3><a href="index.html">Home</a></h3></li>
+                                <li><h3><a href="#">Browse</a></h3>
+                                	<ul>
+                                    	<li><h5><a href="#">Search / Browse Listing</a></h5></li>
+                                        <li><h5><a href="#">Campaigns</a></h5>
+                                        	<ul><li><h6><a href="#">Contribute / Give</a></h6></li></ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><h3><a href="#">Create</a></h3>
+                                	<ul>
+                                    	<li><h5><a href="#">Create a Campaign</a></h5></li>
+                                        <li><h5><a href="#">Get Started</a></h5></li>
+                                        <li><h5><a href="#">FAQ</a></h5></li>
+                                        <li><h5><a href="#">Guidelines</a></h5></li>
+                                    </ul>
+                                </li>
+                                <li><h3><a href="#">Learn</a></h3>
+                                	<ul>
+                                    	<li><h5><a href="#">PBGiving</a></h5></li>
+                                        <li><h5><a href="#">FAQ</a></h5></li>
+                                        <li><h5><a href="#">Press </a></h5></li>
+                                        <li><h5><a href="#">Stats</a></h5></li>
+                                        <li><h5><a href="#">Pratham Books</a></h5></li>
+                                        <li><h5><a href="#">Pratham Books eStore</a></h5></li>
+                                    </ul>
+                                </li>
+                                <li><h3><a href="#">Stay In Touch </a></h3>
+                                	<ul>
+                                    	<li><h5><a href="#">Blog</a></h5></li>
+                                        <li><h5><a href="#">Newsletter</a></h5></li>
+                                        <li><h5><a href="#">Twitter </a></h5></li>
+                                        <li><h5><a href="#">Facebook</a></h5></li>
+                                        <li><h5><a href="#">Google+</a></h5></li>
+                                        <li><h5><a href="contact.html">Write To Us</a></h5></li>
+                                    </ul>
+                                </li>
+                                <li><h3><a href="#">Sitemap </a></h3></li>
+                                <li><h6><a href="privacy.html">Privacy Policy</a></h6></li>
+                                <li><h3><a href="#">Login </a></h3>
+                                	<ul>
+                                    	<li><h5><a href="#">Lost Password</a></h5></li>
+                                    </ul>
+                                </li>
+                                <li><h3><a href="#">Signup </a></h3>
+                                	<ul>
+                                    	<li><h5><a href="#">Donor</a></h5></li>
+                                        <li><h5><a href="#">Beneficiary</a></h5></li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                            
+                           
+                        </div>
+                        
+                    </form>
+                    </div>
+                
+                <div class="row" id="bottomBlock">
+               
+                     
+                </div>
+                
+                
+            </div>
+    </div>  
+      
+    <footer>
+    	<div id="infoBlock" class="row">
+        	<div class="col-md-12">
+            	<h5>Site Map</h5>
+                
+                <div class="siteBlock">
+                	<h6><a href="index.html">Home</a></h6>
+                </div>
+                
+                <div class="siteBlock">
+                	<h6><a href="discover.html">Discover</a></h6>
+                    <ul>
+                    	<li><a href="discover.html">Search/Browse Listing</a></li>
+                        <li><a href="campaignPage.html">Campaign Page</a></li>
+                    </ul>
+                </div>
+                
+                
+                <div class="siteBlock">
+                	<h6><a href="start.html">Start</a></h6>
+                    <ul>
+                    	<li><a href="start.html">Donate a Book</a></li>
+                    	<li><a href="start.html">Tips to Create Campaign</a></li>
+                        <li><a href="start.html">Get Started</a></li>
+                        <li><a href="start.html">FAQ</a></li>
+                        <li><a href="start.html">Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="siteBlock">
+                	<h6><a href="about.html">About</a></h6>
+                    <ul>
+                        <li><a href="about.html">Donate a Book</a></li>
+                         <li><a href="about.html">Pratham Books</a></li>
+                    	<li><a href="about.html">Impact Stories</a></li>
+                    </ul>
+                </div>
+                 
+                 <div class="siteBlock">
+                	<h6><a href="signup.html">Sign Up</a></h6>
+                    	<ul>
+                    	<li><a href="donorForm.html">Donor</a></li>
+                        <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+                       </ul>
+                </div>
+              
+            </div>
+            
+            <div class="col-md-12 bottom">
+            
+                 <div class="siteBlock">
+                	<h6><a href="privacy.html">Privacy Policy</a></h6>
+                </div>
+                
+                 <div class="siteBlock">
+                	<h6><a href="login.html">Login</a></h6>
+                </div>
+            	
+                <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+                <div id="socialIcons">
+                	<h6>Connect</h6>
+                	<a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+                    <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+                    <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+                    <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+                </div>
+            </div>
+            
+            
+        </div>
+    </footer>  
+    
+	
+
+    
+	</div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pratham Books">
+	<meta name="author" content="">
+    
+    <title>Pratham Books</title>
+    
+    <link rel="shortcut icon" href="ico/favicon.ico" />  
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="css/jquery-ui.css" rel="stylesheet" />
+    <link href="css/prathambooks.css" rel="stylesheet" />
+    
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    
+    
+	<script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/bootstrap.js" ></script>
+  
+    
+    
+  </head>
+
+    <body>  
+        <div id="wrapperOut">
+        <header>
+            <div class="headerIn">
+                <h1 class="logo">
+                    <a href="index.html">Pratham Books <span></span></a>
+                </h1>
+                <nav class="nav">
+                    <ul>
+                        <li class="darkOrange">
+                            <a href="about.html">about
+                            <span class="caret"></span>
+                            </a>
+                        </li>
+                        
+                        <li class="orange">
+                            <a href="start.html">start
+                            <span class="caret"></span>
+                            </a>
+                        </li>
+                        
+                        <li class="lightOrange">
+                            <a href="discover.html" >discover
+                            <span class="caret"></span>
+                        </a>
+                        </li>
+                        
+                        <li  class="darkYellow">
+                            <a href="index.html">home
+                            <span class="caret"></span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+                    
+                <div id="login">
+                    <a class="btn btn-default" href="login.html">log in</a>
+                    <!--<a class="btn btn-default" href="login.html">log out</a>-->
+                    <a class="btn btn-warning" href="signup.html">sign up</a>
+                </div>
+            </div>
+        </header>
+            
+            <div id="wrapper">
+                <div class="container internal">
+                    <form role="form">
+                            <div class="row startCampaign capaignList" id="internalCampaign">
+                            	
+                                <div class="col-md-12">
+                                    <h2>Admin Panel
+                                        <span>Campaign Details</span>
+                                    </h2>
+                                </div>
+                                <div class="col-md-12">
+                                
+                                	<table class="table table-striped">
+                                        <tr>
+                                            <th>Campaign Id</th>
+                                            <th>Campaign Title</th>
+                                            <th>Campaign Preview</th>
+                                            <th><span class="arrDown"></span>Beneficiary Type </th>
+                                            <th><span class="arrDown"></span>Location</th>
+                                            <th><span class="arrDown"></span>Fund Raising Amount</th>
+                                            <th><span class="arrUp"></span>Start Date </th>
+                                            <th><span class="arrUp"></span> End Date</th>
+                                            <th><span class="arrDown"></span> Current Status</th>
+                                            <th><span class="arrUp"></span> Action Required</th>
+                                            <th>Update Status / Comment</th>
+                                            <th>Number Of Donors</th>
+                                            <th>Submit Your Comment</th>
+                                            
+                                        </tr>
+                                        	
+                                        <tr>
+                                            <td><a href="campaignPage.html">001</a></td>
+                                            <td>Mard</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Dandeli</td>
+                                            <td>2000</td>
+                                            <td>27 / 12 /2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-info">Submitted</span></td>
+                                            <td><button type="button" class="btn approve">Approve</button></td>
+                                            <td>
+                                            	<select class="label label-info">
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Not Approved</option>
+                                                <option>Closed</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                            </select>
+                                            </td>
+                                            <td>15</td>
+                                            <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                                
+                                                <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    
+                                                    <div class="modal-header">
+                                                    <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h3 id="myLargeModalLabel" class="modal-title">Preview of Beneficiary Form </h3>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                    <textarea id="comments" placeholder="Enter Comment here"  class="form-control"></textarea>
+                                                    <p class="text-danger">Add Your Comment</p>
+                                                    <p class="text-success">Comment submitted successfully!</p>
+                                                    <button class="btn btn-send pull-right" type="submit"></button>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                
+                                            </td>
+                                        
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">002</a></td>
+                                            <td>Musical Expeditions</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Alibaug</td>
+                                            <td>80000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-info">Shipped</span></td>
+                                            <td><button type="button" class="btn approve">Close</button></td>
+                                            <td>
+                                            	<select class="label label-info">
+                                                <option>Closed</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Not Approved</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>26</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">003</a></td>
+                                            <td>Musical Expeditions</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Dharwad</td>
+                                            <td>50000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-success">Approved</span></td>
+                                            <td><button type="button" class="btn approve">Close</button></td>
+                                            <td>
+                                            	<select class="label label-success">
+                                                <option>Closed</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Not Approved</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>26</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">450</a></td>
+                                            <td>Musical Expeditions</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Yernakulam</td>
+                                            <td>500000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-default">Closed</span></td>
+                                            <td><button type="button" class="btn approve">Close</button></td>
+                                            <td>
+                                            	<select class="label label-default">
+                                                <option>Closed</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Not Approved</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>26</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                             
+                                        </tr>
+                                        
+                                        
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">947</a></td>
+                                            <td>Musical Expeditions</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td> NGO</td>
+                                            <td>Trivendrum</td>
+                                            <td>500000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-delivered">Delivered</span></td>
+                                            <td><button type="button" class="btn approve">Close</button></td>
+                                            <td>
+                                            	<select class="label label-delivered">
+                                                <option>Delivered</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Not Approved</option>
+                                                <option>Closed</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>26</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">586</a></td>
+                                            <td>Educate Girl</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Munnar</td>
+                                            <td>200000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-danger">Not Approved</span></td>
+                                            <td><button type="button" class="btn approve">Approve</button></td>
+                                            <td>
+                                            	<select class="label label-danger">
+                                                <option>Not Approved</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Closed</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>30</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                             
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">786</a></td>
+                                            <td>Mard</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Chennai</td>
+                                            <td>2000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-default">Ended</span></td>
+                                            <td></td>
+                                            <td>
+                                            	<select class="label label-default">
+                                                <option>Ended</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Delivered</option>
+                                                <option>Not Approved</option>
+                                                <option>Closed</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>15</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                            
+                                             
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">543</a></td>
+                                            <td>Food Vans</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Hydrabad</td>
+                                            <td>5000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-warning">Extended</span></td>
+                                            <td><button type="button" class="btn approve">Approve</button></td>
+                                            <td>
+                                            	<select class="label label-warning">
+                                                <option>Extended</option>
+                                                <option>Not Approved</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Closed</option>
+                                                <option>Shipped</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>40</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">115</a></td>
+                                            <td>Mard</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Delhi</td>
+                                            <td>2000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-delivered">Delivered</span></td>
+                                            <td><button type="button" class="btn approve">Approve</button></td>
+                                            <td>
+                                            	<select class="label label-primary">
+                                                <option>Delivered</option>
+                                                <option>Shipped</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Not Approved</option>
+                                                <option>Closed</option>
+                                                <option>Extended</option>
+                                                <option>Flagged</option>
+                                                
+                                            </select>
+                                            </td>
+                                            <td>15</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                        
+                                       
+                                        
+                                        <tr>
+                                            <td><a href="campaignPage.html">548</a></td>
+                                            <td>Mard</td>
+                                            <td><a href="campaignPreview.html" class="btn btnPreview">Preview</a></td>
+                                            <td>NGO</td>
+                                            <td>Banglore</td>
+                                            <td>2000</td>
+                                            <td>27 / 12 / 2014</td>
+                                            <td>27 / 05 / 2015</td>
+                                            <td><span class="label label-info">Flagged</span></td>
+                                            <td><button type="button" class="btn approve">Flagged</button></td>
+                                            <td>
+                                            	<select class="label label-info">
+                                                <option>Flagged</option>
+                                            	<option>Submitted</option>
+                                                <option>Approved</option>
+                                                <option>Completed</option>
+                                                <option>Ended</option>
+                                                <option>Delivered</option>
+                                                <option>Not Approved</option>
+                                                <option>Closed</option>
+                                                <option>Extended</option>
+                                                <option>Shipped</option>
+                                                
+                                                
+                                            </select>
+                                            </td>
+                                            <td>15</td>
+                                             <td>
+                                                <!-- Small modal -->
+                                                <button type="button" class="btn btn-comment" data-toggle="modal" data-target="#myModal1"></button>
+                                            </td>
+                                             
+                                        </tr>
+                                        
+                                        
+                                    </table>
+                                    
+                                    <button class="btn btn-default btn-bottom" type="button">Default</button>
+                                    
+                                </div>
+                                
+                            </div><!--InternalCampaign-->
+                        
+                    </form>
+                </div>  
+            </div><!--Wrapper-->   
+             
+            <footer>
+                <div id="infoBlock" class="row">
+                    <div class="col-md-12">
+                        <h5>Site Map</h5>
+                        
+                        <div class="siteBlock">
+                            <h6><a href="index.html">Home</a></h6>
+                        </div>
+                        
+                        <div class="siteBlock">
+                            <h6><a href="discover.html">Discover</a></h6>
+                            <ul>
+                                <li><a href="discover.html">Search/Browse Listing</a></li>
+                                <li><a href="campaignPage.html">Campaign Page</a></li>
+                            </ul>
+                        </div>
+                        
+                        
+                        <div class="siteBlock">
+                            <h6><a href="start.html">Start</a></h6>
+                            <ul>
+                                <li><a href="start.html">Donate a Book</a></li>
+                                <li><a href="start.html">Tips to Create Campaign</a></li>
+                                <li><a href="start.html">Get Started</a></li>
+                                <li><a href="start.html">FAQ</a></li>
+                                <li><a href="start.html">Guidelines</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="siteBlock">
+                            <h6><a href="about.html">About</a></h6>
+                            <ul>
+                                <li><a href="about.html">Donate a Book</a></li>
+                                 <li><a href="about.html">Pratham Books</a></li>
+                                <li><a href="about.html">Impact Stories</a></li>
+                            </ul>
+                        </div>
+                         
+                         <div class="siteBlock">
+                            <h6><a href="signup.html">Sign Up</a></h6>
+                                <ul>
+                                <li><a href="donorForm.html">Donor</a></li>
+                                <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+                               </ul>
+                        </div>
+                      
+                    </div>
+                    
+                    <div class="col-md-12 bottom">
+                    
+                         <div class="siteBlock">
+                            <h6><a href="privacy.html">Privacy Policy</a></h6>
+                        </div>
+                        
+                         <div class="siteBlock">
+                            <h6><a href="login.html">Login</a></h6>
+                        </div>
+                        
+                        <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+                        <div id="socialIcons">
+                            <h6>Connect</h6>
+                            <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+                            <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+                            <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+                            <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </footer>
+    
+ </div>
+
+    </body>
+</html>

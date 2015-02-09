@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pratham Books">
+	<meta name="author" content="">
+    
+    <title>Pratham Books</title>
+    
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bForm.css" rel="stylesheet" />
+    <!--<link href="css/slider.css" rel="stylesheet">-->
+    
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    
+    <script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="js/bootstrap-slider.js"></script>
+	<script src="js/bootstrap.js"></script>
+  </head>
+
+  <body>  
+      <div id="wrapperOut">
+      		
+            <header class="affix">
+              <div class="headerIn">
+                  <h1 class="logo">
+                      <a href="index.html">Pratham Books <span></span></a>
+                  </h1>
+                  <nav class="nav">
+                      <ul>
+                          <li  class="darkOrange">
+                              <a href="about.html">about
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                          
+                          <li class="orange">
+                              <a href="start.html">start
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                          
+                          <li class="lightOrange">
+                              <a href="discover.html" >discover
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                          
+                          <li  class="darkYellow">
+                              <a href="index.html">home
+                                  <span class="caret"></span>
+                              </a>
+                          </li>
+                      </ul>
+                  </nav>
+                  
+                  <div id="login">
+                      <a href="signup.html" class="btn btn-warning">sign up</a>
+                      <a href="login.html" class="btn btn-default">log in</a>
+                      <!--<a class="btn btn-default" href="login.html">log out</a>-->
+                  
+                  </div>
+              </div>
+          </header>
+          
+          <div id="wrapper">
+          
+              <div class="container internal">
+              
+                  <div id="pratham-form" class="container">
+                      <div class="row">
+                          <h2 >Donate <br>
+                          <span>Help India's Childern Read</span>
+                          </h2>
+                          
+                          <div class="col-md-12 col-sm-9">
+                          
+                              <form role="form" novalidate class="col-md-12" method="post">
+                              
+                                  <div id="internalContent" class="row beneficiary donor">
+                                      <div  id="internalCampaign" class="row ">
+                                          <div class="col-md-12">
+                                              <section id="donate" class="tab-pane active">
+                                                  <div class="alert hide">&nbsp;</div>
+                                                  <!-- Step 1 starts here-->
+                                                  <div class="jumbotron row" tabindex="1">
+                                                      <h2>Donate: Help India’s children read!</h2>
+                                                      <p>Just few more steps towards donation.</p>
+                                                  </div><!-- Jumbo-->
+                                                  
+                                                  <div class="well">
+                                                      <h3>You are donating books to Campaign: <a href="campaignPage.html">Campaign Title</a></h3>
+                                                      
+                                                      <div class="form-group row">
+                                                      		<label>Donation amount</label>
+                                                          <div class="radio">
+                                                          <label>
+                                                              <input type="radio" name="optionsRadios" checked id="amt1" value="option1">1000
+                                                          </label>
+                                                          </div>
+                                                          <div class="radio">
+                                                          <label>
+                                                              <input type="radio" name="optionsRadios" id="amt2" value="option2">500
+                                                          </label>
+                                                          </div> 
+                                                          
+                                                          <div class="radio">
+                                                          <label>
+                                                              <input type="radio" name="optionsRadios" id="amt3" value="option2">250
+                                                          </label>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-4">
+                                                              <label for="amt">Customize your donation amount</label>
+                                                          </div>
+                                                          <div class="col-xs-8">
+                                                              <input type="text" required class="form-control" id="amt"   name="amt" placeholder="Enter Donation Amount Here"/>
+                                                              <div class="alert alert-warning hide">Enter the donation amount</div>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      </div><!--well-->
+                                                      
+                                                      <div class="well">
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-12">
+                                                          		<h3>Donor Details:</h3>
+                                                           </div>
+                                                      </div>
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-3">
+                                                              <label for="name">Name</label>
+                                                          </div>
+                                                          <div class="col-xs-3">
+                                                              <input type="text"  class="form-control"  id="name"  name="name" placeholder="First Name" />
+                                                              <div class="alert alert-warning hide">Enter First Name</div>
+                                                          </div>
+                                                          <div class="col-xs-3">
+                                                              <input type="text"  class="form-control"  id="middleName"  name="firstName" placeholder="Middle Name" />
+                                                              <div class="alert alert-warning hide">Enter Middle name</div>
+                                                          </div>
+                                                          <div class="col-xs-3">
+                                                              <input type="text"  class="form-control"  id="lastName"  name="lastName" placeholder="Last Name" />
+                                                              <div class="alert alert-warning hide">Enter Last Name</div>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-3">
+                                                              <label for="address">Address</label>
+                                                          </div>
+                                                          <div class="col-xs-3">
+                                                              <input type="text" class="form-control"  id="city" name="city" placeholder="City"/>
+                                                              <div class="alert alert-warning hide">Enter City</div>
+                                                          </div>
+                                                          <div class="col-xs-3">
+                                                              <input type="text" class="form-control"  id="city" name="state" placeholder="State"/>
+                                                              <div class="alert alert-warning hide">Enter State</div>
+                                                          </div>
+                                                          <div class="col-xs-3">
+                                                              <input type="text" class="form-control"  id="pin" name="city" placeholder="Pin Code"/>
+                                                              <div class="alert alert-warning hide">Enter Pin Code</div>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-3">
+                                                              <label for="contactNumber">Contact Number</label>
+                                                          </div>
+                                                          <div class="col-xs-9">
+                                                              <input type="text" class="form-control"  id="contactNumber" name="contactNumber" placeholder="Contact Number" readonly/>
+                                                              <div class="alert alert-warning hide">Enter Contact Number</div>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-3">
+                                                              <label for="panNumber">Pan Number</label>
+                                                          </div>
+                                                          <div class="col-xs-9">
+                                                              <input type="text" class="form-control" id="panNumber" name="panNumber" placeholder="Pan Number" readonly/>
+                                                              <div class="alert alert-warning hide">Enter PanNumber</div>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-3">
+                                                              <label for="summary">Message for <span>(Campaign name)</span></label>
+                                                          </div>
+                                                          <div class="col-xs-9">
+                                                              <textarea class="form-control" rows="3" id="summary"  name="summary" placeholder="Enter Message To Beneficiary"></textarea>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                      
+                                                      
+                                                    </div><!-- well--> 
+                                                     
+                                                     <div class="well">
+                                                      
+                                                      <div class="form-group row">
+                                                          <div class="col-xs-12">
+                                                          		<h3>Would you like us to send you a Tax Exemption Certificate?</h3>
+                                                                
+                                                              <div class="checkbox">
+                                                                  <label>
+                                                                      <input type="checkbox" required  name="orgFollowing[]" value="Children in Rural areas" checked>
+                                                                     Yes
+                                                                  </label>
+                                                              </div>
+                                                              <div class="checkbox">
+                                                                  <label>
+                                                                      <input type="checkbox" required  name="orgFollowing[]" value="Children in low income Urban area" checked>
+                                                                     No
+                                                                  </label>
+                                                              </div>
+                                                          </div>
+                                                          
+                                                          <div class="col-xs-12">
+                                                          	<div class="checkbox">
+                                                                  <h3>
+                                                                      <input type="checkbox" checked="" value="Children in Rural areas" name="orgFollowing[]" required="">
+                                                                    I have read the Terms & Conditions and I also verify that all the details provided here by me are legit. 
+                                                                  </h3>
+                                                              </div>
+                                                              <a class="btn" id="proceed" type="button">Pay</a>
+                                                          </div>
+                                                      </div>
+                                                      
+                                                  </div><!--well-->
+                                              </section>
+                                              <!-- Step 1 ends here-->
+                                              
+                                              
+                                              <!-- Step 3 starts here-->
+                                              <section id="word" class="tab-pane" tabindex=3>
+                                                  <!--<div class="jumbotron row">
+                                                      <h2>Step 3: Spread The Word</h2>
+                                                      
+                                                  </div>-->
+                                                  
+                                                  <div class="well upload">
+                                                      <h3>Thank you for donating on Pratham Books’ donate-a-book.</h3>
+                                                      
+                                                      <div class="col-md-12">
+                                                      	<p>You have empowered more of India’s children to read.</p>
+                                                        
+                                                      </div>
+                                                      
+                                                       <div class="col-md-12 campaign">
+                                                       		<h3>Donate To Similar Campaigns </h3>
+                                                                                                    
+                                                            <div class="col-md-3">
+                                                                <h1>Campaign One</h1>
+                                                                
+                                                                
+                                                                <div class="campaignInfo">
+                                                                <time><span>5</span> Days Left</time>
+                                                                <h4>500<span class="percentFunded">110</span></h4>
+                                                                <div class="progress progress-warning">
+                                                                <div style="width: 20%;" class="bar"></div>
+                                                                </div>
+                                                                <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                                                                <div class="tag">
+                                                                <a href="#">Tagged</a>
+                                                                </div>
+                                                                <div class="tag">
+                                                                <a href="#">Tagged</a>
+                                                                </div>
+                                                                <h5 class="amt">Donate This Campaign</h5>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="col-md-3 ">
+                                                              <h1>Campaign One</h1>
+                                                                
+                                                                
+                                                                <div class="campaignInfo">
+                                                                    <time><span>5</span> Days Left</time>
+                                                                    <h4>500<span class="percentFunded">110</span></h4>
+                                                                    <div class="progress progress-warning">
+                                                                        <div style="width: 20%;" class="bar"></div>
+                                                                    </div>
+                                                                    <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                                                                    <div class="tag">
+                                                                        <a href="#">Tagged</a>
+                                                                    </div>
+                                                                    <div class="tag">
+                                                                        <a href="#">Tagged</a>
+                                                                    </div>
+                                                                    <h5 class="amt">Donate This Campaign</h5>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-3">
+                                                              <h1>Campaign One</h1>
+                                                                
+                                                                
+                                                                <div class="campaignInfo">
+                                                                    <time><span>5</span> Days Left</time>
+                                                                    <h4>500<span class="percentFunded">110</span></h4>
+                                                                    <div class="progress progress-warning">
+                                                                        <div style="width: 20%;" class="bar"></div>
+                                                                    </div>
+                                                                    <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                                                                    <div class="tag">
+                                                                        <a href="#">Tagged</a>
+                                                                    </div>
+                                                                    <div class="tag">
+                                                                        <a href="#">Tagged</a>
+                                                                    </div>
+                                                                    <h5 class="amt">Donate This Campaign</h5>
+                                                                </div>
+                                                            </div>
+                                                            
+                    
+                                                            
+                                                            
+                                                       </div>
+                                                      
+                                                  </div><!--well--> 
+                                                  
+                                                  
+                                              </section>
+                                              <!-- Step 3 ends here-->
+                                              
+                                              <button type="button" id="next" class="btn">Next</button>
+                                              <button type="button" id="previous" class="btn">Previous</button>
+                                          </div><!--col-md-12 -->
+                                      </div><!--Internal Campaign row -->
+                                  </div><!--/internalContent-->
+                              </form>
+                          </div><!-- xs-12 sm-9-->
+                      </div><!-- row-->
+                      
+                  </div><!-- Pratham Form-->
+                  
+              </div><!--container internal -->
+          </div><!--Wrapper-->    
+          
+          
+          <footer>
+              <div id="infoBlock" class="row">
+                  <div class="col-md-12">
+                      <h5>Site Map</h5>
+                      
+                      <div class="siteBlock">
+                          <h6><a href="index.html">Home</a></h6>
+                      </div>
+                      
+                      <div class="siteBlock">
+                          <h6><a href="discover.html">Discover</a></h6>
+                          <ul>
+                              <li><a href="discover.html">Search/Browse Listing</a></li>
+                              <li><a href="campaignPage.html">Campaign Page</a></li>
+                          </ul>
+                      </div>
+                      
+                      
+                      <div class="siteBlock">
+                          <h6><a href="start.html">Start</a></h6>
+                          <ul>
+                              <li><a href="start.html">Donate a Book</a></li>
+                              <li><a href="start.html">Tips to Create Campaign</a></li>
+                              <li><a href="start.html">Get Started</a></li>
+                              <li><a href="start.html">FAQ</a></li>
+                              <li><a href="start.html">Guidelines</a></li>
+                          </ul>
+                      </div>
+                      
+                      <div class="siteBlock">
+                          <h6><a href="about.html">About</a></h6>
+                          <ul>
+                              <li><a href="about.html">Donate a Book</a></li>
+                               <li><a href="about.html">Pratham Books</a></li>
+                              <li><a href="about.html">Impact Stories</a></li>
+                          </ul>
+                      </div>
+                       
+                       <div class="siteBlock">
+                          <h6><a href="signup.html">Sign Up</a></h6>
+                              <ul>
+                              <li><a href="donorForm.html">Donor</a></li>
+                              <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+                             </ul>
+                      </div>
+                    
+                  </div>
+                  
+                  <div class="col-md-12 bottom">
+                  
+                       <div class="siteBlock">
+                          <h6><a href="privacy.html">Privacy Policy</a></h6>
+                      </div>
+                      
+                       <div class="siteBlock">
+                          <h6><a href="login.html">Login</a></h6>
+                      </div>
+                      
+                      <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+                      <div id="socialIcons">
+                          <h6>Connect</h6>
+                          <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+                          <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+                          <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+                          <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+                      </div>
+                  </div>
+                  
+                  
+              </div>
+          </footer>
+     
+      </div>
+  </body>
+</html>

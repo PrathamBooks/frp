@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pratham Books">
+	<meta name="author" content="">
+    
+    <title>Pratham Books</title>
+    
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/prathambooks.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    
+    
+	<script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+    
+     <script src="js/bootstrap.js"></script>
+    
+    
+	<script>
+		$(function() {
+			$( "#slider-range-max" ).slider({
+			range: "max",
+			min: 1,
+			max: 10,
+			value: 2,
+			slide: function( event, ui ) {
+			$( "#amount" ).val( ui.value );
+			}
+			});
+			$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+		});
+		
+		$(function() {
+			$( "#slider-range-max2" ).slider({
+			range: "max",
+			min: 1,
+			max: 10,
+			value: 2,
+			slide: function( event, ui ) {
+			$( "#amount" ).val( ui.value );
+			}
+			});
+			$( "#amount" ).val( $( "#slider-range-max2" ).slider( "value" ) );
+		});
+    </script>
+    
+  </head>
+
+<body>  
+<div id="wrapperOut">
+	<header>
+    	<div class="headerIn">
+        	<h1 class="logo">
+                <a href="index.html">Pratham Books <span></span></a>
+            </h1>
+            <nav class="nav">
+                <ul>
+                    <li  class="darkOrange">
+                        <a href="about.html">about
+                        <span class="caret"></span>
+                        </a>
+                    </li>
+                    
+                    <li class="orange">
+                        <a href="start.html">start
+                        <span class="caret"></span>
+                        </a>
+                    </li>
+                    
+                    <li class="lightOrange">
+                        <a href="discover.html" >discover
+                        <span class="caret"></span>
+                    </a>
+                    </li>
+                    
+                    <li  class="darkYellow">
+                        <a href="index.html">home
+                        <span class="caret"></span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+                
+            <div id="login">
+                <a class="btn btn-default" href="login.html">log in</a>
+                <!--<a class="btn btn-default" href="login.html">log out</a>-->
+                <a class="btn btn-warning" href="signup.html">sign up</a>
+            </div>
+        </div>
+    </header>
+	<div id="wrapper">
+            <div class="container internal">
+            	<form role="form">
+                
+                <div class="row discover dashboard campaign" id="internalCampaign">
+                	<div class="col-md-12">
+                          <h2>Beneficiary Campaign
+                          	<span>Funding Details</span>
+                          </h2>
+                      </div>
+                      
+                      <div class="row">
+                        <div class="editSection">
+                            <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target=".bs-example-modal-lg">Edit Campaign</button>
+                            
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                    
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">Campaign Details</h4>
+                                        </div>
+                                    
+                                        <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="camTitle">Campaign Title<strong>*</strong></label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <input type="text" id="camTitle" required="" placeholder="Campaign Title" name="camTitle"  class="form-control">
+                                                <div class="alert alert-warning hide">Campaign Title</div>
+                                            </div>
+                                        </div>
+                                        
+                                         <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="campAbout">About Campaign<strong>*</strong></label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <textarea  id="campAbout" required placeholder="About Your Campaign" name="campAbout"  class="form-control"></textarea>
+                                                <div class="alert alert-warning hide">Enter few words about your campaign</div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="campLocation">Campaign Location<strong>*</strong></label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <input type="text" id="campLocation" required="" placeholder="Campaign Location" name="camLocation"  class="form-control">
+                                                <div class="alert alert-warning hide">Campaign Location</div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="impactChild">Children Impacted<strong>*</strong></label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <input type="text" id="impactChild" required="" placeholder="Number of Children Impacted" name="impactChild"  class="form-control">
+                                                <div class="alert alert-warning hide">Enter Number of children Impacted/div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="impactChild">Languages</label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                            	<select  required="" name="language"  class="form-control">
+                                                	<option value="">Select Languages</option>
+                                                    <option>English</option>
+                                                    <option>Hindi </option>
+                                                    <option>Marathi</option>
+                                                </select>
+                                                <div class="alert alert-warning hide">Select language/div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                      <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="benType">Beneficiary Type</label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                            <select id="benType"  required="" name="benType"  class="form-control">
+                                                	<option value="">Select Beneficiary Type</option>
+                                                    <option>Type 1</option>
+                                                    <option>Type 2</option>
+                                                    <option>Type 3</option>
+                                                </select>
+                                                <div class="alert alert-warning hide">Select Beneficiary Type/div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                        <div class="form-group row">
+                                            <div class="col-xs-4">
+                                                <label for="days">Number of Days</label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <input type="text" id="days" required="" placeholder="Days Left" name="days"  class="form-control">
+                                            </div>
+                                        </div>
+                                    
+                                      <div class="form-group row">
+                                          <div class="col-xs-4">
+                                              <label for="amtFunded">Amount Funded</label>
+                                          </div>
+                                          <div class="col-xs-8">
+                                              <input type="text" id="amtFunded" required="" placeholder="Amount Funded" name="amtFunded"  class="form-control">
+                                          </div>
+                                      </div>
+                                           
+                                      <div class="form-group row">
+                                          <div class="btn-group pull-right" data-toggle="buttons">
+                                              <label class="btn active">
+                                                  <input type="checkbox" checked>Add Photos
+                                              </label>
+                                              <label class="btn">
+                                                  <input type="checkbox">Create Album
+                                              </label>
+                                              <label class="btn">
+                                                  <input type="checkbox">Add Videos
+                                              </label>
+                                          </div>
+                                      </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Submit Changes</button>
+                                    </div>
+                                    
+                                </div><!--Modal Content-->
+                            </div>
+                        </div>
+                            
+                		</div>
+                        
+                        </div>      
+                      
+                      <div class="col-md-9">       
+                      <div class="col-md-3">
+                      <h1>Campaign One</h1>
+                        
+                        
+                        <div class="campaignInfo">
+                            <time><span>5</span> Days Left</time>
+                            <h4>500<span class="percentFunded">110</span></h4>
+                            <div class="progress progress-warning">
+                                <div class="bar" style="width: 20%;"></div>
+                            </div>
+                            <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <h5 class="amt">Amount Funded: <span>800</span></h5>
+                        </div>
+                    </div>
+                    
+                    
+                                            
+                      <div class="col-md-3">
+                      <h1>Campaign One</h1>
+                        
+                        
+                        <div class="campaignInfo">
+                            <time><span>5</span> Days Left</time>
+                            <h4>500<span class="percentFunded">110</span></h4>
+                            <div class="progress progress-warning">
+                                <div class="bar" style="width: 20%;"></div>
+                            </div>
+                            <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <h5 class="amt">Amount Funded: <span>1200</span></h5>
+                        </div>
+                    </div>
+                    
+                    
+                                            
+                      <div class="col-md-3">
+                      <h1>Campaign One</h1>
+                        
+                        
+                        <div class="campaignInfo">
+                            <time><span>5</span> Days Left</time>
+                            <h4>500<span class="percentFunded">110</span></h4>
+                            <div class="progress progress-warning">
+                                <div class="bar" style="width: 20%;"></div>
+                            </div>
+                            <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <h5 class="amt">Amount Funded: <span>25000</span></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <h1>Campaign One</h1>
+                        
+                        
+                        <div class="campaignInfo">
+                            <time><span>5</span> Days Left</time>
+                            <h4>500<span class="percentFunded">110</span></h4>
+                            <div class="progress progress-warning">
+                                <div class="bar" style="width: 20%;"></div>
+                            </div>
+                            <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <h5 class="amt">Amount Funded: <span>80000</span></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <h1>Campaign One</h1>
+                        
+                        
+                        <div class="campaignInfo">
+                            <time><span>5</span> Days Left</time>
+                            <h4>500<span class="percentFunded">110</span></h4>
+                            <div class="progress progress-warning">
+                                <div class="bar" style="width: 20%;"></div>
+                            </div>
+                            <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <h5 class="amt">Amount Funded: <span>15000</span></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <h1>Campaign One</h1>
+                        
+                        
+                        <div class="campaignInfo">
+                            <time><span>5</span> Days Left</time>
+                            <h4>500<span class="percentFunded">110</span></h4>
+                            <div class="progress progress-warning">
+                                <div class="bar" style="width: 20%;"></div>
+                            </div>
+                            <h5><span class="days">5</span> <span class="funders">110</span></h5>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <div class="tag">
+                                <a href="#">Tagged</a>
+                            </div>
+                            <h5 class="amt">Amount Funded: <span>120000</span></h5>
+                        </div>
+                    </div>
+                    </div><!-- col-md-12-->
+                      
+                      
+                      
+                      
+                      <div id="tagBlock" class="col-md-3">
+                      <ul class="featured">
+                      	<li>Other Donated Campaigns</li>
+                        <li><a href="#popular">Popular</a> </li>
+                        <li><a href="#Launched">Recently Launched</a></li>
+                        <li><a href="#">Ending Soon</a></li>
+                        <li><a href="#"  class="active">Most Funded</a></li>
+                      </ul>
+                      <hr />
+                      <ul class="category">
+                      	<li>Categories</li>
+                        <li><a href="#">Registered Non-Profit (Trust / Society) </a></li>
+                        <li><a href="#">Section 25 Company</a></li>
+                        <li><a href="#">Private School</a></li>
+                        <li><a href="#">Government School</a></li>
+                        <li><a href="#">Reading Centre/Library</a></li>
+                        <li><a href="#">Reading Champion / Storyteller / Volunteer</a></li>
+                        <li><a href="#">Rural Areas</a></li>
+                        <li><a href="#">Low Income Urban Area</a></li>
+                        <li><a href="#">Tribal Areas</a></li>
+                        <li><a href="#">Special Needs / Differently Abled Children</a></li>
+                      </ul>
+                      
+                      <hr />
+                      
+                      <ul class="citi">
+                      	<li>Cities</li>
+                        <li> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="search cities">
+                            <span class="input-group-addon"><a href="#"><i class="icon-search"></i></a></span>
+                        </div>
+                        </li>
+                      </ul>
+                      
+                      </div>
+                
+                </div>
+            
+            </form>
+            </div>
+    </div> 
+     
+    <footer>
+    	<div id="infoBlock" class="row">
+        	<div class="col-md-12">
+            	<h5>Site Map</h5>
+                
+                <div class="siteBlock">
+                	<h6><a href="index.html">Home</a></h6>
+                </div>
+                
+                <div class="siteBlock">
+                	<h6><a href="discover.html">Discover</a></h6>
+                    <ul>
+                    	<li><a href="discover.html">Search/Browse Listing</a></li>
+                        <li><a href="campaignPage.html">Campaign Page</a></li>
+                    </ul>
+                </div>
+                
+                
+                <div class="siteBlock">
+                	<h6><a href="start.html">Start</a></h6>
+                    <ul>
+                    	<li><a href="start.html">Donate a Book</a></li>
+                    	<li><a href="start.html">Tips to Create Campaign</a></li>
+                        <li><a href="start.html">Get Started</a></li>
+                        <li><a href="start.html">FAQ</a></li>
+                        <li><a href="start.html">Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="siteBlock">
+                	<h6><a href="about.html">About</a></h6>
+                    <ul>
+                        <li><a href="about.html">Donate a Book</a></li>
+                         <li><a href="about.html">Pratham Books</a></li>
+                    	<li><a href="about.html">Impact Stories</a></li>
+                    </ul>
+                </div>
+                 
+                 <div class="siteBlock">
+                	<h6><a href="signup.html">Sign Up</a></h6>
+                    	<ul>
+                    	<li><a href="donorForm.html">Donor</a></li>
+                        <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+                       </ul>
+                </div>
+              
+            </div>
+            
+            <div class="col-md-12 bottom">
+            
+                 <div class="siteBlock">
+                	<h6><a href="privacy.html">Privacy Policy</a></h6>
+                </div>
+                
+                 <div class="siteBlock">
+                	<h6><a href="login.html">Login</a></h6>
+                </div>
+            	
+                <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+                <div id="socialIcons">
+                	<h6>Connect</h6>
+                	<a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+                    <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+                    <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+                    <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+                </div>
+            </div>
+            
+            
+        </div>
+    </footer>  
+    
+	
+ 
+     
+	
+</div>
+  </body>
+</html>
