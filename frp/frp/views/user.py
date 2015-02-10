@@ -193,3 +193,8 @@ app.add_url_rule('/profile/edit',
 def logout():
     pop_login_session()
     return redirect(url_for('index'))
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
