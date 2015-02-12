@@ -27,7 +27,6 @@ css = Bundle("css/bootstrap.css",
              "css/slider.css",
              "css/fonts.css",
              "css/jquery-ui.css",
-             # "css/style.css",
              "css/prathambooks.css",
              output='gen/all.css')
 

@@ -60,12 +60,12 @@
         {% else %}
         <div class="btn-group">
           <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            My Profile<span class="caret"></span>
+            My Profile
           </a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="donorDashboard.html">My Donations</a></li>
             <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
-            <li><a href="profile.html">Settings</a></li>
+            <li><a href="{{ url_for('profile') }}">Settings</a></li>
             <li class="divider"></li>
             <li><a href="#">Logout</a></li>
           </ul>
