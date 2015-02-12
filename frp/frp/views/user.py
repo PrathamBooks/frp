@@ -11,10 +11,13 @@ from flask import (render_template,
 from flask.ext.oauth import OAuth
 
 from .. import app
+from .. import cache
 from ..forms import (DonorSignupForm,
                      LoginForm,
                      BeneficarySignupForm,
-                     ProfileForm)
+                     ProfileForm,
+                     CategoryForm,
+                     CampaignForm)
 from ..service import signup as signup_service
 from ..service import user as user_service
 from ..service.decorators import login_required
@@ -198,3 +201,58 @@ def logout():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route("/category/add", methods=['GET', 'POST'])
+def category_add():
+    form = CategoryForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            category = models.Category(name = form.name.data)
+            icon = request.files['icon']
+            filename = secure_filename(icon.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'icons', filename)
+                icon.save(full_save_path)
+                category.icon = filename
+            db.session.add(category)
+            db.session.commit()
+            flash("category %s added"%form.name.data)
+            return redirect("/")
+    return render_template("create_category.html", form = form)
+
+@app.route("/category/<cat_id>/icon", methods=['GET'])
+def category_icon(cat_id):
+    category = models.Category.query.filter_by(id = cat_id).first()
+    if category and category.icon:
+        return send_from_directory(app.config['UPLOAD_DIRECTORY']+"/icons/", category.icon)
+
+@app.route("/partials/<path:page>", methods = ['GET'])
+def angular_partials(page):
+    return render_template("partials/{}".format(page))
+
+@app.route("/campaign/add", methods=['GET', 'POST'])
+@login_required
+def campaign_add():
+    if request.method == "POST":
+        form = CampaignForm()
+        if form.validate_on_submit():
+            campaign = models.Campaign()
+            form.populate_obj(campaign)
+            campaign.created_by = g.user
+            db.session.add(campaign)
+            db.session.commit()
+            flash("%s added to campaign list"%form.name.data)
+            userid = g.user.username # Remove from cache
+            # TBD : implement redis cache
+            # data = cache.delete(userid)
+            return redirect("/")
+        else:
+            print form.errors
+            return render_template('create_campaign.html',
+                                   form = form)
+    else:
+        userid = g.user.username
+        # data = cache.get(userid)
+        form = CampaignForm()
+        return render_template("create_campaign.html",
+                               form = form)

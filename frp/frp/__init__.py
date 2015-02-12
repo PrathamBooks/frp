@@ -27,12 +27,12 @@ css = Bundle("css/bootstrap.css",
              "css/slider.css",
              "css/fonts.css",
              "css/jquery-ui.css",
-             "css/style.css",
+             # "css/style.css",
              "css/prathambooks.css",
              output='gen/all.css')
 
 jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
-bootstrap = Bundle("lib/bootstrap/bootstrap.min.js",
+bootstrap = Bundle("lib/bootstrap/bootstrap.js",
                    "lib/bootstrap/bootstrap-slider.js",
                    output="gen/bootstrap.js")
 angular = Bundle("lib/angular/angular.js",
@@ -40,13 +40,6 @@ angular = Bundle("lib/angular/angular.js",
                  output="gen/angular.js")
 app_js = Bundle("js/tmp/form.js", output="gen/lib.js")
 
-
-# app_js = Bundle("js/app.js",
-#                 "js/services.js",
-#                 "js/controllers.js",
-#                 "js/filters.js",
-#                 "js/directives.js",
-#                 output="gen/lib.js")
 
 assets.register('css_site', css)
 

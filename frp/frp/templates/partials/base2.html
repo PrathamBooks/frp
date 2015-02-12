@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratham Books Sign-up Form</title>
+
+{% assets "css_site" %}
+<link rel=stylesheet type=text/css href="{{ ASSET_URL }}"/>
+{% endassets %}
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapperOut">
+  <header>
+    <div class="headerIn">
+      <h1 class="logo">
+        <a href="/">
+          <span>Give Books to India's Children</span>
+        </a>
+      </h1>
+      <nav class="nav">
+        <ul>
+          <li  class="darkOrange">
+          <a href="/about">about
+            <span class="caret"></span>
+          </a>
+          </li>
+
+          <li class="orange">
+          <a href="/start">start
+            <span class="caret"></span>
+          </a>
+          </li>
+
+          <li class="lightOrange">
+          <a href="discover.html" >discover
+            <span class="caret"></span>
+          </a>
+          </li>
+
+          <li class="darkYellow">
+          <a href="/">home
+            <span class="caret"></span>
+          </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div id="login">
+        {% if not g.user %}
+        <a class="btn btn-default" href="{{ url_for('login') }}">log in</a>
+        <a class="btn btn-warning" href="{{ url_for('signup') }}">sign up</a>
+        {% else %}
+        <div class="btn-group">
+          <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            My Profile<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="donorDashboard.html">My Donations</a></li>
+            <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
+            <li><a href="profile.html">Settings</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-sm-3" id="sidebar" role="navigation">
+        <div class="list-group">
+          <a href="#step1" class="list-group-item active">Step 1</a>
+          <a href="#step2" class="list-group-item">Step 2</a>
+          <a href="#step3" class="list-group-item">Step 3</a>
+          <a href="#step4" class="list-group-item">Step 4</a>
+        </div>
+      </div><!--/span-->
+      {% block body %}
+      {% endblock %}
+    </div><!--/row-->
+  </div>
+  <footer>
+    <div id="infoBlock" class="row">
+      <div class="col-md-12">
+        <h5>Site Map</h5>
+
+        <div class="siteBlock">
+          <h6><a href="index.html">Home</a></h6>
+        </div>
+
+        <div class="siteBlock">
+          <h6><a href="discover.html">Discover</a></h6>
+          <ul>
+            <li><a href="discover.html">Search/Browse Listing</a></li>
+            <li><a href="campaignPage.html">Campaign Page</a>
+            <ul>
+              <li><a href="blank.html">Contribute/Give</a></li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="siteBlock">
+          <h6><a href="start.html">Start</a></h6>
+          <ul>
+            <li><a href="start.html">Donate a Book</a></li>
+            <li><a href="start.html">Tips to Create Campaign</a></li>
+            <li><a href="start.html">Get Started</a></li>
+            <li><a href="start.html#faqs1">FAQ</a></li>
+            <li><a href="start.html">Guidelines</a></li>
+          </ul>
+        </div>
+
+        <div class="siteBlock">
+          <h6><a href="about.html">About</a></h6>
+          <ul>
+            <li><a href="about.html">Donate a Book</a></li>
+            <li><a href="about.html">Pratham Books</a></li>
+            <li><a href="about.html">Impact Stories</a></li>
+          </ul>
+        </div>
+
+        <div class="siteBlock">
+          <h6><a href="signup.html">Sign Up</a></h6>
+          <ul>
+            <li><a href="donorForm.html">Donor</a></li>
+            <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 bottom">
+        <div class="siteBlock">
+          <h6><a href="privacy.html">Privacy Policy</a></h6>
+        </div>
+
+        <div class="siteBlock">
+          <h6><a href="login.html">Login</a></h6>
+        </div>
+
+        <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+        <div id="socialIcons">
+          <h6>Connect</h6>
+          <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+          <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+          <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+          <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  {% assets "jquery" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"/></script>
+  {% endassets %}
+
+  {% assets "bootstrap" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"/></script>
+  {% endassets %}
+
+  {% assets "app_js" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"/></script>
+  {% endassets %}
+  <script type="text/javascript" src="http://use.typekit.net/lfw6jmj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+</body>
+</html>

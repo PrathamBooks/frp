@@ -3,28 +3,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pratham Books">
-	<meta name="author" content="">
+	  <meta name="author" content="">
 
     <title>Pratham Books</title>
 
     <link rel="shortcut icon" href="ico/favicon.ico" />
-    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
-    <link href="/static/css/prathambooks.css" rel="stylesheet" />
 
+    {% assets "css_site" %}
+    <link rel=stylesheet type=text/css href="{{ ASSET_URL }}"/>
+    {% endassets %}
     <!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	  <![endif]-->
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
-    <script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
+    <script type="text/javascript" src="http://use.typekit.net/lfw6jmj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
-    <script src="/static/js/bootstrap.js"></script>
+    {% assets "app_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
+    {% endassets %}
+
+
   </head>
 
 <body>
@@ -65,13 +70,31 @@
       </nav>
 
       <div id="login">
-        <a class="btn btn-default" href="{{ url_for('login') }}">log in</a>
-        <a class="btn btn-warning" href="{{ url_for('signup') }}">sign up</a>
+        {% if not g.user %}
+          <a class="btn btn-default" href="{{ url_for('login') }}">log in</a>
+          <a class="btn btn-warning" href="{{ url_for('signup') }}">sign up</a>
+        {% else %}
+          <div class="btn-group">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              My Profile<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="donorDashboard.html">My Donations</a></li>
+              <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
+              <li><a href="profile.html">Settings</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Logout</a></li>
+            </ul>
+          </div>
+        {% endif %}
       </div>
     </div>
   </header>
 
-   <div id="wrapper"> {% block content %} {% endblock %} </div>
+   <div id="wrapper"> 
+     {% block content %} 
+     {% endblock %} 
+   </div>
    <footer>
      <div id="infoBlock" class="row">
        <div class="col-md-12">

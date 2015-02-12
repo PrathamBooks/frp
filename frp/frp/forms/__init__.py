@@ -2,3 +2,4 @@
 
 from .signup import *
 from .user import *
+from .forms import *
