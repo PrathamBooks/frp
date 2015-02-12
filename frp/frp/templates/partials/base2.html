@@ -74,28 +74,15 @@
       </div>
     </div>
   </header>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6 col-sm-3" id="sidebar" role="navigation">
-        <div class="list-group">
-          <a href="#step1" class="list-group-item active">Step 1</a>
-          <a href="#step2" class="list-group-item">Step 2</a>
-          <a href="#step3" class="list-group-item">Step 3</a>
-          <a href="#step4" class="list-group-item">Step 4</a>
-        </div>
-      </div><!--/span-->
-      {% block body %}
-      {% endblock %}
-    </div><!--/row-->
-  </div>
+  {% block body %}
+  {% endblock %}
   <footer>
     <div id="infoBlock" class="row">
       <div class="col-md-12">
         <h5>Site Map</h5>
 
         <div class="siteBlock">
-          <h6><a href="index.html">Home</a></h6>
+          <h6><a href="{{ url_for('index') }}">Home</a></h6>
         </div>
 
         <div class="siteBlock">

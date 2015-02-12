@@ -1,451 +1,286 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pratham Books">
-    <meta name="author" content="">
+{% extends "partials/base2.html" %}
+{% block body %}
+<div id="pratham-form" class="container">
+  <div class="row">
+    <h2>Donate Form</h2>
+    <div id="sidebar" class="list-group col-xs-6 col-sm-3"  role="navigation">
+      <a class="list-group-item active" href="#donate" > Step1: Donate </a>
+      <a class="list-group-item" href="#pay">Step2 : Pay </a>
+      <a class="list-group-item" href="#word">Step3 : Spread The Word </a>
+    </div>
 
-    <title>Pratham Books</title>
+    <div ng-controller="signupController" class="col-xs-12 col-sm-9"><!-- ng-controller=signupController -->
 
-    <link rel="shortcut icon" href="ico/favicon.ico">
-    <link href="/static/css/bootstrap.css" rel="stylesheet" />
-    <link href="/static/css/bForm.css" rel="stylesheet" />
-    <!--<link href="css/slider.css" rel="stylesheet">-->
+      <form role="form" novalidate class="col-md-12" method="post" action="">
 
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-
-    <!--<script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
-
-    <script type="text/javascript" src="//use.typekit.net/lfw6jmj.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="/static/js/bootstrap-slider.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/static/js/form.js"></script>
-  </head>
-
-  <body>
-      <div id="wrapperOut">
-
-          <header class="affix">
-              <div class="headerIn">
-                  <h1 class="logo">
-                  <a href="index.html">
-                      <!--<span>Give Books to India's Children</span>-->
-                  </a>
-                </h1>
-
-                <nav class="nav">
-                <ul>
-                    <li  class="darkOrange">
-                        <a href="about.html">about
-                        <span class="caret"></span>
-                        </a>
-                    </li>
-
-                    <li class="orange">
-                        <a href="start.html">start
-                        <span class="caret"></span>
-                        </a>
-                    </li>
-
-                    <li class="lightOrange">
-                        <a href="discover.html" >discover
-                        <span class="caret"></span>
-                    </a>
-                    </li>
-
-                    <li  class="darkYellow">
-                        <a href="index.html">home
-                        <span class="caret"></span>
-                    </a>
-                    </li>
-                </ul>
-            </nav>
-           <!-- <div id="login">
-            <a href="login.html" class="btn btn-default">log in</a>
-            <a href="signup.html" class="btn btn-warning">sign up</a>
-            </div>-->
-
-        </div>
-
-          </header>
-
-          <div id="wrapper">
-
-              <div class="container internal">
-
-                  <div id="pratham-form" class="container">
-                      <div class="row">
-                          <h2 class="affix">Donate Form</h2>
-                          <div id="sidebar" class="list-group col-xs-6 col-sm-3 affix"  role="navigation">
-                              <a href="#donate" class="list-group-item active"> Step1: Donate </a>
-                              <a  class="list-group-item" href="#pay">Step2 : Pay </a>
-                              <a  class="list-group-item" href="#word">Step3 : Spread The Word </a>
-                          </div>
-
-                          <div ng-controller="signupController" class="col-xs-12 col-sm-9"><!-- ng-controller=signupController -->
-
-                              <form role="form" novalidate class="col-md-12" method="post" action="">
-
-                                  <div id="internalContent" class="row beneficiary donor">
-                                      <div  id="internalCampaign" class="row ">
-                                          <div class="col-md-12">
-                                              <section id="donate" class="tab-pane active">
-                                                  <div class="alert hide">&nbsp;</div>
-                                                  <!-- Step 1 starts here-->
-                                                  <div class="jumbotron row" tabindex="1">
-                                                      <h1>Step 1: Donate</h1>
-                                                      <p>Just few more steps towards donation.</p>
-                                                  </div><!-- Jumbo-->
+        <div id="internalContent" class="row beneficiary donor">
+          <div  id="internalCampaign" class="row ">
+            <div class="col-md-12">
+              <section id="donate" class="tab-pane active">
+                <div class="alert hide">&nbsp;</div>
+                <!-- Step 1 starts here-->
+                <div class="jumbotron row" tabindex="1">
+                  <h1>Step 1: Donate</h1>
+                  <p>Just few more steps towards donation.</p>
+                </div><!-- Jumbo-->
 
 
 
-                                                  <div class="well">
-                                                      <h3>Your Contribution Summary<strong>*</strong></h3>
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="summary">Type your Contribution summary here.</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <textarea class="form-control" rows="3" ng-model="" name="summary"></textarea>
-                                                          </div>
-                                                      </div>
+                <div class="well">
+                  <h3>Your Contribution Summary<strong>*</strong></h3>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="summary">Type your Contribution summary here.</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <textarea class="form-control" rows="3" ng-model="" name="summary"></textarea>
+                    </div>
+                  </div>
 
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="amt">How much would you like to contribute?</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text" required class="form-control" ng-model="" name="amt" placeholder="Contribution Amount"/>
-                                                              <div class="alert alert-warning hide">Enter the donation amount</div>
-                                                          </div>
-                                                      </div>
-
-
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-12">
-                                                              <div class="checkbox">
-                                                                  <label>
-                                                                      <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in Rural areas" checked>
-                                                                     Don't display my name on the campaign page
-                                                                  </label>
-                                                              </div>
-                                                              <div class="checkbox">
-                                                                  <label>
-                                                                      <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in low income Urban area" checked>
-                                                                      Sign me for the PBGiving Newsletter
-                                                                  </label>
-                                                              </div>
-                                                          </div>
-                                                      </div>
-                                                      </div><!--well-->
-
-                                                      <div class="well">
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-12">
-                                                          		<h3>Contact Information:</h3>
-                                                                <p>
-                                                                    We understand that this maybe a bit cumbersome but for statutory reasons we need to have the following 	details.
-                                                                    You are just a few minutes away helping us get delightful stories to children!
-                                                                </p>
-                                                           </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="firstName">First Name</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text"  class="form-control" name="first_name"
-                                                                     value="{{ form.first_name.data or '' }}" placeholder="First Name"/>
-                                                              {% if form.first_name.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.first_name.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="lastName">Last Name</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text"  class="form-control" value="{{ form.last_name.data or ''}}" name="last_name" placeholder="Last Name"/>
-                                                              {% if form.last_name.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.last_name.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="userName">User Name</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text" class="form-control" value="{{ form.user_name.data or '' }}" name="user_name" placeholder="User Name"/>
-                                                              {% if form.user_name.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.user_name.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="password">Password</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="password" class="form-control" value="{{ form.password.data or ''}}" name="password" placeholder="Enter Password"/>
-                                                              {% if form.password.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.password.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                              <div class="alert alert-warning hide">Enter password</div>
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="email">Email</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="email" class="form-control" value="{{ form.email.data or '' }}" name="email" placeholder="Enter Email id"/>
-                                                              {% if form.email.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.email.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                              <div class="alert alert-warning hide">Enter email Id</div>
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="address">Address</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text" class="form-control" value="{{ form.address.data or '' }}" name="address" placeholder="Address"/>
-                                                              {% if form.address.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.adrress.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="contactNumber">Contact Number</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text" class="form-control" value="{{ form.contact_number.data or '' }}" name="contact_number" placeholder="Contact Number"/>
-                                                              {% if form.contact_number.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.contact_number.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-4">
-                                                              <label for="panNumber">Pan Number</label>
-                                                          </div>
-                                                          <div class="col-xs-8">
-                                                              <input type="text" class="form-control" value="{{ form.pan_number.data or '' }}" name="pan_number" placeholder="Pan Number"/>
-                                                              {% if form.pan_number.errors %}
-                                                              <ul class="errors">
-                                                                  {% for error in form.pan_number.errors %}
-                                                                  <li><div class="alert alert-warning">{{ error }}</div></li>
-                                                                  {% endfor %}
-                                                              </ul>
-                                                              {% endif %}
-                                                          </div>
-                                                      </div>
-                                                    </div><!-- well-->
-
-                                                     <div class="well">
-
-                                                      <div class="form-group row">
-                                                          <div class="col-xs-12">
-                                                              <h3>Would you like us to send you a Tax Exemption Certificate?</h3>
-
-                                                              <div class="checkbox">
-                                                                  <label>
-                                                                      <input type="radio" required
-                                                                             name="need_80g_certificate" value="Yes"
-                                                                             {% if form.need_80g_certificate %} checked {% endif %}>
-                                                                     Yes
-                                                                  </label>
-                                                              </div>
-                                                              <div class="checkbox">
-                                                                  <label>
-                                                                      <input type="radio" required name="need_80g_certificate" value="No" {% if not form.need_80g_certificate %} checked {% endif %}>
-                                                                     No
-                                                                  </label>
-                                                              </div>
-                                                          </div>
-                                                      </div>
-
-                                                  </div><!--well-->
-                                              </section>
-                                              <!-- Step 1 ends here-->
-
-                                              <!-- Step 2 starts here-->
-                                              <section id="pay"  class="tab-pane hide" tabindex="2">
-                                                  <div class="jumbotron row">
-                                                  <h1>Step 2: Pay</h1>
-                                                  <p>You are just a few simple steps away from getting fabulous stories to the children that you work with!</p>
-                                                  </div>
-
-                                                  <div class="well">
-                                                      <h3>Will need to be directed to Payement Gateway</h3>
-                                                  </div><!--well-->
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="amt">How much would you like to contribute?</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" required class="form-control" ng-model="" name="amt" placeholder="Contribution Amount"/>
+                      <div class="alert alert-warning hide">Enter the donation amount</div>
+                    </div>
+                  </div>
 
 
-                                              </section>
-                                              <!-- Step 2 ends here-->
 
-                                              <!-- Step 3 starts here-->
-                                              <section id="word" class="tab-pane hide" tabindex=3>
-                                                  <div class="jumbotron row">
-                                                      <h1>Step 3: Spread The Word</h1>
+                  <div class="form-group row">
+                    <div class="col-xs-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in Rural areas" checked>
+                          Don't display my name on the campaign page
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in low income Urban area" checked>
+                          Sign me for the PBGiving Newsletter
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div><!--well-->
 
-                                                  </div>
+                <div class="well">
+                  <div class="form-group row">
+                    <div class="col-xs-12">
+                      <h3>Contact Information:</h3>
+                      <p>
+                      We understand that this maybe a bit cumbersome but for statutory reasons we need to have the following 	details.
+                      You are just a few minutes away helping us get delightful stories to children!
+                      </p>
+                    </div>
+                  </div>
 
-                                                  <div class="well upload">
-                                                      <h3>Thank you for donating on PBgiving. </h3>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="firstName">First Name</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text"  class="form-control" name="first_name"
+                      value="{{ form.first_name.data or '' }}" placeholder="First Name"/>
+                      {% if form.first_name.errors %}
+                      <ul class="errors">
+                        {% for error in form.first_name.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
 
-                                                      <div class="col-md-12">
-                                                      	<p>
-                                                            Your contribution is going to help us put many many books in the hands of children across the length and breadth of India.
-                                                            Do help your preferred beneficiary achieve its campaign goal but sharing this link among your friends and family.
-                                                        </p>
-                                                      </div>
-                                                  </div><!--well-->
-                                              </section>
-                                              <!-- Step 3 ends here-->
-                                              <a type="button" id="next" class="btn hide">Next</a>
-                                              <a type="button" id="previous" class="btn hide">Previous</a>
-                                          </div><!--col-md-12 -->
-                                      </div><!--Internal Campaign row -->
-                                  </div><!--/internalContent-->
-                                  <button class="btn btn-default"> Submit </button>
-                              </form>
-                          </div><!-- xs-12 sm-9-->
-                      </div><!-- row-->
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="lastName">Last Name</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text"  class="form-control" value="{{ form.last_name.data or ''}}" name="last_name" placeholder="Last Name"/>
+                      {% if form.last_name.errors %}
+                      <ul class="errors">
+                        {% for error in form.last_name.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
 
-                  </div><!-- Pratham Form-->
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="userName">User Name</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" value="{{ form.user_name.data or '' }}" name="user_name" placeholder="User Name"/>
+                      {% if form.user_name.errors %}
+                      <ul class="errors">
+                        {% for error in form.user_name.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
 
-              </div><!--container internal -->
-          </div><!--Wrapper-->
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="password">Password</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="password" class="form-control" value="{{ form.password.data or ''}}" name="password" placeholder="Enter Password"/>
+                      {% if form.password.errors %}
+                      <ul class="errors">
+                        {% for error in form.password.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                      <div class="alert alert-warning hide">Enter password</div>
+                    </div>
+                  </div>
 
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="email">Email</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="email" class="form-control" value="{{ form.email.data or '' }}" name="email" placeholder="Enter Email id"/>
+                      {% if form.email.errors %}
+                      <ul class="errors">
+                        {% for error in form.email.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                      <div class="alert alert-warning hide">Enter email Id</div>
+                    </div>
+                  </div>
 
-          <footer>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="address">Address</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" value="{{ form.address.data or '' }}" name="address" placeholder="Address"/>
+                      {% if form.address.errors %}
+                      <ul class="errors">
+                        {% for error in form.adrress.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
 
-          <div id="infoBlock" class="row">
-        	<div class="col-md-12">
-            	<h5>Site Map</h5>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="contactNumber">Contact Number</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" value="{{ form.contact_number.data or '' }}" name="contact_number" placeholder="Contact Number"/>
+                      {% if form.contact_number.errors %}
+                      <ul class="errors">
+                        {% for error in form.contact_number.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
 
-                <div class="siteBlock">
-                	<h6><a href="index.html">Home</a></h6>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="panNumber">Pan Number</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" value="{{ form.pan_number.data or '' }}" name="pan_number" placeholder="Pan Number"/>
+                      {% if form.pan_number.errors %}
+                      <ul class="errors">
+                        {% for error in form.pan_number.errors %}
+                        <li><div class="alert alert-warning">{{ error }}</div></li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div><!-- well-->
+
+                <div class="well">
+
+                  <div class="form-group row">
+                    <div class="col-xs-12">
+                      <h3>Would you like us to send you a Tax Exemption Certificate?</h3>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="radio" required
+                          name="need_80g_certificate" value="Yes"
+                          {% if form.need_80g_certificate %} checked {% endif %}>
+                          Yes
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="radio" required name="need_80g_certificate" value="No" {% if not form.need_80g_certificate %} checked {% endif %}>
+                          No
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!--well-->
+              </section>
+              <!-- Step 1 ends here-->
+
+              <!-- Step 2 starts here-->
+              <section id="pay"  class="tab-pane hide" tabindex="2">
+                <div class="jumbotron row">
+                  <h1>Step 2: Pay</h1>
+                  <p>You are just a few simple steps away from getting fabulous stories to the children that you work with!</p>
                 </div>
 
-                <div class="siteBlock">
-                	<h6><a href="discover.html">Discover</a></h6>
-                    <ul>
-                    	<li><a href="discover.html">Search/Browse Listing</a></li>
-                        <li><a href="campaignPage.html">Campaign Page</a>
-                        	<ul>
-                            <li><a href="blank.html">Contribute/Give</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <div class="well">
+                  <h3>Will need to be directed to Payement Gateway</h3>
+                </div><!--well-->
+
+
+              </section>
+              <!-- Step 2 ends here-->
+
+              <!-- Step 3 starts here-->
+              <section id="word" class="tab-pane hide" tabindex=3>
+                <div class="jumbotron row">
+                  <h1>Step 3: Spread The Word</h1>
+
                 </div>
 
+                <div class="well upload">
+                  <h3>Thank you for donating on PBgiving. </h3>
 
-                <div class="siteBlock">
-                	<h6><a href="start.html">Start</a></h6>
-                    <ul>
-                    	<li><a href="start.html">Donate a Book</a></li>
-                    	<li><a href="start.html">Tips to Create Campaign</a></li>
-                        <li><a href="start.html">Get Started</a></li>
-                        <li><a href="start.html">FAQ</a></li>
-                        <li><a href="start.html">Guidelines</a></li>
-                    </ul>
-                </div>
+                  <div class="col-md-12">
+                    <p>
+                    Your contribution is going to help us put many many books in the hands of children across the length and breadth of India.
+                    Do help your preferred beneficiary achieve its campaign goal but sharing this link among your friends and family.
+                    </p>
+                  </div>
+                </div><!--well-->
+              </section>
+              <!-- Step 3 ends here-->
+              <a type="button" id="next" class="btn hide">Next</a>
+              <a type="button" id="previous" class="btn hide">Previous</a>
+            </div><!--col-md-12 -->
+          </div><!--Internal Campaign row -->
+        </div><!--/internalContent-->
+        <button class="btn btn-default"> Submit </button>
+      </form>
+    </div><!-- xs-12 sm-9-->
+  </div><!-- row-->
 
-                <div class="siteBlock">
-                	<h6><a href="about.html">About</a></h6>
-                    <ul>
-                        <li><a href="about.html">Donate a Book</a></li>
-                         <li><a href="about.html">Pratham Books</a></li>
-                    	<li><a href="about.html">Impact Stories</a></li>
-                        <li><a href="about.html">FAQ</a></li>
-                        <li><a href="about.html">Stats</a></li>
-                    </ul>
-                </div>
+</div><!-- Pratham Form-->
 
-                 <div class="siteBlock">
-                	<h6><a href="signup.html">Sign Up</a></h6>
-                    	<ul>
-                    	<li><a href="donorForm.html">Donor</a></li>
-                        <li><a href="beneficiaryForm.html">Beneficiary</a></li>
-                       </ul>
-                </div>
-
-            </div>
-
-            <div class="col-md-12 bottom">
-
-                 <div class="siteBlock">
-                	<h6><a href="privacy.html">Privacy Policy</a></h6>
-                </div>
-
-                 <div class="siteBlock">
-                	<h6><a href="login.html">Login</a></h6>
-                </div>
-
-                <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
-                <div id="socialIcons">
-                	<h6>Connect</h6>
-                	<a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
-                    <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
-                    <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
-                    <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
-                </div>
-            </div>
-        </div>
-          </footer>
-      </div>
-  </body>
-</html>
+{% endblock body %}

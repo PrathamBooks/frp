@@ -81,9 +81,9 @@
             <ul class="dropdown-menu" role="menu">
               <li><a href="donorDashboard.html">My Donations</a></li>
               <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
-              <li><a href="profile.html">Settings</a></li>
+              <li><a href="{{ url_for('profile') }}">Settings</a></li>
               <li class="divider"></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
           </div>
         {% endif %}
@@ -101,7 +101,7 @@
          <h5>Site Map</h5>
 
          <div class="siteBlock">
-           <h6><a href="index.html">Home</a></h6>
+           <h6><a href="{{ url_for('index') }}">Home</a></h6>
          </div>
 
          <div class="siteBlock">
