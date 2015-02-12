@@ -342,7 +342,7 @@ header nav ul .darkOrange {
 }
 header #login {
   float: left;
-  margin: 34px 0 0 166px;
+  margin: -40px 0 0 166px;
   padding: 20px 20px 0 0;
 }
 header #login a.btn {
@@ -350,7 +350,7 @@ header #login a.btn {
   font-weight: bold;
   text-transform: uppercase;
   border: 0.1em solid #000;
-  border-radius: 11px;
+  border-radius: 20px;
   padding: 5px 13px 2px;
   margin: 0 10px 0 0;
   float: left!important;
