@@ -62,7 +62,7 @@
           </li>
 
           <li class="darkYellow">
-            <a href="/">home
+            <a href="{{ url_for('index') }}">home
                <span class="caret"></span>
             </a>
           </li>
@@ -75,7 +75,7 @@
           <a class="btn btn-warning" href="{{ url_for('signup') }}">sign up</a>
         {% else %}
           <div class="btn-group">
-            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <a id = "profile-btn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               My Profile<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">

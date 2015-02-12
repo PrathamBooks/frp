@@ -345,6 +345,12 @@ header #login {
   margin: -40px 0 0 166px;
   padding: 20px 20px 0 0;
 }
+
+header #login #profile-btn {
+  margin-left: 30px;
+  background-image: none !important;
+}
+
 header #login a.btn {
   font-size: 1.1em;
   font-weight: bold;

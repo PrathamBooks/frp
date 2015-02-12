@@ -66,7 +66,7 @@ $(function() {
     $('.percentageSlider').slider();
     showBottomNavigation();
 
-	$('div.list-group a, .nav li a, #previous, #next').click(function (e) {
+	$('div.list-group a, #previous, #next').click(function (e) {
         e.preventDefault();
         var id = $('section:visible').attr('id');
         if($('section#' + id + ' :invalid').length > 0){
