@@ -6,8 +6,8 @@ from . import db, BaseNameMixin, BaseMixin
 
 
 __all__ = ['ORG_STATUS', 'ORG_STATUS_CHOICES', 'Organization',
-           'OrganizationInfo', 'OrganizationWork', 'is_org_name_exists',
-           'is_org_email_exists']
+           'OrganizationInfo', 'OrganizationWork', 'Campaign',
+           'is_org_name_exists', 'is_org_email_exists']
 
 
 def is_org_name_exists(name):
@@ -46,6 +46,8 @@ class ORG_STATUS:
                          'value': 5}
     reading_centre = {'desc': 'Reading centre / library',
                       'value': 6}
+    volunteer  = {'desc': 'Reading Champion / Storyteller / Volunteer',
+                      'value': 7}
 
 
 ORG_STATUS_CHOICES = sorted(map(lambda x: (x[1]['value'], x[1]['desc']),
@@ -59,6 +61,8 @@ class Organization(BaseNameMixin, db.Model):
     info = db.relationship("OrganizationInfo",
                            backref=db.backref("org"),
                            uselist=False)
+    campaigns = db.relationship("Campaign",
+                                backref=db.backref("org"))
 
 
 class OrganizationInfo(BaseMixin, db.Model):
@@ -96,3 +100,16 @@ class OrganizationWork(BaseMixin, db.Model):
     organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
     organization = db.relationship("Organization", backref='works')
     choice_id = db.Column(db.Integer, nullable=False)
+
+class Campaign(BaseMixin, db.Model):
+    __tablename__ = 'campaign'
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    nbooks = db.Column(db.Integer(), nullable=True)
+    nlic = db.Column(db.Integer(), nullable=True)
+    organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'), nullable=False)
+    title = db.Column(db.Unicode(250), nullable=False)
+    description = db.Column(db.Unicode(500), nullable=False)
+    who = db.Column(db.Unicode(500), nullable=False)
+    impact = db.Column(db.Unicode(500), nullable=False)
+    utilization = db.Column(db.Unicode(500), nullable=False)

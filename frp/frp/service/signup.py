@@ -2,11 +2,13 @@
 
 from flask import g
 
+from .. import app
+
 from ..models import (db, User, UserInfo, USER_STATUS, is_email_exists,
-                      Organization, OrganizationInfo, OrganizationWork)
+                      Organization, OrganizationInfo, OrganizationWork, Campaign)
 
 
-def create_beneficary(form):
+def create_beneficiary(form):
     category = form.category.data
     title = form.title.data
     status = form.organization_status.data
@@ -25,9 +27,8 @@ def create_beneficary(form):
     person2_position = form.person2_position.data
     person2_email = form.person2_email.data
     person2_phone = form.person2_phone.data
-    org_intro = form.org_intro.data
+    # org_intro = form.org_intro.data
     total_impact_on_children = form.total_impact_on_children.data
-    age_group_of_children = form.age_group_of_children.data
     org_work = form.org_work.data
 
     # Create organization
@@ -42,19 +43,35 @@ def create_beneficary(form):
         person1_position=person1_position, person1_email=person1_email,
         person1_phone=person1_phone, person2_name=person2_name,
         person2_position=person2_position, person2_email=person2_email,
-        person2_phone=person2_phone, intro=org_intro,
-        total_impact_on_children=total_impact_on_children,
-        age_group_of_children=age_group_of_children)
+        person2_phone=person2_phone, 
+        total_impact_on_children=total_impact_on_children)
+        
     db.session.add(org_info)
 
-    # Create org work
     for choice in org_work:
+    # Create org work
         work = OrganizationWork(organization=org, choice_id=choice)
         db.session.add(work)
+
+    # Create campaign
+    project_title = form.project_title.data
+    project_description = form.project_description.data
+    project_who_are_you = form.project_who_are_you.data
+    project_impact = form.project_impact.data
+    fund_utilization = form.fund_utilization.data
+    nbooks = form.project_books.data
+    nlic = form.project_lib_in_classroom.data
+    campaign = Campaign(created_by=g.user, org=org,
+            title=project_title, description=project_description, 
+            who=project_who_are_you, impact=project_impact,
+            utilization=fund_utilization, nbooks=nbooks, nlic=nlic)
+    db.session.add(campaign)
 
     try:
         db.session.commit()
     except Exception as e:
+        print e
+        app.logger.warning('Unable to save')
         db.session.rollback()
         return {'error': True, 'exc': e}
 

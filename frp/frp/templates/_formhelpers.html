@@ -52,24 +52,32 @@
 {% endmacro %}
 
 
-{% macro render_text_field(field)  %}
+{% macro render_text_field(field, placeholder)  %}
 <div class="form-group row">
   <div class="col-xs-4">
     {{field.label}}
   </div>
   <div class="col-xs-8">
-    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
+    {% if (placeholder) %}
+      <input type="text" class="form-control" name="{{field.name}}" placeholder="{{placeholder}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
+    {% else %}
+      <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
+    {% endif %}
     {% if field.help_text %}
-    <p class="help-block">{{field.help_text}}</p>
+      <p class="help-block">{{field.help_text}}</p>
     {% endif %}
   </div>
 </div>
 {% endmacro %}
 
-{% macro render_text_area(field)  %}
+{% macro render_text_area(field, placeholder=0)  %}
 <div class="form-group row">
   {{ field.label }}
-  <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|default('',True)}}</textarea>
+  {% if placeholder %}
+    <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}">{{field.data|default('',True)}}</textarea>
+  {% else %}
+    <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|default('',True)}}</textarea>
+  {% endif %}
   {% if field.help_text %}
   <p class="help-block">{{field.help_text}}</p>
   {% endif %}
@@ -112,6 +120,23 @@
 </tr>
 {% endmacro %}
 
+{%macro render_checkbox(field)%}
+{% if field.flags.required %}<span class="required">*</span>{% endif %}
+{% for subfield in field %}
+{% if subfield.data == field.data %}
+<div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
+{% else %}
+<div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
+{% endif %}
+{% endfor %}
+{% if field.errors %}
+<ul class=errors>
+  {% for error in field.errors %}
+  <li>{{ error }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{%endmacro%}
 {%macro render_bullets(field)%}
 {% if field.flags.required %}<span class="required">*</span>{% endif %}
 {% for subfield in field %}

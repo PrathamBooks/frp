@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pratham Books Sign-up Form</title>
 
-{% assets "css_site" %}
+{% assets "bforms" %}
 <link rel=stylesheet type=text/css href="{{ ASSET_URL }}"/>
 {% endassets %}
 
@@ -18,7 +18,7 @@
 </head>
 <body>
 <div id="wrapperOut">
-  <header>
+  <header class="affix">
     <div class="headerIn">
       <h1 class="logo">
         <a href="/">
@@ -67,7 +67,7 @@
             <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
             <li><a href="{{ url_for('profile') }}">Settings</a></li>
             <li class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
           </ul>
         </div>
         {% endif %}

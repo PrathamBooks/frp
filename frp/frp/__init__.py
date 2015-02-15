@@ -16,19 +16,32 @@ def create_app(settings='settings/development.py'):
 
 app = create_app(
     os.environ.get('APP_SETTINGS', 'settings/development.py'))
+
+import logging
+from logging import FileHandler
+file_handler = FileHandler('server.log')
+file_handler.setLevel(logging.WARNING)
+app.logger.addHandler(file_handler)
+
 assets = Environment(app)
 
 mailer = Mailer(app)
 cache = Cache(app, config={'CACHE_TYPE': 'redis'})
 
 css = Bundle("css/bootstrap.css",
-             # "css/bootstrap-theme.css",
-             "css/bForm.css",
              "css/slider.css",
              "css/fonts.css",
              "css/jquery-ui.css",
              "css/prathambooks.css",
              output='gen/all.css')
+
+bforms_css = Bundle("css/bootstrap.css",
+             "css/slider.css",
+             "css/bForm.css",
+             "css/jquery-ui.css",
+             output='gen/bforms.css')
+
+
 
 jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
 bootstrap = Bundle("lib/bootstrap/bootstrap.js",
@@ -37,10 +50,11 @@ bootstrap = Bundle("lib/bootstrap/bootstrap.js",
 angular = Bundle("lib/angular/angular.js",
                  "lib/angular/angular-route.js",
                  output="gen/angular.js")
-app_js = Bundle("js/tmp/form.js", output="gen/lib.js")
+app_js = Bundle("js/form.js", output="gen/lib.js")
 
 
 assets.register('css_site', css)
+assets.register('bforms', bforms_css)
 
 assets.register('app_js', app_js)
 assets.register('jquery', jquery)

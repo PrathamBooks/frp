@@ -14,7 +14,7 @@ from .. import app
 from .. import cache
 from ..forms import (DonorSignupForm,
                      LoginForm,
-                     BeneficarySignupForm,
+                     BeneficiarySignupForm,
                      ProfileForm,
                      CategoryForm,
                      CampaignForm)
@@ -53,47 +53,29 @@ def signup():
     return render_template('signup.html')
 
 
-class SignupAsBeneficary(views.MethodView):
-    @login_required
-    def get(self):
-        form = BeneficarySignupForm()
-        return render_template('signup_as_beneficary.html', form=form)
+@app.route('/signup/beneficiary', methods=['GET', 'POST'])
+@login_required
+def signup_as_beneficiary():
+    if request.method == 'GET':
+        form = BeneficiarySignupForm()
+        app.logger.warning("In SignupAsBeneficiary")
+        return render_template('beneficiary_form.html', form=form)
 
-    @login_required
-    def post(self):
-        form = BeneficarySignupForm(request.form)
+    elif request.method == 'POST':
+        app.logger.warning("In signup_as_beneficiary with POST")
+        form = BeneficiarySignupForm(request.form)
         if form.validate():
-            result = signup_service.create_beneficary(form)
+            app.logger.warning("In signup_as_beneficiary after form validation")
+            result = signup_service.create_beneficiary(form)
             if not result['error']:
                 return redirect(url_for('org_info'))
             else:
                 flash('Oops something went wrong, please try again')
-        return render_template('signup_as_beneficary.html', form=form)
 
+        if form.errors: 
+            print form.errors
 
-app.add_url_rule('/signup/beneficary',
-                 view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
-
-
-class SignupAsBeneficaryTemp(views.MethodView):
-    @login_required
-    def get(self):
-        form = BeneficarySignupForm()
-        return render_template('sigup_as_beneficary_old.html', form=form)
-
-    @login_required
-    def post(self):
-        form = BeneficarySignupForm(request.form)
-        if form.validate():
-            result = signup_service.create_beneficary(form)
-            if not result['error']:
-                return redirect(url_for('org_info'))
-            else:
-                flash('Oops something went wrong, please try again')
-        return render_template('sigup_as_beneficary_old.html', form=form)
-
-app.add_url_rule('/signup/beneficarytemp',
-                 view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
+        return render_template('beneficiary_form.html', form=form)
 
 
 @app.route('/signup/donor', methods=['GET', 'POST'])
@@ -230,41 +212,14 @@ def category_icon(cat_id):
 def angular_partials(page):
     return render_template("partials/{}".format(page))
 
-@app.route("/campaign/add", methods=['GET', 'POST'])
-@login_required
-def campaign_add():
-    if request.method == "POST":
-        form = CampaignForm()
-        if form.validate_on_submit():
-            campaign = models.Campaign()
-            form.populate_obj(campaign)
-            campaign.created_by = g.user
-            db.session.add(campaign)
-            db.session.commit()
-            flash("%s added to campaign list"%form.name.data)
-            userid = g.user.username # Remove from cache
-            # TBD : implement redis cache
-            # data = cache.delete(userid)
-            return redirect("/")
-        else:
-            print form.errors
-            return render_template('create_campaign.html',
-                                   form = form)
-    else:
-        userid = g.user.username
-        # data = cache.get(userid)
-        form = CampaignForm()
-        return render_template("create_campaign.html",
-                               form = form)
-
-@app.route("/discover", methods=['GET', 'POST'])
+@app.route("/discover", methods=['GET'])
 def discover():
     return render_template('discover.html')
 
-@app.route("/start", methods=['GET', 'POST'])
+@app.route("/start", methods=['GET'])
 def start():
     return render_template('start.html')
 
-@app.route("/campaignPage", methods=['GET', 'POST'])
+@app.route("/campaignPage", methods=['GET'])
 def campaignPage():
     return render_template('campaignPage.html')

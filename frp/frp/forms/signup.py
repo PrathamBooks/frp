@@ -2,13 +2,14 @@
 
 import wtforms
 import coaster
+from .. import app
 
 from ..models import (is_username_exists, is_email_exists, ORG_STATUS_CHOICES,
                       is_org_email_exists, is_org_name_exists)
 
 
 
-__all__ = ['DonorSignupForm', 'BeneficarySignupForm', 'BENEFICARY_CATEGORY',
+__all__ = ['DonorSignupForm', 'BeneficiarySignupForm', 'BENEFICIARY_CATEGORY',
            'ORG_WORK_CHOICES']
 
 
@@ -69,7 +70,7 @@ class DonorSignupForm(wtforms.Form):
             raise wtforms.ValidationError(u'{} already exists.'.format(email))
 
 
-BENEFICARY_CATEGORY = [
+BENEFICIARY_CATEGORY = [
     (1, 'I am an organization/school raising books for a single library'),
     (2, 'I am an organization raising books for multiple centres'),
     (3, 'I am a Reading Champion needing books for my storytelling sessions'),
@@ -84,12 +85,12 @@ ORG_WORK_CHOICES = [
     (5, 'Children who are differently abled')]
 
 
-class BeneficarySignupForm(wtforms.Form):
+class BeneficiarySignupForm(wtforms.Form):
     category = wtforms.RadioField(
         label='Which category best describes you? *',
         validators=[wtforms.validators.Required()],
         coerce=int,
-        choices=BENEFICARY_CATEGORY)
+        choices=BENEFICIARY_CATEGORY)
     title = wtforms.TextField(
         label='Name of the Organisation/Individual ',
         validators=[wtforms.validators.Required(),
@@ -169,11 +170,6 @@ class BeneficarySignupForm(wtforms.Form):
         validators=[wtforms.validators.Optional(),
                     wtforms.validators.Length(max=15)])
 
-    org_intro = wtforms.TextField(
-        label='Please explain briefly the impact that your organisation\'s work is having on children / community it is serving .',
-        validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=500)]
-    )
     total_impact_on_children = wtforms.IntegerField(
         label='Number of children that you/your organization have impacted since commencement / impacts currently',
         validators=[wtforms.validators.Required()])
@@ -187,17 +183,52 @@ class BeneficarySignupForm(wtforms.Form):
         coerce=int,
         choices=ORG_WORK_CHOICES)
 
-    def validate_name(self, field):
-        name = field.data.strip()
+    project_books = wtforms.IntegerField(
+        label='Books / Books as Prize or Give-Aways / For Reading Sessions',
+        validators=[wtforms.validators.Optional()])
+
+    project_lib_in_classroom = wtforms.IntegerField(
+        label='Library in a Classroom/Books in a Bag',
+        validators=[wtforms.validators.Optional()])
+
+
+    project_title = wtforms.TextField(
+        label='Please enter the project title here. This is the first thing your Donor sees and you can also be searched with it.',
+        validators=[wtforms.validators.Optional(),
+                    wtforms.validators.Length(max=100)])
+
+    project_description = wtforms.TextAreaField(
+        label='Brief description of your project for which you are seeking funding.',
+        validators=[wtforms.validators.Required(),
+                    wtforms.validators.Length(max=100)])
+
+    project_who_are_you = wtforms.TextAreaField(
+            label='Who are you ?',
+            validators=[wtforms.validators.Required(),
+                    wtforms.validators.Length(max=100)])
+
+    project_impact = wtforms.TextAreaField(
+            label='What work do you do and how does it impact society ?',
+            validators=[wtforms.validators.Required(),
+                    wtforms.validators.Length(max=100)])
+
+    fund_utilization = wtforms.TextAreaField(
+            label='How will the funds be utilized?',
+            validators=[wtforms.validators.Required(),
+                    wtforms.validators.Length(max=100)])
+
+
+    # def validate_name(self, field):
+    #     name = field.data.strip()
 
         # Check username is in db.
-        if is_org_name_exists(name):
-            msg = u'{} already exists'.format(name)
-            raise wtforms.ValidationError(msg)
+     #    if is_org_name_exists(name):
+      #       msg = u'{} already exists'.format(name)
+       #      raise wtforms.ValidationError(msg)
 
-    def validate_email(self, field):
-        email = field.data.strip()
-
-        # Check organization email exists
-        if is_org_email_exists(email):
-            raise wtforms.ValidationError(u'{} already exists.'.format(email))
+    # def validate_email(self, field):
+     #    email = field.data.strip()
+# 
+ #        # Check organization email exists
+ #        if is_org_email_exists(email):
+  #           raise wtforms.ValidationError(u'{} already exists.'.format(email))

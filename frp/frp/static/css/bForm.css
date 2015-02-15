@@ -11,8 +11,7 @@ body{
 	font-style: normal;
 	font-size:100%;
 	overflow-x:hidden;
-	/*font-family: "ligurino-condensed",sans-serif !important;*/
-	font-family: "proxima-nova",sans-serif;
+	font-family: "proxima-nova",sans-serif !important;
 	
 }
 p {
@@ -33,10 +32,10 @@ ol li{
     list-style-type: lower-alpha !important;
     margin: 0 10px 0 20px;
 }
+
 .row {
   margin: 0px;
 }
-
 
 #wrapperOut{
   width: 100%;
@@ -55,8 +54,6 @@ ol li{
 #wrapper .container{
 	width:1200px;
 }
-
-
 
 #wrapper .btn-bottom {
   width: 60px;
@@ -121,7 +118,7 @@ header h1.logo {
   margin: 8px 0 0 15px;
   padding: 0;
   position: relative;
-  width: 325px;
+  width: 195px;
   z-index: 2;
 }
 
@@ -203,8 +200,6 @@ header nav ul li.darkYellow .caret {
     background-image:none !important
 }
 
-
-
 .btn{
 	background-color: #fbe659;
     background-image: url(../images/rightArrow.png) !important;
@@ -223,6 +218,10 @@ header nav ul li.darkYellow .caret {
     text-align: left;
     text-transform: uppercase;
     width: auto;	
+}
+
+#proceed.btn{
+	background-position: 230px 14px !important;
 }
 
 .btn:hover{
@@ -260,7 +259,6 @@ header nav ul li.darkYellow .caret {
 .btnFile::-webkit-file-upload-button {
   visibility: hidden;
 }
-
 
 .btnFile:before {
   content: 'Select some files';
@@ -310,58 +308,57 @@ header nav ul li.darkYellow .caret {
 .btnMedia .btn{
 	background-image:none !important;
 }
-/*hr{
-	border-top: 3px dotted #bdae85;
-    float: left;
-    height: 1px;
-    margin: 30px 0 40px 170px;
-    position: relative;
-    width: 60%;
-}*/
+
 .alert{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
     color: #ff7800;
-    font-size: 1.4em;
-    margin: -22px 0 12px;
+    margin: -12px 0 12px;
     padding: 5px 5px 0;
 	float:left;
 	width:100%;
+	font-family: "proxima-nova",sans-serif !important;
+	font-size: 1.4em;
+    font-weight: 600;
+	
 }
 
 .alertleft{
-	 margin: -2px 0 12px;
+	margin: -2px 0 12px;
     padding: 5px 0 0;
 }
 
-
 header #login {
     float: left;
-    margin: 31px 0 0 20px;
+    margin: 33px 0 0 120px;
     min-width: 167px;
     padding: 20px 20px 0 0;
-    width: auto;
+    width: 220px;
 }
 
 header #login .btn {
-    border: 0.1em solid #000;
-    border-radius: 11px;
+	border: 0.1em solid #000;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 1.1em;
     font-weight: bold;
+    height: auto;
+    letter-spacing: 0;
+    line-height: 22px;
     margin: 0 10px 0 0;
-    padding: 5px 13px 2px;
+    padding: 1px 13px;
     text-transform: uppercase;
+	
 }
+
 header #login .btn-default {
     background-color: #ffffff;
-    border-color: #cccccc;
     color: #333333;
 }
 header #login .btn-warning {
     background-color: #ffc600;
     color: #000;
     float: right;
-    margin: 0;
+    margin: 0 0 0 3px;
 }
 
 header h1.logo a {
@@ -375,21 +372,19 @@ header h1.logo a {
   padding: 123px 0 0 100px;
   text-transform: uppercase;
   width: 100%;
+  font-size:0px;
 }
 header h1.logo a:hover {
   color: #000;
   text-decoration: none;
 }
 header h1.logo a span {
-  width: 100%;
-  height: auto;
-  float: left;
-  font-style: italic;
-  font-size: .8em;
-  font-weight: 400;
-  color: #FF7800;
-  color: #FF9600;
-  text-shadow: 0 1px 0 #000;
+ background: url("../images/caption.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: left;
+    height: 42px;
+    margin: -101px 0 0 23px;
+    text-shadow: 0 1px 0 #000;
+    width: 226px;
 }
 header h1.logo a span:hover {
   text-decoration: underline;
@@ -408,9 +403,23 @@ header h1.logo a span:hover {
 .row #sidebar{
 	height:auto;
 	float:left;
-	margin:50px 0 0;
+	margin:70px 0 0;
 }
 
+
+.row h2.affix{
+	font-family: "proxima-nova",sans-serif !important;
+	font-size:2.3em !important;
+	font-weight:300 !important;
+}
+
+.row h2.affix a{
+	float: left;
+	font-size: 0.7em;
+	margin: 7px 0 0;
+	width: 100%;
+	font-weight:bold;
+	}
 .row #sidebar a{
 	border: 1px solid #bdae85;
 	background-color:#ebeae7;
@@ -473,7 +482,7 @@ header h1.logo a span:hover {
 }
 
 #pratham-form{
-	margin: 0 0 20px;
+	margin: 170px 0 20px;
 	color:#6c5e26;	
 }
 
@@ -482,12 +491,16 @@ header h1.logo a span:hover {
 }
 
 #pratham-form form{
-	margin:0 0 0 0;
+	margin:-20px 0 0 0;
 }
 
 #pratham-form .jumbotron{
 	background-color:#fbe659;
 	margin:0 0 40px 0;
+}
+
+#pratham-form .jumbotron h1{
+	font-family: "ligurino-condensed",sans-serif !important;
 }
 
 .form-control{
@@ -519,10 +532,14 @@ input[type=text].form-control{
 }
 
 
-#pratham-form .jumbotron h1{
-	font-family: "ligurino-condensed",sans-serif !important;
-	font-size: 2.5em;
-	font-weight:400;
+#pratham-form .jumbotron h2{
+	float: left;
+    font-family: "ligurino-condensed",sans-serif !important;
+    font-size: 2.5em;
+    font-weight: 400;
+    margin: 0;
+    width: 100%;
+	color:#6c5e26;
 }
 #pratham-form .jumbotron p{
 	font-size: 0.9em;
@@ -551,7 +568,19 @@ input[type=text].form-control{
 
 #pratham-form .well p{
 	font-size:1.8em !important;
-	margin:0 !important;
+	margin:0 0 20px !important;
+	
+}
+
+
+
+#pratham-form .payment .well p{
+	margin:0  0 30px !important;
+	float:left !important;
+}
+
+a.std{
+	font-size:1.5em;
 }
 
 #pratham-form #step4 .well p{
@@ -596,7 +625,7 @@ input[type=text].form-control{
     margin: 0 0 20px;
     min-width: 0;
     position: relative !important;
-    width: 283px;
+    width: 300px;
 }
 
 .title p{
@@ -723,6 +752,11 @@ margin: -7px 0 5px;
 	 margin: 0 0 8px;
 }
 
+#pratham-form #step3 h3 label{
+	font-size: 1em;
+    line-height: 20px;
+}
+
 #pratham-form  #step4 ul li{
 	font-size:1.7em !important;
 }
@@ -736,13 +770,23 @@ margin: -7px 0 5px;
 }
 
 
-#internalContent.donor{margin:20px 0 0 !important;}
+#internalContent.donor{
+	float: none;
+    margin: auto;
+    width: 80%;
+}
 
 .icon-register{
 	width:110px;
 	height:133px;
 	background-image:url(../images/iconRegister.png);
 	background-repeat:no-repeat;
+}
+
+.payment select{
+	float: left;
+    margin: 0 12px 0 0;
+    width: 180px;
 }
 
 /*Footer*/
@@ -966,7 +1010,177 @@ footer .row .bottom .siteBlock a:hover {
 	padding:0px !important;
 }
 
-/*Responsive*/
+
+#pratham-form #netBanking .well h3 label{
+	font-size:1.2em !important;	
+}
+
+
+
+#pratham-form #netBanking .well select{
+	width:80%;
+}
+
+#pratham-form .well .campaign .col-md-3{
+	border: 1px solid #ccc;
+    margin: 0 13px;
+    padding: 0;
+    width: 30%;
+}
+
+#pratham-form .well .campaign .col-md-3 h1 {
+    background-color: #e5e4e0;
+    color: #b8b5a7;
+    font-family: "ligurino-condensed",sans-serif;
+    font-size: 2.8em;
+    height: auto;
+    line-height: 60px;
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+#pratham-form .well .campaign .col-md-3 .campaignInfo {
+    clear: both;
+    float: left;
+    height: auto;
+    padding: 2px 20px 20px;
+    width: 100%;
+}
+
+a.champion{
+	background-image: url("../images/champion.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	color: #222222;
+	float: right;
+	font-size: 8px;
+	margin: -32px -30px -12px 0;
+	padding: 42px 0 0 25px;
+	text-transform: uppercase;
+	width: 95px;
+}
+
+time {
+    background-image: url("../images/clockIcon.png");
+    background-repeat: no-repeat;
+    clear: both;
+    float: left;
+    font-size: 2.5em;
+    font-style: italic;
+    height: auto;
+    margin: 10px 0 0;
+    padding: 0 0 10px 38px;
+    width: 100%;
+}
+ .campaignInfo h4 {
+    background-image: url("../images/rupIcon.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: 15px;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    margin: -5px 0 0;
+    padding: 0 0 0 11px;
+    width: 100%;
+	float:left;
+}
+
+span.funders{
+	float:right;
+}
+
+
+span.funders:after {
+    content: " funders";
+}
+
+h4 span{
+	float:right;
+}
+
+h4 span:after {
+    content: "%";
+}
+ .progress {
+    background-color: #faab3b;
+    height: 12px;
+    margin: 0 !important;
+	float:left;
+	width:100%;
+}
+
+h5{
+	font-weight:bold;
+}
+
+h5 span:after {
+    content: " Days Left";
+    font-size: 11px;
+}
+.campaignInfo .tag {
+    background-image: url("../images/tagArrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    float: left;
+    height: 23px;
+    margin: 2px 4px 0 0;
+    min-width: 63px;
+    width: auto;
+}
+
+.campaignInfo .tag  a{
+    background: linear-gradient(to bottom, #ffffff 0%, #eeeeee 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #a5a5a5;
+    border-left: 1px solid #a5a5a5;
+    border-radius: 4px;
+    border-top: 1px solid #a5a5a5;
+    color: #222222;
+    float: left;
+    font-size: 12px;
+    height: 23px;
+    line-height: 20px;
+    padding: 0 0 0 5px;
+    width: 54px;
+}
+
+h5.amt{
+    background-color: #ffe538;
+    border-radius: 3px;
+    color: #606060;
+    cursor: pointer;
+    float: left;
+    font-family: "ligurino-condensed",sans-serif !important;
+    font-size: 2.5em;
+    font-weight: normal;
+    margin: 41px 0 0;
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+h5.amt:hover{
+	background-color:#fbee9e;
+}
+
+img.img-thumbnail, video{
+	 background-color: #e1e1e1;
+    height: 220px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+#step3 .col-md-3, #step4 .col-md-3{
+	width:33%;
+}
+
+
+.donor .radio, donor .checkbox, .donor .form-group .label, .donor .form-group .col-xs-12 .checkbox {
+	padding:0 0 0 30px !important;
+	
+}
+
+
 @media screen and (max-width: 1600px){
 	
 	/*#pratham-form .well{
@@ -974,7 +1188,7 @@ footer .row .bottom .siteBlock a:hover {
 	}*/
 	
 	#pratham-form .col-sm-9{
-		margin: 30px 0 0;
+		margin: 70px 0 0;
 	}
 	
 	#pratham-form #sidebar.col-sm-3 {

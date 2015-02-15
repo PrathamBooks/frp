@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+{% extends "partials/base2.html" %}
+{% block body %}
+<div id="pratham-form" class="container">
+  <div class="row">
+    <h2 class="affix">Beneficiary Form
+      <a href="#" target="_blank">Download PDF format here!</a>
+    </h2>
+    <div id="sidebar" class="list-group col-xs-6 col-sm-3 affix"  role="navigation">
+      <a href="#step1" class="list-group-item active">Step 1 : Getting To Know You </a>
+      <a  class="list-group-item" href="#step2">Step 2 : Get Started</a>
+      <a  class="list-group-item" href="#step3">Step 3 : Set-up Your Campaign</a>
+      <a  class="list-group-item" href="#step4">Step 4 : Get Funded</a>
+    </div>
+
+    <div ng-controller="signupController" class="col-xs-12 col-sm-9"><!-- ng-controller=signupController -->
+
+      <form role="form" novalidate class="col-md-12" method="post" action="">
+
+        <div id="internalContent" class="row beneficiary">
+          <div  id="internalCampaign" class="row ">
+            <div class="col-md-12">
+              <section id="step1" class="tab-pane active">
+                <div class="alert hide">&nbsp;</div>
+                <!-- Step 1 starts here-->
+                <div class="jumbotron row" tabindex="1">
+                  <h2>Step 1: Getting to know you </h2>
+                  <p>
+                  Congratulations  on  your first step towards setting up your very own Campaign on Pratham Book’s donate-a-book. 
+                  We want to know more about your organization and the work you do.<br/>
+                  Answer each question as best you can and if you have a query please write to us at 
+                  <a href="mailto:donateabook@prathambooks.org">donateabook@prathambooks.org</a>.
+                  </p>
+                </div><!-- Jumbo-->
+
+                <div class="well">
+
+                  <div class="row form-group" >
+                    <h3>Which category best describes you? <strong>*</strong></h3>
+
+                    <p>Pick one category that best describes you and the reason you are raising funds. Please take your time to select this as this 
+                    impacts the next steps.</p>
+                    <div class="alert alert-warning hide alertleft">Please select any one option below.</div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" required ng-model="signup.org" name="org" value="Organization/school raising books for a single library">
+                        I am an organization/school raising books for a single library
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" required ng-model="signup.org" name="org" value="You are an organization raising books for multiple centres">
+                        I am an organization raising books for multiple centres
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label><input type="radio" required ng-model="signup.org" name="org" value="You are a Reading Champion needing books for your sessions">
+                        I  am a Reading Champion needing books for my storytelling  sessions
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" required ng-model="signup.org" name="org" value="Individual raising books on behalf of a school/NGO/others">
+                        I am an Individual raising books on behalf of a school/NGO/others
+                      </label>
+                    </div>
+                  </div> <!--row-->
+                </div><!--well-->
+                <hr/>
+
+                <div class="well">
+                  <h3>Tell us a little more about you/your organization</h3>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="nameOrg">Name of the Organisation/Individual <strong>*</strong></label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" ng-model="signup.name" name="nameOrg" placeholder="Name of organisation / Individual" required />
+                      <div class="alert alert-warning hide">Enter Name of organisation.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-12">
+                      <label for="status">Organisation Status <strong>*</strong></label>
+                      <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" required ng-model="signup.status" name="status" id="status" value="Registered non-profit">
+                          Registered non-profit
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" required  ng-model="signup.status" name="status" value="Section 25 Company">
+                          Section 25 Company
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" required ng-model="signup.status" name="status" value="Private School">Private School
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" required ng-model="signup.status" name="status" value="Budget Private School (fee structure less than Rs.500 per month)">
+                          Budget Private School (fee structure less than Rs.500 per month)
+                      </label></div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" required ng-model="signup.status" name="status" value="Government School">Government School
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" required ng-model="signup.status" name="status" value="Reading centre / library">Reading centre 
+                          / library
+                        </label>
+                      </div>
+
+                      <div class="radio">
+                        <label>
+                          <input type="radio" required ng-model="signup.status" name="status" value="Reading centre / library">
+                          Reading Champion / Storyteller / Volunteer
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="address">Head Office Address <strong>*</strong></label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" id="address" class="form-control" ng-model="signup.HOaddress" name="HOaddress" placeholder="Head Office Address" required />
+                      <div class="alert alert-warning hide">Enter Head Office Address.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="phone">Head Office Phone Number <strong>*</strong></label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" id="phone" class="form-control" ng-model="signup.HOphone" name="HOphone" placeholder="Head Office Phone Number" required />
+                      <div class="alert alert-warning hide">Enter Head Office Phone Number.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="infoEmail">Info Email ID <strong>*</strong></label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="email" class="form-control" ng-model="signup.infoEmail" id="infoEmail" name="infoEmail" placeholder="Info Email ID" required />
+                      <div class="alert alert-warning hide">Invalid Info Email ID.</div>
+                      <p class="help-block">Please add the organisation info ID. It should not be individual specific.</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="website">Website</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" id="website" class="form-control" ng-model="signup.website" name="website" placeholder="Website" />
+                      <div class="alert alert-warning hide">Invalid Website.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="facebook">Facebook page</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" ng-model="signup.facebook" name="facebook" placeholder="Facebook" />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="blog">Blog Address</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" ng-model="signup.blog" name="blog" placeholder="Blog Address" />
+                    </div>
+                  </div>
+                </div><!--well-->
+
+                <hr/>
+
+                <div class="well">
+                  <h3>Update us on your certifications:</h3>
+                  <div class="form-group row">
+                    <div class="col-xs-12">
+                      <label>Does your organisation have 80G certification <strong>*</strong></label>
+                      <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+                      <div class="radio"><label><input type="radio" required  ng-model="signup.80gcert" name="80gcert" value="Y">Yes</label></div>
+                      <div class="radio"><label><input required type="radio" ng-model="signup.80gcert" name="80gcert" value="N">No</label></div>
+                    </div>
+                  </div>
+                </div><!--well-->
+
+                <hr/>
+
+                <div class="well">
+                  <h3>Stay in touch</h3>
+                  <p>Give us  details about any person from your organization with whom we can stay in touch with</p>
+                  <h4>Person 1</h4>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="userName">Your Name</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" ng-model="signup.userName" name="userName" placeholder="Your Name" required />
+                      <div class="alert alert-warning hide">Enter Name.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="position">Position in the organisation</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" ng-model="signup.position" name="position" placeholder="Position" required />
+                      <div class="alert alert-warning hide">Enter Position.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="userEmail">Your Email Id.</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="email" class="form-control" ng-model="signup.userEmail" name="userEmail" placeholder="Your Email Id." required />
+                      <div class="alert alert-warning hide">Invalid Email Id.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="userPhone">Your Phone</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" ng-model="signup.userPhone" name="userPhone" placeholder="Your Phone no." required />
+                      <div class="alert alert-warning hide">Enter Phone Number.</div>
+                    </div>
+                  </div>
+
+
+                </div><!--well-->
+
+
+              </section>
+              <!-- Step 1 ends here-->
+
+              <!-- Step 2 starts here-->
+              <section id="step2"  class="tab-pane hide" tabindex="2">
+                <div class="jumbotron row">
+                  <h2>Step 2: Get Started</h2>
+                  <p>You are just a few simple steps away from getting fabulous books to the children that you work with!</p>
+                </div>
+
+                <div class="well">
+                  <h3>What are you raising money for?</h3>
+                  <p>Please select what you wish to raise money for. For your convenience we have four types of donations to choose from.</p>
+                  <ol start="1">
+                    <li>
+                    If you only need books for your library or reading sessions or  an event we recommend you choose just <strong>Books</strong>. 
+                    </li>
+                    <li>
+                    If you wish to build a classroom library or need a modular unit with books try our <a href="http://www.prathambooks.org/library-classroom" target="_blank">Library-in-a-classroom</a> or 
+                    <a href="http://www.prathambooks.org/library-classroom" target="_blank">Books-in-a-bag.</a> Click on it to see how functional a little bag can be! 
+                    <i>(blurb which opens up images and information on LIC) </i>
+
+                    </li>
+
+                  </ol>
+                  <div class="form-group row" id="bookCounts">
+                    <h3>You can also choose a mix of different product offerings in the same funding campaign! <strong>*</strong></h3>
+                    <div class="alert alert-warning hide">Choose any one / more than one option below</div>
+                    <div class="col-xs-9 row">
+                      <div class="col-xs-5">
+                        <div class="checkbox">
+                          <label for="Library">
+                            <input type="checkbox" required value=" Books for library">
+                            Books / Books as Prize or Give-Aways / For Reading Sessions
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <input type="text" class="form-control"  name="prizes" placeholder="No. of books as prize / give aways / reading sessions" required />
+                      </div>
+                    </div>
+                    <div class="col-xs-9 row">
+                      <div class="col-xs-5">
+                        <div class="checkbox">
+                          <label for="bookbag">
+                            <input type="checkbox" value="Library in a Classroom/Books in a Bag" required>
+                            Library in a Classroom/Books in a Bag
+                          </label>
+                          <p class="help-block">Each LIC kit contains 125 books each.</p>
+                        </div>
+
+                      </div>
+                      <div class="col-xs-4">
+                        <input type="text" class="form-control" name="bookBag" placeholder="No. of kits" required />
+                      </div>
+                    </div>
+
+                  </div>
+                </div><!--well-->
+
+                <div id="goal" class="well">
+                  <div class="row form-group">
+                    <div class="col-xs-12">
+                      <h3>Based on your requirement your funding goal is :</h3>
+                    </div>
+                    <div class="col-xs-4">Number of Books</div>
+                    <div class="col-xs-8"><span id="noOfBooks"></span></div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-xs-4">Number of Kits</div>
+                    <div class="col-xs-8"><span id="noOfKits"></span></div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      Average value of a book
+                    </div>
+                    <div class="col-xs-8">
+                      <span id="averageVal">50</span>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      Amount (in Rupees)
+                    </div>
+                    <div class="col-xs-8">
+                      <span id="bookAmount"></span>
+                    </div>
+                    <br/>
+                  </div>
+
+                  <p>
+                  <strong>PLEASE NOTE:</strong>
+                  If the above amount is not what you had in mind please change your requirement in the previous question on the number of books . 
+                  </p>
+                </div><!--well-->
+
+
+                <div class="well">
+                  <h3>Languages <strong>*</strong></h3>
+                  <div class="form-group row" id="language">
+                    <h3>Pratham Books publishes books in upto 12 Indian languages. </h3>
+
+                    <p>Your donation will entitle you to choose books across any 3 languages that are in stock. <br/>
+                    We hope you will appreciate that the in-stock items keep changing but letting us know which languages and across 
+                    which levels will help us serve you better. Reserve books now!
+                    </p>
+
+                    <div class="col-md-12">
+                      <div class="alert alert-warning hide">Enter number of books in any one language or more than 1 language.</div>
+                    </div>                                                 	
+                    <div class="col-xs-4">
+
+
+                      <div class="col-xs-2">Level</div>
+                      <div class="col-xs-10">Description</div>
+
+                    </div>
+
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                        <select class="form-control" ng-model="signup.language1[]" name="language1[]" required>
+                          <option value="Hindi">Hindi</option>
+                          <option value="English">English</option>
+                          <option value="Marathi">Marathi</option>
+                          <option value="Telugu">Telugu</option>
+                          <option value="Gujarati">Gujarati</option>
+                          <option value="Malayalam">Malayalam</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-4">
+                        <select class="form-control" ng-model="signup.language1[]" name="language1[]">
+                          <option>Select any Language</option>
+                          <option value="Hindi">Hindi</option>
+                          <option value="English">English</option>
+                          <option value="Marathi">Marathi</option>
+                          <option value="Telugu">Telugu</option>
+                          <option value="Gujarati">Gujarati</option>
+                          <option value="Malayalam">Malayalam</option>
+                        </select>
+                      </div>
+
+                      <div class="col-xs-4">
+                        <select class="form-control" ng-model="signup.language1[]" name="language1[]">
+                          <option>Select any Language</option>
+                          <option value="Hindi">Hindi</option>
+                          <option value="English">English</option>
+                          <option value="Marathi">Marathi</option>
+                          <option value="Telugu">Telugu</option>
+                          <option value="Gujarati">Gujarati</option>
+                          <option value="Malayalam">Malayalam</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="col-xs-2">1</div>
+                      <div class="col-xs-10">Beginning to Read / Read Aloud</div>
+                    </div>
+
+                    <!-- <button type="button" id="addLanguage" class="btn btn-success btn-lg">Add another language</button>-->
+
+                    <!--Level 1 -->
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                        <span class="level1"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" required /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level1"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level1"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                    </div><!--End of Level 1 -->
+
+
+
+                    <div class="col-xs-4">
+                      <div class="col-xs-2">2</div>
+                      <div class="col-xs-10">Learning to Read</div>
+                    </div>
+
+                    <!--Level 2 -->
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                        <span class="level2"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level2"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level2"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                    </div><!--End of Level 2 -->
+
+                    <div class="col-xs-4">
+
+                      <div class="col-xs-2">3</div>
+                      <div class="col-xs-10">Reading Independently</div>
+                    </div>   
+
+                    <!--Level 3 -->
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                        <span class="level3"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level3"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level3"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                    </div><!--End of Level 3 -->
+
+
+                    <div class="col-xs-4">
+                      <div class="col-xs-2">4</div>
+                      <div class="col-xs-10">Reading Proficiently</div>
+                    </div> 
+
+                    <!--Level 4 -->
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                        <span class="level4"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level4"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level4"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
+                      </div>
+                    </div><!--End of Level 4 -->
+
+                    <!--Net Total -->
+                    <div class="col-xs-4">
+                      <div class="col-xs-12">Net Total</div>
+                    </div>
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                        <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books" readonly /></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
+                      </div>
+                      <div class="col-xs-4">
+                        <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
+                      </div>
+                    </div><!--End of Total -->
+
+
+                    <div class="form-group row">
+                      <!--Gross Total -->
+                      <div class="col-xs-4">
+                        <div class="col-xs-12">Gross Total
+                          <p class="help-block">Number of books in "this" language <span id="booksLeft"></span> (left)</p>
+                        </div>
+                      </div>
+                      <div class="col-xs-8">
+                        <div class="col-xs-12">
+                          <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Gross Total of Books" readonly/></span>
+                        </div>
+                      </div><!--Gross Total -->
+
+                    </div>
+
+                  </div>
+                </div><!--well-->
+
+                <div id="duration" class="well">
+                  <h3>Duration of Campaign</h3>
+                  <p>A campaign can raise funds for up to <span>30 days</span>, but the average fully-funded campaign is only <span>25 days</span> long.
+                  You campaign will run for the number of days that you select and will start from the day the campaign goes live.
+                  Please note that there will be a <span>5 days</span> lead time after campaign ends and before you get your books.
+                  Therefore plan your campaign time wisely!
+                  </p>
+
+                </div><!--well-->
+
+
+              </section>
+              <!-- Step 2 ends here-->
+
+              <!-- Step 3 starts here-->
+              <section id="step3" class="tab-pane hide" tabindex=3>
+                <div class="jumbotron row">
+                  <h2>Step 3: Set-up your campaign</h2>
+                  <p>
+                  You are now ready to fill in all the detail that will go live on your Campaign Page. Your campaign page is where 
+                  we showcase the awesome work you do. Make sure you take some time out to fill this section as this is what donors 
+                  will review before deciding to support you.
+                  </p>
+                </div>
+
+                <div class="well upload">
+                  <h3>Image upload</h3>
+                  <div class="alert alert-warning  alertleft hide">Please upload a valid image related to the campaign.</div>
+                  <div class="col-md-12">
+                    <input type="file" ng-model="signup.imageUpload" name="imageUpload" class="img-responsive img-thumbnail img-rounded btn btnFile" required>
+                    <!--<img src="..." alt="..." class="img-responsive img-thumbnail img-rounded" width="220px" height="194px" required />-->
+                    <p class="help-block">Please upload images in horizontal / landscape format only.</p>
+                    <div class="alert alert-warning hide">Select an image for your campaign.</div>
+                  </div>
+                </div><!--well--> 
+
+                <div class="well upload">
+                  <h3>Video Upload</h3>
+                  <!--<button type="button" class="btn btn-primary">Add Video</button>-->
+                  <input type="file" ng-model="signup.addVideo" name="addVideo" class="btn btnFile">
+                  <p class="help-block">Video sized limited to 5mb</p>
+                  <video class="hide"></video>
+                  <div class="alert alert-warning hide"> Not valid file.</div>
+                </div><!--well-->
+
+                <div class="well">
+                  <div class=" row form-group">
+                    <div class="col-xs-4">
+                      <h3>Funding Goal</h3>
+                    </div>
+                    <div class="col-xs-8">
+                      <input class="form-control" ng-model="signup.fundingGoal" name="fundingGoal" type="text" placeholder="Rupee + Books Based on Previous Selection" readonly>
+                    </div>
+                  </div><!--form-group-->
+                </div><!--well-->
+
+
+                <div id="category" class="well">
+                  <div class="row form-group">
+                    <div class="col-xs-12">
+                      <h3>Category</h3>
+                    </div>
+                    <!-- <p>should be added directly based on previous section</p>-->
+                    <div class="checkbox">
+                      <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Books for a library" checked>Books for a library / Prizes/give-aways / Reading Sessions</label><br />
+                      <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Books in a bag / Classroom Library" checked>Books in a bag / Classroom Library</label><br />
+                    </div><!--checkbox-->
+                  </div><!--form-group-->
+                </div><!--well-->
+
+                <div class="well">
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      <h3>State</h3>
+                      <div class="alert alert-warning  alertleft hide">Please select any one state in the list</div>
+                      <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
+                                                              This link will work for the city of respective states-->
+                    </div>
+                    <div class="col-xs-8">
+                      <select class="form-control" ng-model="signup.stateCity" name="stateCity" required>
+                        <option value="2169" >Andhra Pradesh</option>
+                        <option value="2196" >Arunachal Pradesh</option>
+                        <option value="2170" >Assam</option>
+                        <option value="2171" >Bihar</option>
+                        <option value="5267" >Chhattisgarh</option>
+                        <option value="2174" >Delhi</option>
+                        <option value="2199" >Goa</option>
+                        <option value="2175" >Gujarat</option>
+                        <option value="2176" >Haryana</option>
+                        <option value="2177" >Himachal Pradesh</option>
+                        <option value="2178" >Jammu and Kashmir</option>
+                        <option value="5268" >Jharkhand</option>
+                        <option value="2185" >Karnataka</option>
+                        <option value="2179" >Kerala</option>
+                        <option value="2181" >Madhya Pradesh</option>
+                        <option value="2182" >Maharashtra</option>
+                        <option value="2183" >Manipur</option>
+                        <option value="2184" >Meghalaya</option>
+                        <option value="2197" >Mizoram</option>
+                        <option value="2186" >Nagaland</option>
+                        <option value="2187" >Orissa</option>
+                        <option value="2189" >Punjab</option>
+                        <option value="2190" >Rajasthan</option>
+                        <option value="2195" >Sikkim</option>
+                        <option value="2191" >Tamil Nadu</option>
+                        <option value="2192" >Tripura</option>
+                        <option value="5269" >UNION TERRITORY</option>
+                        <option value="2193" >Uttar Pradesh</option>
+                        <option value="5259" >Uttaranchal</option>
+                        <option value="2194" >West Bengal</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-4" style="display:none;" >
+                      <h3>City</h3>
+                      <div class="alert alert-warning  alertleft hide">Please select any one city in the list</div>
+                      <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
+                                                              This link will work for the city of respective states-->
+                    </div>
+                    <div class="col-xs-8" style="display:none;">
+                      <select multiple class="form-control" ng-model="signup.stateCity">
+                        <option value="2169" >City Populated</option>
+                      </select>
+
+                    </div>
+                    <button type="button" value="Add State" class="btn btnAdd">Add State</button>
+                  </div><!--form-group-->
+                </div><!--well-->
+
+                <div class="well">
+
+
+                  <h3>Overall impact numbers <strong>*</strong></h3>
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label for="childrenNumber">Number of children that you/your organization have impacted since commencement / impacts currently</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input type="text" required class="form-control" ng-model="signup.childrenNumber" name="childrenNumber" placeholder="Number of Children that you / your organization impacts" />
+                      <div class="alert alert-warning hide">Enter number of children being impacted.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-12">
+                      <label for="age">Do you/your organization do any work for following (check all that apply):<strong>*</strong></label>
+                      <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in Rural areas">
+                          Children in Rural areas
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children in low income Urban area">
+                          Children in low income Urban area
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children living in tribal areas">
+                          Children living in tribal areas
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children  with special needs ">
+                          Children  with special needs 
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" required ng-model="signup.orgFollowing[]" name="orgFollowing[]" value="Children who are  differently abled ">
+                          Children who are  differently abled 
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div class="well title">
+                  <div class="row form-group">
+                    <div class="col-xs-12">
+                      <h3>Project Title</h3>
+                    </div>
+
+                    <div class="col-xs-4">
+                      <label>
+                        Please enter the project title here. This is the first thing your Donor sees and you can also be searched with it. 
+
+                      </label>
+                    </div>
+                    <div class="col-xs-8">
+                      <input class="form-control" ng-model="signup.projectTitle" name="projectTitle" type="text" required>
+                      <div class="alert alert-warning  alertleft hide">Please give a suitable title to your campaign</div>
+                      <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 80 characters)</p> 
+                    </div>
+
+                    <!--<div class="col-xs-12">
+                                                           <p>
+                                                                  This is what goes right under your Project Title and gives the Donor the info that will help generate interest 
+                                                                    in your cause. The shorter, the better. Give a snapshot of what your project is all about and why it is important. 
+                                                                    E.g :  We are a  class of 25 bright young minds from an underprivileged community studying in a Govt school in Delhi. 
+                                                                    We require books for our classroom library. We want to read better and need books which are of our interest and 
+                                                                    our levels. Help us  become readers for life. (Max. 160 characters)
+                                                              </p>
+                                                           </div>-->
+
+                  </div><!--form-group-->
+                </div><!--well-->
+
+                <div class="well upload">
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      <h3>Short Description</h3>
+                    </div>
+
+                    <div class="col-xs-8">
+                      <textarea class="form-control" rows="3" ng-model="signup.description" name="description" required></textarea>
+                      <div class="alert alert-warning  alertleft hide">Enter a small description about your project</div>
+                      <p class="help-block">Brief description of your project for which you are seeking funding</p>
+                    </div>
+                    <div class="col-md-12">
+                      <p>This is what goes right under your Project Title and gives the Donor the info that will help generate 
+                      interest in your cause. The shorter, the better. Give a snapshot of what your project is all about and why it is 
+                      important. E.g :  We are a  class of 25 bright young minds from an underprivileged community studying in a Govt school in 
+                      Delhi. We require books for our classroom library. 
+                      We want to read better and need books which are of our interest and our levels. Help us  become readers for life. (Max. 160 characters)
+                      </p>
+                    </div>
+                  </div><!--form-group-->
+                </div><!--well-->
+
+
+
+
+
+                <div class="well story">
+                  <h3>My Story</h3>
+                  <p>
+                  Share your story in this column below and tell potential contributors why your campaign is important.
+                  Introduce yourself and describe your work. Explain how do you plan to utilize the funding and how will it impact 
+                  the children / community your work with. Be specific and transparent  to earn Donor’s trust.
+                  </p>
+                  <p>
+                  For your benefit, the ‘My Story’  column is divided into 3 simple guiding questions to help you present your story better.
+                  </p>
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      <label for="orgIntro">Who are you ?</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <textarea class="form-control" rows="3" ng-model="signup.projectValue" name="orgIntro" required placeholder="PK Foundation was established in 2000 to help bridge the gap in learning in schools through books and reading. PK Foundation is based out of Pune and has 1 more office in rural Maharashtra. With a staff of 12 members and 20 volunteers, PK foundations aims to establish libraries in Govt schools in rural Maharahstra. "></textarea>
+                      <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
+                      <p class="help-block">Introduce your organization.</p>
+                    </div>
+                  </div><!--form-group-->
+
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      <label for="impactStory">What work do you do and how does it impact society ?</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <textarea class="form-control" rows="3" ng-model="" name="impactStory" placeholder="PK Foundation’s mission is to inculcate reading habit among students at a young age and to expose them to a large variety of books thus pushing their reading abilities and exposure to the works. Children, specially in rural Maharashtra don’t have access to any other books than curriculum and hence learning a language becomes a curriculum material again. We at PK Foundation, aim to introduce the joy of languages through story books to children and hence develop an interest in academics. Till date PK Foundation has established over 120 libraries in Govt schools in the districts of Akola and Paratwada. These libraries serve over 4800 childre from the age group of 7 to 14. Most children are first generation learners and their education is their family’s chance out of poverty
+                        " required></textarea>
+                      <div class="alert alert-warning  alertleft hide">Please Enter Introduction of your organization</div>
+                      <p class="help-block">Share your work and  Impact stories here.</p>
+                    </div>
+                  </div><!--form-group-->
+
+                  <div class="row form-group">
+                    <div class="col-xs-4">
+                      <label for="fundsUtilize">How will the funds be utilized ?</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <textarea class="form-control" rows="3" ng-model="" name="fundsUtilize" required placeholder="PK Foundation aims to set up 400 new libraries by the end of year 2015.The collected funds will be utilized for buying books for children of all ages in 2 languages and buying cupboards for setting them up.
+                        We aim to also start a book-lending program with a membership fee of Rs.1/- to remote areas. These funds would help the logistics for this program.
+                        "></textarea>
+                      <div class="alert alert-warning  alertleft hide">Explain the way you are utilizing the funda</div>
+                      <p class="help-block">Answer the need for this funding and the way in which you plan to utilize these funds.</p>
+                    </div>
+                  </div><!--form-group-->
+                </div><!--well-->
+
+                <div class="well">
+                  <h3>Preview Your Campaign Page :</h3>
+                  <p>
+                  Before you press the final submission button click here to see how will your Campaign page look and do edits if required. 
+                  Once you have pressed the submit button, your application will go in the screening process and you will not be able to 
+                  make any edits.
+                  </p>
+                  <button class="btn btnPreview" data-toggle="modal" data-target=".bs-example-modal-lg">Preview</button>
+                  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                          <h3 class="modal-title" id="myLargeModalLabel">Preview of Beneficiary Form </h3>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>Category best describes you.</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Category</label>
+                          </div>
+                        </div> <!--row-->
+
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>Name of the Organisation/Individual</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Name of the Organisation/Individual</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Organisation Status</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Organisation Status</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Head Office Address</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Head Office Address</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Head Office Phone Number </h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Head Office Phone Number </label>
+                          </div>
+
+
+                          <div class="col-xs-6">
+                            <h5>Info Email ID</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Info Email ID</label>
+                          </div>
+                        </div> <!--row-->
+
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>Does your organisation have 80G certification</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Yes / No</label>
+                          </div>
+                        </div> <!--row-->
+
+                        <div class="row">
+                          <div class="col-xs-12"><h4>Details about 2 people from your organization </h4></div>
+                          <div class="col-xs-12"><h5>Person 1</h5></div>
+                          <div class="col-xs-6">
+                            <h5>Name</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Name</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Position in Organisation</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Position in Organisation</label>
+
+                          </div>
+
+
+                          <div class="col-xs-6">
+                            <h5>Email Id</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Email Id</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Phone</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Phone</label>
+                          </div>
+
+                          <!--Details of person 2!-->
+                          <div class="col-xs-12"><h5>Person 1</h5></div>
+                          <div class="col-xs-6">
+                            <h5>Name</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Name</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Position in Organisation</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Position in Organisation</label>
+                          </div>
+
+
+                          <div class="col-xs-6">
+                            <h5>Email Id</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Email Id</label>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <h5>Phone</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Phone</label>
+                          </div>
+
+
+                        </div> <!--row-->
+
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <h4>Funding Goal</h4>
+                          </div>
+                          <div class="col-xs-6">
+                            <h5>Total books selected</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Total books selected</label>
+                          </div>
+
+
+                          <div class="col-xs-6">
+                            <h5>Total Amount in Rupees</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Total Amount in Rupees</label>
+                          </div>
+                        </div> <!--row-->
+
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <h5>Project Title</h5>
+                          </div>
+                          <div class="col-xs-6">
+                            <label>Project Title</label>
+                          </div>
+                        </div> <!--row-->
+
+                      </div>
+                    </div> <!--modal-->
+                  </div>
+
+
+                </div><!--well-->
+
+                <div class="well">
+                  <div class="row form-group">
+                    <div class="checkbox">
+                      <h3>
+                        <label for="Library">
+                          <input type="checkbox" required value=" Books for library">
+                          I have read the T&amp;C and I want to submit this campaign page . 
+                        </label>
+                      </h3>
+                    </div>
+
+                    <button type="submit" id="goLive" class="btn btn-lg btn-block btnLive">Go Live &amp; Get Funded</button>
+                    <p>Your campaign is not ready to go live quite yet. <br/>
+                    <a href="#" id="showWhatsLeft">Show me what's left to do</a> 
+                    </p>
+                  </div>
+                </div><!--well-->
+
+              </section>
+              <!-- Step 3 ends here-->
+
+
+              <!-- Step 4 starts here-->
+              <!--<section id="step4" class="tab-pane hide">
+                                                  <div class="jumbotron row">
+                                                      <h2>Step 4: Get Funded</h2>
+                                                      <p>You have reached the final step towards getting your campaign up and running. <br/>
+                                                      You can add additional team members and preview how will your campaign page look before submitting it.
+
+                                                      </p>
+                                                  </div>
+
+                                                  <div class="well">
+                                                      <div class="col-xs-4">
+                                                          <h3>Campaign Team</h3>
+                                                      </div>
+
+                                                      <div class="col-xs-8">
+                                                          <input type="text" class="form-control disabled" placeholder="This will have comma separated Indiviual email ids" /> <!-- Wani asked to add input box instead of select tag 
+                                                          <p class="help-block">
+                                                          Add the email ids of other people who will be running the campaign along with you. 
+                                                            Doing this is helpful as multiple people can keep track of your campaign and even if anyone is on a leave, 
+                                                            your campaign is looked after.
+                                                          </p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="well">
+                                                      <div class="row form-group">
+                                                          <div class="col-xs-12">
+                                                              <h3>Media Gallery</h3>
+                                                              <p>
+                                                                Add more pictures/video here. 
+                                                                Donors would be more interested in your campaign as they see more of your work. 
+                                                              </p>
+
+                                                                <div class="btn-group btnMedia disabled" data-toggle="buttons">
+                                                                  <label class="btn" disabled="">
+                                                                  <input type="radio" ng-model="signup.options" name="options" value="Add Photos" id="addPhoto"> Add Photos
+                                                                  </label>
+                                                                  <label class="btn" disabled="">
+                                                                  <input type="radio" ng-model="signup.options" name="options" value="Create Albums" id="addAlbum" data-target="#albumModal" data-toggle="modal"> Create Albums
+                                                                  </label>
+                                                                  <label class="btn" disabled="">
+                                                                  <input type="radio" ng-model="signup.options" name="options" value="Add Videos" id="addVideo"> Add Videos
+                                                                  </label>
+                                                              </div>
+
+                                                          </div>
+
+                                                          <div class="col-xs-8">
+
+                                                          </div>
+                                                      </div>
+                                                  </div>
+
+
+
+                                                  <div class="well">
+                                                      <h3>Good to know  :</h3>
+                                                      <ol>
+                                                        <li>Please read the <a href="#" target="_blank">Terms and Conditions</a> before you submit your campaign for review.</li>
+                                                        <li>Your project will be reviewed to  ensure it meets our <u>Project Guidelines</u></li>
+                                                        <li>Within 3-4 working days, we'll send you a message about the status of your application</li>
+                                                        <li>If approved, the project will Go Live and you will get a message on the same. Once it is Live, you can share your campaign page on social media and 
+                                                        invite friends to view and contribute.</li>
+
+                                                      </ol>
+
+                                                  </div>
+
+                                                  <div class="well">
+                                                      <h3>I have read the T&amp;C and I want to submit this campaign page . </h3>
+                                                     <button type="submit" id="goLive" class="btn btn-lg btn-block btnLive">Go Live &amp; Get Funded</button>
+                                                    <p>Your campaign is not ready to go live quite yet. <br/>
+                                                    <a href="#" id="showWhatsLeft">Show me what's left to do</a> 
+                                                    </p>
+                                                  </div>
+
+                                              </section>-->
+              <!-- Step 4 ends here-->
+
+              <button type="button" id="next" class="btn">Next</a>
+              <button type="button" id="previous" class="btn">Previous</button>
+
+            </div><!--col-md-12 -->
+          </div><!--Internal Campaign row -->
+        </div><!--/internalContent-->
+      </form>
+    </div><!-- xs-12 sm-9-->
+  </div><!-- row-->
+
+</div><!-- Pratham Form-->
+
+              </div><!--container internal -->
+          </div><!--Wrapper-->    
+          <footer>
+              <div id="infoBlock" class="row">
+<div class="col-md-12">
+  <h5>Site Map</h5>
+
+  <div class="siteBlock">
+    <h6><a href="index.html">Home</a></h6>
+  </div>
+
+  <div class="siteBlock">
+    <h6><a href="discover.html">Discover</a></h6>
+    <ul>
+      <li><a href="discover.html">Search/Browse Listing</a></li>
+      <li><a href="campaignPage.html">Campaign Page</a></li>
+    </ul>
+  </div>
+
+
+  <div class="siteBlock">
+    <h6><a href="start.html">Start</a></h6>
+    <ul>
+      <li><a href="start.html">Donate a Book</a></li>
+      <li><a href="start.html">Tips to Create Campaign</a></li>
+      <li><a href="start.html">Get Started</a></li>
+      <li><a href="start.html">FAQ</a></li>
+      <li><a href="start.html">Guidelines</a></li>
+    </ul>
+  </div>
+
+  <div class="siteBlock">
+    <h6><a href="about.html">About</a></h6>
+    <ul>
+      <li><a href="about.html">Donate a Book</a></li>
+      <li><a href="about.html">Pratham Books</a></li>
+      <li><a href="about.html">Impact Stories</a></li>
+    </ul>
+  </div>
+
+  <div class="siteBlock">
+    <h6><a href="signup.html">Sign Up</a></h6>
+    <ul>
+      <li><a href="donorForm.html">Donor</a></li>
+      <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="col-md-12 bottom">
+
+  <div class="siteBlock">
+    <h6><a href="privacy.html">Privacy Policy</a></h6>
+  </div>
+
+  <div class="siteBlock">
+    <h6><a href="login.html">Login</a></h6>
+  </div>
+
+  <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+  <div id="socialIcons">
+    <h6>Connect</h6>
+    <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+    <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+    <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+    <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+  </div>
+</div>
+
+
+              </div>
+          </footer>
+
+
+      </div>
+  </body>
+</html>
+{% endblock body %}
+
