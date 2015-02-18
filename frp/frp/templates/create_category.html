@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% from "_formhelpers.html" import render_field_row %}
 {% block body %}
-  <h2>Create new category</h2>
-  <form id = "create_category" enctype="multipart/form-data" method="post">
+<h2>Create new category</h2>
+<form id = "create_category" enctype="multipart/form-data" method="post">
   {{ form.hidden_tag() }}
   <table>
-  {{render_field_row(form.name)}}
-  {{render_field_row(form.icon)}}
+    {{render_field_row(form.name)}}
+    {{render_field_row(form.icon)}}
   </table>
   <button form ="create_category" formaction="{{ url_for('category_add') }}"  data-async-submit="{{url_for('apiv1.category', _method = 'POST')}}"  type="submit" value="create category" name="submit" formmethod="post">                                                                                 
     Create product
   </button>
 </form>
-  <div id="message">
-  </div>
+<div id="message">
+</div>
 {% endblock body %}
