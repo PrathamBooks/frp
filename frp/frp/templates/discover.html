@@ -1,0 +1,322 @@
+{% extends "partials/base.html" %}
+{% block content %}
+<div id="wrapper">
+  <div class="container internal">
+    <form role="form">
+      <div  id="internalContent" class="row discover-top">
+        <div class="col-md-2">
+          <h5>Language</h5>
+          <div class="form-group">
+            <select multiple id="languages" class="form-control">
+              <option>Hindi</option>
+              <option>Marathi</option>
+              <option>Kannada</option>
+              <option>Tamil</option>
+              <option>Urdu</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Type</h5>
+          <div class="form-group">
+            <select multiple id="type" class="form-control">
+              <option>Books for Library</option>
+              <option>Books for Classroom</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <h5>State</h5>
+          <div class="form-group">
+            <select multiple id="state" class="form-control">
+              <option>Maharashtra</option>
+              <option>Punjab</option>
+              <option>Karnataka</option>
+              <option>Tamilnadu</option>
+              <option>Uttarpradesh</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <h5>City</h5>
+          <div class="form-group">
+            <select multiple id="city" class="form-control">
+              <option>Pune</option>
+              <option>Mumbai</option>
+              <option>Jalgaon</option>
+              <option>Satara</option>
+              <option>Nagpur</option>
+            </select>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-2">
+          <h5>Value</h5>
+          <div id="slider-range-max"></div>
+          <div class="range">
+            <label>&lt; 5000</label>
+            <a href="#" class="amount">
+              <span>500-800 Rs.</span>
+            </a>
+            <label>&gt; 50,000</label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Impact</h5>
+          <div id="slider-range-max2"></div>
+
+          <div class="range">
+            <label>&lt; 100</label>
+            <a href="#" class="amount">
+              <span>251-500 kids</span>
+            </a>
+            <label>> 500</label>
+          </div>
+          <button type="button" class="btn btn-default btn-browse">Browse</button>
+        </div>
+      </div>
+      <!--InternalContent-->
+
+      <div class="row discover" id="internalCampaign">
+        <div class="col-md-12">
+          <h2>Discover Campaigns
+            <span>Start Exploring!!</span>
+          </h2>
+        </div>
+
+        <div class="col-md-9">
+
+          <div class="col-md-3">
+            <h1>Campaign One</h1>
+            <h2>Campaign One</h2>
+            <div class="campaignInfo">
+              <p>I recommend you don't fire until you're within 40,000 kilometers. This is not about revenge. This is about justice. Well, that's certainly good to know.
+              Impact: 152 children</p>
+              <ul>
+                <li><span>Impact:</span> 152 children</li>
+                <li><span>Languages:</span> English, Hindi</li>
+                <li><span>Beneficiary Type:</span> School</li>
+                <li><span>Location:</span> Pune, Maharashtra</li>
+              </ul>
+
+              <hr>
+              <h6>Funding Details</h6>
+              <h4>500<span class="percentFunded">110</span></h4>
+              <div class="progress progress-warning">
+                <div class="bar" style="width: 20%;"></div>
+              </div>
+              <h5><span class="days">Active</span> <span class="funders">110</span></h5>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <h1>Campaign Two</h1>
+            <h2>Campaign Two</h2>
+            <div class="campaignInfo">
+              <p>I recommend you don't fire until you're within 40,000 kilometers. This is not about revenge. This is about justice. Well, that's certainly good to know.
+              Impact: 152 children</p>
+              <ul>
+                <li><span>Impact:</span> 152 children</li>
+                <li><span>Languages:</span> English, Hindi</li>
+                <li><span>Beneficiary Type:</span> School</li>
+                <li><span>Location:</span> Pune, Maharashtra</li>
+              </ul>
+
+              <hr>
+              <h6>Funding Details</h6>
+              <h4>500<span class="percentFunded">110</span></h4>
+              <div class="progress progress-warning">
+                <div class="bar" style="width: 20%;"></div>
+              </div>
+              <h5><span class="days">Not-Active</span> <span class="funders">110</span></h5>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <h1>Campaign Three</h1>
+            <h2>Campaign Three</h2>
+
+            <div class="campaignInfo">
+              <p>I recommend you don't fire until you're within 40,000 kilometers. This is not about revenge. This is about justice. Well, that's certainly good to know.
+              Impact: 152 children</p>
+              <ul>
+                <li><span>Impact:</span> 152 children</li>
+                <li><span>Languages:</span> English, Hindi</li>
+                <li><span>Beneficiary Type:</span> School</li>
+                <li><span>Location:</span> Pune, Maharashtra</li>
+              </ul>
+
+              <hr>
+              <h6>Funding Details</h6>
+              <h4>500<span class="percentFunded">110</span></h4>
+              <div class="progress progress-warning">
+                <div class="bar" style="width: 20%;"></div>
+              </div>
+              <h5><span class="days">5</span> <span class="funders">110</span></h5>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <h1>Campaign Four</h1>
+            <h2>Campaign Four</h2>
+            <div class="campaignInfo">
+              <p>I recommend you don't fire until you're within 40,000 kilometers. This is not about revenge. This is about justice. Well, that's certainly good to know.
+              Impact: 152 children</p>
+              <ul>
+                <li><span>Impact:</span> 152 children</li>
+                <li><span>Languages:</span> English, Hindi</li>
+                <li><span>Beneficiary Type:</span> School</li>
+                <li><span>Location:</span> Pune, Maharashtra</li>
+              </ul>
+
+              <hr>
+              <h6>Funding Details</h6>
+              <h4>500<span class="percentFunded">110</span></h4>
+              <div class="progress progress-warning">
+                <div class="bar" style="width: 20%;"></div>
+              </div>
+              <h5><span class="days">5</span> <span class="funders">110</span></h5>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <h1>Campaign Five</h1>
+            <h2>Campaign Five</h2>
+            <div class="campaignInfo">
+              <p>I recommend you don't fire until you're within 40,000 kilometers. This is not about revenge. This is about justice. Well, that's certainly good to know.
+              Impact: 152 children</p>
+              <ul>
+                <li><span>Impact:</span> 152 children</li>
+                <li><span>Languages:</span> English, Hindi</li>
+                <li><span>Beneficiary Type:</span> School</li>
+                <li><span>Location:</span> Pune, Maharashtra</li>
+              </ul>
+
+              <hr>
+              <h6>Funding Details</h6>
+              <h4>500<span class="percentFunded">110</span></h4>
+              <div class="progress progress-warning">
+                <div class="bar" style="width: 20%;"></div>
+              </div>
+              <h5><span class="days">Pending</span> <span class="funders">110</span></h5>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <h1>Campaign Six</h1>
+            <h2>Campaign Six</h2>
+            <div class="campaignInfo">
+              <p>I recommend you don't fire until you're within 40,000 kilometers. This is not about revenge. This is about justice. Well, that's certainly good to know.
+              Impact: 152 children</p>
+              <ul>
+                <li><span>Impact:</span> 152 children</li>
+                <li><span>Languages:</span> English, Hindi</li>
+                <li><span>Beneficiary Type:</span> School</li>
+                <li><span>Location:</span> Pune, Maharashtra</li>
+              </ul>
+
+              <hr>
+              <h6>Funding Details</h6>
+              <h4>500<span class="percentFunded">110</span></h4>
+              <div class="progress progress-warning">
+                <div class="bar" style="width: 20%;"></div>
+              </div>
+              <h5><span class="days">CLosed</span> <span class="funders">110</span></h5>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+
+              <div class="tag">
+                <a href="#">Tagged</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tagBlock" class="col-md-3">
+          <ul class="featured">
+            <li>Featured</li>
+            <li><a href="#popular">Popular</a> </li>
+            <li><a href="#Launched">Recently Launched</a></li>
+            <li><a href="#">Ending Soon</a></li>
+            <li><a href="#"  class="active">Most Funded</a></li>
+            <li><a href="#">Curated Pages</a></li>
+          </ul>
+          <hr />
+          <ul class="category">
+            <li>Categories</li>
+            <li><a href="#">Registered Non-Profit (Trust / Society) </a></li>
+            <li><a href="#">Section 25 Company</a></li>
+            <li><a href="#">Private School</a></li>
+            <li><a href="#">Government School</a></li>
+            <li><a href="#">Reading Centre/Library</a></li>
+            <li><a href="#">Reading Champion / Storyteller / Volunteer</a></li>
+            <li><a href="#">Rural Areas</a></li>
+            <li><a href="#">Low Income Urban Area</a></li>
+            <li><a href="#">Tribal Areas</a></li>
+            <li><a href="#">Special Needs / Differently Abled Children</a></li>
+          </ul>
+          <hr />
+        </div>
+
+      </div>
+
+
+      <div class="col-md-9">
+        <button type="button" class="btn btn-default btn-bottom">Default</button>
+      </div>
+    </form>
+  </div>
+</div> 
+{% endblock %}
