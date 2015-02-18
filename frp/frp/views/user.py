@@ -120,7 +120,7 @@ def login_via_facebook():
                 _external=True))
 
 
-            @app.route("/login/facebook_authorized")
+@app.route("/login/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
     next_url = request.args.get('next') or url_for('index')
@@ -257,7 +257,7 @@ def campaign_add():
         return render_template("create_campaign.html",
                 form = form)
 
-        @app.route("/discover", methods=['GET', 'POST'])
+@app.route("/discover", methods=['GET', 'POST'])
 def discover():
     return render_template('discover.html')
 
