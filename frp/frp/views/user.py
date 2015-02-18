@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 
 from flask import (render_template,
-                   g,
-                   url_for,
-                   redirect,
-                   session,
-                   flash,
-                   views,
-                   request)
+        g,
+        url_for,
+        redirect,
+        session,
+        flash,
+        views,
+        request)
 from flask.ext.oauth import OAuth
 
 from .. import app
 from .. import cache
 from ..forms import (DonorSignupForm,
-                     LoginForm,
-                     BeneficarySignupForm,
-                     ProfileForm,
-                     CategoryForm,
-                     CampaignForm)
+        LoginForm,
+        BeneficarySignupForm,
+        ProfileForm,
+        CategoryForm,
+        CampaignForm)
 from ..service import signup as signup_service
 from ..service import user as user_service
 from ..service.decorators import login_required
@@ -26,14 +26,14 @@ from ..service.decorators import login_required
 oauth = OAuth()
 
 facebook = oauth.remote_app(
-    'facebook',
-    request_token_url=None,
-    base_url='https://graph.facebook.com/',
-    access_token_url='/oauth/access_token',
-    authorize_url='https://www.facebook.com/dialog/oauth',
-    consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
-    consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
-    request_token_params={'scope': 'email, '})
+        'facebook',
+        request_token_url=None,
+        base_url='https://graph.facebook.com/',
+        access_token_url='/oauth/access_token',
+        authorize_url='https://www.facebook.com/dialog/oauth',
+        consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
+        consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
+        request_token_params={'scope': 'email, '})
 
 
 @facebook.tokengetter
@@ -72,7 +72,7 @@ class SignupAsBeneficary(views.MethodView):
 
 
 app.add_url_rule('/signup/beneficary',
-                 view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
+        view_func=SignupAsBeneficary.as_view('signup_as_beneficary'))
 
 
 class SignupAsBeneficaryTemp(views.MethodView):
@@ -93,7 +93,7 @@ class SignupAsBeneficaryTemp(views.MethodView):
         return render_template('sigup_as_beneficary_old.html', form=form)
 
 app.add_url_rule('/signup/beneficarytemp',
-                 view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
+        view_func=SignupAsBeneficaryTemp.as_view('signup_as_beneficarytemp'))
 
 
 @app.route('/signup/donor', methods=['GET', 'POST'])
@@ -115,12 +115,12 @@ def signup_as_donor():
 @app.route('/login/facebook', methods=['GET', 'POST'])
 def login_via_facebook():
     return facebook.authorize(
-        callback=url_for('facebook_authorized',
-                         next=request.args.get('next'),
-                         _external=True))
+            callback=url_for('facebook_authorized',
+                next=request.args.get('next'),
+                _external=True))
 
 
-@app.route("/login/facebook_authorized")
+            @app.route("/login/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
     next_url = request.args.get('next') or url_for('index')
@@ -154,7 +154,7 @@ def login_via_webform():
         form = LoginForm(request.form)
         if form.validate():
             if user_service.is_valid_login(form.email.data,
-                                           form.password.data):
+                    form.password.data):
                 return redirect(url_for('profile'))
             else:
                 flash('Invalid credentials')
@@ -189,7 +189,7 @@ class EditProfile(views.MethodView):
 
 
 app.add_url_rule('/profile/edit',
-                 view_func=EditProfile.as_view('edit_profile'))
+        view_func=EditProfile.as_view('edit_profile'))
 
 
 @app.route("/logout")
@@ -249,10 +249,21 @@ def campaign_add():
         else:
             print form.errors
             return render_template('create_campaign.html',
-                                   form = form)
+                    form = form)
     else:
         userid = g.user.username
         # data = cache.get(userid)
         form = CampaignForm()
         return render_template("create_campaign.html",
-                               form = form)
+                form = form)
+
+        @app.route("/discover", methods=['GET', 'POST'])
+def discover():
+    return render_template('discover.html')
+
+@app.route("/start", methods=['GET', 'POST'])
+def start():
+    return render_template('start.html')
+@app.route("/campaignPage", methods=['GET', 'POST'])
+def campaignPage():
+    return render_template('campaignPage.html')
