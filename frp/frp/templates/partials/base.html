@@ -129,16 +129,16 @@
           </div>
 
           <div class="siteBlock">
-            <h6><a href="about.html">About</a></h6>
+            <h6><a href="{{ url_for('about')}}">About</a></h6>
             <ul>
-              <li><a href="about.html">Donate a Book</a></li>
-              <li><a href="about.html">Pratham Books</a></li>
-              <li><a href="about.html">Impact Stories</a></li>
+              <li><a href="{{ url_for('about')}}">Donate a Book</a></li>
+              <li><a href="{{ url_for('about')}}">Pratham Books</a></li>
+              <li><a href="{{ url_for('about')}}">Impact Stories</a></li>
             </ul>
           </div>
 
           <div class="siteBlock">
-            <h6><a href="signup.html">Sign Up</a></h6>
+            <h6><a href="{{ url_for('signup') }}">Sign Up</a></h6>
             <ul>
               <li><a href="donorForm.html">Donor</a></li>
               <li><a href="beneficiaryForm.html">Beneficiary</a></li>
