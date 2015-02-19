@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pratham Books">
-	  <meta name="author" content="">
+    <meta name="author" content="">
 
     <title>Pratham Books</title>
 
@@ -13,8 +13,8 @@
     <link rel=stylesheet type=text/css href="{{ ASSET_URL }}"/>
     {% endassets %}
     <!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	  <![endif]-->
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
@@ -32,48 +32,48 @@
 
   </head>
 
-<body>
-<div id="wrapperOut">
-  <header>
-    <div class="headerIn">
-      <h1 class="logo">
-        <a href="/">
-          <span>Give Books to India's Children</span>
-        </a>
-      </h1>
-      <nav class="nav">
+  <body>
+    <div id="wrapperOut">
+      <header>
+      <div class="headerIn">
+        <h1 class="logo">
+          <a href="/">
+            <span>Give Books to India's Children</span>
+          </a>
+        </h1>
+        <nav class="nav">
         <ul>
           <li  class="darkOrange">
-            <a href="/about">about
-              <span class="caret"></span>
-            </a>
+          <a href="/about">about
+            <span class="caret"></span>
+          </a>
           </li>
 
           <li class="orange">
-            <a href="/start">start
-              <span class="caret"></span>
-            </a>
+          <a href="{{ url_for('start')}}">start
+            <span class="caret"></span>
+          </a>
           </li>
 
           <li class="lightOrange">
-            <a href="discover.html" >discover
-              <span class="caret"></span>
-            </a>
+          <a href="{{ url_for('discover') }}" >discover
+            <span class="caret"></span>
+          </a>
           </li>
 
           <li class="darkYellow">
-            <a href="{{ url_for('index') }}">home
-               <span class="caret"></span>
-            </a>
+          <a href="{{ url_for('index') }}">home
+            <span class="caret"></span>
+          </a>
           </li>
         </ul>
-      </nav>
+        </nav>
 
-      <div id="login">
-        {% if not g.user %}
+        <div id="login">
+          {% if not g.user %}
           <a class="btn btn-default" href="{{ url_for('login') }}">log in</a>
           <a class="btn btn-warning" href="{{ url_for('signup') }}">sign up</a>
-        {% else %}
+          {% else %}
           <div class="btn-group">
             <a id = "profile-btn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               My Profile<span class="caret"></span>
@@ -86,87 +86,87 @@
               <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
           </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
+      </header>
+
+      <div id="wrapper"> 
+        {% block content %} 
+        {% endblock %} 
+      </div>
+      <footer>
+      <div id="infoBlock" class="row">
+        <div class="col-md-12">
+          <h5>Site Map</h5>
+
+          <div class="siteBlock">
+            <h6><a href="{{ url_for('index') }}">Home</a></h6>
+          </div>
+
+          <div class="siteBlock">
+            <h6><a href="{{ url_for('discover') }}" >Discover</a></h6>
+            <ul>
+              <li><a href="{{ url_for('discover') }}">Search/Browse Listing</a></li>
+              <li><a href="{{ url_for('campaignPage')}}">Campaign Page</a>
+              <ul>
+                <li><a href="blank.html">Contribute/Give</a></li>
+              </ul>
+              </li>
+            </ul>
+          </div>
+
+
+          <div class="siteBlock">
+            <h6><a href="{{ url_for('start')}}">Start</a></h6>
+            <ul>
+              <li><a href="{{ url_for('start')}}">Donate a Book</a></li>
+              <li><a href="{{ url_for('start')}}">Tips to Create Campaign</a></li>
+              <li><a href="{{ url_for('start')}}">Get Started</a></li>
+              <li><a href="{{ url_for('start')}}#faqs1">FAQ</a></li>
+              <li><a href="{{ url_for('start')}}">Guidelines</a></li>
+            </ul>
+          </div>
+
+          <div class="siteBlock">
+            <h6><a href="{{ url_for('about')}}">About</a></h6>
+            <ul>
+              <li><a href="{{ url_for('about')}}">Donate a Book</a></li>
+              <li><a href="{{ url_for('about')}}">Pratham Books</a></li>
+              <li><a href="{{ url_for('about')}}">Impact Stories</a></li>
+            </ul>
+          </div>
+
+          <div class="siteBlock">
+            <h6><a href="{{ url_for('signup') }}">Sign Up</a></h6>
+            <ul>
+              <li><a href="donorForm.html">Donor</a></li>
+              <li><a href="beneficiaryForm.html">Beneficiary</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 bottom">
+          <div class="siteBlock">
+            <h6><a href="privacy.html">Privacy Policy</a></h6>
+          </div>
+
+          <div class="siteBlock">
+            <h6><a href="login.html">Login</a></h6>
+          </div>
+
+          <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
+          <div id="socialIcons">
+            <h6>Connect</h6>
+            <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
+            <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
+            <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
+            <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
+          </div>
+        </div>
+      </div>
+      </footer>
     </div>
-  </header>
-
-   <div id="wrapper"> 
-     {% block content %} 
-     {% endblock %} 
-   </div>
-   <footer>
-     <div id="infoBlock" class="row">
-       <div class="col-md-12">
-         <h5>Site Map</h5>
-
-         <div class="siteBlock">
-           <h6><a href="{{ url_for('index') }}">Home</a></h6>
-         </div>
-
-         <div class="siteBlock">
-           <h6><a href="discover.html">Discover</a></h6>
-           <ul>
-             <li><a href="discover.html">Search/Browse Listing</a></li>
-             <li><a href="campaignPage.html">Campaign Page</a>
-               <ul>
-                 <li><a href="blank.html">Contribute/Give</a></li>
-               </ul>
-             </li>
-           </ul>
-         </div>
-
-
-         <div class="siteBlock">
-           <h6><a href="start.html">Start</a></h6>
-           <ul>
-             <li><a href="start.html">Donate a Book</a></li>
-             <li><a href="start.html">Tips to Create Campaign</a></li>
-             <li><a href="start.html">Get Started</a></li>
-             <li><a href="start.html#faqs1">FAQ</a></li>
-             <li><a href="start.html">Guidelines</a></li>
-           </ul>
-         </div>
-
-         <div class="siteBlock">
-           <h6><a href="about.html">About</a></h6>
-           <ul>
-             <li><a href="about.html">Donate a Book</a></li>
-             <li><a href="about.html">Pratham Books</a></li>
-             <li><a href="about.html">Impact Stories</a></li>
-           </ul>
-         </div>
-
-         <div class="siteBlock">
-           <h6><a href="signup.html">Sign Up</a></h6>
-           <ul>
-             <li><a href="donorForm.html">Donor</a></li>
-             <li><a href="beneficiaryForm.html">Beneficiary</a></li>
-           </ul>
-         </div>
-
-       </div>
-
-       <div class="col-md-12 bottom">
-         <div class="siteBlock">
-           <h6><a href="privacy.html">Privacy Policy</a></h6>
-         </div>
-
-         <div class="siteBlock">
-           <h6><a href="login.html">Login</a></h6>
-         </div>
-
-         <h1>Pratham Books &copy; 2013. All rights reserved.</h1>
-         <div id="socialIcons">
-           <h6>Connect</h6>
-           <a href="https://www.facebook.com/prathambooks" target="_blank" class="fb"></a>
-           <a href="https://plus.google.com/+prathambooks" target="_blank" class="gPlus"></a>
-           <a href="http://blog.prathambooks.org/" target="_blank" class="blog"></a>
-           <a href="https://twitter.com/prathambooks" target="_blank" class="tw"></a>
-         </div>
-       </div>
-     </div>
-   </footer>
- </div>
-</body>
+  </body>
 </html>

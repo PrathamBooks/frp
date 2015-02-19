@@ -256,3 +256,15 @@ def campaign_add():
         form = CampaignForm()
         return render_template("create_campaign.html",
                                form = form)
+
+@app.route("/discover", methods=['GET', 'POST'])
+def discover():
+    return render_template('discover.html')
+
+@app.route("/start", methods=['GET', 'POST'])
+def start():
+    return render_template('start.html')
+
+@app.route("/campaignPage", methods=['GET', 'POST'])
+def campaignPage():
+    return render_template('campaignPage.html')
