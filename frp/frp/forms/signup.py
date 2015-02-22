@@ -8,7 +8,6 @@ from ..models import (is_username_exists, is_email_exists, ORG_STATUS_CHOICES,
                       is_org_email_exists, is_org_name_exists)
 
 
-
 __all__ = ['DonorSignupForm', 'BeneficiarySignupForm', 'BENEFICIARY_CATEGORY',
            'ORG_WORK_CHOICES']
 

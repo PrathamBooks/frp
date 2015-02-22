@@ -86,15 +86,15 @@
         </div>
 
         <div class="siteBlock">
-          <h6><a href="discover.html">Discover</a></h6>
+          <h6><a href="{{ url_for('discover') }}" >Discover</a></h6>
           <ul>
-            <li><a href="discover.html">Search/Browse Listing</a></li>
-            <li><a href="campaignPage.html">Campaign Page</a>
-            <ul>
-              <li><a href="blank.html">Contribute/Give</a></li>
-            </ul>
+            <li><a href="{{ url_for('discover') }}">Search/Browse Listing</a></li>
+            <li><a href="{{ url_for('discover')}}">Campaign Page</a>
+            <li>
+              <ul>
+                <li><a href="blank.html">Contribute/Give</a></li>
+              </ul>
             </li>
-          </ul>
         </div>
 
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import inspect
+from datetime import date
 
 from . import db, BaseNameMixin, BaseMixin
 
@@ -113,3 +114,10 @@ class Campaign(BaseMixin, db.Model):
     who = db.Column(db.Unicode(500), nullable=False)
     impact = db.Column(db.Unicode(500), nullable=False)
     utilization = db.Column(db.Unicode(500), nullable=False)
+
+    def days_remaining(self):
+        rdays = 30 - (date.today() - self.created_at.date()).days
+        return rdays if rdays > 0 else 0
+
+    def target(self):
+        return 50 * (self.nbooks + 125 * self.nlic)

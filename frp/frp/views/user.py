@@ -12,6 +12,7 @@ from flask.ext.oauth import OAuth
 
 from .. import app
 from .. import cache
+from ..models import (Campaign, ORG_STATUS_CHOICES)
 from ..forms import (DonorSignupForm,
                      LoginForm,
                      BeneficiarySignupForm,
@@ -227,6 +228,13 @@ def donor_dashboard():
 def beneficiary_dashboard():
     return render_template('beneficiaryDashboard.html')
 
-@app.route("/campaignPage", methods=['GET'])
-def campaignPage():
-    return render_template('campaignPage.html')
+@app.context_processor
+def convertStatusTypeToString():
+    def statusString(status):
+        return ORG_STATUS_CHOICES[status]
+    return dict(statusString=statusString)
+
+@app.route("/campaign/<id>", methods=['GET'])
+def campaignPage(id):
+    campaign = Campaign.query.filter_by(id=id).first()
+    return render_template('campaign.html', campaign=campaign)
