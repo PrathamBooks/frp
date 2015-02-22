@@ -79,8 +79,8 @@
               My Profile<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="donorDashboard.html">My Donations</a></li>
-              <li><a href="beneficiaryDashboard.html">My Campaigns</a></li>
+              <li><a href="{{ url_for('donor_dashboard') }}">My Donations</a></li>
+              <li><a href="{{ url_for('beneficiary_dashboard') }}">My Campaigns</a></li>
               <li><a href="{{ url_for('profile') }}">Settings</a></li>
               <li class="divider"></li>
               <li><a href="{{ url_for('logout') }}">Logout</a></li>

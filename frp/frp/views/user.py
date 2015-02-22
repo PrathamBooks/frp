@@ -220,6 +220,16 @@ def discover():
 def start():
     return render_template('start.html')
 
+@app.route("/profile/donor_dashboard")
+@login_required
+def donor_dashboard():
+    return render_template('donorDashboard.html')
+
+@app.route("/profile/beneficiary_dashboard")
+@login_required
+def beneficiary_dashboard():
+    return render_template('beneficiaryDashboard.html')
+
 @app.route("/campaignPage", methods=['GET'])
 def campaignPage():
     return render_template('campaignPage.html')
