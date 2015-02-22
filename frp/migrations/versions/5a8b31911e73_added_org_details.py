@@ -24,8 +24,7 @@ def upgrade():
         sa.Column('name', sa.Unicode(length=250), nullable=False),
         sa.Column('title', sa.Unicode(length=250), nullable=False),
         sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-        sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('name')
+        sa.PrimaryKeyConstraint('id')
     )
     op.create_table('organization_info',
         sa.Column('id', sa.Integer(), nullable=False),

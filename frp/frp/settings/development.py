@@ -5,8 +5,13 @@ SQLALCHEMY_DATABASE_URI = "postgresql://:@localhost/frp"
 
 # Facebook Social Info
 
+FACEBOOK_APP_ID=687940051328349
+SECRET='4e753f463175c5f7aaf01a4c1ae4ce91'
 FACEBOOK_CONSUMER_KEY = os.environ.get('FACEBOOK_CONSUMER_KEY'),
 FACEBOOK_CONSUMER_SECRET =  os.environ.get('FACEBOOK_CONSUMER_SECRET')
+
+GOOGLE_CLEINT_ID='333461527138-5uefjj1d3u859ca68f9huv3n3sp2cfnr.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET='NvAEJHMsjN3rT8y5UVXyvfNv'
 
 DEBUG = True
 SECRET_KEY = "Development key"
