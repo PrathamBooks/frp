@@ -95,7 +95,7 @@ def seed():
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', nbooks='1000', nlic=0)
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0)
     db.session.add(campaign)
     try:
         db.session.commit()

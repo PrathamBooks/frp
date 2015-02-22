@@ -28,6 +28,8 @@ def upgrade():
         sa.Column('who', sa.Unicode(length=500), nullable=False),
         sa.Column('impact', sa.Unicode(length=500), nullable=False),
         sa.Column('utilization', sa.Unicode(length=500), nullable=False),
+        sa.Column('state', sa.Unicode(length=500), nullable=False),
+        sa.Column('city', sa.Unicode(length=500), nullable=False),
         sa.ForeignKeyConstraint(['organization_id'], ['organization.id'], ),
         sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
         sa.PrimaryKeyConstraint('id')

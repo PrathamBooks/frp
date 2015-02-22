@@ -83,6 +83,37 @@ ORG_WORK_CHOICES = [
     (4, 'Children with special needs'),
     (5, 'Children who are differently abled')]
 
+STATES = [
+        (u'Andhra Pradesh', u'Andhra Pradesh'),
+        (u'Arunachal Pradesh', u'Arunachal Pradesh'),
+        ("Assam", "Assam"),
+        ("Bihar", "Bihar"),
+        ("Chhattisgarh", "Chhattisgarh"),
+        ("Delhi", "Delhi"),
+        ("Goa", "Goa"),
+        ("Gujarat", "Gujarat"),
+        ("Haryana", "Haryana"),
+        ("Himachal Pradesh", "Himachal Pradesh"),
+        (u'Jammu and Kashmir', u'Jammu and Kashmir'),
+        ("Jharkhand", 'Jharkhand'),
+        ("Karnataka", "Karnataka"),
+        ("Kerala", "Kerala"),
+        (u'Madhya Pradesh', u'Madhya Pradesh'),
+        ("Maharashtra", "Maharashtra"),
+        ("Manipur", "Manipur"),
+        ("Meghalaya", "Meghalaya"),
+        ("Mizoram", "Mizoram"),
+        ("Nagaland", "Nagaland"),
+        ("Orissa", "Orissa"),
+        ("Punjab", "Punjab"),
+        ("Rajasthan", "Rajasthan"),
+        ("Sikkim", "Sikkim"),
+        ("Tamilnadu", "Tamilnadu"),
+        ("Tripura", "Tripura"),
+        (u'Uttar Pradesh', u'Uttar Pradesh'),
+        ("Uttaranchal", "Uttaranchal"),
+        (u'West Bengal', u'West Bengal')]
+
 
 class BeneficiarySignupForm(wtforms.Form):
     category = wtforms.RadioField(
@@ -187,6 +218,13 @@ class BeneficiarySignupForm(wtforms.Form):
         label='Library in a Classroom/Books in a Bag',
         validators=[wtforms.validators.Optional()])
 
+    project_state = wtforms.SelectField(
+        label='Please select any one state in the list',
+        choices=STATES)
+
+    project_city = wtforms.TextField(
+        validators=[wtforms.validators.Required(),
+                    wtforms.validators.Length(max=100)])
 
     project_title = wtforms.TextField(
         label='Please enter the project title here. This is the first thing your Donor sees and you can also be searched with it.',

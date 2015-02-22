@@ -61,10 +61,13 @@ def create_beneficiary(form):
     fund_utilization = form.fund_utilization.data
     nbooks = form.project_books.data
     nlic = form.project_lib_in_classroom.data
+    state = form.project_state.data
+    city = form.project_city.data
     campaign = Campaign(created_by=g.user, org=org,
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
-            utilization=fund_utilization, nbooks=nbooks, nlic=nlic)
+            utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
+            state=state, city=city)
     db.session.add(campaign)
 
     try:
@@ -75,7 +78,8 @@ def create_beneficiary(form):
         db.session.rollback()
         return {'error': True, 'exc': e}
 
-    return {'error': False}
+    return {'error': False,
+            'campaign': campaign}
 
 
 def create_donor_from_webform(donor):

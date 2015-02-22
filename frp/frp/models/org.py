@@ -70,7 +70,7 @@ class OrganizationInfo(BaseMixin, db.Model):
     __tablename__ = 'organization_info'
 
     organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
-    email = db.Column(db.Unicode(254), unique=True, nullable=False)
+    email = db.Column(db.Unicode(254), nullable=False)
     category = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(500), nullable=True, default=u'')
@@ -114,6 +114,8 @@ class Campaign(BaseMixin, db.Model):
     who = db.Column(db.Unicode(500), nullable=False)
     impact = db.Column(db.Unicode(500), nullable=False)
     utilization = db.Column(db.Unicode(500), nullable=False)
+    state = db.Column(db.Unicode(500), nullable=False)
+    city = db.Column(db.Unicode(500), nullable=False)
 
     def days_remaining(self):
         rdays = 30 - (date.today() - self.created_at.date()).days

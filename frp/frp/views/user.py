@@ -66,13 +66,13 @@ def signup_as_beneficiary():
     elif request.method == 'POST':
         form = BeneficiarySignupForm(request.form)
         if form.validate():
-            app.logger.warning("In signup_as_beneficiary after form validation")
             result = signup_service.create_beneficiary(form)
             if not result['error']:
-                return redirect(url_for('org_info'))
+                return redirect(url_for('campaignPage', id=result['campaign'].id ))
             else:
                 flash('Oops something went wrong, please try again')
 
+        print form.errors
         return render_template('beneficiary_form.html', form=form)
 
 

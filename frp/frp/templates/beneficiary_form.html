@@ -417,15 +417,6 @@
                       </div>
                     </div><!--well--> 
 
-                    <div class="well upload">
-                      <h3>Video Upload</h3>
-                      <!--<button type="button" class="btn btn-primary">Add Video</button>-->
-                      <input type="file" ng-model="signup.addVideo" name="addVideo" class="btn btnFile">
-                      <p class="help-block">Video sized limited to 5mb</p>
-                      <video class="hide"></video>
-                      <div class="alert alert-warning hide"> Not valid file.</div>
-                    </div><!--well-->
-
                     <div class="well">
                       <div class=" row form-group">
                         <div class="col-xs-4">
@@ -437,76 +428,17 @@
                       </div><!--form-group-->
                     </div><!--well-->
 
-
-                    <div id="category" class="well">
-                      <div class="row form-group">
-                        <div class="col-xs-12">
-                          <h3>Category</h3>
-                        </div>
-                        <!-- <p>should be added directly based on previous section</p>-->
-                        <div class="checkbox">
-                          <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Books for a library" checked>Books for a library / Prizes/give-aways / Reading Sessions</label><br />
-                          <label><input type="checkbox" ng-model="signup.category[]" name="category[]" value="Books in a bag / Classroom Library" checked>Books in a bag / Classroom Library</label><br />
-                        </div><!--checkbox-->
-                      </div><!--form-group-->
-                    </div><!--well-->
-
                     <div class="well">
                       <div class="row form-group">
-                        <div class="col-xs-4">
-                          <h3>State</h3>
-                          <div class="alert alert-warning  alertleft hide">Please select any one state in the list</div>
-                          <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
-                                                              This link will work for the city of respective states-->
-                        </div>
-                        <div class="col-xs-8">
-                          <select class="form-control" ng-model="signup.stateCity" name="stateCity" required>
-                            <option value="2169" >Andhra Pradesh</option>
-                            <option value="2196" >Arunachal Pradesh</option>
-                            <option value="2170" >Assam</option>
-                            <option value="2171" >Bihar</option>
-                            <option value="5267" >Chhattisgarh</option>
-                            <option value="2174" >Delhi</option>
-                            <option value="2199" >Goa</option>
-                            <option value="2175" >Gujarat</option>
-                            <option value="2176" >Haryana</option>
-                            <option value="2177" >Himachal Pradesh</option>
-                            <option value="2178" >Jammu and Kashmir</option>
-                            <option value="5268" >Jharkhand</option>
-                            <option value="2185" >Karnataka</option>
-                            <option value="2179" >Kerala</option>
-                            <option value="2181" >Madhya Pradesh</option>
-                            <option value="2182" >Maharashtra</option>
-                            <option value="2183" >Manipur</option>
-                            <option value="2184" >Meghalaya</option>
-                            <option value="2197" >Mizoram</option>
-                            <option value="2186" >Nagaland</option>
-                            <option value="2187" >Orissa</option>
-                            <option value="2189" >Punjab</option>
-                            <option value="2190" >Rajasthan</option>
-                            <option value="2195" >Sikkim</option>
-                            <option value="2191" >Tamil Nadu</option>
-                            <option value="2192" >Tripura</option>
-                            <option value="5269" >UNION TERRITORY</option>
-                            <option value="2193" >Uttar Pradesh</option>
-                            <option value="5259" >Uttaranchal</option>
-                            <option value="2194" >West Bengal</option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4" style="display:none;" >
-                          <h3>City</h3>
-                          <div class="alert alert-warning  alertleft hide">Please select any one city in the list</div>
-                          <!-- http://stackoverflow.com/questions/18606404/get-response-select-and-show-it-in-form-select
-                                                              This link will work for the city of respective states-->
-                        </div>
-                        <div class="col-xs-8" style="display:none;">
-                          <select multiple class="form-control" ng-model="signup.stateCity">
-                            <option value="2169" >City Populated</option>
-                          </select>
-
-                        </div>
-                        <button type="button" value="Add State" class="btn btnAdd">Add State</button>
-                      </div><!--form-group-->
+                        <h3>State</h3>
+                        {{ render_select(form.project_state) }}
+                        <div class="alert alert-warning alertleft hide">Please select any one state in the list</div>
+                      </div>
+                      <div class="row form-group">
+                        <h3>City</h3>
+                        {{ render_text_field(form.project_city) }}
+                        <div class="alert alert-warning  alertleft hide">Please mention one city.</div>
+                      </div>
                     </div><!--well-->
 
                     <div class="well">
