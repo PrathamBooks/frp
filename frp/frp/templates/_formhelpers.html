@@ -63,6 +63,13 @@
     {% else %}
       <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
     {% endif %}
+    {% if field.errors %}
+      <ul class="errors">
+        {% for error in field.errors %}
+          <li><div class="alert alert-warning">{{ error }}</div></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     {% if field.help_text %}
       <p class="help-block">{{field.help_text}}</p>
     {% endif %}

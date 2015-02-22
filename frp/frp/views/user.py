@@ -72,9 +72,6 @@ def signup_as_beneficiary():
             else:
                 flash('Oops something went wrong, please try again')
 
-        if form.errors: 
-            print form.errors
-
         return render_template('beneficiary_form.html', form=form)
 
 
