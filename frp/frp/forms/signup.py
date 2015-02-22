@@ -173,10 +173,7 @@ class BeneficiarySignupForm(wtforms.Form):
     total_impact_on_children = wtforms.IntegerField(
         label='Number of children that you/your organization have impacted since commencement / impacts currently',
         validators=[wtforms.validators.Required()])
-    age_group_of_children = wtforms.TextField(
-        label='Age group of children you impact',
-        validators=[wtforms.validators.Optional(),
-                    wtforms.validators.Length(max=20)])
+
     org_work = wtforms.SelectMultipleField(
         label='Do you/your organization do any work for following (check all that apply)',
         validators=[wtforms.validators.Required()],
@@ -217,6 +214,27 @@ class BeneficiarySignupForm(wtforms.Form):
             validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=100)])
 
+    def set_data(self, org):
+       self.category.data = org.info.category
+       self.title.data = org.title
+       self.email.data = org.info.email
+       self.organization_status.data = org.info.status
+       self.address.data = org.info.address
+       self.contact_number.data = org.info.contact_number
+       self.website.data = org.info.website
+       self.facebook.data = org.info.facebook
+       self.has_80g_certificate.data = org.info.has_80g_certificate
+       self.person1_name.data = org.info.person1_name
+       self.person1_position.data = org.info.person1_position
+       self.person1_email.data = org.info.person1_email
+       self.person1_phone.data = org.info.person1_phone
+
+       self.total_impact_on_children.data =  org.info.total_impact_on_children
+       org_works = org.works
+       org_works_selected = []
+       for org_work in org_works:
+            org_works_selected.append(org_work.choice_id) 
+       self.org_work.data = org_works_selected
 
     # def validate_name(self, field):
     #     name = field.data.strip()

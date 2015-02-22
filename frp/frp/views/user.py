@@ -58,11 +58,11 @@ def signup():
 def signup_as_beneficiary():
     if request.method == 'GET':
         form = BeneficiarySignupForm()
-        app.logger.warning("In SignupAsBeneficiary")
+        if (g.user.organization_created):
+            form.set_data(g.user.organization_created[0])
         return render_template('beneficiary_form.html', form=form)
 
     elif request.method == 'POST':
-        app.logger.warning("In signup_as_beneficiary with POST")
         form = BeneficiarySignupForm(request.form)
         if form.validate():
             app.logger.warning("In signup_as_beneficiary after form validation")
