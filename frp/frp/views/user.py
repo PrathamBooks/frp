@@ -7,7 +7,8 @@ from flask import (render_template,
                    session,
                    flash,
                    views,
-                   request)
+                   request,
+                   jsonify)
 from flask.ext.oauth import OAuth
 
 from .. import app
@@ -245,4 +246,5 @@ def campaignPage(id):
 
 @app.route("/campaigns")
 def campaigns():
-    return render_template('discover.html')
+    campaigns_data = Campaign.all_campaigns_data()
+    return render_template('discover.html', campaigns_data=campaigns_data)
