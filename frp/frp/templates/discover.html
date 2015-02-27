@@ -286,26 +286,35 @@
           <ul class="featured">
             <li>Featured</li>
             <li><a href="#popular">Popular</a> </li>
-            <li><a href="#Launched">Recently Launched</a></li>
-            <li><a href="#">Ending Soon</a></li>
-            <li><a href="#"  class="active">Most Funded</a></li>
-            <li><a href="#">Curated Pages</a></li>
+            <li><a href="{{ url_for('campaigns', category='recently-launched') }}">Recently Launched</a></li>
+            <li><a href="{{ url_for('campaigns', category='ending-soon') }}">Ending Soon</a></li>
+            <li><a href="{{ url_for('campaigns', category='most-funded') }}" class="active">Most Funded</a></li>
           </ul>
           <hr />
           <ul class="category">
             <li>Categories</li>
-            <li><a href="#">Registered Non-Profit (Trust / Society) </a></li>
-            <li><a href="#">Section 25 Company</a></li>
-            <li><a href="#">Private School</a></li>
-            <li><a href="#">Government School</a></li>
-            <li><a href="#">Reading Centre/Library</a></li>
-            <li><a href="#">Reading Champion / Storyteller / Volunteer</a></li>
-            <li><a href="#">Rural Areas</a></li>
-            <li><a href="#">Low Income Urban Area</a></li>
-            <li><a href="#">Tribal Areas</a></li>
-            <li><a href="#">Special Needs / Differently Abled Children</a></li>
+            <li><a href="{{ url_for('campaigns', category='registered-non-profit') }}">Registered Non-Profit (Trust / Society) </a></li>
+            <li><a href="{{ url_for('campaigns', category='section-25-company') }}">Section 25 Company</a></li>
+            <li><a href="{{ url_for('campaigns', category='private-school') }}">Private School</a></li>
+            <li><a href="{{ url_for('campaigns', category='government-school') }}">Government School</a></li>
+            <li><a href="{{ url_for('campaigns', category='reading-center-library') }}">Reading Centre/Library</a></li>
+            <li><a href="{{ url_for('campaigns', category='reading-champion') }}">Reading Champion / Storyteller / Volunteer</a></li>
+            <li><a href="{{ url_for('campaigns', category='rural-areas') }}">Rural Areas</a></li>
+            <li><a href="{{ url_for('campaigns', category='low-income-urban-areas') }}">Low Income Urban Area</a></li>
+            <li><a href="{{ url_for('campaigns', category='tribal-areas') }}">Tribal Areas</a></li>
+            <li><a href="{{ url_for('campaigns', category='special-needs') }}">Special Needs / Differently Abled Children</a></li>
           </ul>
           <hr />
+
+          <ul class="citi">
+            <li>Cities</li>
+            <li> 
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="search cities">
+              <span class="input-group-addon"><a href="#"><i class="icon-search"></i></a></span>
+            </div>
+            </li>
+          </ul>
         </div>
 
       </div>

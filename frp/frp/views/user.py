@@ -53,6 +53,10 @@ def pop_login_session():
 def signup():
     return render_template('signup.html')
 
+@app.route('/campaign/success')
+@login_required
+def campaign_success():
+    return render_template('campaignSuccess.html')
 
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
@@ -68,7 +72,7 @@ def signup_as_beneficiary():
         if form.validate():
             result = signup_service.create_beneficiary(form)
             if not result['error']:
-                return redirect(url_for('campaignPage', id=result['campaign'].id ))
+                return redirect(url_for('campaign_success'))
             else:
                 flash('Oops something went wrong, please try again')
 
@@ -238,3 +242,7 @@ def convertStatusTypeToString():
 def campaignPage(id):
     campaign = Campaign.query.filter_by(id=id).first()
     return render_template('campaign.html', campaign=campaign)
+
+@app.route("/campaigns")
+def campaigns():
+    return render_template('discover.html')

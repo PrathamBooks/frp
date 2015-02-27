@@ -164,7 +164,6 @@ $(function() {
     $('#bookCounts input').each(function(i, e) {
       if (i==1) {
         if (parseInt(e.value)) count += parseInt(e.value) * 125;
-        $('#noOfKits').html(e.value);
       } else {
         if (parseInt(e.value)) count += parseInt(e.value);
       }
