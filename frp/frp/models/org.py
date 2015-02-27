@@ -116,6 +116,8 @@ class Campaign(BaseMixin, db.Model):
     utilization = db.Column(db.Unicode(500), nullable=False)
     state = db.Column(db.Unicode(500), nullable=False)
     city = db.Column(db.Unicode(500), nullable=False)
+    languages = db.Column(db.Unicode(200), nullable=False)
+
 
     @staticmethod
     def all_campaigns_data():
@@ -137,7 +139,7 @@ class Campaign(BaseMixin, db.Model):
                 "title" : self.title,
                 "description" : self.description,
                 "impact" : self.org.info.total_impact_on_children,
-                "languages" : ["Hindi", "English"],
+                "languages" : self.languages,
                 "type" : ORG_STATUS_CHOICES[self.org.info.status][1],
                 "state" : self.state,
                 "city" : self.city,

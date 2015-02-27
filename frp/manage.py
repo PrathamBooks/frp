@@ -95,37 +95,37 @@ def seed():
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0)
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Rural Library', description='Project to set up a rural library', 
             who='We are an organization who works in rural AP', impact='This will raise funds to set up a new library.',
-            utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2)
+            utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Urban Library', description='Project to get 750 books for old age home', 
             who='We are an organization of old people', impact='Make 100 old people happy',
-            utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0)
+            utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Slum Library', description='Slum library in Dharavi, Mumbai', 
             who='We are an organization of volunteers', impact='Library for street children',
-            utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0)
+            utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0)
+            utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0)
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil")
     db.session.add(campaign)
     try:
         db.session.commit()

@@ -217,7 +217,8 @@ def angular_partials(page):
 
 @app.route("/discover", methods=['GET'])
 def discover():
-    return render_template('discover.html')
+    campaigns_data = Campaign.all_campaigns_data()
+    return render_template('discover.html', campaigns_data=campaigns_data)
 
 @app.route("/start", methods=['GET'])
 def start():
@@ -243,8 +244,3 @@ def convertStatusTypeToString():
 def campaignPage(id):
     campaign = Campaign.query.filter_by(id=id).first()
     return render_template('campaign.html', campaign=campaign)
-
-@app.route("/campaigns")
-def campaigns():
-    campaigns_data = Campaign.all_campaigns_data()
-    return render_template('discover.html', campaigns_data=campaigns_data)

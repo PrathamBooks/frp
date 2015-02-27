@@ -45,7 +45,7 @@ def create_beneficiary(form):
         person2_position=person2_position, person2_email=person2_email,
         person2_phone=person2_phone, 
         total_impact_on_children=total_impact_on_children)
-        
+
     db.session.add(org_info)
 
     for choice in org_work:
@@ -63,11 +63,20 @@ def create_beneficiary(form):
     nlic = form.project_lib_in_classroom.data
     state = form.project_state.data
     city = form.project_city.data
+    languages = []
+    if not form.language1.data == 'Select':
+        languages.append(form.language1.data)
+    if not form.language2.data == 'Select':
+        languages.append(form.language2.data)
+    if not form.language3.data == 'Select':
+        languages.append(form.language3.data)
+    languages = ','.join((l) for l in languages)
+
     campaign = Campaign(created_by=g.user, org=org,
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
-            state=state, city=city)
+            state=state, city=city, languages=languages)
     db.session.add(campaign)
 
     try:

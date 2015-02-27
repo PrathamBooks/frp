@@ -16,9 +16,9 @@
             <p> {{ campaign.who }} </p>
             <ul>
               <li><span>Impact:</span> {{ campaign.org.info.total_impact_on_children }} children</li>
-              <li><span>Languages:</span> TBD </li>
+              <li><span>Languages:</span> {{ campaign.languages }} </li>
               <li><span>Beneficiary Type:</span> {{ statusString(campaign.org.info.status)[1] }} </li>
-              <li><span>Location:</span> TBD </li>
+              <li><span>Location:</span> {{ campaign.city }}, {{ campaign.state }} </li>
             </ul>
           </div>
         </div>
@@ -73,24 +73,24 @@
     <div id="tagBlock" class="col-md-3">
       <ul class="featured">
         <li>Featured</li>
-        <li><a href="#popular">Popular</a> </li>
-        <li><a href="{{ url_for('campaigns', category='recently-launched') }}">Recently Launched</a></li>
-        <li><a href="{{ url_for('campaigns', category='ending-soon') }}">Ending Soon</a></li>
-        <li><a href="{{ url_for('campaigns', category='most-funded') }}" class="active">Most Funded</a></li>
+        <li><a href="{{ url_for('discover', category='popular') }}">Popular</a> </li>
+        <li><a href="{{ url_for('discover', category='recently-launched') }}">Recently Launched</a></li>
+        <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
+        <li><a href="{{ url_for('discover', category='most-funded') }}" class="active">Most Funded</a></li>
       </ul>
       <hr />
       <ul class="category">
         <li>Categories</li>
-        <li><a href="{{ url_for('campaigns', category='registered-non-profit') }}">Registered Non-Profit (Trust / Society) </a></li>
-        <li><a href="{{ url_for('campaigns', category='section-25-company') }}">Section 25 Company</a></li>
-        <li><a href="{{ url_for('campaigns', category='private-school') }}">Private School</a></li>
-        <li><a href="{{ url_for('campaigns', category='government-school') }}">Government School</a></li>
-        <li><a href="{{ url_for('campaigns', category='reading-center-library') }}">Reading Centre/Library</a></li>
-        <li><a href="{{ url_for('campaigns', category='reading-champion') }}">Reading Champion / Storyteller / Volunteer</a></li>
-        <li><a href="{{ url_for('campaigns', category='rural-areas') }}">Rural Areas</a></li>
-        <li><a href="{{ url_for('campaigns', category='low-income-urban-areas') }}">Low Income Urban Area</a></li>
-        <li><a href="{{ url_for('campaigns', category='tribal-areas') }}">Tribal Areas</a></li>
-        <li><a href="{{ url_for('campaigns', category='special-needs') }}">Special Needs / Differently Abled Children</a></li>
+        <li><a href="{{ url_for('discover', category='registered-non-profit') }}">Registered Non-Profit (Trust / Society) </a></li>
+        <li><a href="{{ url_for('discover', category='section-25-company') }}">Section 25 Company</a></li>
+        <li><a href="{{ url_for('discover', category='private-school') }}">Private School</a></li>
+        <li><a href="{{ url_for('discover', category='government-school') }}">Government School</a></li>
+        <li><a href="{{ url_for('discover', category='reading-center-library') }}">Reading Centre/Library</a></li>
+        <li><a href="{{ url_for('discover', category='reading-champion') }}">Reading Champion / Storyteller / Volunteer</a></li>
+        <li><a href="{{ url_for('discover', category='rural-areas') }}">Rural Areas</a></li>
+        <li><a href="{{ url_for('discover', category='low-income-urban-areas') }}">Low Income Urban Area</a></li>
+        <li><a href="{{ url_for('discover', category='tribal-areas') }}">Tribal Areas</a></li>
+        <li><a href="{{ url_for('discover', category='special-needs') }}">Special Needs / Differently Abled Children</a></li>
       </ul>
       <hr />
 
