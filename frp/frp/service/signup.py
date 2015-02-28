@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+from shutil import copyfile
 
 from flask import g
 
@@ -6,9 +8,9 @@ from .. import app
 
 from ..models import (db, User, UserInfo, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
+from ..helpers import file_extension
 
-
-def create_beneficiary(form):
+def create_beneficiary(form, filename):
     category = form.category.data
     title = form.title.data
     status = form.organization_status.data
@@ -76,11 +78,23 @@ def create_beneficiary(form):
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
-            state=state, city=city, languages=languages)
+            state=state, city=city, languages=languages, image='xx.png')
     db.session.add(campaign)
 
     try:
         db.session.commit()
+        extension = file_extension(filename)
+        print "extension " + extension
+        full_file_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+        print "full_file_path " + full_file_path
+        new_file_name = str(campaign.id) + '.' + extension
+        full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
+        print "new_file_name " + new_file_name
+        copyfile(full_file_path, full_new_path)
+        campaign.filename = new_file_name
+        db.session.add(campaign)
+        db.session.commit()
+
     except Exception as e:
         print e
         app.logger.warning('Unable to save')

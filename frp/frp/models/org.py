@@ -117,6 +117,7 @@ class Campaign(BaseMixin, db.Model):
     state = db.Column(db.Unicode(500), nullable=False)
     city = db.Column(db.Unicode(500), nullable=False)
     languages = db.Column(db.Unicode(200), nullable=False)
+    image = db.Column(db.Unicode(100), nullable=False)
 
 
     @staticmethod

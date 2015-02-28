@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 from flask import (render_template,
                    g,
                    url_for,
@@ -10,6 +11,7 @@ from flask import (render_template,
                    request,
                    jsonify)
 from flask.ext.oauth import OAuth
+from werkzeug import secure_filename
 
 from .. import app
 from .. import cache
@@ -23,6 +25,8 @@ from ..forms import (DonorSignupForm,
 from ..service import signup as signup_service
 from ..service import user as user_service
 from ..service.decorators import login_required
+from ..helpers import allowed_file
+
 
 # Facebook requirements
 oauth = OAuth()
@@ -71,7 +75,13 @@ def signup_as_beneficiary():
     elif request.method == 'POST':
         form = BeneficiarySignupForm(request.form)
         if form.validate():
-            result = signup_service.create_beneficiary(form)
+            image = request.files['imageUpload']
+            filename = secure_filename(image.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+                image.save(full_save_path)
+
+            result = signup_service.create_beneficiary(form, filename)
             if not result['error']:
                 return redirect(url_for('campaign_success'))
             else:

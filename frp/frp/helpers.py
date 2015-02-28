@@ -5,6 +5,8 @@ from flask import g, jsonify, make_response, request
 
 from . import app
 
+__all__ = ['allowed_file', 'file_extension']
+
 def allowed_file(fname):
     """
     Returns true if 'fname' has an extension mentioned in
@@ -13,12 +15,15 @@ def allowed_file(fname):
 
     extension = "." in fname and fname.rsplit('.', 1)[-1] or ""
     return extension in app.config['ALLOWED_EXTENSIONS']
-        
-    
+
+def file_extension(fname):
+    extension = "." in fname and fname.rsplit('.', 1)[-1] or ""
+    return extension
+
 def utc_timestamp(d):
     "Converts datetime from UTC to timestamp"
     return calendar.timegm(d.utctimetuple())
-    
+
 def requires_login(f):
     """
     Duplicates the functionality of the lastuser.requires_login but

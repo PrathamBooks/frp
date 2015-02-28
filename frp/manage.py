@@ -80,8 +80,8 @@ def seed():
     # Create org info
     org_info = OrganizationInfo(
          org=org, email='info@example.com', category=2, status=1, address='123, Street 2',
-         contact_number='99010201011', facebook='facebook.com/mirafra', 
-         website='www.mirafra.com',
+         contact_number='99010201011', facebook='http://facebook.com/mirafra', 
+         website='http://www.mirafra.com',
          has_80g_certificate='t', person1_name='Alok',
          person1_position='CEO', person1_email='kuchlous@gmail.com',
          person2_position='COO', person2_email='shyam@example.com',
@@ -95,37 +95,43 @@ def seed():
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil")
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
+            image="1.jpg")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Rural Library', description='Project to set up a rural library', 
             who='We are an organization who works in rural AP', impact='This will raise funds to set up a new library.',
-            utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English")
+            utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English",
+            image="2.jpg")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Urban Library', description='Project to get 750 books for old age home', 
             who='We are an organization of old people', impact='Make 100 old people happy',
-            utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil")
+            utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil",
+            image="3.jpg")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Slum Library', description='Slum library in Dharavi, Mumbai', 
             who='We are an organization of volunteers', impact='Library for street children',
-            utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi")
+            utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi",
+            image="4.jpg")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil")
+            utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil",
+            image="5.jpg")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
-            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil")
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
+            image="6.jpg")
     db.session.add(campaign)
     try:
         db.session.commit()

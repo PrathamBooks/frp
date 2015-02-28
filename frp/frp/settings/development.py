@@ -18,7 +18,7 @@ SECRET_KEY = "Development key"
 
 SITE_NAME="Pratham Books Fund raising platform"
 
-UPLOAD_DIRECTORY = "/home/noufal/projects/pratham/pratham_frp/frp/frp/static/uploads"
+UPLOAD_DIRECTORY = "/home/alokk/frp/frp/frp/static/uploads"
 ALLOWED_EXTENSIONS = set("jpg jpeg png gif".split())
 
 # Email configuration
