@@ -3,7 +3,7 @@
 """All decorators required for the project.
 """
 from functools import wraps
-from flask import session, url_for, redirect, g
+from flask import session, request, url_for, redirect, g
 
 from ..models import User
 
@@ -16,5 +16,5 @@ def login_required(f):
         if session.get('logged_in'):
             g.user = User.query.filter_by(email=session.get('email')).first()
             return f(*args, **kwargs)
-        return redirect(url_for('login'))
+        return redirect(url_for('login', next=request.url))
     return inner

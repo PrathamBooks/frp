@@ -5,18 +5,24 @@ SQLALCHEMY_DATABASE_URI = "postgresql://:@localhost/frp"
 
 # Facebook Social Info
 
-FACEBOOK_APP_ID=687940051328349
-SECRET='4e753f463175c5f7aaf01a4c1ae4ce91'
+FRP_FACEBOOK_APP_ID=687940051328349
+FRP_SECRET='4e753f463175c5f7aaf01a4c1ae4ce91'
+MY_FACEBOOK_APP_ID=828919617156016
+MY_FACEBOOK_APP_SECRET='cccd507c38517c64cfe3f38b048ce2d9'
+MY_FACEBOOK_TEST_APP_ID=828920413822603
+MY_FACEBOOK_TEST_APP_SECRET='28d234cea81bbd081f956f86a3d15e73'
+
+
 FACEBOOK_CONSUMER_KEY = os.environ.get('FACEBOOK_CONSUMER_KEY'),
 FACEBOOK_CONSUMER_SECRET =  os.environ.get('FACEBOOK_CONSUMER_SECRET')
 
-GOOGLE_CLEINT_ID='333461527138-5uefjj1d3u859ca68f9huv3n3sp2cfnr.apps.googleusercontent.com'
+GOOGLE_CLIIENT_ID='333461527138-5uefjj1d3u859ca68f9huv3n3sp2cfnr.apps.googleusercontent.com'
 GOOGLE_CLIENT_SECRET='NvAEJHMsjN3rT8y5UVXyvfNv'
 
 DEBUG = True
 SECRET_KEY = "Development key"
 
-SITE_NAME="Pratham Books Fund raising platform"
+SITE_NAME="Pratham Books Donate-A-Book"
 
 UPLOAD_DIRECTORY = "/home/alokk/frp/frp/frp/static/uploads"
 ALLOWED_EXTENSIONS = set("jpg jpeg png gif".split())

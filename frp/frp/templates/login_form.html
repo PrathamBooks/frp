@@ -8,7 +8,7 @@
 {% endwith %}
 {% block content %}
 <div class="container internal">
-  <form  method="POST" action="#">
+  <form  method="POST" action={{ url_for('login_via_webform', next=next)}}>
     <div  id="internalContent" class="row">
       <div id="internalCampaign" class="row startCampaign contact log">
         <div class="well">

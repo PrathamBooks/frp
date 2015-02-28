@@ -39,7 +39,7 @@ facebook = oauth.remote_app(
     authorize_url='https://www.facebook.com/dialog/oauth',
     consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
     consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
-    request_token_params={'scope': 'email, '})
+    request_token_params={'scope': 'email'})
 
 
 @facebook.tokengetter
@@ -128,12 +128,12 @@ def facebook_authorized(resp):
 
     signup_service.create_donor_from_facebook(data.data)
     session['email'] = data.data.get('email')
-    return redirect(url_for('profile'))
+    return redirect(next_url)
 
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template('login.html', next=request.args.get('next'))
 
 
 @app.route('/login/webform', methods=['GET', 'POST'])
@@ -150,12 +150,13 @@ def login_via_webform():
         if form.validate():
             if user_service.is_valid_login(form.email.data,
                                            form.password.data):
-                return redirect(url_for('profile'))
+                next_url = request.args.get('next') or url_for('index')
+                return redirect(next_url)
             else:
                 flash('Invalid credentials')
-                return render_template('login_form.html', form=form)
+                return render_template('login_form.html', form=form, next=request.args.get('next'))
         else:
-            return render_template('login_form.html', form=form)
+            return render_template('login_form.html', form=form, next=request.args.get('next'))
 
 
 @app.route('/profile')
