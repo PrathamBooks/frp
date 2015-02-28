@@ -96,28 +96,28 @@ def seed():
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
-            image="1.jpg")
+            image="1.jpg", status="Submitted")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Rural Library', description='Project to set up a rural library', 
             who='We are an organization who works in rural AP', impact='This will raise funds to set up a new library.',
             utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English",
-            image="2.jpg")
+            image="2.jpg", status="Approved")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Urban Library', description='Project to get 750 books for old age home', 
             who='We are an organization of old people', impact='Make 100 old people happy',
             utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil",
-            image="3.jpg")
+            image="3.jpg", status="Shipped")
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
             title='Slum Library', description='Slum library in Dharavi, Mumbai', 
             who='We are an organization of volunteers', impact='Library for street children',
             utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi",
-            image="4.jpg")
+            image="4.jpg", status="Ended")
     db.session.add(campaign)
 
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499)
@@ -127,7 +127,7 @@ def seed():
             title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil",
-            image="5.jpg")
+            image="5.jpg", status="Delivered")
     db.session.add(campaign)
 
     donation = Donation(donor=user, campaign=campaign, amount=5000, confirmation=93499)
@@ -137,7 +137,7 @@ def seed():
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
-            image="6.jpg")
+            image="6.jpg", status="Flagged")
     db.session.add(campaign)
 
     donation = Donation(donor=user, campaign=campaign, amount=1000, confirmation=99999)

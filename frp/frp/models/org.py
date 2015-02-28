@@ -118,6 +118,7 @@ class Campaign(BaseMixin, db.Model):
     city = db.Column(db.Unicode(500), nullable=False)
     languages = db.Column(db.Unicode(200), nullable=False)
     image = db.Column(db.Unicode(100), nullable=False)
+    status = db.Column(db.Unicode(100), nullable=False)
     donations = db.relationship("Donation", backref=db.backref("campaign"))
 
 

@@ -78,7 +78,7 @@ def create_beneficiary(form, filename):
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
-            state=state, city=city, languages=languages, image='xx.png')
+            state=state, city=city, languages=languages, status='Submitted', image='xx.png')
     db.session.add(campaign)
 
     try:
