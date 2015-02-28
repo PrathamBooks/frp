@@ -56,6 +56,7 @@ class User(BaseMixin, db.Model):
                                            backref=db.backref("created_by"))
     campaigns = db.relationship("Campaign",
                                 backref=db.backref("created_by"))
+    donations = db.relationship("Donation", backref=db.backref("donor"))
 
 
     # Don't load these columns by default

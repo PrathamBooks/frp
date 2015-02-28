@@ -12,3 +12,4 @@ db = SQLAlchemy()
 
 from .user import *
 from .org import *
+from .donation import *

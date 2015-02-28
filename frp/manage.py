@@ -10,7 +10,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from frp import app
 from frp.models import db
 from frp.models import (User, UserInfo, USER_STATUS, is_email_exists,
-                      Organization, OrganizationInfo, OrganizationWork, Campaign)
+                      Organization, OrganizationInfo, OrganizationWork, Campaign, Donation)
 
 manager = Manager(app)
 db.init_app(app)
@@ -120,6 +120,9 @@ def seed():
             image="4.jpg")
     db.session.add(campaign)
 
+    donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499)
+    db.session.add(donation)
+
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
@@ -127,12 +130,19 @@ def seed():
             image="5.jpg")
     db.session.add(campaign)
 
+    donation = Donation(donor=user, campaign=campaign, amount=5000, confirmation=93499)
+    db.session.add(donation)
+
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
             image="6.jpg")
     db.session.add(campaign)
+
+    donation = Donation(donor=user, campaign=campaign, amount=1000, confirmation=99999)
+    db.session.add(donation)
+
     try:
         db.session.commit()
         print 'Successfully seeded'
