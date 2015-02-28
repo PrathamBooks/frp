@@ -1207,7 +1207,8 @@ header #login .dropdown-menu {
   text-align: center;
   line-height: 255px;
   font-family: "ligurino-condensed", sans-serif;
-  background: url(../images/campaign1.jpg) no-repeat;
+  background-image: url(../images/campaign1.jpg) no-repeat;
+  background-size: cover;
   text-shadow: 1px 3px 0 #000 !important;
 }
 .internal .col-md-6 .col-md-12 a.champion {

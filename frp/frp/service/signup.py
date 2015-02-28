@@ -84,14 +84,12 @@ def create_beneficiary(form, filename):
     try:
         db.session.commit()
         extension = file_extension(filename)
-        print "extension " + extension
         full_file_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
-        print "full_file_path " + full_file_path
         new_file_name = str(campaign.id) + '.' + extension
         full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
-        print "new_file_name " + new_file_name
         copyfile(full_file_path, full_new_path)
-        campaign.filename = new_file_name
+        campaign = Campaign.query.get(campaign.id)
+        campaign.image = new_file_name
         db.session.add(campaign)
         db.session.commit()
 
