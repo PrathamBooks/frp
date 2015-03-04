@@ -116,6 +116,19 @@ class Campaign(BaseMixin, db.Model):
     utilization = db.Column(db.Unicode(500), nullable=False)
     state = db.Column(db.Unicode(500), nullable=False)
     city = db.Column(db.Unicode(500), nullable=False)
+    languages = db.Column(db.Unicode(200), nullable=False)
+    image = db.Column(db.Unicode(100), nullable=False)
+    status = db.Column(db.Unicode(100), nullable=False)
+    donations = db.relationship("Donation", backref=db.backref("campaign"))
+
+
+    @staticmethod
+    def all_campaigns_data():
+        campaigns = Campaign.query.all()
+        retval = []
+        for campaign in campaigns:
+            retval.append(campaign.verbose_fields())
+        return retval
 
     def days_remaining(self):
         rdays = 30 - (date.today() - self.created_at.date()).days
@@ -123,3 +136,19 @@ class Campaign(BaseMixin, db.Model):
 
     def target(self):
         return 50 * (self.nbooks + 125 * self.nlic)
+
+    def verbose_fields(self):
+        return {"id" : self.id,
+                "title" : self.title,
+                "description" : self.description,
+                "impact" : self.org.info.total_impact_on_children,
+                "languages" : self.languages,
+                "type" : ORG_STATUS_CHOICES[self.org.info.status][1],
+                "state" : self.state,
+                "city" : self.city,
+                "target" : self.target(),
+                "achieved" : 80,
+                "status" : "ACTIVE",
+                "nfunders" : 95}
+
+

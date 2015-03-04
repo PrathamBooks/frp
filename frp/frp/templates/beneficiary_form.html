@@ -19,7 +19,7 @@
 
         <div class="col-xs-12 col-sm-9">
 
-          <form role="form" novalidate class="col-md-12" method="post" action="/signup/beneficiary">
+          <form role="form" novalidate class="col-md-12" enctype="multipart/form-data" method="post" action="/signup/beneficiary">
             <div id="internalContent" class="row beneficiary">
               <div  id="internalCampaign" class="row">
                 <div class="tab-content col-md-12">
@@ -181,11 +181,6 @@
                       </div>
 
                       <div class="row form-group">
-                        <div class="col-xs-4">Number of Kits</div>
-                        <div class="col-xs-8"><span id="noOfKits"></span></div>
-                      </div>
-
-                      <div class="row form-group">
                         <div class="col-xs-4">
                           Average value of a book
                         </div>
@@ -224,160 +219,12 @@
                         <div class="col-md-12">
                           <div class="alert alert-warning hide">Enter number of books in any one language or more than 1 language.</div>
                         </div>
-                        <div class="col-xs-4">
-
-
-                          <div class="col-xs-2">Level</div>
-                          <div class="col-xs-10">Description</div>
-
-                        </div>
 
                         <div class="col-xs-8">
-                          <div class="col-xs-4">
-                            <select class="form-control" ng-model="signup.language1[]" name="language1[]" required>
-                              <option value="Hindi">Hindi</option>
-                              <option value="English">English</option>
-                              <option value="Marathi">Marathi</option>
-                              <option value="Telugu">Telugu</option>
-                              <option value="Gujarati">Gujarati</option>
-                              <option value="Malayalam">Malayalam</option>
-                            </select>
-                          </div>
-                          <div class="col-xs-4">
-                            <select class="form-control" ng-model="signup.language1[]" name="language1[]">
-                              <option>Select any Language</option>
-                              <option value="Hindi">Hindi</option>
-                              <option value="English">English</option>
-                              <option value="Marathi">Marathi</option>
-                              <option value="Telugu">Telugu</option>
-                              <option value="Gujarati">Gujarati</option>
-                              <option value="Malayalam">Malayalam</option>
-                            </select>
-                          </div>
-
-                          <div class="col-xs-4">
-                            <select class="form-control" ng-model="signup.language1[]" name="language1[]">
-                              <option>Select any Language</option>
-                              <option value="Hindi">Hindi</option>
-                              <option value="English">English</option>
-                              <option value="Marathi">Marathi</option>
-                              <option value="Telugu">Telugu</option>
-                              <option value="Gujarati">Gujarati</option>
-                              <option value="Malayalam">Malayalam</option>
-                            </select>
-                          </div>
-
+                          {{ render_select(form.language1) }}
+                          {{ render_select(form.language2) }}
+                          {{ render_select(form.language3) }}
                         </div>
-                        <div class="col-xs-4">
-                          <div class="col-xs-2">1</div>
-                          <div class="col-xs-10">Beginning to Read / Read Aloud</div>
-                        </div>
-
-                        <!-- <button type="button" id="addLanguage" class="btn btn-success btn-lg">Add another language</button>-->
-
-                        <!--Level 1 -->
-                        <div class="col-xs-8">
-                          <div class="col-xs-4">
-                            <span class="level1"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" required /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level1"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level1"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                        </div><!--End of Level 1 -->
-
-
-
-                        <div class="col-xs-4">
-                          <div class="col-xs-2">2</div>
-                          <div class="col-xs-10">Learning to Read</div>
-                        </div>
-
-                        <!--Level 2 -->
-                        <div class="col-xs-8">
-                          <div class="col-xs-4">
-                            <span class="level2"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level2"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level2"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                        </div><!--End of Level 2 -->
-
-                        <div class="col-xs-4">
-
-                          <div class="col-xs-2">3</div>
-                          <div class="col-xs-10">Reading Independently</div>
-                        </div>   
-
-                        <!--Level 3 -->
-                        <div class="col-xs-8">
-                          <div class="col-xs-4">
-                            <span class="level3"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level3"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level3"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                        </div><!--End of Level 3 -->
-
-
-                        <div class="col-xs-4">
-                          <div class="col-xs-2">4</div>
-                          <div class="col-xs-10">Reading Proficiently</div>
-                        </div> 
-
-                        <!--Level 4 -->
-                        <div class="col-xs-8">
-                          <div class="col-xs-4">
-                            <span class="level4"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level4"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level4"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="No. of books" /></span>
-                          </div>
-                        </div><!--End of Level 4 -->
-
-                        <!--Net Total -->
-                        <div class="col-xs-4">
-                          <div class="col-xs-12">Net Total</div>
-                        </div>
-                        <div class="col-xs-8">
-                          <div class="col-xs-4">
-                            <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books" readonly /></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
-                          </div>
-                          <div class="col-xs-4">
-                            <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Total No. of Books"  readonly/></span>
-                          </div>
-                        </div><!--End of Total -->
-
-
-                        <div class="form-group row">
-                          <!--Gross Total -->
-                          <div class="col-xs-4">
-                            <div class="col-xs-12">Gross Total
-                              <p class="help-block">Number of books in "this" language <span id="booksLeft"></span> (left)</p>
-                            </div>
-                          </div>
-                          <div class="col-xs-8">
-                            <div class="col-xs-12">
-                              <span class="level5"><input type="text" class="form-control" ng-model="signup.library[]" name="library[]" placeholder="Gross Total of Books" readonly/></span>
-                            </div>
-                          </div><!--Gross Total -->
-
-                        </div>
-
                       </div>
                     </div><!--well-->
 

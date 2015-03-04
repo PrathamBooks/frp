@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+from shutil import copyfile
 
 from flask import g
 
@@ -6,9 +8,9 @@ from .. import app
 
 from ..models import (db, User, UserInfo, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
+from ..helpers import file_extension
 
-
-def create_beneficiary(form):
+def create_beneficiary(form, filename):
     category = form.category.data
     title = form.title.data
     status = form.organization_status.data
@@ -45,7 +47,7 @@ def create_beneficiary(form):
         person2_position=person2_position, person2_email=person2_email,
         person2_phone=person2_phone, 
         total_impact_on_children=total_impact_on_children)
-        
+
     db.session.add(org_info)
 
     for choice in org_work:
@@ -63,15 +65,34 @@ def create_beneficiary(form):
     nlic = form.project_lib_in_classroom.data
     state = form.project_state.data
     city = form.project_city.data
+    languages = []
+    if not form.language1.data == 'Select':
+        languages.append(form.language1.data)
+    if not form.language2.data == 'Select':
+        languages.append(form.language2.data)
+    if not form.language3.data == 'Select':
+        languages.append(form.language3.data)
+    languages = ','.join((l) for l in languages)
+
     campaign = Campaign(created_by=g.user, org=org,
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
-            state=state, city=city)
+            state=state, city=city, languages=languages, status='Submitted', image='xx.png')
     db.session.add(campaign)
 
     try:
         db.session.commit()
+        extension = file_extension(filename)
+        full_file_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+        new_file_name = str(campaign.id) + '.' + extension
+        full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
+        copyfile(full_file_path, full_new_path)
+        campaign = Campaign.query.get(campaign.id)
+        campaign.image = new_file_name
+        db.session.add(campaign)
+        db.session.commit()
+
     except Exception as e:
         print e
         app.logger.warning('Unable to save')

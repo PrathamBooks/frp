@@ -83,6 +83,22 @@ ORG_WORK_CHOICES = [
     (4, 'Children with special needs'),
     (5, 'Children who are differently abled')]
 
+LANGUAGE_CHOICES = [
+    ('Select', 'Select'),
+    ('English', 'English'),
+    ('Hindi', 'Hindi'),
+    ('Marathi', 'Marathi'),
+    ('Telugu', 'Telugu'),
+    ('Gujarati', 'Gujarati'),
+    ('Malayalam', 'Malayalam'),
+    ('Tamil', 'Tamil'),
+    ('Kannada', 'Kannada'),
+    ('Urdu', 'Urdu'),
+    ('Bengali', 'Bengali'),
+    ('Oriya', 'Oriya'),
+    ('Punjabi', 'Punjabi'),
+    ('Assamese', 'Assamese')]
+
 STATES = [
         (u'Andhra Pradesh', u'Andhra Pradesh'),
         (u'Arunachal Pradesh', u'Arunachal Pradesh'),
@@ -200,6 +216,21 @@ class BeneficiarySignupForm(wtforms.Form):
         validators=[wtforms.validators.Optional(),
                     wtforms.validators.Length(max=15)])
 
+    language1 = wtforms.SelectField(
+        label='language1',
+        choices=LANGUAGE_CHOICES,
+        validators=[wtforms.validators.Required()])
+
+    language2 = wtforms.SelectField(
+        label='language2',
+        choices=LANGUAGE_CHOICES,
+        validators=[wtforms.validators.Optional()])
+
+    language3 = wtforms.SelectField(
+        label='language3',
+        choices=LANGUAGE_CHOICES,
+        validators=[wtforms.validators.Optional()])
+
     total_impact_on_children = wtforms.IntegerField(
         label='Number of children that you/your organization have impacted since commencement / impacts currently',
         validators=[wtforms.validators.Required()])
@@ -266,12 +297,17 @@ class BeneficiarySignupForm(wtforms.Form):
        self.person1_email.data = org.info.person1_email
        self.person1_phone.data = org.info.person1_phone
 
-       self.total_impact_on_children.data =  org.info.total_impact_on_children
+       self.total_impact_on_children.data = org.info.total_impact_on_children
        org_works = org.works
        org_works_selected = []
        for org_work in org_works:
             org_works_selected.append(org_work.choice_id) 
        self.org_work.data = org_works_selected
+
+       def validate_language1(self, field):
+           if field.data == 'Select':
+             msg = u'Select at least one language'
+             raise wtforms.ValidationError(msg)
 
     # def validate_name(self, field):
     #     name = field.data.strip()

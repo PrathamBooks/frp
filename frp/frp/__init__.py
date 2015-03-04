@@ -51,12 +51,14 @@ angular = Bundle("lib/angular/angular.js",
                  "lib/angular/angular-route.js",
                  output="gen/angular.js")
 app_js = Bundle("js/form.js", output="gen/lib.js")
+discover_js = Bundle("js/discover.js", output="gen/discover.js")
 
 
 assets.register('css_site', css)
 assets.register('bforms', bforms_css)
 
 assets.register('app_js', app_js)
+assets.register('discover_js', discover_js)
 assets.register('jquery', jquery)
 assets.register('bootstrap', bootstrap)
 assets.register('angular', angular)

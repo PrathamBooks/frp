@@ -1,0 +1,22 @@
+{% extends "partials/base.html" %}
+{% block content %}
+<div class="container internal">
+  <div  id="internalContent" class="row">
+    <div id="internalCampaign" class="row startCampaign campaignSuccess">
+      <div class=" col-md-12 well">
+        <h3>Thank you!</h3>
+        <div class=" col-md-12">
+          <h4>Thank you for setting up your campaign on Pratham Books’ donate-a-book </h4>
+          <p>Your campaign will be live within 48 hours. You will hear from us as soon as your campaign is active.</p>
+
+          <div class="form-group row">
+            <a href="{{ url_for('discover') }}" type="button" class="btn">Donate to Similar Campaigns</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
