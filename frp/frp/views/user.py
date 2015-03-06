@@ -14,7 +14,6 @@ from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
 
 from .. import app
-from .. import cache
 from ..models import (Campaign, ORG_STATUS_CHOICES)
 from ..forms import (DonorSignupForm,
                      LoginForm,
@@ -25,8 +24,8 @@ from ..forms import (DonorSignupForm,
 from ..service import signup as signup_service
 from ..service import user as user_service
 from ..service.decorators import login_required
+# from flask_user import login_required, roles_required
 from ..helpers import allowed_file
-
 
 # Facebook requirements
 oauth = OAuth()
@@ -40,6 +39,7 @@ facebook = oauth.remote_app(
     consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
     consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
     request_token_params={'scope': 'email'})
+
 
 
 @facebook.tokengetter
