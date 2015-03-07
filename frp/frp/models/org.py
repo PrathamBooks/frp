@@ -151,4 +151,13 @@ class Campaign(BaseMixin, db.Model):
                 "status" : "ACTIVE",
                 "nfunders" : 95}
 
+    def donor_list(self):
+        retval =[]
+        for donation in self.donations:
+                    retval.append(donation.user_id)
+        return retval
+
+    def is_active(self):
+        return ((int (self.days_remaining())) > 0 )
+
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sets
 from flask import (render_template,
                    g,
                    url_for,
@@ -243,7 +244,40 @@ def donor_dashboard():
 @app.route("/profile/beneficiary_dashboard")
 @login_required
 def beneficiary_dashboard():
-    return render_template('beneficiaryDashboard.html')
+    campaigns = g.user.campaigns
+    active_campaigns=0
+    closed_campaigns=0
+    active_donors = []
+    closed_donors = []
+    total_active_amt=0
+    total_closed_amt=0
+
+    for campaign in campaigns:
+        if campaign.is_active():
+            active_campaigns+=1
+            active_donors+=campaign.donor_list()
+            total_active_amt+= sum(campaign.donations)
+
+        else:
+            closed_campaigns+=1
+            closed_donors+=campaign.donor_list()
+            total_closed_amt+= sum(campaign.donations)
+
+    n_active_donors = len(sets.Set(active_donors))
+    n_closed_donors = len(sets.Set(closed_donors))
+    num_books_recvd_active = int(total_active_amt/50)
+    num_books_recvd_closed = int(total_closed_amt/50)
+    return render_template('beneficiaryDashboard.html',campaigns=campaigns,
+            active_campaigns=active_campaigns,
+            closed_campaigns=closed_campaigns,
+            total_active_amt=total_active_amt,
+            total_closed_amt=total_closed_amt,
+            n_active_donors=n_active_donors,
+            n_closed_donors=n_closed_donors,
+            num_books_recvd_active=num_books_recvd_active,
+            num_books_recvd_closed=num_books_recvd_closed
+            )
+
 
 @app.context_processor
 def convertStatusTypeToString():
