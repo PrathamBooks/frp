@@ -12,12 +12,13 @@ Flask-OAuth==0.12
 Flask-Migrate==1.2.0
 Flask-Principal==0.4.0
 Flask-Rauth==0.2
-Flask-SQLAlchemy==1.0
+Flask-SQLAlchemy==2.0
 Flask-Script==0.6.2
 Flask-Security==1.7.3
 Flask-Sendmail==0.1
 Flask-Social==1.6.2
-Flask-WTF==0.9.1
+Flask-WTF==0.10.2
+flask-user==0.6.1
 Jinja2==2.7.1
 Mako==1.0.0
 Markdown==2.3.1
@@ -34,7 +35,7 @@ cffi==0.7.2
 coaster==0.3.13
 cssmin==0.1.4
 enum==0.4.4
-gunicorn==18.0
+gunicorn==19.1.1
 hiredis==0.1.1
 httplib2==0.9
 itsdangerous==0.23
@@ -42,8 +43,9 @@ jsmin==2.0.5
 oauth2==1.5.211
 paramiko==1.11.0
 passlib==1.6.2
-psycopg2==2.5.1
+psycopg2==2.5.4
 py==1.4.25
+py-bcrypt==0.4
 pycparser==2.10
 pycrypto==2.6
 python-dateutil==2.1

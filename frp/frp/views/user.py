@@ -13,19 +13,17 @@ from flask import (render_template,
                    jsonify)
 from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
+from flask_login import login_user
 
 from .. import app
 from ..models import (Campaign, ORG_STATUS_CHOICES)
-from ..forms import (DonorSignupForm,
-                     LoginForm,
-                     BeneficiarySignupForm,
+from ..forms import (BeneficiarySignupForm,
                      ProfileForm,
                      CategoryForm,
                      CampaignForm)
 from ..service import signup as signup_service
 from ..service import user as user_service
-from ..service.decorators import login_required
-# from flask_user import login_required, roles_required
+from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
 
 # Facebook requirements
@@ -40,8 +38,6 @@ facebook = oauth.remote_app(
     consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
     consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
     request_token_params={'scope': 'email'})
-
-
 
 @facebook.tokengetter
 def get_facebook_token():
@@ -69,8 +65,8 @@ def campaign_success():
 def signup_as_beneficiary():
     if request.method == 'GET':
         form = BeneficiarySignupForm()
-        if (g.user.organization_created):
-            form.set_data(g.user.organization_created[0])
+        if (current_user.organization_created):
+            form.set_data(current_user.organization_created[0])
         return render_template('beneficiary_form.html', form=form)
 
     elif request.method == 'POST':
@@ -91,28 +87,17 @@ def signup_as_beneficiary():
         print form.errors
         return render_template('beneficiary_form.html', form=form)
 
-
-@app.route('/signup/donor', methods=['GET', 'POST'])
-def signup_as_donor():
-    if request.method == 'GET':
-        form = DonorSignupForm()
-        return render_template('signup_as_donor.html', form=form)
-    elif request.method == 'POST':
-        form = DonorSignupForm(request.form)
-        if form.validate():
-            # Create the new user and create userinfo
-            signup_service.create_donor_from_webform(form)
-            return redirect(url_for('profile'))
-        else:
-            return render_template('signup_as_donor.html', form=form)
-
-
 # Login views
 @app.route('/login/facebook', methods=['GET', 'POST'])
 def login_via_facebook():
-    return facebook.authorize(
-        callback=url_for('facebook_authorized',
+    if request.args.get('next'):
+        return facebook.authorize(
+            callback=url_for('facebook_authorized',
                          next=request.args.get('next'),
+                         _external=True))
+    else:
+        return facebook.authorize(
+            callback=url_for('facebook_authorized',
                          _external=True))
 
 
@@ -127,38 +112,9 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
     data = facebook.get('me')
 
-    signup_service.create_donor_from_facebook(data.data)
-    session['email'] = data.data.get('email')
+    user = signup_service.create_donor_from_facebook(data.data)
+    login_user(user=user)
     return redirect(next_url)
-
-
-@app.route('/login')
-def login():
-    return render_template('login.html', next=request.args.get('next'))
-
-
-@app.route('/login/webform', methods=['GET', 'POST'])
-def login_via_webform():
-    # IF logged in redirect
-    if session.get('logged_in'):
-        return redirect(url_for('profile'))
-
-    form = LoginForm()
-    if request.method == "GET":
-        return render_template('login_form.html', form=form)
-    elif request.method == "POST":
-        form = LoginForm(request.form)
-        if form.validate():
-            if user_service.is_valid_login(form.email.data,
-                                           form.password.data):
-                next_url = request.args.get('next') or url_for('index')
-                return redirect(next_url)
-            else:
-                flash('Invalid credentials')
-                return render_template('login_form.html', form=form, next=request.args.get('next'))
-        else:
-            return render_template('login_form.html', form=form, next=request.args.get('next'))
-
 
 @app.route('/profile')
 @login_required
@@ -171,14 +127,12 @@ class EditProfile(views.MethodView):
     def get(self):
         form = ProfileForm()
         # We don't need password, email field
-        form.delete_fields('password', 'email')
-        form.set_data(g.user)
+        form.set_data(current_user)
         return render_template('edit_profile.html', form=form)
 
     @login_required
     def post(self):
         form = ProfileForm(request.form)
-        form.delete_fields('password', 'email')
         if form.validate():
             user_service.update_profile(form)
             return redirect(url_for('profile'))
@@ -187,12 +141,6 @@ class EditProfile(views.MethodView):
 
 app.add_url_rule('/profile/edit',
                  view_func=EditProfile.as_view('edit_profile'))
-
-
-@app.route("/logout")
-def logout():
-    pop_login_session()
-    return redirect(url_for('index'))
 
 
 @app.route('/about')
@@ -244,7 +192,7 @@ def donor_dashboard():
 @app.route("/profile/beneficiary_dashboard")
 @login_required
 def beneficiary_dashboard():
-    campaigns = g.user.campaigns
+    campaigns = current_user.campaigns
     active_campaigns=0
     closed_campaigns=0
     active_donors = []

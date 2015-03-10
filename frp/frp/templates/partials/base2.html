@@ -54,9 +54,9 @@
       </nav>
 
       <div id="login">
-        {% if not g.user %}
-        <a class="btn btn-default" href="{{ url_for('login') }}">log in</a>
-        <a class="btn btn-warning" href="{{ url_for('signup') }}">sign up</a>
+        {% if not current_user.is_authenticated() %}
+        <a class="btn btn-default" href="{{ url_for('user.login') }}">log in</a>
+        <a class="btn btn-warning" href="{{ url_for('user.register') }}">sign up</a>
         {% else %}
         <div class="btn-group">
           <a id="profile-btn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -67,13 +67,23 @@
             <li><a href="{{ url_for('beneficiary_dashboard') }}">My Campaigns</a></li>
             <li><a href="{{ url_for('profile') }}">Settings</a></li>
             <li class="divider"></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
           </ul>
         </div>
         {% endif %}
       </div>
     </div>
   </header>
+  {% with flashes = get_flashed_messages() %}
+  {% if flashes %}
+  <ul class="flashes">
+    {% for message in flashes %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
   {% block body %}
   {% endblock %}
   <footer>

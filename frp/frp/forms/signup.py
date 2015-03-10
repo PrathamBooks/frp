@@ -4,69 +4,12 @@ import wtforms
 import coaster
 from .. import app
 
-from ..models import (is_username_exists, is_email_exists, ORG_STATUS_CHOICES,
+from ..models import (is_email_exists, ORG_STATUS_CHOICES,
                       is_org_email_exists, is_org_name_exists)
 
 
-__all__ = ['DonorSignupForm', 'BeneficiarySignupForm', 'BENEFICIARY_CATEGORY',
+__all__ = ['BeneficiarySignupForm', 'BENEFICIARY_CATEGORY',
            'ORG_WORK_CHOICES']
-
-
-class DonorSignupForm(wtforms.Form):
-    first_name = wtforms.TextField(
-        label='First Name', validators=[wtforms.validators.Required('Enter first name'),
-                                        wtforms.validators.Length(max=160)])
-    last_name = wtforms.TextField(
-        label='Last Name', validators=[wtforms.validators.Required('Enter last name'),
-                                       wtforms.validators.Length(max=160)],
-        default=u'')
-    user_name = wtforms.TextField(
-        label='User Name', validators=[wtforms.validators.Required('Enter user name'),
-                                       wtforms.validators.Length(max=80)])
-    password = wtforms.PasswordField(
-        label='Password', validators=[wtforms.validators.Required('Enter password'),
-                                      wtforms.validators.Length(max=80)])
-    email = wtforms.TextField(
-        label='Email', validators=[wtforms.validators.Required('Enter email Id'),
-                                   wtforms.validators.Email(),
-                                   wtforms.validators.Length(max=254)])
-    address = wtforms.TextField(
-        label='Address', validators=[wtforms.validators.Optional(),
-                                     wtforms.validators.Length(max=500)],
-        default=u'')
-    contact_number = wtforms.TextField(
-        label='Contact Number', validators=[wtforms.validators.Optional(),
-                                            wtforms.validators.Length(max=15)],
-        default=u'')
-    pan_number = wtforms.TextField(
-        label='Pan Number', validators=[wtforms.validators.Optional(),
-                                        wtforms.validators.Length(max=10)],
-        default=u'')
-    need_80g_certificate = wtforms.RadioField(
-        label='Would you like us to send you a Tax Exemption Certificate?',
-        default=False,
-        validators=[wtforms.validators.Required()],
-        coerce=bool,
-        choices=[(True, 'Yes'),
-                 (False, 'No')])
-
-    def validate_user_name(self, field):
-        username = field.data.strip()
-
-        # Check if the username is valid
-        if not coaster.valid_username(username):
-            raise wtforms.ValidationError('Invalid username.')
-
-        # Check username is in db.
-        if is_username_exists(username):
-            msg = u'{} already exists'.format(username)
-            raise wtforms.ValidationError(msg)
-
-    def validate_email(self, field):
-        email = field.data.strip()
-
-        if is_email_exists(email):
-            raise wtforms.ValidationError(u'{} already exists.'.format(email))
 
 
 BENEFICIARY_CATEGORY = [

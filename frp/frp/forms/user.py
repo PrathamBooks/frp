@@ -5,39 +5,39 @@ from flask import g
 import wtforms
 
 from ..models import User
-from .signup import DonorSignupForm
 
-
-class LoginForm(wtforms.Form):
-    email = wtforms.TextField(
-        label='Email', validators=[wtforms.validators.Required(),
-                                   wtforms.validators.Email(),
-                                   wtforms.validators.Length(max=254)])
-    password = wtforms.PasswordField(
-        label='Password', validators=[wtforms.validators.Required(),
-                                      wtforms.validators.Length(max=80)])
-
-
-class ProfileForm(DonorSignupForm):
-    # Right now subclassing solves the typing issue.
-    # Later, this may go away.
-
+class ProfileForm(wtforms.Form):
+    first_name = wtforms.TextField(
+        label='First Name', validators=[wtforms.validators.Required('Enter first name'),
+                                        wtforms.validators.Length(max=160)])
+    last_name = wtforms.TextField(
+        label='Last Name', validators=[wtforms.validators.Required('Enter last name'),
+                                       wtforms.validators.Length(max=160)],
+        default=u'')
+    address = wtforms.TextField(
+        label='Address', validators=[wtforms.validators.Optional(),
+                                     wtforms.validators.Length(max=500)],
+        default=u'')
+    contact_number = wtforms.TextField(
+        label='Contact Number', validators=[wtforms.validators.Optional(),
+                                            wtforms.validators.Length(max=15)],
+        default=u'')
+    pan_number = wtforms.TextField(
+        label='Pan Number', validators=[wtforms.validators.Optional(),
+                                        wtforms.validators.Length(max=10)],
+        default=u'')
+    need_80g_certificate = wtforms.RadioField(
+        label='Would you like us to send you a Tax Exemption Certificate?',
+        default=False,
+        validators=[wtforms.validators.Required()],
+        coerce=bool,
+        choices=[(True, 'Yes'),
+                 (False, 'No')])
+ 
     def set_data(self, user):
-        self.first_name.data = user.userinfo.first_name
-        self.last_name.data = user.userinfo.last_name
-        self.user_name.data = user.username
+        self.first_name.data = user.first_name
+        self.last_name.data = user.last_name
         self.address.data = user.userinfo.address
         self.contact_number.data = user.userinfo.contact_number
         self.pan_number.data = user.userinfo.pan_number
         self.need_80g_certificate.data = user.userinfo.need_80g_certificate
-
-    def delete_fields(self, *fields):
-        for field in fields:
-            delattr(self, field)
-
-    def validate_user_name(self, field):
-        username = field.data.strip()
-
-        user = User.query.filter_by(username=username).first()
-        if user != g.user:
-            return super(ProfileForm, self).validate_user_name(field)
