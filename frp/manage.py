@@ -5,7 +5,6 @@ import os
 import subprocess
 
 from flask.ext.script import Manager
-from frp.startup.init_app import init_app
 
 from frp import app
 from frp.models import db
@@ -14,7 +13,6 @@ from frp.models import (User, UserInfo, UserAuth, USER_STATUS, is_email_exists,
 from flask import current_app
 
 manager = Manager(app)
-init_app(app)
 db.init_app(app)
 db.app = app
 
