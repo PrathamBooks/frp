@@ -6,7 +6,7 @@ from flask import g
 
 from .. import app
 
-from ..models import (db, User, USER_STATUS, is_email_exists,
+from ..models import (db, User, UserAuth, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
 from ..helpers import file_extension
 
@@ -120,8 +120,7 @@ def create_donor_from_facebook(data):
         last_name=data.get('last_name'))
     db.session.add(user)
 
-    db.session.add(user_info)
-
     user_auth = UserAuth(user=user, active=True)
+    db.session.add(user_auth)
 
     db.session.commit()
