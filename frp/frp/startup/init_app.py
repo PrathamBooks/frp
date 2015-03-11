@@ -18,9 +18,13 @@ def init_app(app, settings='settings/development.py'):
     app.config.from_pyfile(settings)
     from .. import views, models
 
-    file_handler = FileHandler('server.log')
-    file_handler.setLevel(logging.WARNING)
-    app.logger.addHandler(file_handler)
+    db.init_app(app)
+    db.app = app
+
+    if not app.debug:
+        file_handler = FileHandler('server.log')
+        file_handler.setLevel(logging.WARNING)
+        app.logger.addHandler(file_handler)
 
     app.config['WTF_CSRF_ENABLED'] = False              # Disable CSRF checks while testing
 

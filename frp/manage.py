@@ -8,13 +8,11 @@ from flask.ext.script import Manager
 
 from frp import app
 from frp.models import db
-from frp.models import (User, UserInfo, UserAuth, USER_STATUS, is_email_exists,
+from frp.models import (User, UserAuth, USER_STATUS, is_email_exists,
                         Organization, OrganizationInfo, OrganizationWork, Campaign, Donation)
 from flask import current_app
 
 manager = Manager(app)
-db.init_app(app)
-db.app = app
 
 @manager.command
 def runserver():
@@ -38,20 +36,21 @@ def resetdb():
 @manager.command
 def seed():
     import datetime
-    user = User(status=USER_STATUS.ACTIVE, email='kuchlous@gmail.com',
-            first_name='Alok', last_name='Kuchlous', active=True,
+    user = User(
+            status=USER_STATUS.ACTIVE, 
+            email='kuchlous@gmail.com',
+            first_name='Alok', 
+            last_name='Kuchlous', 
+            active=True,
+            address='502, TZed Homes',
+            contact_number='990232323232',
+            pan_number='XXYYZZ',
             confirmed_at=datetime.datetime.now())
     db.session.add(user)
 
     user_auth = UserAuth(password=current_app.user_manager.hash_password('kuchlous'), 
             user=user, active=True)
     db.session.add(user_auth)
-
-    user_info = UserInfo(
-        user=user,  address='502, TZed Homes',
-        contact_number='990232323232',
-        pan_number='XXYYZZ')
-    db.session.add(user_info)
 
     org = Organization(title='Whitefield Awake', created_by=user)
     db.session.add(org)

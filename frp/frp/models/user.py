@@ -11,7 +11,7 @@ from flask_user import UserMixin
 from . import db, TimestampMixin, BaseMixin, IdMixin
 
 
-__all__ = ['User', 'UserInfo', 'UserAuth', 'USER_STATUS', 
+__all__ = ['User', 'UserAuth', 'USER_STATUS', 
            'is_email_exists']
 
 
@@ -41,14 +41,16 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String(50), nullable=False, server_default='')
     status = db.Column(
         db.SmallInteger, nullable=False, default=USER_STATUS.ACTIVE)
+    address = db.Column(db.String(500), nullable=True, default=u'')
+    contact_number = db.Column(db.String(15), nullable=True, default=u'')
+    pan_number = db.Column(db.String(10), nullable=True, default=u'')
+    need_80g_certificate = db.Column(db.Boolean, default=False,)
 
     # Relationships
     user_auth = db.relationship('UserAuth', uselist=False)
     roles = db.relationship('Role', secondary='user_roles',
             backref=db.backref('users', lazy='dynamic'))
 
-    userinfo = db.relationship("UserInfo", backref=db.backref("user"),
-                               uselist=False)
     organization_created = db.relationship("Organization",
                                            backref=db.backref("created_by"))
     campaigns = db.relationship("Campaign",
@@ -78,16 +80,6 @@ class UserAuth(db.Model, UserMixin):
     # Relationships
     user = db.relationship('User', uselist=False)
 
-
-class UserInfo(IdMixin, TimestampMixin, db.Model):
-    __tablename__ = 'userinfo'
-
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    address = db.Column(db.String(500), nullable=True, default=u'')
-    contact_number = db.Column(db.String(15), nullable=True, default=u'')
-    pan_number = db.Column(db.String(10), nullable=True, default=u'')
-    need_80g_certificate = db.Column(db.Boolean, default=False,)
 
 # Define the Role data model
 class Role(db.Model):

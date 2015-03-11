@@ -1,5 +1,7 @@
 import os
 
+APP_NAME = "Donate-A-Book"
+
 # Database settings
 SQLALCHEMY_DATABASE_URI = "postgresql://:@localhost/frp"
 
@@ -11,7 +13,6 @@ MY_FACEBOOK_APP_ID=828919617156016
 MY_FACEBOOK_APP_SECRET='cccd507c38517c64cfe3f38b048ce2d9'
 MY_FACEBOOK_TEST_APP_ID=828920413822603
 MY_FACEBOOK_TEST_APP_SECRET='28d234cea81bbd081f956f86a3d15e73'
-
 
 FACEBOOK_CONSUMER_KEY = os.environ.get('FACEBOOK_CONSUMER_KEY'),
 FACEBOOK_CONSUMER_SECRET =  os.environ.get('FACEBOOK_CONSUMER_SECRET')
@@ -36,5 +37,8 @@ MAIL_USE_SSL =  False
 MAIL_DEBUG = True
 MAIL_USERNAME = None
 MAIL_PASSWORD =  None
-MAIL_DEFAULT_SENDER = DEFAULT_MAIL_SENDER = 'noufal@localhost.localdomain' # Different vars from flask-email and flask-sendmail
+MAIL_DEFAULT_SENDER = DEFAULT_MAIL_SENDER = 'frp@ec2-52-74-2-167.ap-southeast-1.compute.amazonaws.com' # Different vars from flask-email and flask-sendmail
 MAIL_MAX_EMAILS = None
+
+# Flask-User setting
+USER_APP_NAME = APP_NAME
