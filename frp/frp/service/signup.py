@@ -105,7 +105,7 @@ def create_beneficiary(form, filename):
 import datetime
 
 def create_donor_from_facebook(data):
-    """Create a user and userinfo object from facebook data.
+    """Create a user and userauth object from facebook data.
 
     :param data: `dict` containing facebook details.
     """

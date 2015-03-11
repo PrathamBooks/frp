@@ -13,10 +13,10 @@ def update_profile(profile):
     user = current_user
     user.first_name = profile.first_name.data
     user.last_name = profile.last_name.data
-    user.userinfo.address = profile.address.data
-    user.userinfo.contact_number = profile.contact_number.data
-    user.userinfo.pan_number = profile.pan_number.data
-    user.userinfo.need_80g_certificate = profile.need_80g_certificate.data
+    user.address = profile.address.data
+    user.contact_number = profile.contact_number.data
+    user.pan_number = profile.pan_number.data
+    user.need_80g_certificate = profile.need_80g_certificate.data
     db.session.add(user)
     db.session.commit()
     return True

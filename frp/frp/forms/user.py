@@ -37,7 +37,7 @@ class ProfileForm(wtforms.Form):
     def set_data(self, user):
         self.first_name.data = user.first_name
         self.last_name.data = user.last_name
-        self.address.data = user.userinfo.address
-        self.contact_number.data = user.userinfo.contact_number
-        self.pan_number.data = user.userinfo.pan_number
-        self.need_80g_certificate.data = user.userinfo.need_80g_certificate
+        self.address.data = user.address
+        self.contact_number.data = user.contact_number
+        self.pan_number.data = user.pan_number
+        self.need_80g_certificate.data = user.need_80g_certificate
