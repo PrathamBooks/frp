@@ -68,7 +68,7 @@
         <h5> <span>Active</span></h5>
         <span class="tw"></span><span class="fb"></span>
         <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-        <h5 class="amt"> <a href={{ url_for('signup_as_donor', campaign_id=campaign.id ) }}> Donate </a> </h5>
+        <h5 class="amt"> <a href={{ url_for('user.register', campaign_id=campaign.id ) }}> Donate </a> </h5>
       </div>
     </div>
     {% endfor %}
