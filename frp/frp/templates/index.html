@@ -2,6 +2,8 @@
 {% block content %}
 <div class="container">
   <div id="featuredCampaign" class="row">
+    <button class="btn btn-default btn-nav btn-navL" type="button">Default</button>
+    <button class="btn btn-default btn-nav" type="button">Default</button>
     <div class="col-md-12">
       Featured Campaign
     </div>
@@ -11,9 +13,13 @@
       </li>
     </ul>
     <p>
-       <span>Featured Campaign</span>
-       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-       <a href="donorForm.html" class="btn btn-warning btn-lg">Donate Books</a>
+    <span>Featured Campaign</span>
+    An astonishing 999 individuals, and NGOs working with children have already prepared their campaigns for book
+    donations. The most recent additions to our roster are Xxooox Oxoxxxx from Maharashtra, and Xxxoooo Xxxx from
+    Assam.Welcome to Pratham Books Donate-a-Book! Start discovering awesome campaigns here.
+    <br/>
+    <strong>HELP INDIA'S CHILDREN READ</strong>
+    <a href="donorForm.html" class="btn btn-warning btn-lg">Donate Books</a>
     </p>
   </div>
 
@@ -26,25 +32,15 @@
 
   <div  id="contentTabs" class="row">
     <ul id="myTab" class="nav nav-tabs">
-      <li><a href="#geography" class="active" data-toggle="tab">Geography driven</a></li>
       <li id="pledge"><a href="#books" data-toggle="tab">Books Pledge till date : <span>48,5786</span></a></li>
     </ul>
 
     <div id="myTabContent" class="tab-content">
       <div  id="geography" class="row tab-pane active">
         <div class="col-md-12">
-          <h2>campaigns have already started!<br/>
-            <span>Campaigns Near You
-              <a href="#" >View All Campaigns In Bangalore</a>
-              <em>(Not in Bangalore? <a href="#" contenteditable="true"><strong>Click here</strong></a> and type your location.) <!--Click here to change your location--></em>
-            </span>
-          </h2>
-          <p>
-            An astonishing 999 individuals, and NGOs working with children have already prepared their campaigns for book donations.
-            The most recent additions to our roster are <a href="#"><em>Xxooox Oxoxxxx from Maharashtra, and Xxxoooo Xxxx from Assam</em></a>.
-          </p>
-          <p>Welcome to Pratham Books Donate-a-Book! Start discovering awesome campaigns <a href="{{ url_for('discover') }}">here</a>.
-          </p>
+          <h2>Welcome to Pratham Book’s donate-a-book platform.</h2>
+          <p>Here you can help India’s children read books in languages they are most comfortable in.</p>
+          <p>Start discovering our campaigns <a href={{url_for('discover')}}>here </a>.</p>
         </div>
 
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -78,9 +74,6 @@
                 <h4><a href="campaignPage.html">Campaign Three</a></h4>
                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
               </div>
-              <div class="carousel-caption">
-                ...
-              </div>
             </div>
             <div class="item">
               <div class="col-md-4">
@@ -100,37 +93,9 @@
                 <h4><a href="campaignPage.html">Campaign Three</a></h4>
                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
               </div>
-              <div class="carousel-caption">
-                ...
-              </div>
             </div>
-            ...
           </div>
         </div>
-      </div>
-
-      <div  id="books" class="row tab-pane">
-        <div class="col-md-12">
-          <h2>Activities at Pratham books</h2>
-          <p>
-            This is the place for you to learn more about this effort, as well as what else we do at Pratham Books,
-            in our mission to place a book in every child’s hand.
-          </p>
-        </div>
-        <div class="col-md-4">
-          <img src="#" class="img-circle">
-          <h4><a href="#">Books Pledge Till Date</a></h4>
-          <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
-        </div>
-        <div class="col-md-4">
-          <img src="#" class="img-circle">
-          <h4><a href="#">Number of children Impacted</a></h4>
-          <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
-        </div>
-        <div class="col-md-4">
-          <img src="#" class="img-circle">
-          <h4><a href="#">Social Investors</a></h4>
-        <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
       </div>
     </div>
   </div>
@@ -142,10 +107,10 @@
       <h2>Easy Browse</h2>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <h5>Language</h5>
       <div class="form-group">
-        <select id="languages " class="form-control">
+        <select multiple id="languages " class="form-control">
           <option>Hindi</option>
           <option>Marathi</option>
           <option>Kannada</option>
@@ -155,86 +120,60 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <h5>Type</h5>
-        <div class="form-group">
-          <select id="languages " class="form-control">
-            <option>Books for Library</option>
-            <option>Books for Classroom</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <h5>Value</h5>
-        <div id="slider-range-max"></div>
-        <div class="range">
-          <label>< 5000</label>
-          <a href="#" class="amount">
-            <span>500-800 Rs.</span>
-          </a>
-          <label>> 50,000</label>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <h5>Impact</h5>
-        <div id="slider-range-max2"></div>
-          <div class="range2">
-            <label>< 100</label>
-            <a href="#" class="amount">
-              <span>251-500 kids</span>
-            </a>
-            <label>> 500</label>
-          </div>
-          <button type="button" class="btn btn-default btn-browse">Browse</button>
-        </div>
-
-      </form>
-    </div>
-
-    <div class="row" id="bottomBlock">
-      <div class="col-md-4">
-        <h3>Success Stories</h3>
-        <div class="news">
-          <!--<time>
-            <a href="">March<span>20</span></a>
-          </time>-->
-          <a href="http://champions.prathambooks.org/" target="_blank">Champions Blog</a>
-          <p>Some days you get the bear, and some days the bear gets you. Maybe if we felt any human loss as keenly as we feel one of those close to us, human history would be far less bloody.</p>
-        </div>
-      </div>
-
-      <div class="col-md-4"><h3>Get Started!</h3>
-        <p>Mr. Worf, you do remember how to fire phasers? Fate protects fools, little children and ships named Enterprise. Now we know what they mean by 'advanced' tactical training. But the probability of making a six is no greater than that of rolling a seven. You're going to be an interesting companion, Mr. Data.</p>
-      </div>
-
-      <div class="col-md-4"><h3>About Pratham Books</h3>
-        <p>Mr. Worf, you do remember how to fire phasers? Fate protects fools, little children and ships named Enterprise. Now we know what they mean by 'advanced' tactical training. But the probability of making a six is no greater than that of rolling a seven. You're going to be an interesting companion, Mr. Data.</p>
-      </div>
-
-    </div>
-
-    <div class="row" id="bottomBlock1">
-      <div class="col-md-4"><h3>Are you a Doner?</h3>
-        <p>Mr. Worf, you do remember how to fire phasers? Fate protects fools, little children and ships named Enterprise. Now we know what they mean by 'advanced' tactical training. But the probability of making a six is no greater than that of rolling a seven. You're going to be an interesting companion, Mr. Data.</p>
-      </div>
- 
-      <div class="col-md-4"><h3>Get Funded</h3>
-        <p>Mr. Worf, you do remember how to fire phasers? Fate protects fools, little children and ships named Enterprise. Now we know what they mean by 'advanced' tactical training. But the probability of making a six is no greater than that of rolling a seven. You're going to be an interesting companion, Mr. Data.</p>
-      </div>
- 
-      <div class="col-md-4 investor">
-        <h3>Featured Social Investor</h3>
-        <img src="static/images/profilePic.png" alt="profilePic" />
-        <h4>Name of the investor.</h4>
-        <h5>Location, India</h5>
-        <h6>Donating since : <strong>29 Nov. 1979</strong></h6>
-        <blockquote>
-          I believe Prathambooks because Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-        </blockquote>
+      <div class="form-group">
+        <select multiple id="languages " class="form-control">
+          <option>Books for Library</option>
+          <option>Books for Classroom</option>
+        </select>
       </div>
     </div>
+
+    <div class="col-md-4">
+      <h5>State</h5>
+      <div class="form-group">
+        <select multiple id="type" class="form-control">
+          <option>Banglore</option>
+          <option>Dharwad</option>
+          <option>Gadag</option>
+          <option>Bailhungol</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-default btn-browse">Browse</button>
+  </form>
+</div>
+
+<div class="row bottomBlock" id="">
+
+  <div class="col-md-4"><h3>About Pratham Books</h3>
+    <p>
+    Mr. Worf, you do remember how to fire phasers? Fate protects fools, little children and ships named Enterprise. 
+    Now we know what they mean by 'advanced' tactical training. But the probability of making a six is no greater than that of rolling a seven. 
+    You're going to be an interesting companion, Mr. Data.
+    </p>
+  </div>
+
+  <div class="col-md-4">
+    <h3>Success Stories</h3>
+    <div class="news">
+      <a href="http://champions.prathambooks.org/" target="_blank">Champions Blog</a>
+      <p>Some days you get the bear, and some days the bear gets you. Maybe if we felt any human loss as keenly as we feel one of those close to us, human history would be far less bloody.</p>
+    </div>
+  </div>
+
+
+  <div class="col-md-4 investor">
+    <h3>Featured Social Investor</h3>
+    <img src="images/profilePic.png" alt="profilePic1"/>
+    <h4>Name of the investor.</h4>
+    <h5>Location, India</h5>
+    <h6>Donating since : <strong>29 Nov. 1979</strong></h6>
+    <blockquote>
+      I believe Prathambooks because Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+    </blockquote>
   </div>
 </div>
 
