@@ -69,7 +69,11 @@ li {
   text-decoration: none;
 }
 #wrapperOut #wrapper .btn-browse {
-  background-position: 97px 15px;
+  background-position: 90px 15px;
+  padding: 0 32px 0 14px;
+}
+#wrapperOut #wrapper .btn-go {
+  background-position: 50px 15px;
   padding: 0 32px 0 14px;
 }
 #wrapperOut #wrapper .btn-reg {
@@ -394,6 +398,23 @@ header #login .dropdown-menu {
   font-family: "ligurino-condensed", sans-serif;
   font-weight: lighter !important;
   border-bottom: 23px solid #282425;
+}
+#featuredCampaign .btn-nav {
+  background-color: #e5e4e0 !important;
+  background-position: center center;
+  border-radius: 20px 0 0 20px !important;
+  font-size: 0 !important;
+  right: 0;
+  top: 200px;
+  padding: 26px 10px !important;
+  position: absolute;
+  margin: 0px !important;
+  opacity: .5;
+}
+#featuredCampaign .btn-navL {
+  background-image: url(../images/leftArrow.png) !important;
+  border-radius: 0 20px 20px 0 !important;
+  left: 0;
 }
 #featuredCampaign .col-md-12 {
   font-size: 0px;
@@ -825,16 +846,16 @@ header #login .dropdown-menu {
   width: 100% !important;
 }
 .internal a.champion {
-  width: 101px;
-  float: right;
-  text-transform: uppercase;
-  font-size: 8px;
-  background-image: url(../images/champion.png);
-  background-repeat: no-repeat;
+  background-image: url("../images/champion.png");
   background-position: right center;
-  padding: 30px 0 0 25px;
-  margin: -30px -10px -24px 0;
+  background-repeat: no-repeat;
   color: #222222;
+  float: right;
+  font-size: 8px;
+  margin: -30px -10px -24px 0;
+  padding: 30px 0 0;
+  text-transform: uppercase;
+  width: 65px;
 }
 .internal .campaign a.champion {
   margin: -30px -29px -23px 0;
@@ -1062,12 +1083,12 @@ header #login .dropdown-menu {
   background-position: center center;
   margin: 1px -5px 0 0;
 }
-.internal #internalContent .col-md-2 {
+.internal #internalContent .col-md-4 {
   height: auto;
   min-height: 190px;
   padding: 10px 5px 5px;
 }
-.internal #internalContent .col-md-2 h5 {
+.internal #internalContent .col-md-4 h5 {
   clear: both;
   float: left;
   font-size: 20px;
@@ -1077,7 +1098,7 @@ header #login .dropdown-menu {
   padding: 7px 0 5px 5px;
   width: 100%;
 }
-.internal #internalContent .col-md-2 .btn-browse {
+.internal #internalContent .col-md-4 .btn-browse {
   background-color: #ffc600;
   background-image: url("../images/rightArrow.png");
   background-position: 106px 14px;
@@ -1139,6 +1160,9 @@ header #login .dropdown-menu {
 }
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
+}
+.internal #internalContent.discover-top select {
+  height: 100px !important;
 }
 .internal .col-md-12 ul {
   font-size: 1.3em;
@@ -1203,22 +1227,6 @@ header #login .dropdown-menu {
   font-family: "ligurino-condensed", sans-serif;
   background: url(../images/campaign1.jpg) no-repeat;
   text-shadow: 1px 3px 0 #000 !important;
-}
-.internal .col-md-6 .col-md-12 a.champion {
-  background-image: url("../images/champion.png");
-  background-position: right center;
-  background-repeat: no-repeat;
-  color: #222222;
-  float: right;
-  font-size: 8px;
-  height: 51px;
-  line-height: 10px;
-  margin: -27px -10px 0 0;
-  padding: 30px 0 0 25px;
-  position: relative;
-  text-align: left;
-  text-transform: uppercase;
-  width: 101px;
 }
 .internal .col-md-3 .tag .progress,
 .internal .col-md-4 .tag .progress {
@@ -1691,19 +1699,6 @@ span.fb:hover {
 .startCampaign .nav-tabs > li a.active {
   background-color: #ffc600;
 }
-.startCampaign .nav-tabs li:last-child {
-  background-image: url("../images/arrLft.png");
-  background-origin: content-box;
-  background-position: left center;
-  background-repeat: no-repeat;
-  font-family: "proxima-nova", sans-serif !important;
-  font-size: 1.3em !important;
-  font-weight: 100 !important;
-  padding: 9px 0 0 4px;
-  text-align: center;
-  text-transform: capitalize !important;
-  width: 288px;
-}
 .startCampaign h2 {
   padding: 0px !important;
   font-size: 2.3em !important;
@@ -1716,6 +1711,14 @@ span.fb:hover {
   background: none !important;
   font-size: 2em;
   padding: 30px 40px 0!important;
+}
+.startCampaign .tab-content section .well .radio + .radio,
+.startCampaign .tab-content section .well .checkbox + .checkbox {
+  margin-top: 0;
+}
+.startCampaign .tab-content section .well input[type="radio"],
+.startCampaign .tab-content section .well input[type="checkbox"] {
+  margin: 8px 7px 0 -19px !important;
 }
 .startCampaign .well {
   font-family: "proxima-nova", sans-serif;
@@ -1828,10 +1831,23 @@ span.fb:hover {
 .startCampaign .faq .tou h2 {
   font-size: 1em !important;
   width: 100%;
+  font-family: "ligurino-condensed", sans-serif !important;
+  color: #6c5e26 !important;
+  font-weight: bold;
 }
 .startCampaign .faq .tou p {
   width: 100%;
   padding: 0px !important;
+}
+.startCampaign .faq .tou ul.alert-warning {
+  background-color: none !important;
+  background-color: #fff !important;
+}
+.startCampaign .faq .tou ul.alert-warning li {
+  font-size: 0.48em !important;
+  font-weight: normal;
+  line-height: 35px;
+  margin: 0 0 0 20px;
 }
 .startCampaign .faq .tou ul {
   padding: 0;
@@ -1851,8 +1867,11 @@ span.fb:hover {
 .startCampaign .faq .tou ul li p {
   font-size: .6em;
 }
+.startCampaign .faq .tou ul li ul li {
+  font-size: .85em !important;
+}
 .startCampaign .faq .tou ul li ul li strong {
-  font-size: .6em;
+  font-size: .6em !important;
 }
 .startCampaign .faq .tou ul li ul li p {
   font-size: .45em;
@@ -1919,7 +1938,7 @@ span.fb:hover {
 }
 .startCampaign .form .col-md-9 .well strong {
   color: #ff7800;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .startCampaign .form .col-md-9 .well .form-control {
   margin: 0 0 15px;
@@ -2026,6 +2045,26 @@ span.fb:hover {
 }
 .startCampaign #goal.well .form-group {
   padding: 5px 0;
+}
+.startCampaign #privacy h2 {
+  width: 100%;
+  color: #6c5e26;
+  font-family: "ligurino-condensed", sans-serif !important;
+  font-size: 1em !important;
+  margin: 20px 0 10px;
+}
+.startCampaign #privacy ul {
+  color: #6c5e26;
+  float: left;
+  font-size: 0.8em;
+  font-weight: normal;
+  list-style-type: initial;
+  width: 100%;
+}
+.startCampaign #privacy ul li {
+  line-height: 33px;
+  list-style-type: disc;
+  margin: 0 0 0 40px;
 }
 .startCampaign #contact address {
   float: left;
