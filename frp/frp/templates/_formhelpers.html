@@ -55,7 +55,7 @@
 {% macro render_text_field(field, placeholder)  %}
 <div class="form-group row">
   <div class="col-xs-4">
-    {{field.label}}
+    {{field.label}} {% if field.flags.required %} <strong>*</strong> {% endif %}
   </div>
   <div class="col-xs-8">
     {% if (placeholder) %}
@@ -95,7 +95,7 @@
 
 {% macro render_field(field)%}
   <th>
-    {{ field.label }}{% if field.flags.required %}<span class="required">*</span>{% endif %}
+    {{ field.label }}{% if field.flags.required %} <strong>*</strong> {% endif %}
   </th>
     <td>
     {{field(**kwargs)|safe}}
@@ -128,7 +128,7 @@
 {% endmacro %}
 
 {%macro render_checkbox(field)%}
-{% if field.flags.required %}<span class="required">*</span>{% endif %}
+{% if field.flags.required %}<strong>*</strong>{% endif %}
 {% for subfield in field %}
 {% if subfield.data == field.data %}
 <div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
@@ -146,7 +146,7 @@
 {%endmacro%}
 
 {%macro render_bullets(field)%}
-{% if field.flags.required %}<span class="required">*</span>{% endif %}
+{% if field.flags.required %}<strong>*</strong>{% endif %}
 {% for subfield in field %}
 {% if subfield.data == field.data %}
 <div class="radio"><label><input type="radio" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}">{{subfield.label.text}}</label></div>

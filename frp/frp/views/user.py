@@ -43,17 +43,10 @@ facebook = oauth.remote_app(
 def get_facebook_token():
     return session.get('facebook_token')
 
-
 def pop_login_session():
     session.pop('logged_in', None)
     session.pop('facebook_token', None)
     session.pop('email', None)
-
-
-# Signup views
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 @app.route('/campaign/success')
 @login_required
@@ -147,42 +140,36 @@ app.add_url_rule('/profile/edit',
 def about():
     return render_template('about.html')
 
-@app.route("/category/add", methods=['GET', 'POST'])
-def category_add():
-    form = CategoryForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            category = models.Category(name = form.name.data)
-            icon = request.files['icon']
-            filename = secure_filename(icon.filename)
-            if filename and allowed_file(filename):
-                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'icons', filename)
-                icon.save(full_save_path)
-                category.icon = filename
-            db.session.add(category)
-            db.session.commit()
-            flash("category %s added"%form.name.data)
-            return redirect("/")
-    return render_template("create_category.html", form = form)
-
-@app.route("/category/<cat_id>/icon", methods=['GET'])
-def category_icon(cat_id):
-    category = models.Category.query.filter_by(id = cat_id).first()
-    if category and category.icon:
-        return send_from_directory(app.config['UPLOAD_DIRECTORY']+"/icons/", category.icon)
-
-@app.route("/partials/<path:page>", methods = ['GET'])
-def angular_partials(page):
-    return render_template("partials/{}".format(page))
-
 @app.route("/discover", methods=['GET'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('discover.html', campaigns_data=campaigns_data)
 
-@app.route("/start", methods=['GET'])
+@app.route("/start", methods=['GET', 'POST'])
 def start():
-    return render_template('start.html')
+    if request.method == 'GET':
+        form = BeneficiarySignupForm()
+        if (current_user.organization_created):
+            form.set_data(current_user.organization_created[0])
+        return render_template('start.html', form=form)
+    elif request.method == 'POST':
+        form = BeneficiarySignupForm(request.form)
+        if form.validate():
+            image = request.files['imageUpload']
+            filename = secure_filename(image.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+                image.save(full_save_path)
+
+            result = signup_service.create_beneficiary(form, filename)
+            if not result['error']:
+                return redirect(url_for('campaign_success'))
+            else:
+                flash('Oops something went wrong, please try again')
+
+        print form.errors
+        return render_template('start.html', form=form)
+
 
 @app.route("/profile/donor_dashboard")
 @login_required

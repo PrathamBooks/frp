@@ -1,6 +1,6 @@
 /***** Declaration of global variables *****/
-//var eachStagePostDataURL = 'http://example.com/';
-var wholeFormPostDataURL = 'http://activelement.com/';
+// var eachStagePostDataURL = 'http://example.com/';
+// var wholeFormPostDataURL = 'http://activelement.com/';
 
 function getFileSize(fSize){
   var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
@@ -29,11 +29,33 @@ $(function() {
   //   $.post(wholeFormPostDataURL, $("form.col-md-12").serializeArray(), function(data){
   //   });
   // });
-  $("a#showLeft").click(function(event){
+  $("a#showWhatsLeft").click(function(event){
     event.preventDefault();
     $("section").addClass('hide');
     $(":invalid").eq(1).parents('section').removeClass('hide');
   });
+
+  // Preview btn populates the modal with the values from the form before 
+  // showing the modal
+
+  $('.modal').on('show.bs.modal', function (event) {
+   var $modal = $(this); 
+   $modal.find("#category").text($('input[name="category"][checked="checked"]').parent().text());
+   $modal.find("#title").text($('input[name="title"]').val());
+   $modal.find("#status").text($('input[name="organization_status"][checked="checked"]').parent().text());
+   $modal.find("#address").text($('input[name="address"]').val());
+   $modal.find("#contact_number").text($('input[name="contact_number"]').val());
+   $modal.find("#email").text($('input[name="email"]').val());
+   $modal.find("#has_80g_certificate").text($('input[name="has_80g_certificate"][checked="checked"]').parent().text());
+   $modal.find("#person1_name").text($('input[name="person1_name"]').val());
+   $modal.find("#person1_position").text($('input[name="person1_position"]').val());
+   $modal.find("#person1_email").text($('input[name="person1_email"]').val());
+   $modal.find("#person1_phone").text($('input[name="person1_phone"]').val());
+   $modal.find("#modal-noOfBooks").text($('#noOfBooks').html());
+   $modal.find("#modal-fundingGoal").text($("input[name='fundingGoal']").val());
+   $modal.find("#modal-project-title").text($('input[name="project_title"]').val());
+  });
+
   $("input[name=imageUpload]").change(function(){
     var ext = this.files[0].type;
     if(ext=='image/jpeg' || ext=='image/png' || ext=='image/gif'){
@@ -93,9 +115,9 @@ $(function() {
           $(this).parent().find('.alert').addClass('hide');
         }
       });
-      /*$.post(eachStagePostDataURL, $('section#' + id + ' :valid').serializeArray(), function(data){
-      //console.log(data);
-      });*/
+      // $.post(eachStagePostDataURL, $('section#' + id + ' :valid').serializeArray(), function(data){
+      //   console.log(data);
+      // });
       $('div#sidebar a').removeClass('active');
       $("a[href="+$(this).attr('href')+"]").addClass('active');
       $('section').removeClass('show').addClass('hide');

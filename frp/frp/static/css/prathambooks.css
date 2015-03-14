@@ -1982,14 +1982,14 @@ span.fb:hover {
 .startCampaign .form .col-md-9 .col-xs-12 .checkbox label {
   font-size: 0.75em;
 }
-.startCampaign .form #setCampaign .well .col-md-12 {
+.startCampaign .form #setCampaign-step .well .col-md-12 {
   padding: 10px 0 0!important;
 }
-.startCampaign .form #setCampaign .well .col-md-12 p {
+.startCampaign .form #setCampaign-step .well .col-md-12 p {
   font-size: 0.35em !important;
   padding: 6px 0 0 10px;
 }
-.startCampaign .form #setCampaign .well .col-md-12 input[type="file"] {
+.startCampaign .form #setCampaign-step .well .col-md-12 input[type="file"] {
   background-image: none !important;
   float: left !important;
   font-size: 0.3em !important;

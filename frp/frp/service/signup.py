@@ -3,6 +3,7 @@ import os
 from shutil import copyfile
 
 from flask import g
+from flask_user import current_user
 
 from .. import app
 
@@ -34,7 +35,7 @@ def create_beneficiary(form, filename):
     org_work = form.org_work.data
 
     # Create organization
-    org = Organization(title=title, created_by=g.user)
+    org = Organization(title=title, created_by=current_user)
     db.session.add(org)
     # Create org info
     org_info = OrganizationInfo(
@@ -74,7 +75,7 @@ def create_beneficiary(form, filename):
         languages.append(form.language3.data)
     languages = ','.join((l) for l in languages)
 
-    campaign = Campaign(created_by=g.user, org=org,
+    campaign = Campaign(created_by=current_user, org=org,
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,

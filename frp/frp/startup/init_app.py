@@ -58,7 +58,6 @@ def init_app(app, settings='settings/development.py'):
                  output='gen/bforms.css')
 
 
-
     jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
     bootstrap = Bundle("lib/bootstrap/bootstrap.js",
                        "lib/bootstrap/bootstrap-slider.js",
