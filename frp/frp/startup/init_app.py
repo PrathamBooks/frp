@@ -10,8 +10,6 @@ from flask_user import UserManager, SQLAlchemyAdapter
 from ..models import db
 
 
-
-
 oauth = 0
 def init_app(app, settings='settings/development.py'):
     print "Loading config from %s" % settings
@@ -67,6 +65,7 @@ def init_app(app, settings='settings/development.py'):
                      output="gen/angular.js")
     app_js = Bundle("js/form.js", output="gen/lib.js")
     discover_js = Bundle("js/discover.js", output="gen/discover.js")
+    start_js = Bundle("js/start.js", output="gen/start.js")
 
 
     assets.register('css_site', css)
@@ -74,6 +73,7 @@ def init_app(app, settings='settings/development.py'):
 
     assets.register('app_js', app_js)
     assets.register('discover_js', discover_js)
+    assets.register('start_js', start_js)
     assets.register('jquery', jquery)
     assets.register('bootstrap', bootstrap)
     assets.register('angular', angular)

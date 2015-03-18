@@ -23,16 +23,20 @@
 {% endmacro %}
 
 {% macro render_select(field) %}
+{% set required = "" %}
+{% if field.flags.required %}
+  {% set required = "required" %}
+{% endif %}
 <div class="col-xs-4">
-  <select class="form-control" name="{{field.name}}">
-  {% for subfield in field %}
-  {% if subfield.data == field.data %}
-  <option selected="selected" value="{{subfield.data}}">{{subfield.label.text}}</option>
-  {%else%}
-  <option value="{{subfield.data}}">{{subfield.label.text}}</option>
-  {%endif%}
-  {% endfor %}
-</select>
+  <select class="form-control" name="{{field.name}}" {{required}} >
+    {% for subfield in field %}
+      {% if subfield.data == field.data %}
+        <option selected="selected" value="{{subfield.data}}">{{subfield.label.text}}</option>
+      {%else%}
+        <option value="{{subfield.data}}">{{subfield.label.text}}</option>
+      {%endif%}
+    {% endfor %}
+  </select>
 </div>
 {% endmacro %}
 
@@ -58,11 +62,14 @@
     {{field.label}} {% if field.flags.required %} <strong>*</strong> {% endif %}
   </div>
   <div class="col-xs-8">
-    {% if (placeholder) %}
-      <input type="text" class="form-control" name="{{field.name}}" placeholder="{{placeholder}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
-    {% else %}
-      <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label.text}}" value="{{field.data|default('',True)}}"/> <!-- 'required' attribute sometimes necessary -->
+    {% set required = "" %}
+    {% if field.flags.required %}
+      {% set required = "required" %}
     {% endif %}
+    {% if not placeholder %}
+      {% set placeholder = field.label.text %}
+    {% endif %}
+    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{placeholder}}" value="{{field.data|default('',True)}}" {{ required }}/> 
     {% if field.errors %}
       <ul class="errors">
         {% for error in field.errors %}
@@ -79,19 +86,26 @@
 
 {% macro render_text_area(field, placeholder=0)  %}
 <div class="form-group row">
-  {{ field.label }}
-  {% if placeholder %}
-    <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}">{{field.data|default('',True)}}</textarea>
-  {% else %}
-    <textarea class="form-control" rows="3" name="{{field.name}}">{{field.data|default('',True)}}</textarea>
+  {{field.label}} {% if field.flags.required %} <strong>*</strong> {% endif %}
+  {% if field.flags.required %}
+    {% set required = "required" %}
+  {% endif %}
+  {% if not placeholder %}
+    {% set placeholder = field.label.text %}
+  {% endif %}
+  <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}" {{ required }}> {{field.data|default('',True)}}</textarea>
+  {% if field.errors %}
+    <ul class="errors">
+      {% for error in field.errors %}
+        <li><div class="alert alert-warning">{{ error }}</div></li>
+      {% endfor %}
+    </ul>
   {% endif %}
   {% if field.help_text %}
-  <p class="help-block">{{field.help_text}}</p>
+    <p class="help-block">{{field.help_text}}</p>
   {% endif %}
 </div>
 {% endmacro %}
-
-
 
 {% macro render_field(field)%}
   <th>
@@ -128,37 +142,44 @@
 {% endmacro %}
 
 {%macro render_checkbox(field)%}
-{% if field.flags.required %}<strong>*</strong>{% endif %}
-{% for subfield in field %}
-{% if subfield.data == field.data %}
-<div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
-{% else %}
-<div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
+{% set required = "" %}
+{% if field.flags.required %}
+  <strong>*</strong>
+  {% set required = "required" %}
 {% endif %}
+{% for subfield in field %}
+  {% if subfield.data == field.data %}
+  <div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" checked="checked" value="{{subfield.data}} {{required}} ">{{subfield.label.text}}</label></div>
+  {% else %}
+  <div class="checkbox"><label><input type="checkbox" name="{{subfield.name}}" value="{{subfield.data}}" {{required}} >{{subfield.label.text}}</label></div>
+  {% endif %}
 {% endfor %}
 {% if field.errors %}
-<ul class=errors>
-  {% for error in field.errors %}
-  <li> <div class="alert alert-warning"> {{ error }} </div> </li>
-  {% endfor %}
-</ul>
+  <ul class=errors>
+    {% for error in field.errors %}
+    <li> <div class="alert alert-warning"> {{ error }} </div> </li>
+    {% endfor %}
+  </ul>
 {% endif %}
 {%endmacro%}
 
 {%macro render_bullets(field)%}
-{% if field.flags.required %}<strong>*</strong>{% endif %}
-{% for subfield in field %}
-{% if subfield.data == field.data %}
-<div class="radio"><label><input type="radio" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
-{% else %}
-<div class="radio"><label><input type="radio" name="{{subfield.name}}" value="{{subfield.data}}">{{subfield.label.text}}</label></div>
+{% set required = "" %}
+{% if field.flags.required %}
+  {% set required = "required" %}
 {% endif %}
+{% for subfield in field %}
+  {% if subfield.data == field.data %}
+  <div class="radio"><label><input type="radio" name="{{subfield.name}}" checked="checked" value="{{subfield.data}}" {{required}} >{{subfield.label.text}}</label></div>
+  {% else %}
+  <div class="radio"><label><input type="radio" name="{{subfield.name}}" value="{{subfield.data}}" {{required}} >{{subfield.label.text}}</label></div>
+  {% endif %}
 {% endfor %}
 {% if field.errors %}
-<ul class=errors>
-  {% for error in field.errors %}
-  <li> <div class="alert alert-warning"> {{ error }} </div> </li>
-  {% endfor %}
-</ul>
+  <ul class=errors>
+    {% for error in field.errors %}
+      <li> <div class="alert alert-warning"> {{ error }} </div> </li>
+    {% endfor %}
+  </ul>
 {% endif %}
 {%endmacro%}

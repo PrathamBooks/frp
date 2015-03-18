@@ -310,7 +310,7 @@
 
                           <p>Pick one category that best describes you and the reason you are raising funds. Please take your time to select this as this 
                           impacts the next steps.</p>
-                          <div class="alert alert-warning hide alertleft">Please select any one option below.</div>
+                          <div class="alert alert-warning hide alertleft">Please select any one option below. <strong>*</strong></div>
                           {{ render_bullets(form.category) }}
                         </div> <!--row-->
                       </div><!--well-->
@@ -324,7 +324,7 @@
 
                         <div class="form-group row">
                           <div class="col-xs-12">
-                            <label for="status">Organisation Status </label>
+                            <label for="status">Organisation Status </label><strong>*</strong>
                             <div class="alert alert-warning alertleft hide">Please select any one option below.</div>
                             {{ render_bullets(form.organization_status) }}
                           </div>
@@ -365,7 +365,7 @@
                       <div class="well">
                         <h3>Update us on your certifications:</h3>
                         <div class="form-group row">
-                          <label>Does your organisation have 80G certification </label>
+                          <label>Does your organisation have 80G certification </label><strong>*</strong>
                           {{ render_bullets(form.has_80g_certificate) }}
                         </div>
                       </div><!--well-->
@@ -550,7 +550,9 @@
                           {{ render_text_field(form.project_city) }}
                           <div class="alert alert-warning hide">Enter City</div>
                         </div><!--form-group-->
+                        <!-- Will add later
                         <button type="button" value="Add State" class="btn btnAdd">Add State</button>
+                        -->
                       </div><!--well-->
 
                       <div class="well">
@@ -779,9 +781,6 @@
                           </div>
 
                           <button type="submit" id="goLive" class="btn btn-lg btn-block btnLive">Go Live &amp; Get Funded</button>
-                          <p>Your campaign is not ready to go live quite yet. <br/>
-                          <a href="#" id="showWhatsLeft">Show me what's left to do</a> 
-                          </p>
                         </div>
                       </div><!--well-->
                     </section>
@@ -803,9 +802,16 @@
     </form>
   </div>  
 </div><!--Wrapper-->
+{% assets "start_js" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
+{% endassets %}
  
 <script>
   $( "#accordion" ).accordion();
+  $(function() {
+      var start = new Start();
+      start.start();
+  });
 </script>
 
 {% endblock %}

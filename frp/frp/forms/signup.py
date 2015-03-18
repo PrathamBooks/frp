@@ -27,7 +27,7 @@ ORG_WORK_CHOICES = [
     (5, 'Children who are differently abled')]
 
 LANGUAGE_CHOICES = [
-    ('Select', 'Select'),
+    ('', 'Select'),
     ('English', 'English'),
     ('Hindi', 'Hindi'),
     ('Marathi', 'Marathi'),
@@ -186,11 +186,11 @@ class BeneficiarySignupForm(wtforms.Form):
 
     project_books = wtforms.IntegerField(
         label='Books / Books as Prize or Give-Aways / For Reading Sessions',
-        validators=[wtforms.validators.Optional()])
+        validators=[wtforms.validators.Required()])
 
     project_lib_in_classroom = wtforms.IntegerField(
         label='Library in a Classroom/Books in a Bag',
-        validators=[wtforms.validators.Optional()])
+        validators=[wtforms.validators.Required()])
 
     project_state = wtforms.SelectField(
         label='Please select any one state in the list',
