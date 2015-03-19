@@ -4,7 +4,12 @@ var Start = function() {
     this.attachErrorUpdateCallbacks();
     this.attachPreviewCallback();
     this.attachOrgCheckboxCallback();
-    this.attachBookCountCallback();
+    $('#bookCounts input').change(this.booksCallback);
+    // Need to call in the beginning to so that required attribute is
+    // set. Not setting in form because we want to avoind printing the
+    // '*'
+    this.booksCallback(); 
+
     $("#goLive").click(function(event){
       event.preventDefault();
       if ($(":invalid").length > 0) {
@@ -13,38 +18,34 @@ var Start = function() {
     });
   };
 
-  this.attachBookCountCallback = function() {
-    $('#bookCounts input').change(function(e) {
-      var foundOneVal = false;
-      $('#bookCounts input').each(function(i, e) {
-        if (parseInt(e.value)) {
-          foundOneVal = true;
-        }
-      });
-      if (foundOneVal) {
-        $('#bookCounts input').removeAttr('required');
-        $('#bookCounts input').css('border-color','#CCCCCC');
+  this.booksCallback = function(e) {
+    var foundOneVal = false;
+    $('#bookCounts input').each(function(i, e) {
+      if (parseInt(e.value)) {
+        foundOneVal = true;
       }
-      else {
-        $('#bookCounts input').attr('required', '');
+    });
+    if (foundOneVal) {
+      $('#bookCounts input').removeAttr('required');
+      $('#bookCounts input').css('border-color','#CCCCCC');
+    }
+    else {
+      $('#bookCounts input').attr('required', '');
+    }
+
+    var count = 0;
+    $('#bookCounts input').each(function(i, e) {
+      if (i==1) {
+        if (parseInt(e.value)) count += parseInt(e.value) * 125;
+      } else {
+        if (parseInt(e.value)) count += parseInt(e.value);
       }
     });
 
-    $('#bookCounts input').keyup(function(e) {
-      var count = 0;
-      $('#bookCounts input').each(function(i, e) {
-        if (i==1) {
-          if (parseInt(e.value)) count += parseInt(e.value) * 125;
-        } else {
-          if (parseInt(e.value)) count += parseInt(e.value);
-        }
-      });
-
-      $('#bookAmount').html(count * 50);
-      $("input[name='fundingGoal']").attr('value', (count * 50));
-      $('#noOfBooks').html(count);
-      $('#booksLeft').html(count);
-    });
+    $('#bookAmount').html(count * 50);
+    $("input[name='fundingGoal']").attr('value', (count * 50));
+    $('#noOfBooks').html(count);
+    $('#booksLeft').html(count);
   };
 
   this.attachOrgCheckboxCallback = function() {

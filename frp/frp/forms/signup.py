@@ -186,11 +186,11 @@ class BeneficiarySignupForm(wtforms.Form):
 
     project_books = wtforms.IntegerField(
         label='Books / Books as Prize or Give-Aways / For Reading Sessions',
-        validators=[wtforms.validators.Required()])
+        validators=[wtforms.validators.Optional()])
 
     project_lib_in_classroom = wtforms.IntegerField(
-        label='Library in a Classroom/Books in a Bag',
-        validators=[wtforms.validators.Required()])
+        label='Library in a Classroom',
+        validators=[wtforms.validators.Optional()])
 
     project_state = wtforms.SelectField(
         label='Please select any one state in the list',
