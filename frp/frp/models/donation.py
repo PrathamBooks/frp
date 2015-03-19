@@ -14,3 +14,7 @@ class Donation(BaseMixin, db.Model):
     amount = db.Column(db.Integer, nullable=False)
     confirmation = db.Column(db.Unicode(100), nullable=False)
 
+    def __add__(self,o):
+        return self.amount + o.amount
+    def __radd__(self,o):
+        return self.amount+o

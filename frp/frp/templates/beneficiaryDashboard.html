@@ -20,27 +20,27 @@
           </tr>
           <tr>
             <td>Total Number Of Campaigns</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
+            <td>{{ active_campaigns + closed_campaigns }}</td>
+            <td>{{ active_campaigns }}</td>
+            <td>{{ closed_campaigns }}</td>
           </tr>
           <tr>
             <td>Total number of books recived</td>
-            <td>6</td>
-            <td>9</td>
-            <td>12</td>
+            <td>{{ num_books_recvd_active + num_books_recvd_closed }}</td>
+            <td>{{ num_books_recvd_active }}</td>
+            <td>{{ num_books_recvd_closed }}</td>
           </tr>
           <tr>
             <td>Total Number Of Donors</td>
-            <td>8</td>
-            <td>12</td>
-            <td>16</td>
+            <td>{{ n_active_donors + n_closed_donors }}</td>
+            <td>{{ n_active_donors }}</td>
+            <td>{{ n_closed_donors }}</td>
           </tr>
           <tr>
-            <td>Total number of books recived</td>
-            <td>10</td>
-            <td>15</td>
-            <td>20</td>
+            <td>Total number of fund recived</td>
+            <td>{{ total_active_amt + total_closed_amt }}</td>
+            <td>{{ total_active_amt }}</td>
+            <td>{{ total_closed_amt }}</td>
           </tr>
         </table>
 
@@ -55,123 +55,23 @@
     </div><!--col-md-3-->
 
 
-    <div class="col-md-12">  
-      <div class="col-md-3">
-        <h1>Name of the Campaign </h1>
-
-
-        <div class="campaignInfo">
-          <time><span>4</span> Days Left</time>
-          <h4>500<span class="percentFunded">110</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5> <span>Active</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-          <h5 class="amt">Donate</h5>
-
+  <div class="col-md-12">  
+    {% for campaign in campaigns %}
+    <div class="col-md-3">
+      <h1> <a href={{ url_for('campaignPage',id=campaign.id) }}>{{  campaign.title }}</a></h1>
+      <div class="campaignInfo">
+        <time><span>{{ campaign.days_remaining() }}</span> Days Left</time>
+        <h4>{{ campaign.target() }} <span class="percentFunded"> TBD </span></h4>
+        <div class="progress progress-warning">
+          <div class="bar" style="width: 20%;"></div>
         </div>
-      </div>
-
-
-
-      <div class="col-md-3">
-        <h1>Payoshni's class of 21</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>24</span> Days Left</time>
-          <h4>500<span class="percentFunded">25</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5> <span>Active</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-          <h5 class="amt">Donate</h5>
-        </div>
-      </div>
-
-
-
-      <div class="col-md-3 closed">
-        <h1>Karthik's reader club</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>0</span> Days Left</time>
-          <h4>500<span class="percentFunded">95</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5> <span>Closed</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-
-          <h5 class="amt">Closed</h5>
-        </div>
-      </div>
-
-
-
-      <div class="col-md-3">
-        <h1>Name of the Campaign </h1>
-
-
-        <div class="campaignInfo">
-          <time><span>4</span> Days Left</time>
-          <h4>500<span class="percentFunded">110</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5> <span>Active</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-
-          <h5 class="amt">Donate</h5>
-        </div>
-      </div>
-
-
-      <div class="col-md-3 closed">
-        <h1>Karthik's reader club</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>0</span> Days Left</time>
-          <h4>500<span class="percentFunded">95</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5> <span>Closed</span></h5>
-
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-          <h5 class="amt">Closed</h5>
-        </div>
-      </div>
-
-
-      <div class="col-md-3">
-        <h1>Payoshni's class of 21</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>24</span> Days Left</time>
-          <h4>500<span class="percentFunded">25</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5> <span>Active</span></h5>
-
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-
-          <h5 class="amt">Donate</h5>
-        </div>
+        <h5> <span>Active</span></h5>
+        <span class="tw"></span><span class="fb"></span>
+        <a href="#" class="btn-search pull-right">Similar Campaigns</a>
+        <h5 class="amt"> <a href={{ url_for('user.register', campaign_id=campaign.id ) }}> Donate </a> </h5>
       </div>
     </div>
+    {% endfor %}
   </div><!-- col-md-12-->
 </div>
 {% endblock %}

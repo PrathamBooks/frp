@@ -11,37 +11,8 @@
 
           <h4>Update Your Information</h4>
 
-          {{render_text_field(form.user_name)}}
-          {{render_text_field(form.first_name)}}
-          {{render_text_field(form.last_name)}}
-
-          <div class="form-group row">
-            <div class="col-xs-4">
-              <label for="prepass">Previous Password</label>
-            </div>
-            <div class="col-xs-8">
-              <input type="password" class="form-control" id="prepass" name="prepass" placeholder="Old Password" required />
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-xs-4">
-              <label for="newpass">Password</label>
-            </div>
-            <div class="col-xs-8">
-              <input type="password" class="form-control" id="newpass" name="newpass" placeholder="NewPassword" required />
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-xs-4">
-              <label for="repass">Retype Password</label>
-            </div>
-            <div class="col-xs-8">
-              <input type="password" class="form-control" id="repass" name="repass" placeholder="Retype Password" required />
-            </div>
-          </div>
-
+          {{ render_text_field(form.first_name) }}
+          {{ render_text_field(form.last_name) }}
           {{ render_text_field(form.contact_number) }}
           {{ render_text_field(form.address) }}
           {{ render_text_field(form.pan_number) }}

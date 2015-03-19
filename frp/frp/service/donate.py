@@ -1,7 +1,7 @@
 from random import randint
 from flask import g
 from .. import app
-from ..models import (db, User, UserInfo, USER_STATUS, is_email_exists,
+from ..models import (db, User, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
 
 def donate(form):

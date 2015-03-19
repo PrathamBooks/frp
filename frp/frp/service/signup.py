@@ -3,10 +3,11 @@ import os
 from shutil import copyfile
 
 from flask import g
+from flask_user import current_user
 
 from .. import app
 
-from ..models import (db, User, UserInfo, USER_STATUS, is_email_exists,
+from ..models import (db, User, UserAuth, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
 from ..helpers import file_extension
 
@@ -34,7 +35,7 @@ def create_beneficiary(form, filename):
     org_work = form.org_work.data
 
     # Create organization
-    org = Organization(title=title, created_by=g.user)
+    org = Organization(title=title, created_by=current_user)
     db.session.add(org)
     # Create org info
     org_info = OrganizationInfo(
@@ -74,7 +75,7 @@ def create_beneficiary(form, filename):
         languages.append(form.language3.data)
     languages = ','.join((l) for l in languages)
 
-    campaign = Campaign(created_by=g.user, org=org,
+    campaign = Campaign(created_by=current_user, org=org,
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
@@ -102,44 +103,25 @@ def create_beneficiary(form, filename):
     return {'error': False,
             'campaign': campaign}
 
-
-def create_donor_from_webform(donor):
-    """Given an `forms.signup.DonorSignupForm` object create user and userinfo
-    object.
-
-    :param donor `forms.signup.DonorSignupForm`: donor form object.
-    """
-    user = User(
-        status=USER_STATUS.INVITED, email=donor.email.data,
-        password=donor.password.data, _username=donor.user_name.data)
-    db.session.add(user)
-
-    user_info = UserInfo(
-        user=user, first_name=donor.first_name.data,
-        last_name=donor.last_name.data, address=donor.address.data,
-        contact_number=donor.contact_number.data,
-        pan_number=donor.pan_number.data)
-    db.session.add(user_info)
-
-    # TODO: Send user activation email
-    db.session.commit()
-
+import datetime
 
 def create_donor_from_facebook(data):
-    """Create a user and userinfo object from facebook data.
+    """Create a user and userauth object from facebook data.
 
     :param data: `dict` containing facebook details.
     """
-    if is_email_exists(data.get('email')):
-        return
+    user =is_email_exists(data.get('email'))
+    if user:
+        return user
     # We don't set username for facebook users.
     user = User(
-        status=USER_STATUS.ACTIVE, email=data.get('email'),)
+        status=USER_STATUS.ACTIVE, email=data.get('email'),
+        confirmed_at=datetime.datetime.now(),
+        active=True, first_name=data.get('first_name'),
+        last_name=data.get('last_name'))
     db.session.add(user)
 
-    user_info = UserInfo(
-        user=user, first_name=data.get('first_name'),
-        last_name=data.get('last_name'),)
-    db.session.add(user_info)
+    user_auth = UserAuth(user=user, active=True)
+    db.session.add(user_auth)
 
     db.session.commit()

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sets
 from flask import (render_template,
                    g,
                    url_for,
@@ -12,21 +13,18 @@ from flask import (render_template,
                    jsonify)
 from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
+from flask_login import login_user
 
 from .. import app
-from .. import cache
 from ..models import (Campaign, ORG_STATUS_CHOICES)
-from ..forms import (DonorSignupForm,
-                     LoginForm,
-                     BeneficiarySignupForm,
+from ..forms import (BeneficiarySignupForm,
                      ProfileForm,
                      CategoryForm,
                      CampaignForm)
 from ..service import signup as signup_service
 from ..service import user as user_service
-from ..service.decorators import login_required
+from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
-
 
 # Facebook requirements
 oauth = OAuth()
@@ -41,22 +39,14 @@ facebook = oauth.remote_app(
     consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
     request_token_params={'scope': 'email'})
 
-
 @facebook.tokengetter
 def get_facebook_token():
     return session.get('facebook_token')
-
 
 def pop_login_session():
     session.pop('logged_in', None)
     session.pop('facebook_token', None)
     session.pop('email', None)
-
-
-# Signup views
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 @app.route('/campaign/success')
 @login_required
@@ -68,8 +58,8 @@ def campaign_success():
 def signup_as_beneficiary():
     if request.method == 'GET':
         form = BeneficiarySignupForm()
-        if (g.user.organization_created):
-            form.set_data(g.user.organization_created[0])
+        if (current_user.organization_created):
+            form.set_data(current_user.organization_created[0])
         return render_template('beneficiary_form.html', form=form)
 
     elif request.method == 'POST':
@@ -90,28 +80,17 @@ def signup_as_beneficiary():
         print form.errors
         return render_template('beneficiary_form.html', form=form)
 
-
-@app.route('/signup/donor', methods=['GET', 'POST'])
-def signup_as_donor():
-    if request.method == 'GET':
-        form = DonorSignupForm()
-        return render_template('signup_as_donor.html', form=form)
-    elif request.method == 'POST':
-        form = DonorSignupForm(request.form)
-        if form.validate():
-            # Create the new user and create userinfo
-            signup_service.create_donor_from_webform(form)
-            return redirect(url_for('profile'))
-        else:
-            return render_template('signup_as_donor.html', form=form)
-
-
 # Login views
 @app.route('/login/facebook', methods=['GET', 'POST'])
 def login_via_facebook():
-    return facebook.authorize(
-        callback=url_for('facebook_authorized',
+    if request.args.get('next'):
+        return facebook.authorize(
+            callback=url_for('facebook_authorized',
                          next=request.args.get('next'),
+                         _external=True))
+    else:
+        return facebook.authorize(
+            callback=url_for('facebook_authorized',
                          _external=True))
 
 
@@ -126,38 +105,9 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
     data = facebook.get('me')
 
-    signup_service.create_donor_from_facebook(data.data)
-    session['email'] = data.data.get('email')
+    user = signup_service.create_donor_from_facebook(data.data)
+    login_user(user=user)
     return redirect(next_url)
-
-
-@app.route('/login')
-def login():
-    return render_template('login.html', next=request.args.get('next'))
-
-
-@app.route('/login/webform', methods=['GET', 'POST'])
-def login_via_webform():
-    # IF logged in redirect
-    if session.get('logged_in'):
-        return redirect(url_for('profile'))
-
-    form = LoginForm()
-    if request.method == "GET":
-        return render_template('login_form.html', form=form)
-    elif request.method == "POST":
-        form = LoginForm(request.form)
-        if form.validate():
-            if user_service.is_valid_login(form.email.data,
-                                           form.password.data):
-                next_url = request.args.get('next') or url_for('index')
-                return redirect(next_url)
-            else:
-                flash('Invalid credentials')
-                return render_template('login_form.html', form=form, next=request.args.get('next'))
-        else:
-            return render_template('login_form.html', form=form, next=request.args.get('next'))
-
 
 @app.route('/profile')
 @login_required
@@ -170,14 +120,12 @@ class EditProfile(views.MethodView):
     def get(self):
         form = ProfileForm()
         # We don't need password, email field
-        form.delete_fields('password', 'email')
-        form.set_data(g.user)
+        form.set_data(current_user)
         return render_template('edit_profile.html', form=form)
 
     @login_required
     def post(self):
         form = ProfileForm(request.form)
-        form.delete_fields('password', 'email')
         if form.validate():
             user_service.update_profile(form)
             return redirect(url_for('profile'))
@@ -188,52 +136,40 @@ app.add_url_rule('/profile/edit',
                  view_func=EditProfile.as_view('edit_profile'))
 
 
-@app.route("/logout")
-def logout():
-    pop_login_session()
-    return redirect(url_for('index'))
-
-
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-@app.route("/category/add", methods=['GET', 'POST'])
-def category_add():
-    form = CategoryForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            category = models.Category(name = form.name.data)
-            icon = request.files['icon']
-            filename = secure_filename(icon.filename)
-            if filename and allowed_file(filename):
-                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'icons', filename)
-                icon.save(full_save_path)
-                category.icon = filename
-            db.session.add(category)
-            db.session.commit()
-            flash("category %s added"%form.name.data)
-            return redirect("/")
-    return render_template("create_category.html", form = form)
-
-@app.route("/category/<cat_id>/icon", methods=['GET'])
-def category_icon(cat_id):
-    category = models.Category.query.filter_by(id = cat_id).first()
-    if category and category.icon:
-        return send_from_directory(app.config['UPLOAD_DIRECTORY']+"/icons/", category.icon)
-
-@app.route("/partials/<path:page>", methods = ['GET'])
-def angular_partials(page):
-    return render_template("partials/{}".format(page))
 
 @app.route("/discover", methods=['GET'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('discover.html', campaigns_data=campaigns_data)
 
-@app.route("/start", methods=['GET'])
+@app.route("/start", methods=['GET', 'POST'])
 def start():
-    return render_template('start.html')
+    if request.method == 'GET':
+        form = BeneficiarySignupForm()
+        if (current_user.organization_created):
+            form.set_data(current_user.organization_created[0])
+        return render_template('start.html', form=form)
+    elif request.method == 'POST':
+        form = BeneficiarySignupForm(request.form)
+        if form.validate():
+            image = request.files['imageUpload']
+            filename = secure_filename(image.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+                image.save(full_save_path)
+
+            result = signup_service.create_beneficiary(form, filename)
+            if not result['error']:
+                return redirect(url_for('campaign_success'))
+            else:
+                flash('Oops something went wrong, please try again')
+
+        print form.errors
+        return render_template('start.html', form=form)
+
 
 @app.route("/profile/donor_dashboard")
 @login_required
@@ -243,7 +179,40 @@ def donor_dashboard():
 @app.route("/profile/beneficiary_dashboard")
 @login_required
 def beneficiary_dashboard():
-    return render_template('beneficiaryDashboard.html')
+    campaigns = current_user.campaigns
+    active_campaigns=0
+    closed_campaigns=0
+    active_donors = []
+    closed_donors = []
+    total_active_amt=0
+    total_closed_amt=0
+
+    for campaign in campaigns:
+        if campaign.is_active():
+            active_campaigns+=1
+            active_donors+=campaign.donor_list()
+            total_active_amt+= sum(campaign.donations)
+
+        else:
+            closed_campaigns+=1
+            closed_donors+=campaign.donor_list()
+            total_closed_amt+= sum(campaign.donations)
+
+    n_active_donors = len(sets.Set(active_donors))
+    n_closed_donors = len(sets.Set(closed_donors))
+    num_books_recvd_active = int(total_active_amt/50)
+    num_books_recvd_closed = int(total_closed_amt/50)
+    return render_template('beneficiaryDashboard.html',campaigns=campaigns,
+            active_campaigns=active_campaigns,
+            closed_campaigns=closed_campaigns,
+            total_active_amt=total_active_amt,
+            total_closed_amt=total_closed_amt,
+            n_active_donors=n_active_donors,
+            n_closed_donors=n_closed_donors,
+            num_books_recvd_active=num_books_recvd_active,
+            num_books_recvd_closed=num_books_recvd_closed
+            )
+
 
 @app.context_processor
 def convertStatusTypeToString():

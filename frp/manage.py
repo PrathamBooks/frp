@@ -5,26 +5,14 @@ import os
 import subprocess
 
 from flask.ext.script import Manager
-from flask.ext.migrate import Migrate, MigrateCommand
 
 from frp import app
 from frp.models import db
-from frp.models import (User, UserInfo, USER_STATUS, is_email_exists,
-                      Organization, OrganizationInfo, OrganizationWork, Campaign, Donation)
+from frp.models import (User, UserAuth, USER_STATUS, is_email_exists,
+                        Organization, OrganizationInfo, OrganizationWork, Campaign, Donation)
+from flask import current_app
 
 manager = Manager(app)
-db.init_app(app)
-db.app = app
-
-settings = "settings/development.py"
-test_settings = "settings/testing.py"
-settings = os.environ.get('APP_SETTINGS', settings)
-print "Loading config from %s" % settings
-
-
-migrate = Migrate(app, db)
-manager.add_command('db', MigrateCommand)
-
 
 @manager.command
 def runserver():
@@ -34,45 +22,35 @@ def runserver():
     Defaults to settings/development.py
     """
     global settings
-    app.config.from_pyfile(settings)
     db.create_all()
     app.run()
-
-
-# @manager.command
-# def migrate():
-#     """
-#     Runs alembic migration
-#     """
-#     global settings
-#     app.config.from_pyfile(settings)
-#     db.create_all()
-#     ManageMigrations().run()
-
 
 @manager.command
 def resetdb():
     global settings, db
-    app.config.from_pyfile(settings)
     print "Dropping all tables"
     db.drop_all()
     print "Creating them afresh"
     db.create_all()
-    print "Creating lastuser tables"
 
 @manager.command
 def seed():
-    user = User(status=USER_STATUS.INVITED, email='kuchlous@gmail.com',
-            password='kuchlous', _username='kuchlous')
+    import datetime
+    user = User(
+            status=USER_STATUS.ACTIVE, 
+            email='kuchlous@gmail.com',
+            first_name='Alok', 
+            last_name='Kuchlous', 
+            active=True,
+            address='502, TZed Homes',
+            contact_number='990232323232',
+            pan_number='XXYYZZ',
+            confirmed_at=datetime.datetime.now())
     db.session.add(user)
 
-    user_info = UserInfo(
-        user=user, first_name='Alok',
-        last_name='Kuchlous', address='502, TZed Homes',
-        contact_number='990232323232',
-        pan_number='XXYYZZ')
-    db.session.add(user_info)
-
+    user_auth = UserAuth(password=current_app.user_manager.hash_password('kuchlous'), 
+            user=user, active=True)
+    db.session.add(user_auth)
 
     org = Organization(title='Whitefield Awake', created_by=user)
     db.session.add(org)

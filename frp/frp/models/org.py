@@ -55,9 +55,10 @@ ORG_STATUS_CHOICES = sorted(map(lambda x: (x[1]['value'], x[1]['desc']),
                                 get_attrs(ORG_STATUS)))
 
 
-class Organization(BaseNameMixin, db.Model):
+class Organization(BaseMixin, db.Model):
     __tablename__ = 'organization'
 
+    title = db.Column(db.Unicode(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     info = db.relationship("OrganizationInfo",
                            backref=db.backref("org"),
@@ -150,5 +151,14 @@ class Campaign(BaseMixin, db.Model):
                 "achieved" : 80,
                 "status" : "ACTIVE",
                 "nfunders" : 95}
+
+    def donor_list(self):
+        retval =[]
+        for donation in self.donations:
+                    retval.append(donation.user_id)
+        return retval
+
+    def is_active(self):
+        return ((int (self.days_remaining())) > 0 )
 
 

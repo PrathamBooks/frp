@@ -7,14 +7,13 @@
 
         This is a place holder to show details. Since we don't have admin view.
         <h3> Details </h3><a href="{{ url_for('edit_profile') }}">Edit</a><br/>
-        First Name: {{ g.user.userinfo.first_name }}<br/>
-        Last Name: {{ g.user.userinfo.last_name }}<br/>
-        User Name: {{ g.user.username or '' }}<br/>
-        Email: {{ g.user.email }}<br/>
-        Address: {{ g.user.userinfo.address }}<br/>
-        Contact Number: {{ g.user.userinfo.contact_number }}<br/>
-        Pan Number: {{ g.user.userinfo.pan_number }}<br/>
-        Need 80G Certificate: {{ g.user.userinfo.need_80g_certificate }}<br/>
+        First Name: {{ current_user.first_name }}<br/>
+        Last Name: {{ current_user.last_name }}<br/>
+        Email: {{ current_user.email }}<br/>
+        Address: {{ current_user.address }}<br/>
+        Contact Number: {{ current_user.contact_number }}<br/>
+        Pan Number: {{ current_user.pan_number }}<br/>
+        Need 80G Certificate: {{ current_user.need_80g_certificate }}<br/>
         <h3>Donated Projects</h3>
         Nothing yet
         <br/>

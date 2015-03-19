@@ -69,7 +69,11 @@ li {
   text-decoration: none;
 }
 #wrapperOut #wrapper .btn-browse {
-  background-position: 115px 13px;
+  background-position: 90px 15px;
+  padding: 0 32px 0 14px;
+}
+#wrapperOut #wrapper .btn-go {
+  background-position: 50px 15px;
   padding: 0 32px 0 14px;
 }
 #wrapperOut #wrapper .btn-reg {
@@ -342,21 +346,15 @@ header nav ul .darkOrange {
 }
 header #login {
   float: left;
-  margin: -40px 0 0 166px;
+  margin: 34px 0 0 166px;
   padding: 20px 20px 0 0;
 }
-
-header #login #profile-btn {
-  margin-left: 30px;
-  background-image: none !important;
-}
-
 header #login a.btn {
   font-size: 1.1em;
   font-weight: bold;
   text-transform: uppercase;
   border: 0.1em solid #000;
-  border-radius: 20px;
+  border-radius: 11px;
   padding: 5px 13px 2px;
   margin: 0 10px 0 0;
   float: left!important;
@@ -400,6 +398,26 @@ header #login .dropdown-menu {
   font-family: "ligurino-condensed", sans-serif;
   font-weight: lighter !important;
   border-bottom: 23px solid #282425;
+}
+#featuredCampaign .btn-nav {
+  background-color: #e5e4e0 !important;
+  background-position: center center;
+  border-radius: 20px 0 0 20px !important;
+  font-size: 0 !important;
+  right: 0;
+  top: 200px;
+  padding: 26px 10px !important;
+  position: absolute;
+  margin: 0px !important;
+  opacity: .5;
+}
+#featuredCampaign .btn-nav:hover {
+   background-color: #ffde00;
+}
+#featuredCampaign .btn-navL {
+  background-image: url(../images/leftArrow.png) !important;
+  border-radius: 0 20px 20px 0 !important;
+  left: 0;
 }
 #featuredCampaign .col-md-12 {
   font-size: 0px;
@@ -460,7 +478,7 @@ header #login .dropdown-menu {
   margin: 33px 0 0 !important;
 }
 #homeSearch.input-group {
-  margin: 530px 0 0 550px;
+  margin: 530px 0 0 325px;
   position: absolute;
   z-index: 5;
 }
@@ -831,16 +849,16 @@ header #login .dropdown-menu {
   width: 100% !important;
 }
 .internal a.champion {
-  width: 101px;
-  float: right;
-  text-transform: uppercase;
-  font-size: 8px;
-  background-image: url(../images/champion.png);
-  background-repeat: no-repeat;
+  background-image: url("../images/champion.png");
   background-position: right center;
-  padding: 30px 0 0 25px;
-  margin: -30px -10px -24px 0;
+  background-repeat: no-repeat;
   color: #222222;
+  float: right;
+  font-size: 8px;
+  margin: -30px -10px -24px 0;
+  padding: 30px 0 0;
+  text-transform: uppercase;
+  width: 65px;
 }
 .internal .campaign a.champion {
   margin: -30px -29px -23px 0;
@@ -1068,12 +1086,12 @@ header #login .dropdown-menu {
   background-position: center center;
   margin: 1px -5px 0 0;
 }
-.internal #internalContent .col-md-2 {
+.internal #internalContent .col-md-4 {
   height: auto;
   min-height: 190px;
   padding: 10px 5px 5px;
 }
-.internal #internalContent .col-md-2 h5 {
+.internal #internalContent .col-md-4 h5 {
   clear: both;
   float: left;
   font-size: 20px;
@@ -1083,7 +1101,7 @@ header #login .dropdown-menu {
   padding: 7px 0 5px 5px;
   width: 100%;
 }
-.internal #internalContent .col-md-2 .btn-browse {
+.internal #internalContent .col-md-4 .btn-browse {
   background-color: #ffc600;
   background-image: url("../images/rightArrow.png");
   background-position: 106px 14px;
@@ -1146,6 +1164,9 @@ header #login .dropdown-menu {
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }
+.internal #internalContent.discover-top select {
+  height: 100px !important;
+}
 .internal .col-md-12 ul {
   font-size: 1.3em;
   font-weight: bold;
@@ -1207,25 +1228,8 @@ header #login .dropdown-menu {
   text-align: center;
   line-height: 255px;
   font-family: "ligurino-condensed", sans-serif;
-  background-image: url(../images/campaign1.jpg) no-repeat;
-  background-size: cover;
+  background: url(../images/campaign1.jpg) no-repeat;
   text-shadow: 1px 3px 0 #000 !important;
-}
-.internal .col-md-6 .col-md-12 a.champion {
-  background-image: url("../images/champion.png");
-  background-position: right center;
-  background-repeat: no-repeat;
-  color: #222222;
-  float: right;
-  font-size: 8px;
-  height: 51px;
-  line-height: 10px;
-  margin: -27px -10px 0 0;
-  padding: 30px 0 0 25px;
-  position: relative;
-  text-align: left;
-  text-transform: uppercase;
-  width: 101px;
 }
 .internal .col-md-3 .tag .progress,
 .internal .col-md-4 .tag .progress {
@@ -1691,25 +1695,13 @@ span.fb:hover {
 }
 .startCampaign .nav-tabs > li > a:hover,
 .startCampaign .nav-tabs > li > a:focus,
-.startCampaign .nav-tabs > li > a:active {
+.startCampaign .nav-tabs > li > a:active,
+.startCampaign .nav-tabs > li.active > a {
   background-color: #ffc600;
   cursor: pointer;
 }
 .startCampaign .nav-tabs > li a.active {
   background-color: #ffc600;
-}
-.startCampaign .nav-tabs li:last-child {
-  background-image: url("../images/arrLft.png");
-  background-origin: content-box;
-  background-position: left center;
-  background-repeat: no-repeat;
-  font-family: "proxima-nova", sans-serif !important;
-  font-size: 1.3em !important;
-  font-weight: 100 !important;
-  padding: 9px 0 0 4px;
-  text-align: center;
-  text-transform: capitalize !important;
-  width: 288px;
 }
 .startCampaign h2 {
   padding: 0px !important;
@@ -1723,6 +1715,15 @@ span.fb:hover {
   background: none !important;
   font-size: 2em;
   padding: 30px 40px 0!important;
+}
+
+.startCampaign .tab-content section .well .radio + .radio,
+.startCampaign .tab-content section .well .checkbox + .checkbox {
+  margin-top: 0;
+}
+.startCampaign .tab-content section .well input[type="radio"],
+.startCampaign .tab-content section .well input[type="checkbox"] {
+  margin: 8px 7px 0 -19px !important;
 }
 .startCampaign .well {
   font-family: "proxima-nova", sans-serif;
@@ -1835,10 +1836,24 @@ span.fb:hover {
 .startCampaign .faq .tou h2 {
   font-size: 1em !important;
   width: 100%;
+  font-family: "ligurino-condensed", sans-serif !important;
+  color: #6c5e26 !important;
+  font-weight: bold;
 }
 .startCampaign .faq .tou p {
   width: 100%;
   padding: 0px !important;
+}
+
+.startCampaign .faq .tou ul.alert-warning {
+  background-color: none !important;
+  background-color: #fff !important;
+}
+.startCampaign .faq .tou ul.alert-warning li {
+  font-size: 0.48em !important;
+  font-weight: normal;
+  line-height: 35px;
+  margin: 0 0 0 20px;
 }
 .startCampaign .faq .tou ul {
   padding: 0;
@@ -1858,14 +1873,34 @@ span.fb:hover {
 .startCampaign .faq .tou ul li p {
   font-size: .6em;
 }
+.startCampaign .faq .tou ul li ul li {
+  font-size: .85em !important;
+}
 .startCampaign .faq .tou ul li ul li strong {
-  font-size: .6em;
+  font-size: .6em !important;
 }
 .startCampaign .faq .tou ul li ul li p {
   font-size: .45em;
 }
 .startCampaign .form .col-md-12 {
   padding: 0 15px !important;
+}
+.startCampaign .form .radio,
+.startCampaign .form .checkbox {
+  float: left !important;
+  min-height: 22px;
+  width: 100%;
+}
+.startCampaign .form .alert {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+  border: 0 none !important;
+  color: #ff7800 !important;
+  float: left !important;
+  font-size: 0.7em !important;
+  font-weight: 600 !important;
+  margin: -12px 0 12px -4px !important;
+  padding: 5px 5px 0 !important;
+  width: 100% !important;
 }
 .startCampaign .form .sidebar {
   padding: 10px 0 0;
@@ -1926,7 +1961,7 @@ span.fb:hover {
 }
 .startCampaign .form .col-md-9 .well strong {
   color: #ff7800;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .startCampaign .form .col-md-9 .well .form-control {
   margin: 0 0 15px;
@@ -1959,6 +1994,7 @@ span.fb:hover {
 .startCampaign .form .col-md-9 .col-xs-12 .radio,
 .startCampaign .form .col-md-9 .col-xs-12 .checkbox {
   line-height: 28px;
+  float: left !important;
 }
 .startCampaign .form .col-md-9 .col-xs-12 .radio input[type="radio"],
 .startCampaign .form .col-md-9 .col-xs-12 .checkbox input[type="radio"],
@@ -1970,20 +2006,26 @@ span.fb:hover {
 .startCampaign .form .col-md-9 .col-xs-12 .checkbox label {
   font-size: 0.75em;
 }
-.startCampaign .form #setCampaign .well .col-md-12 {
+.startCampaign .form #setCampaign-step .well .col-md-12 {
   padding: 10px 0 0!important;
 }
-.startCampaign .form #setCampaign .well .col-md-12 p {
+.startCampaign .form #setCampaign-step .well .col-md-12 p {
   font-size: 0.35em !important;
   padding: 6px 0 0 10px;
 }
-.startCampaign .form #setCampaign .well .col-md-12 input[type="file"] {
+.startCampaign .form #setCampaign-step .well .col-md-12 input[type="file"] {
   background-image: none !important;
   float: left !important;
   font-size: 0.3em !important;
   margin: 0 !important;
   padding: 0 0 0 11px;
   width: auto !important;
+}
+.startCampaign .form #setCampaign-step .well .modal-content .row h5 {
+  font-size: 0.7em !important;
+}
+.startCampaign .form #setCampaign-step .well .col-md-12 .alert {
+  font-size: 0.4em !important;
 }
 .startCampaign #bookCounts.form-group .col-xs-9 {
   width: 100%;
@@ -2033,6 +2075,26 @@ span.fb:hover {
 }
 .startCampaign #goal.well .form-group {
   padding: 5px 0;
+}
+.startCampaign #privacy h2 {
+  width: 100%;
+  color: #6c5e26;
+  font-family: "ligurino-condensed", sans-serif !important;
+  font-size: 1em !important;
+  margin: 20px 0 10px;
+}
+.startCampaign #privacy ul {
+  color: #6c5e26;
+  float: left;
+  font-size: 0.8em;
+  font-weight: normal;
+  list-style-type: initial;
+  width: 100%;
+}
+.startCampaign #privacy ul li {
+  line-height: 33px;
+  list-style-type: disc;
+  margin: 0 0 0 40px;
 }
 .startCampaign #contact address {
   float: left;
@@ -2263,6 +2325,10 @@ button.approve:hover {
 /*Dashboard*/
 .dashboard h2 {
   margin: 50px 0 0 7px;
+}
+.dashboard .col-md-9 h2.blockQuotes {
+  font-weight: lighter !important;
+  font-size: 3em !important;
 }
 .dashboard .col-md-3 {
   height: auto !important;
@@ -2671,7 +2737,7 @@ table td span.label {
 ul#socialThumbs {
   float: left;
   font-family: "ligurino-condensed", sans-serif;
-  margin: 110px 0 0;
+  margin: 0 0;
   padding: 0;
   width: 100%;
 }
