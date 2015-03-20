@@ -86,3 +86,29 @@ the FRP app to run as well as config necessary.
    created by the =app.sh= script present inside the =scripts=
    directory of the frp app which in turn is managed by monit.
      
+
+- Ubuntu setup
+> sudo aptitude install git
+> sudo aptitude install python-dev
+> sudo aptitude install libffi-dev
+> sudo aptitude install libpq-dev
+> sudo aptitude install postgresql
+> sudo aptitude install postfix
+> sudo aptitude install python-pip
+> sudo pip install virtualenv
+> virtualenv frp-env
+> source frp-env/bin/activate
+> git clone https://github.com/PrathamBooks/frp.git
+> cd frp
+> pip install -r requirements/production.txt
+> sudo su postgres
+> createuser -d -s frp
+> exit
+> createdb frp
+> edit /etc/postgresql/9.3/main/pg_hba.conf to trust local connections
+> service postgresql restart
+> copy frp to /etc/nginx/sites-enabled/frp
+> mv /etc/nginx/sites-enabled/default
+> export FACEBOOK_CONSUMER_KEY = <KEY>
+> export FACEBOOK_CONSUMER_SECRET = <SECRET>
+> gunicorn frp:app -b localhost:8000 -D

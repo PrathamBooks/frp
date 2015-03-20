@@ -62,8 +62,8 @@ def create_beneficiary(form, filename):
     project_who_are_you = form.project_who_are_you.data
     project_impact = form.project_impact.data
     fund_utilization = form.fund_utilization.data
-    nbooks = form.project_books.data
-    nlic = form.project_lib_in_classroom.data
+    nbooks = form.project_books.data if form.project_books.data else 0
+    nlic = form.project_lib_in_classroom.data if form.project_lib_in_classroom.data else 0
     state = form.project_state.data
     city = form.project_city.data
     languages = []

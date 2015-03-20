@@ -93,7 +93,7 @@
   {% if not placeholder %}
     {% set placeholder = field.label.text %}
   {% endif %}
-  <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}" {{ required }}> {{field.data|default('',True)}}</textarea>
+  <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}" {{ required }}>{{field.data|default('',True)}}</textarea>
   {% if field.errors %}
     <ul class="errors">
       {% for error in field.errors %}

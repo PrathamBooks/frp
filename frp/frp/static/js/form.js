@@ -81,16 +81,18 @@ $(function() {
     var id = $('section:visible').attr('id');
     var active_tab = $('section:visible');
     var clicked_tab = $($(this).attr('href'));
-    highlightInvalidFields(active_tab);
     if (isClickedTabEarlier(active_tab, clicked_tab) || $('section#' + id + ' :invalid').length == 0) {
       $('div.sidebar a').removeClass('active');
       $("a[href="+$(this).attr('href')+"]").addClass('active');
       $('section').removeClass('show').addClass('hide');
       $('section' + $(this).attr('href')).removeClass('hide').addClass('show');
       showBottomNavigation();
+      window.scrollTo($('section:visible').position().left,
+                      $('section:visible').position().top);
     }
     else {
       $('section#' + id + ' :invalid').first().focus();
+      highlightInvalidFields(active_tab);
       return false;
     } 
   });

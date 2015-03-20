@@ -4,18 +4,24 @@ var Start = function() {
     this.attachErrorUpdateCallbacks();
     this.attachPreviewCallback();
     this.attachOrgCheckboxCallback();
+    $('input[name="total_impact_on_children"]').attr('required','');
+    $('input[name="project_title"]').attr('required','');
     $('#bookCounts input').change(this.booksCallback);
+    $("#goLive").click(this.checkErrorsOnSubmit);
+
     // Need to call in the beginning to so that required attribute is
     // set. Not setting in form because we want to avoind printing the
     // '*'
     this.booksCallback(); 
+  };
 
-    $("#goLive").click(function(event){
-      event.preventDefault();
-      if ($(":invalid").length > 0) {
-        that.showErrorModal();
-      }
-    });
+  this.checkErrorsOnSubmit = function(e) {
+    var active_tab = $('section:visible');
+    if (active_tab.find(':invalid').length > 0) {
+      active_tab.find(':invalid').first().focus();
+      highlightInvalidFields(active_tab);
+      e.preventDefault();
+    }
   };
 
   this.booksCallback = function(e) {
