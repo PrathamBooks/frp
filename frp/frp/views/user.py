@@ -146,6 +146,7 @@ def discover():
     return render_template('discover.html', campaigns_data=campaigns_data)
 
 @app.route("/start", methods=['GET', 'POST'])
+@login_required
 def start():
     if request.method == 'GET':
         form = BeneficiarySignupForm()
