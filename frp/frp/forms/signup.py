@@ -176,7 +176,7 @@ class BeneficiarySignupForm(wtforms.Form):
 
     total_impact_on_children = wtforms.IntegerField(
         label='Number of children that you/your organization have impacted since commencement / impacts currently',
-        validators=[wtforms.validators.Required()])
+        validators=[wtforms.validators.Optional()])
 
     org_work = wtforms.SelectMultipleField(
         label='Do you/your organization do any work for following (check all that apply)',
@@ -211,7 +211,7 @@ class BeneficiarySignupForm(wtforms.Form):
                     wtforms.validators.Length(max=100)])
 
     project_who_are_you = wtforms.TextAreaField(
-            label='Who are you ?',
+            label='Who are you?',
             validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=100)])
 
@@ -239,6 +239,7 @@ class BeneficiarySignupForm(wtforms.Form):
        self.person1_position.data = org.info.person1_position
        self.person1_email.data = org.info.person1_email
        self.person1_phone.data = org.info.person1_phone
+       self.project_description.data = ""
 
        self.total_impact_on_children.data = org.info.total_impact_on_children
        org_works = org.works

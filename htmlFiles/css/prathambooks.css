@@ -411,6 +411,9 @@ header #login .dropdown-menu {
   margin: 0px !important;
   opacity: .5;
 }
+#featuredCampaign .btn-nav:hover {
+  background-color: #ffde00;
+}
 #featuredCampaign .btn-navL {
   background-image: url(../images/leftArrow.png) !important;
   border-radius: 0 20px 20px 0 !important;
@@ -1879,6 +1882,23 @@ span.fb:hover {
 .startCampaign .form .col-md-12 {
   padding: 0 15px !important;
 }
+.startCampaign .form .radio,
+.startCampaign .form .checkbox {
+  float: left !important;
+  min-height: 22px;
+  width: 100%;
+}
+.startCampaign .form .alert {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+  border: 0 none !important;
+  color: #ff7800 !important;
+  float: left !important;
+  font-size: 0.7em !important;
+  font-weight: 600 !important;
+  margin: -12px 0 12px -4px !important;
+  padding: 5px 5px 0 !important;
+  width: 100% !important;
+}
 .startCampaign .form .sidebar {
   padding: 10px 0 0;
 }
@@ -1971,6 +1991,7 @@ span.fb:hover {
 .startCampaign .form .col-md-9 .col-xs-12 .radio,
 .startCampaign .form .col-md-9 .col-xs-12 .checkbox {
   line-height: 28px;
+  float: left !important;
 }
 .startCampaign .form .col-md-9 .col-xs-12 .radio input[type="radio"],
 .startCampaign .form .col-md-9 .col-xs-12 .checkbox input[type="radio"],
@@ -1996,6 +2017,9 @@ span.fb:hover {
   margin: 0 !important;
   padding: 0 0 0 11px;
   width: auto !important;
+}
+.startCampaign .form #setCampaign .well .modal-content .row h5 {
+  font-size: 0.7em !important;
 }
 .startCampaign #bookCounts.form-group .col-xs-9 {
   width: 100%;
@@ -2295,6 +2319,10 @@ button.approve:hover {
 /*Dashboard*/
 .dashboard h2 {
   margin: 50px 0 0 7px;
+}
+.dashboard .col-md-9 h2.blockQuotes {
+  font-weight: lighter !important;
+  font-size: 3em !important;
 }
 .dashboard .col-md-3 {
   height: auto !important;
@@ -2703,7 +2731,7 @@ table td span.label {
 ul#socialThumbs {
   float: left;
   font-family: "ligurino-condensed", sans-serif;
-  margin: 110px 0 0;
+  margin: 0;
   padding: 0;
   width: 100%;
 }

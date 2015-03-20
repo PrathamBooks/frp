@@ -546,8 +546,8 @@
                           <div class="alert alert-warning  alertleft hide">Please select any one state in the list</div>
                         </div>
                         <div class="row form-group">
-                          <h3>City</h3>
-                          {{ render_text_field(form.project_city) }}
+                          <h3>City <strong>*</strong></h3>
+                          <input type="text" class="form-control" name="project_city" value="" required /> 
                           <div class="alert alert-warning hide">Enter City</div>
                         </div><!--form-group-->
                         <!-- Will add later
@@ -577,7 +577,7 @@
                       <div class="well title">
                         <div class="row form-group">
                           <div class="col-xs-12">
-                            <h3>Project Title</h3>
+                            <h3>Project Title <strong>*</strong></h3>
                           </div>
                           {{ render_text_field(form.project_title) }}
                           <div class="alert alert-warning  alertleft hide">Please give a suitable title to your campaign</div>
@@ -778,6 +778,7 @@
                                 I have read the T&amp;C and I want to submit this campaign page . 
                               </label>
                             </h3>
+                            <div class="alert alert-warning hide alertleft">You need to accept the terms and conditions to proceed.</div>
                           </div>
 
                           <button type="submit" id="goLive" class="btn btn-lg btn-block btnLive">Go Live &amp; Get Funded</button>
