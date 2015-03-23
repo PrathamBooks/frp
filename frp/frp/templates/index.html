@@ -23,12 +23,12 @@
     </p>
   </div>
 
-  <div id="homeSearch" class="input-group pull-right">
-    <input type="text" class="form-control" placeholder="Search">
-    <span class="input-group-addon">
-      <a href="#"><i class="icon-search"></i></a>
-    </span>
-  </div>
+  <form action={{url_for("search")}} method="GET">
+    <div id="homeSearch" class="input-group pull-right">
+      <input type="text" name="search-string" class="form-control" placeholder="Search">
+      <input type="submit" value="" class="icon-search">
+    </div>
+  </form>
 
   <div  id="contentTabs" class="row">
     <ul id="myTab" class="nav nav-tabs">

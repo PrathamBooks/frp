@@ -145,6 +145,12 @@ def discover():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('discover.html', campaigns_data=campaigns_data)
 
+@app.route("/search", methods=['GET'])
+def search():
+    search_string = request.args.get('search-string')
+    campaigns_data = Campaign.search(search_string)
+    return render_template('discover.html', campaigns_data=campaigns_data)
+
 @app.route("/start", methods=['GET', 'POST'])
 @login_required
 def start():

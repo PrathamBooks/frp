@@ -125,3 +125,4 @@ def create_donor_from_facebook(data):
     db.session.add(user_auth)
 
     db.session.commit()
+    return user
