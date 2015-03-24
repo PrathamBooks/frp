@@ -41,19 +41,17 @@ def get_attrs(cls):
 class ORG_STATUS:
     registered_non_profit = {'desc': 'Registered non-profit',
                              'value': 1}
-    section_25_company = {'desc': 'Section 25 Company',
-                          'value': 2}
     private_school = {'desc': 'Private School',
-                      'value': 3}
+                      'value': 2}
     budget_private_school = {
         'desc': 'Budget Private School (fee structure less than Rs.500 per month)',
-        'value': 4}
+        'value': 3}
     government_school = {'desc': 'Government School',
-                         'value': 5}
+                         'value': 4}
     reading_centre = {'desc': 'Reading centre / library',
-                      'value': 6}
+                      'value': 5}
     volunteer  = {'desc': 'Reading Champion / Storyteller / Volunteer',
-                      'value': 7}
+                      'value': 6}
 
 
 ORG_STATUS_CHOICES = sorted(map(lambda x: (x[1]['value'], x[1]['desc']),

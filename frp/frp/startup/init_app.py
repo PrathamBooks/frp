@@ -63,6 +63,8 @@ def init_app(app, settings='settings/development.py'):
     angular = Bundle("lib/angular/angular.js",
                      "lib/angular/angular-route.js",
                      output="gen/angular.js")
+    underscore = Bundle("lib/underscore/underscore.js",
+                        output="gen/underscore.js")
     app_js = Bundle("js/form.js", output="gen/lib.js")
     discover_js = Bundle("js/discover.js", output="gen/discover.js")
     start_js = Bundle("js/start.js", output="gen/start.js")
@@ -76,4 +78,5 @@ def init_app(app, settings='settings/development.py'):
     assets.register('start_js', start_js)
     assets.register('jquery', jquery)
     assets.register('bootstrap', bootstrap)
+    assets.register('underscore', underscore)
     assets.register('angular', angular)

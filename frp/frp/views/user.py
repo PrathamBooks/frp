@@ -18,9 +18,13 @@ from flask_login import login_user
 from .. import app
 from ..models import (Campaign, ORG_STATUS_CHOICES)
 from ..forms import (BeneficiarySignupForm,
+                     FilterForm,
                      ProfileForm,
                      CategoryForm,
-                     CampaignForm)
+                     CampaignForm,
+                     LANGUAGE_CHOICES,
+                     STATES,
+                     BENEFICIARY_CATEGORY)
 from ..service import signup as signup_service
 from ..service import user as user_service
 from flask_user import current_user, login_required, roles_required
@@ -143,7 +147,9 @@ def about():
 @app.route("/discover", methods=['GET'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data()
-    return render_template('discover.html', campaigns_data=campaigns_data)
+    filter_form = FilterForm()
+    return render_template('discover.html', campaigns_data=campaigns_data,
+            form=filter_form)
 
 @app.route("/search", methods=['GET'])
 def search():
