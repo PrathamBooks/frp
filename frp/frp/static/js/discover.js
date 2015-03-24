@@ -15,6 +15,9 @@ var DiscoverPage = function(campaign_data) {
     for (i = start; i < end && i < data.length; i++) {
       var campaign = data[i];
       var $div_md_3 = $('<div/>').addClass('col-md-3').appendTo($campaigns);
+      $div_md_3.click(function() {
+        window.location.replace('/campaign/' + campaign.id);
+      });
       var $img = $('<h1/>').html(campaign.title).appendTo($div_md_3);
       var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
@@ -27,13 +30,16 @@ var DiscoverPage = function(campaign_data) {
       $campaignInfo.append($('<hr/>'));
       $campaignInfo.append($('<h6/>').html("Funding Details"));
       var $target = $('<h4/>').html(campaign.target);
-      var $percentFunded = $('<span/>').addClass('percentFunded').html(110).appendTo($target);
+      var $percentFunded = $('<span/>').
+        addClass('percentFunded').
+        html(Math.round((campaign.total_donations/campaign.target) * 100)).
+        appendTo($target);
       $target.appendTo($campaignInfo);
       var $progress = $('<div/>').addClass('progress progress-warning').appendTo($campaignInfo);
       var $bar = $('<div/>').addClass('bar').css('width', '20%').appendTo($progress);
       var $days = $('<h5/>').
         append($('<span/>').addClass('days').html('Active')).
-        append($('<span/>').addClass('funders').html(110)).
+        append($('<span/>').addClass('funders').html(campaign.nfunders)).
         appendTo($campaignInfo);
     }
   };

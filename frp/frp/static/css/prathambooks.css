@@ -76,6 +76,10 @@ li {
   background-position: 50px 15px;
   padding: 0 32px 0 14px;
 }
+#wrapperOut #wrapper .btn-filter {
+  background-position: 75px 15px;
+  padding: 0 32px 0 14px;
+}
 #wrapperOut #wrapper .btn-reg {
   background-position: 146px 14px;
   padding: 0 25px 0 16px;

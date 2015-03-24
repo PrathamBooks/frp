@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import inspect
+import sets
 from datetime import date
 
 from . import db, BaseNameMixin, BaseMixin
@@ -155,6 +156,9 @@ class Campaign(BaseMixin, db.Model):
     def target(self):
         return 50 * (self.nbooks + 125 * self.nlic)
 
+    def total_donations(self):
+        return sum(map(lambda x: x.amount, self.donations))
+
     def verbose_fields(self):
         return {"id" : self.id,
                 "title" : self.title,
@@ -165,15 +169,12 @@ class Campaign(BaseMixin, db.Model):
                 "state" : self.state,
                 "city" : self.city,
                 "target" : self.target(),
-                "achieved" : 80,
+                "total_donations" : self.total_donations(),
                 "status" : "ACTIVE",
-                "nfunders" : 95}
+                "nfunders" : len(sets.Set(self.donor_list()))}
 
     def donor_list(self):
-        retval =[]
-        for donation in self.donations:
-                    retval.append(donation.user_id)
-        return retval
+        return map(lambda x: x.user_id, self.donations)
 
     def is_active(self):
         return ((int (self.days_remaining())) > 0 )

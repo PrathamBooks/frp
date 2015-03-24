@@ -155,7 +155,9 @@ def discover():
 def search():
     search_string = request.args.get('search-string')
     campaigns_data = Campaign.search(search_string)
-    return render_template('discover.html', campaigns_data=campaigns_data)
+    filter_form = FilterForm()
+    return render_template('discover.html', campaigns_data=campaigns_data,
+            form=filter_form)
 
 @app.route("/start", methods=['GET', 'POST'])
 @login_required
