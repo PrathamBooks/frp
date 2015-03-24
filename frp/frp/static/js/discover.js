@@ -83,7 +83,7 @@ var DiscoverPage = function(campaign_data) {
     }
     // There is only one type on a campaign so it is easier to search
     // for the campaign.type in the selected types
-    if (types && types.length > 0) {
+    if (types_string.length > 0) {
       filtered_data = filtered_data.filter(function(c) {
         return (types_string.indexOf(c.type) != -1);
       });
