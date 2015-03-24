@@ -32,6 +32,7 @@ def resetdb():
     db.drop_all()
     print "Creating them afresh"
     db.create_all()
+    db.engine.execute('CREATE TRIGGER campaign_search_vector_trigger BEFORE UPDATE OR INSERT ON "campaign" FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(search_vector, \'pg_catalog.english\', title, description, who, impact, utilization, state, city, languages)')
 
 @manager.command
 def seed():

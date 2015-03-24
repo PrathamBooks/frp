@@ -482,7 +482,7 @@ header #login .dropdown-menu {
   position: absolute;
   z-index: 5;
 }
-#homeSearch.input-group input {
+#homeSearch.input-group input[type="text"] {
   float: left;
   width: 250px !important;
   margin: 0 0 0 5px !important;
@@ -496,6 +496,19 @@ header #login .dropdown-menu {
   border: 1px solid #6c5e26;
   background-color: #ff7800;
 }
+#homeSearch.input-group input.icon-search {
+  float: right;
+  width: 34px;
+  height: 34px;
+  padding: 14px;
+  border: 1px solid #6c5e26;
+  background-color: #ff7800;
+  background-image: url(../images/searchIcon.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0px 5px 5px 0;
+}
+
 #homeSearch.input-group span i.icon-search {
   width: 20px;
   height: 20px;

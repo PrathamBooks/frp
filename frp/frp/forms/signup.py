@@ -9,7 +9,7 @@ from ..models import (is_email_exists, ORG_STATUS_CHOICES,
 
 
 __all__ = ['BeneficiarySignupForm', 'BENEFICIARY_CATEGORY',
-           'ORG_WORK_CHOICES']
+           'ORG_WORK_CHOICES', 'LANGUAGE_CHOICES', 'STATES']
 
 
 BENEFICIARY_CATEGORY = [

@@ -1,175 +1,114 @@
 {% extends "partials/base.html" %}
 {% block content %}
-
-{% assets "discover_js" %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
-{% endassets %}
-
-<script type="text/javascript">
-  var campaigns_data = {{ campaigns_data|tojson }};
-</script>
 <div id="wrapper">
   <div class="container internal">
     <form role="form">
       <div  id="internalContent" class="row discover-top">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <h5>Language</h5>
           <div class="form-group">
             <select multiple id="languages" class="form-control">
-              <option>Hindi</option>
-              <option>Marathi</option>
-              <option>Kannada</option>
-              <option>Tamil</option>
-              <option>Urdu</option>
+              {% for language in form.languages %}
+                {% if language.data != '' %}
+                  <option value="{{language.data}}">{{language.label.text}}</option>
+                {% endif %}
+              {% endfor %}
             </select>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
           <h5>Type</h5>
           <div class="form-group">
-            <select multiple id="type" class="form-control">
-              <option>Books for Library</option>
-              <option>Books for Classroom</option>
+            <select multiple id="types" class="form-control">
+              {% for type in form.types %}
+                {% if type.label.value != '' %}
+                  <option value="{{type.data}}">{{type.label.text}}</option>
+                {% endif %}
+              {% endfor %}
             </select>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
           <h5>State</h5>
           <div class="form-group">
-            <select multiple id="state" class="form-control">
-              <option>Maharashtra</option>
-              <option>Punjab</option>
-              <option>Karnataka</option>
-              <option>Tamilnadu</option>
-              <option>Uttarpradesh</option>
+            <select multiple id="states" class="form-control">
+              {% for state in form.states %}
+                {% if state.label.text != '' %}
+                  <option value="{{state.data}}">{{state.label.text}}</option>
+                {% endif %}
+              {% endfor %}
             </select>
           </div>
         </div>
-
-        <div class="col-md-2">
-          <h5>City</h5>
-          <div class="form-group">
-            <select multiple id="city" class="form-control">
-              <option>Pune</option>
-              <option>Mumbai</option>
-              <option>Jalgaon</option>
-              <option>Satara</option>
-              <option>Nagpur</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-md-2">
-          <h5>Value</h5>
-          <div id="slider-range-max"></div>
-          <div class="range">
-            <label>&lt; 5000</label>
-            <a href="#" id="amount1" class="amount">
-              <span>500-800 Rs.</span>
-            </a>
-            <label>&gt; 50,000</label>
-          </div>
-        </div>
-
-        <div class="col-md-2">
-          <h5>Impact</h5>
-          <div id="slider-range-max2"></div>
-
-          <div class="range">
-            <label>&lt; 100</label>
-            <a href="#" id="amount2" class="amount">
-              <span>251-500 kids</span>
-            </a>
-            <label>> 500</label>
-          </div>
-          <button type="button" class="btn btn-default btn-browse">Browse</button>
-        </div>
-      </div>
-      <!--InternalContent-->
-
-      <div class="row discover" id="internalCampaign">
-        <div class="col-md-12">
-          <h2>Discover Campaigns
-            <span>Start Exploring!!</span>
-          </h2>
-        </div>
-
-        <div id="campaigns" class="col-md-9">
-
-        </div>
-
-        <div id="tagBlock" class="col-md-3">
-          <ul class="featured">
-            <li>Featured</li>
-            <li><a href="{{ url_for('discover', category='popular') }}">Popular</a> </li>
-            <li><a href="{{ url_for('discover', category='recently-launched') }}">Recently Launched</a></li>
-            <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
-            <li><a href="{{ url_for('discover', category='most-funded') }}" class="active">Most Funded</a></li>
-          </ul>
-          <hr />
-          <ul class="category">
-            <li>Categories</li>
-            <li><a href="{{ url_for('discover', category='registered-non-profit') }}">Registered Non-Profit (Trust / Society) </a></li>
-            <li><a href="{{ url_for('discover', category='section-25-company') }}">Section 25 Company</a></li>
-            <li><a href="{{ url_for('discover', category='private-school') }}">Private School</a></li>
-            <li><a href="{{ url_for('discover', category='government-school') }}">Government School</a></li>
-            <li><a href="{{ url_for('discover', category='reading-center-library') }}">Reading Centre/Library</a></li>
-            <li><a href="{{ url_for('discover', category='reading-champion') }}">Reading Champion / Storyteller / Volunteer</a></li>
-            <li><a href="{{ url_for('discover', category='rural-areas') }}">Rural Areas</a></li>
-            <li><a href="{{ url_for('discover', category='low-income-urban-areas') }}">Low Income Urban Area</a></li>
-            <li><a href="{{ url_for('discover', category='tribal-areas') }}">Tribal Areas</a></li>
-            <li><a href="{{ url_for('discover', category='special-needs') }}">Special Needs / Differently Abled Children</a></li>
-          </ul>
-          <hr />
-
-          <ul class="citi">
-            <li>Cities</li>
-            <li> 
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="search cities">
-              <span class="input-group-addon"><a href="#"><i class="icon-search"></i></a></span>
-            </div>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-
-      <div class="col-md-9">
-        <button type="button" class="btn btn-default btn-bottom">Default</button>
+        <button id="filter-btn" type="submit" class="btn btn-default btn-go">Filter</button>
       </div>
     </form>
+    <!--InternalContent-->
+
+    <div class="row discover" id="internalCampaign">
+      <div class="col-md-6">
+        <h2>Discover Campaigns
+          <br/>
+          <span>Start Exploring!!</span>
+        </h2>
+      </div>
+
+      <div id="campaigns" class="col-md-9">
+
+      </div>
+
+      <div id="tagBlock" class="col-md-3">
+        <ul class="featured">
+          <li>Featured</li>
+          <li><a href="{{ url_for('discover', category='popular') }}">Popular</a> </li>
+          <li><a href="{{ url_for('discover', category='recently-launched') }}">Recently Launched</a></li>
+          <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
+          <li><a href="{{ url_for('discover', category='most-funded') }}" class="active">Most Funded</a></li>
+        </ul>
+        <hr />
+        <ul class="category">
+          <li>Categories</li>
+          <li><a href="{{ url_for('discover', category='registered-non-profit') }}">Registered Non-Profit (Trust / Society) </a></li>
+          <li><a href="{{ url_for('discover', category='section-25-company') }}">Section 25 Company</a></li>
+          <li><a href="{{ url_for('discover', category='private-school') }}">Private School</a></li>
+          <li><a href="{{ url_for('discover', category='government-school') }}">Government School</a></li>
+          <li><a href="{{ url_for('discover', category='reading-center-library') }}">Reading Centre/Library</a></li>
+          <li><a href="{{ url_for('discover', category='reading-champion') }}">Reading Champion / Storyteller / Volunteer</a></li>
+          <li><a href="{{ url_for('discover', category='rural-areas') }}">Rural Areas</a></li>
+          <li><a href="{{ url_for('discover', category='low-income-urban-areas') }}">Low Income Urban Area</a></li>
+          <li><a href="{{ url_for('discover', category='tribal-areas') }}">Tribal Areas</a></li>
+          <li><a href="{{ url_for('discover', category='special-needs') }}">Special Needs / Differently Abled Children</a></li>
+        </ul>
+        <hr />
+
+        <ul class="citi">
+          <li>Cities</li>
+          <li> 
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="search cities">
+            <span class="input-group-addon"><a href="#"><i class="icon-search"></i></a></span>
+          </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="col-md-9">
+      <button id="scroll" type="button" class="btn btn-default btn-bottom">Default</button>
+    </div>
   </div>
 </div> 
-<script>
-	$(function() {
-		$("#slider-range-max" ).slider({
-			range: "max",
-			min: 1,
-			max: 10,
-			value: 2,
-			slide: function( event, ui ) {
-			  $("#amount1").val(ui.value);
-			}
-    });
-		$("#amount1").val( $("#slider-range-max").slider("value") );
-  });
-
-  $(function() {
-    $("#slider-range-max2" ).slider({
-			range: "max",
-			min: 1,
-			max: 10,
-			value: 2,
-			slide: function( event, ui ) {
-			  $("#amount2").val( ui.value );
-			}
-		});
-		$("#amount2").val($("#slider-range-max2").slider("value") );
-  });
+{% assets "discover_js" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
+{% endassets %}
+{% assets "underscore" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
+{% endassets %}
+<script type="text/javascript">
+  var campaigns_data = {{ campaigns_data|tojson }};
   $(function() {
     var discover = new DiscoverPage(campaigns_data);
     discover.start();

@@ -5,11 +5,16 @@ from datetime import date
 
 from . import db, BaseNameMixin, BaseMixin
 
+from flask.ext.sqlalchemy import SQLAlchemy, BaseQuery
+from sqlalchemy_searchable import SearchQueryMixin
+from sqlalchemy_utils.types import TSVectorType
+from sqlalchemy_searchable import make_searchable
 
 __all__ = ['ORG_STATUS', 'ORG_STATUS_CHOICES', 'Organization',
            'OrganizationInfo', 'OrganizationWork', 'Campaign',
            'is_org_name_exists', 'is_org_email_exists']
 
+make_searchable(options={'remove_symbols' : ''})
 
 def is_org_name_exists(name):
     """Check the username exists in db.
@@ -36,19 +41,17 @@ def get_attrs(cls):
 class ORG_STATUS:
     registered_non_profit = {'desc': 'Registered non-profit',
                              'value': 1}
-    section_25_company = {'desc': 'Section 25 Company',
-                          'value': 2}
     private_school = {'desc': 'Private School',
-                      'value': 3}
+                      'value': 2}
     budget_private_school = {
         'desc': 'Budget Private School (fee structure less than Rs.500 per month)',
-        'value': 4}
+        'value': 3}
     government_school = {'desc': 'Government School',
-                         'value': 5}
+                         'value': 4}
     reading_centre = {'desc': 'Reading centre / library',
-                      'value': 6}
+                      'value': 5}
     volunteer  = {'desc': 'Reading Champion / Storyteller / Volunteer',
-                      'value': 7}
+                      'value': 6}
 
 
 ORG_STATUS_CHOICES = sorted(map(lambda x: (x[1]['value'], x[1]['desc']),
@@ -103,7 +106,11 @@ class OrganizationWork(BaseMixin, db.Model):
     organization = db.relationship("Organization", backref='works')
     choice_id = db.Column(db.Integer, nullable=False)
 
+class CampaignQuery(BaseQuery, SearchQueryMixin):
+    pass
+
 class Campaign(BaseMixin, db.Model):
+    query_class = CampaignQuery
     __tablename__ = 'campaign'
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -122,10 +129,20 @@ class Campaign(BaseMixin, db.Model):
     status = db.Column(db.Unicode(100), nullable=False)
     donations = db.relationship("Donation", backref=db.backref("campaign"))
 
+    search_vector = db.Column(TSVectorType('title', 'description', 
+        'who', 'impact', 'utilization', 'state', 'city', 'languages'))
 
     @staticmethod
     def all_campaigns_data():
         campaigns = Campaign.query.all()
+        retval = []
+        for campaign in campaigns:
+            retval.append(campaign.verbose_fields())
+        return retval
+
+    @staticmethod
+    def search(search_string):
+        campaigns = Campaign.query.search(search_string).all()
         retval = []
         for campaign in campaigns:
             retval.append(campaign.verbose_fields())
@@ -160,5 +177,6 @@ class Campaign(BaseMixin, db.Model):
 
     def is_active(self):
         return ((int (self.days_remaining())) > 0 )
+
 
 
