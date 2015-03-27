@@ -1,0 +1,76 @@
+{% extends "partials/base.html" %}
+{% block content %}
+
+{% assets "admin_js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"> </script>
+{% endassets %}
+
+<script type="text/javascript">
+  var campaigns_data = {{ campaigns_data|tojson }};
+</script>
+
+<div class="container internal">
+
+  <form role="form" action = "" method='POST'>
+    <div class="row startCampaign capaignList" id="internalCampaign">
+
+      <div class="col-md-12">
+        <h2>Admin Panel
+          <span>Campaign Details</span>
+        </h2>
+      </div>
+      <div  class="col-md-12">
+
+        <table id="campaigns" class="table table-striped">
+          <tr>
+            <th>Campaign Id</th>
+            <th>Campaign Title</th>
+            <th><span class="arrDown"></span>Beneficiary Type </th>
+            <th><span class="arrDown"></span>Location</th>
+            <th><span class="arrDown"></span>Fund Raising Amount</th>
+            <th><span class="arrUp"></span>Start Date </th>
+            <th><span class="arrUp"></span> End Date</th>
+            <th><span class="arrDown"></span> Current Status</th>
+            <th><span class="arrUp"></span> Action Required</th>
+            <th>Update Status / Comment</th>
+            <th>Number Of Donors</th>
+            <th>Submit Your Comment</th>
+
+          </tr>
+        </table>
+        <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 id="myLargeModalLabel" class="modal-title">Preview of Beneficiary Form </h3>
+              </div>
+
+              <div class="form-group">
+                <textarea id="comments" placeholder="Enter Comment here"  class="form-control"></textarea>
+                <!--  
+                <p class="text-danger">Add Your Comment</p>
+              <p class="text-success">Comment submitted successfully!</p>
+              -->
+                <button id="comment-submit-btn" class="btn btn-send pull-right" type="button"></button>
+              </div>
+
+              <button id="comment-show-btn" class="btn btn-default btn-bottom" type="button">Default</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!--InternalCampaign-->
+  </form>
+</div>  
+<script>
+  $(function() {
+    var admin_dash = new AdminPage(campaigns_data);
+    admin_dash.start();
+    });
+  </script>
+
+  {% endblock %}
+
+
