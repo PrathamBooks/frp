@@ -1,11 +1,13 @@
-var DiscoverPage = function(campaign_data) {
+var DiscoverPage = function(args) {
   var that = this;
-  this.campaign_data = campaign_data;
-  this.display_data = campaign_data;
+  this.campaign_data = args.campaign_data;
   this.ndisplayed = 0;
   var DISPLAY_PER_CLICK = 6;
-  this.start = function() {
+  this.start = function(args) {
     this.display_data = this.campaign_data;
+    this.filter_with_args(args.filters.states, 
+                          args.filters.languages, 
+                          args.filters.types_string);
     this.show_next_campaigns();
     $('#scroll').click(this.show_next_campaigns);
     $('#filter-btn').click(this.filter);
@@ -15,9 +17,11 @@ var DiscoverPage = function(campaign_data) {
     for (i = start; i < end && i < data.length; i++) {
       var campaign = data[i];
       var $div_md_3 = $('<div/>').addClass('col-md-3').appendTo($campaigns);
-      $div_md_3.click(function() {
-        window.location.replace('/campaign/' + campaign.id);
-      });
+      $div_md_3.click(function (campaign) {
+        return function() {
+          window.location.replace('/campaign/' + campaign.id);
+        }
+      }(campaign));
       var $img = $('<h1/>').html(campaign.title).appendTo($div_md_3);
       var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
@@ -59,11 +63,7 @@ var DiscoverPage = function(campaign_data) {
     $('#campaigns').html('');
   };
 
-  this.filter = function(e) {
-    e.preventDefault();
-    var states = $('#states').val();
-    var languages = $('#languages').val();
-    var types_string = $('#types option:selected').text();
+  this.filter_with_args = function(states, languages, types_string) {
     var filtered_data = that.campaign_data;;
     if (states && states.length > 0) {
       filtered_data = filtered_data.filter(function(c) {
@@ -97,5 +97,13 @@ var DiscoverPage = function(campaign_data) {
     that.display_data = filtered_data;
     that.clear_campaigns();
     that.show_next_campaigns();
+  };
+
+  this.filter = function(e) {
+    e.preventDefault();
+    var states = $('#states').val();
+    var languages = $('#languages').val();
+    var types_string = $('#types option:selected').text();
+    that.filter_with_args(states, languages, types_string);
   };
 };

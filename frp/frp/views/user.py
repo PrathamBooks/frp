@@ -2,6 +2,7 @@
 
 import os
 import sets
+import json
 from flask import (render_template,
                    g,
                    url_for,
@@ -18,6 +19,7 @@ from flask_login import login_user
 from .. import app
 from ..models import (Campaign, ORG_STATUS_CHOICES)
 from ..forms import (BeneficiarySignupForm,
+                     DonorForm,
                      FilterForm,
                      ProfileForm,
                      CategoryForm,
@@ -27,6 +29,7 @@ from ..forms import (BeneficiarySignupForm,
                      BENEFICIARY_CATEGORY)
 from ..service import signup as signup_service
 from ..service import user as user_service
+from ..service import donate as donate_service
 from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
 
@@ -56,6 +59,11 @@ def pop_login_session():
 @login_required
 def campaign_success():
     return render_template('campaignSuccess.html')
+
+
+@app.route('/donate/success')
+def donate_success():
+    return render_template('donateSuccess.html')
 
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
@@ -144,12 +152,20 @@ app.add_url_rule('/profile/edit',
 def about():
     return render_template('about.html')
 
-@app.route("/discover", methods=['GET'])
+@app.route("/discover", methods=['GET', 'POST'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data()
-    filter_form = FilterForm()
+    filter_form = FilterForm(request.form)
+    languages = request.args.getlist('languages')
+    states = request.args.getlist('states')
+    # Convert numbers to text strings, -1 because select values start from
+    # 1 while array indexing starts from 0
+    types = map(
+            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
+            request.args.getlist('types')
+            )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form)
+            form=filter_form, languages=languages, states=states, types=types)
 
 @app.route("/search", methods=['GET'])
 def search():
@@ -159,15 +175,38 @@ def search():
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form)
 
-@app.route("/start", methods=['GET', 'POST'])
-@login_required
-def start():
+@app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
+def donate(campaign_id):
+    campaign = Campaign.query.get(campaign_id)
     if request.method == 'GET':
+        form = DonorForm()
+        if current_user.is_active():
+            form.set_data(current_user)
+        return render_template('donor_form.html', form=form, campaign=campaign)
+    elif request.method == 'POST':
+        form = DonorForm(request.form)
+        if form.validate():
+            result = donate_service.create_donation(form, campaign)
+            if not result['error']:
+                return redirect(url_for('donate_success'))
+            else:
+                print result
+                flash('Oops something went wrong, please try again')
+
+        print form.errors
+        print form
+        return render_template('donor_form.html', form=form, campaign=campaign)
+
+
+class Start(views.MethodView):
+    def get(self):
         form = BeneficiarySignupForm()
-        if (current_user.organization_created):
+        if (current_user.is_active() and current_user.organization_created):
             form.set_data(current_user.organization_created[0])
         return render_template('start.html', form=form)
-    elif request.method == 'POST':
+
+    @login_required
+    def put(self):
         form = BeneficiarySignupForm(request.form)
         if form.validate():
             image = request.files['imageUpload']
@@ -184,6 +223,10 @@ def start():
 
         print form.errors
         return render_template('start.html', form=form)
+
+app.add_url_rule('/start',
+                 view_func=Start.as_view('start'))
+
 
 
 @app.route("/profile/donor_dashboard")
@@ -236,6 +279,6 @@ def convertStatusTypeToString():
     return dict(statusString=statusString)
 
 @app.route("/campaign/<id>", methods=['GET'])
-def campaignPage(id):
-    campaign = Campaign.query.filter_by(id=id).first()
+def campaign(id):
+    campaign = Campaign.query.get(id)
     return render_template('campaign.html', campaign=campaign)

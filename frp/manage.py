@@ -39,6 +39,21 @@ def seed():
     import datetime
     user = User(
             status=USER_STATUS.ACTIVE, 
+            email='infodigital@prathambooks.org',
+            first_name='Pratham', 
+            last_name='Admin', 
+            active=True,
+            address='XXX',
+            contact_number='123456789',
+            pan_number='XXYYZZ',
+            confirmed_at=datetime.datetime.now())
+    db.session.add(user)
+    user_auth = UserAuth(password=current_app.user_manager.hash_password('digital123'), 
+            user=user, active=True)
+    db.session.add(user_auth)
+
+    user = User(
+            status=USER_STATUS.ACTIVE, 
             email='kuchlous@gmail.com',
             first_name='Alok', 
             last_name='Kuchlous', 
@@ -99,7 +114,8 @@ def seed():
             image="4.jpg", status="Ended")
     db.session.add(campaign)
 
-    donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499)
+    donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
     db.session.add(donation)
 
     campaign = Campaign(created_by=user, org=org,
@@ -109,7 +125,8 @@ def seed():
             image="5.jpg", status="Delivered")
     db.session.add(campaign)
 
-    donation = Donation(donor=user, campaign=campaign, amount=5000, confirmation=93499)
+    donation = Donation(donor=user, campaign=campaign, amount=5000, 
+            confirmation=93499,city="Bangalore", first_name="Aadi", state="Karnataka", identification="ABCDEF")
     db.session.add(donation)
 
     campaign = Campaign(created_by=user, org=org,
@@ -119,7 +136,9 @@ def seed():
             image="6.jpg", status="Flagged")
     db.session.add(campaign)
 
-    donation = Donation(donor=user, campaign=campaign, amount=1000, confirmation=99999)
+    donation = Donation(donor=user, campaign=campaign, amount=1000, 
+            confirmation=99999, city="Bangalore", state="Karnataka", first_name="Shaifali",
+            identification="ABCDEF")
     db.session.add(donation)
 
     try:

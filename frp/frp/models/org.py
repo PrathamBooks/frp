@@ -159,6 +159,8 @@ class Campaign(BaseMixin, db.Model):
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
 
+    def percentage_funds_raised(self):
+        return int(round((self.total_donations() * 100) /self.target()))
     def verbose_fields(self):
         return {"id" : self.id,
                 "title" : self.title,

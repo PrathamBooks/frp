@@ -65,10 +65,13 @@ def init_app(app, settings='settings/development.py'):
                      output="gen/angular.js")
     underscore = Bundle("lib/underscore/underscore.js",
                         output="gen/underscore.js")
-    app_js = Bundle("js/form.js", output="gen/lib.js")
+    app_js = Bundle("js/form.js", 
+                    "js/donor_form.js",
+                    "js/start.js",
+                    output="gen/lib.js")
+
     discover_js = Bundle("js/discover.js", output="gen/discover.js")
     start_js = Bundle("js/start.js", output="gen/start.js")
-
 
     assets.register('css_site', css)
     assets.register('bforms', bforms_css)

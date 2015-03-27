@@ -110,8 +110,18 @@
 <script type="text/javascript">
   var campaigns_data = {{ campaigns_data|tojson }};
   $(function() {
-    var discover = new DiscoverPage(campaigns_data);
-    discover.start();
-    });
+      var discover = new DiscoverPage(
+        {
+          campaign_data:campaigns_data
+        }
+      );
+      discover.start({
+        filters : {
+          states: {{ states|tojson }},
+          languages: {{ languages|tojson }},
+          types_string: {{ types|tojson }} 
+        }
+      });
+  });
 </script>
 {% endblock %}

@@ -29,7 +29,7 @@
         <h1>Funding Goals</h1>
         <div class="campaignInfo">
           <time><span>{{ campaign.days_remaining() }} </span> Days Left</time>
-          <h4>{{ campaign.target() }} <span class="percentFunded"> TBD </span></h4>
+          <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percentage_funds_raised() }}  </span></h4>
           <div class="progress progress-warning">
             <div class="bar" style="width: 20%;"></div>
           </div>
@@ -39,7 +39,7 @@
             <span class="fb"></span>
           </div>
 
-          <h5 class="amt"> <a href={{ url_for('user.register', campaign_id=campaign.id ) }}> Donate To This Campaign </a> </h5>
+          <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate To This Campaign </a> </h5>
         </div>
 
       </div>

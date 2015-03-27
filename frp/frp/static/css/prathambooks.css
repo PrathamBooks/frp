@@ -65,6 +65,9 @@ li {
   width: auto;
   color: #3f3716;
 }
+#wrapperOut #wrapper .campaignSuccess .btn {
+  background-image: none;
+}
 #wrapperOut #wrapper .btn:hover {
   text-decoration: none;
 }
@@ -1181,7 +1184,8 @@ header #login .dropdown-menu {
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }
-.internal #internalContent.discover-top select {
+.internal #internalContent.discover-top select,
+#easyBrowse select {
   height: 100px !important;
 }
 .internal .col-md-12 ul {
