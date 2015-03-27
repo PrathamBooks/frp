@@ -56,6 +56,8 @@ class User(UserMixin, db.Model):
     campaigns = db.relationship("Campaign",
                                 backref=db.backref("created_by"))
     donations = db.relationship("Donation", backref=db.backref("donor"))
+    comments = db.relationship("Comment", backref=db.backref("comment_by"))
+
 
     # Don't load these columns by default
     _defercols = [

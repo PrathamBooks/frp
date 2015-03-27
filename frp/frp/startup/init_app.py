@@ -67,6 +67,7 @@ def init_app(app, settings='settings/development.py'):
                         output="gen/underscore.js")
     app_js = Bundle("js/form.js", output="gen/lib.js")
     discover_js = Bundle("js/discover.js", output="gen/discover.js")
+    admin_js = Bundle("js/admin.js", output="gen/admin.js")
     start_js = Bundle("js/start.js", output="gen/start.js")
 
 
@@ -75,6 +76,7 @@ def init_app(app, settings='settings/development.py'):
 
     assets.register('app_js', app_js)
     assets.register('discover_js', discover_js)
+    assets.register('admin_js', admin_js)
     assets.register('start_js', start_js)
     assets.register('jquery', jquery)
     assets.register('bootstrap', bootstrap)
