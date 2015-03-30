@@ -43,7 +43,7 @@ var DiscoverPage = function(args) {
       var $bar = $('<div/>').addClass('bar').css('width', '20%').appendTo($progress);
       var $days = $('<h5/>').
         append($('<span/>').addClass('days').html('Active')).
-        append($('<span/>').addClass('funders').html(campaign.nfunders)).
+        append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
     }
   };

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import division
 import inspect
 import sets
-from datetime import date
+from datetime import *
 
 from . import db, BaseNameMixin, BaseMixin
 
@@ -129,6 +130,7 @@ class Campaign(BaseMixin, db.Model):
     image = db.Column(db.Unicode(100), nullable=False)
     status = db.Column(db.Unicode(100), nullable=False)
     donations = db.relationship("Donation", backref=db.backref("campaign"))
+    comments = db.relationship("Comment", backref=db.backref("campaign_comment"))
 
     search_vector = db.Column(TSVectorType('title', 'description', 
         'who', 'impact', 'utilization', 'state', 'city', 'languages'))
@@ -139,7 +141,8 @@ class Campaign(BaseMixin, db.Model):
         retval = []
         for campaign in campaigns:
             retval.append(campaign.verbose_fields())
-        return retval
+        ret=sorted(retval, key=lambda x:x["id"])
+        return ret
 
     @staticmethod
     def search(search_string):
@@ -153,14 +156,18 @@ class Campaign(BaseMixin, db.Model):
         rdays = 30 - (date.today() - self.created_at.date()).days
         return rdays if rdays > 0 else 0
 
+    def start_date(self):
+        return self.created_at.date()
+
+    def end_date(self):
+        return self.created_at.date() + timedelta(days=30)
+
     def target(self):
         return 50 * (self.nbooks + 125 * self.nlic)
 
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
 
-    def percentage_funds_raised(self):
-        return int(round((self.total_donations() * 100) /self.target()))
     def verbose_fields(self):
         return {"id" : self.id,
                 "title" : self.title,
@@ -170,16 +177,45 @@ class Campaign(BaseMixin, db.Model):
                 "type" : ORG_STATUS_CHOICES[self.org.info.status][1],
                 "state" : self.state,
                 "city" : self.city,
+                "who"  : self.who,
+                "start_date": "{:%B %d, %Y}".format(self.start_date()),
+                "end_date" : "{:%B %d, %Y}".format(self.end_date()),
+                "num_donors": self.num_donors(),
                 "target" : self.target(),
                 "total_donations" : self.total_donations(),
-                "status" : "ACTIVE",
-                "nfunders" : len(sets.Set(self.donor_list()))}
+                "status" : self.status,
+                "comments" : self.get_comments()
+                }
 
     def donor_list(self):
         return map(lambda x: x.user_id, self.donations)
 
+    def get_comments(self):
+        retval = []
+        for comment in self.comments:
+            retval.append(comment.get_comment())
+        return retval
+
+    def num_donors(self):
+        retval =[]
+        for donation in self.donations:
+                    retval.append(donation.user_id)
+        return len(sets.Set(retval))
+
     def is_active(self):
         return ((int (self.days_remaining())) > 0 )
 
+    def percent_funded(self):
+        return int(round((self.total_donations() * 100) /self.target()))
 
+    def commit(self):
+        db.session.add(self)
+        try:
+          db.session.commit()
+          print 'Successfully campaign commit'
+          return 0
+        except Exception as e:
+          print "commit not done",e
+          return e
+          db.session.rollback()
 

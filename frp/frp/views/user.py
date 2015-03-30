@@ -14,10 +14,11 @@ from flask import (render_template,
                    jsonify)
 from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
+from werkzeug.datastructures import ImmutableMultiDict
 from flask_login import login_user
 
 from .. import app
-from ..models import (Campaign, ORG_STATUS_CHOICES)
+from ..models import (Campaign, ORG_STATUS_CHOICES,Comment,Donation,User)
 from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
@@ -197,6 +198,20 @@ def donate(campaign_id):
         print form
         return render_template('donor_form.html', form=form, campaign=campaign)
 
+@app.route("/change_status",methods=['POST'])
+def change_status():
+    imd = request.form
+    id= imd.getlist("campaign_id")
+    status = imd.getlist("updated_status")
+    campaign = Campaign.query.filter_by(id=id[0]).first()
+    campaign.status = status[0]
+    print campaign.status
+    ret=campaign.commit()
+    if ret==0:
+        campaign_data = campaign.verbose_fields()
+        return jsonify(campaign_data)
+    else:
+        return ret
 
 class Start(views.MethodView):
     def get(self):
@@ -228,11 +243,47 @@ app.add_url_rule('/start',
                  view_func=Start.as_view('start'))
 
 
+@app.route("/add_comment",methods=['POST','GET'])
+def add_comment():
+    if request.method == "POST":
+      imd = request.form
+      id= imd.getlist("campaign_id")
+      new_comment = imd.getlist("comment")
+      campaign = Campaign.query.filter_by(id=id[0]).first()
+      print campaign.user_id," is user id"
+      user = campaign.created_by;
+      comment = Comment(comment_by=user, campaign_comment=campaign, comment=new_comment)
+      ret = comment.commit()
+      if ret==0:
+          campaign_data = {"comments":campaign.get_comments()}
+          return jsonify(campaign_data)
+      else:
+          return ret
+    if request.method == "GET":
+      imd = request.form
+      print request.campaign_id
+      id= imd.getlist("campaign_id")
+      print id[0] , "this  is id"
+      campaign = Campaign.query.filter_by(id=id[0]).first()
+      campaign_data = campaign.get_comments()
+      return jsonify(campaign_data)
+
+
+
+@app.route("/admin/dashbord",methods=['GET'])
+@login_required
+def admin_dashboard():
+    campaigns_data = Campaign.all_campaigns_data()
+    return render_template('adminDashboard.html',campaigns_data=campaigns_data)
 
 @app.route("/profile/donor_dashboard")
 @login_required
 def donor_dashboard():
-    return render_template('donorDashboard.html')
+    donations=current_user.donations
+    campaigns_donated = len(donations)
+    total_donations=sum(donations)
+   
+    return render_template('donorDashboard.html',donations=donations,campaigns_donated=campaigns_donated,total_donations=total_donations)
 
 @app.route("/profile/beneficiary_dashboard")
 @login_required
