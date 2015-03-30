@@ -34,13 +34,20 @@ var DiscoverPage = function(args) {
       $campaignInfo.append($('<hr/>'));
       $campaignInfo.append($('<h6/>').html("Funding Details"));
       var $target = $('<h4/>').html(campaign.target);
+      var percent_funded = Math.round((campaign.total_donations/campaign.target) * 100);
       var $percentFunded = $('<span/>').
         addClass('percentFunded').
-        html(Math.round((campaign.total_donations/campaign.target) * 100)).
+        html(percent_funded).
         appendTo($target);
       $target.appendTo($campaignInfo);
-      var $progress = $('<div/>').addClass('progress progress-warning').appendTo($campaignInfo);
-      var $bar = $('<div/>').addClass('bar').css('width', '20%').appendTo($progress);
+      var $progress_bar = $('<div/>').
+        addClass('progress progress-warning').
+        css('width', percent_funded + '%').
+        appendTo($campaignInfo);
+      var $progress_span = $('<span/>').
+        addClass("sr-only").
+        html(percent_funded + '% Complete').
+        appendTo($target);
       var $days = $('<h5/>').
         append($('<span/>').addClass('days').html('Active')).
         append($('<span/>').addClass('funders').html(campaign.num_donors)).
