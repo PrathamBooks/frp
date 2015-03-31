@@ -1,6 +1,15 @@
 var Start = function() {
   var that = this;
-  this.start = function() {
+  this.start = function(arg) {
+    if (!arg.logged_in) {
+      $('input').attr('disabled','');
+      $("#goLive").click(function(e) {
+        alert('You need to sign-up and login to start a campaign');
+        e.preventDefault();
+      });
+      return;
+    }
+    $("#accordion").accordion();
     this.attachErrorUpdateCallbacks();
     this.attachPreviewCallback();
     this.attachOrgCheckboxCallback();

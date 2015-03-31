@@ -9,7 +9,7 @@
     <div class="col-md-9">
       <div class="col-md-6">
         <div class="col-md-12">
-          <h1 style="background-image:url('/static/uploads/uploads/{{campaign.image}}')"> {{ campaign.title }} </h1>
+          <h1 style="background-image:url('/static/uploads/uploads/{{campaign.image}}'); background-size:cover"> {{ campaign.title }} </h1>
 
           <div class="campaignInfo">
             <h2> {{ campaign.title }} </h2>
@@ -29,9 +29,9 @@
         <h1>Funding Goals</h1>
         <div class="campaignInfo">
           <time><span>{{ campaign.days_remaining() }} </span> Days Left</time>
-          <h4>{{ campaign.target() }} <span class="percentFunded"> TBD </span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
+          <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }}  </span></h4>
+          <div class="progress progress-warning" style="width: {{ (campaign.percent_funded()) }}%">
+            <span class="sr-only"> {{ campaign.percent_funded() }} % Complete </span>
           </div>
           <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>
           <div class="socialIcons">
@@ -39,7 +39,7 @@
             <span class="fb"></span>
           </div>
 
-          <h5 class="amt"> <a href={{ url_for('user.register', campaign_id=campaign.id ) }}> Donate To This Campaign </a> </h5>
+          <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate To This Campaign </a> </h5>
         </div>
 
       </div>

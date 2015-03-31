@@ -803,15 +803,10 @@
     </form>
   </div>  
 </div><!--Wrapper-->
-{% assets "start_js" %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
-{% endassets %}
- 
 <script>
-  $( "#accordion" ).accordion();
   $(function() {
       var start = new Start();
-      start.start();
+      start.start({logged_in:{{ 1 if current_user.is_active() else 0 }}});
   });
 </script>
 

@@ -1,15 +1,27 @@
 from random import randint
 from flask import g
 from .. import app
-from ..models import (db, User, USER_STATUS, is_email_exists,
-                      Organization, OrganizationInfo, OrganizationWork, Campaign)
+from ..models import (db, Donation, admin_user)
+from flask_user import current_user
 
-def donate(form):
-  amount = form.amount.data
-  donor = g.user
-  campaign = Campaign.query.find(form.campaign.data)
+def create_donation(form, campaign):
+  amount = form.amount_choice.data
+  if not amount:
+    amount = form.customize_amount.data
+  # in case the donor did not sign in, the donation is accounted for in
+  # in admin account
+  donor = current_user if current_user.is_active() else admin_user()
+
   confirmation = randint(1000000, 9999999)
-  donation = Donation(amount=amount, donor=donor, campaign=campaign, confirmation=confirmation)
+  donation = Donation(amount=amount, 
+          donor=donor, 
+          first_name=form.first_name.data,
+          last_name=form.last_name.data,
+          campaign=campaign, 
+          confirmation=confirmation, 
+          state=form.state.data, 
+          city=form.city.data, 
+          identification=form.pan_number.data)
   db.session.add(donation)
   try:
     db.session.commit()
