@@ -31,16 +31,9 @@ LANGUAGE_CHOICES = [
     ('English', 'English'),
     ('Hindi', 'Hindi'),
     ('Marathi', 'Marathi'),
-    ('Telugu', 'Telugu'),
-    ('Gujarati', 'Gujarati'),
-    ('Malayalam', 'Malayalam'),
-    ('Tamil', 'Tamil'),
     ('Kannada', 'Kannada'),
-    ('Urdu', 'Urdu'),
-    ('Bengali', 'Bengali'),
-    ('Oriya', 'Oriya'),
-    ('Punjabi', 'Punjabi'),
-    ('Assamese', 'Assamese')]
+    ('Telugu', 'Telugu'),
+    ('Urdu', 'Urdu')]
 
 STATES = [
         (u'Andhra Pradesh', u'Andhra Pradesh'),

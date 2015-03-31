@@ -156,12 +156,15 @@ class Campaign(BaseMixin, db.Model):
 
     def start_date(self):
         return self.created_at.date()
-       
+
     def end_date(self):
         return self.created_at.date() + timedelta(days=30)
 
     def target(self):
         return 50 * (self.nbooks + 125 * self.nlic)
+
+    def total_donations(self):
+        return sum(map(lambda x: x.amount, self.donations))
 
     def verbose_fields(self):
         return {"id" : self.id,
@@ -177,14 +180,13 @@ class Campaign(BaseMixin, db.Model):
                 "end_date" : "{:%B %d, %Y}".format(self.end_date()),
                 "num_donors": self.num_donors(),
                 "target" : self.target(),
-                "achieved" : 80,
+                "total_donations" : self.total_donations(),
                 "status" : self.status,
-                "comments" : self.get_comments(),
-                "nfunders" : 95}
+                "comments" : self.get_comments()
+                }
 
     def donor_list(self):
-        retval = map(lambda x:x.user_id,self.donations)
-        return retval
+        return map(lambda x: x.user_id, self.donations)
 
     def get_comments(self):
         retval = map(lambda x:x.get_comment(),self.comments)
@@ -195,13 +197,12 @@ class Campaign(BaseMixin, db.Model):
         for donation in self.donations:
                     retval.append(donation.user_id)
         return len(sets.Set(retval))
+
     def is_active(self):
         return ((int (self.days_remaining())) > 0 )
 
     def percent_funded(self):
-        ret = sum(self.donations)
-        ret=float((ret/self.target())*100)
-        return ret
+        return int(round((self.total_donations() * 100) /self.target()))
 
     def commit(self):
         db.session.add(self)
@@ -213,7 +214,4 @@ class Campaign(BaseMixin, db.Model):
           print "commit not done",e
           return e
           db.session.rollback()
- 
- 
-
 

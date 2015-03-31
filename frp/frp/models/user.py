@@ -12,7 +12,7 @@ from . import db, TimestampMixin, BaseMixin, IdMixin
 
 
 __all__ = ['User', 'UserAuth', 'USER_STATUS', 
-           'is_email_exists']
+           'is_email_exists', 'admin_user']
 
 
 def is_email_exists(email):
@@ -22,6 +22,8 @@ def is_email_exists(email):
     """
     return User.query.filter_by(email=email).first()
 
+def admin_user():
+    return User.query.filter_by(email='infodigital@prathambooks.org').first()
 
 class USER_STATUS:
     ACTIVE = 0     # Regular, active user

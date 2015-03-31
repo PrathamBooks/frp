@@ -1,11 +1,13 @@
-var DiscoverPage = function(campaign_data) {
+var DiscoverPage = function(args) {
   var that = this;
-  this.campaign_data = campaign_data;
-  this.display_data = campaign_data;
+  this.campaign_data = args.campaign_data;
   this.ndisplayed = 0;
   var DISPLAY_PER_CLICK = 6;
-  this.start = function() {
+  this.start = function(args) {
     this.display_data = this.campaign_data;
+    this.filter_with_args(args.filters.states, 
+                          args.filters.languages, 
+                          args.filters.types_string);
     this.show_next_campaigns();
     $('#scroll').click(this.show_next_campaigns);
     $('#filter-btn').click(this.filter);
@@ -15,6 +17,11 @@ var DiscoverPage = function(campaign_data) {
     for (i = start; i < end && i < data.length; i++) {
       var campaign = data[i];
       var $div_md_3 = $('<div/>').addClass('col-md-3').appendTo($campaigns);
+      $div_md_3.click(function (campaign) {
+        return function() {
+          window.location.replace('/campaign/' + campaign.id);
+        }
+      }(campaign));
       var $img = $('<h1/>').html(campaign.title).appendTo($div_md_3);
       var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
@@ -27,13 +34,23 @@ var DiscoverPage = function(campaign_data) {
       $campaignInfo.append($('<hr/>'));
       $campaignInfo.append($('<h6/>').html("Funding Details"));
       var $target = $('<h4/>').html(campaign.target);
-      var $percentFunded = $('<span/>').addClass('percentFunded').html(110).appendTo($target);
+      var percent_funded = Math.round((campaign.total_donations/campaign.target) * 100);
+      var $percentFunded = $('<span/>').
+        addClass('percentFunded').
+        html(percent_funded).
+        appendTo($target);
       $target.appendTo($campaignInfo);
-      var $progress = $('<div/>').addClass('progress progress-warning').appendTo($campaignInfo);
-      var $bar = $('<div/>').addClass('bar').css('width', '20%').appendTo($progress);
+      var $progress_bar = $('<div/>').
+        addClass('progress progress-warning').
+        css('width', percent_funded + '%').
+        appendTo($campaignInfo);
+      var $progress_span = $('<span/>').
+        addClass("sr-only").
+        html(percent_funded + '% Complete').
+        appendTo($target);
       var $days = $('<h5/>').
         append($('<span/>').addClass('days').html('Active')).
-        append($('<span/>').addClass('funders').html(110)).
+        append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
     }
   };
@@ -53,11 +70,7 @@ var DiscoverPage = function(campaign_data) {
     $('#campaigns').html('');
   };
 
-  this.filter = function(e) {
-    e.preventDefault();
-    var states = $('#states').val();
-    var languages = $('#languages').val();
-    var types_string = $('#types option:selected').text();
+  this.filter_with_args = function(states, languages, types_string) {
     var filtered_data = that.campaign_data;;
     if (states && states.length > 0) {
       filtered_data = filtered_data.filter(function(c) {
@@ -91,5 +104,13 @@ var DiscoverPage = function(campaign_data) {
     that.display_data = filtered_data;
     that.clear_campaigns();
     that.show_next_campaigns();
+  };
+
+  this.filter = function(e) {
+    e.preventDefault();
+    var states = $('#states').val();
+    var languages = $('#languages').val();
+    var types_string = $('#types option:selected').text();
+    that.filter_with_args(states, languages, types_string);
   };
 };

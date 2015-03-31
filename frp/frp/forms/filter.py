@@ -19,6 +19,3 @@ class FilterForm(wtforms.Form):
     types = wtforms.SelectMultipleField(
             label='Types',
             choices = ORG_STATUS_CHOICES)
-
-               
-               

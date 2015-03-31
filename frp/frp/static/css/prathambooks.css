@@ -65,6 +65,9 @@ li {
   width: auto;
   color: #3f3716;
 }
+#wrapperOut #wrapper .campaignSuccess .btn {
+  background-image: none;
+}
 #wrapperOut #wrapper .btn:hover {
   text-decoration: none;
 }
@@ -74,6 +77,10 @@ li {
 }
 #wrapperOut #wrapper .btn-go {
   background-position: 50px 15px;
+  padding: 0 32px 0 14px;
+}
+#wrapperOut #wrapper .btn-filter {
+  background-position: 75px 15px;
   padding: 0 32px 0 14px;
 }
 #wrapperOut #wrapper .btn-reg {
@@ -1177,7 +1184,8 @@ header #login .dropdown-menu {
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }
-.internal #internalContent.discover-top select {
+.internal #internalContent.discover-top select,
+#easyBrowse select {
   height: 100px !important;
 }
 .internal .col-md-12 ul {
