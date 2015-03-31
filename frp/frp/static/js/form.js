@@ -40,13 +40,13 @@ function highlightInvalidFields($tab) {
 
 function showBottomNavigation() {
   if($("section:visible").prev().attr('id')!== undefined && $("section:visible").prev().attr('id').indexOf('step')!== -1) {
-    $("#previous").removeClass('hide');
-    $("#previous").attr('href','#'+$("section:visible").prev().attr('id'));
-  } else $("#previous").addClass('hide');
+    $(".btn-pre").removeClass('hide');
+    $(".btn-pre").attr('href','#'+$("section:visible").prev().attr('id'));
+  } else $(".btn-pre").addClass('hide');
   if($("section:visible").next().attr('id')!== undefined && $("section:visible").next().attr('id').indexOf('step')!== -1) {
-    $("#next").removeClass('hide');
-    $("#next").attr('href','#'+$("section:visible").next().attr('id'));
-  } else $("#next").addClass('hide');
+    $(".btn-next").removeClass('hide');
+    $(".btn-next").attr('href','#'+$("section:visible").next().attr('id'));
+  } else $(".btn-next").addClass('hide');
 };
 
 $(function() {
@@ -76,15 +76,15 @@ $(function() {
   $('.percentageSlider').slider();
   showBottomNavigation();
 
-  $('div.sidebar a, #previous, #next').click(function (e) {
+  $('div.sidebar a, .btn-pre, .btn-next').click(function (e) {
     e.preventDefault();
     var id = $('section:visible').attr('id');
     var active_tab = $('section:visible');
     var clicked_tab = $($(this).attr('href'));
     if (isClickedTabEarlier(active_tab, clicked_tab) || $('section#' + id + ' :invalid').length == 0) {
-      $('div.sidebar a').removeClass('active');
+      clicked_tab.parent().parent().find('div.sidebar a').removeClass('active');
       $("a[href="+$(this).attr('href')+"]").addClass('active');
-      $('section').removeClass('show').addClass('hide');
+      clicked_tab.parent().find('section').removeClass('show').addClass('hide');
       $('section' + $(this).attr('href')).removeClass('hide').addClass('show');
       showBottomNavigation();
       window.scrollTo($('section:visible').position().left,
