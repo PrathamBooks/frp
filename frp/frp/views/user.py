@@ -270,7 +270,7 @@ def add_comment():
 
 
 
-@app.route("/admin/dashbord",methods=['GET'])
+@app.route("/admin/dashboard",methods=['GET'])
 @login_required
 def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
