@@ -138,11 +138,9 @@ class Campaign(BaseMixin, db.Model):
     @staticmethod
     def all_campaigns_data():
         campaigns = Campaign.query.all()
-        retval = []
-        for campaign in campaigns:
-            retval.append(campaign.verbose_fields())
-        ret=sorted(retval, key=lambda x:x["id"])
-        return ret
+        retval = map(lambda x:x.verbose_fields(),campaigns)
+        retval=sorted(retval, key=lambda x:x["id"])
+        return retval
 
     @staticmethod
     def search(search_string):
@@ -185,15 +183,11 @@ class Campaign(BaseMixin, db.Model):
                 "nfunders" : 95}
 
     def donor_list(self):
-        retval =[]
-        for donation in self.donations:
-                    retval.append(donation.user_id)
+        retval = map(lambda x:x.user_id,self.donations)
         return retval
 
     def get_comments(self):
-        retval = []
-        for comment in self.comments:
-            retval.append(comment.get_comment())
+        retval = map(lambda x:x.get_comment(),self.comments)
         return retval
 
     def num_donors(self):

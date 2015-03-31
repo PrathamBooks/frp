@@ -198,34 +198,28 @@ def start():
         print form.errors
         return render_template('start.html', form=form)
 
-@app.route("/add_comment",methods=['POST','GET'])
+@app.route("/comment",methods=['POST','GET'])
+@login_required
 def add_comment():
     if request.method == "POST":
       imd = request.form
       id= imd.getlist("campaign_id")
       new_comment = imd.getlist("comment")
       campaign = Campaign.query.filter_by(id=id[0]).first()
-      print campaign.user_id," is user id"
-      user = campaign.created_by;
-      comment = Comment(comment_by=user, campaign_comment=campaign, comment=new_comment)
+      comment = Comment(comment_by=current_user, campaign_comment=campaign, comment=new_comment)
       ret = comment.commit()
       if ret==0:
-          campaign_data = {"comments":campaign.get_comments()}
-          return jsonify(campaign_data)
+          campaign_data = campaign.get_comments()
+          return jsonify({"comment":campaign_data})
       else:
           return ret
     if request.method == "GET":
-      imd = request.form
-      print request.campaign_id
-      id= imd.getlist("campaign_id")
-      print id[0] , "this  is id"
+      id = request.args.get('campaign_id')
       campaign = Campaign.query.filter_by(id=id[0]).first()
       campaign_data = campaign.get_comments()
-      return jsonify(campaign_data)
+      return jsonify({"comment":campaign_data})
 
-
-
-@app.route("/admin/dashbord",methods=['GET'])
+@app.route("/admin/dashboard",methods=['GET'])
 @login_required
 def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()

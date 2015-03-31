@@ -15,11 +15,12 @@ class Comment(BaseMixin, db.Model):
 
 
     def get_comment(self):
-        return { "date": "{:%B %d, %Y}".format(self.start_date()),
-                "comment": self.comment
-               }
+        return { "date": self.start_date(),
+                "by" : self.comment_by.first_name,
+                "comment": self.comment}
+
     def start_date(self):
-        return self.created_at.date()
+        return "{:%B %d, %Y}".format(self.created_at.date())
 
     def commit(self):
         db.session.add(self)
