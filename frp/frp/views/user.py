@@ -280,10 +280,24 @@ def admin_dashboard():
 @login_required
 def donor_dashboard():
     donations=current_user.donations
-    campaigns_donated = len(donations)
-    total_donations=sum(donations)
-   
-    return render_template('donorDashboard.html',donations=donations,campaigns_donated=campaigns_donated,total_donations=total_donations)
+    campaigns = []
+    active_donation=closed_donation=total_active_amt=total_closed_amt=0
+    for donation in donations:
+        if donation.campaign.is_active():
+            active_donation+=1
+            total_active_amt+= donation.amount
+            campaigns.append(donation.campaign)
+
+        else:
+            closed_donation+=1
+            total_closed_amt+= donation.amount
+            campaigns.append(donation.campaign)
+
+    return render_template('donorDashboard.html',
+            campaigns=campaigns,total_active_amt=total_active_amt,
+            total_closed_amt=total_closed_amt,active_donation=active_donation,
+            books_active= int(total_active_amt/50),books_closed=int(total_closed_amt/50),
+            closed_donation=closed_donation)
 
 @app.route("/profile/beneficiary_dashboard")
 @login_required

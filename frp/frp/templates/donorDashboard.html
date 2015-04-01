@@ -1,175 +1,99 @@
 {% extends "partials/base.html" %}
 {% block content %}
 <div class="container internal">
-  <div class="row discover dashboard campaign" id="internalCampaign">
-    <div class="col-md-12">
-      <h2>Donor Dashboard
-        <span>My donate-a-book footprint</span>
-      </h2>
-    </div>
+  <form role="form">
 
-    <div class="col-md-12 donorDash">
+    <div class="row discover dashboard campaign" id="internalCampaign">
+      <div class="col-md-12">
+        <h2>Donor Dashboard
+          <span>My donate-a-book footprint</span>
+        </h2>
+      </div>           
 
-      <div class="col-md-8">
+      <div class="col-md-12 donorDash">   
 
-        <div class="pieCenter">
-          <h1>I help <span>India's Children Read</span></h1>
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <tbody><tr>
+                <th class="darkOrange">My Funds Details</th>
+                <th class="orange">Total</th>
+                <th class="lightOrange">Active</th>
+                <th class="darkYellow">Closed</th>
+              </tr>
+              <tr>
+                <td>Number of times donation made</td>
+                <td>{{active_donation + closed_donation}}</td>
+                <td>{{active_donation }}</td>
+                <td>{{closed_donation }}</td>
+              </tr>
+              <tr>
+                <td>Total Amount donated</td>
+                <td>{{total_active_amt + total_closed_amt}} </td>
+                <td>{{total_active_amt }}</td>
+                <td>{{total_closed_amt }}</td>
+              </tr>
+              <tr>
+                <td>Number of books donated</td>
+                <td>{{ books_active+ books_closed }}</td>
+                <td>{{ books_active }}</td>
+                <td>{{ books_closed }}</td>
+              </tr>
+              <tr>
+                <td>Number of children impacted</td>
+                <td>10</td>
+                <td>10</td>
+                <td>20</td>
+              </tr>
+          </tbody></table>
+
+        </div>  
+
+        <div class="col-md-9">
+
+          <h2 class="blockQuotes">
+            I donated <strong>{{ books_active + books_closed}} books</strong> and impacted <strong>400 children</strong> through Pratham Book’s donate-a-book platform. <br/>
+            I helped India’s children read.
+          </h2>
+
         </div>
 
-        <div class="pie">
-          <ul>
-            <li class="donations">
-            <a href="#"><span>10,203</span> Donations</a>
-            </li>
-            <li class="impacted">
-            <a href="#"><span>80,302</span>Children Impacted</a>
-            </li>
-            <li class="others">
-            <a href="#"><span>35,202</span> Others </a>
-            </li>
-            <li class="states">
-            <a href="#"><span>71,256</span> States Impacted </a>
-            </li>
-            <li class="totalCampaigns">
-            <a href="#"><span>23,040</span> Total Campaigns Donated </a>
-            </li>
+
+        <div class="col-md-3 pieBlock">
+          <ul id="socialThumbs">
+            <li><a href="myTransactions.html">My Transactions</a></li>
+            <li><a class="fb" href="#">Share On Facebook</a></li>
+            <li><a class="tw" href="#">Share On Twitter</a></li>
           </ul>
-
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <ul id="socialThumbs">
-          <li><a href="#" class="fb">Share on facebook</a></li>
-          <li><a href="#" class="tw">Share on twitter</a></li>
-
-        </ul>
+        </div>  
 
 
-        <a href="#" class="flick"></a>
-      </ul>
-    </div>
-
-
-    <div class="col-md-12">  
-      <div class="col-md-3">
-        <h1>Name of the Campaign </h1>
-
-
-        <div class="campaignInfo">
-          <time><span>4</span> Days Left</time>
-          <h4>500<span class="percentFunded">110</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
+        <div class="col-md-12">
+          {% for campaign in campaigns %}
+          <div class="col-md-3">
+            <h1> <a href={{ url_for('campaign',id=campaign.id) }}> {{  campaign.title }}</a></h1>
+            <div class="campaignInfo">
+              <time><span>{{ campaign.days_remaining() }}</span> Days Left</time>
+              <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }} </span></h4>
+              <div class="progress progress-warning" style="width: {{ (campaign.percent_funded()) }}%">
+                <span class="sr-only"> {{ campaign.percent_funded() }} % Complete </span>
+              </div>
+              <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>
+              <div class="socialIcons">
+                <span class="tw"></span>
+                <span class="fb"></span>
+              </div>
+              <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate </a> </h5>
+            </div>
           </div>
-          <h5>Status : <span>Active</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-          <h5 class="amt">Donate</h5>
+          {% endfor %}
 
-        </div>
+
+        </div><!-- col-md-12-->
+
+
       </div>
 
-
-
-      <div class="col-md-3">
-        <h1>Payoshni's class of 21</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>24</span> Days Left</time>
-          <h4>500<span class="percentFunded">25</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5>Status : <span>Active</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-          <h5 class="amt">Donate</h5>
-        </div>
-      </div>
-
-
-
-      <div class="col-md-3 closed">
-        <h1>Karthik's reader club</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>0</span> Days Left</time>
-          <h4>500<span class="percentFunded">95</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5>Status : <span>Closed</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-
-          <h5 class="amt">Closed</h5>
-        </div>
-      </div>
-
-
-
-      <div class="col-md-3">
-        <h1>Name of the Campaign </h1>
-
-
-        <div class="campaignInfo">
-          <time><span>4</span> Days Left</time>
-          <h4>500<span class="percentFunded">110</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5>Status : <span>Active</span></h5>
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-
-          <h5 class="amt">Donate</h5>
-        </div>
-      </div>
-
-
-      <div class="col-md-3 closed">
-        <h1>Karthik's reader club</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>0</span> Days Left</time>
-          <h4>500<span class="percentFunded">95</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5>Status : <span>Closed</span></h5>
-
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-          <h5 class="amt">Closed</h5>
-        </div>
-      </div>
-
-
-      <div class="col-md-3">
-        <h1>Payoshni's class of 21</h1>
-
-
-        <div class="campaignInfo">
-          <time><span>24</span> Days Left</time>
-          <h4>500<span class="percentFunded">25</span></h4>
-          <div class="progress progress-warning">
-            <div class="bar" style="width: 20%;"></div>
-          </div>
-          <h5>Status : <span>Active</span></h5>
-
-          <span class="tw"></span><span class="fb"></span>
-          <a href="#" class="btn-search pull-right">Similar Campaigns</a>
-
-          <h5 class="amt">Donate</h5>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- col-md-12-->
+    </form>
+  </div>
 </div>
 {% endblock %}
-
