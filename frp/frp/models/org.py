@@ -204,14 +204,4 @@ class Campaign(BaseMixin, db.Model):
     def percent_funded(self):
         return int(round((self.total_donations() * 100) /self.target()))
 
-    def commit(self):
-        db.session.add(self)
-        try:
-          db.session.commit()
-          print 'Successfully campaign commit'
-          return 0
-        except Exception as e:
-          print "commit not done",e
-          return e
-          db.session.rollback()
 

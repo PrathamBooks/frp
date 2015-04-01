@@ -20,12 +20,32 @@ var AdminPage = function(campaign_data)
                              that.replace_campaign_data(data);
                              alert("Status of campaign : " + id + " changed to: " + status);
                            },
-                           failure: function(errMsg) {
+                           error: function(errMsg) {
                              alert(errMsg);
                            }
                          });
                        });
 
+    $('#campaigns').on('click', '.btn.btn.approve', function(e) 
+                       {
+                         var id = $(this).parents('tr').attr('id');
+                         var status = "Approved";
+                         $.ajax({
+                           type: "POST",
+                           url: "/change_status",
+                           data: {
+                             campaign_id : id,
+                             updated_status: status
+                           },
+                           success: function(data){
+                             that.replace_campaign_data(data);
+                             alert("Status of campaign [ " + data.title + " ] changed to: " + status);
+                           },
+                           error: function(data) {
+                             alert("Change status failed")
+                           }
+                         });
+                       });
     $('#campaigns').on('click','.btn.btn-comment',function(e)
                        {
                           var id = parseInt($(this).parents('tr').attr('id'));
@@ -45,7 +65,9 @@ var AdminPage = function(campaign_data)
                              comment: comment
                            },
                            success: function(data){
-                           var  comments=data.comment;
+                               // Remove old comments if present and then show all comments
+                               $('#myModal1').find(".modal-content").attr('id',"modal"+id).children().find('tr').remove()
+                               var  comments=data.comment;
                                var $modal_form = $('#myModal1').find('.form-group');
                                var $modal_content = $('#myModal1').find(".modal-content").attr('id',"modal"+id);
                                /* Load comments*/
@@ -57,8 +79,8 @@ var AdminPage = function(campaign_data)
                                    $('<p/>').addClass("text-success").html(comments[i].date).appendTo($p);
                                  }
                            },
-                           failure: function(errMsg) {
-                             alert("not update");
+                           error: function(errMsg) {
+                             alert("Update failed");
                            }
                          });
                        });
@@ -93,7 +115,7 @@ var AdminPage = function(campaign_data)
                               }
                             },
                           failure: function(errMsg) {
-                            alert("not updated");
+                            alert("Get Failed");
                           }
                         });
                       });

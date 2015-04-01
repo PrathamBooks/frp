@@ -22,13 +22,3 @@ class Comment(BaseMixin, db.Model):
     def start_date(self):
         return "{:%B %d, %Y}".format(self.created_at.date())
 
-    def commit(self):
-        db.session.add(self)
-        try:
-          db.session.commit()
-          print 'Successfull commit'
-          return 0
-        except Exception as e:
-          print "commit not done",e
-          return e
-          db.session.rollback()

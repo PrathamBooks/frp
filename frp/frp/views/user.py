@@ -33,6 +33,7 @@ from ..service import user as user_service
 from ..service import donate as donate_service
 from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
+from ..models import db, BaseNameMixin, BaseMixin
 
 # Facebook requirements
 oauth = OAuth()
@@ -203,15 +204,16 @@ def change_status():
     imd = request.form
     id= imd.getlist("campaign_id")
     status = imd.getlist("updated_status")
-    campaign = Campaign.query.filter_by(id=id[0]).first()
+    campaign = Campaign.query.get(id[0])
     campaign.status = status[0]
-    print campaign.status
-    ret=campaign.commit()
-    if ret==0:
-        campaign_data = campaign.verbose_fields()
-        return jsonify(campaign_data)
-    else:
-        return ret
+    db.session.add(campaign)
+    try:
+      db.session.commit()
+    except Exception as e:
+      print e
+      return "Commit Failed", 500
+    campaign_data = campaign.verbose_fields()
+    return jsonify(campaign_data)
 
 class Start(views.MethodView):
     def get(self):
@@ -250,17 +252,21 @@ def add_comment():
       imd = request.form
       id= imd.getlist("campaign_id")
       new_comment = imd.getlist("comment")
-      campaign = Campaign.query.filter_by(id=id[0]).first()
+      campaign = Campaign.query.get(id[0])
       comment = Comment(comment_by=current_user, campaign_comment=campaign, comment=new_comment)
-      ret = comment.commit()
-      if ret==0:
-          campaign_data = campaign.get_comments()
-          return jsonify({"comment":campaign_data})
-      else:
-          return ret
+      db.session.add(comment)
+      try:
+        db.session.commit()
+      except Exception as e:
+        print e
+        return "Commit Failed", 500
+      
+      campaign_data = campaign.get_comments()
+      return jsonify({"comment":campaign_data})
+
     if request.method == "GET":
       id = request.args.get('campaign_id')
-      campaign = Campaign.query.filter_by(id=id[0]).first()
+      campaign = Campaign.query.get(id[0])
       campaign_data = campaign.get_comments()
       return jsonify({"comment":campaign_data})
 
