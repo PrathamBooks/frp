@@ -280,6 +280,7 @@ def add_comment():
 
 @app.route("/admin/dashboard",methods=['GET'])
 @login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
 def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)

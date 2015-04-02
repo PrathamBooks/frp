@@ -8,7 +8,7 @@ from flask.ext.script import Manager
 
 from frp import app
 from frp.models import db
-from frp.models import (User, UserAuth, USER_STATUS, is_email_exists,
+from frp.models import (User, UserAuth, Role, USER_STATUS, is_email_exists,
                         Organization, OrganizationInfo, OrganizationWork, Campaign, Donation,Comment)
 from flask import current_app
 
@@ -37,6 +37,13 @@ def resetdb():
 @manager.command
 def seed():
     import datetime
+    admin = Role(
+            name="admin",
+            description="Administrator who can approve campaigns"
+            )
+    db.session.add(admin)
+
+                
     user = User(
             status=USER_STATUS.ACTIVE, 
             email='infodigital@prathambooks.org',
@@ -46,8 +53,13 @@ def seed():
             address='XXX',
             contact_number='123456789',
             pan_number='XXYYZZ',
+            roles=[admin],
             confirmed_at=datetime.datetime.now())
+
+    
     db.session.add(user)
+
+
     user_auth = UserAuth(password=current_app.user_manager.hash_password('digital123'), 
             user=user, active=True)
     db.session.add(user_auth)
