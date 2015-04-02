@@ -17,11 +17,19 @@ var Start = function() {
     $('input[name="project_title"]').attr('required','');
     $('#bookCounts input').change(this.booksCallback);
     $("#goLive").click(this.checkErrorsOnSubmit);
+    $("#step8 button").click(this.step8GetStartedCallback);
 
     // Need to call in the beginning to so that required attribute is
     // set. Not setting in form because we want to avoind printing the
     // '*'
     this.booksCallback(); 
+  };
+
+  this.step8GetStartedCallback = function(e) {
+    $('#get-started-tab a').tab('show');
+    // $('#getStarted section').removeClass('show').addClass('hide');
+    // $('#getKnow-step').removeClass('hide').addClass('show');
+    showBottomNavigation();
   };
 
   this.checkErrorsOnSubmit = function(e) {

@@ -146,6 +146,9 @@ li {
   padding: 0 12px;
   width: 242px;
 }
+#wrapperOut #wrapper #get-started-btn {
+  background-image: none;
+}
 #wrapperOut #wrapper a.btn-search {
   background: url("../images/searchIcon.png") no-repeat right center content-box border-box #ecebeb;
   border-radius: 3px;

@@ -9,7 +9,7 @@ from flask.ext.script import Manager
 from frp import app
 from frp.models import db
 from frp.models import (User, UserAuth, USER_STATUS, is_email_exists,
-                        Organization, OrganizationInfo, OrganizationWork, Campaign, Donation)
+                        Organization, OrganizationInfo, OrganizationWork, Campaign, Donation,Comment)
 from flask import current_app
 
 manager = Manager(app)
@@ -99,6 +99,8 @@ def seed():
             utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English",
             image="2.jpg", status="Approved")
     db.session.add(campaign)
+    comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
+    db.session.add(comment)
 
     campaign = Campaign(created_by=user, org=org,
             title='Urban Library', description='Project to get 750 books for old age home', 
@@ -117,6 +119,8 @@ def seed():
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
             city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
     db.session.add(donation)
+    comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
+    db.session.add(comment)
 
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
@@ -128,6 +132,12 @@ def seed():
     donation = Donation(donor=user, campaign=campaign, amount=5000, 
             confirmation=93499,city="Bangalore", first_name="Aadi", state="Karnataka", identification="ABCDEF")
     db.session.add(donation)
+    comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 3]")
+    db.session.add(comment)
+    comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 2]")
+    db.session.add(comment)
+    comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
+    db.session.add(comment)
 
     campaign = Campaign(created_by=user, org=org,
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 

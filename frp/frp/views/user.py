@@ -33,6 +33,7 @@ from ..service import user as user_service
 from ..service import donate as donate_service
 from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
+from ..models import db, BaseNameMixin, BaseMixin
 
 # Facebook requirements
 oauth = OAuth()
@@ -173,8 +174,16 @@ def search():
     search_string = request.args.get('search-string')
     campaigns_data = Campaign.search(search_string)
     filter_form = FilterForm()
+    languages = request.args.getlist('languages')
+    states = request.args.getlist('states')
+    # Convert numbers to text strings, -1 because select values start from
+    # 1 while array indexing starts from 0
+    types = map(
+            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
+            request.args.getlist('types')
+            )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form)
+            form=filter_form, languages=languages, states=states, types=types)
 
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
 def donate(campaign_id):
@@ -203,15 +212,16 @@ def change_status():
     imd = request.form
     id= imd.getlist("campaign_id")
     status = imd.getlist("updated_status")
-    campaign = Campaign.query.filter_by(id=id[0]).first()
+    campaign = Campaign.query.get(id[0])
     campaign.status = status[0]
-    print campaign.status
-    ret=campaign.commit()
-    if ret==0:
-        campaign_data = campaign.verbose_fields()
-        return jsonify(campaign_data)
-    else:
-        return ret
+    db.session.add(campaign)
+    try:
+      db.session.commit()
+    except Exception as e:
+      print e
+      return "Commit Failed", 500
+    campaign_data = campaign.verbose_fields()
+    return jsonify(campaign_data)
 
 class Start(views.MethodView):
     def get(self):
@@ -243,32 +253,30 @@ app.add_url_rule('/start',
                  view_func=Start.as_view('start'))
 
 
-@app.route("/add_comment",methods=['POST','GET'])
+@app.route("/comment",methods=['POST','GET'])
+@login_required
 def add_comment():
     if request.method == "POST":
       imd = request.form
       id= imd.getlist("campaign_id")
       new_comment = imd.getlist("comment")
-      campaign = Campaign.query.filter_by(id=id[0]).first()
-      print campaign.user_id," is user id"
-      user = campaign.created_by;
-      comment = Comment(comment_by=user, campaign_comment=campaign, comment=new_comment)
-      ret = comment.commit()
-      if ret==0:
-          campaign_data = {"comments":campaign.get_comments()}
-          return jsonify(campaign_data)
-      else:
-          return ret
-    if request.method == "GET":
-      imd = request.form
-      print request.campaign_id
-      id= imd.getlist("campaign_id")
-      print id[0] , "this  is id"
-      campaign = Campaign.query.filter_by(id=id[0]).first()
+      campaign = Campaign.query.get(id[0])
+      comment = Comment(comment_by=current_user, campaign_comment=campaign, comment=new_comment)
+      db.session.add(comment)
+      try:
+        db.session.commit()
+      except Exception as e:
+        print e
+        return "Commit Failed", 500
+      
       campaign_data = campaign.get_comments()
-      return jsonify(campaign_data)
+      return jsonify({"comment":campaign_data})
 
-
+    if request.method == "GET":
+      id = request.args.get('campaign_id')
+      campaign = Campaign.query.get(id[0])
+      campaign_data = campaign.get_comments()
+      return jsonify({"comment":campaign_data})
 
 @app.route("/admin/dashboard",methods=['GET'])
 @login_required
@@ -280,10 +288,24 @@ def admin_dashboard():
 @login_required
 def donor_dashboard():
     donations=current_user.donations
-    campaigns_donated = len(donations)
-    total_donations=sum(donations)
-   
-    return render_template('donorDashboard.html',donations=donations,campaigns_donated=campaigns_donated,total_donations=total_donations)
+    campaigns = []
+    active_donation=closed_donation=total_active_amt=total_closed_amt=0
+    for donation in donations:
+        if donation.campaign.is_active():
+            active_donation+=1
+            total_active_amt+= donation.amount
+            campaigns.append(donation.campaign)
+
+        else:
+            closed_donation+=1
+            total_closed_amt+= donation.amount
+            campaigns.append(donation.campaign)
+
+    return render_template('donorDashboard.html',
+            campaigns=campaigns,total_active_amt=total_active_amt,
+            total_closed_amt=total_closed_amt,active_donation=active_donation,
+            books_active= int(total_active_amt/50),books_closed=int(total_closed_amt/50),
+            closed_donation=closed_donation)
 
 @app.route("/profile/beneficiary_dashboard")
 @login_required
