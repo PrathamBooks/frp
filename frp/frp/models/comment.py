@@ -15,19 +15,10 @@ class Comment(BaseMixin, db.Model):
 
 
     def get_comment(self):
-        return { "date": "{:%B %d, %Y}".format(self.start_date()),
-                "comment": self.comment
-               }
-    def start_date(self):
-        return self.created_at.date()
+        return { "date": self.start_date(),
+                "by" : self.comment_by.first_name,
+                "comment": self.comment}
 
-    def commit(self):
-        db.session.add(self)
-        try:
-          db.session.commit()
-          print 'Successfull commit'
-          return 0
-        except Exception as e:
-          print "commit not done",e
-          return e
-          db.session.rollback()
+    def start_date(self):
+        return "{:%B %d, %Y}".format(self.created_at.date())
+
