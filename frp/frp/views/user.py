@@ -186,6 +186,7 @@ def search():
             form=filter_form, languages=languages, states=states, types=types)
 
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
+@login_required
 def donate(campaign_id):
     campaign = Campaign.query.get(campaign_id)
     if request.method == 'GET':
@@ -255,6 +256,7 @@ app.add_url_rule('/start',
 
 @app.route("/comment",methods=['POST','GET'])
 @login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
 def add_comment():
     if request.method == "POST":
       imd = request.form
