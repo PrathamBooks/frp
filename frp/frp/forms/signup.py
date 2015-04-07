@@ -168,7 +168,7 @@ class BeneficiarySignupForm(wtforms.Form):
         validators=[wtforms.validators.Optional()])
 
     total_impact_on_children = wtforms.IntegerField(
-        label='Number of children that you/your organization have impacted since commencement / impacts currently',
+        label='Number of children that will be impacted by this campaign',
         validators=[wtforms.validators.Optional()])
 
     org_work = wtforms.SelectMultipleField(
@@ -234,7 +234,6 @@ class BeneficiarySignupForm(wtforms.Form):
        self.person1_phone.data = org.info.person1_phone
        self.project_description.data = ""
 
-       self.total_impact_on_children.data = org.info.total_impact_on_children
        org_works = org.works
        org_works_selected = []
        for org_work in org_works:

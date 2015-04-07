@@ -11,7 +11,7 @@ from flask_user import UserMixin
 from . import db, TimestampMixin, BaseMixin, IdMixin
 
 
-__all__ = ['User', 'UserAuth', 'USER_STATUS', 
+__all__ = ['User', 'UserAuth', 'Role', 'USER_STATUS', 
            'is_email_exists', 'admin_user']
 
 
