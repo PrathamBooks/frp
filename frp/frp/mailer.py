@@ -4,16 +4,11 @@ Implements the mailer object which can be used
 
 import socket
 
-from flask import render_template
+from flask import render_template, current_app
 from flask_mail import Mail as FlaskMail, Message as FlaskMailMessage
 from flask.ext.sendmail import Mail as FlaskSendmail, Message as FlaskSendmailMessage
 
 class Mailer(object):
-    def __init__(self, app):
-        self.app = app
-        self.flask_mail = FlaskMail(app) # Via SMTP
-        self.flask_sendmail = FlaskSendmail(app) # Via command line sendmail program as a fallback.
-
     def send_email(self, to, subject, template, **vals):
         """
         Send email to `to` from the default from address using the
@@ -24,7 +19,7 @@ class Mailer(object):
         if not isinstance(to, list):
             to = [to]
         message_content = render_template("email/{}".format(template), **vals)
-        if self.app.config.get('DEBUG', False):
+        if current_app.config.get('DEBUG', True):
             print "------------------- Email ------------------ "
             print "To:{}".format(",".join(to))
             print "Subject: {}".format(subject)
@@ -35,7 +30,8 @@ class Mailer(object):
             message = FlaskMailMessage(body = message_content,
                                        subject = subject,
                                        recipients = to)
-            self.flask_mail.send(message)
+            mail_engine = current_app.extensions.get('mail', None)
+            mail_engine.send(message)
         except socket.error:
             print "Trying sendmail callback"
 

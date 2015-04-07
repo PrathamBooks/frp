@@ -9,8 +9,6 @@ from flask_mail import Mail
 from flask_user import UserManager, SQLAlchemyAdapter
 from ..models import db
 
-
-oauth = 0
 def init_app(app, settings='settings/development.py'):
     print "Loading config from %s" % settings
     app.config.from_pyfile(settings)

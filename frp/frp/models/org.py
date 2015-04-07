@@ -97,7 +97,6 @@ class OrganizationInfo(BaseMixin, db.Model):
     person2_phone = db.Column(db.Unicode(15), nullable=True, default=u'')
 
     intro = db.Column(db.Unicode(10000), nullable=True, default=u'')
-    total_impact_on_children = db.Column(db.Integer, nullable=True)
     age_group_of_children = db.Column(db.Unicode(20), nullable=True, default=u'')
 
 
@@ -123,6 +122,7 @@ class Campaign(BaseMixin, db.Model):
     description = db.Column(db.Unicode(500), nullable=False)
     who = db.Column(db.Unicode(500), nullable=False)
     impact = db.Column(db.Unicode(500), nullable=False)
+    total_impact_on_children = db.Column(db.Integer, nullable=True)
     utilization = db.Column(db.Unicode(500), nullable=False)
     state = db.Column(db.Unicode(500), nullable=False)
     city = db.Column(db.Unicode(500), nullable=False)
@@ -170,7 +170,7 @@ class Campaign(BaseMixin, db.Model):
         return {"id" : self.id,
                 "title" : self.title,
                 "description" : self.description,
-                "impact" : self.org.info.total_impact_on_children,
+                "impact" : self.total_impact_on_children,
                 "languages" : self.languages,
                 "type" : ORG_STATUS_CHOICES[self.org.info.status][1],
                 "state" : self.state,

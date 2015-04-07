@@ -34,7 +34,9 @@ from ..service import donate as donate_service
 from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
 from ..models import db, BaseNameMixin, BaseMixin
+from ..mailer import Mailer
 
+mailer = Mailer()
 # Facebook requirements
 oauth = OAuth()
 
@@ -174,10 +176,19 @@ def search():
     search_string = request.args.get('search-string')
     campaigns_data = Campaign.search(search_string)
     filter_form = FilterForm()
+    languages = request.args.getlist('languages')
+    states = request.args.getlist('states')
+    # Convert numbers to text strings, -1 because select values start from
+    # 1 while array indexing starts from 0
+    types = map(
+            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
+            request.args.getlist('types')
+            )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form)
+            form=filter_form, languages=languages, states=states, types=types)
 
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
+@login_required
 def donate(campaign_id):
     campaign = Campaign.query.get(campaign_id)
     if request.method == 'GET':
@@ -190,6 +201,10 @@ def donate(campaign_id):
         if form.validate():
             result = donate_service.create_donation(form, campaign)
             if not result['error']:
+                mailer.send_email(to="kuchlous@gmail.com", 
+                        subject="Thank You", 
+                        template="thank-you.html", 
+                        first_name=current_user.first_name)
                 return redirect(url_for('donate_success'))
             else:
                 print result
@@ -222,7 +237,7 @@ class Start(views.MethodView):
         return render_template('start.html', form=form)
 
     @login_required
-    def put(self):
+    def post(self):
         form = BeneficiarySignupForm(request.form)
         if form.validate():
             image = request.files['imageUpload']
@@ -246,6 +261,7 @@ app.add_url_rule('/start',
 
 @app.route("/comment",methods=['POST','GET'])
 @login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
 def add_comment():
     if request.method == "POST":
       id = request.form['campaign_id']
@@ -270,6 +286,7 @@ def add_comment():
 
 @app.route("/admin/dashboard",methods=['GET'])
 @login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
 def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)
