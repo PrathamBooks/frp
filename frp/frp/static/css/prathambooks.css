@@ -1468,6 +1468,28 @@ header #login .dropdown-menu {
 }
 #internalCampaign .donorDash .closed {
   background-color: #e8e8e8;
+  cursor: pointer;
+}
+#internalCampaign .donorDash .closed:hover {
+  background-color: #e8e8e8 !important;
+}
+#internalCampaign .donorDash .closed a.btn-search {
+  cursor: none;
+}
+#internalCampaign .donorDash .closed a.btn-search:hover {
+  background-color: #ecebeb !important;
+  text-decoration: none;
+  color: #428bca !important;
+}
+#internalCampaign .donorDash .closed .fb,
+#internalCampaign .donorDash .closed .tw {
+  cursor: none;
+}
+#internalCampaign .donorDash .closed .fb:hover {
+  background-image: url("../images/fbIconH.png");
+}
+#internalCampaign .donorDash .closed .tw:hover {
+  background-image: url("../images/twIconH.png");
 }
 #internalCampaign .donorDash .closed h5.amt {
   background-color: #fbee9b !important;
