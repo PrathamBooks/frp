@@ -31,7 +31,6 @@ def create_beneficiary(form, filename):
     person2_email = form.person2_email.data
     person2_phone = form.person2_phone.data
     # org_intro = form.org_intro.data
-    total_impact_on_children = form.total_impact_on_children.data
     org_work = form.org_work.data
 
     # Create organization
@@ -46,8 +45,7 @@ def create_beneficiary(form, filename):
         person1_position=person1_position, person1_email=person1_email,
         person1_phone=person1_phone, person2_name=person2_name,
         person2_position=person2_position, person2_email=person2_email,
-        person2_phone=person2_phone, 
-        total_impact_on_children=total_impact_on_children)
+        person2_phone=person2_phone)
 
     db.session.add(org_info)
 
@@ -63,15 +61,17 @@ def create_beneficiary(form, filename):
     project_impact = form.project_impact.data
     fund_utilization = form.fund_utilization.data
     nbooks = form.project_books.data if form.project_books.data else 0
+    total_impact_on_children = form.total_impact_on_children.data
     nlic = form.project_lib_in_classroom.data if form.project_lib_in_classroom.data else 0
     state = form.project_state.data
     city = form.project_city.data
     languages = []
-    if not form.language1.data == 'Select':
+
+    if not form.language1.data == '':
         languages.append(form.language1.data)
-    if not form.language2.data == 'Select':
+    if not form.language2.data == '':
         languages.append(form.language2.data)
-    if not form.language3.data == 'Select':
+    if not form.language3.data == '':
         languages.append(form.language3.data)
     languages = ','.join((l) for l in languages)
 
@@ -79,7 +79,9 @@ def create_beneficiary(form, filename):
             title=project_title, description=project_description, 
             who=project_who_are_you, impact=project_impact,
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
-            state=state, city=city, languages=languages, status='Submitted', image='xx.png')
+            state=state, city=city, languages=languages, 
+            status='Submitted', image='xx.png',
+            total_impact_on_children=total_impact_on_children)
     db.session.add(campaign)
 
     try:

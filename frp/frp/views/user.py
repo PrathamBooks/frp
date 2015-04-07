@@ -34,7 +34,9 @@ from ..service import donate as donate_service
 from flask_user import current_user, login_required, roles_required
 from ..helpers import allowed_file
 from ..models import db, BaseNameMixin, BaseMixin
+from ..mailer import Mailer
 
+mailer = Mailer()
 # Facebook requirements
 oauth = OAuth()
 
@@ -199,6 +201,10 @@ def donate(campaign_id):
         if form.validate():
             result = donate_service.create_donation(form, campaign)
             if not result['error']:
+                mailer.send_email(to="kuchlous@gmail.com", 
+                        subject="Thank You", 
+                        template="thank-you.html", 
+                        first_name=current_user.first_name)
                 return redirect(url_for('donate_success'))
             else:
                 print result
@@ -232,7 +238,7 @@ class Start(views.MethodView):
         return render_template('start.html', form=form)
 
     @login_required
-    def put(self):
+    def post(self):
         form = BeneficiarySignupForm(request.form)
         if form.validate():
             image = request.files['imageUpload']
