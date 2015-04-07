@@ -201,11 +201,10 @@ def donate(campaign_id):
 
 @app.route("/change_status",methods=['POST'])
 def change_status():
-    imd = request.form
-    id= imd.getlist("campaign_id")
-    status = imd.getlist("updated_status")
-    campaign = Campaign.query.get(id[0])
-    campaign.status = status[0]
+    id = request.form['campaign_id']
+    status = request.form['updated_status']
+    campaign = Campaign.query.get(id)
+    campaign.status = status
     db.session.add(campaign)
     try:
       db.session.commit()
@@ -249,10 +248,9 @@ app.add_url_rule('/start',
 @login_required
 def add_comment():
     if request.method == "POST":
-      imd = request.form
-      id= imd.getlist("campaign_id")
-      new_comment = imd.getlist("comment")
-      campaign = Campaign.query.get(id[0])
+      id = request.form['campaign_id']
+      new_comment = request.form['comment']
+      campaign = Campaign.query.get(id)
       comment = Comment(comment_by=current_user, campaign_comment=campaign, comment=new_comment)
       db.session.add(comment)
       try:
@@ -261,14 +259,14 @@ def add_comment():
         print e
         return "Commit Failed", 500
       
-      campaign_data = campaign.get_comments()
-      return jsonify({"comment":campaign_data})
+      comments = campaign.get_comments()
+      return jsonify({"comments":comments})
 
     if request.method == "GET":
-      id = request.args.get('campaign_id')
-      campaign = Campaign.query.get(id[0])
-      campaign_data = campaign.get_comments()
-      return jsonify({"comment":campaign_data})
+      id = request.args['campaign_id']
+      campaign = Campaign.query.get(id)
+      comments = campaign.get_comments()
+      return jsonify({"comments":comments})
 
 @app.route("/admin/dashboard",methods=['GET'])
 @login_required
