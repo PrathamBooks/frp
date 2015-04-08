@@ -162,6 +162,15 @@ def discover():
     filter_form = FilterForm(request.form)
     languages = request.args.getlist('languages')
     states = request.args.getlist('states')
+    category = request.args.get('category')
+    if (category == 'popular'):
+        campaigns_data = sorted(campaigns_data,key=lambda x:x['num_donors'],reverse=True)
+    if (category == 'recently-launched'):
+        campaigns_data = sorted(campaigns_data,key=lambda x:x['start_date'],reverse=True)
+    if (category == 'ending-soon'):
+        campaigns_data = sorted(campaigns_data,key=lambda x:x['end_date'],reverse=True)
+    if (category == 'most-funded'):
+        campaigns_data = sorted(campaigns_data,key=lambda x:x['total_donations'],reverse=True)
     # Convert numbers to text strings, -1 because select values start from
     # 1 while array indexing starts from 0
     types = map(

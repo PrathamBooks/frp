@@ -78,6 +78,7 @@ var DiscoverPage = function(args) {
         _.each(states, function(state) {
           if (c.state.indexOf(state) != -1) {
             found = true;
+            return;
           }
         });
         return found;
@@ -89,6 +90,7 @@ var DiscoverPage = function(args) {
         _.each(languages, function(language) {
           if (c.languages.indexOf(language) != -1) {
             found = true;
+            return;
           }
         });
         return found;
