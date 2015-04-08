@@ -1,33 +1,40 @@
 {% extends "partials/base.html" %}
 {% block content %}
 <div class="container internal">
-  <div  id="internalContent" class="row">
-    <div id="internalCampaign" class="row startCampaign signup log" style="padding: 0px 220px;">
+  <div id="internalContent" class="row forms">
+    <div id="internalCampaign" class="row startCampaign signup log">
       <div class=" col-md-12 well">
         <form role="form" action="" method="POST">
           {{ form.hidden_tag() }}
           <h3>Login Via:</h3>
-          <div class=" col-md-6">
-            <div class=" col-md-6">
+          <div class=" col-md-12">
+            <div class=" col-md-12">
               <div class="form-group row">
                 <label for="infoEmail">Email</label>
                 <input type="email" class="form-control" id="infoEmail"  name="email" placeholder="Email" required />
-                <a href="{{ url_for('user.register') }}" tabindex='190'> New here? Register.</a>
+                {% if form.email.errors %}
+                  {% for error in form.email.errors %}
+                    <li><div class="alert alert-warning">{{ error }}</div></li>
+                  {% endfor %}
+                {% endif %}
               </div>
             </div>
 
-            <div class=" col-md-6">
+            <div class=" col-md-12">
               <div class="form-group row">
                 <label for="pass">Password</label>
                 <input type="password" class="form-control" id="pass" name="password" placeholder="Password" required />
-                <button type="submit" class="btn">Login</button>
-                <a href="{{ url_for('user.forgot_password') }}" >Forgot Password</a>
               </div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="login-links">
+              <a href="{{ url_for('user.register') }}" tabindex='190'> New here? Register.</a>
+              <a href="{{ url_for('user.forgot_password') }}" >Forgot Password</a>
             </div>
           </div>
         </form>
-        <div class=" col-md-6">
-          <h4 style="margin-top: 23px !important;">Or 
+        <div class=" col-md-12">
+          <h4>Or 
             <a class="fb" href={{ url_for('login_via_facebook', next=form.next.data) }} >Facebook</a>
           </h4>
         </div>
