@@ -1134,7 +1134,7 @@ header #login .dropdown-menu {
 }
 .internal .col-md-9 .col-md-3 {
   width: 31.9%;
-  height: 528px;
+  height: 475px;
   border: 1px solid #bdae85;
   background-color: #fafafa;
   padding: 0;
@@ -1233,7 +1233,9 @@ header #login .dropdown-menu {
 #internalCampaign {
   padding: 0 0 35px;
 }
-#internalCampaign .col-md-12 h2 {
+#internalCampaign .col-md-12 h2,
+#internalCampaign .col-md-9 h2
+{
   font-size: 2.5em;
   font-family: "proxima-nova", sans-serif;
   font-weight: 300;
@@ -1241,12 +1243,14 @@ header #login .dropdown-menu {
   padding: 0 0 0 15px;
   float: left;
 }
-#internalCampaign .col-md-12 h2 span {
+#internalCampaign .col-md-12 h2 span,
+#internalCampaign .col-md-9 h2 span {
   width: 100%;
   float: left;
   font-size: .8em;
   padding: 7px 0 12px;
 }
+
 #internalCampaign .col-md-3 h2 {
   width: 95%;
   font-size: 1.8em;
@@ -1271,6 +1275,9 @@ header #login .dropdown-menu {
   background-image: url(../images/facebookH.png);
   color: #3a5795;
   text-decoration: none;
+}
+#internalCampaign.campaign {
+  width: 100%;
 }
 #internalCampaign.campaign .col-md-3 h1 {
   background-color: #e5e4e0;
@@ -2889,7 +2896,7 @@ ul#socialThumbs li a.gPlus {
 .login-links a {
 	display: block;
 }
-#internalCampaign .btn {
+#internalContent.forms .btn {
 	margin-top: 0px !important;
 	padding: 0px 15px;
 	background-image: none !important;
@@ -2897,7 +2904,7 @@ ul#socialThumbs li a.gPlus {
 .startCampaign .well {
 	box-shadow: 0px 1px 4px #CCC;
 }
-#internalCampaign .btn:after {
+#internalContent.forms .btn:after {
 	content: url("../images/rightArrow.png");
 	width: 8px;
 	height: 10px;
