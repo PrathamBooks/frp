@@ -24,25 +24,6 @@ var AdminPage = function(campaign_data)
       });
     });
 
-    $('#campaigns').on('click', '.btn.btn.approve', function(e) {
-      var id = parseInt($(this).parents('tr').attr('id').replace ( /[^\d.]/g, '' ),10);
-      var status = "Approved";
-      $.ajax({
-        type: "POST",
-        url: "/change_status",
-        data: {
-          campaign_id: id,
-          updated_status: status
-        },
-        success: function(data) {
-          that.replace_campaign_data(data);
-          alert("Status of campaign [ " + data.title + " ] changed to: " + status);
-        },
-        error: function(data) {
-          alert("Change status failed")
-        }
-      });
-    });
     $('#campaigns').on('click','.btn.btn-comment',function(e) {
       var id = parseInt($(this).parents('tr').attr('id').replace ( /[^\d.]/g, '' ),10);
       $('#CommentsModal').find(".modal-content").attr('id',"modal"+id);
@@ -117,21 +98,13 @@ var AdminPage = function(campaign_data)
     var $end_date = $('<td/>').html(data.end_date).appendTo($row);
     var $span = $('<span/>').addClass('label label-info').html(data.status);
     var $status = $('<td>').append($span).appendTo($row);
-    var $button = $('<button type="button"/>').addClass('btn approve').html('Approve');
-    $('<td>').append($button).appendTo($row);
 
 
     var arr = [
-      {val : 'Submitted', text: 'Submitted'},
       {val : 'Approved', text: 'Approved'},
-      {val : 'Completed', text: 'Completed'},
-      {val : 'Ended', text: 'Ended'},
-      {val : 'Delivered', text: 'Delivered'},
-      {val : 'Not Approved', text: 'Not Approved'},
-      {val : 'Closed', text: 'Closed'},
-      {val : 'Extended', text: 'Extended'},
-      {val : 'Shipped', text: 'Shipped'},
-      {val : 'Flagged', text: 'Flagged'}
+      {val : 'Rejected', text: 'Rejected'},
+      {val : 'Pending Approval', text: 'Pending Approval'},
+      {val : 'Closed', text: 'Closed'}
     ];
 
     var $sel = $('<select/>').addClass('label label-info');
@@ -148,11 +121,28 @@ var AdminPage = function(campaign_data)
   this.show_campaigns = function(campaigndata) 
   {
     var $campaigns = $('#campaigns');
+    var $tbody = $('<tbody/>')
     for (i = 0; i < campaigndata.length; i++) 
     {
       var $row=this.get_campaign(campaigndata[i])
-      $row.appendTo($campaigns);
+      $row.appendTo($tbody);
     }
+    $tbody.appendTo($campaigns);
+    $('#campaigns').tablesorter({
+      headers: {
+        6: {
+          sorter: false
+        },
+        7: {
+          sorter: false
+        },
+        9: {
+          sorter: false
+        }
+      },
+      cssAsc: "arrUp",
+      cssDesc: "arrDown"
+    });
   };
   this.show_comments = function(comments,id)
   {

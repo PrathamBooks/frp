@@ -1417,17 +1417,21 @@ header #login .dropdown-menu {
   position: relative;
   width: 100%;
 }
-#internalCampaign.capaignList table th span.arrUp {
+#internalCampaign.capaignList table th.arrUp {
   background-image: url(../images/arrBrownUp.png);
+  background-repeat: no-repeat; 
 }
-#internalCampaign.capaignList table th span.arrUp:hover {
+#internalCampaign.capaignList table th.arrUp:hover {
   background-image: url(../images/arrBrownUpH.png);
+  background-repeat: no-repeat; 
 }
-#internalCampaign.capaignList table th span.arrDown {
+#internalCampaign.capaignList table th.arrDown {
   background-image: url(../images/arrBrown.png);
+  background-repeat: no-repeat; 
 }
-#internalCampaign.capaignList table th span.arrDown:hover {
+#internalCampaign.capaignList table th.arrDown:hover {
   background-image: url(../images/arrBrownH.png);
+  background-repeat: no-repeat; 
 }
 #internalCampaign.capaignList table td {
   border: 1px solid #ccc;

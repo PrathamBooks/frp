@@ -101,8 +101,11 @@ def seed():
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
-            image="1.jpg", status="Submitted",
+            image="1.jpg", status="Approved",
             total_impact_on_children='2000')
+    donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
+    db.session.add(donation)
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
@@ -112,6 +115,9 @@ def seed():
             image="2.jpg", status="Approved",
             total_impact_on_children='1000')
     db.session.add(campaign)
+    donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
+    db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
     db.session.add(comment)
 
@@ -119,7 +125,7 @@ def seed():
             title='Urban Library', description='Project to get 750 books for old age home', 
             who='We are an organization of old people', impact='Make 100 old people happy',
             utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil",
-            image="3.jpg", status="Shipped",
+            image="3.jpg", status="Approved",
             total_impact_on_children='500')
     db.session.add(campaign)
 
@@ -127,7 +133,7 @@ def seed():
             title='Slum Library', description='Slum library in Dharavi, Mumbai', 
             who='We are an organization of volunteers', impact='Library for street children',
             utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi",
-            image="4.jpg", status="Ended",
+            image="4.jpg", status="Approved",
             total_impact_on_children='4000')
     db.session.add(campaign)
 
@@ -141,7 +147,7 @@ def seed():
             title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil",
-            image="5.jpg", status="Delivered",
+            image="5.jpg", status="Approved",
             total_impact_on_children='200')
     db.session.add(campaign)
 
@@ -159,7 +165,7 @@ def seed():
             title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
-            image="6.jpg", status="Flagged",
+            image="6.jpg", status="Approved",
             total_impact_on_children='1500')
     db.session.add(campaign)
 
