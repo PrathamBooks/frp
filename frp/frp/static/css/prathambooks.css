@@ -839,7 +839,7 @@ header #login .dropdown-menu {
 .internal .ui-slider {
   width: 100% !important;
 }
-.internal a.champion {
+.internal span.champion {
   background-image: url("../images/champion.png");
   background-position: right center;
   background-repeat: no-repeat;
@@ -851,7 +851,7 @@ header #login .dropdown-menu {
   text-transform: uppercase;
   width: 65px;
 }
-.internal .campaign a.champion {
+.internal .campaign span.champion {
   margin: -30px -29px -23px 0;
 }
 .internal .progress {
@@ -1595,8 +1595,8 @@ span.fb:hover {
   padding: 0 0 0 20px;
   width: 100%;
 }
-#internalCampaign.discover .col-md-2 a.champion,
-#internalCampaign.discover .col-md-4 a.champion {
+#internalCampaign.discover .col-md-2 span.champion,
+#internalCampaign.discover .col-md-4 span.champion {
   background-image: url("../images/champion.png");
   background-position: right center;
   background-repeat: no-repeat;
@@ -2524,16 +2524,16 @@ button.approve:hover {
 table td span.label {
   font-size: .95em;
 }
-.internal #internalCampaign.discover a.champion {
+.internal #internalCampaign.discover span.champion {
   margin: -25px -10px 0 0;
 }
-.internal #internalCampaign.dashboard a.champion {
+.internal #internalCampaign.dashboard span.champion {
   margin: -25px -10px -30px 0;
 }
-.internal #internalCampaign.campaign a.champion {
+.internal #internalCampaign.campaign span.champion {
   margin: -20px -30px -30px 0;
 }
-.internal #internalCampaign.singleCamp a.champion {
+.internal #internalCampaign.singleCamp span.champion {
   margin: -20px -10px 0 0;
 }
 #internalCampaign.singleCamp .campaignInfo h2 {

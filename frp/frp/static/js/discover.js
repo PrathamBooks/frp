@@ -24,7 +24,7 @@ var DiscoverPage = function(args) {
       var $img = $('<h1/>').html(campaign.title).appendTo($div_md_3);
       if (campaign.target <= campaign.total_donations)
         {
-          $('<a/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
+          $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
         }
       var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
