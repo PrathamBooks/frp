@@ -1114,6 +1114,9 @@ header #login .dropdown-menu {
   clear: both;
   margin: 0 0 10px;
 }
+.discover {
+  width: 100%;
+}
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }
