@@ -2885,7 +2885,7 @@ ul#socialThumbs li a.gPlus {
 .login-links a {
 	display: block;
 }
-#internalCampaign .btn {
+#internalContent.forms .btn {
 	margin-top: 0px !important;
 	padding: 0px 15px;
 	background-image: none !important;
@@ -2893,7 +2893,7 @@ ul#socialThumbs li a.gPlus {
 .startCampaign .well {
 	box-shadow: 0px 1px 4px #CCC;
 }
-#internalCampaign .btn:after {
+#internalContent.forms .btn:after {
 	content: url("../images/rightArrow.png");
 	width: 8px;
 	height: 10px;
