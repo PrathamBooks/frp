@@ -8,7 +8,6 @@ var DiscoverPage = function(args) {
     this.filter_with_args(args.filters.states, 
                           args.filters.languages, 
                           args.filters.types_string);
-    this.show_next_campaigns();
     $('#scroll').click(this.show_next_campaigns);
     $('#filter-btn').click(this.filter);
   };
@@ -43,6 +42,7 @@ var DiscoverPage = function(args) {
       var $progress_bar = $('<div/>').
         addClass('progress progress-warning').
         css('width', percent_funded + '%').
+        css('min-width', '0.2em').
         appendTo($campaignInfo);
       var $progress_span = $('<span/>').
         addClass("sr-only").
