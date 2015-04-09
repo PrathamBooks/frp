@@ -181,15 +181,14 @@ class Campaign(BaseMixin, db.Model):
                 "num_donors": self.num_donors(),
                 "target" : self.target(),
                 "total_donations" : self.total_donations(),
-                "status" : self.status,
-                "comments" : self.get_comments()
+                "status" : self.status
                 }
 
     def donor_list(self):
         return map(lambda x: x.user_id, self.donations)
 
     def get_comments(self):
-        retval = map(lambda x:x.get_comment(),self.comments)
+        retval = map(lambda x:x.verbose_fields(),self.comments)
         return retval
 
     def num_donors(self):

@@ -2,6 +2,12 @@
 {% block content %}
 <div id="wrapper">
   <div class="container internal">
+    <form action={{url_for("search")}} method="GET">
+      <div  class="input-group">
+        <input type="text" class="form-control" name="search-string" placeholder="SEARCH IN CAMPAIGNS">
+        <input type="submit" value="" class="icon-search">
+      </div>
+    </form>
     <form role="form">
       <div  id="internalContent" class="row discover-top">
         <div class="col-md-4">
@@ -67,33 +73,7 @@
           <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
           <li><a href="{{ url_for('discover', category='most-funded') }}" class="active">Most Funded</a></li>
         </ul>
-        <hr />
-        <ul class="category">
-          <li>Categories</li>
-          <li><a href="{{ url_for('discover', category='registered-non-profit') }}">Registered Non-Profit (Trust / Society) </a></li>
-          <li><a href="{{ url_for('discover', category='section-25-company') }}">Section 25 Company</a></li>
-          <li><a href="{{ url_for('discover', category='private-school') }}">Private School</a></li>
-          <li><a href="{{ url_for('discover', category='government-school') }}">Government School</a></li>
-          <li><a href="{{ url_for('discover', category='reading-center-library') }}">Reading Centre/Library</a></li>
-          <li><a href="{{ url_for('discover', category='reading-champion') }}">Reading Champion / Storyteller / Volunteer</a></li>
-          <li><a href="{{ url_for('discover', category='rural-areas') }}">Rural Areas</a></li>
-          <li><a href="{{ url_for('discover', category='low-income-urban-areas') }}">Low Income Urban Area</a></li>
-          <li><a href="{{ url_for('discover', category='tribal-areas') }}">Tribal Areas</a></li>
-          <li><a href="{{ url_for('discover', category='special-needs') }}">Special Needs / Differently Abled Children</a></li>
-        </ul>
-        <hr />
-
-        <ul class="citi">
-          <li>Cities</li>
-          <li> 
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="search cities">
-            <span class="input-group-addon"><a href="#"><i class="icon-search"></i></a></span>
-          </div>
-          </li>
-        </ul>
       </div>
-
     </div>
 
     <div class="col-md-9">
