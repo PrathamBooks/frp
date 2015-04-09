@@ -38,7 +38,7 @@
 
           </tr>
         </table>
-        <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div id="CommentsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
 
@@ -51,8 +51,8 @@
                 <textarea id="comments" placeholder="Enter Comment here"  class="form-control"></textarea>
                 <!--  
                 <p class="text-danger">Add Your Comment</p>
-              <p class="text-success">Comment submitted successfully!</p>
-              -->
+                <p class="text-success">Comment submitted successfully!</p>
+                -->
                 <button id="comment-submit-btn" class="btn btn-send pull-right" type="button"></button>
               </div>
 
@@ -69,8 +69,7 @@
     var admin_dash = new AdminPage(campaigns_data);
     admin_dash.start();
     });
-  </script>
-
-  {% endblock %}
+</script>
+{% endblock %}
 
 

@@ -30,7 +30,7 @@
         <div class="campaignInfo">
           <time><span>{{ campaign.days_remaining() }} </span> Days Left</time>
           <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }}  </span></h4>
-          <div class="progress progress-warning" style="width: {{ (campaign.percent_funded()) }}%">
+          <div class="progress progress-warning" style="min-width:0.2em; width: {{ (campaign.percent_funded()) }}%">
             <span class="sr-only"> {{ campaign.percent_funded() }} % Complete </span>
           </div>
           <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>

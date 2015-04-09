@@ -14,7 +14,7 @@ class Comment(BaseMixin, db.Model):
     comment = db.Column(db.Unicode(500), nullable=False)
 
 
-    def get_comment(self):
+    def verbose_fields(self):
         return { "date": self.start_date(),
                 "by" : self.comment_by.first_name,
                 "comment": self.comment}
