@@ -184,7 +184,8 @@ class Campaign(BaseMixin, db.Model):
                 "num_donors": self.num_donors(),
                 "target" : self.target(),
                 "total_donations" : self.total_donations(),
-                "status" : self.status
+                "status" : self.status,
+                "image" : self.image
                 }
 
     def donor_list(self):

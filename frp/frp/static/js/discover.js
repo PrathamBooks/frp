@@ -21,7 +21,11 @@ var DiscoverPage = function(args) {
           window.location.replace('/campaign/' + campaign.id);
         }
       }(campaign));
-      var $img = $('<h1/>').html(campaign.title).appendTo($div_md_3);
+      var $h1 = $('<h1/>').appendTo($div_md_3);
+      var $img = $('<img/>').
+        attr('src', '/static/uploads/uploads/' + campaign.image).
+        attr('alt', 'campaign image').
+        appendTo($h1);
       if (campaign.target <= campaign.total_donations)
         {
           $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
