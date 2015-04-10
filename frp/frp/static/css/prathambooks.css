@@ -485,6 +485,7 @@ header #login .dropdown-menu {
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 0px 5px 5px 0;
+  margin: 0px 0px 0px 0px !important;
 }
 
 #homeSearch.input-group span i.icon-search {
@@ -2918,4 +2919,90 @@ ul#socialThumbs li a.gPlus {
 	width: 100%;
 }
 }
+/******************** Search box **********************/
 
+
+#search.input-group input[type="text"] {
+  float: left;
+  width: 250px !important;
+  margin: 0px 0px 0px 5px !important;
+  border: 1px solid #6C5E26;
+  border-radius: 5px 0px 0px 5px;
+}
+
+#search.input-group input.icon-search {
+  float: right;
+  width: 34px;
+  height: 34px;
+  padding: 14px;
+  border: 1px solid #6C5E26;
+  background-color: #FF7800;
+  background-image: url("../images/searchIcon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0px 5px 5px 0px;
+  margin: 0px 0px 0px 0px !important;
+}
+
+
+
+/*********************************** Comment modal ********************/
+
+.comments {
+  float: left;
+  width: 100%;
+  background: none repeat scroll 0% 0% #FCFCFC;
+  margin-top: 12px;
+  padding: 1% 2%;
+  box-shadow: 0 0 1px #888;
+}
+.comment-header {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 5px;
+}
+.comment-header .user {
+  text-align: left;
+  float: left;
+  width: 50%;
+}
+.comment-header .datetime {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
+.comments .comment-content {
+  float: left;
+  width: 100%;
+}
+.comments .comment-content p {
+  margin-top: 6px;
+  font-size: 1em;
+}
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  line-height: 14px;
+  vertical-align: text-top;
+  background: url("../images/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  margin: 1px 2px;
+}
+.icon-user {
+  background-position: -168px 0;
+}
+.icon-time {
+  background-position: -48px -24px;
+}
+.modal-content .btn-bottom {
+  height: 40px !important;
+  left: 0px !important;
+  border: medium none !important;
+  border-radius: 5px !important;
+  width: 42px !important;
+  margin-right: 6px !important;
+  margin-top: 18px !important;
+}
