@@ -104,7 +104,7 @@ def seed():
             image="1.jpg", status="Approved",
             total_impact_on_children='2000')
     donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=0)
     db.session.add(donation)
     db.session.add(campaign)
 
@@ -116,7 +116,7 @@ def seed():
             total_impact_on_children='1000')
     db.session.add(campaign)
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=0)
     db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
     db.session.add(comment)
@@ -137,9 +137,6 @@ def seed():
             total_impact_on_children='4000')
     db.session.add(campaign)
 
-    donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF")
-    db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
     db.session.add(comment)
 
@@ -151,9 +148,6 @@ def seed():
             total_impact_on_children='200')
     db.session.add(campaign)
 
-    donation = Donation(donor=user, campaign=campaign, amount=5000, 
-            confirmation=93499,city="Bangalore", first_name="Aadi", state="Karnataka", identification="ABCDEF")
-    db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 3]")
     db.session.add(comment)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 2]")
@@ -169,10 +163,6 @@ def seed():
             total_impact_on_children='1500')
     db.session.add(campaign)
 
-    donation = Donation(donor=user, campaign=campaign, amount=1000, 
-            confirmation=99999, city="Bangalore", state="Karnataka", first_name="Shaifali",
-            identification="ABCDEF")
-    db.session.add(donation)
 
     try:
         db.session.commit()

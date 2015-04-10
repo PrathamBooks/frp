@@ -11,7 +11,10 @@ def create_donation(form, campaign):
   # in case the donor did not sign in, the donation is accounted for in
   # in admin account
   donor = current_user if current_user.is_active() else admin_user()
-
+  if (ann_choice == True):
+      ann_choice = 1
+  else:
+      ann_choice = 0
   confirmation = randint(1000000, 9999999)
   donation = Donation(amount=amount, 
           donor=donor, 
@@ -21,7 +24,8 @@ def create_donation(form, campaign):
           confirmation=confirmation, 
           state=form.state.data, 
           city=form.city.data, 
-          identification=form.pan_number.data)
+          identification=form.pan_number.data,
+          ann_choice=form.ann_choice.data)
   db.session.add(donation)
   try:
     db.session.commit()

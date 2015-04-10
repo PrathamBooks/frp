@@ -18,6 +18,7 @@ class Donation(BaseMixin, db.Model):
     state = db.Column(db.Unicode(100), nullable=False)
     city = db.Column(db.Unicode(100), nullable=False)
     identification = db.Column(db.Unicode(100), nullable=False)
+    ann_choice = db.Column(db.BOOLEAN,nullable=False)
 
     def __add__(self,o):
         return self.amount + o.amount

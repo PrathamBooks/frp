@@ -91,6 +91,11 @@
                         <div class="alert alert-warning hide">Enter Pan/DL/Passport Number</div>
                       </div>
                     </div>
+                    <div class="form-group row">
+                      <div class="col-xs-12">
+                        <h3>Would you like to be annonomus?</h3>
+                        {{ render_checkbox(form.ann_choice) }}
+                      </div>
 
                   </div><!-- well--> 
 
@@ -101,6 +106,7 @@
                         <h3>Would you like us to send you a Tax Exemption Certificate?</h3>
                         {{ render_checkbox(form.tax_exemption_certificate) }}
                       </div>
+
 
                       <div class="col-xs-12">
                         <div class="checkbox">
