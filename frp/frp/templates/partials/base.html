@@ -25,6 +25,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
 
     {% assets "app_js" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
@@ -83,6 +84,9 @@
               <li><a href="{{ url_for('donor_dashboard') }}">My Donations</a></li>
               <li><a href="{{ url_for('beneficiary_dashboard') }}">My Campaigns</a></li>
               <li><a href="{{ url_for('profile') }}">Settings</a></li>
+              {% if current_user.has_roles('admin') %}
+              <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+              {% endif %}
               <li class="divider"></li>
               <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
             </ul>

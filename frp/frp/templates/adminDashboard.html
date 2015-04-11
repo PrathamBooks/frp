@@ -19,43 +19,42 @@
           <span>Campaign Details</span>
         </h2>
       </div>
+
       <div  class="col-md-12">
 
-        <table id="campaigns" class="table table-striped">
-          <tr>
-            <!--  <th>Campaign Id</th>-->
-            <th>Campaign Title</th>
-            <th><span class="arrDown"></span>Beneficiary Type </th>
-            <th><span class="arrDown"></span>Location</th>
-            <th><span class="arrDown"></span>Fund Raising Amount</th>
-            <th><span class="arrUp"></span>Start Date </th>
-            <th><span class="arrUp"></span> End Date</th>
-            <th><span class="arrDown"></span> Current Status</th>
-            <th><span class="arrUp"></span> Action Required</th>
-            <th>Update Status / Comment</th>
-            <th>Number Of Donors</th>
-            <th>Submit Your Comment</th>
-
-          </tr>
+        <table id="campaigns" class="tablesorter,table table-striped" >
+          <thead>
+            <tr>
+              <th>Campaign Title</th>
+              <th>Beneficiary Type </th>
+              <th>Location</th>
+              <th>Fund Raising Amount</th>
+              <th>Start Date </th>
+              <th>End Date</th>
+              <th>Current Status</th>
+              <th>Update Status / Comment</th>
+              <th>Number Of Donors</th>
+              <th>Submit Your Comment</th>
+            </tr>
+          </thead>
         </table>
+
         <div id="CommentsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
 
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h3 id="myLargeModalLabel" class="modal-title">Preview of Beneficiary Form </h3>
+                <h3 id="myLargeModalLabel" class="modal-title">Comments</h3>
               </div>
 
               <div class="form-group">
                 <textarea id="comments" placeholder="Enter Comment here"  class="form-control"></textarea>
-                <!--  
-                <p class="text-danger">Add Your Comment</p>
-                <p class="text-success">Comment submitted successfully!</p>
-                -->
-                <button id="comment-submit-btn" class="btn btn-send pull-right" type="button"></button>
+              </div>
+              <div class="comments">
               </div>
 
+              <button id="comment-submit-btn" class="btn btn-send pull-right" type="button"></button>
               <button id="comment-show-btn" class="btn btn-default btn-bottom" type="button">Default</button>
             </div>
           </div>
