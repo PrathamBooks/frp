@@ -5,9 +5,9 @@ import coaster
 from .. import app
 from .signup import (STATES)
 
-AMOUNT_CHOICES = [(1000, 1000), 
-                  (500, 500),
-                  (250, 250)]
+AMOUNT_CHOICES = [(1000, u'Rs. 1000'), 
+                  (500, u'Rs. 500'),
+                  (250, u'Rs. 250')]
 
 class DonorForm(wtforms.Form):
     amount_choice = wtforms.RadioField(
