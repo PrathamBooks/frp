@@ -3017,3 +3017,12 @@ ul#socialThumbs li a.gPlus {
   margin-right: 6px !important;
   margin-top: 18px !important;
 }
+
+/* admin arrows */
+#internalCampaign.capaignList table th.arrUp {
+  background-position: center 10px;
+}
+
+#internalCampaign.capaignList table th.arrDown {
+  background-position: center 10px;
+}
