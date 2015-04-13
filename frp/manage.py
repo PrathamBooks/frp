@@ -104,7 +104,7 @@ def seed():
             image="1.jpg", status="Approved",
             total_impact_on_children='2000')
     donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=0)
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=False)
     db.session.add(donation)
     db.session.add(campaign)
 
@@ -116,7 +116,7 @@ def seed():
             total_impact_on_children='1000')
     db.session.add(campaign)
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=0)
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=False)
     db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
     db.session.add(comment)

@@ -11,10 +11,6 @@ def create_donation(form, campaign):
   # in case the donor did not sign in, the donation is accounted for in
   # in admin account
   donor = current_user if current_user.is_active() else admin_user()
-  if (ann_choice == True):
-      ann_choice = 1
-  else:
-      ann_choice = 0
   confirmation = randint(1000000, 9999999)
   donation = Donation(amount=amount, 
           donor=donor, 
