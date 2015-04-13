@@ -485,6 +485,7 @@ header #login .dropdown-menu {
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 0px 5px 5px 0;
+  margin: 0px 0px 0px 0px !important;
 }
 
 #homeSearch.input-group span i.icon-search {
@@ -725,8 +726,8 @@ header #login .dropdown-menu {
 }
 .tab-content .col-md-4 img {
   float: left;
-  width: 100px;
-  height: 100px;
+  width: 114px;
+  height: 76px;
   background-color: rgba(229, 229, 229, 0.8);
 }
 .tab-content .col-md-4 h4 {
@@ -839,7 +840,7 @@ header #login .dropdown-menu {
 .internal .ui-slider {
   width: 100% !important;
 }
-.internal a.champion {
+.internal span.champion {
   background-image: url("../images/champion.png");
   background-position: right center;
   background-repeat: no-repeat;
@@ -851,7 +852,7 @@ header #login .dropdown-menu {
   text-transform: uppercase;
   width: 65px;
 }
-.internal .campaign a.champion {
+.internal .campaign span.champion {
   margin: -30px -29px -23px 0;
 }
 .internal .progress {
@@ -1114,6 +1115,9 @@ header #login .dropdown-menu {
   clear: both;
   margin: 0 0 10px;
 }
+.discover {
+  width: 100%;
+}
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }
@@ -1133,16 +1137,16 @@ header #login .dropdown-menu {
   font-weight: bold;
 }
 .internal .col-md-9 .col-md-3 {
-  width: 31.9%;
-  height: 475px;
+  width: 31.7%;
+  height: 550px;
   border: 1px solid #bdae85;
   background-color: #fafafa;
   padding: 0;
   margin: 0 6px 30px;
 }
 .internal .col-md-9 .col-md-3 h1 {
-  width: 100%;
-  height: 140px;
+  width: 279px;
+  height: 186px;
   padding: 0;
   margin: 0;
   font-size: 36px;
@@ -1153,6 +1157,10 @@ header #login .dropdown-menu {
   line-height: 140px;
   text-align: center;
   padding: 0 0 0;
+}
+.internal .col-md-9 .col-md-3 h1 img {
+  width: 279px;
+  height: 186px;
 }
 .internal .col-md-6 h3 {
   padding: 0 10px;
@@ -1172,8 +1180,8 @@ header #login .dropdown-menu {
   width: 100%;
 }
 .internal .col-md-6 .col-md-12 h1 {
-  width: 100%;
-  height: 300px;
+  width: 480px;
+  height: 320px;
   padding: 0;
   margin: 0;
   font-size: 36px;
@@ -1182,7 +1190,6 @@ header #login .dropdown-menu {
   text-align: center;
   line-height: 255px;
   font-family: "ligurino-condensed", sans-serif;
-  background: url(../images/campaign1.jpg) no-repeat;
   text-shadow: 1px 3px 0 #000 !important;
 }
 .internal .col-md-3 .tag .progress,
@@ -1592,8 +1599,8 @@ span.fb:hover {
   padding: 0 0 0 20px;
   width: 100%;
 }
-#internalCampaign.discover .col-md-2 a.champion,
-#internalCampaign.discover .col-md-4 a.champion {
+#internalCampaign.discover .col-md-2 span.champion,
+#internalCampaign.discover .col-md-4 span.champion {
   background-image: url("../images/champion.png");
   background-position: right center;
   background-repeat: no-repeat;
@@ -2521,16 +2528,16 @@ button.approve:hover {
 table td span.label {
   font-size: .95em;
 }
-.internal #internalCampaign.discover a.champion {
+.internal #internalCampaign.discover span.champion {
   margin: -25px -10px 0 0;
 }
-.internal #internalCampaign.dashboard a.champion {
+.internal #internalCampaign.dashboard span.champion {
   margin: -25px -10px -30px 0;
 }
-.internal #internalCampaign.campaign a.champion {
+.internal #internalCampaign.campaign span.champion {
   margin: -20px -30px -30px 0;
 }
-.internal #internalCampaign.singleCamp a.champion {
+.internal #internalCampaign.singleCamp span.champion {
   margin: -20px -10px 0 0;
 }
 #internalCampaign.singleCamp .campaignInfo h2 {
@@ -2915,4 +2922,90 @@ ul#socialThumbs li a.gPlus {
 	width: 100%;
 }
 }
+/******************** Search box **********************/
 
+
+#search.input-group input[type="text"] {
+  float: left;
+  width: 250px !important;
+  margin: 0px 0px 0px 5px !important;
+  border: 1px solid #6C5E26;
+  border-radius: 5px 0px 0px 5px;
+}
+
+#search.input-group input.icon-search {
+  float: right;
+  width: 34px;
+  height: 34px;
+  padding: 14px;
+  border: 1px solid #6C5E26;
+  background-color: #FF7800;
+  background-image: url("../images/searchIcon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0px 5px 5px 0px;
+  margin: 0px 0px 0px 0px !important;
+}
+
+
+
+/*********************************** Comment modal ********************/
+
+.comments {
+  float: left;
+  width: 100%;
+  background: none repeat scroll 0% 0% #FCFCFC;
+  margin-top: 12px;
+  padding: 1% 2%;
+  box-shadow: 0 0 1px #888;
+}
+.comment-header {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 5px;
+}
+.comment-header .user {
+  text-align: left;
+  float: left;
+  width: 50%;
+}
+.comment-header .datetime {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
+.comments .comment-content {
+  float: left;
+  width: 100%;
+}
+.comments .comment-content p {
+  margin-top: 6px;
+  font-size: 1em;
+}
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  line-height: 14px;
+  vertical-align: text-top;
+  background: url("../images/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  margin: 1px 2px;
+}
+.icon-user {
+  background-position: -168px 0;
+}
+.icon-time {
+  background-position: -48px -24px;
+}
+.modal-content .btn-bottom {
+  height: 40px !important;
+  left: 0px !important;
+  border: medium none !important;
+  border-radius: 5px !important;
+  width: 42px !important;
+  margin-right: 6px !important;
+  margin-top: 18px !important;
+}

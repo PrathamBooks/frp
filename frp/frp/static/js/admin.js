@@ -25,9 +25,9 @@ var AdminPage = function(campaign_data)
     });
 
     $('#campaigns').on('click','.btn.btn-comment',function(e) {
-      var id = parseInt($(this).parents('tr').attr('id').replace ( /[^\d.]/g, '' ),10);
+      var id = parseInt($(this).parents('tr').attr('id').replace(/[^\d.]/g, ''),10);
       $('#CommentsModal').find(".modal-content").attr('id',"modal"+id);
-      $('#CommentsModal').find('.form-group').find("tr").remove();
+      $('#CommentsModal').find('.comments').html('');
     });
 
     $('#CommentsModal').on('click','#comment-submit-btn',function(e) {
@@ -42,7 +42,6 @@ var AdminPage = function(campaign_data)
         },
         success: function(data) {
           // Remove old comments if present and then show all comments
-          $('#CommentsModal').find(".modal-content").attr('id',"modal"+id).children().find('tr').remove()
           var comments = data.comments;
           that.show_comments(comments,id);
         },
@@ -64,14 +63,12 @@ var AdminPage = function(campaign_data)
         },
         success: function(data){
           var comments = data.comments;
-          if (comments.length != 0)
-            {
-              that.show_comments(comments,id);
-            }
-            else
-              {
-                alert("There are no comments for this campaign");
-              }
+          if (comments.length != 0) {
+            that.show_comments(comments,id);
+          }
+          else {
+            alert("There are no comments for this campaign");
+          }
         },
         failure: function(errMsg){
           alert("Get Failed");
@@ -146,15 +143,20 @@ var AdminPage = function(campaign_data)
   };
   this.show_comments = function(comments,id)
   {
-    var $modal_form = $('#CommentsModal').find('.form-group');
+    var $modal_comments_section = $('#CommentsModal').find('.comments');
+    $modal_comments_section.html('');
     /* Load comments*/
-    for (i=0; i<comments.length;i++)
-      {
-        var $tr =$('<tr/>').appendTo($modal_form);
-        $('<td/>').width(300).addClass("text-success").html(comments[i].comment).appendTo($tr);
-        $('<td/>').width(50).addClass("text-danger").html(comments[i].by).appendTo($tr);
-        $('<tr/>').append('<td/>').width(50).html(comments[i].date).appendTo($tr);
-      }
+    for (i=0; i<comments.length;i++) {
+      var $comment_header = $('<div/>').addClass('comment-header').appendTo($modal_comments_section);
+      var $user = $('<div/>').addClass('user').appendTo($comment_header);
+      var $user_icon = $('<i/>').addClass('icon-user').appendTo($user);
+      $user.append(comments[i].by);
+      var $datetime = $('<div/>').addClass('datetime').appendTo($comment_header);
+      var $time_icon = $('<i/>').addClass('icon-time').appendTo($datetime);
+      $datetime.append(comments[i].date);
+      var $comment_content = $('<div/>').addClass('comment-content').appendTo($modal_comments_section);
+      var $comment = $('<p/>').text(comments[i].comment).appendTo($comment_content);
+    }
   };
 };
 

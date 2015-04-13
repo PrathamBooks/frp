@@ -84,6 +84,9 @@
               <li><a href="{{ url_for('donor_dashboard') }}">My Donations</a></li>
               <li><a href="{{ url_for('beneficiary_dashboard') }}">My Campaigns</a></li>
               <li><a href="{{ url_for('profile') }}">Settings</a></li>
+              {% if current_user.has_roles('admin') %}
+              <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+              {% endif %}
               <li class="divider"></li>
               <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
             </ul>

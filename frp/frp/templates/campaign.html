@@ -9,7 +9,9 @@
     <div class="col-md-9">
       <div class="col-md-6">
         <div class="col-md-12">
-          <h1 style="background-image:url('/static/uploads/uploads/{{campaign.image}}'); background-size:cover"> {{ campaign.title }} </h1>
+          <h1>
+            <img src='/static/uploads/uploads/{{campaign.image}}' alt="campaign images"> 
+          </h1>
 
           <div class="campaignInfo">
             <h2> {{ campaign.title }} </h2>
@@ -39,7 +41,7 @@
             <span class="fb"></span>
           </div>
 
-          <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate To This Campaign </a> </h5>
+          <a href={{ url_for('donate', campaign_id=campaign.id ) }}> <h5 class="amt"> Donate To This Campaign </h5> </a>
         </div>
 
       </div>
