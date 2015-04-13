@@ -1121,6 +1121,14 @@ header #login .dropdown-menu {
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }
+div#search {
+  position: absolute;
+  right: 13px;
+}
+form.discover-search {
+  position: relative;
+  margin-bottom: 18px;
+}
 .internal #internalContent.discover-top select,
 #easyBrowse select {
   height: 100px !important;
@@ -3008,4 +3016,13 @@ ul#socialThumbs li a.gPlus {
   width: 42px !important;
   margin-right: 6px !important;
   margin-top: 18px !important;
+}
+
+/* admin arrows */
+#internalCampaign.capaignList table th.arrUp {
+  background-position: center 10px;
+}
+
+#internalCampaign.capaignList table th.arrDown {
+  background-position: center 10px;
 }

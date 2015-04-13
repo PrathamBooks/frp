@@ -46,6 +46,12 @@ class DonorForm(wtforms.Form):
         default=True,
         choices=[(True, 'Yes'),
                  (False, 'No')])
+    ann_choice = wtforms.RadioField(
+        label='Would you like to be annonomus?',
+        coerce=bool,
+        default=False,
+        choices=[(True, 'Yes'),
+                 (False, 'No')])
 
     def set_data(self, user):
        self.first_name.data = user.first_name
