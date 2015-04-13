@@ -283,7 +283,7 @@ def add_comment():
       except Exception as e:
         print e
         return "Commit Failed", 500
-      
+
       comments = campaign.get_comments()
       return jsonify({"comments":comments})
 
