@@ -118,20 +118,20 @@
                         <div class="alert alert-warning hide">Enter Pan/DL/Passport Number</div>
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <div class="col-xs-12">
-                        <h3>Would you like to be annonomus?</h3>
-                        {{ render_checkbox(form.ann_choice) }}
-                      </div>
-
                   </div><!-- well--> 
 
                   <div class="well">
-
+                    <div class="form-group row">
+                      <div class="col-xs-12">
+                        <h3>Would you like to be anonymous?</h3>
+                        <p class="help-block">If you choose "No", your name and email will be shared with the beneficiary organization.</p>
+                        {{ render_bullets(form.ann_choice) }}
+                      </div>
+                    </div>
                     <div class="form-group row">
                       <div class="col-xs-12">
                         <h3>Would you like us to send you a Tax Exemption Certificate?</h3>
-                        {{ render_checkbox(form.tax_exemption_certificate) }}
+                        {{ render_bullets(form.tax_exemption_certificate) }}
                       </div>
 
 
