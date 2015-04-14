@@ -14,21 +14,39 @@
           <div class=" col-md-12">
             <div class="form-group row">
               <label for="email" class="control-label">Email</label>
-              <input class="form-control" id="email" name="email" tabindex="210" type="text" value="" required />
+              <input class="form-control" id="email" name="email" tabindex="210" type="text" value="{{form.email.data|default('',True)}}" required />
             </div>
+            {% if form.email.errors %}
+              <ul class="errors"
+                {% for e in form.email.errors %}
+                  <li> <div class="alert alert-warning"> {{ e }} </div> </li>
+                {% endfor %}
+            {% endif %}
           </div>
           <div class="col-md-12">
             <div class="form-group row">
               <label for="password" class="control-label">Password</label>
               <input class="form-control" id="password" name="password" tabindex="230" type="password" value="" />
             </div>
+            {% if form.password.errors %}
+              <ul class="errors"
+                {% for e in form.password.errors %}
+                  <li> <div class="alert alert-warning"> {{ e }} </div> </li>
+                {% endfor %}
+            {% endif %}
           </div>
           <div class="col-md-12">
             <div class="form-group row">
               <label for="retype_password" class="control-label">Retype Password</label>
               <input class="form-control" id="retype_password" name="retype_password" tabindex="240" type="password" value="" />
             </div>
-          </div>
+            {% if form.retype_password.errors %}
+              <ul class="errors"
+                {% for e in form.retype_password.errors %}
+                  <li> <div class="alert alert-warning"> {{ e }} </div> </li>
+                {% endfor %}
+            {% endif %}
+           </div>
           <button type="submit"  class="btn" tabindex="280">Register</button>
           <div class="login-links">
             <a href="/user/sign-in" tabindex='290'> Already registered? Sign in.</a>
