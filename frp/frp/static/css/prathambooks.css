@@ -1028,6 +1028,7 @@ header #login .dropdown-menu {
 .internal #internalContent {
   height: auto;
   min-height: 106px;
+  clear: both;
 }
 .internal #internalContent h2 {
   width: 27%;
@@ -1122,12 +1123,10 @@ header #login .dropdown-menu {
   margin: 0;
 }
 div#search {
-  position: absolute;
-  right: 13px;
+  float: right;
 }
 form.discover-search {
   position: relative;
-  margin-bottom: 18px;
 }
 .internal #internalContent.discover-top select,
 #easyBrowse select {
@@ -2455,7 +2454,7 @@ button.approve:hover {
   width: 100%;
 }
 .internal #internalCampaign.campaign h2 {
-  margin: 50px 0 20px;
+  margin: 20px 0 20px;
 }
 .editSection button {
   cursor: pointer !important;
@@ -3016,4 +3015,13 @@ ul#socialThumbs li a.gPlus {
   width: 42px !important;
   margin-right: 6px !important;
   margin-top: 18px !important;
+}
+
+/* admin arrows */
+#internalCampaign.capaignList table th.arrUp {
+  background-position: center 10px;
+}
+
+#internalCampaign.capaignList table th.arrDown {
+  background-position: center 10px;
 }
