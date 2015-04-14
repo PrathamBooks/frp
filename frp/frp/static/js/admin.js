@@ -98,6 +98,7 @@ var AdminPage = function(campaign_data)
 
 
     var arr = [
+      {val : '', text: 'Select State'},
       {val : 'Approved', text: 'Approved'},
       {val : 'Rejected', text: 'Rejected'},
       {val : 'Pending Approval', text: 'Pending Approval'},

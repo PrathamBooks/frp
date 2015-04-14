@@ -131,6 +131,7 @@ class Campaign(BaseMixin, db.Model):
     status = db.Column(db.Unicode(100), nullable=False)
     donations = db.relationship("Donation", backref=db.backref("campaign"))
     comments = db.relationship("Comment", backref=db.backref("campaign_comment"))
+    approved_at = db.Column(db.DateTime, nullable=True)
 
     search_vector = db.Column(TSVectorType('title', 'description', 
         'who', 'impact', 'utilization', 'state', 'city', 'languages'))
@@ -153,15 +154,29 @@ class Campaign(BaseMixin, db.Model):
             retval.append(campaign.verbose_fields())
         return retval
 
+    def approved_date(self):
+        if (self.approved_at != None):
+            return "{:%B %d, %Y}".format(self.approved_at)
+        return "None"
+
+    def approved_date_set(self):
+        self.approved_at = datetime.now()
+
+
     def days_remaining(self):
-        rdays = 30 - (date.today() - self.created_at.date()).days
-        return rdays if rdays > 0 else 0
+        if (self.approved_at !=None):
+            rdays = 30 - (datetime.now() - self.approved_at).days
+            return rdays if rdays > 0 else 0
+        return 0
 
     def start_date(self):
         return self.created_at.date()
 
     def end_date(self):
-        return self.created_at.date() + timedelta(days=30)
+        if (self.approved_at != None):
+            return self.approved_at + timedelta(days=30)
+        else:
+            return self.created_at.date() + timedelta(days=30)
 
     def target(self):
         return 50 * (self.nbooks + 125 * self.nlic)
@@ -181,6 +196,7 @@ class Campaign(BaseMixin, db.Model):
                 "who"  : self.who,
                 "start_date": "{:%B %d, %Y}".format(self.start_date()),
                 "end_date" : "{:%B %d, %Y}".format(self.end_date()),
+                "days_remaining" : self.days_remaining(),
                 "num_donors": self.num_donors(),
                 "target" : self.target(),
                 "total_donations" : self.total_donations(),

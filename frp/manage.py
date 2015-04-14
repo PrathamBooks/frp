@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-import datetime
+#import datetime
 import os
 import subprocess
 
 from flask.ext.script import Manager
 
+from datetime import *
 from frp import app
 from frp.models import db
 from frp.models import (User, UserAuth, Role, USER_STATUS, is_email_exists,
@@ -98,10 +99,10 @@ def seed():
     work = OrganizationWork(organization=org, choice_id='3') 
 
     campaign = Campaign(created_by=user, org=org,
-            title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
+            title='Harayana Library', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
-            image="1.jpg", status="Approved",
+            image="1.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=1),
             total_impact_on_children='2000')
     donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
             city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=False)
@@ -112,7 +113,7 @@ def seed():
             title='Rural Library', description='Project to set up a rural library', 
             who='We are an organization who works in rural AP', impact='This will raise funds to set up a new library.',
             utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English",
-            image="2.jpg", status="Approved",
+            image="2.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=2),
             total_impact_on_children='1000')
     db.session.add(campaign)
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
@@ -125,7 +126,7 @@ def seed():
             title='Urban Library', description='Project to get 750 books for old age home', 
             who='We are an organization of old people', impact='Make 100 old people happy',
             utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil",
-            image="3.jpg", status="Approved",
+            image="3.jpg", status="Rejected",
             total_impact_on_children='500')
     db.session.add(campaign)
 
@@ -133,7 +134,7 @@ def seed():
             title='Slum Library', description='Slum library in Dharavi, Mumbai', 
             who='We are an organization of volunteers', impact='Library for street children',
             utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi",
-            image="4.jpg", status="Approved",
+            image="4.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=3),
             total_impact_on_children='4000')
     db.session.add(campaign)
 
@@ -141,10 +142,10 @@ def seed():
     db.session.add(comment)
 
     campaign = Campaign(created_by=user, org=org,
-            title='Buy a 1000 books', description='Project to get 1000 books for Sidhapura School', 
+            title='Karnataka Library', description='Project to get 1000 books for Sidhapura School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil",
-            image="5.jpg", status="Approved",
+            image="5.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=4),
             total_impact_on_children='200')
     db.session.add(campaign)
 
@@ -156,10 +157,10 @@ def seed():
     db.session.add(comment)
 
     campaign = Campaign(created_by=user, org=org,
-            title='Buy a 1000 books', description='Project to get 1000 books for Ramagondanhalli School', 
+            title='Harayana Village Library', description='Project to get 1000 books for Ramagondanhalli School', 
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
-            image="6.jpg", status="Approved",
+            image="6.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=5),
             total_impact_on_children='1500')
     db.session.add(campaign)
 

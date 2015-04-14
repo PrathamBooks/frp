@@ -166,9 +166,9 @@ def discover():
     if (category == 'popular'):
         campaigns_data = sorted(campaigns_data, key=lambda x:x['num_donors'], reverse=True)
     if (category == 'recently-launched'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['start_date'], reverse=True)
+        campaigns_data = sorted(campaigns_data, key=lambda x:x['days_remaining'], reverse=True)
     if (category == 'ending-soon'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['end_date'], reverse=True)
+        campaigns_data = sorted(campaigns_data, key=lambda x:x['days_remaining'], reverse=False)
     if (category == 'most-funded'):
         campaigns_data = sorted(campaigns_data, key=lambda x:x['total_donations'], reverse=True)
     # Convert numbers to text strings, -1 because select values start from
@@ -228,13 +228,18 @@ def change_status():
     id = request.form['campaign_id']
     status = request.form['updated_status']
     campaign = Campaign.query.get(id)
-    campaign.status = status
-    db.session.add(campaign)
-    try:
-      db.session.commit()
-    except Exception as e:
-      print e
-      return "Commit Failed", 500
+    if (status != campaign.status):
+        campaign.status = status
+        if (status == "Approved"):
+            campaign.approved_date_set()
+
+        db.session.add(campaign)
+        try:
+          db.session.commit()
+        except Exception as e:
+          print e
+          return "Commit Failed", 500
+
     campaign_data = campaign.verbose_fields()
     return jsonify(campaign_data)
 
