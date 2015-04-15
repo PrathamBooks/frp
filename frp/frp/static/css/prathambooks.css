@@ -726,22 +726,23 @@ header #login .dropdown-menu {
 }
 .tab-content .col-md-4 img {
   float: left;
-  width: 114px;
-  height: 76px;
+  width: 360px;
+  height: 240px;
   background-color: rgba(229, 229, 229, 0.8);
 }
 .tab-content .col-md-4 h4 {
+  width: 100%;
   text-transform: uppercase;
   font-size: 18px;
   color: #0072dc;
   float: left;
-  margin: 9px 0 0 19px;
+  margin: 15px 0 0 5px;
 }
 .tab-content .col-md-4 p {
   float: left;
-  width: 66%;
+  width: 92%;
   font-size: 1.5em;
-  margin: 0 0 0 19px;
+  margin: 10px 0 0 7px;
 }
 .tab-content .col-md-4 h2 span {
   float: left;
