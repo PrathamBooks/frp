@@ -1,6 +1,6 @@
-{% extends "partials/base2.html" %}
+{% extends "partials/base.html" %}
 {% from "_formhelpers.html" import render_field, render_bullets, render_checkbox, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea%}
-{% block body %}
+{% block content %}
 <div class="container internal">
 
   <div id="pratham-form" class="container">
@@ -157,9 +157,6 @@
     </div><!-- row-->
   </div><!-- Pratham Form-->
 </div><!--container internal -->
-{% endblock %}
-
-{% block js_block %}
 <script>
   $(function() {
       var form = new DonorForm();
@@ -167,4 +164,3 @@
   });
 </script>
 {% endblock %}
-

@@ -69,33 +69,6 @@ def campaign_success():
 def donate_success():
     return render_template('donateSuccess.html')
 
-@app.route('/signup/beneficiary', methods=['GET', 'POST'])
-@login_required
-def signup_as_beneficiary():
-    if request.method == 'GET':
-        form = BeneficiarySignupForm()
-        if (current_user.organization_created):
-            form.set_data(current_user.organization_created[0])
-        return render_template('beneficiary_form.html', form=form)
-
-    elif request.method == 'POST':
-        form = BeneficiarySignupForm(request.form)
-        if form.validate():
-            image = request.files['imageUpload']
-            filename = secure_filename(image.filename)
-            if filename and allowed_file(filename):
-                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
-                image.save(full_save_path)
-
-            result = signup_service.create_beneficiary(form, filename)
-            if not result['error']:
-                return redirect(url_for('campaign_success'))
-            else:
-                flash('Oops something went wrong, please try again')
-
-        print form.errors
-        return render_template('beneficiary_form.html', form=form)
-
 # Login views
 @app.route('/login/facebook', methods=['GET', 'POST'])
 def login_via_facebook():
