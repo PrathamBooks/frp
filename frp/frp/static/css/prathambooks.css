@@ -3147,6 +3147,17 @@ a.std {
   height: 34px;
 }
 
+@media (min-width: 769px) {
+  #pratham-form .col-md-9 {
+    margin: 0 auto;
+    width: 75%;
+    float: inherit;
+  }
+  #pratham-form .col-md-12 {
+    width: 100%;
+  }
+}
+
 .alert{
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
   border: 0 none;
