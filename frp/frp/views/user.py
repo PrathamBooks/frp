@@ -23,8 +23,6 @@ from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
                      ProfileForm,
-                     CategoryForm,
-                     CampaignForm,
                      LANGUAGE_CHOICES,
                      STATES,
                      BENEFICIARY_CATEGORY)
