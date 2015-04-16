@@ -3028,3 +3028,148 @@ ul#socialThumbs li a.gPlus {
 #internalCampaign.capaignList table th.arrDown {
   background-position: center 10px;
 }
+
+/* donor form */
+
+#pratham-form {
+  margin: 0 0 20px;
+  color: #6c5e26;
+  font-family: "proxima-nova", sans-serif;
+}
+#pratham-form h4 {
+  font-size: 1.7em;
+}
+#pratham-form form {
+  margin: -20px 0 0 0;
+}
+#pratham-form .jumbotron {
+  background-color: #fbe659;
+  margin: 0 0 40px 0;
+}
+#pratham-form .jumbotron h1 {
+  font-family: "ligurino-condensed", sans-serif !important;
+}
+#pratham-form .form-control {
+  margin: 0 0 20px;
+  border-radius: 0;
+}
+/*
+input[type=text].form-control {
+  font-size: 1.6em;
+}
+*/
+#step2 #language input[type=text].form-control {
+  font-size: 1em;
+}
+#step2 #language .col-xs-8 .col-xs-4 {
+  margin: 0 5px 0 0;
+  width: 32.3% !important;
+}
+#step2 #language .col-xs-8 {
+  padding: 0 !important;
+}
+#step2 #language p.help-block {
+  font-size: 1em !important;
+  padding: 14px 0 0;
+}
+#pratham-form .jumbotron h2 {
+  float: left;
+  font-family: "ligurino-condensed", sans-serif !important;
+  font-size: 2.5em;
+  font-weight: 400;
+  margin: 0;
+  width: 100%;
+  color: #6c5e26;
+  padding-left: 0;
+}
+#pratham-form .jumbotron p {
+  font-size: 0.9em;
+  line-height: 30px;
+  font-weight: 500;
+}
+#pratham-form .well {
+  background: none;
+  background-color: #fff;
+  box-shadow: 0 5px 10px #ccc;
+  margin: 0 0 40px 0;
+}
+#pratham-form .well label {
+  font-size: 1.6em;
+  font-weight: normal;
+}
+#pratham-form .well h3 {
+  font-family: "ligurino-condensed", sans-serif !important;
+  font-size: 2.5em;
+  margin: 0 0 25px 0;
+}
+#pratham-form .well p {
+  font-size: 1.8em !important;
+  margin: 0 0 20px !important;
+}
+#pratham-form .payment .well p {
+  margin: 0 0 30px !important;
+  float: left !important;
+}
+a.std {
+  font-size: 1.5em;
+}
+#pratham-form #step4 .well p {
+  font-size: 1.75em !important;
+}
+#pratham-form .well p.help-block {
+  color: #6c5e26;
+  font-size: 1.4em !important;
+  margin: -15px 0 20px !important;
+  padding: 0 0 0 5px;
+  position: relative;
+  float: left;
+}
+#pratham-form .btn {
+  background-image: none !important;
+}
+#pratham-form .btn:after {
+  content: url("../images/rightArrow.png");
+  width: 8px;
+  height: 10px;
+  margin: 1px 0 0 10px;
+}
+.well .radio label, .well .checkbox label {
+  float: left;
+  width: 100%;
+}
+.donor .radio, donor .checkbox, .donor .form-group .label, .donor .form-group .col-xs-12 .checkbox {
+  padding: 0 0 0 30px !important;
+}
+#pratham-form .radio label, #pratham-form .checkbox label {
+  margin-bottom: 15px;
+}
+#wrapperOut #wrapper #pratham-form select {
+  height: 34px;
+}
+
+@media (min-width: 769px) {
+  #pratham-form .col-md-9 {
+    margin: 0 auto;
+    width: 75%;
+    float: inherit;
+  }
+  #pratham-form .col-md-12 {
+    width: 100%;
+  }
+}
+
+.alert{
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: 0 none;
+  color: #ff7800;
+  margin: -12px 0 12px;
+  padding: 5px 5px 0;
+  float:left;
+  width:100%;
+  font-family: "proxima-nova",sans-serif !important;
+  font-size: 1.4em;
+  font-weight: 600;
+	
+}
+
+

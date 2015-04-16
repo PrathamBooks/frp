@@ -47,20 +47,10 @@ def init_app(app, settings='settings/development.py'):
                  "css/prathambooks.css",
                  output='gen/all.css')
 
-    bforms_css = Bundle("css/bootstrap.css",
-                 "css/slider.css",
-                 "css/bForm.css",
-                 "css/jquery-ui.css",
-                 output='gen/bforms.css')
-
-
     jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
     bootstrap = Bundle("lib/bootstrap/bootstrap.js",
                        "lib/bootstrap/bootstrap-slider.js",
                        output="gen/bootstrap.js")
-    angular = Bundle("lib/angular/angular.js",
-                     "lib/angular/angular-route.js",
-                     output="gen/angular.js")
     underscore = Bundle("lib/underscore/underscore.js",
                         output="gen/underscore.js")
     app_js = Bundle("js/form.js", 
@@ -73,7 +63,6 @@ def init_app(app, settings='settings/development.py'):
     start_js = Bundle("js/start.js", output="gen/start.js")
 
     assets.register('css_site', css)
-    assets.register('bforms', bforms_css)
 
     assets.register('app_js', app_js)
     assets.register('discover_js', discover_js)
@@ -82,4 +71,3 @@ def init_app(app, settings='settings/development.py'):
     assets.register('jquery', jquery)
     assets.register('bootstrap', bootstrap)
     assets.register('underscore', underscore)
-    assets.register('angular', angular)
