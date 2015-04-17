@@ -224,3 +224,4 @@ class Campaign(BaseMixin, db.Model):
         return int(round((self.total_donations() * 100) /self.target()))
 
 
+

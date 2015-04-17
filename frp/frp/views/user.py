@@ -89,6 +89,10 @@ def signup_as_beneficiary():
 
             result = signup_service.create_beneficiary(form, filename)
             if not result['error']:
+                mailer.send_email(to=current_user.email,
+                        subject="Congrats! Your registration on D-A-B is Successful!",
+                        template="new_user.html", 
+                        first_name=current_user.first_name)
                 return redirect(url_for('campaign_success'))
             else:
                 flash('Oops something went wrong, please try again')
@@ -188,7 +192,7 @@ def search():
     languages = request.args.getlist('languages')
     states = request.args.getlist('states')
     # Convert numbers to text strings, -1 because select values start from
-    # 1 while array indexing starts from 0
+    # 1 whame array indexing starts from 0
     types = map(
             lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
             request.args.getlist('types')
@@ -206,14 +210,72 @@ def donate(campaign_id):
             form.set_data(current_user)
         return render_template('donor_form.html', form=form, campaign=campaign)
     elif request.method == 'POST':
+        old_percent = campaign.percent_funded()
         form = DonorForm(request.form)
         if form.validate():
             result = donate_service.create_donation(form, campaign)
             if not result['error']:
-                mailer.send_email(to="kuchlous@gmail.com", 
-                        subject="Thank You", 
+                start_date = "{:%B %d, %Y}".format(campaign.start_date())
+                mailer.send_email(to=current_user.email,
+                        subject="Thank You for your donation", 
                         template="thank-you.html", 
                         first_name=current_user.first_name)
+                mailer.send_email(to=campaign.created_by.email,
+                        subject="New Donation Recieved", 
+                        template="new_donation.html",
+                        first_name=campaign.created_by.first_name,
+                        amount=result['donation'].amount,
+                        donor=result['donation'].donor.first_name,
+                        campaign=campaign,
+                        title=campaign.title,
+                        start_date=start_date )
+                curr_percent = campaign.percent_funded()
+                if (old_percent < 100 <= curr_percent):
+                    mailer.send_email(to=campaign.created_by.email,
+                            subject="You’ve hit a century! Congrats",
+                            template="congrats.html",
+                            first_name=campaign.created_by.first_name,
+                            title=campaign.title,
+                            start_date=start_date)
+
+                if (old_percent < 75 <= curr_percent):
+                    mailer.send_email(to=campaign.created_by.email,
+                            subject="Yay! You’ve reached 75% of your target!",
+                            template="percent.html",
+                            first_name=campaign.created_by.first_name,
+                            number="third",
+                            percent="75",
+                            title=campaign.title,
+                            start_date=start_date)
+                if (old_percent < 50 <= curr_percent):
+                    mailer.send_email(to=campaign.created_by.email,
+                            subject="Yay! You’ve reached 50% of your target!",
+                            template="percent.html", 
+                            first_name=campaign.created_by.first_name,
+                            number="second",
+                            percent="50",
+                            title=campaign.title,
+                            start_date=start_date)
+                if (old_percent < 25 <= curr_percent):
+                    mailer.send_email(to=campaign.created_by.email,
+                            subject="Yay! You’ve reached 25% of your target!",
+                            template="percent.html", 
+                            first_name=campaign.created_by.first_name,
+                            number="first",
+                            percent="25",
+                            title=campaign.title,
+                            start_date=start_date)
+                if (old_percent == 0 ):
+                    mailer.send_email(to=campaign.created_by.email,
+                            subject="First Donation Recieved", 
+                            template="new_donation.html",
+                            first_name=campaign.created_by.first_name,
+                            amount=result['donation'].amount,
+                            donor=result['donation'].donor.first_name,
+                            title = campaign.title,
+                            start_date=start_date)
+
+
                 return redirect(url_for('donate_success'))
             else:
                 print result
@@ -228,7 +290,8 @@ def change_status():
     id = request.form['campaign_id']
     status = request.form['updated_status']
     campaign = Campaign.query.get(id)
-    if (status != campaign.status):
+    old_status = campaign.status
+    if (status != old_status):
         campaign.status = status
         if (status == "Approved"):
             campaign.approved_date_set()
@@ -239,6 +302,23 @@ def change_status():
         except Exception as e:
           print e
           return "Commit Failed", 500
+    start_date = "{:%B %d, %Y}".format(campaign.start_date())
+    if (status == "Approved"):
+        mailer.send_email(to=campaign.created_by.email,
+                subject="Your D-A-B Campaign is now Live!",
+                template="campaign_created.html",
+                first_name=campaign.created_by.first_name,
+                id=campaign.id)
+    else:
+        mailer.send_email(to=campaign.created_by.email,
+                subject="Your D-A-B Campaign is " + status,
+                template="campaign_state_change.html",
+                first_name=campaign.created_by.first_name,
+                title=campaign.title,
+                start_date=start_date,
+                old_status=old_status,
+                status=status)
+
 
     campaign_data = campaign.verbose_fields()
     return jsonify(campaign_data)
@@ -375,4 +455,5 @@ def convertStatusTypeToString():
 @app.route("/campaign/<id>", methods=['GET'])
 def campaign(id):
     campaign = Campaign.query.get(id)
+    print campaign.created_by.email , "email"
     return render_template('campaign.html', campaign=campaign)
