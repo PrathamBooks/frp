@@ -51,13 +51,24 @@ function showBottomNavigation() {
 
 $(function() {
   $("input[name=imageUpload]").change(function(){
+    $(this).parent().find('.alert').addClass('hide');
     var ext = this.files[0].type;
+    var imageSize = this.files[0].size;
+    if (imageSize < MAX_FILE_SIZE) {
+      $(this).css('border-color','#FF0004');
+      $(this).parent().find('.alert-size').addClass('hide');
+    }
+    else {
+      $(this).css('border-color','#FF0004');
+      $(this).parent().find('.alert-size').removeClass('hide');
+    }
+
     if(ext=='image/jpeg' || ext=='image/png' || ext=='image/gif'){
       $(this).css('border-color','#CCCCCC');
-      $(this).parent().find('.alert').addClass('hide');
+      $(this).parent().find('.alert-type').addClass('hide');
     } else {
       $(this).css('border-color','#FF0004');
-      $(this).parent().find('.alert').removeClass('hide');
+      $(this).parent().find('.alert-type').removeClass('hide');
     }
   });
   $("input[name=addVideo]").change(function(){
