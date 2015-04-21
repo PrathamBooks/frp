@@ -3,28 +3,29 @@
 <div class="container internal">
   <div id="pratham-form" class="container">
     <div class="row">
-      <div ng-controller="signupController" class="col-xs-12 col-sm-9"><!-- ng-controller=signupController -->
-
-        This is a place holder to show details. Since we don't have admin view.
-        <h3> Details </h3><a href="{{ url_for('edit_profile') }}">Edit</a><br/>
-        First Name: {{ current_user.first_name }}<br/>
-        Last Name: {{ current_user.last_name }}<br/>
-        Email: {{ current_user.email }}<br/>
-        Address: {{ current_user.address }}<br/>
-        Contact Number: {{ current_user.contact_number }}<br/>
-        Pan Number: {{ current_user.pan_number }}<br/>
-        Need 80G Certificate: {{ current_user.need_80g_certificate }}<br/>
-        <h3>Donated Projects</h3>
-        Nothing yet
-        <br/>
-        <h3>Your Projects</h3>
-        Nothing yet
-        <br/>
-
-      </div><!-- xs-12 sm-9-->
+      <div class="col-md-12 col-sm-9">
+        <div class="col-md-12">
+          <div id="internalContent" class="row beneficiary donor">
+            <div  id="internalCampaign" class="row ">
+              <div class="col-md-9">
+                <h3> Your Profile Details </h3>
+                <p> <strong> First Name </strong> : {{ current_user.first_name }} </p>
+                <p> Last Name: {{ current_user.last_name }} </p>
+                <p> Email: {{ current_user.email }} </p>
+                <p> Address: {{ current_user.address }} </p>
+                <p> City: {{ current_user.city }} </p>
+                <p> State: {{ current_user.state }} </p>
+                <p> Pin: {{ current_user.pin }} </p>
+                <p> Contact Number: {{ current_user.contact_number }} </p>
+                <p> Pan Number: {{ current_user.pan_number }} </p>
+                <p> Need 80G Certificate: {{ current_user.need_80g_certificate }} </p>
+                <button type="submit" id="proceed" class="btn"> <a href="{{ url_for('edit_profile') }}">Edit</a> </button>
+               </div>
+            </div><!-- xs-12 sm-9-->
+          </div>
+        </div>
+      </div>
     </div><!-- row-->
-
   </div><!-- Pratham Form-->
-
 </div><!--container internal -->
 {% endblock content%}
