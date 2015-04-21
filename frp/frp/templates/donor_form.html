@@ -63,11 +63,11 @@
                         <label for="address">Address<strong>*</strong></label>
                       </div>
                       <div class="col-xs-3">
-                        <input type="text" class="form-control"  id="city" name="city" placeholder="City" required/>
+                        <input type="text" class="form-control"  id="city" name="city" placeholder="City" value="{{form.city.data|default('',True)}}" required/>
                         <div class="alert alert-warning hide">Enter City</div>
                       </div>
                       <div class="col-xs-3">
-                        <select type="text" class="form-control"  id="city" name="state" placeholder="State" required/>
+                        <select type="text" class="form-control"  id="city" name="state" placeholder="State" value="{{form.state.data|default('',True)}}" required/>
                           <option value="Andhra Pradesh">Andhra Pradesh</option>
                           <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                           <option value="Assam">Assam</option>
@@ -133,7 +133,6 @@
                         <h3>Would you like us to send you a Tax Exemption Certificate?</h3>
                         {{ render_bullets(form.tax_exemption_certificate) }}
                       </div>
-
 
                       <div class="col-xs-12">
                         <div class="checkbox">

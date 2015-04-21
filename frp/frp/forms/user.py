@@ -56,3 +56,45 @@ class ProfileForm(wtforms.Form):
         self.contact_number.data = user.contact_number
         self.pan_number.data = user.pan_number
         self.need_80g_certificate.data = user.need_80g_certificate
+
+class BillingInfo(wtforms.Form):
+    donation_id = wtforms.HiddenField('Donation Id')
+    first_name = wtforms.TextField(
+        label='First Name', validators=[wtforms.validators.Required('Enter first name'),
+                                        wtforms.validators.Length(max=160)])
+    last_name = wtforms.TextField(
+        label='Last Name', validators=[wtforms.validators.Required('Enter last name'),
+                                       wtforms.validators.Length(max=160)],
+        default=u'')
+    phone_number = wtforms.TextField(
+        label='Phone Number', validators=[wtforms.validators.Optional(),
+                                            wtforms.validators.Length(max=15)],
+        default=u'')
+    email = wtforms.TextField(
+            label='Email',
+            validators=[wtforms.validators.Required()])
+    address = wtforms.TextField(
+        label='Address', validators=[wtforms.validators.Required(),
+                                     wtforms.validators.Length(max=500)],
+        default=u'')
+    city = wtforms.TextField(
+        label='City', validators=[wtforms.validators.Required(),
+                                     wtforms.validators.Length(max=500)],
+        default=u'')
+    state = wtforms.SelectField(
+        label='State',
+        choices=STATES)
+    pin = wtforms.TextField(
+            label='Pin Code',
+            validators=[wtforms.validators.Required()])
+  
+    def set_data(self, user, donation):
+        self.first_name.data = user.first_name
+        self.last_name.data = user.last_name
+        self.address.data = user.address
+        self.phone_number.data = user.contact_number
+        self.email.data = user.email
+        self.city.data = user.city
+        self.state.data = user.state
+        self.pin.data = user.pin
+        self.donation_id.data = donation.id

@@ -16,7 +16,7 @@ class Donation(BaseMixin, db.Model):
     last_name = db.Column(db.String(50), nullable=True, server_default='')
     campaign_id = db.Column(db.Integer, db.ForeignKey('campaign.id'), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
-    confirmation = db.Column(db.Unicode(100), nullable=False)
+    confirmation = db.Column(db.Unicode(100), nullable=True)
     state = db.Column(db.Unicode(100), nullable=False)
     city = db.Column(db.Unicode(100), nullable=False)
     identification = db.Column(db.Unicode(100), nullable=False)

@@ -13,7 +13,11 @@ GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID'),
 GOOGLE_CLIENT_SECRET =  os.environ.get('GOOGLE_CLIENT_SECRET')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = True
+#DEBUG = True
+
+#ccavenue
+CCAVENUE_ACCESS_CODE = os.environ.get('CCAVENUE_ACCESS_CODE')
+CCAVENUE_WORKING_KEY = os.environ.get('CCAVENUE_WORKING_KEY')
 
 SITE_NAME="Pratham Books Donate-A-Book"
 

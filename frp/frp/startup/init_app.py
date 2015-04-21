@@ -19,7 +19,7 @@ def init_app(app, settings='settings/development.py'):
 
     if not app.debug:
         file_handler = FileHandler('server.log')
-        file_handler.setLevel(logging.WARNING)
+        file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
 
     app.config['WTF_CSRF_ENABLED'] = False              # Disable CSRF checks while testing

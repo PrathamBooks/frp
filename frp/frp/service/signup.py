@@ -10,6 +10,15 @@ from .. import app
 from ..models import (db, User, UserAuth, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
 from ..helpers import file_extension
+from .image_backup import save_image
+
+from rq import Queue
+from rq.job import Job
+import redis
+
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+conn = redis.from_url(redis_url)
+q = Queue(connection=conn)
 
 def create_beneficiary(form, filename):
     category = form.category.data
@@ -91,6 +100,13 @@ def create_beneficiary(form, filename):
         new_file_name = str(campaign.id) + '.' + extension
         full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
         copyfile(full_file_path, full_new_path)
+	job = q.enqueue_call(
+        	func=save_image, 
+                args=(os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads'),
+                      new_file_name,), 
+                result_ttl=5000
+      	)
+	print job.get_id()
         campaign = Campaign.query.get(campaign.id)
         campaign.image = new_file_name
         db.session.add(campaign)
@@ -98,7 +114,7 @@ def create_beneficiary(form, filename):
 
     except Exception as e:
         print e
-        app.logger.warning('Unable to save')
+        app.logger.warning('Unable to save campaign')
         db.session.rollback()
         return {'error': True, 'exc': e}
 

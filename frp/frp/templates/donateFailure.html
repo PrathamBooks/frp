@@ -6,11 +6,11 @@
       <div class=" col-md-12 well">
         <h3>Thank you!</h3>
         <div class=" col-md-12">
-          <h4>Thank you for your donation to {{ campaign.title }} on Pratham Books’ Donate-a-Book. </h4>
-          <p>If you chose to receive tax exmption certificate, you will hear from us soon.</p>
+          <h4>Unfortunately, your donation to {{ campaign.title }} did not go through.</h4>
+          <p> If you would like to try again, please click to the button below </p>
 
           <div class="form-group row">
-            <a href="{{ url_for('discover') }}" type="button" class="btn">Donate to Similar Campaigns</a>
+            <a href={{ url_for('donate', campaign_id=campaign.id ) }} type="button" class="btn">Try Again</a>
           </div>
         </div>
       </div>

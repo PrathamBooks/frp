@@ -23,6 +23,7 @@ from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
                      ProfileForm,
+                     BillingInfo,
                      LANGUAGE_CHOICES,
                      STATES,
                      BENEFICIARY_CATEGORY)
@@ -63,10 +64,96 @@ def campaign_success():
     return render_template('campaignSuccess.html')
 
 
-@app.route('/donate/success')
-def donate_success():
-    return render_template('donateSuccess.html')
+@app.route('/billing/failure', methods=['GET', 'POST'])
+def donate_failure():
+  donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp']) 
+  donation = Donation.query.get(int(donation_id))
+  campaign = donation.campaign  
+  db.session.delete(donation)
+  app.logger.warning('Donation id ' + str(donation_id) + ' failed. Tracking id is ' + str(tracking_id))
+  db.session.commit()
+  return render_template("donateFailure.html", campaign=campaign)
 
+@app.route('/billing/success', methods=['GET', 'POST'])
+def donate_success():
+  donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp'])
+  donation = Donation.query.get(int(donation_id))
+  campaign = donation.campaign  
+
+  start_date = "{:%B %d, %Y}".format(campaign.start_date())
+  mailer.send_email(to=current_user.email,
+    subject="Thank you for your donation", 
+    template="thank-you.html", 
+    first_name=current_user.first_name,
+    last_name=current_user.last_name,
+    title=campaign.title)
+  mailer.send_email(to=campaign.created_by.email,
+    subject="New Donation Recieved", 
+    template="new_donation.html",
+    first_name=campaign.created_by.first_name,
+    amount=donation.amount,
+    donor=donation.donor.first_name + ' ' + donation.donor.last_name,
+    campaign=campaign,
+    title=campaign.title,
+    start_date=start_date )
+  curr_percent = campaign.percent_funded()
+  old_percent = curr_percent - donation.amount
+  if (old_percent < 100 <= curr_percent):
+    mailer.send_email(to=campaign.created_by.email,
+      subject="You’ve hit a century! Congrats",
+      template="congrats.html",
+      first_name=campaign.created_by.first_name,
+      title=campaign.title,
+      start_date=start_date)
+
+  if (old_percent < 75 <= curr_percent):
+    mailer.send_email(to=campaign.created_by.email,
+      subject="Yay! You’ve reached 75% of your target!",
+      template="percent.html",
+      first_name=campaign.created_by.first_name,
+      number="third",
+      percent="75",
+      title=campaign.title,
+      start_date=start_date)
+  if (old_percent < 50 <= curr_percent):
+    mailer.send_email(to=campaign.created_by.email,
+      subject="Yay! You’ve reached 50% of your target!",
+      template="percent.html", 
+      first_name=campaign.created_by.first_name,
+      number="second",
+      percent="50",
+      title=campaign.title,
+      start_date=start_date)
+  if (old_percent < 25 <= curr_percent):
+    mailer.send_email(to=campaign.created_by.email,
+      subject="Yay! You’ve reached 25% of your target!",
+      template="percent.html", 
+      first_name=campaign.created_by.first_name,
+      number="first",
+      percent="25",
+      title=campaign.title,
+      start_date=start_date)
+  if (old_percent == 0 ):
+    mailer.send_email(to=campaign.created_by.email,
+      subject="First Donation Recieved", 
+      template="new_donation.html",
+      first_name=campaign.created_by.first_name,
+      amount=donation.amount,
+      donor=donation.donor.first_name + ' ' + donation.donor.last_name,
+      title = campaign.title,
+      start_date=start_date)
+
+  donation.confirmation = tracking_id
+  db.session.add(donation)
+  try:
+    db.session.commit()
+    return render_template('donateSuccess.html', campaign=campaign)
+
+  except Exception as e:
+    app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
+    return render_template('donateSuccess.html', campaign=campaign)
+
+    
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
 def signup_as_beneficiary():
@@ -198,6 +285,13 @@ def search():
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, languages=languages, states=states, types=types)
 
+@app.route("/donate/pay", methods=['POST'])
+@login_required
+def pay():
+  form = BillingInfo(request.form)
+  donation = Donation.query.get(form.donation_id.data)
+  return donate_service.ccavRequest(form, donation)
+
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
 @login_required
 def donate(campaign_id):
@@ -208,79 +302,17 @@ def donate(campaign_id):
             form.set_data(current_user)
         return render_template('donor_form.html', form=form, campaign=campaign)
     elif request.method == 'POST':
-        old_percent = campaign.percent_funded()
         form = DonorForm(request.form)
         if form.validate():
             result = donate_service.create_donation(form, campaign)
             if not result['error']:
-                start_date = "{:%B %d, %Y}".format(campaign.start_date())
-                mailer.send_email(to=current_user.email,
-                        subject="Thank You for your donation", 
-                        template="thank-you.html", 
-                        first_name=current_user.first_name)
-                mailer.send_email(to=campaign.created_by.email,
-                        subject="New Donation Recieved", 
-                        template="new_donation.html",
-                        first_name=campaign.created_by.first_name,
-                        amount=result['donation'].amount,
-                        donor=result['donation'].donor.first_name,
-                        campaign=campaign,
-                        title=campaign.title,
-                        start_date=start_date )
-                curr_percent = campaign.percent_funded()
-                if (old_percent < 100 <= curr_percent):
-                    mailer.send_email(to=campaign.created_by.email,
-                            subject="You’ve hit a century! Congrats",
-                            template="congrats.html",
-                            first_name=campaign.created_by.first_name,
-                            title=campaign.title,
-                            start_date=start_date)
-
-                if (old_percent < 75 <= curr_percent):
-                    mailer.send_email(to=campaign.created_by.email,
-                            subject="Yay! You’ve reached 75% of your target!",
-                            template="percent.html",
-                            first_name=campaign.created_by.first_name,
-                            number="third",
-                            percent="75",
-                            title=campaign.title,
-                            start_date=start_date)
-                if (old_percent < 50 <= curr_percent):
-                    mailer.send_email(to=campaign.created_by.email,
-                            subject="Yay! You’ve reached 50% of your target!",
-                            template="percent.html", 
-                            first_name=campaign.created_by.first_name,
-                            number="second",
-                            percent="50",
-                            title=campaign.title,
-                            start_date=start_date)
-                if (old_percent < 25 <= curr_percent):
-                    mailer.send_email(to=campaign.created_by.email,
-                            subject="Yay! You’ve reached 25% of your target!",
-                            template="percent.html", 
-                            first_name=campaign.created_by.first_name,
-                            number="first",
-                            percent="25",
-                            title=campaign.title,
-                            start_date=start_date)
-                if (old_percent == 0 ):
-                    mailer.send_email(to=campaign.created_by.email,
-                            subject="First Donation Recieved", 
-                            template="new_donation.html",
-                            first_name=campaign.created_by.first_name,
-                            amount=result['donation'].amount,
-                            donor=result['donation'].donor.first_name,
-                            title = campaign.title,
-                            start_date=start_date)
-
-
-                return redirect(url_for('donate_success'))
+                app.logger.warning('Trying to display billing page in views')
+                return result['billing_info_page']
             else:
                 print result
                 flash('Oops something went wrong, please try again')
 
-        print form.errors
-        print form
+        app.logger.warning(form.errors)
         return render_template('donor_form.html', form=form, campaign=campaign)
 
 @app.route("/change_status",methods=['POST'])

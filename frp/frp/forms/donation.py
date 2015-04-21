@@ -18,7 +18,7 @@ class DonorForm(wtforms.Form):
     customize_amount = wtforms.IntegerField(
             label='Customize your donation amount',
             validators=[wtforms.validators.Optional(),
-                        wtforms.validators.NumberRange(250,10000)])
+                        wtforms.validators.NumberRange(1,10000)])
     first_name = wtforms.TextField(
             label='Name',
             validators=[wtforms.validators.Required()])
@@ -47,7 +47,7 @@ class DonorForm(wtforms.Form):
         choices=[(True, 'Yes'),
                  (False, 'No')])
     ann_choice = wtforms.RadioField(
-        label='Would you like to be annonomus?',
+        label='Would you like to be anonymous?',
         coerce=bool,
         default=False,
         choices=[(True, 'Yes'),
@@ -56,5 +56,8 @@ class DonorForm(wtforms.Form):
     def set_data(self, user):
        self.first_name.data = user.first_name
        self.last_name.data = user.last_name
+       self.state.data = user.state
+       self.city.data = user.city
+       self.pin.data = user.pin
        self.contact_number.data = user.contact_number
        self.pan_number.data = user.pan_number
