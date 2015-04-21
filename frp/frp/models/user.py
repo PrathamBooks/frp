@@ -44,6 +44,9 @@ class User(UserMixin, db.Model):
     status = db.Column(
         db.SmallInteger, nullable=False, default=USER_STATUS.ACTIVE)
     address = db.Column(db.String(500), nullable=True, default=u'')
+    city = db.Column(db.String(100), nullable=True, default=u'')
+    state = db.Column(db.String(100), nullable=True, default=u'')
+    pin = db.Column(db.String(100), nullable=True, default=u'')
     contact_number = db.Column(db.String(15), nullable=True, default=u'')
     pan_number = db.Column(db.String(10), nullable=True, default=u'')
     need_80g_certificate = db.Column(db.Boolean, default=False,)

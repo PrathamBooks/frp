@@ -15,8 +15,15 @@
           {{ render_text_field(form.last_name) }}
           {{ render_text_field(form.contact_number) }}
           {{ render_text_field(form.address) }}
+          {{ render_text_field(form.city) }}
+          <div class="form-group row">
+            <div class="col-xs-4">
+              {{ form.state.label }} <strong> * </strong>
+            </div>
+            {{ render_select(form.state) }}
+          </div>
+          {{ render_text_field(form.pin) }}
           {{ render_text_field(form.pan_number) }}
-
           <div class="form-group row">
             <div class="col-xs-12">
               <label for="status">Would you like us to send you a Tax Exemption Certificate?</label>
