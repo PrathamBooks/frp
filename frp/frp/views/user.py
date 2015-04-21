@@ -415,6 +415,12 @@ def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)
 
+@app.route("/profile/donor_transactions")
+@login_required
+def donor_transactions():
+    donations=current_user.donations
+    return render_template('donor_transactions.html', donations=donations)
+
 @app.route("/profile/donor_dashboard")
 @login_required
 def donor_dashboard():

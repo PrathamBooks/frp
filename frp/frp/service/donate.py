@@ -28,6 +28,7 @@ def create_donation(form, campaign):
           state=form.state.data, 
           city=form.city.data, 
           identification=form.pan_number.data,
+          tax_exemption_certificate=form.tax_exemption_certificate.data,
           ann_choice=form.ann_choice.data)
   db.session.add(donation)
   try:

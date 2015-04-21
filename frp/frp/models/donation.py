@@ -21,6 +21,7 @@ class Donation(BaseMixin, db.Model):
     city = db.Column(db.Unicode(100), nullable=False)
     identification = db.Column(db.Unicode(100), nullable=False)
     ann_choice = db.Column(db.BOOLEAN,nullable=False)
+    tax_exemption_certificate = db.Column(db.BOOLEAN,nullable=False)
 
     def __add__(self,o):
         return self.amount + o.amount
