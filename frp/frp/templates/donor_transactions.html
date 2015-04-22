@@ -1,0 +1,40 @@
+{% extends "partials/base.html" %}
+{% block content %}
+<div class="container internal">
+  <form role="form">
+    <div class="row startCampaign capaignList" id="internalCampaign">
+      <div class="col-md-12">
+        <h2>Donor Transactions
+          <span>My donate-a-book footprint</span>
+        </h2>
+      </div>           
+
+      <div class="col-md-12 donorDash">   
+
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th>Date</th>
+                <th>Transaction ID</th>
+                <th>Campaign</th>
+                <th>Amount</th>
+                <th>80 G Cert. Requested</th>
+              </tr>
+              {% for donation in donations %}
+                <tr>
+                  <td>{{ donation.created_at.date() }} </td>
+                  <td>{{ donation.confirmation }}</td>
+                  <td>{{ donation.campaign.title }}</td>
+                  <td>{{ donation.amount }}</td>
+                  <td>{{ donation.tax_exemption_certificate }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        </div>  
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

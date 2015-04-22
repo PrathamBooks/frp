@@ -415,28 +415,37 @@ def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)
 
+@app.route("/profile/donor_transactions")
+@login_required
+def donor_transactions():
+    donations=current_user.donations
+    return render_template('donor_transactions.html', donations=donations)
+
 @app.route("/profile/donor_dashboard")
 @login_required
 def donor_dashboard():
     donations=current_user.donations
     campaigns = []
     active_donation=closed_donation=total_active_amt=total_closed_amt=0
+    total_active_children = total_closed_children = 0
     for donation in donations:
+        campaigns.append(donation.campaign)
         if donation.campaign.is_active():
             active_donation+=1
+            total_active_children += donation.campaign.total_impact_on_children
             total_active_amt+= donation.amount
-            campaigns.append(donation.campaign)
 
         else:
             closed_donation+=1
+            total_closed_children += donation.campaign.total_impact_on_children
             total_closed_amt+= donation.amount
-            campaigns.append(donation.campaign)
 
     return render_template('donorDashboard.html',
             campaigns=campaigns,total_active_amt=total_active_amt,
             total_closed_amt=total_closed_amt,active_donation=active_donation,
             books_active= int(total_active_amt/50),books_closed=int(total_closed_amt/50),
-            closed_donation=closed_donation)
+            closed_donation=closed_donation, total_active_children=total_active_children,
+            total_closed_children=total_closed_children)
 
 @app.route("/profile/beneficiary_dashboard")
 @login_required

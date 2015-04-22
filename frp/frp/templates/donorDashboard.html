@@ -40,9 +40,9 @@
               </tr>
               <tr>
                 <td>Number of children impacted</td>
-                <td>10</td>
-                <td>10</td>
-                <td>20</td>
+                <td>{{ total_active_children + total_closed_children }}</td>
+                <td>{{ total_active_children }}</td>
+                <td>{{ total_closed_children }}</td>
               </tr>
           </tbody></table>
 
@@ -51,7 +51,7 @@
         <div class="col-md-9">
 
           <h2 class="blockQuotes">
-            I donated <strong>{{ books_active + books_closed}} books</strong> and impacted <strong>400 children</strong> through Pratham Book’s donate-a-book platform. <br/>
+            I have donated <strong>{{ books_active + books_closed}} books</strong> and impacted <strong> {{ total_closed_children + total_active_children }} children</strong> through Pratham Book’s donate-a-book platform. <br/>
             I helped India’s children read.
           </h2>
 
@@ -60,7 +60,7 @@
 
         <div class="col-md-3 pieBlock">
           <ul id="socialThumbs">
-            <li><a href="myTransactions.html">My Transactions</a></li>
+            <li><a href={{ url_for('donor_transactions') }} >My Transactions</a></li>
             <li><a class="fb" href="#">Share On Facebook</a></li>
             <li><a class="tw" href="#">Share On Twitter</a></li>
           </ul>
