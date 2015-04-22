@@ -11,7 +11,8 @@ from flask import (render_template,
                    flash,
                    views,
                    request,
-                   jsonify)
+                   jsonify,
+                   current_app)
 from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
@@ -74,30 +75,24 @@ def donate_failure():
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
 
-@app.route('/billing/success', methods=['GET', 'POST'])
-def donate_success():
-  donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp'])
-  donation = Donation.query.get(int(donation_id))
-  campaign = donation.campaign  
-
+def send_mail(old_percent,curr_percent,campaign,donation):
   start_date = "{:%B %d, %Y}".format(campaign.start_date())
-  mailer.send_email(to=current_user.email,
+  mailer.send_email(to=donation.donor.email,
     subject="Thank you for your donation", 
     template="thank-you.html", 
-    first_name=current_user.first_name,
-    last_name=current_user.last_name,
+    first_name=donation.donor.first_name,
+    last_name=donation.donor.last_name,
     title=campaign.title)
+
   mailer.send_email(to=campaign.created_by.email,
-    subject="New Donation Recieved", 
+    subject="New Donation Recieved ",
     template="new_donation.html",
     first_name=campaign.created_by.first_name,
     amount=donation.amount,
-    donor=donation.donor.first_name + ' ' + donation.donor.last_name,
-    campaign=campaign,
+    donor=donation.donor_name(),
     title=campaign.title,
     start_date=start_date )
-  curr_percent = campaign.percent_funded()
-  old_percent = curr_percent - donation.amount
+
   if (old_percent < 100 <= curr_percent):
     mailer.send_email(to=campaign.created_by.email,
       subject="You’ve hit a century! Congrats",
@@ -105,34 +100,8 @@ def donate_success():
       first_name=campaign.created_by.first_name,
       title=campaign.title,
       start_date=start_date)
+    return
 
-  if (old_percent < 75 <= curr_percent):
-    mailer.send_email(to=campaign.created_by.email,
-      subject="Yay! You’ve reached 75% of your target!",
-      template="percent.html",
-      first_name=campaign.created_by.first_name,
-      number="third",
-      percent="75",
-      title=campaign.title,
-      start_date=start_date)
-  if (old_percent < 50 <= curr_percent):
-    mailer.send_email(to=campaign.created_by.email,
-      subject="Yay! You’ve reached 50% of your target!",
-      template="percent.html", 
-      first_name=campaign.created_by.first_name,
-      number="second",
-      percent="50",
-      title=campaign.title,
-      start_date=start_date)
-  if (old_percent < 25 <= curr_percent):
-    mailer.send_email(to=campaign.created_by.email,
-      subject="Yay! You’ve reached 25% of your target!",
-      template="percent.html", 
-      first_name=campaign.created_by.first_name,
-      number="first",
-      percent="25",
-      title=campaign.title,
-      start_date=start_date)
   if (old_percent == 0 ):
     mailer.send_email(to=campaign.created_by.email,
       subject="First Donation Recieved", 
@@ -142,7 +111,31 @@ def donate_success():
       donor=donation.donor.first_name + ' ' + donation.donor.last_name,
       title = campaign.title,
       start_date=start_date)
+    return
 
+  percent_arr = [25,50,75]
+  index=0
+  while index < len(percent_arr):
+      if (old_percent < percent_arr[index] <= curr_percent):
+          mailer.send_email(to=campaign.created_by.email,
+                  subject='Yay! You’ve reached '+ str(percent_arr[index])+'% of your target!',
+                  template="campaign_milestone.html",
+                  first_name=campaign.created_by.first_name,
+                  number=index+1,
+                  percent=percent_arr[index],
+                  title=campaign.title,
+                  start_date=start_date)
+          return
+      index+=1
+
+@app.route('/billing/success', methods=['GET', 'POST'])
+def donate_success():
+  donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp'])
+  donation = Donation.query.get(int(donation_id))
+  campaign = donation.campaign
+  curr_percent = campaign.percent_funded()
+  old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
+  send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
   donation.confirmation = tracking_id
   db.session.add(donation)
   try:
@@ -153,7 +146,7 @@ def donate_success():
     app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
     return render_template('donateSuccess.html', campaign=campaign)
 
-    
+
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
 def signup_as_beneficiary():
@@ -494,5 +487,40 @@ def convertStatusTypeToString():
 @app.route("/campaign/<id>", methods=['GET'])
 def campaign(id):
     campaign = Campaign.query.get(id)
-    print campaign.created_by.email , "email"
+    donation = campaign.donations[0]
     return render_template('campaign.html', campaign=campaign)
+
+# This code has been added for testing porpose only 
+@app.route("/donate_1/<campaign_id>", methods=['GET', 'POST'])
+@login_required
+def donate_1(campaign_id):
+    if current_app.config.get('DEBUG', True):
+        campaign = Campaign.query.get(campaign_id)
+        if request.method == 'GET':
+            form = DonorForm()
+            if current_user.is_active():
+                form.set_data(current_user)
+                return render_template('donor_form.html', form=form, campaign=campaign)
+        elif request.method == 'POST':
+            form = DonorForm(request.form)
+            if form.validate():
+                amount = form.amount_choice.data
+                if not amount:
+                    amount = form.customize_amount.data
+                donor = current_user if current_user.is_active() else admin_user()
+                donation = Donation(amount=amount, 
+                        donor=donor, 
+                        first_name=form.first_name.data,
+                        last_name=form.last_name.data,
+                        campaign=campaign, 
+                        state=form.state.data, 
+                        city=form.city.data, 
+                        identification=form.pan_number.data,
+                        tax_exemption_certificate=form.tax_exemption_certificate.data,
+                        ann_choice=form.ann_choice.data)
+                db.session.add(donation)
+                db.session.commit()
+                curr_percent = campaign.percent_funded()
+                old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
+                send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
+                return render_template('donor_form.html', form=form, campaign=campaign)
