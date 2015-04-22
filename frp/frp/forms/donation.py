@@ -42,16 +42,14 @@ class DonorForm(wtforms.Form):
             validators=[wtforms.validators.Optional()])
     tax_exemption_certificate = wtforms.RadioField(
         label='Would you like us to send you a Tax Exemption Certificate?',
-        coerce=bool,
-        default=True,
-        choices=[(True, 'Yes'),
-                 (False, 'No')])
+        default='True',
+        choices=[('True', 'Yes'),
+                 ('False', 'No')])
     ann_choice = wtforms.RadioField(
         label='Would you like to be anonymous?',
-        coerce=bool,
-        default=False,
-        choices=[(True, 'Yes'),
-                 (False, 'No')])
+        default='False',
+        choices=[('True', 'Yes'),
+                 ('False', 'No')])
 
     def set_data(self, user):
        self.first_name.data = user.first_name
