@@ -19,6 +19,7 @@ def create_donation(form, campaign):
   # in case the donor did not sign in, the donation is accounted for in
   # in admin account
   donor = current_user if current_user.is_active() else admin_user()
+  
   donation = Donation(amount=amount, 
           donor=donor, 
           first_name=form.first_name.data,
@@ -28,8 +29,8 @@ def create_donation(form, campaign):
           state=form.state.data, 
           city=form.city.data, 
           identification=form.pan_number.data,
-          tax_exemption_certificate=form.tax_exemption_certificate.data,
-          ann_choice=form.ann_choice.data)
+          tax_exemption_certificate=(True if form.tax_exemption_certificate.data == "True" else False),
+          ann_choice=(True if form.ann_choice.data == "True" else False))
   db.session.add(donation)
   try:
     db.session.commit()
