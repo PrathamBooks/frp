@@ -492,7 +492,6 @@ def convertStatusTypeToString():
 @app.route("/campaign/<id>", methods=['GET'])
 def campaign(id):
     campaign = Campaign.query.get(id)
-    donation = campaign.donations[0]
     return render_template('campaign.html', campaign=campaign)
 
 # This code has been added for testing porpose only 

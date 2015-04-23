@@ -8,22 +8,18 @@ LOCAL_FILE = 'file'
 
 IMAGES_BUCKET = 'frp-production/images'
 def save_image(directory, filename):
-  print "In save image"
-  errors = []
-  try:
-    with open(os.path.join(directory, filename), 'r') as localfile:
-      print "opened file"
-      dst_uri = boto.storage_uri(
-        IMAGES_BUCKET + '/' + filename, GOOGLE_STORAGE)
-    # The key-related functions are a consequence of boto's
-    # interoperability with Amazon S3 (which employs the
-    # concept of a key mapping to localfile).
-      dst_uri.new_key().set_contents_from_file(localfile)
-      print 'Successfully created "%s/%s"' % (
-        dst_uri.bucket_name, dst_uri.object_name)
-      return dst_uri.bucket_name + '/' + dst_uri.object_name
-  except:
-    errors.append('Unable to save image')
-    return errors
+  with open("/home/infodigital/log/image_backup.log", "a") as log:
+    log.write('Trying to save ' + directory + ' ' + filename + '\n')
+    errors = []
+    try:
+      with open(os.path.join(directory, filename), 'r') as localfile:
+        log.write('opened file ' + directory + ' ' + filename)
+        dst_uri = boto.storage_uri(
+          IMAGES_BUCKET + '/' + filename, GOOGLE_STORAGE)
+        dst_uri.new_key().set_contents_from_file(localfile)
+        log.write('Successfully created ' + dst_uri.bucket_name + ' ' + dst_uri.object_name + '\n')
+    except:
+      errors.append('Unable to save image')
+      return errors
 
 

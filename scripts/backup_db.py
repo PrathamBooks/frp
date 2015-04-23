@@ -17,7 +17,6 @@ project_id = 'emerald-surface-650'
 PSQL_BUCKET = 'frp-production/psql'
 
 call(["rm","-f","postgres.dump"])
-call(["ls","-l"])
 now = time.time()
 filename = 'postgres-%d.dump' % now
 pg_dump_cmd = 'pg_dumpall > ' + filename 
