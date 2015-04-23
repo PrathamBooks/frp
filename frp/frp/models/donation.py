@@ -28,6 +28,11 @@ class Donation(BaseMixin, db.Model):
     def __radd__(self,o):
         return self.amount+o
 
+    def donor_name(self):
+        if (self.ann_choice == True):
+            return "an Anonomus Donor"
+        return  self.donor.first_name + ' ' + self.donor.last_name + '\nDont forgrt to thank him/her @ ' + self.donor.email
+
     @staticmethod
     def total_donated():
         donations = map(lambda x: x.amount, Donation.query.all())

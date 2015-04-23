@@ -137,12 +137,12 @@ class Campaign(BaseMixin, db.Model):
         'who', 'impact', 'utilization', 'state', 'city', 'languages'))
 
     @staticmethod
-    def all_campaigns_data(status = 'none'):
+    def all_campaigns_data(status = 'none',status_1='none'):
         campaigns = Campaign.query.all()
         if (status == 'none'):
             retval = map(lambda x:x.verbose_fields(),campaigns)
         else:
-            campaigns = filter((lambda x:x.status==status),campaigns)
+            campaigns = filter((lambda x:(x.status==status or x.status==status_1)),campaigns)
             retval = map(lambda x:x.verbose_fields(),campaigns)
         return retval
 
