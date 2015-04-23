@@ -3169,7 +3169,12 @@ a.std {
   font-family: "proxima-nova",sans-serif !important;
   font-size: 1.4em;
   font-weight: 600;
-	
 }
 
-
+/* Image upload btn on start page */
+.file-input-wrapper {
+    float: inherit !important;
+    margin: 0 !important;
+    height: auto !important;
+    background-image: none !important;
+}

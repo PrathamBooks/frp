@@ -81,9 +81,9 @@
     </div>
   </div>
 </div> 
-{% assets "discover_js" %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
-{% endassets %}
+{% endblock %}
+
+{% block jsblock %}
 {% assets "underscore" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
 {% endassets %}

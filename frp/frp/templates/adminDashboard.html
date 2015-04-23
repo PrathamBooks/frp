@@ -1,10 +1,6 @@
 {% extends "partials/base.html" %}
 {% block content %}
 
-{% assets "admin_js" %}
-<script type="text/javascript" src="{{ ASSET_URL }}"> </script>
-{% endassets %}
-
 <script type="text/javascript">
   var campaigns_data = {{ campaigns_data|tojson }};
 </script>
@@ -63,6 +59,9 @@
     </div><!--InternalCampaign-->
   </form>
 </div>  
+{% endblock %}
+
+{% block jsblock %}
 <script>
   $(function() {
     var admin_dash = new AdminPage(campaigns_data);

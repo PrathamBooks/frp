@@ -495,10 +495,7 @@
 
                       <div id="duration" class="well">
                         <h3>Duration of Campaign</h3>
-                        <p>A campaign can raise funds for up to <span>30 days</span>, but the average fully-funded campaign is only <span>25 days</span> long.
-                        You campaign will run for the number of days that you select and will start from the day the campaign goes live.
-                        Please note that there will be a <span>5 days</span> lead time after campaign ends and before you get your books.
-                        Therefore plan your campaign time wisely!
+                        <p>Each campaign on donate-a-book is <span>30 days</span> long which will start from the day your campaign is approved and goes live.
                         </p>
 
                       </div><!--well-->
@@ -519,18 +516,20 @@
                       </div>
 
                       <div class="well upload">
+                        <div class="row form-group">
                         <h3>Image upload</h3>
                         <div class="col-md-12">
-                          <input type="file" ng-model="signup.imageUpload" name="imageUpload" class="btn btnFile" required>
+                          <input type="file" name="imageUpload" title="upload" data-filename-placement="inside" required>
                           <p class="help-block">Please upload images in horizontal / landscape format only.</p>
                           <div class="alert alert-warning hide">Select an image for your campaign. </div>
                           <div class="alert alert-warning alert-size hide">Image file size should be less than 1 MB. </div>
                           <div class="alert alert-warning alert-type hide">Image should be in jpeg, png, or gif formats.</div>
                         </div>
+                      </div>
                       </div><!--well--> 
 
                       <div class="well">
-                        <div class=" row form-group">
+                        <div class="row form-group">
                           <div class="col-xs-4">
                             <h3>Funding Goal</h3>
                           </div>
@@ -804,12 +803,16 @@
     </form>
   </div>  
 </div><!--Wrapper-->
-<script>
-  $(function() {
-      var start = new Start();
-      start.start({logged_in:{{ 1 if current_user.is_active() else 0 }}});
-  });
-</script>
 
+{% endblock %}
+
+{% block jsblock %}
+<script>
+$(function() {
+    var start = new Start();
+    start.start({logged_in:{{ 1 if current_user.is_active() else 0 }}});
+    });
+</script>
+<script>$(document).ready(function(){$('input[type=file]').bootstrapFileInput();});</script>
 {% endblock %}
 

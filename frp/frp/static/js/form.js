@@ -20,7 +20,7 @@ function isClickedTabEarlier(active_tab, clicked_tab) {
 function highlightInvalidFields($tab) {
   $tab.find(':valid').css('border-color','#CCCCCC');
   $tab.find(':valid').each(function(){
-    if($(this).is(":radio") || $(this).is(":checkbox")){
+    if($(this).is(":radio") || $(this).is(":checkbox") || $(this).is(":file")){
       $(this).parents('.form-group').find('.alert').addClass('hide');
     }
     else{
@@ -29,7 +29,7 @@ function highlightInvalidFields($tab) {
   });
   $tab.find(':invalid').css('border-color','#ffc600');
   $tab.find(':invalid').each(function(){
-    if($(this).is(":radio") || $(this).is(":checkbox")){
+    if($(this).is(":radio") || $(this).is(":checkbox") || $(this).is(":file")){
       $(this).parents('.form-group').find('.alert').removeClass('hide');
     }
     else{
@@ -49,26 +49,27 @@ function showBottomNavigation() {
   } else $(".btn-next").addClass('hide');
 };
 
+var MAX_FILE_SIZE = 1000000;
 $(function() {
   $("input[name=imageUpload]").change(function(){
-    $(this).parent().find('.alert').addClass('hide');
+    $(this).parents('.form-group').find('.alert').addClass('hide');
     var ext = this.files[0].type;
     var imageSize = this.files[0].size;
     if (imageSize < MAX_FILE_SIZE) {
       $(this).css('border-color','#FF0004');
-      $(this).parent().find('.alert-size').addClass('hide');
+      $(this).parents('.form-group').find('.alert-size').addClass('hide');
     }
     else {
       $(this).css('border-color','#FF0004');
-      $(this).parent().find('.alert-size').removeClass('hide');
+      $(this).parents('.form-group').find('.alert-size').removeClass('hide');
     }
 
     if(ext=='image/jpeg' || ext=='image/png' || ext=='image/gif'){
       $(this).css('border-color','#CCCCCC');
-      $(this).parent().find('.alert-type').addClass('hide');
+      $(this).parents('.form-group').find('.alert-type').addClass('hide');
     } else {
       $(this).css('border-color','#FF0004');
-      $(this).parent().find('.alert-type').removeClass('hide');
+      $(this).parents('.form-group').find('.alert-type').removeClass('hide');
     }
   });
   $("input[name=addVideo]").change(function(){
