@@ -100,13 +100,13 @@ def create_beneficiary(form, filename):
         new_file_name = str(campaign.id) + '.' + extension
         full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
         copyfile(full_file_path, full_new_path)
-	job = q.enqueue_call(
-        	func=save_image, 
+        if (app.config['VERSION'] == 'production'):
+            job = q.enqueue_call(
+                func=save_image, 
                 args=(os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads'),
-                      new_file_name,), 
+                    new_file_name,), 
                 result_ttl=5000
-      	)
-	print job.get_id()
+                )
         campaign = Campaign.query.get(campaign.id)
         campaign.image = new_file_name
         db.session.add(campaign)

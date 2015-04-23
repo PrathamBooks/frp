@@ -23,6 +23,7 @@ def init_app(app, settings='settings/development.py'):
         app.logger.addHandler(file_handler)
 
     app.config['WTF_CSRF_ENABLED'] = False              # Disable CSRF checks while testing
+    app.config['VERSION'] = __version__
 
     # Setup Flask-Mail
     mail = Mail(app)
@@ -33,8 +34,6 @@ def init_app(app, settings='settings/development.py'):
     db_adapter = SQLAlchemyAdapter(db, User,        # Setup the SQLAlchemy DB Adapter
             UserAuthClass=UserAuth)                 #   using separated UserAuth/User data models
     user_manager = UserManager(db_adapter, app     # Init Flask-User and bind to app
-#            register_form=MyRegisterForm,           #   using a custom register form with UserProfile fields
-#            user_profile_view_function = profile,
             )
     user_manager.enable_username = False
 
@@ -47,27 +46,17 @@ def init_app(app, settings='settings/development.py'):
                  "css/prathambooks.css",
                  output='gen/all.css')
 
-    jquery = Bundle("lib/bootstrap/jquery-1.10.2.js", output="gen/jquery.js")
-    bootstrap = Bundle("lib/bootstrap/bootstrap.js",
-                       "lib/bootstrap/bootstrap-slider.js",
-                       output="gen/bootstrap.js")
     underscore = Bundle("lib/underscore/underscore.js",
                         output="gen/underscore.js")
+
     app_js = Bundle("js/form.js", 
                     "js/donor_form.js",
                     "js/start.js",
+                    "js/admin.js",
+                    "js/discover.js",
+                    "lib/bootstrap/bootstrap.file-input.js",
                     output="gen/lib.js")
 
-    discover_js = Bundle("js/discover.js", output="gen/discover.js")
-    admin_js = Bundle("js/admin.js", output="gen/admin.js")
-    start_js = Bundle("js/start.js", output="gen/start.js")
-
     assets.register('css_site', css)
-
     assets.register('app_js', app_js)
-    assets.register('discover_js', discover_js)
-    assets.register('admin_js', admin_js)
-    assets.register('start_js', start_js)
-    assets.register('jquery', jquery)
-    assets.register('bootstrap', bootstrap)
     assets.register('underscore', underscore)
