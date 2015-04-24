@@ -48,17 +48,14 @@
             </select>
           </div>
         </div>
-        <button id="filter-btn" type="submit" class="btn btn-default btn-right-arrow">Filter</button>
+        <button id="filter-btn" type="submit" class="btn btn-default btn-right-arrow">Go</button>
       </div>
     </form>
     <!--InternalContent-->
 
     <div class="row discover" id="internalCampaign">
       <div class="col-md-9">
-        <h2>Discover Campaigns
-          <br/>
-          <span>Start Exploring!!</span>
-        </h2>
+        <h2>Discover campaigns now </h2>
       </div>
 
       <div id="campaigns" class="col-md-9">
@@ -79,6 +76,18 @@
     <div class="col-md-9">
       <button id="scroll" type="button" class="btn btn-default btn-bottom">Default</button>
     </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h3 class="modal-title" id="myLargeModalLabel"> There are no campaigns that match your search criteria. Please try again.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
   </div>
 </div> 
 {% endblock %}

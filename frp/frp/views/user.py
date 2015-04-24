@@ -12,7 +12,8 @@ from flask import (render_template,
                    views,
                    request,
                    jsonify,
-                   current_app)
+                   current_app,
+                   get_flashed_messages)
 from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
@@ -36,7 +37,6 @@ from ..helpers import allowed_file
 from ..models import db, BaseNameMixin, BaseMixin
 from ..mailer import Mailer
 
-from apscheduler.scheduler import Scheduler
 mailer = Mailer()
 # Facebook requirements
 oauth = OAuth()
@@ -183,6 +183,13 @@ def signup_as_beneficiary():
 
         print form.errors
         return render_template('beneficiary_form.html', form=form)
+
+@app.route('/after_register')
+def after_register():
+  # clear the flashes so that the message from flask_user does not show up on
+  # the web page
+  session['_flashes'] = []
+  return render_template('after_register.html')
 
 # Login views
 @app.route('/login/facebook', methods=['GET', 'POST'])

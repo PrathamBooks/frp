@@ -116,7 +116,18 @@ var DiscoverPage = function(args) {
     }
     that.display_data = filtered_data;
     that.clear_campaigns();
+    if (that.display_data.length == 0) {
+      that.no_campaigns();
+      that.display_data = that.campaign_data;
+    }
     that.show_next_campaigns();
+  };
+
+  this.no_campaigns = function() {
+    $('.modal').modal('show');
+    $('#states').val('');
+    $('#languages').val('');
+    $('#types').val('');
   };
 
   this.filter = function(e) {

@@ -1,0 +1,25 @@
+{% extends "partials/base.html" %}
+{% block content %}
+<div class="container internal">
+  <div  id="internalContent" class="row forms">
+    <div id="internalCampaign" class="row startCampaign signup log">
+      <div class=" col-md-12 well">
+        <form role="form" action="" method="POST">
+          <div style="display:none;">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="None">
+          </div>
+          <h3>Resend Confirmation Email</h1>
+          <div class=" col-md-12">
+            <div class="form-group row">
+              <label for="email" class="control-label">Your email address</label>
+              <input class="form-control" id="email" name="email" tabindex="10" type="text" value="" required />
+            </div>
+          </div>
+          <button type="submit"  class="btn" tabindex="90" >Go</button>
+        </form>
+      </div>
+    </div>
+    <!--InternalCampaign-->
+  </div>
+</div>
+{% endblock %}
