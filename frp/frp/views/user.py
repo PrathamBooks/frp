@@ -36,7 +36,8 @@ from ..helpers import allowed_file
 from ..models import db, BaseNameMixin, BaseMixin
 from ..mailer import Mailer
 
-from apscheduler.scheduler import Scheduler
+
+
 mailer = Mailer()
 # Facebook requirements
 oauth = OAuth()
@@ -75,6 +76,8 @@ def donate_failure():
   app.logger.warning('Donation id ' + str(donation_id) + ' failed. Tracking id is ' + str(tracking_id))
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
+
+
 
 def send_mail(old_percent,curr_percent,campaign,donation):
   start_date = "{:%B %d, %Y}".format(campaign.start_date())
@@ -146,12 +149,21 @@ def donate_success():
   db.session.add(donation)
   try:
     db.session.commit()
-    return render_template('donateSuccess.html', campaign=campaign)
 
   except Exception as e:
     app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
     return render_template('donateSuccess.html', campaign=campaign)
 
+  if (curr_percent >= 100):
+      mailer.send_email(to=campaign.created_by.email,
+              subject="Your D-A-B Campaign is " + status,
+              template="campaign_state_change.html",
+              first_name=campaign.created_by.first_name,
+              title=campaign.title,
+              start_date=start_date,
+              old_status=old_status,
+              status=status)
+  return render_template('donateSuccess.html', campaign=campaign)
 
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
