@@ -36,6 +36,7 @@ from ..helpers import allowed_file
 from ..models import db, BaseNameMixin, BaseMixin
 from ..mailer import Mailer
 
+from apscheduler.scheduler import Scheduler
 mailer = Mailer()
 # Facebook requirements
 oauth = OAuth()

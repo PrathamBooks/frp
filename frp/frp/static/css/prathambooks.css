@@ -326,6 +326,7 @@ header #login {
   float: left;
   margin: 34px 0 0 166px;
   padding: 20px 20px 0 0;
+  margin: 34px 0px 0px 162px;
 }
 header #login a.btn {
   font-size: 1.1em;
@@ -388,6 +389,7 @@ header #login .dropdown-menu {
   position: absolute;
   margin: 0px !important;
   opacity: .5;
+  width: 33px !important;
 }
 #featuredCampaign .btn-nav:hover {
    background-color: #ffde00;
@@ -1306,6 +1308,11 @@ form.discover-search {
 }
 #internalCampaign.signup {
   min-height: 375px;
+}
+
+#internalCampaign.signup .alert{
+  margin:0px;
+  font-size:1em;
 }
 #internalCampaign.signup .well .signIn {
   float: none;
@@ -2453,6 +2460,7 @@ button.approve:hover {
 }
 #internalCampaign.campaign .col-md-6 img {
   width: 100%;
+  max-height: 320px;
 }
 .internal #internalCampaign.campaign h2 {
   margin: 20px 0 20px;
