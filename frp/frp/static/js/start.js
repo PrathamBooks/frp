@@ -24,11 +24,11 @@ var Start = function() {
     // '*'
     this.booksCallback(); 
   };
+ //  super(Email, self).__init__(r'^.+@[^.].*\.[a-z]{2,10}$', re.IGNORECASE, message)
 
+  // At the end of step 8 in Introduction, need to go to get started
   this.step8GetStartedCallback = function(e) {
     $('#get-started-tab a').tab('show');
-    // $('#getStarted section').removeClass('show').addClass('hide');
-    // $('#getKnow-step').removeClass('hide').addClass('show');
     showBottomNavigation();
   };
 
@@ -106,7 +106,7 @@ var Start = function() {
   };
 
   // Attach callbacks to all inputs so that when they get valid values
-  // we can remove the "What's left link
+  // we can remove the "What's left" link
   this.attachErrorUpdateCallbacks = function() {
     $('input, textarea, select').change(function() {
       if ($(':invalid').length == 0) {
