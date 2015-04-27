@@ -76,6 +76,8 @@ def donate_failure():
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
 
+
+
 def send_mail(old_percent,curr_percent,campaign,donation):
   start_date = "{:%B %d, %Y}".format(campaign.start_date())
   mailer.send_email(to=donation.donor.email,
@@ -146,12 +148,21 @@ def donate_success():
   db.session.add(donation)
   try:
     db.session.commit()
-    return render_template('donateSuccess.html', campaign=campaign)
 
   except Exception as e:
     app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
     return render_template('donateSuccess.html', campaign=campaign)
 
+  if (curr_percent >= 100):
+      mailer.send_email(to=campaign.created_by.email,
+              subject="Your D-A-B Campaign is " + status,
+              template="campaign_state_change.html",
+              first_name=campaign.created_by.first_name,
+              title=campaign.title,
+              start_date=start_date,
+              old_status=old_status,
+              status=status)
+  return render_template('donateSuccess.html', campaign=campaign)
 
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
