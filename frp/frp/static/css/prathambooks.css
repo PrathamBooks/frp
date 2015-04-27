@@ -825,6 +825,9 @@ header #login .dropdown-menu {
 #carousel-example-generic.carousel .carousel-inner {
   background-color: #fff1bf;
 }
+#geography .carousel-inner {
+  padding-bottom: 25px;
+}
 /* Less File Internal pages */
 .internal {
   padding: 0;
