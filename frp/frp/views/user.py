@@ -255,7 +255,7 @@ def about():
 
 @app.route("/discover", methods=['GET'])
 def discover():
-    campaigns_data = Campaign.all_campaigns_data(status='Approved',status_1='Closed')
+    campaigns_data = Campaign.all_campaigns_data('Approved','Closed')
     filter_form = FilterForm(request.form)
     languages = request.args.getlist('languages')
     states = request.args.getlist('states')

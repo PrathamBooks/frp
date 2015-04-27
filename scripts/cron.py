@@ -52,7 +52,7 @@ def send_email(to,name,title,percent,subject,start_date):
         print "Error: unable to send email"
 
 def send_mail():
-    campaigns = Campaign.all_campaigns_data(is_last_day=True)
+    campaigns = Campaign.last_day_today()
     for campaign in campaigns:
         campaign.status = 'Closed'
         db.session.add(campaign)
