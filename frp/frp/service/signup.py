@@ -100,20 +100,23 @@ def create_beneficiary(form, filename):
         new_file_name = str(campaign.id) + '.' + extension
         full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
         copyfile(full_file_path, full_new_path)
+        campaign = Campaign.query.get(campaign.id)
+        campaign.image = new_file_name
+        db.session.add(campaign)
+        db.session.commit()
+
         if (app.config['VERSION'] == 'production'):
+            app.logger.warning('Trying to backup image')
             job = q.enqueue_call(
                 func=save_image, 
                 args=(os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads'),
                     new_file_name,), 
                 result_ttl=5000
                 )
-        campaign = Campaign.query.get(campaign.id)
-        campaign.image = new_file_name
-        db.session.add(campaign)
-        db.session.commit()
+            app.logger.warning('image save job id: ' + str(job.id))
 
     except Exception as e:
-        print e
+        app.logger.warning(e)
         app.logger.warning('Unable to save campaign')
         db.session.rollback()
         return {'error': True, 'exc': e}
