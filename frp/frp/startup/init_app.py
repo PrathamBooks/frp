@@ -36,6 +36,8 @@ def init_app(app, settings='settings/development.py'):
     user_manager = UserManager(db_adapter, app     # Init Flask-User and bind to app
             )
     user_manager.enable_username = False
+    user_manager.after_register_endpoint = 'after_register'
+    user_manager.password_validator = lambda x, y: True
 
     assets = Environment(app)
 

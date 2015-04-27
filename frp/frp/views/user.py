@@ -12,7 +12,8 @@ from flask import (render_template,
                    views,
                    request,
                    jsonify,
-                   current_app)
+                   current_app,
+                   get_flashed_messages)
 from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
@@ -36,7 +37,6 @@ from ..helpers import allowed_file
 from ..models import db, BaseNameMixin, BaseMixin
 from ..mailer import Mailer
 
-from apscheduler.scheduler import Scheduler
 mailer = Mailer()
 # Facebook requirements
 oauth = OAuth()
@@ -76,6 +76,8 @@ def donate_failure():
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
 
+
+
 def send_mail(old_percent,curr_percent,campaign,donation):
   start_date = "{:%B %d, %Y}".format(campaign.start_date())
   mailer.send_email(to=donation.donor.email,
@@ -103,7 +105,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
       start_date=start_date)
     return
 
-  if (old_percent == 0 ):
+  if (old_percent == 0):
     mailer.send_email(to=campaign.created_by.email,
       subject="First Donation Recieved", 
       template="new_donation.html",
@@ -146,12 +148,12 @@ def donate_success():
   db.session.add(donation)
   try:
     db.session.commit()
-    return render_template('donateSuccess.html', campaign=campaign)
 
   except Exception as e:
     app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
     return render_template('donateSuccess.html', campaign=campaign)
 
+  return render_template('donateSuccess.html', campaign=campaign)
 
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
@@ -174,8 +176,8 @@ def signup_as_beneficiary():
             result = signup_service.create_beneficiary(form, filename)
             if not result['error']:
                 mailer.send_email(to=current_user.email,
-                        subject="Congrats! Your registration on D-A-B is Successful!",
-                        template="new_user.html", 
+                        subject="Congrats! You successfully created a campaign on donate-a-book!",
+                        template="new_campaign.html", 
                         first_name=current_user.first_name)
                 return redirect(url_for('campaign_success'))
             else:
@@ -183,6 +185,13 @@ def signup_as_beneficiary():
 
         print form.errors
         return render_template('beneficiary_form.html', form=form)
+
+@app.route('/after_register')
+def after_register():
+  # clear the flashes so that the message from flask_user does not show up on
+  # the web page
+  session['_flashes'] = []
+  return render_template('after_register.html')
 
 # Login views
 @app.route('/login/facebook', methods=['GET', 'POST'])

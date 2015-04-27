@@ -63,7 +63,6 @@ class User(UserMixin, db.Model):
     donations = db.relationship("Donation", backref=db.backref("donor"))
     comments = db.relationship("Comment", backref=db.backref("comment_by"))
 
-
     # Don't load these columns by default
     _defercols = [
         defer('created_at'),
@@ -73,6 +72,13 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return u'<User {}>'.format(self.email)
+
+    def profile_name(self):
+      if (self.first_name or self.last_name):
+        return (self.first_name + ' ' + self.last_name)
+      else:
+        pos_of_at = self.email.find('@')
+        return self.email.substr[:pos_of_at]
 
 # Define the UserAuth data model.
 class UserAuth(db.Model, UserMixin):

@@ -13,9 +13,11 @@
                 <label for="infoEmail">Email</label>
                 <input type="email" class="form-control" id="infoEmail"  name="email" placeholder="Email" required />
                 {% if form.email.errors %}
+                <ul>
                   {% for error in form.email.errors %}
                     <li><div class="alert alert-warning">{{ error }}</div></li>
                   {% endfor %}
+                </ul>
                 {% endif %}
               </div>
             </div>
