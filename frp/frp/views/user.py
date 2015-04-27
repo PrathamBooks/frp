@@ -105,7 +105,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
       start_date=start_date)
     return
 
-  if (old_percent == 0 ):
+  if (old_percent == 0):
     mailer.send_email(to=campaign.created_by.email,
       subject="First Donation Recieved", 
       template="new_donation.html",
@@ -153,15 +153,6 @@ def donate_success():
     app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
     return render_template('donateSuccess.html', campaign=campaign)
 
-  if (curr_percent >= 100):
-      mailer.send_email(to=campaign.created_by.email,
-              subject="Your D-A-B Campaign is " + status,
-              template="campaign_state_change.html",
-              first_name=campaign.created_by.first_name,
-              title=campaign.title,
-              start_date=start_date,
-              old_status=old_status,
-              status=status)
   return render_template('donateSuccess.html', campaign=campaign)
 
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
@@ -185,8 +176,8 @@ def signup_as_beneficiary():
             result = signup_service.create_beneficiary(form, filename)
             if not result['error']:
                 mailer.send_email(to=current_user.email,
-                        subject="Congrats! Your registration on D-A-B is Successful!",
-                        template="new_user.html", 
+                        subject="Congrats! You successfully created a campaign on donate-a-book!",
+                        template="new_campaign.html", 
                         first_name=current_user.first_name)
                 return redirect(url_for('campaign_success'))
             else:
