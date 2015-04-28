@@ -825,6 +825,9 @@ header #login .dropdown-menu {
 #carousel-example-generic.carousel .carousel-inner {
   background-color: #fff1bf;
 }
+#geography .carousel-inner {
+  padding-bottom: 25px;
+}
 /* Less File Internal pages */
 .internal {
   padding: 0;
@@ -1970,7 +1973,7 @@ span.fb:hover {
 }
 .startCampaign .form .col-md-9 .well strong {
   color: #ff7800;
-  font-size: 1em;
+  font-size: 0.75em;
 }
 .startCampaign .form .col-md-9 .well .form-control {
   margin: 0 0 15px;
@@ -2139,6 +2142,10 @@ span.fb:hover {
 }
 .startCampaign #contact ul li#tw {
   background: url(../images/twColor.png) no-repeat center left;
+}
+.startCampaign .form .checkbox .alert{
+  margin-top:0 !important;
+    
 }
 /* LESS Document */
 #internalCampaign.learn .well p {

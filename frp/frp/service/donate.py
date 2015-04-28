@@ -7,10 +7,22 @@ from flask_user import current_user
 from string import Template
 from string import split
 from ..views.ccavutil import encrypt,decrypt
+import threading
 
 accessCode = app.config.get('CCAVENUE_ACCESS_CODE')
 workingKey = app.config.get('CCAVENUE_WORKING_KEY')
 
+
+
+def donation_validate(donation_id):
+  donation = Donation.query.get(int(donation_id))
+  if donation.confirmation == None:
+      db.session.delete(donation)
+      try:
+        db.session.commit()
+      except Exception as e:
+        app.logger.warning('Unable to delete invalid donation')
+        app.logger.warning(e)
 
 def create_donation(form, campaign):
   amount = form.amount_choice.data
@@ -42,6 +54,8 @@ def create_donation(form, campaign):
     app.logger.warning(e)
     db.session.rollback()
     return {'error': True, 'exc': e}
+  # Function "donation_validate will be called after 600 seconds that is 10 minuts 
+  threading.Timer(600,donation_validate,[donation.id]).start()
   return {'error': False,
           'donation': donation,
           'billing_info_page': billing_info_page}

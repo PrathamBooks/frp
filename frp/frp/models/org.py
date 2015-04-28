@@ -137,18 +137,19 @@ class Campaign(BaseMixin, db.Model):
         'who', 'impact', 'utilization', 'state', 'city', 'languages'))
 
     @staticmethod
-    def all_campaigns_data(status = 'none',status_1='none',is_last_day=False):
+    def all_campaigns_data(*args):
         campaigns = Campaign.query.all()
-
-        if (is_last_day == True):
-            retval = list(filter(lambda x:(x.days_remaining()==0 and x.status!='Closed'),campaigns))
-            return retval
-
-        if (status == 'none'):
+        if len(args) == 0:
             retval = map(lambda x:x.verbose_fields(),campaigns)
         else:
-            campaigns = filter((lambda x:(x.status==status or x.status==status_1)),campaigns)
+            campaigns = filter(lambda x:(x.status in (args)),campaigns)
             retval = map(lambda x:x.verbose_fields(),campaigns)
+        return retval
+
+    @staticmethod
+    def last_day_today():
+        campaigns = Campaign.query.all()
+        retval = list(filter(lambda x:(x.days_remaining()==0 and x.status!='Closed'),campaigns))
         return retval
 
 
