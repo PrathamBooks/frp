@@ -379,24 +379,23 @@ header #login .dropdown-menu {
   border-bottom: 23px solid #282425;
 }
 #featuredCampaign .btn-nav {
-  background-color: #e5e4e0 !important;
-  background-position: center center;
-  border-radius: 20px 0 0 20px !important;
+  background-color: transparent !important;
+  background-image: url("../images/carouselArr.png") !important;
+  background-position: -41px 0;
   font-size: 0 !important;
+  margin: 0 !important;
+  opacity: 0.9;
+  padding: 13px 20px;
+  position: absolute;
   right: 0;
   top: 200px;
-  padding: 26px 10px !important;
-  position: absolute;
-  margin: 0px !important;
-  opacity: .5;
-  width: 33px !important;
 }
+
 #featuredCampaign .btn-nav:hover {
    background-color: #ffde00;
 }
 #featuredCampaign .btn-navL {
-  background-image: url(../images/leftArrow.png) !important;
-  border-radius: 0 20px 20px 0 !important;
+  background-position: 10px 0;
   left: 0;
 }
 #featuredCampaign .col-md-12 {
@@ -2470,7 +2469,7 @@ button.approve:hover {
   max-height: 320px;
 }
 .internal #internalCampaign.campaign h2 {
-  margin: 20px 0 20px;
+  margin: 20px 12px 20px;
 }
 .editSection button {
   cursor: pointer !important;

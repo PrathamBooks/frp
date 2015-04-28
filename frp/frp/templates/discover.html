@@ -54,23 +54,43 @@
     <!--InternalContent-->
 
     <div class="row discover" id="internalCampaign">
-      <div class="col-md-9">
+      <div class="col-md-12">
         <h2>Discover campaigns now </h2>
+      </div>
+      <div id="tagBlock" class="col-md-3">
+        <ul>
+          <li> Language </li>
+          {% for language in form.languages %}
+            {% if language.data != '' %}
+            <input type="checkbox" name="{{language.data}}" value="{{language.data}}">{{language.label.text}}</input>
+            {% endif %}
+          {% endfor %}
+          <li> Type </li>
+          {% for type in form.types %}
+            {% if type.label.value != '' %}
+            <input type="checkbox" name="{{type.data}}" value="{{type.data}}">{{type.label.text}}</input>
+            {% endif %}
+          {% endfor %}
+          <li> State </li>
+          {% for state in form.states %}
+            {% if state.data != '' %}
+            <input type="checkbox" name="{{state.data}}" value="{{state.data}}">{{state.label.text}}</input>
+            {% endif %}
+          {% endfor %}
+         </ul>
+        <ul class="featured">
+          <li>Featured</li>
+          <li><a href="{{ url_for('discover', category='popular') }}">Popular</a> </li>
+          <li><a href="{{ url_for('discover', category='recently-launched') }}">Recently Launched</a></li>
+          <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
+          <li><a href="{{ url_for('discover', category='most-funded') }}">Most Funded</a></li>
+        </ul>
       </div>
 
       <div id="campaigns" class="col-md-9">
 
       </div>
 
-      <div id="tagBlock" class="col-md-3">
-        <ul class="featured">
-          <li>Featured</li>
-          <li><a href="{{ url_for('discover', category='popular') }}">Popular</a> </li>
-          <li><a href="{{ url_for('discover', category='recently-launched') }}">Recently Launched</a></li>
-          <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
-          <li><a href="{{ url_for('discover', category='most-funded') }}" class="active">Most Funded</a></li>
-        </ul>
-      </div>
     </div>
 
     <div class="col-md-9">
