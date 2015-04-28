@@ -56,6 +56,7 @@ def init_app(app, settings='settings/development.py'):
                     "js/start.js",
                     "js/admin.js",
                     "js/discover.js",
+                    "js/utils.js",
                     "lib/bootstrap/bootstrap.file-input.js",
                     output="gen/lib.js")
 

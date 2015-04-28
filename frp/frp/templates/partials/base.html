@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pratham Books">
     <meta name="author" content="">
+    {% block meta_tags %}
+    {% endblock %}
 
     <title>Donate A Book</title>
 
@@ -26,7 +28,20 @@
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
-
+    <script type="text/javascript">
+      var appId = "{{config['FACEBOOK_APP_ID']}}";
+      $(document).ready(function() {
+        $.ajaxSetup({ cache: true });
+        $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+          FB.init({
+            appId: appId,
+            version: 'v2.3' // or v2.0, v2.1, v2.0
+          });
+          $('#loginbutton,#feedbutton').removeAttr('disabled');
+          FB.getLoginStatus(updateStatusCallback);
+        });
+      });
+    </script>
     {% assets "app_js" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
     {% endassets %}
