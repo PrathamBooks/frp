@@ -36,7 +36,6 @@ def send_email(to,name,title,percent,subject,start_date):
     if not isinstance(to, list):
         to = [to]
     sender = 'noreply@donateabook.org'
-    receivers = ['sairamsudhir@mirafra.com']
     msg = MIMEMultipart()
     msg['Subject'] = subject
     text = 'Dear '+name+'\n\nWhat a ride that was! Your Donate-a-Book Campaign: '+title+' has officially come to an end.\n'+ 'You have raised ' + str(percent) + ' of  your target fund. Congratulations on the success of your campaign. \n\nYou can expect to receive an email from the Pratham Books team which will have a comprehensive list of all books in stock.You would be able to pick and choose your preferred books priced within the fund limit that you have raised.\nKeep an eye out for our email, we will be in touch soon with more details \n\nRegards, \nDonate-a-Book Team'
@@ -70,13 +69,10 @@ def send_mail():
 
 
 @manager.command
-def cron():
+def mail():
     scheduler.add_job(send_mail, 'interval', days=1)
     scheduler.start()
 
-@manager.command
-def mail():
-    send_mail()
 
 if __name__ == '__main__':
      manager.run()
