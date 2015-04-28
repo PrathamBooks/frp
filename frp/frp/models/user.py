@@ -78,7 +78,7 @@ class User(UserMixin, db.Model):
         return (self.first_name + ' ' + self.last_name)
       else:
         pos_of_at = self.email.find('@')
-        return self.email.substr[:pos_of_at]
+        return self.email[:pos_of_at]
 
 # Define the UserAuth data model.
 class UserAuth(db.Model, UserMixin):
