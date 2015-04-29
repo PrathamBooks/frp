@@ -260,6 +260,8 @@ def discover():
     languages = request.args.getlist('languages')
     states = request.args.getlist('states')
     category = request.args.get('category')
+    if (category == 'featured'):
+        campaigns_data = filter(lambda x: x['featured'], campaigns_data)
     if (category == 'popular'):
         campaigns_data = sorted(campaigns_data, key=lambda x:x['num_donors'], reverse=True)
     if (category == 'recently-launched'):
