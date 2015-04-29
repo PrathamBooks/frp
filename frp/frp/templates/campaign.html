@@ -1,10 +1,15 @@
 {% extends "partials/base.html" %}
 {% block meta_tags %}
-<meta property="og:url" content="http://donateabook.org.in/campaigns/{{campaign.id}}"/>
+<meta property="og:url" content="http://donateabook.org.in/campaign/{{campaign.id}}"/>
 <meta property="og:title" content="{{campaign.title}} on donate-a-book"/>
 <meta property="og:image" content="http://donateabook.org.in/static/uploads/uploads/{{campaign.image}}"/>
 <meta property="og:description" content="Help India's children read. Donate books to a needy library."/>
 <meta property="fb:app_id" content="{{config['FACEBOOK_APP_ID']}}" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{campaign.title}} on Pratham Books donate-a-book"/>
+<meta name="twitter:description" content="Help India's children read. Donate books to a needy library."/>
+<meta name="twitter:image" content="http://donateabook.org.in/static/uploads/uploads/{{campaign.image}}"/>
+<meta name="twitter:url" content="http://donateabook.org.in/campaign/{{campaign.id}}"/>
 {% endblock %}
 {% block content %}
 <div class="container internal">
@@ -50,7 +55,7 @@
           </div>
           <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>
           <div class="socialIcons">
-            <span class="tw"></span>
+            <span class="tw"  onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'Help India\'s children read. Donate to a library on Pratham donate-a-book.')"></span>
             <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
           </div>
 

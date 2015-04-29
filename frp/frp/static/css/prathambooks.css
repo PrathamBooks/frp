@@ -387,7 +387,7 @@ header #login .dropdown-menu {
   opacity: 0.9;
   padding: 13px 20px;
   position: absolute;
-  right: 0;
+  right: 5px;
   top: 200px;
 }
 
@@ -395,8 +395,8 @@ header #login .dropdown-menu {
    background-color: #ffde00;
 }
 #featuredCampaign .btn-navL {
-  background-position: 10px 0;
-  left: 0;
+  background-position: 0px 0;
+  left: 5px;
 }
 #featuredCampaign .col-md-12 {
   font-size: 0px;
