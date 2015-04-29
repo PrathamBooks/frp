@@ -8,6 +8,10 @@ from .signup import (STATES)
 AMOUNT_CHOICES = [(1000, u'Rs. 1000'), 
                   (500, u'Rs. 500'),
                   (250, u'Rs. 250')]
+ID_TYPE = [(u'P', u'Passport'),
+           (u'DL', u'Driving License'),
+           (u'PAN', u'PAN Card'),
+           (u'AADHAR', u'Aadhar Card')]
 
 class DonorForm(wtforms.Form):
     amount_choice = wtforms.RadioField(
@@ -37,8 +41,11 @@ class DonorForm(wtforms.Form):
     contact_number = wtforms.TextField(
             label='Contact Number',
             validators=[wtforms.validators.Optional()])
+    identification_type = wtforms.SelectField(
+            label='',
+            choices=ID_TYPE)
     pan_number = wtforms.TextField(
-            label='Contact Number',
+            label='Pan Number',
             validators=[wtforms.validators.Optional()])
     tax_exemption_certificate = wtforms.RadioField(
         label='Would you like us to send you a Tax Exemption Certificate?',

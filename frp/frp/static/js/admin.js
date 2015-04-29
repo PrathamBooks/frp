@@ -24,6 +24,24 @@ var AdminPage = function(campaign_data)
       });
     });
 
+    $('#campaigns').on('click', '.glyphicon', function(e) {
+      var id = parseInt($(this).parents('tr').attr('id').replace ( /[^\d.]/g, '' ),10);
+      $.ajax({
+        type: "POST",
+        url: "/change_featured",
+        data: {
+          campaign_id: id,
+        },
+        success: function(data) {
+          that.replace_campaign_data(data);
+          alert("Campaign [ " + data.title + " ] is now " + (data.featured ? "featured" : "not featured"));
+        },
+        error: function(errMsg) {
+          alert(errMsg);
+        }
+      });
+     });
+
     $('#campaigns').on('click','.btn.btn-comment',function(e) {
       var id = parseInt($(this).parents('tr').attr('id').replace(/[^\d.]/g, ''),10);
       $('#CommentsModal').find(".modal-content").attr('id',"modal"+id);
@@ -95,7 +113,15 @@ var AdminPage = function(campaign_data)
     var $end_date = $('<td/>').html(data.end_date).appendTo($row);
     var $span = $('<span/>').addClass('label label-info').html(data.status);
     var $status = $('<td>').append($span).appendTo($row);
+    var $featured_span = $('<span/>').addClass('glyphicon');
+    if (data.featured) {
+      $featured_span.addClass('glyphicon-ok');
+    }
+    else {
+      $featured_span.addClass('glyphicon-remove');
+    }
 
+    var $featured = $('<td>').append($featured_span).appendTo($row);
 
     var arr = [
       {val : '', text: 'Select State'},

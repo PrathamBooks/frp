@@ -20,6 +20,7 @@ class Donation(BaseMixin, db.Model):
     state = db.Column(db.Unicode(100), nullable=False)
     city = db.Column(db.Unicode(100), nullable=False)
     identification = db.Column(db.Unicode(100), nullable=False)
+    identification_type = db.Column(db.Unicode(10), nullable=False)
     ann_choice = db.Column(db.BOOLEAN,nullable=False)
     tax_exemption_certificate = db.Column(db.BOOLEAN,nullable=False)
 

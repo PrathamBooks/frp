@@ -129,6 +129,7 @@ class Campaign(BaseMixin, db.Model):
     languages = db.Column(db.Unicode(200), nullable=False)
     image = db.Column(db.Unicode(100), nullable=False)
     status = db.Column(db.Unicode(100), nullable=False)
+    featured = db.Column(db.BOOLEAN, nullable=False)
     donations = db.relationship("Donation", backref=db.backref("campaign"))
     comments = db.relationship("Comment", backref=db.backref("campaign_comment"))
     approved_at = db.Column(db.DateTime, nullable=True)
@@ -207,6 +208,7 @@ class Campaign(BaseMixin, db.Model):
                 "target" : self.target(),
                 "total_donations" : self.total_donations(),
                 "status" : self.status,
+                "featured" : self.featured,
                 "image" : self.image
                 }
 

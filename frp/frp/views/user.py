@@ -260,6 +260,8 @@ def discover():
     languages = request.args.getlist('languages')
     states = request.args.getlist('states')
     category = request.args.get('category')
+    if (category == 'featured'):
+        campaigns_data = filter(lambda x: x['featured'], campaigns_data)
     if (category == 'popular'):
         campaigns_data = sorted(campaigns_data, key=lambda x:x['num_donors'], reverse=True)
     if (category == 'recently-launched'):
@@ -323,6 +325,22 @@ def donate(campaign_id):
         app.logger.warning(form.errors)
         return render_template('donor_form.html', form=form, campaign=campaign)
 
+@app.route("/change_featured",methods=['POST'])
+def change_featured():
+    id = request.form['campaign_id']
+    campaign = Campaign.query.get(id)
+    campaign.featured = not campaign.featured
+    db.session.add(campaign)
+
+    try:
+      db.session.commit()
+    except Exception as e:
+      app.logger.warning(e)
+      return "Commit Failed", 500
+
+    campaign_data = campaign.verbose_fields()
+    return jsonify(campaign_data)
+
 @app.route("/change_status",methods=['POST'])
 def change_status():
     id = request.form['campaign_id']
@@ -356,7 +374,6 @@ def change_status():
                 start_date=start_date,
                 old_status=old_status,
                 status=status)
-
 
     campaign_data = campaign.verbose_fields()
     return jsonify(campaign_data)

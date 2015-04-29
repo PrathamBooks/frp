@@ -103,9 +103,10 @@ def seed():
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
             image="1.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=1),
-            total_impact_on_children='2000')
+            total_impact_on_children='2000', featured=False)
     donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=False,
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
+            identification_type="DL", ann_choice=False,
             tax_exemption_certificate=False)
     db.session.add(donation)
     db.session.add(campaign)
@@ -115,10 +116,11 @@ def seed():
             who='We are an organization who works in rural AP', impact='This will raise funds to set up a new library.',
             utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English",
             image="2.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=2),
-            total_impact_on_children='1000')
+            total_impact_on_children='1000', featured=True)
     db.session.add(campaign)
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",ann_choice=False,
+            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
+            identification_type="P", ann_choice=False,
             tax_exemption_certificate=True)
     db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
@@ -129,7 +131,7 @@ def seed():
             who='We are an organization of old people', impact='Make 100 old people happy',
             utilization='It will help a few old people smile', state="Karnataka", city="Dharwad", nbooks='100', nlic=0, languages="English, Tamil",
             image="3.jpg", status="Rejected",
-            total_impact_on_children='500')
+            total_impact_on_children='500', featured=True)
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
@@ -137,7 +139,7 @@ def seed():
             who='We are an organization of volunteers', impact='Library for street children',
             utilization='Take children off the streets', state="Maharashtra", city="Mumbai", nbooks='10000', nlic=0, languages="Hindi, Punjabi",
             image="4.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=3),
-            total_impact_on_children='4000')
+            total_impact_on_children='4000', featured=True)
     db.session.add(campaign)
 
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
@@ -148,7 +150,7 @@ def seed():
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Karnataka", city="Bangalore", nbooks='1000', nlic=0, languages="Kannada, Tamil",
             image="5.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=4),
-            total_impact_on_children='200')
+            total_impact_on_children='200', featured=True)
     db.session.add(campaign)
 
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 3]")
@@ -163,7 +165,7 @@ def seed():
             who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
             utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
             image="6.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=5),
-            total_impact_on_children='1500')
+            total_impact_on_children='1500', featured=False)
     db.session.add(campaign)
 
 
