@@ -110,8 +110,15 @@
                     </div>
 
                     <div class="form-group row">
+                      <div class="col-xs-12">
+                        <h3>Identification<strong>*</strong></h3>
+                      </div>
                       <div class="col-xs-3">
-                        <label for="panNumber">Pan/DL/Passport Number<strong>*</strong></label>
+                        <select type="text" class="form-control" id="identification_type" name="identification_type" placeholder="Identification Type" value="{{form.identification_type.data|default('',True)}}" required/>
+                        {% for subfield in form.identification_type %}
+                          <option selected="selected" value="{{subfield.data}}">{{subfield.label.text}}</option>
+                        {% endfor %}
+                        </select>
                       </div>
                       <div class="col-xs-9">
                         <input type="text" class="form-control" id="panNumber" name="panNumber" placeholder="Pan Number" value="{{form.pan_number.data|default('',True)}}" required />
