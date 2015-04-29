@@ -152,7 +152,6 @@ class Campaign(BaseMixin, db.Model):
         retval = list(filter(lambda x:(x.days_remaining()==0 and x.status!='Closed'),campaigns))
         return retval
 
-
     @staticmethod
     def search(search_string):
         campaigns = Campaign.query.search(search_string).all()

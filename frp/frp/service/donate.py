@@ -1,5 +1,5 @@
 from random import randint
-from flask import g, render_template
+from flask import render_template
 from .. import app
 from ..models import (db, Donation, admin_user)
 from ..forms import BillingInfo
