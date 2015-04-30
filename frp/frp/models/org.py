@@ -41,7 +41,7 @@ def get_attrs(cls):
 
 
 class ORG_STATUS:
-    registered_non_profit = {'desc': 'Registered non-profit',
+    registered_non_profit = {'desc': 'Not-for-profit venture / NGO',
                              'value': 1}
     private_school = {'desc': 'Private School',
                       'value': 2}
@@ -50,7 +50,7 @@ class ORG_STATUS:
         'value': 3}
     government_school = {'desc': 'Government School',
                          'value': 4}
-    reading_centre = {'desc': 'Reading centre / library',
+    reading_centre = {'desc': 'Reading Centre / Library',
                       'value': 5}
     volunteer  = {'desc': 'Reading Champion / Storyteller / Volunteer',
                       'value': 6}

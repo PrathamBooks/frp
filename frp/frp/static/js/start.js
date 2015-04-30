@@ -65,7 +65,7 @@ var Start = function() {
       }
     });
 
-    $('#bookAmount').html(count * 50);
+    $('#bookAmount').html('Rs. ' + count * 50);
     $("input[name='fundingGoal']").attr('value', (count * 50));
     $('#noOfBooks').html(count);
     $('#booksLeft').html(count);

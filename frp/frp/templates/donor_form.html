@@ -18,7 +18,7 @@
                   <!-- Step 1 starts here-->
                   <div class="jumbotron row" tabindex="1">
                     <h2>Donate: Help India’s children read!</h2>
-                    <p>Just few more steps towards donation.</p>
+                    <p>You are just a few steps away from gifting children the experience of reading.</p>
                   </div><!-- Jumbo-->
 
                   <div class="well">
@@ -130,14 +130,15 @@
                   <div class="well">
                     <div class="form-group row">
                       <div class="col-xs-12">
-                        <h3>Would you like to be anonymous?</h3>
-                        <p class="help-block">If you choose "No", your name and email will be shared with the beneficiary organization.</p>
+                        <h3>Would you like to be an anonymous donor?</h3>
+                        <p class="help-block">We respect our user’s privacy. Should you choose to be an anonymous donor, your name will not be shared with the beneficiary organization. 
+                        If you choose No in the option below only your name and the donation amount is shared with the beneficiary organization
                         {{ render_bullets(form.ann_choice) }}
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-xs-12">
-                        <h3>Would you like us to send you a Tax Exemption Certificate?</h3>
+                        <h3>Would you require a Tax Exemption Certificate for this donation?</h3>
                         {{ render_bullets(form.tax_exemption_certificate) }}
                       </div>
 
@@ -145,7 +146,7 @@
                         <div class="checkbox">
                           <h3>
                             <input type="checkbox" required="">
-                            I have read the Terms & Conditions and I also verify that all the details provided here by me are correct. 
+                            I have read the Terms & Conditions and verify that all the details provided here by me are accurate. 
                           </h3>
                           <div class="alert alert-warning hide">You need to read and accept the terms and conditions.</div>
                         </div>

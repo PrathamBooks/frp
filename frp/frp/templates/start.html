@@ -236,7 +236,7 @@
                     <h4>Dos</h4>
                     <ol>
                       <li>
-                      Every Campaign must have a project page with an image and description that introduces you/ your 
+                      Every campaign must have a campaign page with an image and description that introduces you or your 
                       organization and the work it does. Choose an image which is a reflection of your work and makes your page visually engaging.
                       </li>
 
@@ -246,13 +246,13 @@
                       Donors would feel more involved in your project if they know more about you.
                       </li>
                       <li>
-                      Have a target for your campaign — even if it’s just a rough one. 
-                      A target  is proof that you’ve planned  for the number of books and hence know what are you going to do with it.
+                      Think through and have a achievable target for your campaign.
+                      A target is proof that you’ve planned for the number of books and hence know what are you going to do with them.
                       This brings in credibility.
                       </li>
                       <li>
-                      Keep your language simple and  descriptions within word limits but be as expressive as you can.
-                      The Donors would invest their money on your project if they know and trust you.
+                      Keep your language simple and descriptions within word limits but be as expressive as you can.
+                      The donors would invest their money on your project if they know and trust you.
                       </li>
                     </ol>
                   </div>
@@ -260,13 +260,14 @@
                   <div class="col-md-12">
                     <h4>Donts</h4>
                     <ol>
-                      <li>Do not share any false information. All information that you mention in your campaign is your responsibility and must be 100% true.</li>
+                      <li>Do not share any false information. All information that you mention in your campaign is your responsibility 
+                      and must be accurate and legitimate. </li>
 
-                      <li>Do not use any image that does not belong to you and could be copyrighted. This could bring in legal issues that you would not want to cope up with.</li>
+                      <li>Do not use any image that does not belong to you and could be copyrighted. This could invite legal issues.</li>
 
-                      <li>Do not put a target which is too much or too less . Putting a realistic target, with a clearly defined goal will help you achieve it.</li>
+                      <li>Do not put a target which is too much or too less. Putting a realistic target, with a clearly defined goal will help you achieve it.</li>
 
-                      <li>Refrain from using any text, image or language that may be offensive or obscene in nature. This could lead to your Campaign getting rejected at the review stage.</li>
+                      <li>Refrain from using any text, image or language that may be offensive or obscene in nature. This could lead to your campaign getting rejected at the review stage.</li>
 
                       <li>Do not spam : This includes link-bombing, promoting a project where it shouldn’t be promoted, sending unsolicited @’s on Twitter, 
                       hyping third-party services, and using email lists from outside sources, to name a few. </li>
@@ -285,7 +286,7 @@
                   <div id="" class="nav nav-tabs col-md-3 sidebar">
                     <a href="#getKnow-step" class="active top" data-toggle="tab">Step 1 : Getting To Know You.</a>
                     <a href="#startCampaign-step" data-toggle="tab">Step 2 : Get Started</a>
-                    <a href="#setCampaign-step" data-toggle="tab">Step 3 : Set-up your campaign.</a>
+                    <a href="#setCampaign-step" data-toggle="tab">Step 3 : Set-up Your Campaign.</a>
                   </div> <!--sidbar-->
 
                   <div class="tab-content col-md-9">
@@ -296,9 +297,9 @@
                       <div class="jumbotron row" tabindex="1">
                         <h2>Step 1: Getting to know you </h2>
                         <p>
-                        Congratulations  on  your first step towards setting up your very own Campaign on Pratham Book’s donate-a-book. 
+                        Congratulations on your first step towards setting up your very own fund raising campaign on Pratham Books' <strong> donate-a-book </strong>. 
                         We want to know more about your organization and the work you do.<br/>
-                        Answer each question as best you can and if you have a query please write to us at 
+                        Answer each question to the best of your knowledge and if you have a query please write to us at 
                         <a href="mailto:donateabook@prathambooks.org">donateabook@prathambooks.org</a>.
                         </p>
                       </div><!-- Jumbo-->
@@ -331,18 +332,21 @@
 
                         <div class="form-group row">
                           {{ render_text_field(form.address) }}
+                          <p class="help-block">In case of an individual, a residence address can be given.</p>
                           <div class="alert alert-warning hide">Enter Head Office Address.</div>
                         </div>
 
                         <div class="form-group row">
                           {{ render_text_field(form.contact_number) }}
+                          <p class="help-block">In case of an individual, a personal phone number can be given.</p>
                           <div class="alert alert-warning hide">Enter Head Office Phone Number.</div>
                         </div>
 
                         <div class="form-group row">
                           {{ render_text_field(form.email) }}
-                          <div class="alert alert-warning hide">Invalid Info Email ID.</div>
-                          <p class="help-block">Please add the organisation info ID. It should not be individual specific.</p>
+                          <div class="alert alert-warning hide">Invalid Email ID.</div>
+                          <p class="help-block">Please add the organisation's email ID. It should not be individual specific.</p>
+                          <p class="help-block">In case of an individual, a personal email id can be given.</p>
                         </div>
 
                         <div class="form-group row">
@@ -362,19 +366,20 @@
                       <hr/>
 
                       <div class="well">
-                        <h3>Update us on your certifications:</h3>
+                        <h3>Please update us on your organisation's certifications:</h3>
+                        <p class="help-block">Not applicable in case of individuals</p>
                         <div class="form-group row">
-                          <label>Does your organisation have 80G certification </label><strong>*</strong>
+                          <label>Does your organisation have a 80G certification? </label ><strong>*</strong>
                           {{ render_bullets(form.has_80g_certificate) }}
                         </div>
-                      </div><!--well-->
+                      </div><!--well-- >
 
                       <hr/>
 
                       <div class="well">
                         <h3>Stay in touch</h3>
-                        <p>Give us  details about any person from your organization with whom we can stay in touch with</p>
-                        <h4>Person 1</h4>
+                        <p>Please give details of any one person from your organization with whom we can stay in touch.</p>
+                        <h4>Contact Person</h4>
                         <div class="form-group row">
                           {{ render_text_field(form.person1_name) }}
                           <div class="alert alert-warning hide">Enter Name.</div>
@@ -405,33 +410,33 @@
 
                       <div class="jumbotron row">
                         <h2>Step 2: Get Started</h2>
-                        <p>You are just a few simple steps away from getting fabulous books to the children that you work with!</p>
+                        <p class="help-blocl">You are just a few steps away from getting fabulous books to the children you work with!</p>
                       </div>
 
                       <div class="well">
-                        <h3>What are you raising money for?</h3>
-                        <p>Please select what you wish to raise money for. For your convenience we have four types of donations to choose from.</p>
+                        <h3>What are you raising funds for? <strong>*</strong></h3>
+                        <p>Please select what you wish to raise funds for from these two donation options.</p>
                         <ol start="1">
                           <li>
-                          If you only need books for your library or reading sessions or  an event we recommend you choose just Books.
+                          If you only need books for your library or reading sessions or an event we recommend you choose just Books.
                           </li>
                           <li>
-                          If you wish to build a classroom library or need a modular unit with books try our 
-                          <a href="http://www.prathambooks.org/library-classroom" target="_blank">Library-in-a-classroom</a>.
+                          If you wish to build a classroom library or need modular units with books, try our 
+                          <a href="http://www.prathambooks.org/library-classroom" target="_blank">Library-in-a-classroom</a> unit.
                           Click on it to see how easy it is to set up a library! 
                           </li>
 
                         </ol>
                         <div class="form-group row" id="bookCounts">
-                          <h3>You can also choose a mix of different product offerings in the same funding campaign! <strong>*</strong></h3>
+                          <p class="help-block"> You can also choose a mix of different product offerings in the same funding campaign!</p>
                           <div class="alert alert-warning hide">Choose any one / more than one option below</div>
                           <div class="col-xs-9 row">
-                            {{ render_text_field (form.project_books, "No. of books as prizes / give aways") }}
+                            {{ render_text_field (form.project_books, "Books / Books as prizes or give-aways / Books for reading sessions") }}
                           </div>
 
                           <div class="col-xs-9 row">
                             {{ render_text_field (form.project_lib_in_classroom, "No. of kits") }}
-                            <p class="help-block">Each LIC kit contains 125 books.</p>
+                            <p class="help-block">Note - Each LIC kit contains 125 books.</p>
                           </div>
                         </div>
                       </div><!--well-->
@@ -439,7 +444,7 @@
                       <div id="goal" class="well">
                         <div class="row form-group">
                           <div class="col-xs-12">
-                            <h3>Based on your requirement your funding goal is :</h3>
+                            <h3>Based on your requirement as mentioned above your funding goal comes to :</h3>
                           </div>
                           <div class="col-xs-4">Number of Books</div>
                           <div class="col-xs-8"><span id="noOfBooks"></span></div>
@@ -450,13 +455,13 @@
                             Average value of a book
                           </div>
                           <div class="col-xs-8">
-                            <span id="averageVal">50</span>
+                            <span id="averageVal">Rs. 50</span>
                           </div>
                         </div>
 
                         <div class="row form-group">
                           <div class="col-xs-4">
-                            Amount (in Rupees)
+                            Fund raising amount
                           </div>
                           <div class="col-xs-8">
                             <span id="bookAmount"></span>
@@ -466,7 +471,8 @@
 
                         <p>
                         <strong>PLEASE NOTE:</strong>
-                        If the above amount is not what you had in mind please change your requirement in the previous question on the number of books . 
+                        If the above amount is not what you had planned for the fund raising campaign, please change your requirement of books 
+                        in the previous question. 
                         </p>
                       </div><!--well-->
 
@@ -474,14 +480,14 @@
                       <div class="well">
                         <h3>Languages <strong>*</strong></h3>
                         <div class="form-group row" id="language">
-                          <h3>Select Books in any 3 languages</h3>
+                          <h3>You can raise funds for books in upto 3 different languages.</h3>
 
-                          <p>Your donation will entitle you to choose books across any 3 languages that are in stock. <br/>
+                          <p>
                           Please give a language preference for the books you need for us to serve you better.<br/> <br/>
                           </p>
 
                           <div class="col-md-12">
-                            <div class="alert alert-warning hide">Enter number of books in any one language or more than 1 language.</div>
+                            <div class="alert alert-warning hide">Enter number of books in at least  one language.</div>
                           </div> 
 
                           <div class="col-xs-8">
@@ -494,10 +500,10 @@
                       </div><!--well-->
 
                       <div id="duration" class="well">
-                        <h3>Duration of Campaign</h3>
-                        <p>Each campaign on donate-a-book is <span>30 days</span> long which will start from the day your campaign is approved and goes live.
+                        <h3>Duration of the campaign</h3>
+                        <p>Each campaign on <b>donate-a-book</b> is 30 days long. The duration is 
+                        calculated from the day your campaign goes live.
                         </p>
-
                       </div><!--well-->
 
                     </section>
@@ -509,18 +515,18 @@
                       <div class="jumbotron row">
                         <h2>Step 3: Set-up your campaign</h2>
                         <p>
-                        You are now ready to fill in all the detail that will go live on your Campaign Page. Your campaign page is where 
-                        we showcase the awesome work you do. Make sure you take some time out to fill this section as this is what donors 
-                        will review before deciding to support you.
+                        This is the final step towards setting up your fund raising campaign. Make sure you fill in this 
+                        section well, as this is what your donors will see before they decide to support you. This information 
+                        will go live on your campaign page.
                         </p>
                       </div>
 
                       <div class="well upload">
                         <div class="row form-group">
-                        <h3>Image upload</h3>
+                        <h3>Upload an image of your work or organization here</h3>
                         <div class="col-md-12">
                           <input type="file" name="imageUpload" title="upload" data-filename-placement="inside" required>
-                          <p class="help-block">Please upload images in horizontal / landscape format only.</p>
+                          <p class="help-block">Please upload only jpeg/png images in horizontal / landscape format.</p>
                           <div class="alert alert-warning hide">Select an image for your campaign. </div>
                           <div class="alert alert-warning alert-size hide">Image file size should be less than 1 MB. </div>
                           <div class="alert alert-warning alert-type hide">Image should be in jpeg, png, or gif formats.</div>
@@ -565,7 +571,7 @@
 
                         <div class="form-group row">
                           <div class="col-xs-12">
-                            <label for="age">Do you/your organization do any work for following (check all that apply):
+                            <label for="age">Do you or your organization do any work for following (check all that apply):
                             {{ render_checkbox(form.org_work) }}
                             <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
                           </div>
@@ -577,11 +583,11 @@
                       <div class="well title">
                         <div class="row form-group">
                           <div class="col-xs-12">
-                            <h3>Project Title <strong>*</strong></h3>
+                            <h3>Campaign Title <strong>*</strong></h3>
                           </div>
                           {{ render_text_field(form.project_title) }}
-                          <div class="alert alert-warning  alertleft hide">Please give a suitable title to your campaign</div>
-                          <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 80 characters)</p> 
+                          <div class="alert alert-warning alertleft hide">Please give a suitable title to your campaign</div>
+                          <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Not more than 10 words)</p> 
                         </div><!--form-group-->
                       </div><!--well-->
 
@@ -597,7 +603,7 @@
                             interest in your cause. The shorter, the better. Give a snapshot of what your project is all about and why it is 
                             important. E.g :  We are a  class of 25 bright young minds from an underprivileged community studying in a Govt school in 
                             Delhi. We require books for our classroom library. 
-                            We want to read better and need books which are of our interest and our levels. Help us  become readers for life. (Max. 160 characters)
+                            We want to read better and need books which are of our interest and our levels. Help us become readers for life. (Not more than 55 words)
                             </p>
                           </div>
                         </div><!--form-group-->
@@ -606,33 +612,36 @@
                       <div class="well story">
                         <h3>My Story</h3>
                         <p>
-                        Share your story in this column below and tell potential contributors why your campaign is important.
-                        Introduce yourself and describe your work. Explain how do you plan to utilize the funding and how will it impact 
-                        the children / community your work with. Be specific and transparent  to earn Donor’s trust.
+                        Share your story in this column below and tell potential donors why your campaign is important.
+                        Introduce yourself and describe your work. Explain how you plan to utilize the funds and how will it impact 
+                        the children/community you work with. Be specific and transparent to earn donor’s trust.
                         </p>
                         <p>
                         For your benefit, the ‘My Story’  column is divided into 3 simple guiding questions to help you present your story better.
                         </p>
                         <div class="row form-group">
                           {{ render_text_area(form.project_who_are_you,"PK Foundation was established in 2000 to help bridge the gap in learning in schools through books and reading. PK Foundation is based out of Pune and has 1 more office in rural Maharashtra. With a staff of 12 members and 20 volunteers, PK foundations aims to establish libraries in Govt schools in rural Maharahstra.") }}
+                          <p class="help-block">Not more than 100 words </p>
                         </div><!--form-group-->
 
                         <div class="row form-group">
                           {{ render_text_area(form.project_impact,"PK Foundation’s mission is to inculcate reading habit among students at a young age and to expose them to a large variety of books thus pushing their reading abilities and exposure to the works. Children, specially in rural Maharashtra don’t have access to any other books than curriculum and hence learning a language becomes a curriculum material again. We at PK Foundation, aim to introduce the joy of languages through story books to children and hence develop an interest in academics. Till date PK Foundation has established over 120 libraries in Govt schools in the districts of Akola and Paratwada. These libraries serve over 4800 childre from the age group of 7 to 14. Most children are first generation learners and their education is their family’s chance out of poverty") }}
-                          <p class="help-block">Share your work and  Impact stories here.</p>
+                          <p class="help-block">Share your work and impact stories here.</p>
+                          <p class="help-block">Not more than 150 words </p>
                         </div><!--form-group-->
 
                         <div class="row form-group">
                           {{ render_text_area(form.fund_utilization,"PK Foundation aims to set up 400 new libraries by the end of year 2015.The collected funds will be utilized for buying books for children of all ages in 2 languages and buying cupboards for setting them up. We aim to also start a book-lending program with a membership fee of Rs.1/- to remote areas. These funds would help the logistics for this program.") }}
                           <div class="alert alert-warning alertleft hide">Explain the way you are utilizing the funds.</div>
                           <p class="help-block">Answer the need for this funding and the way in which you plan to utilize these funds.</p>
+                          <p class="help-block">Not more than 100 words </p>
                         </div><!--form-group-->
                       </div><!--well-->
 
                       <div class="well">
                         <h3>Preview Your Campaign Page :</h3>
                         <p>
-                        Before you press the final submission button click here to see how will your Campaign page looks and do edits if required. 
+                        Before you press the final submission button click here to see how will your campaign page looks and do edits if required. 
                         Once you have pressed the submit button, your application will go in the screening process and you will not be able to 
                         make any edits.
                         </p>
@@ -775,7 +784,7 @@
                             <h3>
                               <label for="Library">
                                 <input type="checkbox" required value=" Books for library">
-                                I have read the T&amp;C and I want to submit this campaign page . 
+                                I have read and agree on the Terms of Use and want to submit this campaign.
                               </label>
                             </h3>
                             <div class="alert alert-warning hide alertleft">You need to accept the terms and conditions to proceed.</div>
