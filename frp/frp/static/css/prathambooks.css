@@ -499,16 +499,12 @@ header #login .dropdown-menu {
   margin: 1px -5px 0 0;
 }
 #myTabContent .arrL {
-  background-image: url("../images/ArrowBrwnL.png");
-  border-radius: 0 5px 5px 0;
-  box-shadow: 1px 0 2px 0 #6c5e26;
-  margin: 130px 0 0;
+  background-image: url("../images/carouselArr.png"); 
+  background-position:0 0;
 }
 #myTabContent .arrR {
-  background-image: url("../images/ArrowBrwnR.png");
-  border-radius: 5px 0 0 5px;
-  box-shadow: -1px 0 2px 0 #6c5e26;
-  margin: 130px 0 0;
+  background-image: url("../images/carouselArr.png"); 
+  background-position:-42px 0;
 }
 #contentTabs {
   float: left;
@@ -805,18 +801,21 @@ header #login .dropdown-menu {
 .tab-content .col-md-12 h2 span a {
   font-size: 0.95em;
 }
+.carousel-control {
+  opacity:1;
+}
 .tab-content a.carousel-control {
-  margin: 95px 0 0 1px;
+  margin: 10% 0 0 1px;
   background-color: #fff2c6;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
   background-position: center center;
   background-repeat: no-repeat;
-  height: 30px;
-  width: 30px;
+  height: 44px;
+  width: 44px;
   z-index: 1;
 }
 .tab-content a.carousel-control:hover {
-  background-color: #ff7800;
+  background-color: transparent;
 }
 #carousel-example-generic.carousel {
   clear: both;
