@@ -9,7 +9,13 @@ var DiscoverPage = function(args) {
                           args.filters.languages, 
                           args.filters.types_string);
     $('#scroll').click(this.show_next_campaigns);
-    $('#filter-btn').click(this.filter);
+    // $('#filter-btn').click(this.filter);
+    $('input[type="checkbox"]').on('change',this.filter);
+    $('.row-fluid a').click(function(e) {
+      $(this).find('.collapseSign').html(
+        $(this).find('.collapseSign').html() == '−' ? '+' : '−'
+      );
+    });
   };
   this.show_campaigns = function(data, start, end) {
     var $campaigns = $('#campaigns');
@@ -26,10 +32,9 @@ var DiscoverPage = function(args) {
         attr('src', '/static/uploads/uploads/' + campaign.image).
         attr('alt', 'campaign image').
         appendTo($h1);
-      if (campaign.target <= campaign.total_donations)
-        {
-          $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
-        }
+      if (campaign.target <= campaign.total_donations) {
+        $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
+      }
       var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
       var $description = $('<p/>').html(campaign.description).appendTo($campaignInfo);
@@ -63,6 +68,10 @@ var DiscoverPage = function(args) {
         append($('<span/>').addClass('days').html('Active')).
         append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
+      var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
+        addClass('btn browse-btn').
+        html('Donate').
+        appendTo($div_md_3);
     }
   };
   this.show_next_campaigns = function() {
@@ -81,8 +90,9 @@ var DiscoverPage = function(args) {
     $('#campaigns').html('');
   };
 
-  this.filter_with_args = function(states, languages, types_string) {
+  this.filter_with_args = function(states, languages, types) {
     var filtered_data = that.campaign_data;;
+
     if (states && states.length > 0) {
       filtered_data = filtered_data.filter(function(c) {
         var found = false;
@@ -109,9 +119,9 @@ var DiscoverPage = function(args) {
     }
     // There is only one type on a campaign so it is easier to search
     // for the campaign.type in the selected types
-    if (types_string.length > 0) {
+    if (types.length > 0) {
       filtered_data = filtered_data.filter(function(c) {
-        return (types_string.indexOf(c.type) != -1);
+        return types.indexOf(c.type) != -1;
       });
     }
     that.display_data = filtered_data;
@@ -132,9 +142,25 @@ var DiscoverPage = function(args) {
 
   this.filter = function(e) {
     e.preventDefault();
-    var states = $('#states').val();
-    var languages = $('#languages').val();
-    var types_string = $('#types option:selected').text();
-    that.filter_with_args(states, languages, types_string);
+
+    var states = [];
+    $states = $('#state').find('input[type=checkbox]:checked');
+    $states.each(function() {
+      states.push($(this).val());
+    });
+
+    var languages = [];
+    $languages = $('#language').find('input[type=checkbox]:checked');
+    $languages.each(function() {
+      languages.push($(this).val());
+    });
+
+    var types = [];
+    $types = $('#type').find('input[type=checkbox]:checked');
+    $types.each(function() {
+      types.push($(this).val());
+    });
+
+    that.filter_with_args(states, languages, types);
   };
 };

@@ -3191,3 +3191,49 @@ a.std {
     height: auto !important;
     background-image: none !important;
 }
+
+/* discover page */
+.internal #filterOptions.col-md-3 {
+	font-family: "proxima-nova", sans-serif;
+	font-size: 1.3em;
+}
+.checkoptions.filter-group > input {
+	display: inline-block;
+	margin-right: 5px;
+}
+.row-fluid a {
+	color: #333333;
+	cursor: pointer;
+	display: block;
+	font-family: "proxima-nova", sans-serif;
+	font-size: 1.3em;
+	font-weight: normal;
+	text-decoration: none;
+}
+.checkoptions.filter-group {
+	margin-bottom: 10px;
+}
+.row-fluid a.collapsed {
+	text-decoration: none;
+}
+.checkoptions .row-fluid {
+	display: block;
+	margin-bottom: 10px;
+	padding: 10px;
+	background: #fff;
+	background-color: #fbe659;
+	border-radius: 5px;
+}
+label.checkboxLabel {
+	font-weight: normal;
+	width: 90%;
+	vertical-align: middle;
+}
+#campaigns .col-md-3 .browse-btn {
+	background-image: none!important;
+	margin: 0 31% !important;
+}
+#internalCampaign.discover .campaignInfo {
+	min-height: 240px;
+}
+ 
