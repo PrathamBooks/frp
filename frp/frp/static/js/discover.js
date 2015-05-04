@@ -16,6 +16,27 @@ var DiscoverPage = function(args) {
         $(this).find('.collapseSign').html() == '−' ? '+' : '−'
       );
     });
+    $('input[name=sort-by]').on('change', this.sort);
+  };
+  this.sort = function(e) {
+    var sort_by = $('input[name=sort-by]:checked').val();
+    var sorted_data;
+    if (sort_by === 'Featured') {
+      sorted_data = that.campaign_data.sort(function(a, b) { return (b.featured - a.featured) }); 
+    }
+    else if (sort_by === 'Popular') {
+      sorted_data = that.campaign_data.sort(function(a, b) { return (b.num_donors - a.num_donors) }); 
+    }
+    else if (sort_by === 'Recently Launched') {
+      sorted_data = that.campaign_data.sort(function(a, b) { return (b.days_remaining - a.days_remaining) }); 
+    }
+    else if (sort_by == 'Ending Soon') {
+      sorted_data = that.campaign_data.sort(function(a, b) { return (a.days_remaining - b.days_remaining) }); 
+    }
+    else if (sort_by == 'Most Funded') {
+      sorted_data = that.campaign_data.sort(function(a, b) { return (b.total_donations - a.total_donations) }); 
+    }
+    that.show_after_filter_or_sort(sorted_data);
   };
   this.show_campaigns = function(data, start, end) {
     var $campaigns = $('#campaigns');
@@ -124,7 +145,11 @@ var DiscoverPage = function(args) {
         return types.indexOf(c.type) != -1;
       });
     }
-    that.display_data = filtered_data;
+    that.show_after_filter_or_sort(filtered_data);
+  };
+
+  this.show_after_filter_or_sort = function(data) {
+    that.display_data = data;
     that.clear_campaigns();
     if (that.display_data.length == 0) {
       that.no_campaigns();

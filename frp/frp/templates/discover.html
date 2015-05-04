@@ -16,6 +16,21 @@
     <div class="col-md-3" id="filterOptions">
       <div class="checkoptions filter-group">
         <div class="row-fluid">
+          <a data-toggle="collapse" data-target="#sort-by"> 
+            Sort by <span class="pull-right txt-right collapseSign">−</span>
+          </a>
+        </div>
+        <div id="sort-by" class="checkoptions filter-group collapse in">
+          <input type="radio" name="sort-by" value="Featured"> <label class="checkboxLabel"> Featured </label>
+          <input type="radio" name="sort-by" value="Popular"> <label class="checkboxLabel"> Popular </label>
+          <input type="radio" name="sort-by" value="Recently Launched"> <label class="checkboxLabel"> Recently Launched </label>
+          <input type="radio" name="sort-by" value="Ending Soon"> <label class="checkboxLabel"> Ending Soon </label>
+          <input type="radio" name="sort-by" value="Most Funded"> <label class="checkboxLabel"> Most Funded </label>
+        </div>
+      </div>
+
+      <div class="checkoptions filter-group">
+        <div class="row-fluid">
           <a data-toggle="collapse" data-target="#language"> 
             Langauge <span class="pull-right txt-right collapseSign">−</span>
           </a>
@@ -56,14 +71,6 @@
         </div>
       </div>
  
-      <ul class="featured">
-        <li>Featured</li>
-        <li><a href="{{ url_for('discover', category='featured') }}">Featured</a> </li>
-        <li><a href="{{ url_for('discover', category='popular') }}">Popular</a> </li>
-        <li><a href="{{ url_for('discover', category='recently-launched') }}">Recently Launched</a></li>
-        <li><a href="{{ url_for('discover', category='ending-soon') }}">Ending Soon</a></li>
-        <li><a href="{{ url_for('discover', category='most-funded') }}">Most Funded</a></li>
-      </ul>
     </div>
 
     <div id="campaigns" class="col-md-9">
