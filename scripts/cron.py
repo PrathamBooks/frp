@@ -32,13 +32,16 @@ app.logger.addHandler(file_handler)
 
 
 
-def send_email(to,name,title,percent,subject,start_date):
+def send_email(to,name,title,percent,subject,start_date,end_date,last_day=False):
     if not isinstance(to, list):
         to = [to]
     sender = 'noreply@donateabook.org'
     msg = MIMEMultipart()
     msg['Subject'] = subject
-    text = 'Dear '+name+'\n\nWhat a ride that was! Your Donate-a-Book Campaign: '+title+' has officially come to an end.\n'+ 'You have raised ' + str(percent) + ' of  your target fund. Congratulations on the success of your campaign. \n\nYou can expect to receive an email from the Pratham Books team which will have a comprehensive list of all books in stock.You would be able to pick and choose your preferred books priced within the fund limit that you have raised.\nKeep an eye out for our email, we will be in touch soon with more details \n\nRegards, \nDonate-a-Book Team'
+    if last_day == True:
+        text = 'Dear '+name+'\n\nWhat a ride that was! Your Donate-a-Book Campaign: '+title+' has officially come to an end.\n'+ 'You have raised ' + str(percent) + ' of  your target fund. Congratulations on the success of your campaign. \n\nYou can expect to receive an email from the Pratham Books team which will have a comprehensive list of all books in stock.You would be able to pick and choose your preferred books priced within the fund limit that you have raised.\nKeep an eye out for our email, we will be in touch soon with more details \n\nRegards, \nDonate-a-Book Team'
+    else:
+        text = 'Dear '+name+'\n\n Your campaign with title: '+title +'ends on' + end_date +' You are just 7 days away from completion \nPull up your socks, give it a final push and meet your targets. Our books await you.\nGood Luck. Let it be your best foot forward \n\nRegards,\nDonate-a-Book Team'
 
     i=MIMEText(text, 'plain')
     msg.attach(i)
@@ -51,8 +54,19 @@ def send_email(to,name,title,percent,subject,start_date):
         print "Error: unable to send email"
 
 def send_mail():
-    campaigns = Campaign.last_day_today()
-    for campaign in campaigns:
+    campaigns_last_day_today = Campaign.last_day_today()
+    campaigns_last_week = Campaign.last_week()
+    for campaign in campaigns_last_week:
+        send_email(to=campaign.created_by.email,
+                subject="Just 7 days to go!",
+                name=campaign.created_by.first_name,
+                title=campaign.title,
+                percent=campaign.percent_funded(),
+                start_date="{:%B %d, %Y}".format(campaign.start_date()),
+                end_date="{:%B %d, %Y}".format(campaign.end_date())
+                )
+
+    for campaign in campaigns_last_day_today:
         campaign.status = 'Closed'
         db.session.add(campaign)
         try:
@@ -65,7 +79,9 @@ def send_mail():
                 name=campaign.created_by.first_name,
                 title=campaign.title,
                 percent=campaign.percent_funded(),
-                start_date="{:%B %d, %Y}".format(campaign.start_date()))
+                start_date="{:%B %d, %Y}".format(campaign.start_date()),
+                last_day=True)
+       
 
 
 @manager.command
