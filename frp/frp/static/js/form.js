@@ -49,7 +49,7 @@ function showBottomNavigation() {
   } else $(".btn-next").addClass('hide');
 };
 
-var MAX_FILE_SIZE = 1000000;
+var MAX_FILE_SIZE = 2000000;
 $(function() {
   $("input[name=imageUpload]").change(function(){
     $(this).parents('.form-group').find('.alert').addClass('hide');
