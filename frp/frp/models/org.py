@@ -168,7 +168,10 @@ class Campaign(BaseMixin, db.Model):
         return retval
 
     def emails(self):
-        return [self.created_by.email, campaign.email]
+        if (self.created_by.email == campaign.email):
+            return [self.created_by.email]
+        else:
+            return [self.created_by.email, campaign.email]
 
 
     def approved_date(self):
