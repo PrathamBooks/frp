@@ -87,7 +87,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     last_name=donation.donor.last_name,
     title=campaign.title)
 
-  mailer.send_email(to=campaign.created_by.email,
+  mailer.send_email(to=campaign.emails(),
     subject="New Donation Recieved ",
     template="new_donation.html",
     first_name=campaign.created_by.first_name,
@@ -97,7 +97,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     start_date=start_date )
 
   if (old_percent < 100 <= curr_percent):
-    mailer.send_email(to=campaign.created_by.email,
+    mailer.send_email(to=campaign.emails(),
       subject="You’ve hit a century! Congrats",
       template="congrats.html",
       first_name=campaign.created_by.first_name,
@@ -106,7 +106,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     return
 
   if (old_percent == 0):
-    mailer.send_email(to=campaign.created_by.email,
+    mailer.send_email(to=campaign.email(),
       subject="First Donation Recieved", 
       template="new_donation.html",
       first_name=campaign.created_by.first_name,
@@ -120,7 +120,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
   index=0
   while index < len(percent_arr):
       if (old_percent < percent_arr[index] <= curr_percent):
-          mailer.send_email(to=campaign.created_by.email,
+          mailer.send_email(to=campaign.emails(),
                   subject='Yay! You’ve reached '+ str(percent_arr[index])+'% of your target!',
                   template="campaign_milestone.html",
                   first_name=campaign.created_by.first_name,
@@ -360,13 +360,13 @@ def change_status():
           return "Commit Failed", 500
     start_date = "{:%B %d, %Y}".format(campaign.start_date())
     if (status == "Approved"):
-        mailer.send_email(to=campaign.created_by.email,
+        mailer.send_email(to=campaign.emails(),
                 subject="Your D-A-B Campaign is now Live!",
                 template="campaign_created.html",
                 first_name=campaign.created_by.first_name,
                 id=campaign.id)
     else:
-        mailer.send_email(to=campaign.created_by.email,
+        mailer.send_email(to=campaign.emails(),
                 subject="Your D-A-B Campaign is " + status,
                 template="campaign_state_change.html",
                 first_name=campaign.created_by.first_name,

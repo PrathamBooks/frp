@@ -18,12 +18,12 @@ var Start = function() {
     $('#bookCounts input').change(this.booksCallback);
     $("#goLive").click(this.checkErrorsOnSubmit);
     $("#step8 button").click(this.step8GetStartedCallback);
-
     // Need to call in the beginning to so that required attribute is
     // set. Not setting in form because we want to avoind printing the
     // '*'
     this.booksCallback(); 
   };
+
  //  super(Email, self).__init__(r'^.+@[^.].*\.[a-z]{2,10}$', re.IGNORECASE, message)
 
   // At the end of step 8 in Introduction, need to go to get started

@@ -167,6 +167,10 @@ class Campaign(BaseMixin, db.Model):
             retval.append(campaign.verbose_fields())
         return retval
 
+    def emails(self):
+        return [self.created_by.email, campaign.email]
+
+
     def approved_date(self):
         if (self.approved_at != None):
             return "{:%B %d, %Y}".format(self.approved_at)
