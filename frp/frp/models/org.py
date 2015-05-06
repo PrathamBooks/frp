@@ -150,13 +150,13 @@ class Campaign(BaseMixin, db.Model):
     @staticmethod
     def last_day_today():
         campaigns = Campaign.query.all()
-        retval = list(filter(lambda x:(x.days_remaining()==0 and x.status!='Closed'),campaigns))
+        retval = list(filter(lambda x:(x.days_remaining()==0 and x.status == 'Approved'),campaigns))
         return retval
 
     @staticmethod
     def last_week():
         campaigns = Campaign.query.all()
-        retval = list(filter(lambda x:(x.days_remaining()==7 and x.status!='Closed'),campaigns))
+        retval = list(filter(lambda x:(x.days_remaining()==7 and x.status == 'Approved'),campaigns))
         return retval
 
     @staticmethod
@@ -177,7 +177,7 @@ class Campaign(BaseMixin, db.Model):
 
 
     def days_remaining(self):
-        if (self.approved_at !=None):
+        if (self.approved_at != None):
             rdays = 30 - (datetime.now() - self.approved_at).days
             return rdays if rdays > 0 else 0
         return 0
