@@ -381,16 +381,16 @@ header #login .dropdown-menu {
 #featuredCampaign .btn-nav {
   background-color: transparent !important;
   background-image: url("../images/carouselArr.png") !important;
-  background-position: -41px 0;
+  background-position: -49px 0;
   font-size: 0 !important;
   margin: 0 !important;
   opacity: 0.9;
-  padding: 13px 20px;
+  padding: 25px 24px;
   position: absolute;
   right: 5px;
   top: 200px;
+  width: 50px !important;
 }
-
 #featuredCampaign .btn-nav:hover {
    background-color: #ffde00;
 }
@@ -499,12 +499,10 @@ header #login .dropdown-menu {
   margin: 1px -5px 0 0;
 }
 #myTabContent .arrL {
-  background-image: url("../images/carouselArr.png"); 
-  background-position:0 0;
+  background-position: 2px 0;
 }
 #myTabContent .arrR {
-  background-image: url("../images/carouselArr.png"); 
-  background-position:-42px 0;
+  background-position: -43px 0;
 }
 #contentTabs {
   float: left;
@@ -555,18 +553,18 @@ header #login .dropdown-menu {
   border: 0 none;
 }
 #contentTabs ul.nav-tabs li#pledge a {
-  background-color: #fff;
-  box-shadow: 2px 0 68px #ffc600 inset;
+  background-color: #ffd74f;
   color: #6c5e26;
   font-family: "proxima-nova", sans-serif;
   font-size: 2.3em;
   font-weight: 300;
   height: 80px;
   line-height: 25px;
-  margin: 0 0 0 -1px;
+  margin: 0;
   text-align: center;
   text-transform: capitalize;
   width: 302px;
+  box-shadow: none;
 }
 #contentTabs ul.nav-tabs li#pledge a span {
   color: #ff7800;
@@ -805,14 +803,13 @@ header #login .dropdown-menu {
   opacity:1;
 }
 .tab-content a.carousel-control {
-  margin: 10% 0 0 1px;
-  background-color: #fff2c6;
   background-color: transparent;
-  background-position: center center;
   background-repeat: no-repeat;
-  height: 44px;
-  width: 44px;
+  height: 45px;
+  margin: 10% 0 0 1px;
+  width: 46px;
   z-index: 1;
+  background-image: url("../images/carouselbottomArr.png");
 }
 .tab-content a.carousel-control:hover {
   background-color: transparent;
@@ -825,6 +822,36 @@ header #login .dropdown-menu {
 }
 #geography .carousel-inner {
   padding-bottom: 25px;
+}
+.tab-content .col-md-4 {
+  padding: 10px 0 0 15px;
+}
+.startNow .btn.browse-btn {
+  background-image: none !important;
+  clear: both;
+  float: inherit !important;
+  margin: 26px 0 !important;
+  text-align: center !important;
+  width: 15% !important;
+}
+.decriptionTxt {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 29px;
+  color: #fff;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 700;
+  margin: 0 auto 20px;
+  padding: 10px;
+  width: 64%;
+}
+.row.startNow {
+  margin: 15px 0;
+  text-align: center;
+  width: 100%;
+}
+.decriptionTxt span {
+  color: #ffc600;
 }
 /* Less File Internal pages */
 .internal {
