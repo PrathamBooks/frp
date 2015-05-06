@@ -192,6 +192,7 @@ class BeneficiarySignupForm(wtforms.Form):
 
     project_state = wtforms.SelectField(
         label='Please select any one state in the list',
+        validators=[wtforms.validators.Required()],
         choices=STATES)
 
     project_city = wtforms.TextField(
