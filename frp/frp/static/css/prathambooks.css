@@ -646,7 +646,7 @@ header #login .dropdown-menu {
 }
 .bottomBlock div.news a {
   float: left;
-  font-size: 18px;
+  font-size: 14px;
   text-decoration: underline;
   margin: -10px 0 0;
   width: 100%;
@@ -2332,6 +2332,17 @@ footer .row .siteBlock ul li a {
 }
 footer .row .siteBlock ul li a:hover {
   text-decoration: underline;
+}
+footer .credits a {
+  text-decoration: none;
+  color: #888888;
+  font-size: 1em;
+}
+footer .credits a:hover {
+  text-decoration: underline;
+}
+h1.pull-left.credits span {
+    color: #888888;
 }
 footer .row .bottom .siteBlock {
   padding: 35px 0 0;
