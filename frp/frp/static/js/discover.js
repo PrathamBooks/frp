@@ -9,7 +9,6 @@ var DiscoverPage = function(args) {
                           args.filters.languages, 
                           args.filters.types_string);
     $('#scroll').click(this.show_next_campaigns);
-    // $('#filter-btn').click(this.filter);
     $('input[type="checkbox"]').on('change',this.filter);
     $('.row-fluid a').click(function(e) {
       $(this).find('.collapseSign').html(
@@ -114,7 +113,7 @@ var DiscoverPage = function(args) {
   this.filter_with_args = function(states, languages, types) {
     var filtered_data = that.campaign_data;;
 
-    if (states && states.length > 0) {
+    if (states && states.length > 0 && states.indexOf('All') == -1) {
       filtered_data = filtered_data.filter(function(c) {
         var found = false;
         _.each(states, function(state) {
@@ -126,7 +125,7 @@ var DiscoverPage = function(args) {
         return found;
       });
     }
-    if (languages && languages.length > 0) {
+    if (languages && languages.length > 0 && languages.indexOf('All') == -1) {
       filtered_data = filtered_data.filter(function(c) {
         var found = false;
         _.each(languages, function(language) {
@@ -140,7 +139,7 @@ var DiscoverPage = function(args) {
     }
     // There is only one type on a campaign so it is easier to search
     // for the campaign.type in the selected types
-    if (types.length > 0) {
+    if (types && types.length > 0 && types.indexOf('All') == -1) {
       filtered_data = filtered_data.filter(function(c) {
         return types.indexOf(c.type) != -1;
       });

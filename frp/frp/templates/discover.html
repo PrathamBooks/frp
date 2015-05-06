@@ -36,6 +36,8 @@
           </a>
         </div>
         <div id="language" class="checkoptions filter-group collapse in">
+          <input type="checkbox" name="All" value="All">
+          <label class="checkboxLabel"> All <span class='num'>  </span>  </label></input>
           {% for language in form.languages %}
             {% if language.data != '' %}
               <input type="checkbox" name="{{language.data}}" value="{{language.data}}">
@@ -49,6 +51,8 @@
           </a>
         </div>
         <div id="type" class="checkoptions filter-group collapse">
+          <input type="checkbox" name="All" value="All">
+          <label class="checkboxLabel"> All <span class='num'>  </span>  </label></input>
           {% for type in form.types %}
             {% if type.label.value != '' %}
               <input type="checkbox" name="{{type.data}}" value="{{type.label.text}}">
@@ -62,6 +66,8 @@
           </a>
         </div>
         <div id="state" class="checkoptions filter-group collapse" style="height: auto;">
+          <input type="checkbox" name="All" value="All">
+          <label class="checkboxLabel"> All <span class='num'>  </span>  </label></input>
           {% for state in form.states %}
             {% if state.data != '' %}
             <input type="checkbox" name="{{state.data}}" value="{{state.data}}">

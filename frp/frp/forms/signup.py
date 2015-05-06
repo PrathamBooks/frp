@@ -84,10 +84,12 @@ class BeneficiarySignupForm(wtforms.Form):
         choices=ORG_STATUS_CHOICES)
     address = wtforms.TextField(
         label='Head Office Address',
+        description='In case of an individual, a residence address can be given.',
         validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=500)])
     contact_number = wtforms.TextField(
         label='Head Office Phone Number',
+        description='In case of an individual, a personal phone number can be given.',
         validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=15)])
     email = wtforms.TextField(
@@ -96,17 +98,20 @@ class BeneficiarySignupForm(wtforms.Form):
                     wtforms.validators.Email(),
                     wtforms.validators.Length(max=254)])
     website = wtforms.TextField(
-        label='Website URL', validators=[wtforms.validators.Optional(),
-                                     wtforms.validators.URL(),
-                                     wtforms.validators.Length(max=500)])
+            label='Website URL', description=u'Website should start with http://',
+            validators=[wtforms.validators.Optional(),
+                wtforms.validators.URL(),
+                wtforms.validators.Length(max=500)])
     facebook = wtforms.TextField(
-        label='Facebook link', validators=[wtforms.validators.Optional(),
-                                      wtforms.validators.URL(),
-                                      wtforms.validators.Length(max=500)])
+            label='Facebook link', description=u'Facebook link should start with http://',
+            validators=[wtforms.validators.Optional(),
+                wtforms.validators.URL(),
+                wtforms.validators.Length(max=500)])
     blog = wtforms.TextField(
-        label='Blog link', validators=[wtforms.validators.Optional(),
-                                     wtforms.validators.URL(),
-                                     wtforms.validators.Length(max=500)])
+            label='Blog link', description=u'Blog link should start with http://',
+            validators=[wtforms.validators.Optional(),
+                wtforms.validators.URL(),
+                wtforms.validators.Length(max=500)])
     has_80g_certificate = wtforms.RadioField(
         label='Does your organisation have 80G certification',
         validators=[wtforms.validators.Required()],

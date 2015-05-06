@@ -332,21 +332,31 @@
 
                         <div class="form-group row">
                           {{ render_text_field(form.address) }}
-                          <p class="help-block">In case of an individual, a residence address can be given.</p>
                           <div class="alert alert-warning hide">Enter Head Office Address.</div>
                         </div>
 
                         <div class="form-group row">
                           {{ render_text_field(form.contact_number) }}
-                          <p class="help-block">In case of an individual, a personal phone number can be given.</p>
                           <div class="alert alert-warning hide">Enter Head Office Phone Number.</div>
                         </div>
 
                         <div class="form-group row">
-                          {{ render_text_field(form.email) }}
-                          <div class="alert alert-warning hide">Invalid Email ID.</div>
-                          <p class="help-block">Please add the organisation's email ID. It should not be individual specific.</p>
-                          <p class="help-block">In case of an individual, a personal email id can be given.</p>
+                          <div class="col-xs-4">
+                            {{form.email.label}} {% if form.email.flags.required %} <strong>*</strong> {% endif %}
+                          </div>
+                          <div class="col-xs-8">
+                            <input type="text" class="form-control" name="{{form.email.name}}" value="{{form.email.data|default('',True)}}" required /> 
+                            <p class="help-block">Please add the organisation's email ID. It should not be individual specific.</p>
+                            <p class="help-block">In case of an individual, a personal email id can be given.</p>
+                            <div class="alert alert-warning hide">Invalid Email ID.</div>
+                            {% if form.email.errors %}
+                            <ul class="errors">
+                              {% for error in form.email.errors %}
+                              <li><div class="alert alert-warning">{{ error }}</div></li>
+                              {% endfor %}
+                            </ul>
+                            {% endif %}
+                          </div>
                         </div>
 
                         <div class="form-group row">
