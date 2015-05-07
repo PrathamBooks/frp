@@ -3276,3 +3276,35 @@ label.checkboxLabel {
 	min-height: 240px;
 }
  
+/* profile page */
+.col-md-9.well.profile{
+  padding:0;
+}
+
+.col-md-9.well.profile .row span {
+  float: right;
+}
+
+.well.profile h3{
+  margin: 0 0 0 !important;
+  background-color: #E5E4E0;
+  color: #B8B5A7;
+  font-size: 2.8em;
+  padding: 20px 20px 0;
+  text-align: left;
+  height: 70px !important;
+
+}
+.col-md-9.well.profile .row{
+  margin: 20px 15px;
+
+  font-size: 1.6em;
+}
+
+.col-md-9.well.profile .btn {
+  margin-right:0!important;
+}
+
+.col-md-9.well.profile .btn a{
+  color:#000;  
+}
