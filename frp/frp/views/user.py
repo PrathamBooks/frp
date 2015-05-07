@@ -445,7 +445,7 @@ def admin_add_user():
     else:
         form = RegisterForm(request.form)
         if (form.validate()):
-            user = User(status=USER_STATUS.ACTIVE, email=form.email.data, confirmed_at=datetime.now())
+            user = User(status=USER_STATUS.ACTIVE, active=True, email=form.email.data, confirmed_at=datetime.now())
             db.session.add(user)
 
             user_auth = UserAuth(password=current_app.user_manager.hash_password(form.password.data),
