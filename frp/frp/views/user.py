@@ -3,6 +3,7 @@
 import os
 import sets
 import json
+from datetime import *
 from flask import (render_template,
                    g,
                    url_for,
@@ -18,9 +19,10 @@ from flask.ext.oauth import OAuth
 from werkzeug import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
 from flask_login import login_user
+from flask_user.forms import RegisterForm
 
 from .. import app
-from ..models import (Campaign, ORG_STATUS_CHOICES,Comment,Donation,User)
+from ..models import (Campaign,ORG_STATUS_CHOICES,USER_STATUS,Comment,Donation,User,UserAuth)
 from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
@@ -433,12 +435,47 @@ def add_comment():
       comments = campaign.get_comments()
       return jsonify({"comments":comments})
 
-@app.route("/admin/dashboard",methods=['GET'])
+@app.route("/admin/add_user",methods=['GET', 'POST'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def admin_add_user():
+    if request.method == "GET":
+        form = RegisterForm()
+        return render_template('flask_user/add_user.html', form=form)
+    else:
+        form = RegisterForm(request.form)
+        if (form.validate()):
+            user = User(status=USER_STATUS.ACTIVE, email=form.email.data, confirmed_at=datetime.now())
+            db.session.add(user)
+
+            user_auth = UserAuth(password=current_app.user_manager.hash_password(form.password.data),
+                    user=user, active=True)
+            db.session.add(user_auth)
+            try:
+                db.session.commit()
+            except Exception as e:
+                app.logger.warning("Failed to add user " + form.email.data)
+                app.logger.warning(e)
+                return render_template('flask_user/add_user.html', form=form)
+
+            return redirect(url_for('user_add_success', id=user.id))
+
+        return render_template('flask_user/add_user.html', form=form)
+
+@app.route("/admin/user_add_success/<id>", methods=['GET'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def user_add_success(id):
+    user = User.query.get(id)
+    return render_template("flask_user/user_add_success.html", user=user)
+
+@app.route("/admin/dashboard",methods=['GET', 'POST'])
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
 def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)
+
 
 @app.route("/profile/donor_transactions")
 @login_required
