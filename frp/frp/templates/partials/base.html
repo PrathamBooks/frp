@@ -58,32 +58,43 @@
             <span>Give Books to India's Children</span>
           </a>
         </h1>
-        <nav class="nav">
-        <ul>
-          <li  class="darkOrange">
-          <a href="{{ url_for('about') }}">about
-            <span class="caret"></span>
-          </a>
-          </li>
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button data-target="#myNavbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="myNavbar" class="navbar-collapse collapse" style="height: 1px;">
+              <ul class="nav navbar-nav">
+                <li  class="darkOrange">
+                <a href="{{ url_for('about') }}">about
+                  <span class="caret"></span>
+                </a>
+                </li>
 
-          <li class="orange">
-          <a href="{{ url_for('start')}}">start
-            <span class="caret"></span>
-          </a>
-          </li>
+                <li class="orange">
+                <a href="{{ url_for('start')}}">start
+                  <span class="caret"></span>
+                </a>
+                </li>
 
-          <li class="lightOrange">
-          <a href="{{ url_for('discover') }}" >discover
-            <span class="caret"></span>
-          </a>
-          </li>
+                <li class="lightOrange">
+                <a href="{{ url_for('discover') }}" >discover
+                  <span class="caret"></span>
+                </a>
+                </li>
 
-          <li class="darkYellow">
-          <a href="{{ url_for('index') }}">home
-            <span class="caret"></span>
-          </a>
-          </li>
-        </ul>
+                <li class="darkYellow">
+                <a href="{{ url_for('index') }}">home
+                  <span class="caret"></span>
+                </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </nav>
 
         <div id="login">
