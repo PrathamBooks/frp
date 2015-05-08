@@ -16,6 +16,7 @@ from flask import (render_template,
                    current_app,
                    get_flashed_messages)
 from flask.ext.oauth import OAuth
+from flask.ext import excel
 from werkzeug import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
 from flask_login import login_user
@@ -437,7 +438,7 @@ def add_comment():
 
 @app.route("/admin/add_user",methods=['GET', 'POST'])
 @login_required
-@roles_required('admin')    # Limits access to users with the 'admin' role
+#@roles_required('admin')    # Limits access to users with the 'admin' role
 def admin_add_user():
     if request.method == "GET":
         form = RegisterForm()
@@ -475,6 +476,24 @@ def user_add_success(id):
 def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)
+
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+@app.route("/download",methods=['GET'])
+def download():
+    category = request.args.get('category')
+    if category == 'donations':
+        donations = Donation.query.all()
+        donations_data = map(lambda x:x.donation_details(),donations)
+        header = ["Donor Name","Date","Campaign Title","Amount Donated","Anonomus Donor","80 G Cert Requested","Transaction Details"]
+        donations_data.insert(0,header)
+        return excel.make_response_from_array(donations_data, "csv")
+    else:
+        campaigns = Campaign.query.all()
+        campaigns_data = map(lambda x:x.campaign_details(),campaigns)
+        header = ['Campaign Title','Start Date','Remaining Days','Number of Donors Contributed','Target amount','Fund Raised','State']
+        campaigns_data.insert(0,header)
+        return excel.make_response_from_array(campaigns_data, "csv")
 
 
 @app.route("/profile/donor_transactions")
