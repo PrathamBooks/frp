@@ -104,7 +104,7 @@ var Start = function() {
       $modal.find("#total_impact_on_children").text($('input[name="total_impact_on_children"]').val());
       $modal.find("#category").text($('input[name="category"][checked="checked"]').parent().text());
       $modal.find("#status").text($('input[name="organization_status"][checked="checked"]').parent().text());
-      $modal.find("#location").text($('select[name="project_state"]').val() + ',' + $('input[name="project_city"]').val());
+      $modal.find("#location").text($('select[name="project_city"]').val() + ', ' + $('input[name="project_state"]').val());
       $modal.find("#website").text($('input[name="website"]').val());
       $modal.find("#facebook").text($('input[name="facebook"]').val());
       $modal.find("#blog").text($('input[name="blog"]').val());
