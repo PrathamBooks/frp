@@ -83,25 +83,36 @@ var Start = function() {
     });
   };
 
+  this.get_chosen_languages = function() {
+    var languages = [];
+    if ($('select[name="language1"]').val()) { languages.push($('select[name="language1"]').val()) };
+    if ($('select[name="language2"]').val()) { languages.push($('select[name="language2"]').val()) };
+    if ($('select[name="language3"]').val()) { languages.push($('select[name="language3"]').val()) };
+    return languages;
+  };
+
   // Preview btn populates the modal with the values from the form before 
   // showing the modal
   this.attachPreviewCallback = function() {
     $('.modal').on('show.bs.modal', function (event) {
       var $modal = $(this); 
-      $modal.find("#category").text($('input[name="category"][checked="checked"]').parent().text());
       $modal.find("#title").text($('input[name="title"]').val());
+      var languages = that.get_chosen_languages().join(',');
+      if (languages) {
+        $modal.find("#languages").text(languages);
+      }
+      $modal.find("#total_impact_on_children").text($('input[name="total_impact_on_children"]').val());
+      $modal.find("#category").text($('input[name="category"][checked="checked"]').parent().text());
       $modal.find("#status").text($('input[name="organization_status"][checked="checked"]').parent().text());
-      $modal.find("#address").text($('input[name="address"]').val());
-      $modal.find("#contact_number").text($('input[name="contact_number"]').val());
-      $modal.find("#email").text($('input[name="email"]').val());
-      $modal.find("#has_80g_certificate").text($('input[name="has_80g_certificate"][checked="checked"]').parent().text());
-      $modal.find("#person1_name").text($('input[name="person1_name"]').val());
-      $modal.find("#person1_position").text($('input[name="person1_position"]').val());
-      $modal.find("#person1_email").text($('input[name="person1_email"]').val());
-      $modal.find("#person1_phone").text($('input[name="person1_phone"]').val());
-      $modal.find("#modal-noOfBooks").text($('#noOfBooks').html());
-      $modal.find("#modal-fundingGoal").text($("input[name='fundingGoal']").val());
-      $modal.find("#modal-project-title").text($('input[name="project_title"]').val());
+      $modal.find("#location").text($('select[name="project_state"]').val() + ',' + $('input[name="project_city"]').val());
+      $modal.find("#website").text($('input[name="website"]').val());
+      $modal.find("#facebook").text($('input[name="facebook"]').val());
+      $modal.find("#blog").text($('input[name="blog"]').val());
+      $modal.find("#target").text($("input[name='fundingGoal']").val());
+      $modal.find("#who").text($("textarea[name='project_who_are_you']").val());
+      $modal.find("#story").text($("textarea[name='project_description']").val());
+      $modal.find("#impact").text($("textarea[name='project_impact']").val());
+      $modal.find("#fund_utilization").text($("textarea[name='fund_utilization']").val());
     });
   };
 
