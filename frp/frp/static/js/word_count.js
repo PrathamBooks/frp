@@ -1,7 +1,7 @@
 $(function ($){
   $('.form-control').each(function(){
-    var max = parseInt( $(this).attr('maxwords'));
-    if (!max){
+    var max = parseInt($(this).attr('maxwords'));
+    if (!max) {
       return;
     }
     var $btn = $('<button/>');
@@ -11,15 +11,14 @@ $(function ($){
       if (!str) {
         $btn.hide();
         return;
-      }else {
-        str = str.split(/\s+/);
-        var words = str.length;
-      }
-      if (words >= max) {
+      } 
+      str = str.split(/\s+/);
+      var nwords = str.length;
+      if (nwords >= max) {
         alert('You have reached the word limit'+max);
         $btn.html('You have reached the word limit');
-      }else {
-        $btn.html(max- words + 'Words left');
+      } else {
+        $btn.html(max - nwords + 'Words left');
       }
       $btn.show();
     });
