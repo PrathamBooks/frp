@@ -24,8 +24,6 @@ var Start = function() {
     this.booksCallback(); 
   };
 
- //  super(Email, self).__init__(r'^.+@[^.].*\.[a-z]{2,10}$', re.IGNORECASE, message)
-
   // At the end of step 8 in Introduction, need to go to get started
   this.step8GetStartedCallback = function(e) {
     $('#get-started-tab a').tab('show');

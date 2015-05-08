@@ -57,6 +57,7 @@ def init_app(app, settings='settings/development.py'):
                     "js/admin.js",
                     "js/discover.js",
                     "js/utils.js",
+                    "js/word_count.js",
                     "lib/bootstrap/bootstrap.file-input.js",
                     output="gen/lib.js")
 
