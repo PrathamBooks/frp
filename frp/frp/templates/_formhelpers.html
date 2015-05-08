@@ -56,7 +56,7 @@
 {% endmacro %}
 
 
-{% macro render_text_field(field, placeholder,maxlength)  %}
+{% macro render_text_field(field, placeholder,maxwords)  %}
 <div class="form-group row">
   <div class="col-xs-4">
     {{field.label}} {% if field.flags.required %} <strong>*</strong> {% endif %}
@@ -69,10 +69,10 @@
     {% if not placeholder %}
       {% set placeholder = field.label.text %}
     {% endif %}
-    {% if not maxlength %}
+    {% if not maxwords %}
     <input type="text" class="form-control" name="{{field.name}}" placeholder="{{placeholder}}" value="{{field.data|default('',True)}}" {{ required }}/> 
     {% else %}
-    <input type="text" class="form-control" maxlength="{{ maxlength }}" name="{{field.name}}" placeholder="{{placeholder}}" value="{{field.data|default('',True)}}" {{ required }}/> 
+    <input type="text" class="form-control" maxwords="{{ maxwords }}" name="{{field.name}}" placeholder="{{placeholder}}" value="{{field.data|default('',True)}}" {{ required }}/> 
     {% endif %}
     {% if field.errors %}
       <ul class="errors">
@@ -88,7 +88,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_text_area(field, placeholder=0,maxlength=0)  %}
+{% macro render_text_area(field, placeholder=0,maxwords=0)  %}
 <div class="form-group row">
   {{field.label}} {% if field.flags.required %} <strong>*</strong> {% endif %}
   {% if field.flags.required %}
@@ -97,10 +97,10 @@
   {% if not placeholder %}
     {% set placeholder = field.label.text %}
   {% endif %}
-  {% if not maxlength %}
+  {% if not maxwords %}
   <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}"  {{ required }}>{{field.data|default('',True)}}</textarea>
   {% else %}
-  <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}" maxlength="{{ maxlength }}" {{ required }}>{{field.data|default('',True)}}</textarea>
+  <textarea class="form-control" rows="3" name="{{field.name}}" placeholder="{{placeholder}}" maxwords="{{ maxwords }}" {{ required }}>{{field.data|default('',True)}}</textarea>
   {% endif %}
 
   {% if field.errors %}

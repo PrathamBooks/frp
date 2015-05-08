@@ -23,32 +23,6 @@ var Start = function() {
     // set. Not setting in form because we want to avoind printing the
     // '*'
     this.booksCallback(); 
-    $('.form-control').keyup(function () {
-      var max = parseInt( $(this).attr('maxlength'))
-      if (!max) {
-        return;
-      }
-
-      max = Math.round(max/12);
-      var str = $(this).val().split(' ')
-      str = jQuery.grep(str, function(value) {
-        return value != '';
-      });
-      var words = str.length
-      if ($(this).next().attr('type') == 'temp'){
-        var $btn = $(this).next();
-      }
-      else{
-        var $btn = $('<button/>').attr('type','temp');
-      }
-
-      if (words >= max) {
-        $btn.html('you have reached the limit');
-      } else {
-        $btn.html(max-words + 'Words left');
-      }
-      $(this).after($btn);
-    });
   };
   //  super(Email, self).__init__(r'^.+@[^.].*\.[a-z]{2,10}$', re.IGNORECASE, message)
 
