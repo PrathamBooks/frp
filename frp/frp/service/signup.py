@@ -90,7 +90,8 @@ def create_beneficiary(form, filename):
             utilization=fund_utilization, nbooks=nbooks, nlic=nlic,
             state=state, city=city, languages=languages, 
             status='Submitted', image='xx.png',
-            total_impact_on_children=total_impact_on_children)
+            total_impact_on_children=total_impact_on_children,
+            featured=False)
     db.session.add(campaign)
 
     try:
