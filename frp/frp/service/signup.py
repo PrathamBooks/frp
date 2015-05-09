@@ -10,7 +10,7 @@ from .. import app
 from ..models import (db, User, UserAuth, USER_STATUS, is_email_exists,
                       Organization, OrganizationInfo, OrganizationWork, Campaign)
 from ..helpers import file_extension
-from .image_backup import save_image
+
 
 from rq import Queue
 from rq.job import Job
@@ -106,6 +106,7 @@ def create_beneficiary(form, filename):
         db.session.commit()
 
         if (app.config['VERSION'] == 'production'):
+            from .image_backup import save_image
             app.logger.warning('Trying to backup image')
             job = q.enqueue_call(
                 func=save_image, 

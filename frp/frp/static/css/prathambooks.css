@@ -2378,14 +2378,12 @@ footer .row .bottom .siteBlock a {
 footer .row .bottom .siteBlock a:hover {
   text-decoration: underline;
 }
-/*To Be converted to Less*/
-/*To Be converted to Less*/
 button.approve {
   background-image: none !important;
   font-size: 0.9em !important;
   font-weight: normal ;
   letter-spacing: 1px !important;
-  margin: 0 !important;
+  margin-right: 10px !important;
   padding: 6px 10px ;
   float: left !important;
   height: 28px !important;

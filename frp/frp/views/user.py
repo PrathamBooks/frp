@@ -479,21 +479,25 @@ def admin_dashboard():
 
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
-@app.route("/download",methods=['GET'])
-def download():
-    category = request.args.get('category')
-    if category == 'donations':
-        donations = Donation.query.all()
-        donations_data = map(lambda x:x.donation_details(),donations)
-        header = ["Donor Name","Date","Campaign Title","Amount Donated","Anonomus Donor","80 G Cert Requested","Transaction Details"]
-        donations_data.insert(0,header)
-        return excel.make_response_from_array(donations_data, "csv")
-    else:
-        campaigns = Campaign.query.all()
-        campaigns_data = map(lambda x:x.campaign_details(),campaigns)
-        header = ['Campaign Title','Start Date','Remaining Days','Number of Donors Contributed','Target amount','Fund Raised','State']
-        campaigns_data.insert(0,header)
-        return excel.make_response_from_array(campaigns_data, "csv")
+@app.route("/download/donations",methods=['GET'])
+def download_donations():
+    donations = Donation.query.all()
+    donations_data = map(lambda x:x.donation_details(),donations)
+    header = ["Donor Name", "Donor Email", "Date", "Campaign Title", "Amount Donated",
+            "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
+    donations_data.insert(0,header)
+    return excel.make_response_from_array(donations_data, "csv")
+
+
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+@app.route("/download/campaigns",methods=['GET'])
+def download_campaigns():
+    campaigns = Campaign.query.all()
+    campaigns_data = map(lambda x:x.campaign_details(),campaigns)
+    header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Fund Raised','State']
+    campaigns_data.insert(0,header)
+    return excel.make_response_from_array(campaigns_data, "csv")
 
 
 @app.route("/profile/donor_transactions")
