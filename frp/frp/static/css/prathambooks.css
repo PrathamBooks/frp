@@ -845,8 +845,11 @@ header #login .dropdown-menu {
 .tab-content .col-md-4 {
   padding: 10px 0 0 15px;
 }
-.startNow .btn.browse-btn {
+.btn.browse-btn {
   background-image: none !important;
+}
+
+.startNow .btn.browse-btn {
   clear: both;
   float: inherit !important;
   margin: 26px 0 !important;
@@ -3285,7 +3288,6 @@ label.checkboxLabel {
 	vertical-align: middle;
 }
 #campaigns .col-md-3 .browse-btn {
-	background-image: none!important;
 	margin: 0 31% !important;
 }
 #internalCampaign.discover .campaignInfo {
@@ -3582,7 +3584,7 @@ footer .row .siteBlock {
 }
 
 .startNow .btn.browse-btn {
-       width:auto!important;
+  width:auto!important;
 }
 }
 @media (min-width: 481px) and (max-width: 639px) {
