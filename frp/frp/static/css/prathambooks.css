@@ -3293,7 +3293,14 @@ label.checkboxLabel {
 #internalCampaign.discover .campaignInfo {
 	min-height: 240px;
 }
- 
+.modal-content button.btn {
+  background: #ffc600;
+  border-radius: 29px;
+  text-transform: uppercase;
+  font-family: "ligurino-condensed", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
 /* profile page */
 .col-md-9.well.profile{
   padding:0;
