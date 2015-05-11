@@ -9,7 +9,7 @@
     </div>
     <ul>
       <li> 
-        <img src="static/images/bannerImage/1.jpg" alt="banner1">
+      <img src="static/images/bannerImage/1.jpg" alt="banner1">
       </li>
     </ul>
     <p>
@@ -58,42 +58,18 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <div class="col-md-4">
-                 <img src="static/images/campaignImages/campaign1B.jpg">
-                 <h4><a href="campaignPage.html">Campaign One</a></h4>
-                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know. <br />
-                 You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.
-                 </p>
-               </div>
-               <div class="col-md-4">
-                 <img src="static/images/campaignImages/campaign2B.jpg">
-                 <h4><a href="campaignPage.html">Campaign Two</a></h4>
-                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
-              </div>
+              {% set i=0 %}
+              {% for campaign in display_campaigns %}
               <div class="col-md-4">
-                <img src="static/images/campaignImages/campaign3B.jpg">
-                <h4><a href="campaignPage.html">Campaign Three</a></h4>
-                <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
-              </div>
+                <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                <p>{{ campaign.description }}</p>
+              </div>{% set i= i+1 %}
+              {% if (i == 3 ) %}
             </div>
             <div class="item">
-              <div class="col-md-4">
-                <img src="static/images/campaignImages/campaign4B.jpg">
-                <h4><a href="campaignPage.html">Campaign One</a></h4>
-                <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know. <br />
-                You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.
-                </p>
-              </div>
-              <div class="col-md-4">
-                <img src="static/images/campaignImages/campaign5B.jpg">
-                <h4><a href="campaignPage.html">Campaign Two</a></h4>
-                <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
-              </div>
-              <div class="col-md-4">
-                <img src="static/images/campaignImages/campaign6B.jpg">
-                <h4><a href="campaignPage.html">Campaign Three</a></h4>
-                <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
-              </div>
+              {% set i = 0 %}
+              {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
