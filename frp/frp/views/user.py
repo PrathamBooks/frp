@@ -296,7 +296,7 @@ def search():
             request.args.getlist('types')
             )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form, languages=languages, states=states, types=types)
+            form=filter_form, languages=languages, states=states, types=types,search_string=search_string)
 
 @app.route("/donate/pay", methods=['POST'])
 @login_required
