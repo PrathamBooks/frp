@@ -12,7 +12,7 @@ LOCAL_FILE = 'file'
 
 project_id = 'emerald-surface-650'
 
-PSQL_BUCKET = 'frp-production/psql'
+PSQL_BUCKET = 'frp-staging/psql'
 
 uri = boto.storage_uri(PSQL_BUCKET, GOOGLE_STORAGE)
 # If for some reason backups are not happening, keep at least the old backups
