@@ -655,116 +655,7 @@
                         Once you have pressed the submit button, your application will go in the screening process and you will not be able to 
                         make any edits.
                         </p>
-                        <button class="btn btnPreview" data-toggle="modal" data-target=".bs-example-modal-lg">Preview</button>
-                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h3 class="modal-title" id="myLargeModalLabel">Preview of Beneficiary Form </h3>
-                              </div>
-
-                              <div class="row">
-                                <div class="col-xs-6">
-                                  <h5>Name of the Organisation/Individual</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="title"></label>
-                                </div>
-                                 <div class="col-xs-6">
-                                  <h5>Number of children impacted</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="total_impact_on_children"></label>
-                                </div>
-
-                                <div class="col-xs-6">
-                                  <h5>Languages</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="languages"> Languages </label>
-                                </div>
-
-                                <div class="col-xs-6">
-                                  <h5>Beneficiary Type</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="category"> Beneficiary Type</label>
-                                </div>
-
-                                <div class="col-xs-6">
-                                  <h5>Location</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="location"> Location </label>
-                                </div>
-                              </div> <!--row-->
-
-                              <div class="row">
-                                <div class="col-xs-12"><h4>Social Details</h4></div>
-                                <div class="col-xs-6">
-                                  <h5>Website</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="website">Category</label>
-                                </div>
-                                <div class="col-xs-6">
-                                  <h5>Facebook</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="facebook">Category</label>
-                                </div>
-                                 <div class="col-xs-6">
-                                  <h5>Blog</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="blog">Category</label>
-                                </div>
-                               </div> <!--row-->
-
-                              <div class="row">
-                                <div class="col-xs-6">
-                                  <h5>Funding goal</h5>
-                                </div>
-                                <div class="col-xs-6">
-                                  <label id="target"></label>
-                                </div>
-                              </div> <!--row-->
-
-                              <div class="row">
-                                <div class="col-xs-12"><h4>Campaign Information </h4></div>
-
-                                <div class="col-xs-12">
-                                  <h5>Who we are</h5>
-                                </div>
-                                <div class="col-xs-12">
-                                  <label id="who"></label>
-                                </div>
-
-                                <div class="col-xs-12">
-                                  <h5>Our Story</h5>
-                                </div>
-                                <div class="col-xs-12">
-                                  <label id="story">Name</label>
-                                </div>
-
-                                <div class="col-xs-12">
-                                  <h5>Our work and its impact</h5>
-                                </div>
-                                <div class="col-xs-12">
-                                  <label id="impact"></label>
-                                </div>
-
-                                <div class="col-xs-12">
-                                  <h5>How we will utilize these funds.</h5>
-                                </div>
-                                <div class="col-xs-12">
-                                  <label id="fund_utilization"></label>
-                                </div>
-                              </div> <!--row-->
-                            </div>
-                          </div> <!--modal-->
-                        </div>
+                        <button class="btn btnPreview" data-toggle="modal" data-target="#preview-modal">Preview</button>
 
                       </div><!--well-->
 
@@ -802,6 +693,132 @@
     </form>
   </div>  
 </div><!--Wrapper-->
+<div class="modal fade bs-example-modal-lg" id="preview-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myLargeModalLabel">Preview of Beneficiary Form </h3>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <h5>Name of the Organisation/Individual</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="title"></label>
+        </div>
+        <div class="col-xs-6">
+          <h5>Number of children impacted</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="total_impact_on_children"> Not specified</label>
+        </div>
+
+        <div class="col-xs-6">
+          <h5>Languages</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="languages"> Languages </label>
+        </div>
+
+        <div class="col-xs-6">
+          <h5>Beneficiary Type</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="category"> Beneficiary Type</label>
+        </div>
+
+        <div class="col-xs-6">
+          <h5>Location</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="location"> Not specified</label>
+        </div>
+      </div> <!--row-->
+
+      <div class="row">
+        <div class="col-xs-12"><h4>Social Details</h4></div>
+        <div class="col-xs-6">
+          <h5>Website</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="website">Category</label>
+        </div>
+        <div class="col-xs-6">
+          <h5>Facebook</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="facebook">Category</label>
+        </div>
+        <div class="col-xs-6">
+          <h5>Blog</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="blog">Category</label>
+        </div>
+      </div> <!--row-->
+
+      <div class="row">
+        <div class="col-xs-6">
+          <h5>Funding goal</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="target"></label>
+        </div>
+      </div> <!--row-->
+
+      <div class="row">
+        <div class="col-xs-12"><h4>Campaign Information </h4></div>
+
+        <div class="col-xs-12">
+          <h5>Who we are</h5>
+        </div>
+        <div class="col-xs-12">
+          <label id="who"></label>
+        </div>
+
+        <div class="col-xs-12">
+          <h5>Our Story</h5>
+        </div>
+        <div class="col-xs-12">
+          <label id="story">Name</label>
+        </div>
+
+        <div class="col-xs-12">
+          <h5>Our work and its impact</h5>
+        </div>
+        <div class="col-xs-12">
+          <label id="impact"></label>
+        </div>
+
+        <div class="col-xs-12">
+          <h5>How we will utilize these funds.</h5>
+        </div>
+        <div class="col-xs-12">
+          <label id="fund_utilization"></label>
+        </div>
+      </div> <!--row-->
+    </div>
+  </div> <!--modal-->
+</div>
+<div id="error-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myLargeModalLabel"> Error in this section</h3>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>You left some fields unfilled in this section. These will be highlighted by orange boxes around them 
+            or with orange coloured messages under them. Please fill them before going to the next section.</h4>
+        </div>
+        <button type="button" class="btn browse-btn pull-right" data-dismiss="modal"> OK </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 

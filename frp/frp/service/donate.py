@@ -12,8 +12,6 @@ import threading
 accessCode = app.config.get('CCAVENUE_ACCESS_CODE')
 workingKey = app.config.get('CCAVENUE_WORKING_KEY')
 
-
-
 def donation_validate(donation_id):
   donation = Donation.query.get(int(donation_id))
   if donation.confirmation == None:
@@ -28,9 +26,8 @@ def create_donation(form, campaign):
   amount = form.amount_choice.data
   if not amount:
     amount = form.customize_amount.data
-  # in case the donor did not sign in, the donation is accounted for in
-  # in admin account
-  donor = current_user if current_user.is_active() else admin_user()
+
+  donor = current_user 
   
   donation = Donation(amount=amount, 
           donor=donor, 
@@ -55,7 +52,7 @@ def create_donation(form, campaign):
     app.logger.warning(e)
     db.session.rollback()
     return {'error': True, 'exc': e}
-  # Function "donation_validate will be called after 600 seconds that is 10 minuts 
+  # Function "donation_validate will be called after 600 seconds that is 10 minutes 
   threading.Timer(600,donation_validate,[donation.id]).start()
   return {'error': False,
           'donation': donation,
@@ -88,6 +85,7 @@ def ccavRequest(form, donation):
   merchant_data='merchant_id=' + p_merchant_id + '&' + 'order_id=' + p_order_id + '&' + 'currency=' + p_currency + '&' + 'amount=' + p_amount + '&' + 'redirect_url=' + p_redirect_url + '&' + 'cancel_url=' + p_cancel_url + '&' + 'language=' + p_language + '&' + 'integration_type=' + p_integration_type + '&' + 'billing_name=' + p_billing_name + '&' + 'billing_address=' + p_billing_address + '&' + 'billing_city=' + p_billing_city + '&' + 'billing_state=' + p_billing_state + '&' + 'billing_zip=' + p_billing_zip + '&' + 'billing_country=' + p_billing_country + '&' + 'billing_tel=' + p_billing_tel + '&' + 'billing_email=' + p_billing_email + '&'
   app.logger.warning('merchant data = ' + merchant_data)
 	
+  print merchant_data
   encryption = encrypt(merchant_data,workingKey)
 
   html = '''\

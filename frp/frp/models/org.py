@@ -224,10 +224,15 @@ class Campaign(BaseMixin, db.Model):
                 "featured" : self.featured,
                 "image" : self.image
                 }
-    def campaign_details(self):
-        return [self.title,"{:%B %d, %Y}".format(self.start_date()),self.days_remaining(),self.num_donors(),self.target(),
-                self.total_donations(),self.status]
 
+    def campaign_details(self):
+        return [self.title,
+                "{:%B %d, %Y}".format(self.start_date()),
+                self.days_remaining(),
+                self.num_donors(),
+                self.target(),
+                self.total_donations(),
+                self.status]
 
     def donor_list(self):
         return map(lambda x: x.user_id, self.donations)
