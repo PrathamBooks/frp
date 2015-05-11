@@ -29,24 +29,32 @@ class DonorForm(wtforms.Form):
     last_name = wtforms.TextField(
             label='Name',
             validators=[wtforms.validators.Optional()])
+    address = wtforms.TextField(
+        label='Address', validators=[wtforms.validators.Required(),
+                                     wtforms.validators.Length(max=500)],
+        default=u'')
     city = wtforms.TextField(
             label='City',
-            validators=[wtforms.validators.Optional()])
+            validators=[wtforms.validators.Required()])
     state = wtforms.SelectField(
         label='Please select any one state in the list',
         choices=STATES)
     pin = wtforms.TextField(
             label='Pin Code',
-            validators=[wtforms.validators.Optional()])
-    contact_number = wtforms.TextField(
-            label='Contact Number',
-            validators=[wtforms.validators.Optional()])
+            validators=[wtforms.validators.Required()])
+    phone_number = wtforms.TextField(
+            label='Phone Number',
+            validators=[wtforms.validators.Required()])
+    email = wtforms.TextField(
+            label='Email',
+            validators=[wtforms.validators.Required()])
+
     identification_type = wtforms.SelectField(
             label='',
             choices=ID_TYPE)
     pan_number = wtforms.TextField(
             label='Pan Number',
-            validators=[wtforms.validators.Optional()])
+            validators=[wtforms.validators.Required()])
     tax_exemption_certificate = wtforms.RadioField(
         label='Would you like us to send you a Tax Exemption Certificate?',
         default='True',
@@ -64,5 +72,6 @@ class DonorForm(wtforms.Form):
        self.state.data = user.state
        self.city.data = user.city
        self.pin.data = user.pin
-       self.contact_number.data = user.contact_number
+       self.phone_number.data = user.contact_number
+       self.email.data = user.email
        self.pan_number.data = user.pan_number

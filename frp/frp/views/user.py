@@ -319,8 +319,7 @@ def donate(campaign_id):
         if form.validate():
             result = donate_service.create_donation(form, campaign)
             if not result['error']:
-                app.logger.warning('Trying to display billing page in views')
-                return result['billing_info_page']
+                return donate_service.ccavRequest(form, result['donation'])
             else:
                 print result
                 flash('Oops something went wrong, please try again')
