@@ -43,3 +43,14 @@ class Donation(BaseMixin, db.Model):
     def total_books_donated():
         return int(round(Donation.total_donated() / COST_PER_BOOK))
 
+
+    def donation_details(self):
+        return [self.first_name +' '+ self.last_name, 
+                self.donor.email, 
+                self.created_at.date(),
+                self.campaign.title,
+                self.amount,
+                self.ann_choice,
+                self.tax_exemption_certificate,
+                self.confirmation]
+

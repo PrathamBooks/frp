@@ -6,10 +6,13 @@
 </script>
 
 <div class="container internal">
-
-  <form role="form" action = "" method='POST'>
     <div class="row startCampaign capaignList" id="internalCampaign">
 
+      <div class="row">
+        <a href={{url_for('admin_add_user')}}> <button class="approve"> Add User </button> </a> 
+        <a href={{url_for('download_donations')}}> <button class="approve"> Donations Sheet </button> </a> 
+        <a href={{url_for('download_campaigns')}}> <button class="approve"> Campaigns Sheet </button> </a> 
+      </div>
       <div class="col-md-12">
         <h2>Admin Panel
           <span>Campaign Details</span>
@@ -58,7 +61,6 @@
         </div>
       </div>
     </div><!--InternalCampaign-->
-  </form>
 </div>  
 {% endblock %}
 

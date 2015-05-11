@@ -202,7 +202,7 @@ li {
 }
 header {
   width: 100%;
-  height: 86px;
+  height: 87px;
   clear: both;
   box-shadow: 0 15px 12px -14px #cac9c6;
   position: relative;
@@ -224,27 +224,53 @@ header {
   background: linear-gradient(to right, #ffffff 0%, #ffffff 7%, #ffffff 21%, #ffffff 29%, #ffffff 29%, #fbee9b 42%, #fbee9b 56%, #fbee9b 66%, #ffc600 76%, #ffc600 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffc600', GradientType=1);
-  /* IE6-8 */
+/* IE6-8 */
 }
 header .headerIn {
-  width: 1200px;
+  max-width: 1200px;
   float: none;
   margin: auto;
+}
+header #login {
+  position: absolute;
+  top: 56px;
+  left: 35%;
+}
+header #login a.btn {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 0.1em solid #000;
+  border-radius: 11px;
+  padding: 5px 13px 2px;
+  margin: 0 10px 0 0;
+  float: left!important;
+}
+header #login .btn-warning {
+  float: right;
+  margin: 0;
+  background-color: #ffc600;
+  color: #000;
+}
+header #login .btn-warning:hover {
+  background-color: #ffde00;
+}
+header #login .btn-group.open .dropdown-toggle {
+  box-shadow: 0px 0px 0px #000 !important;
 }
 header h1.logo {
   background-image: url("../images/pratham_logo.png");
   background-repeat: no-repeat;
-  color: #000000;
+  color: #000;
   cursor: pointer;
-  float: left;
-  font-size: 2.8em;
   font-weight: bold;
-  height: 152px;
-  margin: 8px 0 0 15px;
-  padding: 0;
-  position: relative;
-  width: 195px;
+  margin: 8px 0px 0px 15px;
   z-index: 2;
+  font-size: 2.8em;
+  float: left;
+  position: relative;
+  padding: 0px;
+  height: 121px;
 }
 header h1.logo a {
   color: #000000;
@@ -271,84 +297,76 @@ header h1.logo a span {
   text-shadow: 0 1px 0 #000;
   width: 226px;
 }
-header nav {
-  width: 643px;
-  height: 60px;
-  float: right;
-  /*background-color: #FFC600;*/
-  padding: 0;
-  margin: 0;
-}
-header nav ul {
-  float: right;
-  height: 100%;
-  margin: 0;
-  width: 100%;
-  z-index: 3;
-}
+/********************* nav bar *******************/
+
+
 header nav ul li {
-  display: inline-block;
-  float: right;
+  margin: 0px !important;
   font-family: "ligurino-condensed", sans-serif;
-  height: 86px;
-  padding: 10px 0 0 35px;
-  width: 155px;
-}
-header nav ul li a {
-  width: 100%;
   float: left;
-  line-height: 60px;
-  color: #3f3716;
-  font-size: 3em;
-  text-transform: capitalize;
-  font-weight: normal;
+  padding: 10px 0% 21px;
 }
-header nav ul li a:hover {
-  color: #000;
-  text-decoration: none;
+.nav {
+  padding-left: 0px;
+  margin-bottom: 0px;
+  list-style: outside none none;
+  margin-left: 0px;
 }
 header nav ul li .caret {
   width: 8px;
   height: 11px;
   float: right;
-  margin: 28px 14px 0 0;
-  background-image: url(../images/caret.png);
   background-repeat: no-repeat;
-  border: 0 none;
+  border: 0px none;
 }
-header nav ul header nav ul .orange {
-  background-color: #ff9600;
-}
-header nav ul .darkOrange {
-  background-color: #ffc600;
-}
-header #login {
+header nav ul li a {
+  font-size: 3em;
+  text-transform: capitalize;
+  font-weight: normal;
   float: left;
-  margin: 34px 0 0 166px;
-  padding: 20px 20px 0 0;
-  margin: 34px 0px 0px 162px;
+  width: 100%;
+  color: #3F3716;
+  line-height: 60px;
+  padding: 10px 20px;
 }
-header #login a.btn {
-  font-size: 1.1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: 0.1em solid #000;
-  border-radius: 11px;
-  padding: 5px 13px 2px;
-  margin: 0 10px 0 0;
-  float: left!important;
+.navbar-inverse {
+  background-color: transparent;
+  border-color: transparent;
 }
-header #login .btn-warning {
+#login .dropdown-menu {
+  min-width: 140px;
+}
+.navbar-nav > li {
   float: right;
-  margin: 0;
-  background-color: #ffc600;
+}
+.navbar-inverse {
+  background-color: transparent;
+  border: none;
+}
+header nav {
+}
+.navbar-nav {
+  float: none;
+}
+.navbar-inverse .navbar-nav > li > a {
   color: #000;
+  line-height: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
-header #login .btn-warning:hover {
-  background-color: #ffde00;
+header nav ul li .caret {
+  background-image: url("../images/caret.png");
+  margin: 11px 8px 0 20px;
 }
-header #login .btn-group.open .dropdown-toggle {
-  box-shadow: 0px 0px 0px #000 !important;
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: transparent;
+}
+.navbar-collapse {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-image: none;
 }
 .open .dropdown-toggle.btn-default {
   background-color: #ffde00;
@@ -827,8 +845,11 @@ header #login .dropdown-menu {
 .tab-content .col-md-4 {
   padding: 10px 0 0 15px;
 }
-.startNow .btn.browse-btn {
+.btn.browse-btn {
   background-image: none !important;
+}
+
+.startNow .btn.browse-btn {
   clear: both;
   float: inherit !important;
   margin: 26px 0 !important;
@@ -2360,14 +2381,12 @@ footer .row .bottom .siteBlock a {
 footer .row .bottom .siteBlock a:hover {
   text-decoration: underline;
 }
-/*To Be converted to Less*/
-/*To Be converted to Less*/
 button.approve {
   background-image: none !important;
   font-size: 0.9em !important;
   font-weight: normal ;
   letter-spacing: 1px !important;
-  margin: 0 !important;
+  margin-right: 10px !important;
   padding: 6px 10px ;
   float: left !important;
   height: 28px !important;
@@ -3269,10 +3288,388 @@ label.checkboxLabel {
 	vertical-align: middle;
 }
 #campaigns .col-md-3 .browse-btn {
-	background-image: none!important;
 	margin: 0 31% !important;
 }
 #internalCampaign.discover .campaignInfo {
 	min-height: 240px;
 }
  
+/* profile page */
+.col-md-9.well.profile{
+  padding:0;
+}
+
+.col-md-9.well.profile .row span {
+  float: right;
+}
+
+.well.profile h3{
+  margin: 0 0 0 !important;
+  background-color: #E5E4E0;
+  color: #B8B5A7;
+  font-size: 2.8em;
+  padding: 20px 20px 0;
+  text-align: left;
+  height: 70px !important;
+
+}
+.col-md-9.well.profile .row{
+  margin: 20px 15px;
+
+  font-size: 1.6em;
+}
+
+.col-md-9.well.profile .btn {
+  margin-right:0!important;
+}
+
+.col-md-9.well.profile .btn a{
+  color:#000;  
+}
+
+/* For responsive */
+
+#featuredCampaign .banner img {
+  width: 100%;
+  height: auto;
+}
+footer .row {
+  max-width: 1200px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+#featuredCampaign {
+  height: auto;
+}
+#featuredCampaign .banner img {
+  width: 100%;
+  height: auto;
+}
+#featuredCampaign {
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+#featuredCampaign ul {
+  float: left;
+  margin-top: -73px;
+}
+#featuredCampaign p {
+  bottom: 0;
+  font-size: 16px;
+  height: auto;
+}
+#featuredCampaign .btn-nav {
+  top: 30%;
+}
+#contentTabs {
+  margin: -60px 0 0;
+}
+#contentTabs ul.nav-tabs {
+  margin: 0;
+}
+#homeSearch {
+  float: left !important;
+  margin: 40px 15px 0 334px !important;
+  position: relative !important;
+}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.navbar-inverse .navbar-nav > li > a {
+  font-size: 2.5em !important;
+  padding-left: 17%;
+  padding-right: 17%;
+}
+header nav ul li .caret {
+  margin: 11px 0 0 6px;
+}
+footer .col-md-12 {
+  clear: left;
+  float: inherit;
+}
+#featuredCampaign ul {
+  float: left;
+  margin: -60px 0 0;
+}
+#featuredCampaign {
+  height: auto;
+}
+#homeSearch {
+  float: left !important;
+  margin: 40px 15px 0 334px !important;
+  position: relative !important;
+}
+#contentTabs {
+  margin: -135px 0 0;
+}
+#featuredCampaign p {
+  font-size: 14px;
+  height: auto;
+}
+#featuredCampaign .btn-nav {
+  top: 25%;
+}
+}
+@media (max-width:767px) {
+.navbar-nav > li {
+  text-align: right;
+}
+header .headerIn {
+  width: 100%;
+}
+header nav ul li .caret {
+  width: 8px;
+  height: 11px;
+  float: right;
+  margin: 8px 14px 0px 10px !important;
+  background-image: url("../images/caret.png");
+  background-repeat: no-repeat;
+  border: 0px none;
+}
+.navbar-nav {
+  margin: 7.5px 0px;
+}
+.nav {
+  padding-left: 0px;
+  list-style: outside none none;
+  margin-top: 0px !important;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: transparent;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #333;
+}
+.navbar-inverse {
+  border-color: transparent;
+  background-color: transparent;
+}
+.darkYellow .caret {
+  display: block;
+  background-image: none;
+}
+.navbar {
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  top: 33px;
+  position: absolute;
+}
+header nav {
+  height: 60px;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  float: left;
+}
+header nav ul li a {
+  font-size: 2.2em;
+}
+header nav ul li {
+  display: inline-block;
+  font-family: "ligurino-condensed", sans-serif;
+  /* height: 64px;
+  padding: 10px 0px 0px 35px; */
+  
+  height: 41px;
+  padding: 0px 0px 0px 35px;
+  width: 100%;
+  float: right;
+}
+.navbar-collapse {
+  padding-right: 0;
+  padding-left: 0;
+  opacity: 0.9;
+}
+.navbar-toggle {
+  position: relative;
+  float: right;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 1%;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none repeat scroll 0% 0% rgb(68, 68, 68);
+}
+header h1.logo {
+  background-image: url("../images/pratham_logo.png");
+  background-repeat: no-repeat;
+  color: #000;
+  cursor: pointer;
+  float: left;
+  font-size: 2.8em;
+  font-weight: bold;
+  height: 152px;
+  margin: 8px 0px 0px 15px;
+  padding: 0px;
+  position: relative;
+  width: 195px;
+  z-index: 2;
+  background-size: 50% auto !important;
+}
+header h1.logo a span {
+  background: url("../images/caption.png") no-repeat scroll 0px 0px / 83% auto transparent;
+  float: left;
+  height: 42px;
+  margin: -95px 0px 0px 23px;
+}
+header #login {
+  margin: 0px;
+  padding: 8px 0px 0px;
+  left: inherit;
+  position: absolute;
+  right: 1%;
+  top: 0px;
+}
+header #login .dropdown-menu {
+  right: 0px;
+}
+footer .col-md-12 {
+  border-bottom: 1px solid #222;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+footer .row #socialIcons {
+  float: inherit;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  width: 200px;
+}
+footer .row #socialIcons h6 {
+  float: left;
+  margin: 0;
+  text-align: center;
+}
+footer .row #socialIcons a {
+  display: inline-block;
+  float: inherit;
+}
+footer .row h1 {
+  float: inherit;
+  text-align: center;
+  width: 100%;
+}
+.col-md-12.bottom {
+  float: inherit;
+  margin: 0 auto;
+}
+footer .row .siteBlock {
+  margin: 0 1% 0 0;
+  width: 24%;
+}
+#featuredCampaign {
+  height: auto;
+}
+#featuredCampaign ul {
+  float: left;
+  margin: -90px 0 0;
+}
+#homeSearch {
+  float: left !important;
+  margin: 40px 15px 0 334px !important;
+  position: relative !important;
+}
+#featuredCampaign p {
+  font-size: 14px;
+  z-index: inherit;
+  height: auto;
+}
+#featuredCampaign .btn-nav {
+  top: 25%;
+}
+.tab-content .col-md-4 {
+  width: 30% !important;
+}
+
+.startNow .btn.browse-btn {
+  width:auto!important;
+}
+}
+@media (min-width: 481px) and (max-width: 639px) {
+#featuredCampaign p {
+  font-size: 12px;
+}
+#homeSearch {
+  margin: 15px !important;
+}
+#contentTabs {
+  margin: 0;
+}
+#contentTabs ul.nav-tabs li#pledge a {
+  width: 479px;
+}
+#homeSearch {
+  clear: both;
+  float: inherit !important;
+  margin: 0 auto !important;
+  padding: 2% 0;
+}
+}
+@media (max-width: 480px) {
+header h1.logo {
+  height: 114px;
+  margin: 8px 0px 0px 5px;
+  width: 154px;
+  background-size: 55% auto !important;
+}
+header h1.logo a span {
+  background: url("../images/caption.png") no-repeat scroll 0px 0px / 70% auto transparent;
+  margin: -103px 0px 0px 1px;
+}
+header #login {
+  right: 59px;
+  top: 40px;
+  margin-left: 18px;
+}
+header nav ul li a {
+  font-size: 2.2em;
+}
+header nav ul li {
+  height: 41px;
+  padding: 0px 0px 0px 35px;
+}
+footer .row .siteBlock {
+  margin: 0;
+  max-width: none;
+  text-align: center;
+  width: 100%;
+}
+footer .row h5 {
+  border-bottom: 1px solid #333;
+  font-size: 1.5em;
+  padding: 1% 0;
+  text-align: center;
+}
+#homeSearch {
+  clear: both;
+  float: inherit !important;
+  margin: 0 auto !important;
+  padding: 2% 0;
+}
+#contentTabs {
+  margin: 0;
+}
+#contentTabs ul.nav-tabs li#pledge a {
+  width: 350px;
+}
+#featuredCampaign ul {
+  margin: -52px 0 0;
+}
+#featuredCampaign p {
+  font-size: 10px;
+}
+#featuredCampaign p a.btn-warning {
+  font-size: 10px;
+}
+}
+@media (max-width: 360px) {
+header #login {
+  margin-left: 0;
+  right: 52px;
+}
+#featuredCampaign p strong {
+  font-size: 12px;
+}
+}

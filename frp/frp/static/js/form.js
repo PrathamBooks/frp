@@ -18,6 +18,9 @@ function isClickedTabEarlier(active_tab, clicked_tab) {
 }
 
 function highlightInvalidFields($tab) {
+  if ($('#error-modal').length > 0) {
+    $('#error-modal').modal('show');
+  }
   $tab.find(':valid').css('border-color','#CCCCCC');
   $tab.find(':valid').each(function(){
     if($(this).is(":radio") || $(this).is(":checkbox") || $(this).is(":file")){

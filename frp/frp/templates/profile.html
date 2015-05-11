@@ -3,29 +3,57 @@
 <div class="container internal">
   <div id="pratham-form" class="container">
     <div class="row">
-      <div class="col-md-12 col-sm-9">
-        <div class="col-md-12">
-          <div id="internalContent" class="row beneficiary donor">
-            <div  id="internalCampaign" class="row ">
-              <div class="col-md-9">
-                <h3> Your Profile Details </h3>
-                <p> <strong> First Name </strong> : {{ current_user.first_name }} </p>
-                <p> Last Name: {{ current_user.last_name }} </p>
-                <p> Email: {{ current_user.email }} </p>
-                <p> Address: {{ current_user.address }} </p>
-                <p> City: {{ current_user.city }} </p>
-                <p> State: {{ current_user.state }} </p>
-                <p> Pin: {{ current_user.pin }} </p>
-                <p> Contact Number: {{ current_user.contact_number }} </p>
-                <p> Pan Number: {{ current_user.pan_number }} </p>
-                <p> Need 80G Certificate: {{ current_user.need_80g_certificate }} </p>
-                <button type="submit" id="proceed" class="btn"> <a href="{{ url_for('edit_profile') }}">Edit</a> </button>
-               </div>
-            </div><!-- xs-12 sm-9-->
+      <div id="internalContent" class="row beneficiary donor">
+        <div id="internalCampaign" class="row ">
+          <div class="col-md-9 well profile">
+            <h3> Your Profile Details </h3>
+            <div class=row>
+              <div class="col-xs-4"> First Name<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.first_name }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> Last Name<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.last_name }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> Email<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.email }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> Address<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.address }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> City<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.city }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> State<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.state }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> Pin<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.pin }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> Contact Number<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.contact_number }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> ID <span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.pan_number }}  </div>
+            </div>
+            <div class=row>
+              <div class="col-xs-4"> Need 80G Certificate<span>:</span></div>
+              <div class="col-xs-8"> {{ current_user.need_80g_certificate }}  </div>
+            </div>
+            <button type="submit" id="proceed" class="btn"> 
+              <a href="{{ url_for('edit_profile') }}">Edit</a> 
+            </button>
           </div>
         </div>
       </div>
-    </div><!-- row-->
-  </div><!-- Pratham Form-->
-</div><!--container internal -->
+    </div>
+  </div>
+</div><!-- row-->
 {% endblock content%}
