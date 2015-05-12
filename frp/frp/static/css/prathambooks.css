@@ -3344,12 +3344,12 @@ label.checkboxLabel {
 /* For responsive */
 
 #featuredCampaign img {
-  width:width 100%;
+  width: 100%;
   height: auto;
 }
 footer .row {
   max-width: 1200px;
-  padding:0 10000px;
+  padding:0 10px;
   width:100%;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -3357,7 +3357,7 @@ footer .row {
     height: auto;
   }
   #featuredCampaign .banner img {
-    wellidth: 100%;
+    width: 100%;
     height: auto;
   }
   #featuredCampaign {
@@ -3367,24 +3367,24 @@ footer .row {
   }
   #featuredCampaign ul {
     float: left;
-    margin-top: -left73px;
+    margin-top: -73px;
   }
   #featuredCampaign p {
     bottom: 0;
     font-size: 16px;
-    height: autoto;
+    height: auto;
   }
   #featuredCampaign .btn-nav {
     top: 30%;
   }
   #contentTabs {
-    margin:contentTabs -60px 0 0;
+    margin: -60px 0 0;
   }
   #contentTabs ul.nav-tabs {
     margin: 0;
   }
   #homeSearch {
-    fontloat: left !important;
+    float: left !important;
     margin: 40px 15px 0 334px !important;
     position: relative !important;
   }
@@ -3396,13 +3396,13 @@ footer .row {
     padding-right: 17%;
   }
   header nav ul li .caret {
-    margin: 15px1px 0 0 6px;
+    margin: 11px 0 0 6px;
   }
   footer .col-md-12 {
     clear: left;
     float: inherit;
   }
-  #featuredaturedCampaign ul {
+  #featuredCampaign ul {
     float: left;
     margin: -60px 0 0;
   }
@@ -3411,10 +3411,10 @@ footer .row {
   }
   #homeSearch {
     float: left !important;
-    margin: 4000px 15px 0 334px !important;
+    margin: 40px 15px 0 334px !important;
     position: relative !important;
   }
-  #contentTabsTabs {
+  #contentTabs {
     margin: -135px 0 0;
   }
   #featuredCampaign p {
@@ -3424,12 +3424,12 @@ footer .row {
   #featuredCampaign .btn-nav {
     top: 25%;
   }
-  .tab-content  .col-md-4 {
+  .tab-content .col-md-4 {
     float: left;
     padding: 10px;
     width: 33%;
   }
-  .tab-content .33col-md-4 img {
+  .tab-content .col-md-4 img {
     height: auto;
     width: 100%;
   }
@@ -3439,16 +3439,16 @@ footer .row {
     text-align: right;
   }
   header .headerIn {
-    width:headerIn 100%;
+    width: 100%;
   }
   header nav ul li .caret {
     width: 8px;
     height: 11px;
-    float:      right;
+    float: right;
     margin: 8px 14px 0px 10px !important;
-    background-image: url(".image./images/caret.png");
+    background-image: url("../images/caret.png");
     background-repeat: no-repeat;
-    border: 0px none;0px
+    border: 0px none;
   }
   .navbar-nav {
     margin: 7.5px 0px;
@@ -3458,13 +3458,13 @@ footer .row {
     list-style: outside none none;
     margin-top: 0px !important;
   }
-  .navbar-inversese .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: transformsparent;
+  .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: transparent;
   }
   .navbar-inverse .navbar-toggle {
     border-color: #333;
   }
-  .navbarbar-inverse {
+  .navbar-inverse {
     border-color: transparent;
     background-color: transparent;
   }
@@ -3472,27 +3472,27 @@ footer .row {
     display: block;
     background-image: none;
   }
-  .imagenavbar {
+  .navbar {
     min-height: 50px;
     margin-bottom: 20px;
-    border: 1px solid transformansparent;
+    border: 1px solid transparent;
     top: 33px;
     position: absolute;
   }
   header nav {
-    height: 60pxx;
+    height: 60px;
     padding: 0px;
     margin: 0px;
     width: 100%;
     float: left;
   }
-  header navLv ul li a {
+  header nav ul li a {
     font-size: 2.2em;
     padding: 10px !important;
   }
-  header nav    ul li {
+  header nav ul li {
     display: inline-block;
-    font-family: "ligurino-condensed", Sanss-serif;
+    font-family: "ligurino-condensed", sans-serif;
     height: 41px;
     padding: 0px 0px 0px 35px;
     width: 100%;
@@ -3501,38 +3501,38 @@ footer .row {
   .navbar-collapse {
     padding-right: 0;
     padding-left: 0;
-    openacity: 0.9;
+    opacity: 0.9;
   }
   .navbar-toggle {
     position: relative;
     float: right;
-    paddingding: 9px 10px;
+    padding: 9px 10px;
     margin-top: 8px;
     margin-right: 1%;
-    margin-bottom: 8pxx;
+    margin-bottom: 8px;
     border: 1px solid transparent;
     border-radius: 4px;
-    background: normalne repeat scroll 0% 0% rgb(68, 68, 68);
+    background: none repeat scroll 0% 0% rgb(68, 68, 68);
   }
   header h1.logo {
-    background-backgroundimage: url("../images/pratham_logo.png");
+    background-image: url("../images/pratham_logo.png");
     background-repeat: no-repeat;
     color: #000;
     cursor: pointer;
     float: left;
     font-size: 2.8em;
-    fontloatt-weight: bold;
+    font-weight: bold;
     height: 152px;
     margin: 8px 0px 0px 15px;
-    padding: 0pxx;
+    padding: 0px;
     position: relative;
     width: 195px;
     z-index: 2;
-    background-size: 5000% auto !important;
+    background-size: 50% auto !important;
   }
   header h1.logo a span {
-    background: url("../imageses/caption.png") no-repeat scroll 0px 0px / 83% auto transparent;
-    floatt: left;
+    background: url("../images/caption.png") no-repeat scroll 0px 0px / 83% auto transparent;
+    float: left;
     height: 42px;
     margin: -95px 0px 0px 23px;
   }
@@ -3545,11 +3545,11 @@ footer .row {
     top: 40px;
   }
   header #login .dropdown-menu {
-    right: 000px;
+    right: 0px;
   }
   footer .col-md-12 {
     border-bottom: 1px solid #222;
-    margin-bottomBlockm: 10px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
     width: 100%;
   }
@@ -3557,7 +3557,7 @@ footer .row {
     float: inherit;
     margin: 0 auto;
     position: relative;
-    text-align:position center;
+    text-align: center;
     width: 200px;
   }
   footer .row #socialIcons h6 {
@@ -3571,81 +3571,81 @@ footer .row {
   }
   footer .row h1 {
     float: inherit;
-    transparentext-align: center;
+    text-align: center;
     width: 100%;
   }
   .col-md-12.bottom {
-    float: inherit;float
+    float: inherit;
     margin: 0 auto;
   }
   footer .row .siteBlock {
     margin: 0 1% 0 0;
-    width:siteBlock 24%;
+    width: 24%;
   }
   #featuredCampaign {
     height: auto;
-    background-color: transparentnt;
+    background-color: transparent;
     border-bottom: 0 none;
   }
   #featuredCampaign ul {
     float: left;
-    margingin: -90px 0 0;
+    margin: -90px 0 0;
   }
   #homeSearch {
     float: left !important;
-    margin: 40px    15px 0 334px !important;
+    margin: 40px 15px 0 334px !important;
     position: relative !important;
   }
-  #featuredCampaignpaign p {
+  #featuredCampaign p {
     font-size: 14px;
     z-index: inherit;
     height: auto;
   }
-  footer      .row {
+  footer .row {
     max-width: 1200px;
     width: 100%;
   }
   .tab-content .col-md-4 {
-    pagedding: 0 15px;
+    padding: 0 15px;
     text-align: center;
     margin: 10px 0;
-    width: 100% !importantrtant;
+    width: 100% !important;
     background: none repeat scroll 0 0 transparent;
   }
-  .tab-content  .col-md-4 img {
+  .tab-content .col-md-4 img {
     background-color: transparent;
-    box-shadow: 1px 0 4px     #666;
+    box-shadow: 1px 0 4px #666;
     float: inherit;
     height: auto;
     max-width: 360px;
     width: 70%;
-  }max
+  }
   .tab-content .col-md-4 p {
     float: left;
     font-size: 1.5em;
-    margin: 10px0px 0;
+    margin: 10px 0;
     width: 100%;
   }
   .startNow .btn.browse-btn {
-    width: auto!importantnt;
+    width: auto!important;
   }
 
   #featuredCampaign p {
     background-color: rgba(0, 0, 0, 0.9);
-    bottomttom: 0;
+    bottom: 0;
     float: left;
     position: initial;
   }
-  #featuredCampaign p a.btn-featuredCampaignwarning {
+  #featuredCampaign p a.btn-warning {
     line-height: 21px;
   }
   #featuredCampaign .btn-nav {
-    top: 33%;top
+    top: 33%;
   }
   .bottomBlock .col-md-4 {
     float: left;
   }
-  .tab-content a.carousel-contenttrol {
+  .tab-content a.carousel-control {
     margin: 18% 6px 0;
   }
 }
@@ -3654,12 +3654,12 @@ footer .row {
     font-size: 12px;
   }
   #homeSearch {
-    margingingin: 15px !important;
+    margin: 15px !important;
   }
   #contentTabs {
     margin: 0;
   }
-  #contentTabs ul.navv-tabs li#pledge a {
+  #contentTabs ul.nav-tabs li#pledge a {
     width: 479px;
   }
   #homeSearch {
@@ -3672,20 +3672,20 @@ footer .row {
 @media (max-width: 480px) {
   header h1.logo {
     height: 114px;
-    margin: 83px 0px 0px 5px;
+    margin: 8px 0px 0px 5px;
     width: 154px;
     background-size: 55% auto !important;
-  }auto
+  }
   header h1.logo a span {
-    background: url("../images/caption.png") no-rgbaepeat scroll 0px 0px / 70% auto transparent;
-    margin: -103px 0px 0px 1pxx;
+    background: url("../images/caption.png") no-repeat scroll 0px 0px / 70% auto transparent;
+    margin: -103px 0px 0px 1px;
   }
   header #login {
     right: 59px;
     top: 40px;
     margin-left: 18px;
   }
-  headerInader nav ul li a {
+  header nav ul li a {
     font-size: 2.2em;
   }
   header nav ul li {
@@ -3706,21 +3706,21 @@ footer .row {
   }
   #homeSearch {
     clear: both;
-    float: inherit !importantntnt;
+    float: inherit !important;
     margin: 0 auto !important;
     padding: 2% 0;
   }
   #contentTabs {
-    marginginn: 0;
+    margin: 0;
   }
   #contentTabs ul.nav-tabs li#pledge a {
     width: 350px;
   }
-  #featuredCampaignedCampaign ul {
+  #featuredCampaign ul {
     margin: -52px 0 0;
   }
   #featuredCampaign p {
-    font-size:font 10px;
+    font-size: 10px;
   }
   #featuredCampaign p a.btn-warning {
     font-size: 10px !important;
@@ -3732,16 +3732,16 @@ footer .row {
   #featuredCampaign p strong {
     font-size: 1.5em;
   }
-  #contentTabstentTabs ul.nav-tabs li#pledge a {
+  #contentTabs ul.nav-tabs li#pledge a {
     font-size: 2em;
     width: 100%;
   }
-  #contentTabsntentTabs ul.nav-tabs li {
+  #contentTabs ul.nav-tabs li {
     margin: 0;
     width: 100%;
   }
 }
-@media (max-widgetdth: 360px) {
+@media (max-width: 360px) {
   header #login {
     margin-left: 0;
     right: 52px;
@@ -3750,3 +3750,5 @@ footer .row {
     font-size: 12px;
   }
 }
+
+
