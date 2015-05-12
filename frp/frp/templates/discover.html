@@ -5,11 +5,11 @@
     <div class="row discover" id="internalCampaign">
     <form action={{url_for("search")}} class="discover-search" method="GET">
       <div id="search" class="input-group">
-        <a href={{url_for('discover')}}> <button class="approve pull-right">Show All Campaigns </button> </a><br></br>
         {% if (search_string) %}
         <input type="text" class="form-control" name="search-string" placeholder={{ search_string }}>
         {% else %}
         <input type="text" class="form-control" name="search-string" placeholder="Search">
+        <a href={{url_for('discover')}} class="pull-right">Show All Campaigns </a>
         {% endif %}
         <input type="submit" value="" class="icon-search">
       </div>
@@ -89,7 +89,7 @@
     </div>
 
 
-    <div class="col-md-9">
+    <div class="col-md-12">
       <button id="scroll" type="button" class="btn btn-default btn-bottom">Default</button>
     </div>
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
