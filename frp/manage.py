@@ -169,6 +169,25 @@ def seed():
     db.session.add(campaign)
 
 
+    campaign = Campaign(created_by=user, org=org,
+            title='Varthur Village Library', description='Project to get 1000 books for Ramagondanhalli School', 
+            who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
+            image="6.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=5),
+            total_impact_on_children='1500', featured=False)
+    db.session.add(campaign)
+
+
+    campaign = Campaign(created_by=user, org=org,
+            title='Ramgondahalli Village Library', description='Project to get 1000 books for Ramagondanhalli School', 
+            who='We are an organization of volunteers', impact='This will raise funds to buy 1000 books for government schools',
+            utilization='A very large impact', state="Haryana", city="Karnal", nbooks='1000', nlic=0, languages="Hindi, Tamil",
+            image="6.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=5),
+            total_impact_on_children='1500', featured=False)
+    db.session.add(campaign)
+
+
+
     try:
         db.session.commit()
         print 'Successfully seeded'

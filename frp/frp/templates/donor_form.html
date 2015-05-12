@@ -40,7 +40,7 @@
                   <div class="well">
                     <div class="form-group row">
                       <div class="col-xs-12">
-                        <h3>Donor Details:</h3>
+                        <h3>Billing Details:</h3>
                       </div>
                     </div>
 
@@ -60,11 +60,25 @@
 
                     <div class="form-group row">
                       <div class="col-xs-3">
-                        <label for="address">Address<strong>*</strong></label>
+                        <label for="address">Street Address<strong>*</strong></label>
                       </div>
+                      <div class="col-xs-9">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="123, Airport Rd." value="{{form.city.data|default('',True)}}" required/>
+                        <div class="alert alert-warning hide">Street Address: 123, Airport Rd.. </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
                       <div class="col-xs-3">
-                        <input type="text" class="form-control"  id="city" name="city" placeholder="City" value="{{form.city.data|default('',True)}}" required/>
+                        <label for="address">City<strong>*</strong></label>
+                      </div>
+                      <div class="col-xs-9">
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City" value="{{form.city.data|default('',True)}}" required/>
                         <div class="alert alert-warning hide">Enter City</div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-xs-3">
+                        <label for="address">State<strong>*</strong></label>
                       </div>
                       <div class="col-xs-3">
                         <select type="text" class="form-control"  id="city" name="state" placeholder="State" value="{{form.state.data|default('',True)}}" required/>
@@ -97,15 +111,29 @@
                           <option value="West Bengal">West Bengal</option>
                         </select>
                       </div>
+                      <div class="col-xs-3">
+                        <label for="pin">PIN<strong>*</strong></label>
+                      </div>
+                      <div class="col-xs-3">
+                        <input type="text" class="form-control" id="pin" name="pin" placeholder="PIN" value="{{form.pin.data|default('',True)}}" required/>
+                        <div class="alert alert-warning hide">Enter PIN Code</div>
+                      </div>
                     </div>
 
                     <div class="form-group row">
                       <div class="col-xs-3">
-                        <label for="contactNumber">Contact Number</label>
+                        <label for="contactNumber">Phone<strong>*</strong></label>
                       </div>
-                      <div class="col-xs-9">
-                        <input type="text" class="form-control"  id="contactNumber" name="contactNumber" placeholder="Contact Number" value="{{form.contact_number.data|default('',True)}}" />
-                        <div class="alert alert-warning hide">Enter Contact Number</div>
+                      <div class="col-xs-3">
+                        <input type="text" class="form-control"  id="phone_number" name="phone_number" placeholder="Phone Number" value="{{form.phone_number.data|default('',True)}}" required/>
+                        <div class="alert alert-warning hide">Enter Phone Number</div>
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="contactNumber">Email<strong>*</strong></label>
+                      </div>
+                      <div class="col-xs-3">
+                        <input type="text" class="form-control"  id="email" name="email" placeholder="Email" value="{{form.email.data|default('',True)}}" required />
+                        <div class="alert alert-warning hide">Enter Email</div>
                       </div>
                     </div>
 
@@ -121,7 +149,7 @@
                         </select>
                       </div>
                       <div class="col-xs-9">
-                        <input type="text" class="form-control" id="panNumber" name="panNumber" placeholder="Pan Number" value="{{form.pan_number.data|default('',True)}}" required />
+                        <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Pan Number" value="{{form.pan_number.data|default('',True)}}" required />
                         <div class="alert alert-warning hide">Enter Pan/DL/Passport Number</div>
                       </div>
                     </div>
@@ -131,8 +159,8 @@
                     <div class="form-group row">
                       <div class="col-xs-12">
                         <h3>Would you like to be an anonymous donor?</h3>
-                        <p class="help-block">We respect our user’s privacy. Should you choose to be an anonymous donor, your name will not be shared with the beneficiary organization. 
-                        If you choose No in the option below only your name and the donation amount is shared with the beneficiary organization
+                        <p class="help-block">We respect your privacy. Should you choose to be an anonymous donor, your name will not be shared with the beneficiary organization. 
+                        If you choose No in the option below only your name and the donation amount will be shared with the beneficiary organization
                         {{ render_bullets(form.ann_choice) }}
                       </div>
                     </div>

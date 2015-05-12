@@ -296,7 +296,7 @@ def search():
             request.args.getlist('types')
             )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form, languages=languages, states=states, types=types)
+            form=filter_form, languages=languages, states=states, types=types,search_string=search_string)
 
 @app.route("/donate/pay", methods=['POST'])
 @login_required
@@ -319,8 +319,7 @@ def donate(campaign_id):
         if form.validate():
             result = donate_service.create_donation(form, campaign)
             if not result['error']:
-                app.logger.warning('Trying to display billing page in views')
-                return result['billing_info_page']
+                return donate_service.ccavRequest(form, result['donation'])
             else:
                 print result
                 flash('Oops something went wrong, please try again')
