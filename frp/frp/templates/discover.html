@@ -6,6 +6,7 @@
     <form action={{url_for("search")}} class="discover-search" method="GET">
       <div id="search" class="input-group">
         {% if (search_string) %}
+        <a href={{url_for('discover')}}> <button class="approve pull-right">Show All Campaigns </button> </a><br></br>
         <input type="text" class="form-control" name="search-string" placeholder={{ search_string }}>
         {% else %}
         <input type="text" class="form-control" name="search-string" placeholder="Search">
