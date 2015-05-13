@@ -34,7 +34,6 @@ def create_donation(form, campaign):
           first_name=form.first_name.data,
           last_name=form.last_name.data,
           campaign=campaign, 
-          #confirmation=1, 
           state=form.state.data, 
           city=form.city.data, 
           identification=form.pan_number.data,
