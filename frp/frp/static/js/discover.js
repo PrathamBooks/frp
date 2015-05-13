@@ -44,7 +44,7 @@ var DiscoverPage = function(args) {
       var $div_md_3 = $('<div/>').addClass('col-md-3').appendTo($campaigns);
       $div_md_3.click(function (campaign) {
         return function() {
-          window.location.replace('/campaign/' + campaign.id);
+          window.location.href = '/campaign/' + campaign.id;
         }
       }(campaign));
       var $h1 = $('<h1/>').appendTo($div_md_3);
