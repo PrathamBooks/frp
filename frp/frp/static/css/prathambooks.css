@@ -1171,6 +1171,10 @@ header #login .dropdown-menu {
 .discover {
   width: 100%;
 }
+#internalCampaign.discover .col-md-12 #scroll.btn-bottom {
+  left: inherit !important;
+  right: 18px;
+}
 .internal #internalContent.discover-top .col-md-3 {
   margin: 0;
 }

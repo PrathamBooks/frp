@@ -513,16 +513,17 @@ def donor_dashboard():
     active_donation=closed_donation=total_active_amt=total_closed_amt=0
     total_active_children = total_closed_children = 0
     for donation in donations:
-        campaigns.append(donation.campaign)
-        if donation.campaign.is_active():
-            active_donation+=1
-            total_active_children += donation.campaign.total_impact_on_children
-            total_active_amt+= donation.amount
+        if (donation.confirmation):
+            campaigns.append(donation.campaign)
+            if donation.campaign.is_active():
+                active_donation+=1
+                total_active_children += donation.campaign.total_impact_on_children
+                total_active_amt+= donation.amount
 
-        else:
-            closed_donation+=1
-            total_closed_children += donation.campaign.total_impact_on_children
-            total_closed_amt+= donation.amount
+            else:
+                closed_donation+=1
+                total_closed_children += donation.campaign.total_impact_on_children
+                total_closed_amt+= donation.amount
 
     return render_template('donorDashboard.html',
             campaigns=campaigns,total_active_amt=total_active_amt,
