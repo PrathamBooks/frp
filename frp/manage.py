@@ -10,7 +10,8 @@ from datetime import *
 from frp import app
 from frp.models import db
 from frp.models import (User, UserAuth, Role, USER_STATUS, is_email_exists,
-                        Organization, OrganizationInfo, OrganizationWork, Campaign, Donation,Comment)
+                        Organization, OrganizationInfo, OrganizationWork, Campaign, 
+                        Donation, Comment, Memory)
 from flask import current_app
 
 manager = Manager(app)
@@ -186,6 +187,13 @@ def seed():
             total_impact_on_children='1500', featured=False)
     db.session.add(campaign)
 
+    memory = Memory(name="Alok", city="Bangalore", state="Karnataka", 
+            email="alok@example.com", can_share=True, words="Hello there from Alok")
+    db.session.add(memory)
+
+    memory = Memory(name="Sai", city="Bangalore", state="Karnataka", 
+            email="sai@example.com", can_share=False, words="Hello there from Sai")
+    db.session.add(memory)
 
 
     try:

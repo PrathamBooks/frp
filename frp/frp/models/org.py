@@ -149,14 +149,14 @@ class Campaign(BaseMixin, db.Model):
 
     @staticmethod
     def last_day_today():
-        campaigns = Campaign.query.all()
-        retval = list(filter(lambda x:(x.days_remaining()==0 and x.status == 'Approved'),campaigns))
+        campaigns = Campaign.query.filter_by(status='Approved').all()
+        retval = list(filter(lambda x:(x.days_remaining()==0),campaigns))
         return retval
 
     @staticmethod
     def last_week():
-        campaigns = Campaign.query.all()
-        retval = list(filter(lambda x:(x.days_remaining()==7 and x.status == 'Approved'),campaigns))
+        campaigns = Campaign.query.filter_by(status='Approved').all()
+        retval = list(filter(lambda x:(x.days_remaining()==7),campaigns))
         return retval
 
     @staticmethod
