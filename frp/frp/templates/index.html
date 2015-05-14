@@ -57,20 +57,25 @@
 
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
-            <div class="item active">
-              {% if display_campaigns|length %}
+            {% if display_campaigns|length %}
               {% set i=0 %}
               {% for campaign in display_campaigns %}
-              <div class="col-md-4">
-                <img src="/static/uploads/uploads/{{campaign.image}}">
-                <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
-                <p>{{ campaign.description }}</p>
-              </div>{% set i= i+1 %}
-              {% if (i == 3 ) %}
-            </div>
-            <div class="item">
-              {% set i = 0 %}
-              {% endif %}
+                {% if i%3 == 0 %}
+                  {% set active = "" %}
+                  {% if i == 0 %}
+                    {% set active = "active" %}
+                  {% endif %}
+                  <div class="item {{active}}">
+                {% endif %}
+                <div class="col-md-4">
+                  <img src="/static/uploads/uploads/{{campaign.image}}">
+                  <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                  <p>{{ campaign.description }}</p>
+                </div>
+                {% set i = i+1 %}
+                {% if i%3 == 0 %}
+                  </div>
+                {% endif %}
               {% endfor %}
               {% else %}
               <div class="col-md-4">

@@ -62,6 +62,7 @@ class User(UserMixin, db.Model):
                                 backref=db.backref("created_by"))
     donations = db.relationship("Donation", backref=db.backref("donor"))
     comments = db.relationship("Comment", backref=db.backref("comment_by"))
+    memories = db.relationship("Memory", backref=db.backref("memory_by"))
 
     # Don't load these columns by default
     _defercols = [

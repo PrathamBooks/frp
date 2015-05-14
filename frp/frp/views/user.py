@@ -23,12 +23,13 @@ from flask_login import login_user
 from flask_user.forms import RegisterForm
 
 from .. import app
-from ..models import (Campaign,ORG_STATUS_CHOICES,USER_STATUS,Comment,Donation,User,UserAuth)
+from ..models import (Campaign,ORG_STATUS_CHOICES,USER_STATUS,Comment,Donation,User,UserAuth,Memory)
 from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
                      ProfileForm,
                      BillingInfo,
+                     MemoryForm,
                      LANGUAGE_CHOICES,
                      STATES,
                      BENEFICIARY_CATEGORY)
@@ -68,7 +69,6 @@ def pop_login_session():
 def campaign_success():
     return render_template('campaignSuccess.html')
 
-
 @app.route('/billing/failure', methods=['GET', 'POST'])
 def donate_failure():
   donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp']) 
@@ -78,8 +78,6 @@ def donate_failure():
   app.logger.warning('Donation id ' + str(donation_id) + ' failed. Tracking id is ' + str(tracking_id))
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
-
-
 
 def send_mail(old_percent,curr_percent,campaign,donation):
   start_date = "{:%B %d, %Y}".format(campaign.start_date())
@@ -615,3 +613,30 @@ def donate_1(campaign_id):
                 old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
                 send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
                 return render_template('donor_form.html', form=form, campaign=campaign)
+
+@app.route("/memories",methods=['GET', 'POST'])
+def memories():
+    all_memories = Memory.query.filter_by(can_share=True).all()
+    if request.method == 'GET':
+        form = MemoryForm()
+        return render_template('memories.html', form=form, memories=all_memories)
+    else:
+        form = MemoryForm(request.form)
+        user = current_user if current_user.is_active else None
+        if form.validate():
+            memory = Memory(name=form.name.data,
+                    city=form.city.data,
+                    state=form.state.data,
+                    email=form.email.data,
+                    can_share=form.can_share.data,
+                    memory_by=user,
+                    words=form.words.data)
+            db.session.add(memory)
+            db.session.commit()
+            all_memories = Memory.query.filter_by(can_share=True).all()
+            return render_template("memories.html", memories=all_memories)
+        else:
+            return render_template("memories.html", memories=all_memories, form=form)
+
+
+

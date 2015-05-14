@@ -1,0 +1,55 @@
+{% extends "partials/base.html" %}
+{% from "_formhelpers.html" import render_field, render_bullets, render_checkbox, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea%}
+{% block content %}
+<div class="container internal">
+
+  <div id="pratham-form" class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-9">
+        {% if form %}
+        <form role="form" class="col-md-12" method="post">
+
+          <div id="internalContent" class="row beneficiary donor">
+            <div  id="internalCampaign" class="row ">
+              <div class="col-md-9">
+                <section id="donate" class="tab-pane active">
+                  <div class="well">
+                    <p> Thank you for stopping by! </p>
+                    <p> Record your memory here and we will donate one book on your behalf. 
+                    Don’t forget to tag it as #mybookmemory when you finish writing. </p>
+                    <p> Start now: </p>
+                    <div class="row form-group" >
+                      {{ render_text_field(form.name) }}
+                    </div>
+                    <div class="row form-group" >
+                      <div class="col-xs-4">
+                        {{ form.state.label }}<strong>*</strong>
+                      </div>
+                      {{ render_select(form.state) }}
+                    </div>
+                    <div class="row form-group" >
+                      {{ render_text_field(form.city) }}
+                      {{ render_text_field(form.email) }}
+                      <p> Can we share your book memory to encourage others? </p>
+                      {{ render_bullets(form.can_share) }}
+                    </div>
+                    <div class="row form-group" >
+                      {{ render_text_area(form.words) }}
+                    </div>
+                    <button type="submit" class="btn btn-lg browse-btn"> Add Memory</button>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% endif %}
+      </div>
+      {% for memory in memories %}
+        <p> <strong> {{ memory.name + ', ' + memory.city }} </strong>: {{memory.words}} </p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
