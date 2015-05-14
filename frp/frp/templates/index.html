@@ -9,14 +9,14 @@
     </div>
     <ul>
       <li> 
-        <img src="static/images/bannerImage/1.jpg" alt="banner1">
+        <img src="/static/images/bannerImage/1.jpg" alt="banner1">
       </li>
     </ul>
     <p>
     <span>Featured Campaign</span>
     An astonishing 999 individuals, and NGOs working with children have already prepared their campaigns for book
     donations. The most recent additions to our roster are Xxooox Oxoxxxx from Maharashtra, and Xxxoooo Xxxx from
-    Assam.Welcome to Pratham Books donate-a-book! Start discovering awesome campaigns here.
+    Assam.Welcome to Pratham Books donate-a-Book! Start discovering awesome campaigns here.
     <br/>
     <strong>HELP INDIA'S CHILDREN READ</strong>
     <a href={{url_for('discover')}}  class="btn btn-warning btn-lg">Donate Books</a>
@@ -39,7 +39,7 @@
       <div  id="geography" class="row tab-pane active">
         <div class="col-md-12">
           <h2>Welcome to Pratham Book’s donate-a-book platform.</h2>
-          <p>Help build a reading nation by donating books. 
+          <p>Help build a reading nation by donating books.
           Start discovering our campaigns <a href={{url_for('discover')}}>here</a>.
           </p>
         </div>
@@ -58,17 +58,32 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <div class="col-md-4">
-                 <img src="static/images/campaignImages/campaign1B.jpg">
-                 <h4><a href="campaignPage.html">Campaign One</a></h4>
-                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know. <br />
-                 You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.
-                 </p>
-               </div>
-               <div class="col-md-4">
-                 <img src="static/images/campaignImages/campaign2B.jpg">
-                 <h4><a href="campaignPage.html">Campaign Two</a></h4>
-                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
+              {% if display_campaigns|length %}
+              {% set i=0 %}
+              {% for campaign in display_campaigns %}
+              <div class="col-md-4">
+                <img src="/static/uploads/uploads/{{campaign.image}}">
+                <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                <p>{{ campaign.description }}</p>
+              </div>{% set i= i+1 %}
+              {% if (i == 3 ) %}
+            </div>
+            <div class="item">
+              {% set i = 0 %}
+              {% endif %}
+              {% endfor %}
+              {% else %}
+              <div class="col-md-4">
+                <img src="static/images/campaignImages/campaign1B.jpg">
+                <h4><a href="campaignPage.html">Campaign One</a></h4>
+                <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know. <br />
+                You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.
+                </p>
+              </div>
+              <div class="col-md-4">
+                <img src="static/images/campaignImages/campaign2B.jpg">
+                <h4><a href="campaignPage.html">Campaign Two</a></h4>
+                <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
               </div>
               <div class="col-md-4">
                 <img src="static/images/campaignImages/campaign3B.jpg">
@@ -95,6 +110,7 @@
                 <p>You bet I'm agitated! I may be surrounded by insanity, but I am not insane. Well, that's certainly good to know.</p>
               </div>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -128,15 +144,14 @@
       <p>
       <a href="http://blog.prathambooks.org/2014/11/our-books-reach-e-base-library-in-pench.html" target="_blank">E Base Library</a>
       </p>
-      <p>The E-Base library is a humble attempt to open up the world of books to 
-      the students of Pench. The importance of reading for a holistic education cannot 
-      be discounted and the E-Base library strives to fill this gap that exists by bringing 
-      to the students books from all around the world. This is the first time the students of this 
-      region have a library at their doorstep. Would you want to start a Library too? 
-      </p>
       <p>
-      <a href={{url_for('start')}}> Click here to get started. </a>      
+      The E-Base library is a humble attempt to open up the world of books to the students of 
+      Pench. The importance of reading for a holistic education cannot be discounted and the 
+      E-Base library strives to fill this gap that exists by bringing to the students books 
+      from all around the world. This is the first time the students of this region have a 
+      library at their doorstep. Would you want to start a Library too?
       </p>
+      <p> <a href={{url_for('start')}}> Click here to get started. </a> </p>
     </div>
   </div>
 
