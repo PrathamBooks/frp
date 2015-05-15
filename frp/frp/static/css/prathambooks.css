@@ -1684,6 +1684,21 @@ span.fb:hover {
   text-transform: uppercase;
   width: 101px;
 }
+span.featured-campaign {
+  background-image: url("../images/featured-champion.png");
+  background-position: right 5px;
+  background-repeat: no-repeat;
+  background-size: 41px auto;
+  color: #222222;
+  float: right;
+  font-size: 8px;
+  margin: -24px -12px 0 0;
+  padding: 29px 0 5px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+  width: 78px;
+}
 #internalCampaign.discover .col-md-2 .tag,
 #internalCampaign.discover .col-md-4 .tag {
   background-image: url("../images/tagArrow.png");

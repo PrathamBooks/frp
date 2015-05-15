@@ -55,6 +55,9 @@ var DiscoverPage = function(args) {
       if (campaign.target <= campaign.total_donations) {
         $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
       }
+      if (campaign.featured) {
+        $('<span/>').addClass('featured-campaign').html('Featured').appendTo($div_md_3);
+      }
       var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
       var $description = $('<p/>').html(campaign.description).appendTo($campaignInfo);
