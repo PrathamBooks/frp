@@ -3784,4 +3784,89 @@ footer .row {
   }
 }
 
+/*********************** Memories page **************************/
 
+#memories {
+	background-image: url("../images/bodyBG.jpg");
+	background-position: top center;
+}
+#memories .well {
+	background-image: url("../images/form-bg.jpg") !important;
+	padding: 0 50px 15px;
+	border: medium none;
+	box-shadow: 0 5px 3px #444;
+	margin-top: 60px;
+}
+@media (max-width: 480px) {
+#memories .well {
+	
+	padding: 0 15px 15px;
+}
+}
+#memories .well .memories-form {
+	background-image: url("../images/pin-tag.png");
+	background-position: 17px 0;
+	background-repeat: no-repeat;
+	margin-top: -57px;
+	padding-top: 100px;
+}
+#memories .record-memory {
+	color: #fff;
+	font-size: 2em;
+	margin: 0 auto;
+	text-align: center;
+	text-shadow: 2px 2px 3px #444;
+	width: 70%;
+}
+#memories .record-memory p {
+	font-size: 18px;
+	font-weight: bold;
+}
+#memories .record-memory p span {
+	color: #444;
+	text-shadow: none;
+}
+#memories .thanks {
+	background-image: url("../images/thanks.png");
+	background-repeat: no-repeat;
+	font-size: 1.8em;
+	font-weight: bold;
+	margin: 0 auto 18px;
+	padding: 72px 0 35px;
+	text-align: center;
+	width: 272px;
+}
+#memories .start-now {
+	color: #fff;
+	font-size: 2em;
+	text-align: center;
+	text-shadow: 2px 2px 3px #444;
+	font-weight: bold;
+}
+#memories .memory-comments .comments {
+/*	background: none repeat scroll 0 0 #fbee9b; */
+	background: none repeat scroll 0 0 lightyellow;
+	border-radius: 0 18px 0 0;
+	box-shadow: 1px 2px 6px #555;
+	font-size: 13px;
+	margin-bottom: 20px;
+}
+#memories .col-md-9.memory-comments {
+	clear: both;
+}
+#memories .memory-comments .comment-header {
+	border-bottom: 1px dashed #000;
+}
+#memories .memory-comments .col-xs-2 {
+	text-align: center;
+	vertical-align: middle;
+	width: 10.667%;
+	padding: 0;
+}
+#memories .memory-comments .col-xs-10 {
+	width: 89.333%;
+}
+#memories .memory-comments .col-xs-2 img {
+	height: auto;
+	width: 100%;
+}
