@@ -2,25 +2,40 @@
 {% block content %}
 <div class="container">
   <div id="featuredCampaign" class="row">
-    <button class="btn btn-default btn-nav btn-navL" type="button">Default</button>
-    <button class="btn btn-default btn-nav" type="button">Default</button>
-    <div class="col-md-12">
-      Featured Campaign
+    <div id="carousel-banner" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-banner" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-banner" data-slide-to="1"></li>
+        <li data-target="#carousel-banner" data-slide-to="2"></li>
+        <li data-target="#carousel-banner" data-slide-to="3"></li>
+        <li data-target="#carousel-banner" data-slide-to="4"></li>
+        <li data-target="#carousel-banner" data-slide-to="5"></li>
+      </ol>
+      <!-- Controls -->
+      <a class="left carousel-control arrL" href="#carousel-banner" role="button" data-slide="prev"></a>
+      <a class="right carousel-control arrR" href="#carousel-banner" role="button" data-slide="next"></a>
+      <div class="carousel-inner">
+        <div class="item active">
+          <a href="{{url_for('discover')}}"> <img src="/static/images/DoB_Banner_donor.jpg"> </a>
+        </div>
+        <div class="item">
+          <a href="{{url_for('discover')}}"> <img src="/static/images/DoB_Banner_donor2.jpg"> </a>
+        </div>
+        <div class="item">
+          <a href="{{url_for('discover')}}"> <img src="/static/images/DoB_Banner_donor3.jpg"> </a>
+        </div>
+        <div class="item">
+          <a href="{{url_for('about')}}"> <img src="/static/images/DoB_Banner_platform.jpg"> </a>
+        </div>
+        <div class="item">
+          <a href="{{url_for('about')}}"> <img src="/static/images/DoB_Banner_platform2.jpg"> </a>
+        </div>
+        <div class="item">
+          <a href="{{url_for('start')}}"> <img src="/static/images/DoB_Banner_platform3.jpg"> </a>
+        </div>
+      </div>
     </div>
-    <ul>
-      <li> 
-        <img src="/static/images/bannerImage/1.jpg" alt="banner1">
-      </li>
-    </ul>
-    <p>
-    <span>Featured Campaign</span>
-    An astonishing 999 individuals, and NGOs working with children have already prepared their campaigns for book
-    donations. The most recent additions to our roster are Xxooox Oxoxxxx from Maharashtra, and Xxxoooo Xxxx from
-    Assam.Welcome to Pratham Books donate-a-Book! Start discovering awesome campaigns here.
-    <br/>
-    <strong>HELP INDIA'S CHILDREN READ</strong>
-    <a href={{url_for('discover')}}  class="btn btn-warning btn-lg">Donate Books</a>
-    </p>
   </div>
 
   <form action={{url_for("search")}} method="GET">
@@ -57,22 +72,28 @@
 
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
-            <div class="item active">
-              {% if display_campaigns|length %}
+            {% if display_campaigns|length %}
               {% set i=0 %}
               {% for campaign in display_campaigns %}
-              <div class="col-md-4">
-                <img src="/static/uploads/uploads/{{campaign.image}}">
-                <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
-                <p>{{ campaign.description }}</p>
-              </div>{% set i= i+1 %}
-              {% if (i == 3 ) %}
-            </div>
-            <div class="item">
-              {% set i = 0 %}
-              {% endif %}
+                {% if i%3 == 0 %}
+                  {% set active = "" %}
+                  {% if i == 0 %}
+                    {% set active = "active" %}
+                  {% endif %}
+                  <div class="item {{active}}">
+                {% endif %}
+                <div class="col-md-4">
+                  <img src="/static/uploads/uploads/{{campaign.image}}">
+                  <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                  <p>{{ campaign.description }}</p>
+                </div>
+                {% set i = i+1 %}
+                {% if i%3 == 0 %}
+                  </div>
+                {% endif %}
               {% endfor %}
-              {% else %}
+            {% else %}
+            <div class="item active">
               <div class="col-md-4">
                 <img src="static/images/campaignImages/campaign1B.jpg">
                 <h4><a href="campaignPage.html">Campaign One</a></h4>

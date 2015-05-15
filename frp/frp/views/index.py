@@ -12,26 +12,18 @@ from ..models import User, Donation,Campaign
 def index():
     filter_form = FilterForm()
     total_books_donated = Donation.total_books_donated
-    campaigns = Campaign.query.all()
-    display_campaigns = []
-    if len(campaigns)>=6:
-        display_campaigns = filter(lambda x:x.featured==True,campaigns)
-        if len(display_campaigns)<6:
-            # add other campaigns till the number of campaigns  is 6
-            non_featured_campaigns = filter(lambda x:x.featured==False,campaigns)
-            i=0
-            while len(display_campaigns)<6:
-                display_campaigns.append(non_featured_campaigns[i])
-                i+=1
-    elif len(campaigns)>0:
-        # Show the same campaigns again 
-        display_campaigns = campaigns
+    display_campaigns = Campaign.query.filter_by(featured=True).limit(6).all()
+    if len(display_campaigns)<6:
+        # add other campaigns to make 6
+        more_campaigns_needed = 6 - len(display_campaigns)
+        non_featured_campaigns = Campaign.query.filter_by(featured=False).limit(more_campaigns_needed).all()
+        display_campaigns = display_campaigns + non_featured_campaigns
+    # if still not enough just repeat the first
+    if len(display_campaigns)<6 and len(display_campaigns)>0:
         while len(display_campaigns)<6:
-            display_campaigns.append(campaigns[i])
-            i+=1
+            display_campaigns.append(display_campaigns[0])
 
     return flask.render_template('index.html', 
             form=filter_form, 
             total_books_donated=total_books_donated,
             display_campaigns=display_campaigns)
-

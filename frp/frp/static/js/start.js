@@ -22,6 +22,9 @@ var Start = function() {
     // set. Not setting in form because we want to avoind printing the
     // '*'
     this.booksCallback(); 
+    $(window).on('beforeunload', function(){
+        return 'Are you sure you want to leave before saving the form? The form will not be saved.';
+    });
   };
 
   // At the end of step 8 in Introduction, need to go to get started
@@ -37,6 +40,7 @@ var Start = function() {
       highlightInvalidFields(active_tab);
       e.preventDefault();
     }
+    $(window).off('beforeunload');
   };
 
   this.booksCallback = function(e) {

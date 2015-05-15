@@ -14,3 +14,4 @@ from .user import *
 from .org import *
 from .donation import *
 from .comment import *
+from .memory import *

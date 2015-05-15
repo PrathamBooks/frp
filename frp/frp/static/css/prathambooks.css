@@ -381,9 +381,10 @@ header #login .dropdown-menu {
 }
 #featuredCampaign {
   width: 100%;
-  height: 547px;
+  height: 580px;
   margin: -74px 0 0;
-  padding: 90px 0 0;
+  clear: both;
+  padding: 32px 0 0;
   float: left;
   clear: both;
   background-color: #e5e4e0;
@@ -475,7 +476,7 @@ header #login .dropdown-menu {
   margin: 33px 0 0 !important;
 }
 #homeSearch.input-group {
-  margin: 530px 0 0 325px;
+  margin: 550px 0 0 325px;
   position: absolute;
   z-index: 5;
 }
@@ -526,14 +527,14 @@ header #login .dropdown-menu {
   float: left;
   clear: both;
   position: relative;
-  margin: -54px 0 0;
+  margin: 0;
   padding: 0 15px;
 }
 #contentTabs ul.nav-tabs {
   width: 100%;
   height: 80px;
   float: left;
-  margin: 78px 0 0;
+  margin: 20px 0 0;
   padding: 1px 0 0;
   border-bottom: 0 none;
 }
@@ -786,6 +787,7 @@ header #login .dropdown-menu {
   font-size: 24px;
   background-color: #ffc80b;
   background: #ffc600;
+  width: 100%;
   /* Old browsers */
   background: -moz-linear-gradient(top, #ffd74e 0%, #fff1bf 100%);
   /* FF3.6+ */
@@ -1683,6 +1685,21 @@ span.fb:hover {
   text-align: left;
   text-transform: uppercase;
   width: 101px;
+}
+span.featured-campaign {
+  background-image: url("../images/featured-champion.png");
+  background-position: right 5px;
+  background-repeat: no-repeat;
+  background-size: 41px auto;
+  color: #222222;
+  float: right;
+  font-size: 8px;
+  margin: -24px -12px 0 0;
+  padding: 29px 0 5px;
+  position: relative;
+  right: 0;
+  text-transform: uppercase;
+  width: 78px;
 }
 #internalCampaign.discover .col-md-2 .tag,
 #internalCampaign.discover .col-md-4 .tag {
@@ -2611,9 +2628,10 @@ table td span.label {
   font-size: .95em;
 }
 .internal #internalCampaign.discover span.champion {
-  margin: -25px -10px 0 0;
-  position: absolute;
+  margin: -25px -12px 0 15px;
+  position: relative;
   right: 0;
+  width: 66px;
 }
 .internal #internalCampaign.dashboard span.champion {
   margin: -25px -10px -30px 0;
@@ -3230,6 +3248,9 @@ a.std {
   #pratham-form .col-md-12 {
     width: 100%;
   }
+  .carousel-indicators {
+    bottom: -1%;
+  }
 }
 
 .alert{
@@ -3366,7 +3387,7 @@ footer .row {
   }
   #featuredCampaign {
     height: auto;
-    margin: 0;
+    margin: -42px 0 0;
     padding: 0;
   }
   #featuredCampaign ul {
@@ -3382,7 +3403,7 @@ footer .row {
     top: 30%;
   }
   #contentTabs {
-    margin: -60px 0 0;
+    margin-top: -75px;
   }
   #contentTabs ul.nav-tabs {
     margin: 0;
@@ -3419,7 +3440,7 @@ footer .row {
     position: relative !important;
   }
   #contentTabs {
-    margin: -135px 0 0;
+    margin: -74px 0 0;
   }
   #featuredCampaign p {
     font-size: 14px;
@@ -3590,14 +3611,16 @@ footer .row {
     height: auto;
     background-color: transparent;
     border-bottom: 0 none;
+    padding-top: 0;
   }
   #featuredCampaign ul {
     float: left;
     margin: -90px 0 0;
   }
   #homeSearch {
-    float: left !important;
-    margin: 40px 15px 0 334px !important;
+    clear: both;
+    float: inherit !important;
+    margin: 15px auto 0 !important;
     position: relative !important;
   }
   #featuredCampaign p {
@@ -3651,6 +3674,9 @@ footer .row {
   }
   .tab-content a.carousel-control {
     margin: 18% 6px 0;
+  }
+  .carousel-indicators {
+    bottom: -30px;
   }
 }
 @media (min-width: 481px) and (max-width: 639px) {
@@ -3743,6 +3769,9 @@ footer .row {
   #contentTabs ul.nav-tabs li {
     margin: 0;
     width: 100%;
+  }
+  #featuredCampaign {
+    margin-top: -35px;
   }
 }
 @media (max-width: 360px) {
