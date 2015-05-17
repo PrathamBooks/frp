@@ -49,7 +49,7 @@
     <div class="col-md-12 donorDash">  
       {% for campaign in campaigns %}
       <div class="col-md-3">
-        <h1> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h1>
+        <h1> <a href={{ url_for('campaign',id=campaign.id) }}>{{ campaign.title[0:25] }}</a></h1>
         <div class="campaignInfo">
           <time><span>{{ campaign.days_remaining() }}</span> Days Left</time>
           <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }} </span></h4>
