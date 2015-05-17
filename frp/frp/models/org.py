@@ -253,5 +253,9 @@ class Campaign(BaseMixin, db.Model):
     def percent_funded(self):
         return int(round((self.total_donations() * 100) /self.target()))
 
+    def needs(self):
+        needs = self.target() - self.total_donations() 
+        needs = needs if needs > 0 else 0
+        return needs
 
 
