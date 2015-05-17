@@ -12,7 +12,7 @@
 
       <div class="col-md-12 donorDash">   
 
-        <div class="col-md-12">
+        <div class="col-md-9">
           <table class="table table-striped">
             <tbody><tr>
                 <th class="darkOrange">My Funds Details</th>
@@ -56,16 +56,6 @@
           </h2>
 
         </div>
-
-
-        <div class="col-md-3 pieBlock">
-          <ul id="socialThumbs">
-            <li><a href={{ url_for('donor_transactions') }} >My Transactions</a></li>
-            <li><a class="fb" href="#">Share On Facebook</a></li>
-            <li><a class="tw" href="#">Share On Twitter</a></li>
-          </ul>
-        </div>  
-
 
         <div class="col-md-12 donorDash">
           {% for campaign in campaigns %}

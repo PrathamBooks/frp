@@ -1,55 +1,104 @@
 {% extends "partials/base.html" %}
 {% from "_formhelpers.html" import render_field, render_bullets, render_checkbox, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea%}
 {% block content %}
-<div class="container internal">
-
+<div id="memories" class="container internal">
+  {% if not form %}
+    <div class="thanks">
+      #mybookmemories 
+    </div>
+  {% endif %}
   <div id="pratham-form" class="container">
     <div class="row">
       <div class="col-md-12 col-sm-9">
         {% if form %}
         <form role="form" class="col-md-12" method="post">
-
           <div id="internalContent" class="row beneficiary donor">
             <div  id="internalCampaign" class="row ">
               <div class="col-md-9">
                 <section id="donate" class="tab-pane active">
-                  <div class="well">
-                    <p> Thank you for stopping by! </p>
+                  <div class="thanks">
+                    Thank you for stopping by! 
+                  </div>
+                  <div class="record-memory">
                     <p> Record your memory here and we will donate one book on your behalf. 
-                    Don’t forget to tag it as #mybookmemory when you finish writing. </p>
-                    <p> Start now: </p>
-                    <div class="row form-group" >
-                      {{ render_text_field(form.name) }}
-                    </div>
-                    <div class="row form-group" >
-                      <div class="col-xs-4">
-                        {{ form.state.label }}<strong>*</strong>
+                    Don't forget to tag it as <span> #mybookmemory </span> when you finish writing. </p>
+                  </div>
+                  <div class="start-now"> Start now: </div>
+                  <div class="well">
+                    <div class="memories-form">
+                      <div class="row form-group" >
+                        {{ render_text_field(form.name) }}
                       </div>
-                      {{ render_select(form.state) }}
+                      <div class="row form-group" >
+                        <div class="col-xs-4">
+                          {{ form.state.label }}<strong>*</strong>
+                        </div>
+                        {{ render_select(form.state) }}
+                      </div>
+                      <div class="row form-group" >
+                        {{ render_text_field(form.city) }}
+                        {{ render_text_field(form.email) }}
+                        <p> Can we share your book memory to encourage others? </p>
+                        {{ render_bullets(form.can_share) }}
+                      </div>
+                      <div class="row form-group" >
+                        {{ render_text_area(form.words) }}
+                      </div>
+                      <button type="submit" class="btn btn-lg browse-btn"> Add Memory</button>
                     </div>
-                    <div class="row form-group" >
-                      {{ render_text_field(form.city) }}
-                      {{ render_text_field(form.email) }}
-                      <p> Can we share your book memory to encourage others? </p>
-                      {{ render_bullets(form.can_share) }}
-                    </div>
-                    <div class="row form-group" >
-                      {{ render_text_area(form.words) }}
-                    </div>
-                    <button type="submit" class="btn btn-lg browse-btn"> Add Memory</button>
                   </div>
                 </section>
               </div>
             </div>
           </div>
         </form>
-        {% endif %}
+       {% endif %}
       </div>
-      {% for memory in memories %}
-        <p> <strong> {{ memory.name + ', ' + memory.city }} </strong>: {{memory.words}} </p>
-      {% endfor %}
+      <div class="col-md-9 memory-comments">
+        {% for memory in memories %}
+          <div class="comments">
+            <div class="col-xs-2">
+              <img src="/static/images/avatar.png" alt="avatar" />
+            </div>
+            <div class="col-xs-10">
+              <div class="comment-header">
+                <div class="user"><i class="icon-user"></i> {{ memory.name + ', ' + memory.city }} </div> 
+              </div>
+              <div class="comment-content">
+                {{ memory.words }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
 {% endblock %}
-
+{% block jsblock %}
+  {% if not form %}
+    <script type="text/javascript">
+      $(function() {
+          $("#thanks-modal").modal('show');
+          });
+    </script>
+  {% endif %}
+{% endblock %}
+{% block modalblock %}
+<div id="thanks-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <!--- <h3 class="modal-title" id="myLargeModalLabel"> Thanks!</h3> -->
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Thank you for sharing your memory. Help someone else make a #mybookmemory.</h4>
+        </div>
+        <a type="button" class="btn pull-right" href={{url_for('discover')}}><button class="btn pull-right"> Click here to donate-a-book.</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

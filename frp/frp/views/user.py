@@ -622,7 +622,7 @@ def memories():
         return render_template('memories.html', form=form, memories=all_memories)
     else:
         form = MemoryForm(request.form)
-        user = current_user if current_user.is_active else None
+        user = current_user if current_user.is_active() else None
         if form.validate():
             memory = Memory(name=form.name.data,
                     city=form.city.data,
