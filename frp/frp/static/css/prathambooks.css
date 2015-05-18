@@ -3870,3 +3870,37 @@ footer .row {
 	height: auto;
 	width: 100%;
 }
+#thanks-modal .modal-content {
+  background-color:#f9cf3d!important;
+  border:4px solid #fff;
+  border-radius:30px
+}
+
+#thanks-modal .modal-content .modal-header {
+  background-color: transparent !important;
+  border: none;
+  padding: 0 0 0!important;
+  margin-bottom: 0!important;
+}
+
+#thanks-modal  .modal-content h4 {
+  text-align:center;
+  line-height:24px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#thanks-modal .modal-content .row {
+  border-bottom: none;
+  text-align: center;
+  padding-left: 0;
+  margin: 0 auto;
+}
+
+#thanks-modal .modal-content button.btn {
+  background: #f68c1f;
+  /* text-shadow: 1px 1px 1px #444; */
+  font-size: 1em;
+  letter-spacing: 2px;
+  color: #fff;
+}

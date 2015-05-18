@@ -568,7 +568,7 @@
                         </div>
                         <div class="row form-group">
                           <h3>City <strong>*</strong></h3>
-                          <input type="text" class="form-control" name="project_city" value="" required /> 
+                          <input type="text" class="form-control" name="project_city" value="{{form.city.data|default('',True)}}" required /> 
                           <div class="alert alert-warning hide">Enter City</div>
                         </div><!--form-group-->
                         <!-- Will add later
@@ -588,7 +588,7 @@
                           <div class="col-xs-12">
                             <label for="age">Do you or your organization do any work for following (check all that apply):
                             {{ render_checkbox(form.org_work) }}
-                            <div class="alert alert-warning  alertleft hide">Please select any one option below.</div>
+                            <div class="alert alert-warning alertleft hide">Please select at least one option above.</div>
                           </div>
                         </div>
 
@@ -602,7 +602,7 @@
                           </div>
                           {{ render_text_field(form.project_title,maxwords=10) }}
                           <div class="alert alert-warning alertleft hide">Please give a suitable title to your campaign</div>
-                          <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 10 Words)</p> 
+                          <p class="help-block">Make it unique, and not general. E.g: Priya’s Grade-6 Leading Readers (Max. 10 words)</p> 
                         </div><!--form-group-->
                       </div><!--well-->
 
