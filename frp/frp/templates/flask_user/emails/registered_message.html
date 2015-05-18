@@ -7,7 +7,7 @@
 <p>You will need to confirm your email next.</p>
 
 <p>If you initiated this sign-up, please click on the link below:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ confirm_email_link }}?next={{request.args.get('next')}}">Confirm your email</a>.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ confirm_email_link }}?next={{request.args.get('next') if request.args.get('next') else '/' }}">Confirm your email</a>.</p>
 
 <p>If you did not initiate this sign-up, you may safely ignore this email.</p>
 

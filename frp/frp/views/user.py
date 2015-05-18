@@ -89,13 +89,13 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     title=campaign.title)
 
   mailer.send_email(to=campaign.emails(),
-    subject="New Donation Recieved ",
+    subject="New Donation Received ",
     template="new_donation.html",
     first_name=campaign.created_by.first_name,
     amount=donation.amount,
     donor=donation.donor_name(),
     title=campaign.title,
-    start_date=start_date )
+    start_date=start_date)
 
   if (old_percent < 100 <= curr_percent):
     mailer.send_email(to=campaign.emails(),
@@ -107,7 +107,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     return
 
   if (old_percent == 0):
-    mailer.send_email(to=campaign.email(),
+    mailer.send_email(to=campaign.emails(),
       subject="First Donation Recieved", 
       template="new_donation.html",
       first_name=campaign.created_by.first_name,

@@ -30,9 +30,9 @@ class Donation(BaseMixin, db.Model):
         return self.amount+o
 
     def donor_name(self):
-        if (self.ann_choice == True):
-            return "an Anonomus Donor"
-        return  self.donor.first_name + ' ' + self.donor.last_name + '\nDont forgrt to thank him/her @ ' + self.donor.email
+        if (self.ann_choice == True or (self.donor.first_name == '' and self.donor.last_name == '')):
+            return "an Anonymous Donor"
+        return self.donor.first_name + ' ' + self.donor.last_name 
 
     @staticmethod
     def total_donated():
