@@ -113,7 +113,7 @@ def seed():
     db.session.add(campaign)
 
     campaign = Campaign(created_by=user, org=org,
-            title='Rural Library', description='Project to set up a rural library', 
+            title='Rural Library With a very very very long name that should not be allowed', description='Project to set up a rural library', 
             who='We are an organization who works in rural AP', impact='This will raise funds to set up a new library.',
             utilization='Utilize to get books', state="Andhra Pradesh", city="Hyderabad", nbooks='500', nlic=2, languages="Telugu, English",
             image="2.jpg", status="Approved",approved_at=datetime.datetime.now()-timedelta(days=2),
