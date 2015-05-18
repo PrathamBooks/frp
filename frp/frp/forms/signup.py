@@ -202,27 +202,27 @@ class BeneficiarySignupForm(wtforms.Form):
     project_title = wtforms.TextField(
         label='Please enter a title for your campaign here. This is the first thing a.donor will see or search while looking for your campaign.',
         validators=[wtforms.validators.Optional(),
-                    wtforms.validators.Length(max=100)])
+                    wtforms.validators.Length(max=500)])
 
     project_description = wtforms.TextAreaField(
         label='Brief description of the project for which you are raising funds.',
         validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=100)])
+                    wtforms.validators.Length(max=1000)])
 
     project_who_are_you = wtforms.TextAreaField(
             label='Who are you?',
             validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=100)])
+                    wtforms.validators.Length(max=1000)])
 
     project_impact = wtforms.TextAreaField(
             label='What work do you do and how does it impact society ?',
             validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=100)])
+                    wtforms.validators.Length(max=1000)])
 
     fund_utilization = wtforms.TextAreaField(
             label='How will the funds be utilized?',
             validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=100)])
+                    wtforms.validators.Length(max=1000)])
 
     def set_data(self, org):
        self.category.data = org.info.category

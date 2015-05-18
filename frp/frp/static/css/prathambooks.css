@@ -1206,8 +1206,9 @@ form.discover-search {
   height: 550px;
   border: 1px solid #bdae85;
   background-color: #fafafa;
-  padding: 0;
   margin: 0 6px 30px;
+  min-height: initial;
+  padding: 0 0 30px;
 }
 .internal .col-md-9 .col-md-3 h1 {
   width: auto;
@@ -1424,6 +1425,18 @@ form.discover-search {
   margin: 6px 0 0 23px !important;
   padding: 15px 40px !important;
   width: auto !important;
+}
+#campaigns .internal time {
+  font-size: 1.5em;
+  margin: 0px 0 12px;
+  padding: 0 0 4px 32px;
+  background-size: 24px;
+}
+#campaigns .col-md-3 .campaignInfo p {
+  min-height: 40px;
+}
+#campaigns .campaignInfo h6 {
+  margin: 0px 0 10px !important;
 }
 #internalCampaign.log .col-md-2 h1 {
   font-family: "ligurino-condensed", sans-serif !important;
@@ -1694,13 +1707,19 @@ span.featured-campaign {
   color: #222222;
   float: right;
   font-size: 8px;
-  margin: -24px -12px 0 0;
+  margin: -24px -12px -20px 0;
   padding: 29px 0 5px;
   position: relative;
   right: 0;
   text-transform: uppercase;
   width: 78px;
 }
+
+#internalCampaign #campaigns .col-md-3 h2 { 
+  min-height: 57px; 
+} 
+
+
 #internalCampaign.discover .col-md-2 .tag,
 #internalCampaign.discover .col-md-4 .tag {
   background-image: url("../images/tagArrow.png");
@@ -1711,6 +1730,9 @@ span.featured-campaign {
   margin: 20px 2px 0 0;
   min-width: 63px;
   width: auto;
+}
+#internalCampaign #campaigns .col-md-3 h2 {
+  min-height: 57px;
 }
 #internalCampaign.discover .campaignInfo {
   clear: both;
@@ -3869,4 +3891,38 @@ footer .row {
 #memories .memory-comments .col-xs-2 img {
 	height: auto;
 	width: 100%;
+}
+#thanks-modal .modal-content {
+  background-color:#f9cf3d!important;
+  border:4px solid #fff;
+  border-radius:30px
+}
+
+#thanks-modal .modal-content .modal-header {
+  background-color: transparent !important;
+  border: none;
+  padding: 0 0 0!important;
+  margin-bottom: 0!important;
+}
+
+#thanks-modal  .modal-content h4 {
+  text-align:center;
+  line-height:24px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#thanks-modal .modal-content .row {
+  border-bottom: none;
+  text-align: center;
+  padding-left: 0;
+  margin: 0 auto;
+}
+
+#thanks-modal .modal-content button.btn {
+  background: #f68c1f;
+  /* text-shadow: 1px 1px 1px #444; */
+  font-size: 1em;
+  letter-spacing: 2px;
+  color: #fff;
 }
