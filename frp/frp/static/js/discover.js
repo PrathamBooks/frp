@@ -68,6 +68,9 @@ var DiscoverPage = function(args) {
       var $location = $('<li/>').html("Location: " + campaign.city + ', ' + campaign.state).appendTo($ul);
       $campaignInfo.append($('<hr/>'));
       $campaignInfo.append($('<h6/>').html("Funding Details"));
+      var $time_left = $('<time/>').append($('<span/>').text(campaign.days_remaining + ' Days Left'));
+      $campaignInfo.append($time_left);
+
       var $target = $('<h4/>').html(campaign.target);
       var percent_funded = Math.round((campaign.total_donations/campaign.target) * 100);
       var $percentFunded = $('<span/>').
