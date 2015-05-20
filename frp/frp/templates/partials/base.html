@@ -150,7 +150,10 @@
         {% if flashes %}
         <ul class="flashes">
           {% for message in flashes %}
-          <li>{{ message }}</li>
+          <li class="alert-success">
+            {{ message }}
+            <a href="#" class="close" data-dismiss="alert">×</a>
+          </li>
           {% endfor %}
         </ul>
         {% endif %}
