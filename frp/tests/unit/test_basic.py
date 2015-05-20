@@ -6,7 +6,7 @@ from frp.models import (User, UserAuth, Role, USER_STATUS, is_email_exists,
                         Donation, Comment, Memory)
 from flask_user import current_user, login_required, roles_required
 import datetime
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 
 # Initial Configuration
 
