@@ -37,7 +37,7 @@ class Donation(BaseMixin, db.Model):
     @staticmethod
     def total_donated():
         donations = map(lambda x: x.amount, Donation.query.all())
-        return reduce(lambda x, y: x + y, donations)
+        return reduce(lambda x, y: x + y, donations, 0)
 
     @staticmethod
     def total_books_donated():
