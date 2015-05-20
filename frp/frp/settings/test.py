@@ -1,5 +1,5 @@
 # Database settings
-SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/test.db"
+SQLALCHEMY_DATABASE_URI = "postgresql://:@localhost/frp_test"
 
 DEBUG = True
 SECRET_KEY = "Development key"
