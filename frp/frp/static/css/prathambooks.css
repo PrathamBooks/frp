@@ -2982,18 +2982,30 @@ ul#socialThumbs li a.gPlus {
 /****************************** login pages *************************************/
 
 .flashes {
-	text-align: center;
-	margin: 2% 0px;
-	font-size: 1.2em;
+  text-align: center;
+  margin: 0  auto;
+  font-size: 1.2em;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
 }
 .flashes li {
-	padding: 15px;
-	font-weight: bold;
-	max-width: 360px;
-	margin: 0px auto;
-	margin-bottom: 1%;
-	width: 90%;
+padding: 15px;
+  font-weight: bold;
+  max-width: 360px;
+  margin: 0px auto;
+  width: 90%;
+  box-shadow: 0px 0px 10px #444;
+  position:relative;
 }
+.flashes a.close {
+  position:absolute;
+  right: 10px;
+  top: 11px;
+  color: #000;
+  opacity: 0.7;
+}
+
 .bg-danger {
 	background-color: #f2dede;
 }
@@ -3018,6 +3030,7 @@ ul#socialThumbs li a.gPlus {
 #wrapperOut #wrapper {
 	width: 100%;
 	max-width: 1200px;
+  position: relative;
 }
 .login-links {
 	padding: 0 4%;
