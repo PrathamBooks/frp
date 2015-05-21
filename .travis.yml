@@ -4,7 +4,9 @@ python:
 add_ons:
   postgresql: "9.3"
 before_script:
-    - psql -c 'create database frp_test;' -U postgres
+  - psql -c 'create database frp_test;' -U postgres
+env:
+  - FRP_CONFIG=settings/test.py
 # command to install dependencies
 install: "pip install -r requirements/test.txt"
 # command to run tests
