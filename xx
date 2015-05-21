@@ -1,5 +1,0 @@
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://donateabook.org.in/campaign/3" data-text="I have donated books to this library. Please help by donating as well." data-via="PbPbuser" data-count="none">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-
-https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fabout.twitter.com%2Fresources%2Fbuttons&text=I%20have%20donated%20books%20to%20this%20library.%20Please%20help%20by%20donating%20as%20well.&tw_p=tweetbutton&url=http%3A%2F%2Fdonateabook.org.in%2Fcampaign%2F3&via=PbPbuser
