@@ -88,6 +88,7 @@ the FRP app to run as well as config necessary.
      
 
 - Ubuntu setup
+> add_user infodigital
 > sudo aptitude install git
 > sudo aptitude install python-dev
 > sudo aptitude install libffi-dev
@@ -95,7 +96,14 @@ the FRP app to run as well as config necessary.
 > sudo aptitude install postgresql
 > sudo aptitude install postfix
 > sudo aptitude install python-pip
+> sudo aptitude install monit
 > sudo pip install virtualenv
+# Install redis
+> wget http://download.redis.io/redis-stable.tar.gz
+> tar xvzf redis-stable.tar.gz
+> cd redis-stable/
+> make
+> sudo make install
 > virtualenv frp-env
 > source frp-env/bin/activate
 > git clone https://github.com/PrathamBooks/frp.git
@@ -111,4 +119,5 @@ the FRP app to run as well as config necessary.
 > mv /etc/nginx/sites-enabled/default
 > export FACEBOOK_CONSUMER_KEY = <KEY>
 > export FACEBOOK_CONSUMER_SECRET = <SECRET>
+> mkdir ~/log
 > gunicorn frp:app -b localhost:8000 -D
