@@ -1186,6 +1186,18 @@ div#search {
 form.discover-search {
   position: relative;
 }
+.showAll.pull-right {
+  padding: 27px 20px 10px;
+}
+i.icon-large.icon-th {
+  background-position: 231px 0px;
+}
+.showAll.pull-right a {
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: sub;
+  margin-left: 3px;
+}
 .internal #internalContent.discover-top select,
 #easyBrowse select {
   height: 100px !important;
