@@ -177,7 +177,7 @@ def signup_as_beneficiary():
             result = signup_service.create_beneficiary(form, filename)
             if not result['error']:
                 mailer.send_email(to=current_user.email,
-                        subject="Congrats! You successfully created a campaign on donate-a-book!",
+                        subject="Congrats! You successfully created a campaign on Donate-a-Book!",
                         template="new_campaign.html", 
                         first_name=current_user.first_name)
                 return redirect(url_for('campaign_success'))
