@@ -5,7 +5,7 @@
   <div class="row discover dashboard campaign" id="internalCampaign">
     <div class="col-md-12">
       <h2>Beneficiary Dashboard
-        <span>My donate-a-book progress</span>
+        <span>My Donate-a-Book progress</span>
       </h2>
     </div>
 
@@ -58,7 +58,7 @@
           </div>
           <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>
           <div class="socialIcons">
-            <span class="tw"  onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'Help India\'s children read. Donate to a library on Pratham donate-a-book.')"></span>
+            <span class="tw"  onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'Help India\'s children read. Donate to a library on Pratham Donate-a-Book.')"></span>
             <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
           </div>
           <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate </a> </h5>
