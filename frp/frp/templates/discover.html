@@ -5,15 +5,17 @@
     <div class="row discover" id="internalCampaign">
     <form action={{url_for("search")}} class="discover-search" method="GET">
       <div id="search" class="input-group">
-        {% if (search_string) %}
-          <a href={{url_for('discover')}}> Show All Campaigns </a><br></br>
-        {% endif %}
         <input type="text" class="form-control" name="search-string" placeholder={{search_string|default("Search", True)}}>
         <input type="submit" value="" class="icon-search">
       </div>
     </form>
     <div class="col-md-12">
       <h2>Discover campaigns now </h2>
+      {% if (search_string) %}
+        <div class="showAll pull-right"><i class="icon-large icon-th"></i>        
+          <a href={{url_for('discover')}}> Show All Campaigns </a>
+        </div>
+      {% endif %}
     </div>
 
     <div class="col-md-3" id="filterOptions">
