@@ -1098,6 +1098,14 @@
 {% endblock %}
 {% block jsblock %}
 <script>
+var hash = document.location.hash;
+if (hash) {
+   $('.nav-tabs a[href='+hash+']').tab('show');
+} 
+$('#about-links a').click(function() {
+  var hash = $(this).attr('href').replace('/about','');
+  $('.nav-tabs a[href='+hash+']').tab('show');
+});
 $(function() {
     $("#accordion").accordion();
     $("#accordion2").accordion();

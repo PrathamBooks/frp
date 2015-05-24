@@ -568,7 +568,7 @@
                         </div>
                         <div class="row form-group">
                           <h3>City <strong>*</strong></h3>
-                          <input type="text" class="form-control" name="project_city" value="{{form.city.data|default('',True)}}" required /> 
+                          <input type="text" class="form-control" name="project_city" value="{{form.project_city.data|default('',True)}}" required /> 
                           <div class="alert alert-warning hide">Enter City</div>
                         </div><!--form-group-->
                         <!-- Will add later
@@ -829,6 +829,14 @@
 
 {% block jsblock %}
 <script>
+var hash = document.location.hash;
+if (hash) {
+   $('.nav-tabs a[href='+hash+']').tab('show');
+} 
+$('#start-links a').click(function() {
+  var hash = $(this).attr('href').replace('/about','');
+  $('.nav-tabs a[href='+hash+']').tab('show');
+});
 $(function() {
     var start = new Start();
     start.start({logged_in:{{ 1 if current_user.is_active() else 0 }}});
