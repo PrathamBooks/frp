@@ -3973,3 +3973,105 @@ header nav ul li .caret {
 	margin-left: 4%;
 }
 }
+/********** Home lower carousel *******/
+
+#geography time {
+    background-image: url("../images/clockIcon.png");
+    background-repeat: no-repeat;
+    clear: both;
+    float: left;
+    font-size: 2.5em;
+    font-style: italic;
+    height: auto;
+    margin: 10px 0 0;
+    padding: 0 0 10px 38px;
+    width: 100%;
+}
+
+#geography h4.title {
+  min-height:60px;
+}
+
+#geography .col-md-4 p {
+  min-height:43px;
+}
+
+#geography .progress {
+  background-color: #faab3b;
+  height: 12px;
+  margin: 0 !important;
+}
+
+#geography .campaignInfo h4 {
+  background-image: url("../images/rupIcon.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+  font-size: 15px;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  margin: -5px 0 0;
+  padding: 0 0 0 11px;
+  width: 100%;
+  color: #333;
+
+}
+
+#geography .campaignInfo h4 span::after {
+  color: #000;
+  content: "% funds raised" !important;
+  font-size: 0.8em;
+  width: 88px;
+}
+
+#geography .campaignInfo h4 span::after {
+  content: "%";
+}
+
+#geography .campaignInfo h4 span {
+  float: right;
+}
+#geography .campaignInfo h5 {
+  margin: 5px 0;
+}
+
+#geography .campaignInfo h5 span.funders::before {
+  content: "";
+}
+
+#geography .campaignInfo h5 span::before {
+  content: "Status: ";
+  font-size: 15px;
+}
+
+#geography .campaignInfo h5 span.funders::after {
+  content: " funders";
+}
+
+#geography .campaignInfo h5 span.funders {
+  float: right;
+}
+
+
+
+#geography .campaignInfo h5 span {
+  font-weight: bold;
+}
+
+#geography .browse-btn {
+  background-color: #ffe538 !important;
+  border-radius: 3px !important;
+  color: #606060 !important;
+  float: inherit !important;
+  font-size: 2.5em !important;
+  letter-spacing: 0 !important;
+  margin: 0 33% !important;
+  padding: 2px 20px !important;
+  text-transform: capitalize !important;
+}
+
+#geography .campaignInfo {
+  margin: 0 15px;
+  position:relative;
+  float:left;
+}

@@ -85,8 +85,16 @@
                 {% endif %}
                 <div class="col-md-4">
                   <img src="/static/uploads/uploads/{{campaign.image}}">
-                  <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                  <h4 class="title"> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
                   <p>{{ campaign.description }}</p>
+                  <div class="campaignInfo">
+                    <time><span>{{ campaign.days_remaining() }} </span> Days Left</time>
+                    <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }}  </span></h4>
+                    <div class="progress progress-warning" style="min-width:0.2em; width: {{ (campaign.percent_funded()) }}%">
+                      <span class="sr-only"> {{ campaign.percent_funded() }} % Complete </span>
+                    </div>
+                    <a href={{ url_for('donate', campaign_id=campaign.id ) }} class="btn browse-btn"> Donate </a>
+                  </div>
                 </div>
                 {% set i = i+1 %}
                 {% if i%3 == 0 %}
