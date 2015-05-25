@@ -3934,8 +3934,8 @@ footer .row {
 	width: 150px;
 }
 .navbar-inverse .navbar-nav > li > a {
-	font-size: 2.3em;
-	padding: 32px 25px 30px 25px;
+  font-size: 3em;
+  padding: 32px 25px 30px 25px;
 }
 header nav ul li .caret {
 	position: absolute;
@@ -3949,8 +3949,8 @@ header nav ul li .caret {
 	width: 12%;
 }
 .navbar-inverse .navbar-nav > li > a {
-	font-size: 2em;
-	padding: 32px 15px 30px 15px;
+  font-size: 2.5em;
+  padding: 32px 15px 30px 15px;
 }
 header nav ul li .caret {
 	position: absolute;
