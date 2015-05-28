@@ -13,8 +13,8 @@ __all__ = ['BeneficiarySignupForm', 'BENEFICIARY_CATEGORY',
 
 
 BENEFICIARY_CATEGORY = [
-    (1, 'I am an Organization/School raising funds for books for a single library'),
-    (2, 'I am an Organization raising funds for books for multiple centers'),
+    (1, 'I am an Organisation/School raising funds for books for a single library'),
+    (2, 'I am an Organisation raising funds for books for multiple centers'),
     (3, 'I am a Reading Champion raising funds for books for my storytelling sessions'),
     (4, 'I am an Individual raising funds for books on behalf of a School/NGO/Others')]
 
@@ -123,7 +123,7 @@ class BeneficiarySignupForm(wtforms.Form):
         label='Name', validators=[wtforms.validators.Optional(),
                                        wtforms.validators.Length(max=160)])
     person1_position = wtforms.TextField(
-        label='Position in the organization',
+        label='Position in the organisation',
         validators=[wtforms.validators.Optional(),
                     wtforms.validators.Length(max=160)])
 
@@ -142,7 +142,7 @@ class BeneficiarySignupForm(wtforms.Form):
         label='Your Name', validators=[wtforms.validators.Optional(),
                                        wtforms.validators.Length(max=160)])
     person2_position = wtforms.TextField(
-        label='Position in the organization',
+        label='Position in the organisation',
         validators=[wtforms.validators.Optional(),
                     wtforms.validators.Length(max=160)])
 
@@ -177,17 +177,17 @@ class BeneficiarySignupForm(wtforms.Form):
         validators=[wtforms.validators.Optional()])
 
     org_work = wtforms.SelectMultipleField(
-        label='Do you/your organization do any work for following (check all that apply)',
+        label='Do you/your organisation do any work for following (check all that apply)',
         validators=[wtforms.validators.Required()],
         coerce=int,
         choices=ORG_WORK_CHOICES)
 
     project_books = wtforms.IntegerField(
-        label='Books / Books as prizes or give-aways / Books for reading sessions',
+        label='Books',
         validators=[wtforms.validators.Optional()])
 
     project_lib_in_classroom = wtforms.IntegerField(
-        label='Library-in-a-classroom',
+        label='Library-in-a-classroom (LIC)',
         validators=[wtforms.validators.Optional()])
 
     project_state = wtforms.SelectField(
@@ -200,7 +200,7 @@ class BeneficiarySignupForm(wtforms.Form):
                     wtforms.validators.Length(max=100)])
 
     project_title = wtforms.TextField(
-        label='Please enter a title for your campaign here. This is the first thing a.donor will see or search while looking for your campaign.',
+        label='Please enter a title for your campaign here. This is the first thing a donor will see or search while looking for your campaign.',
         validators=[wtforms.validators.Optional(),
                     wtforms.validators.Length(max=500)])
 
