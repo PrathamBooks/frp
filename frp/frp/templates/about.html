@@ -4,11 +4,6 @@
   <form role="form">
     <div class="row startCampaign learn" id="internalCampaign">
 
-      <div class="col-md-12">
-        <h2>Learn more about Pratham Books' Donate-a-Book initiative.
-        </h2>
-      </div>
-
       <div class="col-md-12 tabbable">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
@@ -66,10 +61,10 @@
               <div class="row">
                 <div class="col-md-12">
                   <p>
-                  Pratham Books is a non-profit organization that publishes high quality, affordable books for children in 
+                  Pratham Books is a non-profit organisation that publishes high quality, affordable books for children in 
                   multiple Indian languages. We believe that every child has the right to enjoy good books with stories 
                   set in surroundings familiar to them and in languages they speak and learn in. We also believe that to make books accessible 
-                  to every child, the price points have to be very low. Pratham Books publishes story-books as Indian as the children 
+                  to every child, the price points have to be very low. Pratham Books publishes storybooks as Indian as the children 
                   who read them. As a not-for-profit publisher, our dream is to see a country where every child wants to read, is able to 
                   read, and has something good to read.<br/><br/>
 
@@ -96,7 +91,7 @@
                   <h5>Beneficiary FAQs</h5>
                   <div id="accordion">
                     <h4 class="active">1. Am I eligible to raise money for books?</h4>
-                    <div>
+                    <div> 
                       <p>
                       If you are an individual or an organisation that works with children in India, and seek help to spread the joy of 
                       reading to these children, then you are eligible! You do not necessarily have to be a registered charity to build a 
@@ -106,9 +101,9 @@
                     <h4>2. How long does it take to set up? </h4>
                     <div>
                       <p>
-                      You will have to fill our simple 3 step form which will help us identify you and your work. Once the campaign is created, 
-                      it will take us 2 to 3 working days to verify it. Once verified, your campaign goes live, and you can start 
-                      spreading the word about your appeal. 
+                      You will have to fill our simple 3 step beneficiary form which will help us identify you and your work. Once the campaign is created, 
+                      it will take us 2 to 3 working days for us to verify it. Once verified, your campaign goes live, and you can start 
+                      spreading the word about it.
                       </p>
                     </div>
                     <h4>3. How much does it cost? </h4>
@@ -118,51 +113,60 @@
                       the books you require.
                       </p>
                     </div>
+
                     <h4>4. How long does a campaign run? </h4>
-                    <div> 
+                    <div>
                       <p>
-                      The average duration of a Campaign is 25 days.
+                      The average duration of a campaign to be featured on Donate-a-Book is 30 days 
                       </p>
                     </div>
                     <h4>5. What if I don’t achieve my set target? </h4>
                     <div>
                       <p>
-                      Even if you don’t achieve 100% of your target, you are eligible to get books for whatever amount you 
-                      have already raised. For example, if your target amount for Rs.10,000/- but at the end of your campaign period you 
+                      Once the campaign is up, start sharing it with your circle of friends and well wishers requesting them to donate for 
+                      the campaign. You could also send out emailers or run awareness campaigns on your social media to raise 
+                      awareness about your campaign. Pratham Books will also be spreading a word about the running campaigns on its 
+                      social media along with targeted emailers to help you achieve your fund raising goal.
+                      </p>
+                    </div>
+                    <h4>6. What if I don’t achieve my set target? </h4>
+                    <div>
+                      <p>
+                      Even if you don’t achieve 100% of your target, you are eligible to get books of the amount you 
+                      have already raised funds for. For example, if your target amount for Rs.10,000/- but at the end of your campaign period you 
                       could raise only Rs.7500/-, you can still choose books for that amount. Books worth Rs.7500/- would reach you.
                       </p>
                     </div>
 
-                    <h4>6. In how many days will I get the books? </h4>
+                    <h4>7. In how many days will I get the books? </h4>
                     <div>
                       <p>
-                      After your campaign is over, a list of  in-stock books will be sent to you. 
+                      After your campaign is over, a list of in-stock books will be sent to you. 
                       You are required to revert within 10 working  days with your choice and preference of books required. 
-                      As soon as we get your list, the books will reach you within 30 working days.
+                      Once we get your list, the books will reach you within 30 working days.
 
                       </p>
                     </div>
 
-                    <h4>7. What are the other things I should know before I start? </h4>
+                    <h4>8. What are the other things I should know before I start? </h4>
                     <div>
                       <p>
                       Do look at our Terms of Use before you start. If there are still any more questions, 
-                      do drop in an email at <a style=" color:#428bca; text-decoration:underline" href="mailto:donateabook@prathambooks.org">donateabook@prathambooks.org</a>.
+                      do drop in an email at <a href="mailto:donateabook@prathambooks.org" style=" color:#428bca; text-decoration:underline">donateabook@prathambooks.org</a>.
 
                       </p>
                     </div>
-
                   </div>
-
+ 
                   <h5>Donors FAQs</h5>
                   <div id="accordion2">
-                    <h4 class="active">1. Who do I donate to? How  do I choose a beneficiary for my donation?</h4>
+                    <h4 class="active">1. Who do I donate to? How do I choose a beneficiary for my donation?</h4>
                     <div> 
                       <p>
                       We have a number of beneficiaries listed who are running their campaigns from different parts of the country. You 
-                      can choose a beneficiary whom you wish to donate to, on the basis of geography : state or urband vs rural, or their total 
-                      requirement or the scope of their work (Govt organisation vs Individual raisers). You can filter your choices also on the
-                      basis of the language, type or location of the organisations.
+                      can choose a beneficiary whom you wish to donate for, on the basis of geography, or their total 
+                      requirement or the scope of their work (Govt organisation vs Individuals). You can filter your choice on the
+                      basis of the language requirement of books too.
                       You could also lend a hand to organisations which are least funded or whose campaigns are going to end soon. Refer to our
                       <a href="{{url_for('discover', category='featured') }}">Featured</a> or 
                       <a href="{{ url_for('discover', category='ending-soon') }}">Ending soon</a> campaigns for that.
@@ -174,29 +178,38 @@
                       <p>
                       <a href="www.donateabook.org.in" target="_blank">www.donateabook.org.in</a> has a SSL certification 
                       which means all your transactional information is safe with us. For our payment gateway we have partnered 
-                      with a top payment gateway service provider which has the highest level of security in place.
+                      with a top payment gateway service provider with the highest level of security in place.
                       </p>
                     </div>
 
-                    <h4>3. How can I be sure my donation is reaching the correct organisation?</h4>
+                    <h4>3. How can I be sure the organisation that I am donating to is genuine?</h4>
+                    <div>
+                      <p>
+                      Before a campaign is live on the platform, we do a thorough check on the applying beneficiaries to ensure that only 
+                      real and genuine organisations feature on Donate-a-Book. This is to ensure that your money goes to a genuine 
+                      organisation in need of books.
+                      </p>
+                    </div>
+
+                    <h4>4. How can I be sure my donation is reaching the correct organisation?</h4>
                     <div> 
                       <p>
                       As soon as the campaign ends, the process of delivery of books to the beneficiary will begin from our end. 
                       In less than a month, the books should be with the children. You can contact the beneficiary directly for any update. 
-                      Pratham Books has been working in the space of children book publishing for over 10 years and is a not-for-profit with 
-                      huge credibility in the sector.
+                      Pratham Books has been working in the space of children book publishing for over 10 years and is a not-for-profit organisation 
+                      with huge credibility in the sector.
                       </p>
                     </div>
 
-                    <h4>4. Can I choose the books that I want to donate?</h4>
+                    <h4>5. Can I choose the books that I want to donate?</h4>
                     <div>
                       <p>
-                      No. The option of choosing the books lies only with the Beneficiary as they know their children and their needs 
-                      the best. Based on their requirement they choose a mix of books in various languages and levels.
+                      The option of choosing the books lies only with the Beneficiary as they know their children and their needs 
+                      the best. Based on their requirement they will choose a mix of books in various languages and levels.
                       </p>
                     </div>
 
-                    <h4>5. Would the beneficiary know I am donating for them?</h4>
+                    <h4>6. Would the beneficiary know I am donating for them?</h4>
                     <div>
                       <p>
                       Yes, if you want them to. We have an option of donating anonymously which you can tick if you would prefer to 
@@ -204,37 +217,42 @@
                       </p>
                     </div>
 
-                    <h4>6. Will I get anything in return?</h4>
+                    <h4>7. Will I get anything in return?</h4>
                     <div>
                       <p>
-                      The joy of knowing that you have helped more children in India is the biggest reward that your contribution will get you. 
-                      There are no physical rewards if that’s what you meant.
+                      The joy of knowing that you have helped more children in India read, is the biggest reward that your contribution will get you. 
+                      There are no physical rewards if that’s what you mean.
                       </p>
                     </div>
 
-                    <h4>7. When does my money reach the beneficiary?</h4>
+                    <h4>8. When does my money reach the beneficiary?</h4>
                     <div>
                       <p>
-                      The books that are brought from your donation reaches the Beneficiary within 30 days from when the campaign ends.
+                      The books that are brought from your donation reach the beneficiary within 30 days from the day their campaign ends.
                       </p>
                     </div>
 
-                    <h4>8. Can I change my chosen beneficiary or cancel my donation?</h4>
+                    <h4>9. Can I change my chosen beneficiary or cancel my donation?</h4>
                     <div>
                       <p>
-                      Once you have made the donation and paid, no change or cancellation is possible.
+                      Once you have made the donation and paid via your bank a/c or, credit/debit crad, no change or cancellation is possible.
                       </p>
                     </div>
 
-                    <h4>9. Can I make a donation on someone else’s behalf?</h4>
+                    <h4>10. Can I make a donation on someone else’s behalf?</h4>
                     <div>
                       <p>
                       Yes, very much. Donating for a cause is the best gift to give someone. 
-                      You can choose to donate on their behalf by mentioning their name as the Donor while making the payment.
+                      You can choose to donate on their behalf by mentioning their name as the donor while making the payment.
                       </p>
                     </div>
-
-
+                    <h4>11. Can I make a Foreign Currency donation on Donate-a-Book?</h4>
+                    <div>
+                      <p>
+                      Currently we are accepting donations only in the Indian Rupee. The option to make a foreign currency donation is not 
+                      open on Donate-a-Book as of now.
+                      </p>
+                    </div>
                   </div><!--Accordian2-->
                 </div>
               </div>
@@ -318,8 +336,8 @@
                       <p>
                       You represent and warrant that you are of legal age to form a binding contract (or if not, you’ve received your 
                       parent’s or guardian’s permission to use the Services and they have agreed to these Terms on your behalf, 
-                      as we described earlier). If you’re agreeing to these Terms on behalf of an organization or entity, 
-                      you represent and warrant that you are authorized to agree to these Terms on that organization or entity’s 
+                      as we described earlier). If you’re agreeing to these Terms on behalf of an organisation or entity, 
+                      you represent and warrant that you are authorized to agree to these Terms on that organisation or entity’s 
                       behalf and bind them to these Terms. We reserve the right to refuse use of the Service to anyone and to reject, 
                       cancel, interrupt,remove or suspend the Campaign at any time for any reason without liability.
                       </p>
@@ -415,9 +433,9 @@
                       your Account to anyone else without our prior written permission. 
                       </p>
                       <p>
-                      If you’re agreeing to these Terms of Use on behalf of an organization or entity (for example, if you’re an 
+                      If you’re agreeing to these Terms of Use on behalf of an organisation or entity (for example, if you’re an 
                       administrator agreeing to these Terms of Use on behalf of your district), you represent and warrant that you are 
-                      authorized to agree to these Terms of Use on that organization or entity’s behalf and bind them to these Terms of Use.
+                      authorized to agree to these Terms of Use on that organisation or entity’s behalf and bind them to these Terms of Use.
 
                       </p>
                       <li><!--point5-->
@@ -558,7 +576,7 @@
                         <p>
                         We also can’t guarantee the identity of any users with whom you interact in using the Services and are not responsible for which users gain access to the Services. You are responsible for all Content you contribute, in any manner, to the Services, and you represent and warrant you have all rights necessary to do so, in the manner in which you contribute it. You will keep all your registration information accurate and current. You are responsible for all your activity in connection with the Services.
                         The Services may contain links or connections to third party websites or services that are not owned, operated, or controlled by the Company. When you access third party websites or use third party services (including, without limitation, your use of Publisher Software, defined below), you accept that there are risks in doing so, and that the Company is not responsible for such risks. We encourage you to be aware when you leave the Services and to read the terms and conditions and privacy policy of each third party website or service that you visit or utilize.
-                        Your interactions with organizations and/or individuals found on or through the Services, including delivery of services, and any other terms, conditions, warranties, or representations associated with such dealings, are solely between you and such organizations and/or individuals. You should make whatever investigation you feel necessary or appropriate before proceeding with any online or offline transaction with respect to any Campaign. You agree that the Company shall not be responsible or liable for any loss or damage of any sort incurred as the result of any such dealings.
+                        Your interactions with organisations and/or individuals found on or through the Services, including delivery of services, and any other terms, conditions, warranties, or representations associated with such dealings, are solely between you and such organisations and/or individuals. You should make whatever investigation you feel necessary or appropriate before proceeding with any online or offline transaction with respect to any Campaign. You agree that the Company shall not be responsible or liable for any loss or damage of any sort incurred as the result of any such dealings.
                         </p>
                         </li>
                       </ul>
@@ -760,8 +778,8 @@
                       <p>
                       You represent and warrant that you are of legal age to form a binding contract (or if not, you’ve 
                       received your parent’s or guardian’s permission to use the Services and they have agreed to these Terms on your 
-                      behalf, as we described earlier). If you’re agreeing to these Terms on behalf of an organization or entity, you 
-                      represent and warrant that you are authorized to agree to these Terms on that organization or entity’s behalf and 
+                      behalf, as we described earlier). If you’re agreeing to these Terms on behalf of an organisation or entity, you 
+                      represent and warrant that you are authorized to agree to these Terms on that organisation or entity’s behalf and 
                       bind them to these Terms. We reserve the right to refuse use of the Service to anyone and to reject, cancel, interrupt, 
                       remove or suspend the Campaign at any time for any reason without liability.
                       </p>
@@ -778,9 +796,9 @@
                       permission. 
                       </p>
                       <p>
-                      If you’re agreeing to these Terms of Use on behalf of an organization or entity (for example, 
+                      If you’re agreeing to these Terms of Use on behalf of an organisation or entity (for example, 
                       if you’re an administrator agreeing to these Terms of Use on behalf of your district), you represent 
-                      and warrant that you are authorized to agree to these Terms of Use on that organization or entity’s 
+                      and warrant that you are authorized to agree to these Terms of Use on that organisation or entity’s 
                       behalf and bind them to these Terms of Use.
                       </p>
                       </li>
@@ -911,7 +929,7 @@
                 <div class="col-md-12">
                   <p>We always want our policies to be clear and easy to understand — so this Privacy Policy offers a simple 
                   breakdown of what happens with your data on www.donateabook.org.in including which details are public, which 
-                  are private, and which are shared only with Campaign Owners / Beneficiary Organizations whose projects you're 
+                  are private, and which are shared only with Campaign Owners / Beneficiary organisations whose projects you're 
                   supporting.
                   </p>
 
@@ -960,10 +978,10 @@
                   necessary to comply with the law or law enforcement, to prevent fraud or abuse, or to protect 
                   www.donateabook.org.in‘s legal rights.
                   </p>
-                  <h2>What’s Only Shared with Beneficiary Organizations</h2>
+                  <h2>What’s Only Shared with Beneficiary Organisations</h2>
                   <p>
-                  When you back a project, and if you chose to, the Campaign Owners / Beneficiary Organizations will know your account name and the 
-                  amount you have pledged. Campaign Owners / Beneficiary Organizations never receive Donors’ credit card details 
+                  When you back a project, and if you chose to, the Campaign Owners / Beneficiary Organisations will know your account name and the 
+                  amount you have pledged. Campaign Owners / Beneficiary Organisations never receive Donors’ credit card details 
                   or any other payment information.
                   </p>
 

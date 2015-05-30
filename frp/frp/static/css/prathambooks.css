@@ -457,9 +457,10 @@ header #login .dropdown-menu {
   margin: 33px 0 0 !important;
 }
 #homeSearch.input-group {
-  margin: 550px 0 0 325px;
+  margin: 525px 0 0 325px;
   position: absolute;
   z-index: 5;
+  right: 0;
 }
 #homeSearch.input-group input[type="text"] {
   float: left;
@@ -509,11 +510,11 @@ header #login .dropdown-menu {
   clear: both;
   position: relative;
   margin: 0;
-  padding: 0 15px;
+  padding: 0px;
 }
 #contentTabs ul.nav-tabs {
   width: 100%;
-  height: 80px;
+  height: 50px;
   float: left;
   margin: 20px 0 0;
   padding: 1px 0 0;
@@ -555,25 +556,23 @@ header #login .dropdown-menu {
   font-family: "proxima-nova", sans-serif;
   font-size: 2.3em;
   font-weight: 300;
-  height: 80px;
+  height: 31px;
   line-height: 25px;
   margin: 0;
-  text-align: center;
+  text-align: left;
   text-transform: capitalize;
-  width: 302px;
+  width: 500px;
   box-shadow: none;
+  float: left;
 }
 #contentTabs ul.nav-tabs li#pledge span {
   color: #ff7800;
-  float: left;
   font-size: 1.5em;
   font-weight: 400;
   height: auto;
   letter-spacing: 3px;
   text-align: center;
   text-shadow: 1px 1px 2px #000;
-  width: 100%;
-  margin: 11px 0 0;
 }
 #contentTabs h2 {
   font-size: 24px;
@@ -699,27 +698,30 @@ header #login .dropdown-menu {
   height: auto;
   min-height: 222px;
   padding: 10px 0 0 20px;
-  background: #ffd74e;
-  /* Old browsers */
+  width: 31%;
+  margin: 0 1%;
+  box-shadow: 0 0 4px #bbb;
+  background: #f3f3f3;
+  /* Old browsers 
   background: -moz-linear-gradient(top, #fff1bf 0%, #fff1bf 100%);
-  /* FF3.6+ */
+  /* FF3.6+ 
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff1bf), color-stop(100%, #fff1bf));
-  /* Chrome,Safari4+ */
+  /* Chrome,Safari4+ 
   background: -webkit-linear-gradient(top, #fff1bf 0%, #fff1bf 100%);
-  /* Chrome10+,Safari5.1+ */
+  /* Chrome10+,Safari5.1+
   background: -o-linear-gradient(top, #fff1bf 0%, #fff1bf 100%);
-  /* Opera 11.10+ */
+  /* Opera 11.10+ 
   background: -ms-linear-gradient(top, #fff1bf 0%, #fff1bf 100%);
-  /* IE10+ */
+  /* IE10+ 
   background: linear-gradient(to bottom, #fff1bf 0%, #fff1bf 100%);
-  /* W3C */
+  /* W3C 
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd74e', endColorstr='#fff1bf', GradientType=0);
   /* IE6-9 */
 }
 .tab-content .col-md-4 img {
   float: left;
-  width: 360px;
-  height: 240px;
+  width: 100%;
+  height: 214px;
   background-color: rgba(229, 229, 229, 0.8);
 }
 .tab-content .col-md-4 h4 {
@@ -735,6 +737,7 @@ header #login .dropdown-menu {
   width: 92%;
   font-size: 1.5em;
   margin: 10px 0 0 7px;
+  padding:0 2%;
 }
 .tab-content .col-md-4 h2 span {
   float: left;
@@ -761,7 +764,7 @@ header #login .dropdown-menu {
 .tab-content .col-md-12 {
   height: auto;
   margin: 0 !important;
-  padding: 14px 15px 0 18px;
+  padding: 0px 15px 10px 18px;
   font-size: 24px;
   background-color: #ffc80b;
   background: #ffc600;
@@ -817,12 +820,14 @@ header #login .dropdown-menu {
 }
 #carousel-example-generic.carousel .carousel-inner {
   background-color: #fff1bf;
+  width: 100%;
+  padding-left: 1%
 }
 #geography .carousel-inner {
   padding-bottom: 25px;
 }
 .tab-content .col-md-4 {
-  padding: 10px 0 0 15px;
+  padding:0px;
 }
 .btn.browse-btn {
   background-image: none !important;
@@ -3333,7 +3338,8 @@ a.std {
 label.checkboxLabel {
 	font-weight: normal;
 	width: 90%;
-	vertical-align: middle;
+	vertical-align: top;
+  margin-top: 2px;
 }
 #campaigns .col-md-3 .browse-btn {
   background-color: #ffe538!important;
@@ -3972,4 +3978,112 @@ header nav ul li .caret {
 	margin-top: 7px;
 	margin-left: 4%;
 }
+}
+/********** Home lower carousel *******/
+
+#geography time {
+    background-image: url("../images/clockIcon.png");
+    background-repeat: no-repeat;
+    clear: both;
+    float: left;
+    font-size: 2.5em;
+    font-style: italic;
+    height: auto;
+    margin: 10px 0 0;
+    padding: 0 0 10px 38px;
+    width: 100%;
+}
+
+#geography h4.title {
+  min-height:60px;
+  font-family: "proxima-nova", sans-serif;
+  width: 96%;
+  padding: 0 2%;
+}
+#geography h4 a {
+	color:#444;
+}
+
+#geography .col-md-4 p {
+  min-height:43px;
+}
+
+#geography .progress {
+  background-color: #faab3b;
+  height: 12px;
+  margin: 0 !important;
+}
+
+#geography .campaignInfo h4 {
+  background-image: url("../images/rupIcon.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+  font-size: 15px;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  margin: -5px 0 0;
+  padding: 0 0 0 11px;
+  width: 100%;
+  color: #333;
+
+}
+
+#geography .campaignInfo h4 span::after {
+  color: #000;
+  content: "% funds raised" !important;
+  font-size: 0.8em;
+  width: 88px;
+}
+
+#geography .campaignInfo h4 span::after {
+  content: "%";
+}
+
+#geography .campaignInfo h4 span {
+  float: right;
+}
+#geography .campaignInfo h5 {
+  margin: 5px 0;
+}
+
+#geography .campaignInfo h5 span.funders::before {
+  content: "";
+}
+
+#geography .campaignInfo h5 span::before {
+  content: "Status: ";
+  font-size: 15px;
+}
+
+#geography .campaignInfo h5 span.funders::after {
+  content: " funders";
+}
+
+#geography .campaignInfo h5 span.funders {
+  float: right;
+}
+
+
+
+#geography .campaignInfo h5 span {
+  font-weight: bold;
+}
+
+#geography .browse-btn {
+  background-color: #ffe538 !important;
+  color: #606060 !important;
+  float: inherit !important;
+  font-size: 2.5em !important;
+  letter-spacing: 0 !important;
+  margin: 10% 33% !important;
+  padding: 2px 20px !important;
+  text-transform: capitalize !important;
+}
+
+#geography .campaignInfo {
+  margin: 10px 15px 0;
+  position:relative;
+  float:left;
+  border-top: 1px solid #ddd;
 }

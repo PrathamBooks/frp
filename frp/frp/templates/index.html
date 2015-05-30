@@ -85,8 +85,16 @@
                 {% endif %}
                 <div class="col-md-4">
                   <img src="/static/uploads/uploads/{{campaign.image}}">
-                  <h4> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                  <h4 class="title"> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
                   <p>{{ campaign.description }}</p>
+                  <div class="campaignInfo">
+                    <time><span>{{ campaign.days_remaining() }} </span> Days Left</time>
+                    <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }}  </span></h4>
+                    <div class="progress progress-warning" style="min-width:0.2em; width: {{ (campaign.percent_funded()) }}%">
+                      <span class="sr-only"> {{ campaign.percent_funded() }} % Complete </span>
+                    </div>
+                    <a href={{ url_for('donate', campaign_id=campaign.id ) }} class="btn browse-btn"> Donate </a>
+                  </div>
                 </div>
                 {% set i = i+1 %}
                 {% if i%3 == 0 %}
@@ -141,9 +149,9 @@
 </div>
 
 <div class="row startNow">
-  <a class="btn browse-btn" href={{url_for('discover')}}> Start Now </a>
+  <a class="btn browse-btn" href={{url_for('discover')}}> Donate Now </a>
   <!--- <div class="decriptionTxt"><span>&#8377.291.7M </span>of social investment | <span> 99.78% </span> Repayment Rate* |<span> 387</span> different occupations</div> -->
-  <div class="decriptionTxt"> Every rupee donated on this platform goes towards ensuring &#8216a book in every child's hand&#8217.</div>
+  <div class="decriptionTxt"> Every rupee donated on this platform goes towards distributing books to children.</div>
 </div>
 
 <div class="row bottomBlock" id="">
@@ -151,12 +159,12 @@
   <div class="col-md-4">
     <h3> About Pratham Books </h3>
     <p>
-    <strong> Pratham Books </strong> is a non-profit organization that publishes high quality,
+    <strong> Pratham Books </strong> is a non-profit organisation that publishes high quality,
     affordable books for children in multiple Indian languages. We believe 
     that every child has the right to enjoy good books with stories set in 
     surroundings familiar to them and in languages they speak and learn in. 
     We also believe that to make books accessible to every child, the price 
-    points have to be very low. Pratham Books publishes story-books as 
+    points have to be very low. Pratham Books publishes storybooks as 
     Indian as the children who read them. As a not-for-profit publisher, our 
     dream is to see a country where every child wants to read, is able to 
     read, and has something good to read.<a href="http://www.prathambooks.org" target="_blank"> (more) </a>

@@ -18,14 +18,14 @@
                   <!-- Step 1 starts here-->
                   <div class="jumbotron row" tabindex="1">
                     <h2>Donate: Help India’s children read!</h2>
-                    <p>You are just a few steps away from gifting children the experience of reading.</p>
+                    <p>You are just a few steps away from gifting children the joyful experience of reading.</p>
                   </div><!-- Jumbo-->
 
                   <div class="well">
                     <h3>You are donating books to Campaign: 
                       <a href={{ url_for('campaign', id=campaign.id) }}>{{campaign.title}}</a>
                     </h3>
-                    <h4> This campaign needs to raise &#8377 {{campaign.needs()}} more to meet its target. </h4>
+                    <h4> This campaign needs to raise Rs. {{campaign.needs()}} more to meet its target. </h4>
                     <div class="row form-group" >
                       <label for="amount_choice">Donation Amount<strong>*</strong></label>
                       {{ render_bullets(form.amount_choice) }}
@@ -34,6 +34,7 @@
 
                     <div class="form-group row">
                       {{ render_text_field(form.customize_amount) }}
+                      <p class="help-block">We only accept donations in INR </p>
                     </div>
 
                   </div><!--well-->
@@ -150,7 +151,7 @@
                         </select>
                       </div>
                       <div class="col-xs-9">
-                        <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Pan Number" value="{{form.pan_number.data|default('',True)}}" required />
+                        <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Enter details here" value="{{form.pan_number.data|default('',True)}}" required />
                         <div class="alert alert-warning hide">Enter Pan/DL/Passport Number</div>
                       </div>
                     </div>
@@ -160,8 +161,8 @@
                     <div class="form-group row">
                       <div class="col-xs-12">
                         <h3>Would you like to be an anonymous donor?</h3>
-                        <p class="help-block">We respect your privacy. Should you choose to be an anonymous donor, your name will not be shared with the beneficiary organization. 
-                        If you choose No in the option below only your name and the donation amount will be shared with the beneficiary organization
+                        <p class="help-block">We respect your privacy. Should you choose to be an anonymous donor, your name will not be shared with the beneficiary organisation. 
+                        If you choose No in the option below only your name and the donation amount will be shared with the beneficiary organisation
                         {{ render_bullets(form.ann_choice) }}
                       </div>
                     </div>
