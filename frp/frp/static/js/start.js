@@ -132,6 +132,4 @@ var Start = function() {
       }
     });
   };
-  this.showErrorModal = function() {
-  };
 };
