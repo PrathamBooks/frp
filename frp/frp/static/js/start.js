@@ -67,8 +67,9 @@ var Start = function() {
       }
     });
 
-    $('#bookAmount').html('Rs. ' + count * 38);
-    $("input[name='fundingGoal']").attr('value', (count * 38));
+    var COST_PER_BOOK = 36.75;
+    $('#bookAmount').html('Rs. ' + count * COST_PER_BOOK);
+    $("input[name='fundingGoal']").attr('value', (count * COST_PER_BOOK));
     $('#noOfBooks').html(count);
     $('#booksLeft').html(count);
   };
@@ -131,7 +132,5 @@ var Start = function() {
         $('#whatsleft').hide();
       }
     });
-  };
-  this.showErrorModal = function() {
   };
 };

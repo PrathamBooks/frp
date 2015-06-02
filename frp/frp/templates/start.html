@@ -1,5 +1,5 @@
 {% extends "partials/base.html" %}
-{% from "_formhelpers.html" import render_field, render_bullets, render_checkbox, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea%}
+{% from "_formhelpers.html" import render_field, render_bullets, render_checkbox, render_field_row, render_text_field, render_text_area, render_narrow_field, render_select, render_slider, render_heading_textfield, render_heading_textarea, render_url_field%}
 {% block content %}
 <div id="wrapper">
   <div class="container internal">
@@ -357,7 +357,7 @@
                             {{form.email.label}} {% if form.email.flags.required %} <strong>*</strong> {% endif %}
                           </div>
                           <div class="col-xs-8">
-                            <input type="text" class="form-control" name="{{form.email.name}}" value="{{form.email.data|default('',True)}}" required /> 
+                            <input type="text" class="form-control" pattern="^.+@[^.].*\.[a-z]{2,10}$" name="{{form.email.name}}" value="{{form.email.data|default('',True)}}" required /> 
                             <p class="help-block">Please add the organisation's email ID. It should not be individual specific.</p>
                             <p class="help-block">In case of an individual, a personal email id can be given.</p>
                             <div class="alert alert-warning hide">Invalid Email ID.</div>
@@ -372,16 +372,18 @@
                         </div>
 
                         <div class="form-group row">
-                          {{ render_text_field(form.website) }}
+                          {{ render_url_field(form.website) }}
                           <div class="alert alert-warning hide">Invalid Website.</div>
                         </div>
 
                         <div class="form-group row">
-                          {{ render_text_field(form.facebook) }}
+                          {{ render_url_field(form.facebook) }}
+                          <div class="alert alert-warning hide">Invalid Facebook link.</div>
                         </div>
 
                         <div class="form-group row">
-                          {{ render_text_field(form.blog) }}
+                          {{ render_url_field(form.blog) }}
+                          <div class="alert alert-warning hide">Invalid blog link.</div>
                         </div>
                       </div><!--well-->
 
@@ -474,15 +476,6 @@
 
                         <div class="row form-group">
                           <div class="col-xs-4">
-                            Average value of a book
-                          </div>
-                          <div class="col-xs-8">
-                            <span id="averageVal">Rs. 35 + 8% Shipping charges</span>
-                          </div>
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col-xs-4">
                             Fund raising amount
                           </div>
                           <div class="col-xs-8">
@@ -493,8 +486,10 @@
 
                         <p>
                         <strong>PLEASE NOTE:</strong>
-                        If the above amount is not what you had planned for the fund raising campaign, please change your requirement of books 
-                        in the previous question. 
+                        The fundraising amount includes the cost of books and the shipping charges. 
+                        Pratham Books is committed to send you the maximum number of books. It however 
+                        reserves the right to adjust the number of books being sent to you on the basis 
+                        of the books chosen by you, the inventory levels and the final amount raised.
                         </p>
                       </div><!--well-->
 
@@ -822,7 +817,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <h4>You left some fields unfilled in this section. These will be highlighted by orange boxes around them 
+          <h4>You have errors in some fields in this section. These will be highlighted by orange boxes around them 
             or with orange coloured messages under them. Please fill them before going to the next section.</h4>
         </div>
         <button type="button" class="btn browse-btn pull-right" data-dismiss="modal"> OK </button>
