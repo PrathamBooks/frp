@@ -33,7 +33,7 @@
 
           <div class="campaignInfo">
             <h2> {{ campaign.title }} </h2>
-            <p> {{ campaign.who }} </p>
+            <p> {{ campaign.description }} </p>
             <ul>
               <li><span>Impact:</span> {{ campaign.org.info.total_impact_on_children }} children</li>
               <li><span>Languages:</span> {{ campaign.languages }} </li>
@@ -96,9 +96,9 @@
         {{ campaign.impact }}
         </p>
 
-        <h3> How we will utilize these funds.</h3>
+        <h3> How we will utilize these funds</h3>
         <p>
-        {{ campaign.fund_utilization }}
+        {{ campaign.utilization }}
         </p>
 
       </div>
