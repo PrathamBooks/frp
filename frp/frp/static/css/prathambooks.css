@@ -1427,10 +1427,17 @@ i.icon-large.icon-th {
   background-size: 24px;
 }
 #campaigns .col-md-3 .campaignInfo p {
-  min-height: 40px;
+  height: 178px;
+  min-height: 178px;
+  overflow: auto;
 }
 #campaigns .campaignInfo h6 {
   margin: 0px 0 10px !important;
+}
+.internal .col-md-9 .campaignInfo > ul {
+  height: 120px;
+  min-height: 118px;
+  overflow: auto;
 }
 #internalCampaign.log .col-md-2 h1 {
   font-family: "ligurino-condensed", sans-serif !important;
@@ -1710,7 +1717,7 @@ span.featured-campaign {
 }
 
 #internalCampaign #campaigns .col-md-3 h2 { 
-  min-height: 57px; 
+  min-height: 60px; 
 } 
 
 
