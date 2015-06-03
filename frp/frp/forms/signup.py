@@ -212,17 +212,17 @@ class BeneficiarySignupForm(wtforms.Form):
     project_who_are_you = wtforms.TextAreaField(
             label='Who are you?',
             validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=1000)])
+                    wtforms.validators.Length(max=2000)])
 
     project_impact = wtforms.TextAreaField(
             label='What work do you do and how does it impact society ?',
             validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=1000)])
+                    wtforms.validators.Length(max=2500)])
 
     fund_utilization = wtforms.TextAreaField(
             label='How will the funds be utilized?',
             validators=[wtforms.validators.Required(),
-                    wtforms.validators.Length(max=1000)])
+                    wtforms.validators.Length(max=2000)])
 
     def set_data(self, org):
        self.category.data = org.info.category
