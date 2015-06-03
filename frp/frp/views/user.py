@@ -499,7 +499,7 @@ def download_donations():
 def download_campaigns():
     campaigns = Campaign.query.all()
     campaigns_data = map(lambda x:x.campaign_details(),campaigns)
-    header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Fund Raised','State']
+    header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Funds Raised','Status']
     campaigns_data.insert(0,header)
     return excel.make_response_from_array(campaigns_data, "csv")
 
