@@ -388,7 +388,14 @@ class Start(views.MethodView):
     @login_required
     def post(self):
         form = BeneficiarySignupForm(request.form)
+        if form.website.data:
+            form.website.data = form.website.data.strip() 
+        if form.facebook.data:
+            form.facebook.data = form.facebook.data.strip() 
+        if form.blog.data:
+            form.blog.data = form.blog.data.strip() 
         if form.validate():
+            print "validated form"
             image = request.files['imageUpload']
             filename = secure_filename(image.filename)
             if filename and allowed_file(filename):
