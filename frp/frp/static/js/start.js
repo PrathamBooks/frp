@@ -109,9 +109,9 @@ var Start = function() {
       }
       $modal.find("#category").text($('input[name="category"][checked="checked"]').parent().text());
       $modal.find("#status").text($('input[name="organization_status"][checked="checked"]').parent().text());
-      if ($('select[name="project_city"]').val() && ('input[name="project_state"]').val()) {
-        $modal.find("#location").text($('select[name="project_city"]').val() + ', ' + 
-                                      $('input[name="project_state"]').val());
+      if ($('input[name="project_city"]').val() && $('select[name="project_state"]').val()) {
+        $modal.find("#location").text($('input[name="project_city"]').val() + ', ' + 
+                                      $('select[name="project_state"]').val());
       }
       $modal.find("#website").text($('input[name="website"]').val());
       $modal.find("#facebook").text($('input[name="facebook"]').val());

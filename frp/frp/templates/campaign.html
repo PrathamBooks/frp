@@ -33,19 +33,19 @@
 
           <div class="campaignInfo">
             <h2> {{ campaign.title }} </h2>
-            <p> {{ campaign.who }} </p>
+            <p> {{ campaign.description }} </p>
             <ul>
-              <li><span>Impact:</span> {{ campaign.org.info.total_impact_on_children }} children</li>
+              <li><span>Impact:</span> {{ campaign.total_impact_on_children }} children</li>
               <li><span>Languages:</span> {{ campaign.languages }} </li>
               <li><span>Beneficiary Type:</span> {{ statusString(campaign.org.info.status)[1] }} </li>
               <li><span>Location:</span> {{ campaign.city }}, {{ campaign.state }} </li>
-              {% if campaign.org.website %}
+              {% if campaign.org.info.website %}
               <li><span>Website:</span> <a href={{ campaign.org.info.website }}> {{ campaign.org.info.website }} </a> </li>
               {% endif %}
-              {% if campaign.org.facebook %}
+              {% if campaign.org.info.facebook %}
               <li><span>Facebook:</span> <a href={{ campaign.org.info.facebook }}> {{ campaign.org.info.facebook }} </a></li>
               {% endif %}
-              {% if campaign.org.blog %}
+              {% if campaign.org.info.blog %}
               <li><span>Blog:</span><a href={{campaign.org.info.blog}}> {{ campaign.org.info.blog }} </a> </li>
               {% endif %}
             </ul>
@@ -96,9 +96,9 @@
         {{ campaign.impact }}
         </p>
 
-        <h3> How we will utilize these funds.</h3>
+        <h3> How we will utilize these funds</h3>
         <p>
-        {{ campaign.fund_utilization }}
+        {{ campaign.utilization }}
         </p>
 
       </div>

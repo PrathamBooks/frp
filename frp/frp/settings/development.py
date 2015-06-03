@@ -27,7 +27,7 @@ SECRET_KEY = "Development key"
 SITE_NAME="Pratham Books Donate-A-Book"
 
 UPLOAD_DIRECTORY = "/home/alokk/frp/frp/frp/static/uploads"
-ALLOWED_EXTENSIONS = set("jpg jpeg png gif".split())
+ALLOWED_EXTENSIONS = set("jpg jpeg png gif JPG JPEG PNG GIF".split())
 
 # Email configuration
 MAIL_SERVER = 'localhost'
