@@ -578,7 +578,7 @@ def beneficiary_dashboard():
 @app.context_processor
 def convertStatusTypeToString():
     def statusString(status):
-        return ORG_STATUS_CHOICES[status]
+        return ORG_STATUS_CHOICES[status - 1]
     return dict(statusString=statusString)
 
 @app.route("/campaign/<id>", methods=['GET'])
