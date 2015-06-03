@@ -4005,7 +4005,9 @@ header nav ul li .caret {
 }
 
 #geography .col-md-4 p {
-  min-height:43px;
+  min-height: 234px;
+  height: 234px;
+  overflow: auto;
 }
 
 #geography .progress {
