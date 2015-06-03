@@ -35,7 +35,7 @@
             <h2> {{ campaign.title }} </h2>
             <p> {{ campaign.description }} </p>
             <ul>
-              <li><span>Impact:</span> {{ campaign.org.info.total_impact_on_children }} children</li>
+              <li><span>Impact:</span> {{ campaign.total_impact_on_children }} children</li>
               <li><span>Languages:</span> {{ campaign.languages }} </li>
               <li><span>Beneficiary Type:</span> {{ statusString(campaign.org.info.status)[1] }} </li>
               <li><span>Location:</span> {{ campaign.city }}, {{ campaign.state }} </li>
