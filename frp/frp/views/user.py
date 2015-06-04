@@ -254,7 +254,7 @@ app.add_url_rule('/profile/edit',
 def about():
     return render_template('about.html')
 
-@app.route("/discover", methods=['GET'])
+@app.route("/donate", methods=['GET'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data('Approved','Closed')
     filter_form = FilterForm(request.form)
@@ -411,7 +411,7 @@ class Start(views.MethodView):
         print form.errors
         return render_template('start.html', form=form)
 
-app.add_url_rule('/start',
+app.add_url_rule('/setup',
                  view_func=Start.as_view('start'))
 
 

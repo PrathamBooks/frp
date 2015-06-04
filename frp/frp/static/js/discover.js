@@ -58,7 +58,7 @@ var DiscoverPage = function(args) {
       if (campaign.featured) {
         $('<span/>').addClass('featured-campaign').html('Featured').appendTo($div_md_3);
       }
-      var $title = $('<h2/>').html(campaign.title).appendTo($div_md_3);
+      var $title = $('<h2/>').html('<strong>' + campaign.title + '</strong>').appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
       var $description = $('<p/>').html(campaign.description).appendTo($campaignInfo);
       var $ul = $('<ul/>').appendTo($campaignInfo);
