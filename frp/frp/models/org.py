@@ -210,7 +210,7 @@ class Campaign(BaseMixin, db.Model):
                 "description" : self.description,
                 "impact" : self.total_impact_on_children,
                 "languages" : self.languages,
-                "type" : ORG_STATUS_CHOICES[self.org.info.status][1],
+                "type" : ORG_STATUS_CHOICES[self.org.info.status - 1][1],
                 "state" : self.state,
                 "city" : self.city,
                 "who"  : self.who,

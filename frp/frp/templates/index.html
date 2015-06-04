@@ -81,7 +81,7 @@
                 {% endif %}
                 <div class="col-md-4">
                   <img src="/static/uploads/uploads/{{campaign.image}}">
-                  <h4 class="title"> <a href={{ url_for('campaign',id=campaign.id) }}>{{  campaign.title }}</a></h4>
+                  <h4 class="title"> <strong> <a href={{ url_for('campaign',id=campaign.id) }}>{{ campaign.title }}</a> </strong></h4>
                   <p>{{ campaign.description }}</p>
                   <div class="campaignInfo">
                     <time><span>{{ campaign.days_remaining() }} </span> Days Left</time>

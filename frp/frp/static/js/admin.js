@@ -106,7 +106,7 @@ var AdminPage = function(campaign_data)
   {
     var $row = $('<tr/>').attr('id',"row"+data.id)
     var $title = $('<td/>').html("<a href=/campaign/"+data.id+ ">"+data.title+"</a>").addClass('title').appendTo($row);
-    var $who = $('<td/>').html(data.who).appendTo($row);
+    var $type = $('<td/>').html(data.type).appendTo($row);
     var $city= $('<td/>').html(data.city).appendTo($row);
     var $target = $('<td/>').html(data.target).appendTo($row);
     var $start_date = $('<td/>').html(data.start_date).appendTo($row);
