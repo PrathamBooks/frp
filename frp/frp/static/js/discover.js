@@ -91,7 +91,7 @@ var DiscoverPage = function(args) {
         html(percent_funded + '% Complete').
         appendTo($target);
       var $days = $('<h5/>').
-        append($('<span/>').addClass('days').html('Active')).
+        append($('<span/>').addClass('days').html(campaign.status)).
         append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
       var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).

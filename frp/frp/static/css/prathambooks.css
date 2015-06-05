@@ -953,7 +953,7 @@ header #login .dropdown-menu {
   float: right;
 }
 .internal .campaignInfo h5 span.funders:after {
-  content: " funders";
+  content: " donors";
 }
 .internal .campaignInfo h6 {
   font-size: 14px;
@@ -1780,7 +1780,7 @@ span.featured-campaign {
   content: "";
 }
 #internalCampaign.discover .campaignInfo h5 span.funders:after {
-  content: " funders";
+  content: " donors";
 }
 #internalCampaign.discover .campaignInfo .progress {
   background-color: #faab3b;
