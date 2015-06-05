@@ -112,7 +112,7 @@ the FRP app to run as well as config necessary.
 > sudo su postgres
 > createuser -d -s frp
 > exit
-> createdb frp
+> createdb -E 'UTF8' -T template0 --lc-collate=en_IN --lc-ctype=en_IN frp
 > edit /etc/postgresql/9.3/main/pg_hba.conf to trust local connections
 > service postgresql restart
 > copy frp to /etc/nginx/sites-enabled/frp

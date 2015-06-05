@@ -47,6 +47,20 @@ var DiscoverPage = function(args) {
           window.location.href = '/campaign/' + campaign.id;
         }
       }(campaign));
+      $div_md_3.popover({
+        title: campaign.title,
+        container: 'body',
+        placement: 'top',
+        content: campaign.description
+      });
+      $div_md_3.hover(
+        function() {
+          $(this).popover('show'); 
+        },
+        function() {
+          $(this).popover('hide'); 
+        }
+      );
       var $h1 = $('<h1/>').appendTo($div_md_3);
       var $img = $('<img/>').
         attr('src', '/static/uploads/uploads/' + campaign.image).
@@ -60,7 +74,7 @@ var DiscoverPage = function(args) {
       }
       var $title = $('<h2/>').html('<strong>' + campaign.title + '</strong>').appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
-      var $description = $('<p/>').html(campaign.description).appendTo($campaignInfo);
+      // var $description = $('<p/>').html(campaign.description).appendTo($campaignInfo);
       var $ul = $('<ul/>').appendTo($campaignInfo);
       var $impact = $('<li/>').html("Children Impacted: " + campaign.impact).appendTo($ul);
       var $langs = $('<li/>').html("Languages: " + campaign.languages).appendTo($ul);

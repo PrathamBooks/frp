@@ -4096,3 +4096,178 @@ header nav ul li .caret {
   float:left;
   border-top: 1px solid #ddd;
 }
+
+/***************** Campaign page **************************/
+#internalCampaign.singleCamp .campaignTop {
+  border: 1px solid #000;
+  background-color: #fdfcf7;
+}
+#internalCampaign.singleCamp .campaignTop .col-md-8 {
+  padding: 0;
+}
+#internalCampaign.singleCamp .campaignTop .col-md-4 {
+  padding: 0;
+}
+#internalCampaign.singleCamp .campaignTop .col-md-4 h1 {
+  background-color: transparent;
+  color: #000;
+  font-size: 3.5em;
+  height: auto;
+  line-height: 102px;
+  text-align: left;
+}
+#internalCampaign.singleCamp .col-md-12 .campaignInfo {
+  padding: 2px 4em 8px 5em;
+  font-size: 1.5em;
+}
+#internalCampaign.singleCamp h2.title {
+  clear: both;
+  float: initial;
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0 0 16px !important;
+  padding-left: 0;
+}
+#internalCampaign.singleCamp .col-md-12 h3.sub-title {
+  font-family: "proxima-nova", sans-serif !important;
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: normal;
+  margin: 0 0 15px;
+}
+#internalCampaign.singleCamp .campaignTop .progress-bar {
+  background-color: #faab3b;
+}
+#internalCampaign.singleCamp .campaignInfo .progress {
+  background-color: #d0cece;
+  height: 23px;
+  margin: 0 !important;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5 span::before {
+  content: "Status: ";
+  font-size: 13px;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5 span {
+  float: left;
+  font-size: 13px;
+  font-weight: normal;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5 time span::before {
+  content: none;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5 time span {
+  padding-right: 6px;
+}
+#internalCampaign.singleCamp .campaignTop time {
+  background-size: 13% auto;
+  clear: none;
+  float: right;
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 0;
+  padding: 0 0 10px 20px;
+  width: 36%;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5.amt {
+  background-color: #f68b1f;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 1.5em;
+  width: 100%;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5.amt:hover {
+  background-color: #ff7800;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5 a:hover {
+  text-decoration: none;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo h3 {
+  margin-bottom: 0;
+  margin-top: 0px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+#internalCampaign.singleCamp .campaignTop .campaignInfo div {
+  margin-bottom: 10px;
+  ;
+}
+#internalCampaign.singleCamp .campaignTop img {
+  max-height: 470px;
+  width: 100%;
+}
+.singleCamp .col-lg-9 .campaignInfo ul li {
+  float: left;
+  min-width: 50%;
+  padding: 5px 0;
+}
+.singleCamp .col-lg-9 .campaignInfo {
+  min-height: auto !important;
+  padding: 33px 0 !important;
+}
+.singleCamp .col-lg-9 {
+  padding: 0;
+}
+.singleCamp .col-lg-9 i {
+  background-image: url("../images/campaignInfo-icons.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 24px;
+  width: 20px;
+}
+i.impact {
+  background-position: 3px 9px;
+}
+i.languages {
+  background-position: -65px 9px;
+}
+i.beneficiary {
+  background-position: -21px 10px;
+}
+i.location {
+  background-position: -42px 10px;
+}
+#internalCampaign.singleCamp .col-md-9.campaignBottom .col-md-12 {
+  background: transparent none repeat scroll 0 0;
+  font-size: 1em;
+  padding: 15px 0;
+  width: 100% !important;
+}
+#internalCampaign.singleCamp .col-md-9.campaignBottom .col-md-12 p {
+  font-family: "proxima-nova", sans-serif !important;
+  font-size: 1.5em;
+  line-height: 23px;
+  float: none;
+}
+.campaignBottom .nav-tabs {
+  border-bottom: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
+}
+.campaignBottom .nav-tabs > li.active > a, .campaignBottom .nav-tabs > li.active > a:hover, .campaignBottom .nav-tabs > li.active > a:focus {
+  border: none;
+  border-bottom: 5px solid #f68b1f;
+  background: transparent;
+  outline: none;
+}
+.campaignBottom .nav-tabs > li {
+  margin-right: 20px;
+}
+.campaignBottom .nav > li > a:hover, .campaignBottom .nav > li > a:focus {
+  background-color: transparent;
+  border: none;
+}
+.campaignBottom .nav-tabs > li a {
+  border: none;
+  color: #555;
+  border-bottom: 5px solid #555;
+  font-family: "ligurino-condensed", sans-serif !important;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+}
+.campaignTop span.tw {
+  background-image: url("../images/tw.png");
+  cursor: pointer;
+}
+.campaignTop span.fb {
+  background-image: url("../images/fb.png");
+  cursor: pointer;
+}
