@@ -199,7 +199,7 @@ class Campaign(BaseMixin, db.Model):
             return self.created_at.date() + timedelta(days=30)
 
     def target(self):
-        return 50 * (self.nbooks + 125 * self.nlic)
+        return 36.75 * (self.nbooks + 125 * self.nlic)
 
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
@@ -231,6 +231,8 @@ class Campaign(BaseMixin, db.Model):
                 self.days_remaining(),
                 self.num_donors(),
                 self.target(),
+                self.nbooks,
+                self.nlic,
                 self.total_donations(),
                 self.status]
 
