@@ -199,7 +199,7 @@ class Campaign(BaseMixin, db.Model):
             return self.created_at.date() + timedelta(days=30)
 
     def target(self):
-        return 36.75 * (self.nbooks + 125 * self.nlic)
+        return int(round(36.75 * (self.nbooks + 125 * self.nlic)))
 
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
@@ -254,6 +254,9 @@ class Campaign(BaseMixin, db.Model):
 
     def percent_funded(self):
         return int(round((self.total_donations() * 100) /self.target()))
+
+    def books_donated(self):
+        return int(round(self.total_donations()/36.75))
 
     def needs(self):
         needs = self.target() - self.total_donations() 
