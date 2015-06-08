@@ -17,10 +17,33 @@ function isClickedTabEarlier(active_tab, clicked_tab) {
   return false;
 }
 
-function highlightInvalidFields($tab) {
+function tooManyWordsInTextField($field) {
+  var max = parseInt($field.attr('maxwords'))
+  if (max && ($field.val().split(/\s+/).length > max)) {
+    return true;
+  }
+  return false;
+}
+
+function hasInvalidFields($tab) {
+  if ($tab.find(':invalid').length > 0) {
+    return true;
+  }
+  var found_invalid = false;
+  $tab.find('.form-control').each(function() {
+    if (tooManyWordsInTextField($(this))) {
+      found_invalid = true;
+      return false;
+    }
+  });
+  return found_invalid;
+}
+
+function highlightInvalidFieldsAndFocusOnFirst($tab) {
   if ($('#error-modal').length > 0) {
     $('#error-modal').modal('show');
   }
+  var invalidFields = [];
   $tab.find(':valid').css('border-color','#CCCCCC');
   $tab.find(':valid').each(function(){
     if($(this).is(":radio") || $(this).is(":checkbox") || $(this).is(":file")){
@@ -32,6 +55,7 @@ function highlightInvalidFields($tab) {
   });
   $tab.find(':invalid').css('border-color','#ffc600');
   $tab.find(':invalid').each(function(){
+    invalidFields = invalidFields.concat($(this));
     if($(this).is(":radio") || $(this).is(":checkbox") || $(this).is(":file")){
       $(this).parents('.form-group').find('.alert').removeClass('hide');
     }
@@ -39,6 +63,25 @@ function highlightInvalidFields($tab) {
       $(this).parent().find('.alert').removeClass('hide');
     }
   });
+  $tab.find('.form-control').each(function() {
+    if (tooManyWordsInTextField($(this))) {
+      invalidFields = invalidFields.concat($(this));
+      $(this).css('border-color','#ffc600');
+      $(this).parents('.form-group').find('.alert.alert-maxwords').removeClass('hide');
+    }
+    else {
+      $(this).parents('.form-group').find('.alert.alert-maxwords').addClass('hide');
+    }
+  });
+  if (invalidFields.length > 0) {
+    var firstInvalidField = invalidFields[0];
+    for (var i = 1; i < invalidFields.length; i++) {
+      if (invalidFields[i].position().top < firstInvalidField.position().top) {
+        firstInvalidField = invalidFields[i];
+      }
+    }
+    firstInvalidField.focus();
+  }
 }
 
 function showBottomNavigation() {
@@ -96,7 +139,7 @@ $(function() {
     var id = $('section:visible').attr('id');
     var active_tab = $('section:visible');
     var clicked_tab = $($(this).attr('href'));
-    if (isClickedTabEarlier(active_tab, clicked_tab) || $('section#' + id + ' :invalid').length == 0) {
+    if (isClickedTabEarlier(active_tab, clicked_tab) || !hasInvalidFields(active_tab)) {
       clicked_tab.parent().parent().find('div.sidebar a').removeClass('active');
       $("a[href="+$(this).attr('href')+"]").addClass('active');
       clicked_tab.parent().find('section').removeClass('show').addClass('hide');
@@ -106,9 +149,16 @@ $(function() {
                       $('section:visible').position().top);
     }
     else {
-      $('section#' + id + ' :invalid').first().focus();
-      highlightInvalidFields(active_tab);
+      highlightInvalidFieldsAndFocusOnFirst(active_tab);
       return false;
     } 
+  });
+  $('.form-control').each(function() {
+    var max = parseInt($(this).attr('maxwords'))
+    if (max) {
+      console.log('maxwords = ' + max);
+      $maxwords_alert = $('<div/>').addClass('alert alert-warning alertleft alert-maxwords hide').text('Not more than ' + max + ' words.');
+      $(this).parents('.form-group').first().append($maxwords_alert);
+    }
   });
 });
