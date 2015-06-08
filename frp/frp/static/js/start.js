@@ -35,9 +35,8 @@ var Start = function() {
 
   this.checkErrorsOnSubmit = function(e) {
     var active_tab = $('section:visible');
-    if (active_tab.find(':invalid').length > 0) {
-      active_tab.find(':invalid').first().focus();
-      highlightInvalidFields(active_tab);
+    if (hasInvalidFields(active_tab)) {
+      highlightInvalidFieldsAndFocusOnFirst(active_tab);
       e.preventDefault();
     }
     $(window).off('beforeunload');
