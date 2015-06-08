@@ -82,7 +82,7 @@ def create_beneficiary(form, filename):
         languages.append(form.language2.data)
     if not form.language3.data == '':
         languages.append(form.language3.data)
-    languages = ','.join((l) for l in languages)
+    languages = ', '.join((l) for l in languages)
 
     campaign = Campaign(created_by=current_user, org=org,
             title=project_title, description=project_description, 
