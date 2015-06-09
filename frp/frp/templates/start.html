@@ -611,14 +611,14 @@
                           <div class="col-xs-4">
                             <h3>Short Description</h3>
                           </div>
-                          {{ render_text_area(form.project_description,maxwords=55) }}
+                          {{ render_text_area(form.project_description,maxwords=100) }}
 
                           <div class="col-md-12">
                             <p>This is what goes right under your Project Title and gives the Donor the info that will help generate 
                             interest in your cause. The shorter, the better. Give a snapshot of what your project is all about and why it is 
                             important. E.g :  We are a  class of 25 eight year olds studying in a Government school in Delhi. We require books for 
                             our classroom library for we wish to read more books and in our preferred language and at our reading level.  Help 
-                            us become readers for life. (Not more than 55 words)
+                            us become readers for life. (Not more than 100 words)
                             </p>
                           </div>
                         </div><!--form-group-->
@@ -636,21 +636,21 @@
                         </p>
                         <div class="row form-group">
                           {{ render_text_area(form.project_who_are_you,"PK Foundation was established in 2000 to help bridge the gap in learning in schools through books and reading. PK Foundation is based out of Pune and has 1 more office in rural Maharashtra. With a staff of 12 members and 20 volunteers, PK foundation aims to establish libraries in Govt schools in rural Maharashtra.", 
-                             "100") }}
-                          <p class="help-block">Not more than 100 words </p>
-                        </div><!--form-group-->
-
-                        <div class="row form-group">
-                          {{ render_text_area(form.project_impact,"PK Foundation’s mission is to inculcate a reading habit among students at a young age by providing access to a large variety of books. Through our reading program we wish to build our children’s reading capabilities further. Children in rural Maharashtra whom we work with  don’t have access to storybooks. We wish to push language development by encouraging supplementary reading of storybooks. Till date PK Foundation has established over 120 libraries in Govt schools in the districts of Akola and Paratwada. These libraries serve over 4800 children in the age group of 7 to 14. Most children are first generation learners and education is their family’s chance to break the circle of poverty.", 
-                          "150") }}
+                             "150") }}
                           <p class="help-block">Not more than 150 words </p>
                         </div><!--form-group-->
 
                         <div class="row form-group">
+                          {{ render_text_area(form.project_impact,"PK Foundation’s mission is to inculcate a reading habit among students at a young age by providing access to a large variety of books. Through our reading program we wish to build our children’s reading capabilities further. Children in rural Maharashtra whom we work with  don’t have access to storybooks. We wish to push language development by encouraging supplementary reading of storybooks. Till date PK Foundation has established over 120 libraries in Govt schools in the districts of Akola and Paratwada. These libraries serve over 4800 children in the age group of 7 to 14. Most children are first generation learners and education is their family’s chance to break the circle of poverty.", 
+                          "200") }}
+                          <p class="help-block">Not more than 200 words </p>
+                        </div><!--form-group-->
+
+                        <div class="row form-group">
                           {{ render_text_area(form.fund_utilization,"PK Foundation aims to set up 40 new libraries by the end of year 2015.The collected funds will be utilized for buying books for children in English, Hindi and Marathi. We also aim to start a book-lending program in remote areas with a membership fee of Rs.1/-. These funds would help cover the costs of the logistics for this program.",
-                          "100") }}
+                          "200") }}
                           <div class="alert alert-warning alertleft hide">Explain the way you are utilizing the funds.</div>
-                          <p class="help-block">Not more than 100 words </p>
+                          <p class="help-block">Not more than 200 words </p>
                         </div><!--form-group-->
                       </div><!--well-->
 

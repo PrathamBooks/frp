@@ -11,7 +11,7 @@ var DonorForm = function() {
         $('[name="amount_choice"]').removeAttr('required');
       }
       if ($(':invalid').length > 0) {
-        highlightInvalidFields($('form'));
+        highlightInvalidFieldsAndFocusOnFirst($('form'));
         $('form').find(':invalid').first().focus();
         e.preventDefault();
       }
