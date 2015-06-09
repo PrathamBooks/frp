@@ -50,7 +50,7 @@ var DiscoverPage = function(args) {
       $div_md_3.popover({
         title: campaign.title,
         container: 'body',
-        placement: 'top',
+        placement: 'left',
         content: campaign.description
       });
       $div_md_3.hover(

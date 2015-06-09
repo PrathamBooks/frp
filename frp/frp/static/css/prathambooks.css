@@ -3359,9 +3359,6 @@ label.checkboxLabel {
   margin: 0 33% !important;
   float: inherit !important;
 }
-#internalCampaign.discover .campaignInfo {
-	min-height: 240px;
-}
 .modal-content button.btn {
   background: #ffc600;
   border-radius: 29px;
