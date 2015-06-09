@@ -258,19 +258,19 @@ def about():
 def discover():
     campaigns_data = Campaign.all_campaigns_data('Approved','Closed')
     filter_form = FilterForm(request.form)
-    languages = request.args.getlist('languages')
-    states = request.args.getlist('states')
     category = request.args.get('category')
     if (category == 'featured'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['featured'], reverse=True)
+        category = 'Featured'
     if (category == 'popular'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['num_donors'], reverse=True)
+        category = 'Popular'
     if (category == 'recently-launched'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['days_remaining'], reverse=True)
+        category = 'Recently Launched'
     if (category == 'ending-soon'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['days_remaining'], reverse=False)
+        category = 'Ending Soon'
     if (category == 'most-funded'):
-        campaigns_data = sorted(campaigns_data, key=lambda x:x['total_donations'], reverse=True)
+        category = 'Most Funded'
+    if (not category):
+        category = 'Recently Launched'
     # Convert numbers to text strings, -1 because select values start from
     # 1 while array indexing starts from 0
     types = map(
@@ -278,7 +278,7 @@ def discover():
             request.args.getlist('types')
             )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form, languages=languages, states=states, types=types)
+            form=filter_form, category=category)
 
 @app.route("/search", methods=['GET'])
 def search():
@@ -294,7 +294,7 @@ def search():
             request.args.getlist('types')
             )
     return render_template('discover.html', campaigns_data=campaigns_data,
-            form=filter_form, languages=languages, states=states, types=types,search_string=search_string)
+            form=filter_form, category='Recently Launched', search_string=search_string)
 
 @app.route("/donate/pay", methods=['POST'])
 @login_required
