@@ -5,38 +5,61 @@ var DiscoverPage = function(args) {
   var DISPLAY_PER_CLICK = 6;
   this.start = function(args) {
     this.display_data = this.campaign_data;
-    this.filter_with_args(args.filters.states, 
-                          args.filters.languages, 
-                          args.filters.types_string);
+    this.show_after_filter_or_sort(this.campaign_data);
     $('#scroll').click(this.show_next_campaigns);
-    $('input[type="checkbox"]').on('change',this.filter);
     $('.row-fluid a').click(function(e) {
       $(this).find('.collapseSign').html(
         $(this).find('.collapseSign').html() == '−' ? '+' : '−'
       );
     });
-    $('input[name=sort-by]').on('change', this.sort);
+    $('input[type="checkbox"]').on('change',this.filter_and_sort);
+    $('input[name=sort-by]').on('change', this.filter_and_sort);
+    $(':radio[value="' + args.category + '"]').click();
+    $('.modal').on('hidden.bs.modal', this.on_modal_hide);
   };
-  this.sort = function(e) {
+  this.filter_and_sort = function(e) {
+    e.preventDefault();
+
+    var states = [];
+    $states = $('#state').find('input[type=checkbox]:checked');
+    $states.each(function() {
+      states.push($(this).val());
+    });
+
+    var languages = [];
+    $languages = $('#language').find('input[type=checkbox]:checked');
+    $languages.each(function() {
+      languages.push($(this).val());
+    });
+
+    var types = [];
+    $types = $('#type').find('input[type=checkbox]:checked');
+    $types.each(function() {
+      types.push($(this).val());
+    });
+
+    var filtered_data = that.filter_with_args(states, languages, types);
+
     var sort_by = $('input[name=sort-by]:checked').val();
-    var sorted_data;
+    var sorted_data = filtered_data;
     if (sort_by === 'Featured') {
-      sorted_data = that.campaign_data.sort(function(a, b) { return (b.featured - a.featured) }); 
+      sorted_data = filtered_data.sort(function(a, b) { return (b.featured - a.featured) }); 
     }
     else if (sort_by === 'Popular') {
-      sorted_data = that.campaign_data.sort(function(a, b) { return (b.num_donors - a.num_donors) }); 
+      sorted_data = filtered_data.sort(function(a, b) { return (b.num_donors - a.num_donors) }); 
     }
     else if (sort_by === 'Recently Launched') {
-      sorted_data = that.campaign_data.sort(function(a, b) { return (b.days_remaining - a.days_remaining) }); 
+      sorted_data = filtered_data.sort(function(a, b) { return (b.days_remaining - a.days_remaining) }); 
     }
     else if (sort_by == 'Ending Soon') {
-      sorted_data = that.campaign_data.sort(function(a, b) { return (a.days_remaining - b.days_remaining) }); 
+      sorted_data = filtered_data.sort(function(a, b) { return (a.days_remaining - b.days_remaining) }); 
     }
     else if (sort_by == 'Most Funded') {
-      sorted_data = that.campaign_data.sort(function(a, b) { return (b.total_donations - a.total_donations) }); 
+      sorted_data = filtered_data.sort(function(a, b) { return (b.total_donations - a.total_donations) }); 
     }
     that.show_after_filter_or_sort(sorted_data);
-  };
+  }
+
   this.show_campaigns = function(data, start, end) {
     var $campaigns = $('#campaigns');
     for (i = start; i < end && i < data.length; i++) {
@@ -50,7 +73,7 @@ var DiscoverPage = function(args) {
       $div_md_3.popover({
         title: campaign.title,
         container: 'body',
-        placement: 'top',
+        placement: 'left',
         content: campaign.description
       });
       $div_md_3.hover(
@@ -116,13 +139,16 @@ var DiscoverPage = function(args) {
   };
   this.show_next_campaigns = function() {
     var start = that.ndisplayed;
-    var end = that.ndisplayed + DISPLAY_PER_CLICK < that.campaign_data.length ?
+    var end = that.ndisplayed + DISPLAY_PER_CLICK < that.display_data.length ?
       that.ndisplayed + DISPLAY_PER_CLICK : 
-      that.campaign_data.length;
+      that.display_data.length;
     that.show_campaigns(that.display_data, start, end);
     that.ndisplayed = end;
     if (that.ndisplayed == that.display_data.length) {
       $('#scroll').hide();
+    }
+    else {
+      $('#scroll').show();
     }
   };
   this.clear_campaigns = function() {
@@ -164,7 +190,7 @@ var DiscoverPage = function(args) {
         return types.indexOf(c.type) != -1;
       });
     }
-    that.show_after_filter_or_sort(filtered_data);
+    return filtered_data;
   };
 
   this.show_after_filter_or_sort = function(data) {
@@ -179,32 +205,15 @@ var DiscoverPage = function(args) {
 
   this.no_campaigns = function() {
     $('.modal').modal('show');
-    $('#states').val('');
-    $('#languages').val('');
-    $('#types').val('');
-  };
+  }
 
-  this.filter = function(e) {
-    e.preventDefault();
-
-    var states = [];
-    $states = $('#state').find('input[type=checkbox]:checked');
-    $states.each(function() {
-      states.push($(this).val());
-    });
-
-    var languages = [];
-    $languages = $('#language').find('input[type=checkbox]:checked');
-    $languages.each(function() {
-      languages.push($(this).val());
-    });
-
-    var types = [];
-    $types = $('#type').find('input[type=checkbox]:checked');
-    $types.each(function() {
-      types.push($(this).val());
-    });
-
-    that.filter_with_args(states, languages, types);
+  this.on_modal_hide = function() {
+    $('#state input').prop('checked', false);
+    $('#state input[value="All"]').prop('checked', true);
+    $('#language input').prop('checked', false);
+    $('#language input[value="All"]').prop('checked', true);
+    $('#type input').prop('checked', false);
+    $('#type input[value="All"]').prop('checked', true);
+    $(':radio[value="Featured"]').click();
   };
 };

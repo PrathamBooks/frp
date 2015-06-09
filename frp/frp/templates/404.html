@@ -1,8 +1,12 @@
-{% extends "base.html" %}
-{% block body %}
-  <table>
-     <tr> <th>error</th> <td>{{error}}</td> </tr>
-     <tr> <th>error_description</th><td>{{error_description}} </td> </tr>
-     <tr> <th>error_uri</th><td>{{error_uri}} </td> </tr>
-  </table>
-{% endblock body %}
+{% extends "partials/base.html" %}
+{% block content %}
+<div class="container internal">
+  <div id="featuredCampaign" class="row">
+    <div class="col-md-12">
+      <h2> Error: {{error}} </h2>
+      <h2> error_description: {{error_description}} </h2>
+      <h2> error_uri: {{error_uri}} </h2>
+    </div>
+  </div>
+</div>
+{% endblock content %}

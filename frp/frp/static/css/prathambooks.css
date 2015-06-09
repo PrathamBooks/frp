@@ -1708,7 +1708,7 @@ span.featured-campaign {
   color: #222222;
   float: right;
   font-size: 8px;
-  margin: -24px -12px -20px 0;
+  margin: -25px -12px -20px 0;
   padding: 29px 0 5px;
   position: relative;
   right: 0;
@@ -2651,7 +2651,7 @@ table td span.label {
   font-size: .95em;
 }
 .internal #internalCampaign.discover span.champion {
-  margin: -25px -12px -26px 15px;
+  margin: -26px -12px -26px 15px;
   position: relative;
   right: 0;
   width: 66px;
@@ -3358,9 +3358,6 @@ label.checkboxLabel {
   padding: 2px 20px!important;
   margin: 0 33% !important;
   float: inherit !important;
-}
-#internalCampaign.discover .campaignInfo {
-	min-height: 240px;
 }
 .modal-content button.btn {
   background: #ffc600;

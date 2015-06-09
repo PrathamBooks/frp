@@ -204,6 +204,13 @@ class Campaign(BaseMixin, db.Model):
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
 
+    def print_status(self):
+        if self.status == 'Approved':
+            return 'Active'
+        else:
+            return self.status
+
+
     def verbose_fields(self):
         return {"id" : self.id,
                 "title" : self.title,
@@ -220,7 +227,7 @@ class Campaign(BaseMixin, db.Model):
                 "num_donors": self.num_donors(),
                 "target" : self.target(),
                 "total_donations" : self.total_donations(),
-                "status" : self.status,
+                "status" : self.print_status(),
                 "featured" : self.featured,
                 "image" : self.image
                 }

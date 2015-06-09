@@ -16,12 +16,12 @@ def index():
     if len(display_campaigns)<6:
         # add other campaigns to make 6
         more_campaigns_needed = 6 - len(display_campaigns)
-        non_featured_campaigns = Campaign.query.filter_by(featured=False).limit(more_campaigns_needed).all()
+        non_featured_campaigns = Campaign.query.filter_by(featured=False).filter_by(status='Approved').limit(more_campaigns_needed).all()
         display_campaigns = display_campaigns + non_featured_campaigns
     # if still not enough just repeat the first
     if len(display_campaigns)<6 and len(display_campaigns)>0:
         while len(display_campaigns)<6:
-            display_campaigns.append(display_campaigns[0])
+            display_campaigns = display_campaigns + display_campaigns
 
     return flask.render_template('index.html', 
             form=filter_form, 
