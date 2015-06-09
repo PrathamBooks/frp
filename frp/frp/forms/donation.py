@@ -57,7 +57,7 @@ class DonorForm(wtforms.Form):
             validators=[wtforms.validators.Required()])
     tax_exemption_certificate = wtforms.RadioField(
         label='Would you like us to send you a Tax Exemption Certificate?',
-        default='True',
+        default='False',
         choices=[('True', 'Yes'),
                  ('False', 'No')])
     ann_choice = wtforms.RadioField(
