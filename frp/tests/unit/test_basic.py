@@ -42,7 +42,7 @@ def test_add_donations(test_db, seed_db, test_client):
     soup = BeautifulSoup(x.data)
     total_donations += donation.amount
     percent_funded = (total_donations*100.0)/campaign.target()
-    assert int(soup.find('div', {'class': "funds-raised"}).contents[1].text) == int(round(percent_funded))
+    assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
 
 def test_del_donations(test_db, seed_db, test_client):
     campaign = Campaign.query.filter_by(title='Test Campaign').first()
@@ -57,7 +57,7 @@ def test_del_donations(test_db, seed_db, test_client):
     x = test_client.get("/campaign/"+str(campaign.id))
     soup = BeautifulSoup(x.data)
     percent_funded = (total_donations*100.0)/campaign.target()
-    assert int(soup.find('div', {'class': "funds-raised"}).contents[1].text) == int(round(percent_funded))
+    assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
 
 def login(email, password,test_client):
     return test_client.post('/user/sign-in', data=dict(
