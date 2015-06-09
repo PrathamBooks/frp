@@ -34,7 +34,7 @@
         <div class="campaignInfo">
           <h1>&#8377; {{campaign.target()}}</h1>
           <div class="funds-raised">
-            <h3>{{campaign.percent_funded()}}</h3>
+            <h3>{{campaign.percent_funded()}}%</h3>
             funds raised
           </div>
           <div class="donated">
@@ -70,9 +70,9 @@
     <div class="col-lg-9">
       <div class="campaignInfo">
         <ul>
-          <li><i class="impact"></i><span>Impact:</span> {{campaign.impact}} children</li>
+          <li><i class="impact"></i><span>Impact:</span> {{campaign.total_impact_on_children}} children</li>
           <li><i class="languages"></i><span>Languages:</span> {{campaign.languages}} </li>
-          <li><i class="beneficiary"></i><span>Beneficiary Type:</span>{{ statusString(campaign.org.info.status)[1] }} </li>
+          <li><i class="beneficiary"></i><span>Beneficiary Type: </span>{{ statusString(campaign.org.info.status)[1] }} </li>
           <li><i class="location"></i><span>Location:</span> {{campaign.city}}, {{campaign.state}}</li>
         </ul>
       </div>
