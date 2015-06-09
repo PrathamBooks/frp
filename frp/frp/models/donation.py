@@ -7,7 +7,7 @@ from . import db, BaseNameMixin, BaseMixin
 
 __all__ = ['Donation']
 
-COST_PER_BOOK = 50
+COST_PER_BOOK = 36.75
 
 class Donation(BaseMixin, db.Model):
     __tablename__ = 'donation'
