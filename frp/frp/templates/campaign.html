@@ -60,7 +60,7 @@
           {% if campaign.percent_funded() >= 100 %}
             <h5 class="amt" data-toggle="modal" data-target="#no-donation-modal"> Donate To This Campaign </h5> </a>
           {% else %}
-          <a href="http://donateabook.org.in/donate/1">
+          <a href={{url_for('donate', campaign_id=campaign.id)}}>
             <h5 class="amt"> Donate To This Campaign </h5>
           </a>
           {% endif %}
