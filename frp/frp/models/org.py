@@ -4,6 +4,7 @@ from __future__ import division
 import inspect
 import sets
 from datetime import *
+from flask import current_app
 
 from . import db, BaseNameMixin, BaseMixin
 
@@ -202,7 +203,7 @@ class Campaign(BaseMixin, db.Model):
         return self.nbooks + 125 * self.nlic
 
     def target(self):
-        return int(round(36.75 * (self.nbooks + 125 * self.nlic)))
+        return int(round(current_app.config.get('COST_PER_BOOK') * (self.nbooks + 125 * self.nlic)))
 
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
@@ -266,7 +267,7 @@ class Campaign(BaseMixin, db.Model):
         return int(round((self.total_donations() * 100) /self.target()))
 
     def books_donated(self):
-        return int(round(self.total_donations()/36.75))
+        return int(round(self.total_donations()/current_app.config.get('COST_PER_BOOK')))
 
     def needs(self):
         needs = self.target() - self.total_donations() 
