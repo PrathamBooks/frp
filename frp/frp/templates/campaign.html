@@ -33,17 +33,17 @@
       <div class="col-md-4">
         <div class="campaignInfo">
           <h1>&#8377; {{campaign.target()}}</h1>
-          <div class="funds-raised">
-            <h3>{{campaign.percent_funded()}}%</h3>
-            funds raised
-          </div>
           <div class="donated">
-            <h3>{{campaign.books_donated()}}</h3>
-            books donated
+            <h3>{{campaign.books_donated()}} books </h3>
+            donated out of {{campaign.books_target()}} required
           </div>
           <div class="donors">
             <h3>{{campaign.num_donors()}}</h3>
             donors
+          </div>
+          <div class="funds-raised">
+            <h3>{{campaign.percent_funded()}}%</h3>
+            funds raised
           </div>
           <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{campaign.percent_funded()}}%;">

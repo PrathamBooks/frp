@@ -44,7 +44,7 @@ def close_campaigns():
         except Exception as e:
           print e,"Unable to Commit"
 
-        name = campaign.created_by.profile_name
+        name = campaign.created_by.profile_name()
         campaign_title = campaign.title
         percent = campaign.percent_funded()
 
@@ -56,7 +56,7 @@ def close_campaigns():
 def send_last_week_mails():
     campaigns_last_week = Campaign.last_week()
     for campaign in campaigns_last_week:
-        name = campaign.created_by.profile_name
+        name = campaign.created_by.profile_name()
         campaign_title = campaign.title
         end_date = "{:%B %d, %Y}".format(campaign.end_date())
 

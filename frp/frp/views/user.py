@@ -84,14 +84,13 @@ def send_mail(old_percent,curr_percent,campaign,donation):
   mailer.send_email(to=donation.donor.email,
     subject="Thank you for your donation", 
     template="thank-you.html", 
-    first_name=donation.donor.first_name,
-    last_name=donation.donor.last_name,
+    profile_name=donation.donor.profile_name(),
     title=campaign.title)
 
   mailer.send_email(to=campaign.emails(),
     subject="New Donation Received ",
     template="new_donation.html",
-    first_name=campaign.created_by.first_name,
+    profile_name=campaign.created_by.profile_name(),
     amount=donation.amount,
     donor=donation.donor_name(),
     title=campaign.title,
@@ -99,20 +98,20 @@ def send_mail(old_percent,curr_percent,campaign,donation):
 
   if (old_percent < 100 <= curr_percent):
     mailer.send_email(to=campaign.emails(),
-      subject="You’ve hit a century! Congrats",
+      subject="You've hit a century! Congrats",
       template="congrats.html",
-      first_name=campaign.created_by.first_name,
+      profile_name=donation.donor.profile_name(),
       title=campaign.title,
       start_date=start_date)
     return
 
   if (old_percent == 0):
     mailer.send_email(to=campaign.emails(),
-      subject="First Donation Recieved", 
+      subject="First Donation Recieved",
       template="new_donation.html",
-      first_name=campaign.created_by.first_name,
+      profile_name=donation.donor.profile_name(),
       amount=donation.amount,
-      donor=donation.donor.first_name + ' ' + donation.donor.last_name,
+      donor=donation.donor_name(),
       title = campaign.title,
       start_date=start_date)
     return
@@ -122,10 +121,10 @@ def send_mail(old_percent,curr_percent,campaign,donation):
   while index < len(percent_arr):
       if (old_percent < percent_arr[index] <= curr_percent):
           mailer.send_email(to=campaign.emails(),
-                  subject='Yay! You’ve reached '+ str(percent_arr[index])+'% of your target!',
+                  subject="Yay! You've reached '+ str(percent_arr[index])+'% of your target!",
                   template="campaign_milestone.html",
-                  first_name=campaign.created_by.first_name,
                   number=index+1,
+                  profile_name=donation.donor.profile_name(),
                   percent=percent_arr[index],
                   title=campaign.title,
                   start_date=start_date)
@@ -178,8 +177,8 @@ def signup_as_beneficiary():
             if not result['error']:
                 mailer.send_email(to=current_user.email,
                         subject="Congrats! You successfully created a campaign on Donate-a-Book!",
-                        template="new_campaign.html", 
-                        first_name=current_user.first_name)
+                        template="new_campaign.html",
+                        profile_name=current_user.profile_name())
                 return redirect(url_for('campaign_success'))
             else:
                 flash('Oops something went wrong, please try again')
@@ -363,13 +362,13 @@ def change_status():
         mailer.send_email(to=campaign.emails(),
                 subject="Your D-A-B Campaign is now Live!",
                 template="campaign_created.html",
-                first_name=campaign.created_by.first_name,
+                profile_name=campaign.created_by.profile_name(),
                 id=campaign.id)
     else:
         mailer.send_email(to=campaign.emails(),
                 subject="Your D-A-B Campaign is " + status,
                 template="campaign_state_change.html",
-                first_name=campaign.created_by.first_name,
+                profile_name=campaign.created_by.profile_name(),
                 title=campaign.title,
                 start_date=start_date,
                 old_status=old_status,
