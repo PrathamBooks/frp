@@ -162,9 +162,9 @@ class Campaign(BaseMixin, db.Model):
     @staticmethod
     def search(search_string):
         campaigns = Campaign.query.search(search_string).all()
-        retval = []
-        for campaign in campaigns:
-            retval.append(campaign.verbose_fields())
+        args=['Approved', 'Closed']
+        campaigns = filter(lambda x:(x.status in (args)), campaigns)
+        retval = map(lambda x:x.verbose_fields(),campaigns)
         return retval
 
     def emails(self):
