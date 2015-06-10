@@ -3415,6 +3415,14 @@ footer .row {
   padding:0 10px;
   width:100%;
 }
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  #internalCampaign .col-md-3 h2 {
+    font-size: 1.5em;
+    line-height: 1.3em;
+    width: 95%;
+  }
+}
 @media (min-width: 992px) and (max-width: 1199px) {
   #featuredCampaign {
     height: auto;
