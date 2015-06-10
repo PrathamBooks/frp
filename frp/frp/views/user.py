@@ -270,12 +270,6 @@ def discover():
         category = 'Most Funded'
     if (not category):
         category = 'Recently Launched'
-    # Convert numbers to text strings, -1 because select values start from
-    # 1 while array indexing starts from 0
-    types = map(
-            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
-            request.args.getlist('types')
-            )
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category=category)
 
@@ -284,14 +278,6 @@ def search():
     search_string = request.args.get('search-string')
     campaigns_data = Campaign.search(search_string)
     filter_form = FilterForm()
-    languages = request.args.getlist('languages')
-    states = request.args.getlist('states')
-    # Convert numbers to text strings, -1 because select values start from
-    # 1 whame array indexing starts from 0
-    types = map(
-            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
-            request.args.getlist('types')
-            )
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category='Recently Launched', search_string=search_string)
 
