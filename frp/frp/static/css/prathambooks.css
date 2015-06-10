@@ -3315,6 +3315,10 @@ a.std {
 	font-family: "proxima-nova", sans-serif;
 	font-size: 1.3em;
 }
+/* override bootstrap setting */
+.popover {
+  font-size: 12px;
+}
 .checkoptions.filter-group > input {
 	display: inline-block;
 	margin-right: 5px;
