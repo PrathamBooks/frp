@@ -25,7 +25,7 @@
                     <h3>You are donating books to Campaign: 
                       <a href={{ url_for('campaign', id=campaign.id) }}>{{campaign.title}}</a>
                     </h3>
-                    <h4> This campaign needs to raise Rs. {{campaign.needs()}} more to meet its target. </h4>
+                    <h4> This campaign needs to raise Rs. {{campaign.needs()}} more to meet its target of {{campaign.books_target()}} books. </h4>
                     <div class="row form-group" >
                       <label for="amount_choice">Donation Amount<strong>*</strong></label>
                       {{ render_bullets(form.amount_choice) }}

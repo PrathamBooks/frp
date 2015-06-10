@@ -198,6 +198,9 @@ class Campaign(BaseMixin, db.Model):
         else:
             return self.created_at.date() + timedelta(days=30)
 
+    def books_target(self):
+        return self.nbooks + 125 * self.nlic
+
     def target(self):
         return int(round(36.75 * (self.nbooks + 125 * self.nlic)))
 
