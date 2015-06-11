@@ -241,6 +241,7 @@ def test_db(request):
     # in finalizer
     models.db.drop_all()
     models.db.create_all()
+    models.db.engine.execute('DROP TRIGGER IF EXISTS "campaign_search_vector_trigger" ON "campaign"')
     models.db.engine.execute('CREATE TRIGGER campaign_search_vector_trigger BEFORE UPDATE OR INSERT ON "campaign" FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(search_vector, \'pg_catalog.english\', title, description, who, impact, utilization, state, city, languages)')
 
 @pytest.fixture
