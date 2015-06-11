@@ -4,6 +4,7 @@ import pytest
 from datetime import *
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../../../frp/')
+os.environ['FRP_CONFIG'] = 'settings/test.py'
 
 from frp import app, models
 from frp.models import (db, User, UserAuth, Role, USER_STATUS, is_email_exists,
@@ -236,16 +237,13 @@ def logout(test_client):
 
 @pytest.fixture
 def test_db(request):
-    # In case left behind from a hung test last time
+    # Better way is to drop in a finalizer but py.test has a problem dropping postgres db
+    # in finalizer
     models.db.drop_all()
-    app.config.from_pyfile("settings/test.py")
     models.db.create_all()
-    def fin():
-        models.db.drop_all()
-    request.addfinalizer(fin)
+    models.db.engine.execute('CREATE TRIGGER campaign_search_vector_trigger BEFORE UPDATE OR INSERT ON "campaign" FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(search_vector, \'pg_catalog.english\', title, description, who, impact, utilization, state, city, languages)')
 
 @pytest.fixture
 def test_client(request):
-    app.config.from_pyfile("settings/test.py")
     tc = app.test_client()
     return tc
