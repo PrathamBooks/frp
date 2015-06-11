@@ -2,12 +2,11 @@
 
 import inspect
 from datetime import date
+from flask import current_app
 
 from . import db, BaseNameMixin, BaseMixin
 
 __all__ = ['Donation']
-
-COST_PER_BOOK = 36.75
 
 class Donation(BaseMixin, db.Model):
     __tablename__ = 'donation'
@@ -41,7 +40,7 @@ class Donation(BaseMixin, db.Model):
 
     @staticmethod
     def total_books_donated():
-        return int(round(Donation.total_donated() / COST_PER_BOOK))
+        return int(round(Donation.total_donated() / current_app.config.get('COST_PER_BOOK')))
 
 
     def donation_details(self):

@@ -35,29 +35,31 @@ def test_add_campaign(test_db, seed_db, test_client):
     assert 'Test Campaign' in x.data
 
 def test_add_donations(test_db, seed_db, test_client):
-    campaign = Campaign.query.filter_by(title='Test Campaign').first()
-    total_donations = campaign.total_donations()
-    donation = add_donation(campaign, 1000)
-    x = test_client.get("/campaign/"+str(donation.campaign.id))
-    soup = BeautifulSoup(x.data)
-    total_donations += donation.amount
-    percent_funded = (total_donations*100.0)/campaign.target()
-    assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
+    with app.app_context():
+        campaign = Campaign.query.filter_by(title='Test Campaign').first()
+        total_donations = campaign.total_donations()
+        donation = add_donation(campaign, 1000)
+        x = test_client.get("/campaign/"+str(donation.campaign.id))
+        soup = BeautifulSoup(x.data)
+        total_donations += donation.amount
+        percent_funded = (total_donations*100.0)/campaign.target()
+        assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
 
 def test_del_donations(test_db, seed_db, test_client):
-    campaign = Campaign.query.filter_by(title='Test Campaign').first()
-    for i in range(1,6):
-        donation = add_donation(campaign, 1000)
-    donation = Donation.query.filter_by(identification="ABCDEF").first()
-    campaign = donation.campaign
-    total_donations = campaign.total_donations()
-    total_donations -= donation.amount
-    db.session.delete(donation)
-    db.session.commit()
-    x = test_client.get("/campaign/"+str(campaign.id))
-    soup = BeautifulSoup(x.data)
-    percent_funded = (total_donations*100.0)/campaign.target()
-    assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
+    with app.app_context():
+        campaign = Campaign.query.filter_by(title='Test Campaign').first()
+        for i in range(1,6):
+            donation = add_donation(campaign, 1000)
+        donation = Donation.query.filter_by(identification="ABCDEF").first()
+        campaign = donation.campaign
+        total_donations = campaign.total_donations()
+        total_donations -= donation.amount
+        db.session.delete(donation)
+        db.session.commit()
+        x = test_client.get("/campaign/"+str(campaign.id))
+        soup = BeautifulSoup(x.data)
+        percent_funded = (total_donations*100.0)/campaign.target()
+        assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
 
 def login(email, password,test_client):
     return test_client.post('/user/sign-in', data=dict(

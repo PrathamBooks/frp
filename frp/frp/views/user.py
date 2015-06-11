@@ -515,10 +515,12 @@ def donor_dashboard():
                 total_closed_children += donation.campaign.total_impact_on_children
                 total_closed_amt+= donation.amount
 
+    cost_per_book = app.config.get('COST_PER_BOOK')
+
     return render_template('donorDashboard.html',
             campaigns=campaigns,total_active_amt=total_active_amt,
             total_closed_amt=total_closed_amt,active_donation=active_donation,
-            books_active= int(total_active_amt/50),books_closed=int(total_closed_amt/50),
+            books_active= int(total_active_amt/cost_per_book),books_closed=int(total_closed_amt/cost_per_book),
             closed_donation=closed_donation, total_active_children=total_active_children,
             total_closed_children=total_closed_children)
 
@@ -546,8 +548,9 @@ def beneficiary_dashboard():
 
     n_active_donors = len(sets.Set(active_donors))
     n_closed_donors = len(sets.Set(closed_donors))
-    num_books_recvd_active = int(total_active_amt/50)
-    num_books_recvd_closed = int(total_closed_amt/50)
+    cost_per_book = app.config.get('COST_PER_BOOK')
+    num_books_recvd_active = int(total_active_amt/cost_per_book)
+    num_books_recvd_closed = int(total_closed_amt/cost_per_book)
     return render_template('beneficiaryDashboard.html',campaigns=campaigns,
             active_campaigns=active_campaigns,
             closed_campaigns=closed_campaigns,
