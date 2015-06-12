@@ -2,7 +2,6 @@ from random import randint
 from flask import render_template
 from .. import app
 from ..models import (db, Donation, admin_user)
-from ..forms import BillingInfo
 from flask_user import current_user
 from string import Template
 from string import split
@@ -43,9 +42,6 @@ def create_donation(form, campaign):
   db.session.add(donation)
   try:
     db.session.commit()
-    app.logger.warning('Committed Donation')
-    billing_info_page = mk_billing_info_page(donation)
-    app.logger.warning('Created Billing Info page')
   except Exception as e:
     app.logger.warning('Unable to save')
     app.logger.warning(e)
@@ -54,13 +50,7 @@ def create_donation(form, campaign):
   # Function "donation_validate will be called after 600 seconds that is 10 minutes 
   threading.Timer(600,donation_validate,[donation.id]).start()
   return {'error': False,
-          'donation': donation,
-          'billing_info_page': billing_info_page}
-
-def mk_billing_info_page(donation):
-  billing_form = BillingInfo()
-  billing_form.set_data(current_user, donation)
-  return render_template('billing_info.html', form=billing_form)
+          'donation': donation}
 
 def ccavRequest(form, donation):
   p_merchant_id = "37848"

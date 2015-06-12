@@ -30,7 +30,6 @@ from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
                      ProfileForm,
-                     BillingInfo,
                      MemoryForm,
                      LANGUAGE_CHOICES,
                      STATES,
@@ -284,13 +283,6 @@ def search():
     filter_form = FilterForm()
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category='Recently Launched', search_string=search_string)
-
-@app.route("/donate/pay", methods=['POST'])
-@login_required
-def pay():
-  form = BillingInfo(request.form)
-  donation = Donation.query.get(form.donation_id.data)
-  return donate_service.ccavRequest(form, donation)
 
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
 @login_required
