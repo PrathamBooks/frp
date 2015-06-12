@@ -1,17 +1,11 @@
-from frp import app
 from frp.models import db
-from flask import current_app
 from frp.models import (User, UserAuth, Role, USER_STATUS, is_email_exists,
                         Organization, OrganizationInfo, OrganizationWork, Campaign, 
                         Donation, Comment, Memory)
-from flask_user import current_user, login_required, roles_required
-import datetime
 from BeautifulSoup import BeautifulSoup
-import pytest
 
-@pytest.fixture
-def seed_db(request):
-    user = add_user()
-    org = add_org(user=user)
-    campaign = add_campaign(user=user, org=org)
- 
+def test_search_shows_only_active_and_closed_campaigns(test_db, seed_db, test_client):
+    campaigns = Campaign.query.search('hindi').all()
+    for campaign in campaigns:
+        assert campaign.status == 'Approved' or campaign.status == 'Closed'
+
