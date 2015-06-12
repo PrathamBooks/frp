@@ -44,7 +44,6 @@ def init_app(app, settings='settings/development.py'):
     css = Bundle("css/bootstrap.css",
                  "css/slider.css",
                  "css/fonts.css",
-                 "css/jquery-ui.css",
                  "css/prathambooks.css",
                  output='gen/all.css')
 
@@ -57,7 +56,7 @@ def init_app(app, settings='settings/development.py'):
                     "js/admin.js",
                     "js/discover.js",
                     "js/utils.js",
-                    # "js/word_count.js",
+                    "js/tablesorter.js",
                     "lib/bootstrap/bootstrap.file-input.js",
                     output="gen/lib.js")
 
