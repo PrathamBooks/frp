@@ -4,6 +4,7 @@ import os
 import sets
 import json
 from datetime import *
+import random
 from flask import (render_template,
                    g,
                    url_for,
@@ -256,6 +257,7 @@ def about():
 @app.route("/donate", methods=['GET'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data('Approved','Closed')
+    random.shuffle(campaigns_data)
     filter_form = FilterForm(request.form)
     category = request.args.get('category')
     if (category == 'featured'):
@@ -277,6 +279,7 @@ def discover():
 def search():
     search_string = request.args.get('search-string')
     campaigns_data = Campaign.search(search_string)
+    random.shuffle(campaigns_data)
     filter_form = FilterForm()
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category='Recently Launched', search_string=search_string)
