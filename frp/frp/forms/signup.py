@@ -69,7 +69,7 @@ STATES = [
         ("Tamilnadu", "Tamilnadu"),
         ("Tripura", "Tripura"),
         (u'Uttar Pradesh', u'Uttar Pradesh'),
-        ("Uttaranchal", "Uttaranchal"),
+        ("Uttarakhand", "Uttarakhand"),
         (u'West Bengal', u'West Bengal')]
 
 
