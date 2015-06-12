@@ -5,6 +5,7 @@ import sets
 import json
 from datetime import *
 import random
+import pyexcel_xls
 from flask import (render_template,
                    g,
                    url_for,
@@ -478,7 +479,7 @@ def download_donations():
     header = ["Donor Name", "Donor Email", "Date", "Campaign Title", "Amount Donated",
             "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
     donations_data.insert(0,header)
-    return excel.make_response_from_array(donations_data, "csv")
+    return excel.make_response_from_array(donations_data, "xls")
 
 
 @login_required
@@ -489,7 +490,7 @@ def download_campaigns():
     campaigns_data = map(lambda x:x.campaign_details(),campaigns)
     header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Funds Raised','Status']
     campaigns_data.insert(0,header)
-    return excel.make_response_from_array(campaigns_data, "csv")
+    return excel.make_response_from_array(campaigns_data, "xls")
 
 
 @app.route("/profile/donor_transactions")
