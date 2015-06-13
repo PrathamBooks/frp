@@ -3,7 +3,11 @@
 {% block content %}
 <div id="wrapper">
   <div class="container internal">
+    {% if action %}
+    <form role="form" enctype="multipart/form-data" action={{action}} method="post">
+    {% else %}
     <form role="form" enctype="multipart/form-data" method="post">
+    {% endif %}
       <div class="row startCampaign" id="internalCampaign">
 
         <div class="col-md-12">

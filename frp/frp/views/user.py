@@ -156,6 +156,19 @@ def donate_success():
 
   return render_template('donateSuccess.html', campaign=campaign)
 
+@app.route("/campaign/edit/<id>", methods=['GET'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def campaign_edit(id):
+    campaign = Campaign.query.get(id)
+    if (campaign):
+        form = BeneficiarySignupForm()
+        form.set_edit_data(campaign)
+        return render_template('start.html', form=form, action=url_for('campaign', id=campaign.id))
+    return render_template("404.html", error="Campaign with id " + str(id) + " does not exist",
+            error_description="",
+            error_uri=request.url)
+
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
 def signup_as_beneficiary():
@@ -572,10 +585,28 @@ def convertStatusTypeToString():
         return ORG_STATUS_CHOICES[status - 1]
     return dict(statusString=statusString)
 
-@app.route("/campaign/<id>", methods=['GET'])
+@app.route("/campaign/<id>", methods=['GET', 'POST'])
 def campaign(id):
     campaign = Campaign.query.get(id)
-    return render_template('campaign.html', campaign=campaign)
+    if request.method == 'GET':
+        return render_template('campaign.html', campaign=campaign)
+    else:
+        form = BeneficiarySignupForm(request.form)
+        if form.validate():
+            image = request.files['imageUpload']
+            filename = secure_filename(image.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+                image.save(full_save_path)
+
+            result = signup_service.edit_beneficiary(campaign, form, filename)
+            if not result['error']:
+                flash('You successfully edited the campaign')
+                return render_template('campaign.html', campaign=campaign)
+            else:
+                flash('Oops something went wrong, please try again')
+        return render_template('beneficiary_form.html', form=form)
+
 
 # This code has been added for testing porpose only 
 @app.route("/donate_1/<campaign_id>", methods=['GET', 'POST'])
