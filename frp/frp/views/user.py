@@ -5,6 +5,7 @@ import sets
 import json
 from datetime import *
 import random
+import pyexcel_xls
 from flask import (render_template,
                    g,
                    url_for,
@@ -29,7 +30,6 @@ from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
                      ProfileForm,
-                     BillingInfo,
                      MemoryForm,
                      LANGUAGE_CHOICES,
                      STATES,
@@ -284,13 +284,6 @@ def search():
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category='Recently Launched', search_string=search_string)
 
-@app.route("/donate/pay", methods=['POST'])
-@login_required
-def pay():
-  form = BillingInfo(request.form)
-  donation = Donation.query.get(form.donation_id.data)
-  return donate_service.ccavRequest(form, donation)
-
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
 @login_required
 def donate(campaign_id):
@@ -478,7 +471,7 @@ def download_donations():
     header = ["Donor Name", "Donor Email", "Date", "Campaign Title", "Amount Donated",
             "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
     donations_data.insert(0,header)
-    return excel.make_response_from_array(donations_data, "csv")
+    return excel.make_response_from_array(donations_data, "xls")
 
 
 @login_required
@@ -489,7 +482,7 @@ def download_campaigns():
     campaigns_data = map(lambda x:x.campaign_details(),campaigns)
     header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Funds Raised','Status']
     campaigns_data.insert(0,header)
-    return excel.make_response_from_array(campaigns_data, "csv")
+    return excel.make_response_from_array(campaigns_data, "xls")
 
 
 @app.route("/profile/donor_transactions")
