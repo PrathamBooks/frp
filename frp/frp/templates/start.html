@@ -836,11 +836,15 @@
 <script>
 var hash = document.location.hash;
 if (hash) {
-   $('.nav-tabs a[href='+hash+']').tab('show');
+   $('.nav-tabs a[href="'+hash+'"]').tab('show');
 } 
-$('#start-links a').click(function() {
-  var hash = $(this).attr('href').replace('/about','');
-  $('.nav-tabs a[href='+hash+']').tab('show');
+$('a').click(function() {
+  var href = $(this).attr('href');
+  if (href.indexOf('/setup#') == -1) {
+    return;
+  }
+  var hash = $(this).attr('href').replace('/setup','');
+  $('.nav-tabs a[href="'+hash+'"]').tab('show');
 });
 $(function() {
     var start = new Start();
