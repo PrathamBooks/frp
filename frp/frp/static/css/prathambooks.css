@@ -2434,6 +2434,17 @@ button.approve {
   float: left !important;
   height: 28px !important;
 }
+button.edit {
+  font-size: 0.7em !important;
+  letter-spacing: 1px !important;
+  padding: 3px 5px ;
+  float: right !important;
+  background-color: #5bc0de;
+}
+button.edit:hover {
+  background-color: #ffde00 !important;
+}
+
 button.approve:hover {
   background-color: #ffde00 !important;
 }
