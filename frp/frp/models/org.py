@@ -218,6 +218,7 @@ class Campaign(BaseMixin, db.Model):
     def verbose_fields(self):
         return {"id" : self.id,
                 "title" : self.title,
+                "org_name": self.org.title,
                 "description" : self.description,
                 "impact" : self.total_impact_on_children,
                 "languages" : self.languages,
