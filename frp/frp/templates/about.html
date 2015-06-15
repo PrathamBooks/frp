@@ -8,7 +8,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#donateBook" data-toggle="tab">Pratham Books' Donate-a-Book</a></li>
-          <li><a href="#prathamBook" data-toggle="tab">About Pratham Books</a></li>
+          <li><a href="#prathamBooks" data-toggle="tab">About Pratham Books</a></li>
           <li><a href="#faq" data-toggle="tab">FAQs</a></li>
           <li><a href="#terms" data-toggle="tab">Terms Of Use</a></li>
           <li><a href="#privacy" data-toggle="tab">Privacy Policy</a></li>
@@ -55,7 +55,7 @@
           </div><!--tab-pane-->
 
 
-          <div class="tab-pane" id="prathamBook">
+          <div class="tab-pane" id="prathamBooks">
             <div class="well">
               <h3>Pratham Books</h3>
               <div class="row">
@@ -151,7 +151,7 @@
                     <h4>8. What are the other things I should know before I start? </h4>
                     <div>
                       <p>
-                      Do look at our Terms of Use before you start. If there are still any more questions, 
+                      Do look at our <a href={{url_for('about')}}#terms>Terms of Use </a>before you start. If there are still any more questions, 
                       do drop in an email at <a href="mailto:donateabook@prathambooks.org" style=" color:#428bca; text-decoration:underline">donateabook@prathambooks.org</a>.
 
                       </p>
@@ -1108,11 +1108,15 @@
 <script>
 var hash = document.location.hash;
 if (hash) {
-   $('.nav-tabs a[href='+hash+']').tab('show');
+   $('.nav-tabs a[href="'+hash+'"]').tab('show');
 } 
-$('#about-links a').click(function() {
+$('a').click(function() {
+  var href = $(this).attr('href');
+  if (href.indexOf('/about#') == -1) {
+    return;
+  }
   var hash = $(this).attr('href').replace('/about','');
-  $('.nav-tabs a[href='+hash+']').tab('show');
+  $('.nav-tabs a[href="'+hash+'"]').tab('show');
 });
 $(function() {
     $("#accordion").accordion();
