@@ -109,7 +109,7 @@ var AdminPage = function(campaign_data)
     var $title = $('<a/>').attr('href', '/campaign/'+data.id).text(data.title).appendTo($title_td);
     var $edit_btn = $('<a/>').attr('href','/campaign/edit/'+data.id).appendTo($title_td).
       append($('<button/>').addClass('edit').text('edit'));
-    var $type = $('<td/>').html(data.type).appendTo($row);
+    var $org_name = $('<td/>').html(data.org_name).appendTo($row);
     var $city= $('<td/>').html(data.city).appendTo($row);
     var $target = $('<td/>').html(data.target).appendTo($row);
     var $start_date = $('<td/>').html(data.start_date).appendTo($row);

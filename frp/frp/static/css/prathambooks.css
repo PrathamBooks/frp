@@ -272,10 +272,10 @@ header h1.logo a:hover {
   text-decoration: none;
 }
 header h1.logo a span {
-  background: url("../images/caption.png") no-repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) url("../images/caption.png") no-repeat scroll 0 0;
   float: left;
-  height: 42px;
-  margin: -101px 0 0 23px;
+  height: 69px;
+  margin: -94px 0 0 20px;
   text-shadow: 0 1px 0 #000;
   width: 226px;
 }
@@ -3613,10 +3613,10 @@ footer .row {
     background-size: 50% auto !important;
   }
   header h1.logo a span {
-    background: url("../images/caption.png") no-repeat scroll 0px 0px / 83% auto transparent;
+    background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 86% auto;
     float: left;
-    height: 42px;
-    margin: -95px 0px 0px 23px;
+    height: 53px;
+    margin: -86px 0 0 11px;
   }
   header #login {
     margin: 0px;
@@ -3764,13 +3764,16 @@ footer .row {
     background-size: 55% auto !important;
   }
   header h1.logo a span {
-    background: url("../images/caption.png") no-repeat scroll 0px 0px / 70% auto transparent;
-    margin: -103px 0px 0px 1px;
+    background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 70% auto;
+    margin:-104px 0 0 -3px;
   }
   header #login {
-    right: 59px;
-    top: 40px;
     margin-left: 18px;
+    right: 59px;
+    top: 48px;
+  }
+  .navbar-toggle {
+    margin-top:13px;
   }
   header nav ul li a {
     font-size: 2.2em;
