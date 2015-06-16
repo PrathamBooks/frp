@@ -277,7 +277,7 @@ header h1.logo a span {
   height: 69px;
   margin: -94px 0 0 20px;
   text-shadow: 0 1px 0 #000;
-  width: 226px;
+  width: 227px;
 }
 /********************* nav bar *******************/
 
@@ -907,7 +907,8 @@ header #login .dropdown-menu {
   font-style: italic;
   height: auto;
   margin: 10px 0 0;
-  padding: 0 0 10px 38px;
+	padding: 0 0 10px 40px;
+	text-align: left;
   width: 100%;
 }
 .internal .campaignInfo {
@@ -3414,436 +3415,524 @@ label.checkboxLabel {
 .col-md-9.well.profile .btn a{
   color:#000;  
 }
-
 /* For responsive */
 
 #featuredCampaign img {
-  width: 100%;
-  height: auto;
+	width: 100%;
+	height: auto;
 }
 footer .row {
-  max-width: 1200px;
-  padding:0 10px;
-  width:100%;
+	max-width: 1200px;
+	padding: 0 10px;
+	width: 100%;
 }
-
-@media (min-width: 992px) and (max-width: 1024px) {
-  #internalCampaign .col-md-3 h2 {
-    font-size: 1.5em;
-    line-height: 1.3em;
-    width: 95%;
-  }
+#geography .browse-btn {
+	background-color: #ffe538 !important;
+	color: #606060 !important;
+	display: block !important;
+	float: initial !important;
+	font-size: 2.5em !important;
+	letter-spacing: 0 !important;
+	margin: 10% auto !important;
+	padding: 2px 20px !important;
+	text-align: center!important;
+	text-transform: capitalize !important;
+	width: 120px !important;
+}
+ @media (min-width: 992px) and (max-width: 1024px) {
+#internalCampaign .col-md-3 h2 {
+	font-size: 1.5em;
+	line-height: 1.3em;
+	width: 95%;
+}
+header h1.logo a span {
+	background: rgba(0, 0, 0, 0) url("../images/caption.png") no-repeat scroll 0 0 / 93% auto;
+}
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  #featuredCampaign {
-    height: auto;
-  }
-  #featuredCampaign .banner img {
-    width: 100%;
-    height: auto;
-  }
-  #featuredCampaign {
-    height: auto;
-    margin: -42px 0 0;
-    padding: 0;
-  }
-  #featuredCampaign ul {
-    float: left;
-    margin-top: -73px;
-  }
-  #featuredCampaign p {
-    bottom: 0;
-    font-size: 16px;
-    height: auto;
-  }
-  #featuredCampaign .btn-nav {
-    top: 30%;
-  }
-  #contentTabs {
-    margin-top: -75px;
-  }
-  #contentTabs ul.nav-tabs {
-    margin: 0;
-  }
-  #homeSearch {
-    float: left !important;
-    margin: 40px 15px 0 334px !important;
-    position: relative !important;
-  }
+#featuredCampaign {
+	height: auto;
 }
-@media (min-width: 768px) and (max-width: 991px) {
-  .navbar-inverse .navbar-nav > li > a {
-    font-size: 2.5em !important;
-    padding-left: 17%;
-    padding-right: 17%;
-  }
-  header nav ul li .caret {
-    margin: 11px 0 0 6px;
-  }
-  footer .col-md-12 {
-    clear: left;
-    float: inherit;
-  }
-  #featuredCampaign ul {
-    float: left;
-    margin: -60px 0 0;
-  }
-  #featuredCampaign {
-    height: auto;
-  }
-  #homeSearch {
-    float: left !important;
-    margin: 40px 15px 0 334px !important;
-    position: relative !important;
-  }
-  #contentTabs {
-    margin: -74px 0 0;
-  }
-  #featuredCampaign p {
-    font-size: 14px;
-    height: auto;
-  }
-  #featuredCampaign .btn-nav {
-    top: 25%;
-  }
-  .tab-content .col-md-4 {
-    float: left;
-    padding: 10px;
-    width: 33%;
-  }
-  .tab-content .col-md-4 img {
-    height: auto;
-    width: 100%;
-  }
+#featuredCampaign .banner img {
+	width: 100%;
+	height: auto;
+}
+#featuredCampaign {
+	height: auto;
+	margin: -42px 0 0;
+	padding: 0;
+}
+#featuredCampaign ul {
+	float: left;
+	margin-top: -73px;
+}
+#featuredCampaign p {
+	bottom: 0;
+	font-size: 16px;
+	height: auto;
+}
+#featuredCampaign .btn-nav {
+	top: 30%;
+}
+#contentTabs {
+	margin-top: -75px;
+}
+#contentTabs ul.nav-tabs {
+	margin: 0;
+}
+#homeSearch {
+	margin: 20px 10px 40px 0 !important;
+	position: relative !important;
+}
+.tab-content .col-md-4 {
+	float: left;
+	padding: 10px 0;
+	width: 31%;
+}
+}
+ @media (min-width: 768px) and (max-width: 991px) {
+.navbar-inverse .navbar-nav > li > a {
+	font-size: 2.5em !important;
+	padding-left: 17%;
+	padding-right: 17%;
+}
+header nav ul li .caret {
+	margin: 11px 0 0 6px;
+}
+footer .col-md-12 {
+	clear: left;
+	float: inherit;
+}
+#featuredCampaign ul {
+	float: left;
+	margin: -60px 0 0;
+}
+#featuredCampaign {
+	height: auto;
+}
+#homeSearch {
+	margin: 20px 10px 20px 0 !important;
+	position: relative !important;
+}
+#contentTabs ul.nav-tabs li#pledge {
+	margin-left: 10px;
+}
+#contentTabs {
+	margin: -74px 0 0;
+}
+#featuredCampaign p {
+	font-size: 14px;
+	height: auto;
+}
+#featuredCampaign .btn-nav {
+	top: 25%;
+}
+.tab-content .col-md-4 {
+	float: left;
+	padding: 0;
+	width: 31%;
+}
+.tab-content .col-md-4 img {
+	height: auto;
+	width: 100%;
+}
+.tab-content .col-md-4 img {
+	height: auto;
+	max-height: 130px;
+}
+#geography h4.title {
+	font-size: 1.6em;
+}
+#geography .col-md-4 p {
+	font-size: 1.2em;
+	height: 193px!important;
+	min-height: 192px!important;
+}
+#geography time {
+	font-size: 2em;
+}
+#geography .browse-btn {
+	font-size: 2em !important;
+	margin: 10% 21% !important;
+	padding: 6px 20px !important;
+	width: auto !important;
+}
 }
 @media (max-width:767px) {
-  .navbar-nav > li {
-    text-align: right;
-  }
-  header .headerIn {
-    width: 100%;
-  }
-  header nav ul li .caret {
-    width: 8px;
-    height: 11px;
-    float: right;
-    margin: 8px 14px 0px 10px !important;
-    background-image: url("../images/caret.png");
-    background-repeat: no-repeat;
-    border: 0px none;
-  }
-  .navbar-nav {
-    margin: 7.5px 0px;
-  }
-  .nav {
-    padding-left: 0px;
-    list-style: outside none none;
-    margin-top: 0px !important;
-  }
-  .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: transparent;
-  }
-  .navbar-inverse .navbar-toggle {
-    border-color: #333;
-  }
-  .navbar-inverse {
-    border-color: transparent;
-    background-color: transparent;
-  }
-  .darkYellow .caret {
-    display: block;
-    background-image: none;
-  }
-  .navbar {
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    top: 33px;
-    position: absolute;
-  }
-  header nav {
-    height: 60px;
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
-    float: left;
-  }
-  header nav ul li a {
-    font-size: 2.2em;
-    padding: 10px !important;
-  }
-  header nav ul li {
-    display: inline-block;
-    font-family: "ligurino-condensed", sans-serif;
-    height: 41px;
-    padding: 0px 0px 0px 35px;
-    width: 100%;
-    float: right;
-  }
-  .navbar-collapse {
-    padding-right: 0;
-    padding-left: 0;
-    opacity: 0.9;
-  }
-  .navbar-toggle {
-    position: relative;
-    float: right;
-    padding: 9px 10px;
-    margin-top: 8px;
-    margin-right: 1%;
-    margin-bottom: 8px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background: none repeat scroll 0% 0% rgb(68, 68, 68);
-  }
-  header h1.logo {
-    background-image: url("../images/pratham_logo.png");
-    background-repeat: no-repeat;
-    color: #000;
-    cursor: pointer;
-    float: left;
-    font-size: 2.8em;
-    font-weight: bold;
-    height: 152px;
-    margin: 8px 0px 0px 15px;
-    padding: 0px;
-    position: relative;
-    width: 195px;
-    z-index: 2;
-    background-size: 50% auto !important;
-  }
-  header h1.logo a span {
-    background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 86% auto;
-    float: left;
-    height: 53px;
-    margin: -86px 0 0 11px;
-  }
-  header #login {
-    margin: 0px;
-    padding: 8px 0px 0px;
-    left: inherit;
-    position: absolute;
-    right: 54px;
-    top: 40px;
-  }
-  header #login .dropdown-menu {
-    right: 0px;
-  }
-  footer .col-md-12 {
-    border-bottom: 1px solid #222;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    width: 100%;
-  }
-  footer .row #socialIcons {
-    float: inherit;
-    margin: 0 auto;
-    position: relative;
-    text-align: center;
-    width: 200px;
-  }
-  footer .row #socialIcons h6 {
-    float: left;
-    margin: 0;
-    text-align: center;
-  }
-  footer .row #socialIcons a {
-    display: inline-block;
-    float: inherit;
-  }
-  footer .row h1 {
-    float: inherit;
-    text-align: center;
-    width: 100%;
-  }
-  .col-md-12.bottom {
-    float: inherit;
-    margin: 0 auto;
-  }
-  footer .row .siteBlock {
-    margin: 0 1% 0 0;
-    width: 24%;
-  }
-  #featuredCampaign {
-    height: auto;
-    background-color: transparent;
-    border-bottom: 0 none;
-    padding-top: 0;
-  }
-  #featuredCampaign ul {
-    float: left;
-    margin: -90px 0 0;
-  }
-  #homeSearch {
-    clear: both;
-    float: inherit !important;
-    margin: 15px auto 0 !important;
-    position: relative !important;
-  }
-  #featuredCampaign p {
-    font-size: 14px;
-    z-index: inherit;
-    height: auto;
-  }
-  footer .row {
-    max-width: 1200px;
-    width: 100%;
-  }
-  .tab-content .col-md-4 {
-    padding: 0 15px;
-    text-align: center;
-    margin: 10px 0;
-    width: 100% !important;
-    background: none repeat scroll 0 0 transparent;
-  }
-  .tab-content .col-md-4 img {
-    background-color: transparent;
-    box-shadow: 1px 0 4px #666;
-    float: inherit;
-    height: auto;
-    max-width: 360px;
-    width: 70%;
-  }
-  .tab-content .col-md-4 p {
-    float: left;
-    font-size: 1.5em;
-    margin: 10px 0;
-    width: 100%;
-  }
-  .startNow .btn.browse-btn {
-    width: auto!important;
-  }
-
-  #featuredCampaign p {
-    background-color: rgba(0, 0, 0, 0.9);
-    bottom: 0;
-    float: left;
-    position: initial;
-  }
-  #featuredCampaign p a.btn-warning {
-    line-height: 21px;
-  }
-  #featuredCampaign .btn-nav {
-    top: 33%;
-  }
-  .bottomBlock .col-md-4 {
-    float: left;
-  }
-  .tab-content a.carousel-control {
-    margin: 18% 6px 0;
-  }
-  .carousel-indicators {
-    bottom: -30px;
-  }
+.navbar-nav > li {
+	text-align: right;
+}
+header .headerIn {
+	width: 100%;
+}
+header nav ul li .caret {
+	width: 8px;
+	height: 11px;
+	float: right;
+	margin: 8px 14px 0px 10px !important;
+	background-image: url("../images/caret.png");
+	background-repeat: no-repeat;
+	border: 0px none;
+}
+.navbar-nav {
+	margin: 7.5px 0px;
+}
+.nav {
+	padding-left: 0px;
+	list-style: outside none none;
+	margin-top: 0px !important;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	border-color: transparent;
+}
+.nav li.orange {
+	display: none !important;
+}
+.navbar-inverse .navbar-toggle {
+	border-color: #333;
+}
+.navbar-inverse {
+	border-color: transparent;
+	background-color: transparent;
+}
+.darkYellow .caret {
+	display: block;
+	background-image: none;
+}
+.navbar {
+	min-height: 50px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	top: 33px;
+	position: absolute;
+}
+header nav {
+	height: 60px;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	float: left;
+}
+header nav ul li a {
+	font-size: 2.2em;
+	padding: 10px !important;
+}
+header nav ul li {
+	display: inline-block;
+	font-family: "ligurino-condensed", sans-serif;
+	height: 41px;
+	padding: 0px 0px 0px 35px;
+	width: 100%;
+	float: right;
+}
+.navbar-collapse {
+	padding-right: 0;
+	padding-left: 0;
+	opacity: 0.9;
+}
+.navbar-toggle {
+	position: relative;
+	float: right;
+	padding: 9px 10px;
+	margin-top: 8px;
+	margin-right: 1%;
+	margin-bottom: 8px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: none repeat scroll 0% 0% rgb(68, 68, 68);
+}
+header h1.logo {
+	background-image: url("../images/pratham_logo.png");
+	background-repeat: no-repeat;
+	color: #000;
+	cursor: pointer;
+	float: left;
+	font-size: 2.8em;
+	font-weight: bold;
+	height: 152px;
+	margin: 8px 0px 0px 15px;
+	padding: 0px;
+	position: relative;
+	width: 195px;
+	z-index: 2;
+	background-size: 50% auto !important;
+}
+header h1.logo a span {
+	background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 86% auto;
+	float: left;
+	height: 53px;
+	margin: -86px 0 0 11px;
+}
+header #login {
+	margin: 0px;
+	padding: 8px 0px 0px;
+	left: inherit;
+	position: absolute;
+	right: 54px;
+	top: 40px;
+}
+header #login .dropdown-menu {
+	right: 0px;
+}
+footer .col-md-12 {
+	border-bottom: 1px solid #222;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	width: 100%;
+}
+footer .row #socialIcons {
+	float: inherit;
+	margin: 0 auto;
+	position: relative;
+	text-align: center;
+	width: 200px;
+}
+footer .row #socialIcons h6 {
+	float: left;
+	margin: 0;
+	text-align: center;
+}
+footer .row #socialIcons a {
+	display: inline-block;
+	float: inherit;
+}
+footer .row h1 {
+	float: inherit;
+	text-align: center;
+	width: 100%;
+}
+.col-md-12.bottom {
+	float: inherit;
+	margin: 0 auto;
+}
+footer .row .siteBlock {
+	margin: 0 1% 0 0;
+	width: 24%;
+}
+#featuredCampaign {
+	height: auto;
+	background-color: transparent;
+	border-bottom: 0 none;
+	padding-top: 0;
+}
+#featuredCampaign ul {
+	float: left;
+	margin: -90px 0 0;
+}
+#homeSearch {
+	clear: both;
+	float: inherit !important;
+	margin: 15px auto 0 !important;
+	position: relative !important;
+	padding: 15px 0;
+}
+#contentTabs ul.nav-tabs li#pledge {
+	text-align: center;
+	width: 100%;
+}
+#featuredCampaign p {
+	font-size: 14px;
+	z-index: inherit;
+	height: auto;
+}
+footer .row {
+	max-width: 1200px;
+	width: 100%;
+}
+.tab-content .col-md-4 {
+	display: table;
+	margin: 10px auto;
+	padding: 0;
+	text-align: center;
+	width: 70%;
+}
+.tab-content .carousel-indicators {
+	bottom: -3px;
+}
+.tab-content .carousel-indicators .active {
+	background-color: #ffc600;
+}
+.tab-content .carousel-indicators li {
+	background-color: #fff;
+}
+#geography .col-md-4 p {
+	height: 150px!important;
+	min-height: 150px!important;
+	overflow: auto;
+}
+#geography .campaignInfo h4 {
+	text-align: left;
+}
+.tab-content .col-md-4 img {
+	background-color: transparent;
+	box-shadow: 1px 0 4px #666;
+	float: inherit;
+	height: auto;
+	width: 100%;
+}
+#contentTabs h2 {
+	text-align: center;
+}
+.tab-content .col-md-4 p {
+	float: left;
+	font-size: 1.5em;
+	margin: 10px 0;
+	width: 100%;
+}
+.startNow .btn.browse-btn {
+	width: auto!important;
+}
+#featuredCampaign p {
+	background-color: rgba(0, 0, 0, 0.9);
+	bottom: 0;
+	float: left;
+	position: initial;
+}
+#featuredCampaign p a.btn-warning {
+	line-height: 21px;
+}
+#featuredCampaign .btn-nav {
+	top: 33%;
+}
+.bottomBlock .col-md-4 {
+	float: left;
+}
+.tab-content a.carousel-control {
+	margin: 18% 6px 0;
+}
+.carousel-indicators {
+	bottom: -30px;
+}
 }
 @media (min-width: 481px) and (max-width: 639px) {
-  #featuredCampaign p {
-    font-size: 12px;
-  }
-  #homeSearch {
-    margin: 15px !important;
-  }
-  #contentTabs {
-    margin: 0;
-  }
-  #contentTabs ul.nav-tabs li#pledge a {
-    width: 479px;
-  }
-  #homeSearch {
-    clear: both;
-    float: inherit !important;
-    margin: 0 auto !important;
-    padding: 2% 0;
-  }
+#featuredCampaign p {
+	font-size: 12px;
+}
+#homeSearch {
+	margin: 15px !important;
+}
+#contentTabs {
+	margin: 0;
+}
+#contentTabs ul.nav-tabs li#pledge a {
+	width: 479px;
+}
+#homeSearch {
+	clear: both;
+	float: inherit !important;
+	margin: 0 auto !important;
+	padding: 2% 0;
+}
 }
 @media (max-width: 480px) {
-  header h1.logo {
-    height: 114px;
-    margin: 8px 0px 0px 5px;
-    width: 154px;
-    background-size: 55% auto !important;
-  }
-  header h1.logo a span {
-    background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 70% auto;
-    margin:-104px 0 0 -3px;
-  }
-  header #login {
-    margin-left: 18px;
-    right: 59px;
-    top: 48px;
-  }
-  .navbar-toggle {
-    margin-top:13px;
-  }
-  header nav ul li a {
-    font-size: 2.2em;
-  }
-  header nav ul li {
-    height: 41px;
-    padding: 0px 0px 0px 35px;
-  }
-  footer .row .siteBlock {
-    margin: 0;
-    max-width: none;
-    text-align: center;
-    width: 100%;
-  }
-  footer .row h5 {
-    border-bottom: 1px solid #333;
-    font-size: 1.5em;
-    padding: 1% 0;
-    text-align: center;
-  }
-  #homeSearch {
-    clear: both;
-    float: inherit !important;
-    margin: 0 auto !important;
-    padding: 2% 0;
-  }
-  #contentTabs {
-    margin: 0;
-  }
-  #contentTabs ul.nav-tabs li#pledge a {
-    width: 350px;
-  }
-  #featuredCampaign ul {
-    margin: -52px 0 0;
-  }
-  #featuredCampaign p {
-    font-size: 10px;
-  }
-  #featuredCampaign p a.btn-warning {
-    font-size: 10px !important;
-    line-height: 2px;
-    height: auto !important;
-    padding: 12px 8px !important;
-  }
-
-  #featuredCampaign p strong {
-    font-size: 1.5em;
-  }
-  #contentTabs ul.nav-tabs li#pledge a {
-    font-size: 2em;
-    width: 100%;
-  }
-  #contentTabs ul.nav-tabs li {
-    margin: 0;
-    width: 100%;
-  }
-  #featuredCampaign {
-    margin-top: -35px;
-  }
+header h1.logo {
+	height: 114px;
+	margin: 8px 0px 0px 5px;
+	width: 154px;
+	background-size: 55% auto !important;
+}
+header h1.logo a span {
+	background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 70% auto;
+	margin: -104px 0 0 -3px;
+}
+header #login {
+	margin-left: 18px;
+	right: 59px;
+	top: 48px;
+}
+.navbar-toggle {
+	margin-top: 13px;
+}
+header nav ul li a {
+	font-size: 2.2em;
+}
+header nav ul li {
+	height: 41px;
+	padding: 0px 0px 0px 35px;
+}
+footer .row .siteBlock {
+	margin: 0;
+	max-width: none;
+	text-align: center;
+	width: 100%;
+}
+footer .row h5 {
+	border-bottom: 1px solid #333;
+	font-size: 1.5em;
+	padding: 1% 0;
+	text-align: center;
+}
+#homeSearch {
+	clear: both;
+	float: inherit !important;
+	margin: 0 auto !important;
+	padding: 2% 0;
+}
+#contentTabs {
+	margin: 0;
+}
+#contentTabs ul.nav-tabs li#pledge a {
+	width: 350px;
+}
+#featuredCampaign ul {
+	margin: -52px 0 0;
+}
+#featuredCampaign p {
+	font-size: 10px;
+}
+#featuredCampaign p a.btn-warning {
+	font-size: 10px !important;
+	line-height: 2px;
+	height: auto !important;
+	padding: 12px 8px !important;
+}
+#featuredCampaign p strong {
+	font-size: 1.5em;
+}
+#contentTabs ul.nav-tabs li#pledge a {
+	font-size: 2em;
+	width: 100%;
+}
+#contentTabs ul.nav-tabs li {
+	margin: 0;
+	width: 100%;
+}
+#featuredCampaign {
+	margin-top: -35px;
+}
+.tab-content .col-md-4 {
+	width: 95%;
+}
+#geography .browse-btn {
+	font-size: 2.2em !important;
+	margin: 2% auto 4% !important;
+	padding: 5px 20px !important;
+	text-transform: capitalize;
+}
+#contentTabs ul.nav-tabs li#pledge {
+	font-size: 1.7em;
+	;
+}
 }
 @media (max-width: 360px) {
-  header #login {
-    margin-left: 0;
-    right: 52px;
-  }
-  #featuredCampaign p strong {
-    font-size: 12px;
-  }
+header #login {
+	margin-left: 0;
+	right: 52px;
 }
-
+#featuredCampaign p strong {
+	font-size: 12px;
+}
+#contentTabs ul.nav-tabs li#pledge {
+	font-size: 1.4em;
+}
+#contentTabs ul.nav-tabs li#pledge span {
+	font-size: 1.2em;
+	text-shadow: none;
+}
+#contentTabs ul.nav-tabs {
+	height: 33px
+}
+}
 /*********************** Memories page **************************/
 
 #memories {
@@ -4020,7 +4109,8 @@ header nav ul li .caret {
     font-style: italic;
     height: auto;
     margin: 10px 0 0;
-    padding: 0 0 10px 38px;
+    padding: 0 0 10px 40px;
+    text-align: left;
     width: 100%;
 }
 
@@ -4102,19 +4192,9 @@ header nav ul li .caret {
   font-weight: bold;
 }
 
-#geography .browse-btn {
-  background-color: #ffe538 !important;
-  color: #606060 !important;
-  float: inherit !important;
-  font-size: 2.5em !important;
-  letter-spacing: 0 !important;
-  margin: 10% 33% !important;
-  padding: 2px 20px !important;
-  text-transform: capitalize !important;
-}
-
 #geography .campaignInfo {
-  margin: 10px 15px 0;
+	margin: 10px 3% 0;
+	width: 94%;
   position:relative;
   float:left;
   border-top: 1px solid #ddd;
