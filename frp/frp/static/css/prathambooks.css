@@ -1588,10 +1588,10 @@ i.icon-large.icon-th {
   cursor: none;
 }
 #internalCampaign .donorDash .closed .fb:hover {
-  background-image: url("../images/fbIconH.png");
+  background-image: url("../images/fb.png");
 }
 #internalCampaign .donorDash .closed .tw:hover {
-  background-image: url("../images/twIconH.png");
+  background-image: url("../images/tw.png");
 }
 #internalCampaign .donorDash .closed h5.amt {
   background-color: #fbee9b !important;
@@ -1605,7 +1605,7 @@ i.icon-large.icon-th {
   font-size: normal !important;
 }
 span.tw {
-  background-image: url("../images/twIconH.png");
+  background-image: url("../images/tw.png");
   background-repeat: no-repeat;
   float: left;
   height: 20px;
@@ -1613,10 +1613,10 @@ span.tw {
   width: 20px;
 }
 span.tw:hover {
-  background-image: url("../images/twIcon.png");
+  background-image: url("../images/twIconH.png");
 }
 span.fb {
-  background-image: url("../images/fbIconH.png");
+  background-image: url("../images/fb.png");
   background-repeat: no-repeat;
   float: left;
   height: 20px;
@@ -1624,7 +1624,7 @@ span.fb {
   width: 20px;
 }
 span.fb:hover {
-  background-image: url("../images/fbIcon.png");
+  background-image: url("../images/fbIconH.png");
 }
 .donorDash table {
   font-family: "proxima-nova", sans-serif !important;
@@ -4290,7 +4290,13 @@ i.location {
   background-image: url("../images/tw.png");
   cursor: pointer;
 }
+.campaignTop span.tw:hover {
+  background-image: url("../images/twIconH.png");
+}
 .campaignTop span.fb {
   background-image: url("../images/fb.png");
   cursor: pointer;
+}
+.campaignTop span.fb:hover {
+  background-image: url("../images/fbIconH.png");
 }
