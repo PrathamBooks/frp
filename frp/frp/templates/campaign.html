@@ -54,7 +54,7 @@
             <time><span>{{campaign.days_remaining()}}</span> Days Left</time>
           </h5>
           <div class="socialIcons">
-            <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'Help India\'s children read. Donate to a library on Pratham Donate-a-Book.')"></span>
+            <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'I am helping India\'s children read. Donate books on @prathambook \'s Donate-a-Book. #donateabook')"></span>
             <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
           </div>
           {% if campaign.percent_funded() >= 100 %}
