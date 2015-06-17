@@ -20,6 +20,96 @@ redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 conn = redis.from_url(redis_url)
 q = Queue(connection=conn)
 
+def edit_beneficiary(campaign, form, filename):
+    org = campaign.org
+    info = org.info
+
+    org.title = form.title.data
+    db.session.add(org)
+
+    info.category = form.category.data
+    info.status = form.organization_status.data
+    info.address = form.address.data
+    info.contact_number = form.contact_number.data
+    info.email = form.email.data
+    info.website = form.website.data
+    info.facebook = form.facebook.data
+    info.blog = form.blog.data
+    info.has_80g_certificate = form.has_80g_certificate.data
+    info.person1_name = form.person1_name.data
+    info.person1_position = form.person1_position.data
+    info.person1_email = form.person1_email.data
+    info.person1_phone = form.person1_phone.data
+    info.person2_name = form.person2_name.data
+    info.person2_position = form.person2_position.data
+    info.person2_email = form.person2_email.data
+    info.person2_phone = form.person2_phone.data
+
+    db.session.add(info)
+    for choice in org.works:
+        db.session.delete(choice)
+
+    org_work = form.org_work.data
+    for choice in org_work:
+    # Create org work
+        work = OrganizationWork(organization=org, choice_id=choice)
+        db.session.add(work)
+
+    campaign.title = form.project_title.data
+    campaign.description = form.project_description.data
+    campaign.who = form.project_who_are_you.data
+    campaign.impact = form.project_impact.data
+    campaign.utilization = form.fund_utilization.data
+    campaign.nbooks = form.project_books.data if form.project_books.data else 0
+    campaign.total_impact_on_children = form.total_impact_on_children.data
+    campaign.nlic = form.project_lib_in_classroom.data if form.project_lib_in_classroom.data else 0
+    campaign.state = form.project_state.data
+    campaign.city = form.project_city.data
+    languages = []
+
+    if not form.language1.data == '':
+        languages.append(form.language1.data)
+    if not form.language2.data == '':
+        languages.append(form.language2.data)
+    if not form.language3.data == '':
+        languages.append(form.language3.data)
+    languages = ', '.join((l) for l in languages)
+
+    campaign.languages = languages
+
+    db.session.add(campaign)
+    try:
+        db.session.commit()
+        extension = file_extension(filename)
+        full_file_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+        new_file_name = str(campaign.id) + '.' + extension
+        full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
+        copyfile(full_file_path, full_new_path)
+        campaign = Campaign.query.get(campaign.id)
+        campaign.image = new_file_name
+        db.session.add(campaign)
+        db.session.commit()
+
+        if (app.config['VERSION'] == 'production'):
+            from .image_backup import save_image
+            app.logger.warning('Trying to backup image')
+            job = q.enqueue_call(
+                func=save_image, 
+                args=(os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads'),
+                    new_file_name,), 
+                result_ttl=5000
+                )
+            app.logger.warning('image save job id: ' + str(job.id))
+
+    except Exception as e:
+        app.logger.warning(e)
+        app.logger.warning('Unable to save campaign')
+        db.session.rollback()
+        return {'error': True, 'exc': e}
+
+    return {'error': False,
+            'campaign': campaign}
+
 def create_beneficiary(form, filename):
     category = form.category.data
     title = form.title.data
@@ -93,7 +183,6 @@ def create_beneficiary(form, filename):
             total_impact_on_children=total_impact_on_children,
             featured=False)
     db.session.add(campaign)
-
     try:
         db.session.commit()
         extension = file_extension(filename)

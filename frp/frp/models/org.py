@@ -4,6 +4,7 @@ from __future__ import division
 import inspect
 import sets
 from datetime import *
+from flask import current_app
 
 from . import db, BaseNameMixin, BaseMixin
 
@@ -162,9 +163,9 @@ class Campaign(BaseMixin, db.Model):
     @staticmethod
     def search(search_string):
         campaigns = Campaign.query.search(search_string).all()
-        retval = []
-        for campaign in campaigns:
-            retval.append(campaign.verbose_fields())
+        args=['Approved', 'Closed']
+        campaigns = filter(lambda x:(x.status in (args)), campaigns)
+        retval = map(lambda x:x.verbose_fields(),campaigns)
         return retval
 
     def emails(self):
@@ -198,8 +199,11 @@ class Campaign(BaseMixin, db.Model):
         else:
             return self.created_at.date() + timedelta(days=30)
 
+    def books_target(self):
+        return self.nbooks + 125 * self.nlic
+
     def target(self):
-        return int(round(36.75 * (self.nbooks + 125 * self.nlic)))
+        return int(round(current_app.config.get('COST_PER_BOOK') * (self.nbooks + 125 * self.nlic)))
 
     def total_donations(self):
         return sum(map(lambda x: x.amount, self.donations))
@@ -214,6 +218,7 @@ class Campaign(BaseMixin, db.Model):
     def verbose_fields(self):
         return {"id" : self.id,
                 "title" : self.title,
+                "org_name": self.org.title,
                 "description" : self.description,
                 "impact" : self.total_impact_on_children,
                 "languages" : self.languages,
@@ -263,7 +268,7 @@ class Campaign(BaseMixin, db.Model):
         return int(round((self.total_donations() * 100) /self.target()))
 
     def books_donated(self):
-        return int(round(self.total_donations()/36.75))
+        return int(round(self.total_donations()/current_app.config.get('COST_PER_BOOK')))
 
     def needs(self):
         needs = self.target() - self.total_donations() 

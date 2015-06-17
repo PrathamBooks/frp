@@ -4,6 +4,8 @@ import os
 import sets
 import json
 from datetime import *
+import random
+import pyexcel_xls
 from flask import (render_template,
                    g,
                    url_for,
@@ -28,7 +30,6 @@ from ..forms import (BeneficiarySignupForm,
                      DonorForm,
                      FilterForm,
                      ProfileForm,
-                     BillingInfo,
                      MemoryForm,
                      LANGUAGE_CHOICES,
                      STATES,
@@ -84,14 +85,13 @@ def send_mail(old_percent,curr_percent,campaign,donation):
   mailer.send_email(to=donation.donor.email,
     subject="Thank you for your donation", 
     template="thank-you.html", 
-    first_name=donation.donor.first_name,
-    last_name=donation.donor.last_name,
+    profile_name=donation.donor.profile_name(),
     title=campaign.title)
 
   mailer.send_email(to=campaign.emails(),
     subject="New Donation Received ",
     template="new_donation.html",
-    first_name=campaign.created_by.first_name,
+    profile_name=campaign.created_by.profile_name(),
     amount=donation.amount,
     donor=donation.donor_name(),
     title=campaign.title,
@@ -99,20 +99,20 @@ def send_mail(old_percent,curr_percent,campaign,donation):
 
   if (old_percent < 100 <= curr_percent):
     mailer.send_email(to=campaign.emails(),
-      subject="You’ve hit a century! Congrats",
+      subject="You've hit a century! Congrats",
       template="congrats.html",
-      first_name=campaign.created_by.first_name,
+      profile_name=donation.donor.profile_name(),
       title=campaign.title,
       start_date=start_date)
     return
 
   if (old_percent == 0):
     mailer.send_email(to=campaign.emails(),
-      subject="First Donation Recieved", 
+      subject="First Donation Recieved",
       template="new_donation.html",
-      first_name=campaign.created_by.first_name,
+      profile_name=donation.donor.profile_name(),
       amount=donation.amount,
-      donor=donation.donor.first_name + ' ' + donation.donor.last_name,
+      donor=donation.donor_name(),
       title = campaign.title,
       start_date=start_date)
     return
@@ -122,10 +122,10 @@ def send_mail(old_percent,curr_percent,campaign,donation):
   while index < len(percent_arr):
       if (old_percent < percent_arr[index] <= curr_percent):
           mailer.send_email(to=campaign.emails(),
-                  subject='Yay! You’ve reached '+ str(percent_arr[index])+'% of your target!',
+                  subject="Yay! You've reached '+ str(percent_arr[index])+'% of your target!",
                   template="campaign_milestone.html",
-                  first_name=campaign.created_by.first_name,
                   number=index+1,
+                  profile_name=donation.donor.profile_name(),
                   percent=percent_arr[index],
                   title=campaign.title,
                   start_date=start_date)
@@ -156,6 +156,19 @@ def donate_success():
 
   return render_template('donateSuccess.html', campaign=campaign)
 
+@app.route("/campaign/edit/<id>", methods=['GET'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def campaign_edit(id):
+    campaign = Campaign.query.get(id)
+    if (campaign):
+        form = BeneficiarySignupForm()
+        form.set_edit_data(campaign)
+        return render_template('start.html', form=form, action=url_for('campaign', id=campaign.id))
+    return render_template("404.html", error="Campaign with id " + str(id) + " does not exist",
+            error_description="",
+            error_uri=request.url)
+
 @app.route('/signup/beneficiary', methods=['GET', 'POST'])
 @login_required
 def signup_as_beneficiary():
@@ -178,8 +191,8 @@ def signup_as_beneficiary():
             if not result['error']:
                 mailer.send_email(to=current_user.email,
                         subject="Congrats! You successfully created a campaign on Donate-a-Book!",
-                        template="new_campaign.html", 
-                        first_name=current_user.first_name)
+                        template="new_campaign.html",
+                        profile_name=current_user.profile_name())
                 return redirect(url_for('campaign_success'))
             else:
                 flash('Oops something went wrong, please try again')
@@ -257,6 +270,7 @@ def about():
 @app.route("/donate", methods=['GET'])
 def discover():
     campaigns_data = Campaign.all_campaigns_data('Approved','Closed')
+    random.shuffle(campaigns_data)
     filter_form = FilterForm(request.form)
     category = request.args.get('category')
     if (category == 'featured'):
@@ -271,12 +285,6 @@ def discover():
         category = 'Most Funded'
     if (not category):
         category = 'Recently Launched'
-    # Convert numbers to text strings, -1 because select values start from
-    # 1 while array indexing starts from 0
-    types = map(
-            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
-            request.args.getlist('types')
-            )
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category=category)
 
@@ -284,24 +292,10 @@ def discover():
 def search():
     search_string = request.args.get('search-string')
     campaigns_data = Campaign.search(search_string)
+    random.shuffle(campaigns_data)
     filter_form = FilterForm()
-    languages = request.args.getlist('languages')
-    states = request.args.getlist('states')
-    # Convert numbers to text strings, -1 because select values start from
-    # 1 whame array indexing starts from 0
-    types = map(
-            lambda x: ORG_STATUS_CHOICES[int(x) - 1][1], 
-            request.args.getlist('types')
-            )
     return render_template('discover.html', campaigns_data=campaigns_data,
             form=filter_form, category='Recently Launched', search_string=search_string)
-
-@app.route("/donate/pay", methods=['POST'])
-@login_required
-def pay():
-  form = BillingInfo(request.form)
-  donation = Donation.query.get(form.donation_id.data)
-  return donate_service.ccavRequest(form, donation)
 
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
 @login_required
@@ -363,13 +357,13 @@ def change_status():
         mailer.send_email(to=campaign.emails(),
                 subject="Your D-A-B Campaign is now Live!",
                 template="campaign_created.html",
-                first_name=campaign.created_by.first_name,
+                profile_name=campaign.created_by.profile_name(),
                 id=campaign.id)
     else:
         mailer.send_email(to=campaign.emails(),
                 subject="Your D-A-B Campaign is " + status,
                 template="campaign_state_change.html",
-                first_name=campaign.created_by.first_name,
+                profile_name=campaign.created_by.profile_name(),
                 title=campaign.title,
                 start_date=start_date,
                 old_status=old_status,
@@ -490,7 +484,7 @@ def download_donations():
     header = ["Donor Name", "Donor Email", "Date", "Campaign Title", "Amount Donated",
             "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
     donations_data.insert(0,header)
-    return excel.make_response_from_array(donations_data, "csv")
+    return excel.make_response_from_array(donations_data, "xls")
 
 
 @login_required
@@ -501,7 +495,7 @@ def download_campaigns():
     campaigns_data = map(lambda x:x.campaign_details(),campaigns)
     header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Funds Raised','Status']
     campaigns_data.insert(0,header)
-    return excel.make_response_from_array(campaigns_data, "csv")
+    return excel.make_response_from_array(campaigns_data, "xls")
 
 
 @app.route("/profile/donor_transactions")
@@ -530,10 +524,12 @@ def donor_dashboard():
                 total_closed_children += donation.campaign.total_impact_on_children
                 total_closed_amt+= donation.amount
 
+    cost_per_book = app.config.get('COST_PER_BOOK')
+
     return render_template('donorDashboard.html',
             campaigns=campaigns,total_active_amt=total_active_amt,
             total_closed_amt=total_closed_amt,active_donation=active_donation,
-            books_active= int(total_active_amt/50),books_closed=int(total_closed_amt/50),
+            books_active= int(total_active_amt/cost_per_book),books_closed=int(total_closed_amt/cost_per_book),
             closed_donation=closed_donation, total_active_children=total_active_children,
             total_closed_children=total_closed_children)
 
@@ -561,8 +557,9 @@ def beneficiary_dashboard():
 
     n_active_donors = len(sets.Set(active_donors))
     n_closed_donors = len(sets.Set(closed_donors))
-    num_books_recvd_active = int(total_active_amt/50)
-    num_books_recvd_closed = int(total_closed_amt/50)
+    cost_per_book = app.config.get('COST_PER_BOOK')
+    num_books_recvd_active = int(total_active_amt/cost_per_book)
+    num_books_recvd_closed = int(total_closed_amt/cost_per_book)
     return render_template('beneficiaryDashboard.html',campaigns=campaigns,
             active_campaigns=active_campaigns,
             closed_campaigns=closed_campaigns,
@@ -581,10 +578,28 @@ def convertStatusTypeToString():
         return ORG_STATUS_CHOICES[status - 1]
     return dict(statusString=statusString)
 
-@app.route("/campaign/<id>", methods=['GET'])
+@app.route("/campaign/<id>", methods=['GET', 'POST'])
 def campaign(id):
     campaign = Campaign.query.get(id)
-    return render_template('campaign.html', campaign=campaign)
+    if request.method == 'GET':
+        return render_template('campaign.html', campaign=campaign)
+    else:
+        form = BeneficiarySignupForm(request.form)
+        if form.validate():
+            image = request.files['imageUpload']
+            filename = secure_filename(image.filename)
+            if filename and allowed_file(filename):
+                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
+                image.save(full_save_path)
+
+            result = signup_service.edit_beneficiary(campaign, form, filename)
+            if not result['error']:
+                flash('You successfully edited the campaign')
+                return render_template('campaign.html', campaign=campaign)
+            else:
+                flash('Oops something went wrong, please try again')
+        return render_template('beneficiary_form.html', form=form)
+
 
 # This code has been added for testing porpose only 
 @app.route("/donate_1/<campaign_id>", methods=['GET', 'POST'])
