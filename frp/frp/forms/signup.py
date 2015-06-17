@@ -3,6 +3,7 @@
 import wtforms
 import coaster
 from .. import app
+from string import split
 
 from ..models import (is_email_exists, ORG_STATUS_CHOICES,
                       is_org_email_exists, is_org_name_exists)
@@ -69,7 +70,7 @@ STATES = [
         ("Tamilnadu", "Tamilnadu"),
         ("Tripura", "Tripura"),
         (u'Uttar Pradesh', u'Uttar Pradesh'),
-        ("Uttaranchal", "Uttaranchal"),
+        ("Uttarakhand", "Uttarakhand"),
         (u'West Bengal', u'West Bengal')]
 
 
@@ -230,6 +231,30 @@ class BeneficiarySignupForm(wtforms.Form):
             validators=[wtforms.validators.Required(),
                     wtforms.validators.Length(max=4000)])
 
+    def set_edit_data(self, campaign):
+       self.set_data(campaign.org)
+       self.project_title.data = campaign.title
+       self.project_description.data = campaign.description
+       self.project_who_are_you.data = campaign.who
+       self.project_impact.data = campaign.impact
+       self.total_impact_on_children.data = campaign.total_impact_on_children
+       self.fund_utilization.data = campaign.utilization
+       self.project_books.data = campaign.nbooks
+       self.project_lib_in_classroom.data = campaign.nlic
+       self.project_state.data = campaign.state
+       self.project_city.data = campaign.city
+       for work in campaign.org.works:
+         self.org_work.data.append(work.choice_id) 
+       languages = split(campaign.languages, ', ')
+       languages = map(lambda x:x.strip(), languages)
+       if len(languages) > 0:
+           self.language1.data = languages[0]
+       if len(languages) > 1:
+           self.language2.data = languages[1]
+       if len(languages) > 2:
+           self.language3.data = languages[2]
+
+
     def set_data(self, org):
        self.category.data = org.info.category
        self.title.data = org.title
@@ -244,7 +269,6 @@ class BeneficiarySignupForm(wtforms.Form):
        self.person1_position.data = org.info.person1_position
        self.person1_email.data = org.info.person1_email
        self.person1_phone.data = org.info.person1_phone
-       self.project_description.data = ""
 
        org_works = org.works
        org_works_selected = []

@@ -7,6 +7,7 @@ var Start = function() {
         alert('You need to sign-up and login to start a campaign');
         e.preventDefault();
       });
+      $('#login-error-modal').modal('show');
       return;
     }
     $("#accordion").accordion();

@@ -105,8 +105,11 @@ var AdminPage = function(campaign_data)
   this.get_campaign = function(data) 
   {
     var $row = $('<tr/>').attr('id',"row"+data.id)
-    var $title = $('<td/>').html("<a href=/campaign/"+data.id+ ">"+data.title+"</a>").addClass('title').appendTo($row);
-    var $type = $('<td/>').html(data.type).appendTo($row);
+    var $title_td = $('<td/>').appendTo($row);
+    var $title = $('<a/>').attr('href', '/campaign/'+data.id).text(data.title).appendTo($title_td);
+    var $edit_btn = $('<a/>').attr('href','/campaign/edit/'+data.id).appendTo($title_td).
+      append($('<button/>').addClass('edit').text('edit'));
+    var $org_name = $('<td/>').html(data.org_name).appendTo($row);
     var $city= $('<td/>').html(data.city).appendTo($row);
     var $target = $('<td/>').html(data.target).appendTo($row);
     var $start_date = $('<td/>').html(data.start_date).appendTo($row);
