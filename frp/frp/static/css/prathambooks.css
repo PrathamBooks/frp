@@ -3824,6 +3824,19 @@ footer .row {
 	padding: 2% 0;
 }
 }
+@media (min-width: 481px) and (max-width: 550px) {
+  header h1.logo a span {
+    background: transparent url("../images/caption.png") no-repeat scroll 0 0 / 68% auto;
+    margin: -86px 0 0 1px;
+  }
+  header h1.logo {
+    background-image: url("../images/pratham_logo.png");
+    margin: 8px 0px 0px 6px;
+    width: 97px;
+    background-size: 92% auto !important;
+  }
+}
+
 @media (max-width: 480px) {
 header h1.logo {
 	height: 114px;
@@ -3912,6 +3925,16 @@ footer .row h5 {
 #contentTabs ul.nav-tabs li#pledge {
 	font-size: 1.7em;
 	;
+}
+.carousel-indicators {
+	bottom: -4px;
+	margin-left: 0;
+	left: 42%;
+	width: 33%;
+}
+.carousel-indicators li {
+	margin: 1px 6px;
+	float: left;
 }
 }
 @media (max-width: 360px) {
