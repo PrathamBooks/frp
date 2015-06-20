@@ -73,7 +73,7 @@ var DiscoverPage = function(args) {
       $div_md_3.popover({
         title: campaign.title,
         container: 'body',
-        placement: 'left',
+        placement: function() { return $(window).width() < 786 ? 'top' : 'left'; },
         content: campaign.description
       });
       $div_md_3.hover(
