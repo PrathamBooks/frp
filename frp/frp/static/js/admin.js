@@ -157,9 +157,6 @@ var AdminPage = function(campaign_data)
     $tbody.appendTo($campaigns);
     $('#campaigns').tablesorter({
       headers: {
-        6: {
-          sorter: false
-        },
         7: {
           sorter: false
         },
