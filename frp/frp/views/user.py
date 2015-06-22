@@ -52,8 +52,8 @@ facebook = oauth.remote_app(
     base_url='https://graph.facebook.com/',
     access_token_url='/oauth/access_token',
     authorize_url='https://www.facebook.com/dialog/oauth',
-    consumer_key=app.config.get('FACEBOOK_CONSUMER_KEY'),
-    consumer_secret=app.config.get('FACEBOOK_CONSUMER_SECRET'),
+    consumer_key="key",#app.config.get('FACEBOOK_CONSUMER_KEY'),
+    consumer_secret="secret",#app.config.get('FACEBOOK_CONSUMER_SECRET'),
     request_token_params={'scope': 'email'})
 
 @facebook.tokengetter
@@ -493,7 +493,7 @@ def download_donations():
 def download_campaigns():
     campaigns = Campaign.query.all()
     campaigns_data = map(lambda x:x.campaign_details(),campaigns)
-    header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Funds Raised','Status']
+    header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Funds Raised','Status','Name','Organization Email_Id','Organization Phone Numbers','Person Email_Id','Person Phone Number','Language']
     campaigns_data.insert(0,header)
     return excel.make_response_from_array(campaigns_data, "xls")
 

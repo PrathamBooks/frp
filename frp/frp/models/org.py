@@ -234,7 +234,11 @@ class Campaign(BaseMixin, db.Model):
                 "total_donations" : self.total_donations(),
                 "status" : self.print_status(),
                 "featured" : self.featured,
-                "image" : self.image
+                "image" : self.image,
+                "email" : self.org.info.email,
+                "contact_number" : self.org.info.contact_number,
+                "person1_email" : self.org.info.person1_email,
+                "person1_phone" : self.org.info.person1_phone
                 }
 
     def campaign_details(self):
@@ -246,7 +250,13 @@ class Campaign(BaseMixin, db.Model):
                 self.nbooks,
                 self.nlic,
                 self.total_donations(),
-                self.status]
+                self.status,
+                self.org.title,
+                self.org.info.email,
+                self.org.info.contact_number,
+                self.org.info.person1_email,
+                self.org.info.person1_phone,
+                self.languages]
 
     def donor_list(self):
         return map(lambda x: x.user_id, self.donations)
