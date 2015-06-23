@@ -234,11 +234,7 @@ class Campaign(BaseMixin, db.Model):
                 "total_donations" : self.total_donations(),
                 "status" : self.print_status(),
                 "featured" : self.featured,
-                "image" : self.image,
-                "email" : self.org.info.email,
-                "contact_number" : self.org.info.contact_number,
-                "person1_email" : self.org.info.person1_email,
-                "person1_phone" : self.org.info.person1_phone
+                "image" : self.image
                 }
 
     def campaign_details(self):
