@@ -57,8 +57,8 @@ def ccavRequest(form, donation):
   p_order_id = str(donation.id)
   p_currency = 'INR'
   p_amount = str(donation.amount)
-  p_redirect_url = "http://donateabook.org.in/billing/success"
-  p_cancel_url = "http://donateabook.org.in/billing/failure"
+  p_redirect_url = "https://donateabook.org.in/billing/success"
+  p_cancel_url = "https://donateabook.org.in/billing/failure"
   p_language = 'EN'
   p_integration_type = "iframe_normal"
   
@@ -118,5 +118,8 @@ def ccavResponse(encresp):
       donation_id = arg[1]
     if (arg[0] == 'tracking_id'):
       tracking_id = arg[1]
-  return (donation_id, tracking_id)
+    if (arg[0] == 'order_status'):
+      order_status = arg[1]
+
+  return (donation_id, tracking_id, order_status)
    

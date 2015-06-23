@@ -134,28 +134,34 @@ def send_mail(old_percent,curr_percent,campaign,donation):
 
 @app.route('/billing/success', methods=['GET', 'POST'])
 def donate_success():
-  donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp'])
+  donation_id, tracking_id, order_status = donate_service.ccavResponse(request.form['encResp'])
   donation = Donation.query.get(int(donation_id))
   campaign = donation.campaign
-  curr_percent = campaign.percent_funded()
-  old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
-  send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
+  if (order_status == 'Success'):
+	  curr_percent = campaign.percent_funded()
+	  old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
+	  send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
+	  app.logger.warning('Donation id ' + str(donation_id) + ' successful. Tracking id is ' + str(tracking_id))
 
-  if (curr_percent >= 100):
-      campaign.status = 'Closed'
-      db.session.add(campaign)
+	  if (curr_percent >= 100):
+	      campaign.status = 'Closed'
+	      db.session.add(campaign)
 
-  donation.confirmation = tracking_id
-  db.session.add(donation)
-  try:
-    db.session.commit()
+	  donation.confirmation = tracking_id
+	  db.session.add(donation)
+	  try:
+	    db.session.commit()
 
-  except Exception as e:
-    app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
-    return render_template('donateSuccess.html', campaign=campaign)
+	  except Exception as e:
+	    app.logger.warning("Unable to save donation with id " + donation_id + " tracking num " + tracking_id)
+	    return render_template('donateSuccess.html', campaign=campaign)
 
-  return render_template('donateSuccess.html', campaign=campaign)
-
+	  return render_template('donateSuccess.html', campaign=campaign)
+  db.session.delete(donation)
+  app.logger.warning('Donation id ' + str(donation_id) + ' failed. Tracking id is ' + str(tracking_id))
+  db.session.commit()
+  return render_template("donateFailure.html", campaign=campaign)
+   
 @app.route("/campaign/edit/<id>", methods=['GET'])
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
