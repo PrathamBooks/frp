@@ -828,7 +828,7 @@ header #login .dropdown-menu {
   float: inherit !important;
   margin: 26px 0 !important;
   text-align: center !important;
-  width: 15% !important;
+ 
 }
 .decriptionTxt {
   background-color: rgba(0, 0, 0, 0.7);
@@ -2829,7 +2829,6 @@ ul#socialThumbs li {
   float: left;/*a.blog{
   background-image:url(../images/blogIcon.png); 
 }
-
 a.flick{
   background-image:url(../images/flkfIcon.png);
 }*//*a.news{
@@ -4382,13 +4381,53 @@ i.location {
     margin: 0 36% !important;
   }
   label.checkboxLabel {
-    width: 92%;
+    width: 93%;
   }
+.beneficiary.donor .col-xs-4 {
+  width: 100%;
+
+}
+
+.beneficiary.donor .col-xs-8 {
+  width: 100%;
+
+}
+
+.beneficiary.donor  .col-xs-9 {
+  width: 100%;
+}
+
+.beneficiary.donor .col-xs-3 {
+  width: 100%;
+}
+#pratham-form .jumbotron h2 {
+ 
+  font-size: 1.5em;
+margin-bottom:10px;
+}
+
+
+#pratham-form  .beneficiary.donor h3{ font-size: 2em;}
+
+#pratham-form  .beneficiary.donor h4 {
+  font-size: 1.5em;
+}
+
+#pratham-form .well p.help-block {
+ 
+  padding: 0 0 0 15px;}
+
+
 }
 @media (max-width: 480px) {
   .internal .col-md-9 .col-md-3 {
     width: 85%;
   }
+
+#pratham-form .jumbotron h2 {
+ 
+ 
+  font-size: 1.5em;}
 }
 @media (max-width: 360px) {
   .internal .col-md-9 .col-md-3 {
@@ -4446,3 +4485,22 @@ i.location {
     font-size: 2em;
   }
 }
+
+
+.popover {
+  font-size: 12px;
+  background-color:#fbee9b;
+}
+
+.popover-title {
+  background-color:#fbe659;}
+
+.popover.left .arrow:after {
+  right: 1px;
+  bottom: -10px;
+  border-left-color: #fbee9b;}
+
+.popover.top .arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  border-top-color: #fbee9b;}
