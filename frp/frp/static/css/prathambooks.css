@@ -4370,6 +4370,11 @@ i.location {
   .internal #filterOptions.col-md-3 {
     clear: both;
   }
+  .tab-content .col-md-12 p.see-more {
+    float: initial !important;
+    text-align: center; 
+    margin-right: 0 !important; 
+  } 
 }
 @media (max-width: 600px) {
   .internal .col-md-9 .col-md-3 {
@@ -4513,3 +4518,8 @@ i.webSite {
 i.blog { 
   background-position: -124px 9px; 
 }
+.tab-content .col-md-12 p.see-more {
+  float: right;
+  font-size: 14px; 
+  margin-right: 10px; 
+} 
