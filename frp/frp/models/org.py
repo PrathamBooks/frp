@@ -206,7 +206,8 @@ class Campaign(BaseMixin, db.Model):
         return int(round(current_app.config.get('COST_PER_BOOK') * (self.nbooks + 125 * self.nlic)))
 
     def total_donations(self):
-        return sum(map(lambda x: x.amount, self.donations))
+        fdonations = filter(lambda x: x.confirmation, self.donations)
+        return sum(map(lambda x: x.amount, fdonations))
 
     def print_status(self):
         if self.status == 'Approved':
@@ -264,7 +265,8 @@ class Campaign(BaseMixin, db.Model):
     def num_donors(self):
         retval =[]
         for donation in self.donations:
-                    retval.append(donation.user_id)
+	    if (donation.confirmation):
+                retval.append(donation.user_id)
         return len(sets.Set(retval))
 
     def is_active(self):
