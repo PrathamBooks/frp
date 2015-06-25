@@ -22,7 +22,7 @@ class DonorForm(wtforms.Form):
     customize_amount = wtforms.IntegerField(
             label='Customize your donation amount',
             validators=[wtforms.validators.Optional(),
-                        wtforms.validators.NumberRange(1,10000)])
+                        wtforms.validators.NumberRange(1,50000)])
     first_name = wtforms.TextField(
             label='Name',
             validators=[wtforms.validators.Required()])
