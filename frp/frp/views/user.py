@@ -587,7 +587,7 @@ def convertStatusTypeToString():
 @app.route("/campaign/<id>", methods=['GET', 'POST'])
 def campaign(id):
     campaign = Campaign.query.get(id)
-    if request.method == 'GET':
+    if request.method == 'GET' or request.method == 'HEAD':
         return render_template('campaign.html', campaign=campaign)
     else:
         form = BeneficiarySignupForm(request.form)
