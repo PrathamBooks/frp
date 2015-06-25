@@ -16,5 +16,13 @@ var DonorForm = function() {
         e.preventDefault();
       }
     });
+    $("input:text[name='customize_amount']").focus(function() {
+      $("input:radio[name='amount_choice']").each(function() {
+        this.checked = false;
+      });
+    })
+    $("input:radio[name='amount_choice']").click(function() {
+      $("input:text[name='customize_amount']").val('');
+    });
   }
 };
