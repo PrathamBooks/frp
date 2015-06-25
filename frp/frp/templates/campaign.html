@@ -76,17 +76,17 @@
           <li><i class="location"></i><span>Location:</span> {{campaign.city}}, {{campaign.state}}</li>
           {% if campaign.org.info.facebook != '' %}
             <li><i class="faceBook"></i><span>Facebook:</span>
-              <a href="{{campaign.org.info.facebook}}"> {{campaign.org.info.facebook}}</a>
+              <a href="{{campaign.org.info.facebook}}" target="_blank"> {{campaign.org.info.facebook}}</a>
             </li>
           {% endif %}
           {% if campaign.org.info.website != '' %}
             <li><i class="webSite"></i><span>Website:</span>
-              <a href="{{campaign.org.info.website}}"> {{campaign.org.info.website}}</a>
+              <a href="{{campaign.org.info.website}}" target="_blank"> {{campaign.org.info.website}}</a>
             </li>
           {% endif %}
           {% if campaign.org.info.blog != '' %}
             <li><i class="blog"></i><span>Blog:</span> 
-              <a href="{{campaign.org.info.blog}}"> {{campaign.org.info.blog}}</a> 
+              <a href="{{campaign.org.info.blog}}" target="_blank"> {{campaign.org.info.blog}}</a> 
             </li>
           {% endif %}
         </ul>
