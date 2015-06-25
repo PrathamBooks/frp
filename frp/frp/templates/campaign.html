@@ -84,6 +84,11 @@
               <a href="{{campaign.org.info.website}}"> {{campaign.org.info.website}}</a>
             </li>
           {% endif %}
+          {% if campaign.org.info.blog != '' %}
+            <li><i class="blog"></i><span>Blog:</span> 
+              <a href="{{campaign.org.info.blog}}"> {{campaign.org.info.blog}}</a> 
+            </li>
+          {% endif %}
         </ul>
       </div>
     </div>
