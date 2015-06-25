@@ -960,18 +960,6 @@ $(function() {
     var start = new Start();
     start.start({logged_in:{{ 1 if current_user.is_active() else 0 }}});
     });
-if (document.documentElement.clientWidth >= 769) {
-$(function() {
-    var start = new Start();
-    start.start({logged_in:0});
-    });
-}
-
-if (document.documentElement.clientWidth <= 768) {
-   $('#setup-warning-modal').modal({
-    backdrop: 'static'
-   });
-}
 </script>
 <script>$(document).ready(function(){$('input[type=file]').bootstrapFileInput();});</script>
 {% endblock %}
