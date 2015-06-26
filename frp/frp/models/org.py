@@ -140,7 +140,7 @@ class Campaign(BaseMixin, db.Model):
 
     @staticmethod
     def all_campaigns_data(*args):
-        campaigns = Campaign.query.all()
+        campaigns = Campaign.query.order_by(Campaign.created_at.desc()).all()
         if len(args) == 0:
             retval = map(lambda x:x.verbose_fields(),campaigns)
         else:

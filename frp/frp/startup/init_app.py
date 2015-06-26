@@ -58,6 +58,7 @@ def init_app(app, settings='settings/development.py'):
                     "js/utils.js",
                     "js/tablesorter.js",
                     "lib/bootstrap/bootstrap.file-input.js",
+                    "js/responsive-tabs.js",
                     output="gen/lib.js")
 
     assets.register('css_site', css)
