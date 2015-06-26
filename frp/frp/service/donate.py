@@ -74,7 +74,6 @@ def ccavRequest(form, donation):
   merchant_data='merchant_id=' + p_merchant_id + '&' + 'order_id=' + p_order_id + '&' + 'currency=' + p_currency + '&' + 'amount=' + p_amount + '&' + 'redirect_url=' + p_redirect_url + '&' + 'cancel_url=' + p_cancel_url + '&' + 'language=' + p_language + '&' + 'integration_type=' + p_integration_type + '&' + 'billing_name=' + p_billing_name + '&' + 'billing_address=' + p_billing_address + '&' + 'billing_city=' + p_billing_city + '&' + 'billing_state=' + p_billing_state + '&' + 'billing_zip=' + p_billing_zip + '&' + 'billing_country=' + p_billing_country + '&' + 'billing_tel=' + p_billing_tel + '&' + 'billing_email=' + p_billing_email + '&'
   app.logger.warning('merchant data = ' + merchant_data)
 	
-  print merchant_data
   encryption = encrypt(merchant_data,workingKey)
 
   html = '''\
@@ -108,12 +107,14 @@ def ccavRequest(form, donation):
 
 def ccavResponse(encresp):
   plainText = decrypt(encresp, workingKey)	
+  app.logger.warning("Response = " + plainText)
   args = split(plainText, '&')
   args = map(lambda x: split(x, '='), args)
   donation_id = 0
   tracking_id = 0
   
   for arg in args:
+  #  app.logger.warning('Donation ' + arg[0] + ' = ' + arg[1])
     if (arg[0] == 'order_id'):
       donation_id = arg[1]
     if (arg[0] == 'tracking_id'):

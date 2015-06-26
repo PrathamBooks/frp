@@ -6,25 +6,25 @@ APP_NAME = "Donate-A-Book"
 SQLALCHEMY_DATABASE_URI = "postgresql://:@localhost/frp"
 
 # Facebook Social Info
-FACEBOOK_CONSUMER_KEY = os.environ.get('FACEBOOK_CONSUMER_KEY'),
-FACEBOOK_CONSUMER_SECRET =  os.environ.get('FACEBOOK_CONSUMER_SECRET')
-FACEBOOK_APP_ID =  os.environ.get('FACEBOOK_APP_ID')
+FACEBOOK_CONSUMER_KEY=os.environ.get('FACEBOOK_CONSUMER_KEY'),
+FACEBOOK_CONSUMER_SECRET=os.environ.get('FACEBOOK_CONSUMER_SECRET')
+FACEBOOK_APP_ID=os.environ.get('FACEBOOK_APP_ID')
 
-GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID'),
-GOOGLE_CLIENT_SECRET =  os.environ.get('GOOGLE_CLIENT_SECRET')
-SECRET_KEY = os.environ.get('SECRET_KEY')
+GOOGLE_CLIENT_ID=os.environ.get('GOOGLE_CLIENT_ID'),
+GOOGLE_CLIENT_SECRET=os.environ.get('GOOGLE_CLIENT_SECRET')
+SECRET_KEY=os.environ.get('SECRET_KEY')
+
 COST_PER_BOOK=36.75
-
 #DEBUG = True
 
 #ccavenue
-CCAVENUE_ACCESS_CODE = os.environ.get('CCAVENUE_ACCESS_CODE')
-CCAVENUE_WORKING_KEY = os.environ.get('CCAVENUE_WORKING_KEY')
+CCAVENUE_ACCESS_CODE=os.environ.get('CCAVENUE_ACCESS_CODE')
+CCAVENUE_WORKING_KEY=os.environ.get('CCAVENUE_WORKING_KEY')
 
 SITE_NAME="Pratham Books Donate-A-Book"
 
-UPLOAD_DIRECTORY = "/home/infodigital/frp/frp/frp/static/uploads"
-ALLOWED_EXTENSIONS = set("jpg jpeg png gif JPG JPEG PNG GIF".split())
+UPLOAD_DIRECTORY="/home/infodigital/frp/frp/frp/static/uploads"
+ALLOWED_EXTENSIONS=set("jpg jpeg png gif JPG JPEG PNG GIF".split())
 
 # Email configuration
 MAIL_SERVER = 'localhost'

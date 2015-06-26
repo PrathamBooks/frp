@@ -72,11 +72,10 @@ def campaign_success():
 
 @app.route('/billing/failure', methods=['GET', 'POST'])
 def donate_failure():
-  donation_id, tracking_id = donate_service.ccavResponse(request.form['encResp']) 
+  donation_id, tracking_id, order_status = donate_service.ccavResponse(request.form['encResp']) 
   donation = Donation.query.get(int(donation_id))
   campaign = donation.campaign  
   db.session.delete(donation)
-  app.logger.warning('Donation id ' + str(donation_id) + ' failed. Tracking id is ' + str(tracking_id))
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
 
@@ -101,7 +100,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     mailer.send_email(to=campaign.emails(),
       subject="You've hit a century! Congrats",
       template="congrats.html",
-      profile_name=donation.donor.profile_name(),
+      profile_name=campaign.created_by.profile_name(),
       title=campaign.title,
       start_date=start_date)
     return
@@ -110,7 +109,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     mailer.send_email(to=campaign.emails(),
       subject="First Donation Recieved",
       template="new_donation.html",
-      profile_name=donation.donor.profile_name(),
+      profile_name=campaign.created_by.profile_name(),
       amount=donation.amount,
       donor=donation.donor_name(),
       title = campaign.title,
@@ -125,7 +124,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
                   subject="Yay! You've reached '+ str(percent_arr[index])+'% of your target!",
                   template="campaign_milestone.html",
                   number=index+1,
-                  profile_name=donation.donor.profile_name(),
+                  profile_name=campaign.created_by.profile_name(),
                   percent=percent_arr[index],
                   title=campaign.title,
                   start_date=start_date)
