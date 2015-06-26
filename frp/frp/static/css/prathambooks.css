@@ -4523,3 +4523,108 @@ i.blog {
   font-size: 14px; 
   margin-right: 10px; 
 } 
+/* AboutUs Responsive */
+@media (max-width: 991px) {
+  #collapse-myTab .well p {
+    font-size: 14px;
+  }
+  #collapse-myTab .well h4 {
+    padding-left: 20px!important;
+    font-size: 16px!important;
+  }
+  #collapse-myTab .well h2 {
+    padding-left: 20px!important;
+    font-size: 18px!important;
+  }
+  #collapse-myTab .faq .tou h1 {
+    font-size: 2em !important;
+  }
+  #collapse-myTab .faq h5 {
+    font-size: 2em!important;
+    padding-left: 20px!important;
+  }
+  #collapse-myTab .faq .tou ul li strong {
+    font-size: 16px !important;
+    padding-left: 20px!important;
+    width: 100%;
+  }
+  .startCampaign #privacy ul {
+    line-height: 22px;
+    font-size: 14px;
+  }
+  .startCampaign #privacy ul li {
+    line-height: 22px;
+  }
+  .startCampaign .faq .tou ul.alert-warning li {
+    font-size: 14px !important;
+    line-height: 26px;
+  }
+  .startCampaign #contact address {
+    font-size: 1.3em;
+    padding: 0 15px;
+    width: 100%;
+  }
+  .startCampaign #contact ul {
+    font-size: 1.3em;
+    line-height: 36px;
+    padding: 0 15px;
+  }
+  .startCampaign #collapse-myTab .well h3 {
+    margin: 0 0 25px !important;
+  }
+  #collapse-myTab .panel-heading {
+    background-color: transparent;
+    padding: 0;
+  }
+  .startCampaign .panel-title a.accordion-toggle.collapsed {
+    background-color: #ffde00 !important;
+    border-radius: 4px;
+    display: block;
+    margin: 1% 1%;
+    padding: 10px;/*    background-image: url("../images/tab-arrows-down.png") !important; */
+  }
+  .startCampaign .panel-title a.accordion-toggle {
+    background-color: #ffc600 !important;
+    border-radius: 4px;
+    display: block;
+    margin: 1% 1%;
+    padding: 10px;
+    background-repeat: no-repeat;
+    /*  background-image: url("../images/tab-arrows-top.png") !important; */
+    background-position: 98% center;
+    outline: medium none;
+    text-decoration: none;
+  }
+  .startCampaign .panel-title > a:hover {
+    background-color: #ffc600;
+    text-decoration: none;
+  }
+  .startCampaign .panel {
+    margin-top: 0px;
+    border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .startCampaign .panel-body {
+    border: medium none !important
+  }
+  .visible-xs {
+    display: block !important;
+  }
+  #collapse-myTab .panel-title {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .startCampaign .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+    left: 0.2em !important;
+    margin-top: 0 !important;
+    top: initial !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width:991px) {
+  #beneficiary-form .tab-content.col-md-9 {
+    width: 100%;
+    padding-left: 0 !important;
+  }
+}

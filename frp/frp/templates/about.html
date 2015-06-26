@@ -6,7 +6,7 @@
 
       <div class="col-md-12 tabbable">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs responsive"  id="myTab">
           <li class="active"><a href="#donateBook" data-toggle="tab">Pratham Books' Donate-a-Book</a></li>
           <li><a href="#prathamBooks" data-toggle="tab">About Pratham Books</a></li>
           <li><a href="#donateThon" data-toggle="tab">Donate-a-Thon</a></li>
@@ -17,7 +17,7 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content responsive">
           <div class="tab-pane active" id="donateBook">
             <div class="well">
               <h3>Donate-a-Book</h3>
@@ -1141,5 +1141,9 @@ $(function() {
     $("#accordion").accordion();
     $("#accordion2").accordion();
 });
+
+(function($) {
+  fakewaffle.responsiveTabs(['xs', 'sm']);
+})(jQuery);
 </script>
 {% endblock %}
