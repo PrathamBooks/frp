@@ -1684,7 +1684,7 @@ span.featured-campaign {
   float: right;
   font-size: 8px;
   margin: -25px -12px -20px 0;
-  padding: 29px 0 5px;
+  padding: 28px 0 5px;
   position: relative;
   right: 0;
   text-transform: uppercase;
@@ -1704,7 +1704,7 @@ span.featured-campaign {
   width: auto;
 }
 #internalCampaign #campaigns .col-md-3 h2 {
-  min-height: 57px;
+  min-height: 60px;
 }
 #internalCampaign.discover .campaignInfo {
   clear: both;
