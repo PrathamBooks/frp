@@ -69,7 +69,7 @@
               </div>
               <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>
               <div class="socialIcons">
-                <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'I am helping India\'s children read. Donate books on @prathambook \'s Donate-a-Book. #donateabook')"></span>
+                <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'I am helping India\'s children read. Donate books on @prathambooks Donate-a-Book. #donateabook')"></span>
                 <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
               </div>
               <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate </a> </h5>
