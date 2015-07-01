@@ -123,7 +123,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
   while index < len(percent_arr):
       if (old_percent < percent_arr[index] <= curr_percent):
           mailer.send_email(to=campaign.emails(),
-                  subject="Yay! You've reached '+ str(percent_arr[index])+'% of your target!",
+                  subject="Yay! You've reached "+ str(percent_arr[index])+"% of your target!",
                   template="campaign_milestone.html",
                   number=index+1,
                   profile_name=campaign.created_by.profile_name(),
@@ -139,9 +139,9 @@ def donate_success():
   donation = Donation.query.get(int(donation_id))
   campaign = donation.campaign
   if (order_status == 'Success'):
-	  curr_percent = campaign.percent_funded()
-	  old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
-	  send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
+          old_percent = campaign.percent_funded()
+          curr_percent = int(round(((campaign.total_donations() + donation.amount)  * 100.0) / campaign.target()))
+          send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
 	  app.logger.warning('Donation id ' + str(donation_id) + ' successful. Tracking id is ' + str(tracking_id))
 
 	  if (curr_percent >= 100):
