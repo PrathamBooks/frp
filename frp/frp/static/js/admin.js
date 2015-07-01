@@ -142,6 +142,7 @@ var AdminPage = function(campaign_data)
     $('<td/>').html(data.num_donors).appendTo($row);
     var $butn = $('<button type="button"/>').attr("data-toggle","modal").attr("data-target","#CommentsModal").attr("id",'butn'+data.id).addClass("btn btn-comment");
     $('<td/>').append($butn).appendTo($row);
+    var $fund_raised = $('<td/>').html(data.funds_raised).appendTo($row)
     return $row;
   };
 
