@@ -96,6 +96,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
     title=campaign.title,
     start_date=start_date)
 
+  app.logger.warning("old_percent = " + str(old_percent) + " curr_percent = " + str(curr_percent))
   if (old_percent < 100 <= curr_percent):
     mailer.send_email(to=campaign.emails(),
       subject="You've hit a century! Congrats",
@@ -103,6 +104,7 @@ def send_mail(old_percent,curr_percent,campaign,donation):
       profile_name=campaign.created_by.profile_name(),
       title=campaign.title,
       start_date=start_date)
+    app.logger.warning("Sent 100% email")
     return
 
   if (old_percent == 0):
@@ -631,6 +633,8 @@ def donate_1(campaign_id):
                         campaign=campaign, 
                         state=form.state.data, 
                         city=form.city.data, 
+                        confirmation=12345,
+                        identification_type=form.identification_type.data,
                         identification=form.pan_number.data,
                         tax_exemption_certificate=form.tax_exemption_certificate.data,
                         ann_choice=form.ann_choice.data)
