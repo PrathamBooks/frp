@@ -45,6 +45,10 @@ class Donation(BaseMixin, db.Model):
 
     def donation_details(self):
         return [self.first_name +' '+ self.last_name, 
+                self.city,
+                self.state,
+                self.identification_type,
+                self.identification,
                 self.donor.email, 
                 self.created_at.date(),
                 self.campaign.title,
