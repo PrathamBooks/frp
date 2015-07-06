@@ -144,22 +144,16 @@
                         <div class="alert alert-warning hide">Enter Email</div>
                       </div>
                     </div>
-
                     <div class="form-group row">
-                      <div class="col-xs-12">
-                        <h3>Identification<strong>*</strong></h3>
-                        <p class="help-block">This information is collected only for internal audit purpose as subject to the terms & conditions under our Privacy Policy.</p>
+                      <div class="col-xs-3">
+                        <label for="contactNumber">Pan Card<strong>*</strong></label>
                       </div>
                       <div class="col-xs-3">
-                        <select type="text" class="form-control" id="identification_type" name="identification_type" placeholder="Identification Type" value="{{form.identification_type.data|default('',True)}}" required/>
-                        {% for subfield in form.identification_type %}
-                          <option selected="selected" value="{{subfield.data}}">{{subfield.label.text}}</option>
-                        {% endfor %}
-                        </select>
+                        <input type="text" class="form-control"  id="identification_type" name="identification_type" placeholder="Enter Pan Card Number" value="{{form.pan_number.data|default('',True)}}" required/>
+                        <div class="alert alert-warning hide">Enter Pan Card Number</div>
                       </div>
-                      <div class="col-xs-9">
-                        <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Enter identification card number" value="{{form.pan_number.data|default('',True)}}" required />
-                        <div class="alert alert-warning hide">Enter Pan/DL/Passport Number</div>
+                      <div class="form-group row">
+                        <p class="help-block">This information is mandatory as per Government guidelines. We solicit your cooperation.</p>
                       </div>
                     </div>
                   </div><!-- well--> 
