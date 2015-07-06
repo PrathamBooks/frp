@@ -65,7 +65,7 @@
                         <label for="address">Street Address<strong>*</strong></label>
                       </div>
                       <div class="col-xs-9">
-                        <input type="text" class="form-control" id="address" name="address" placeholder="123, Airport Rd." value="{{form.city.data|default('',True)}}" required/>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="123, Airport Rd." value="{{form.address.data|default('',True)}}" required/>
                         <div class="alert alert-warning hide">Street Address: 123, Airport Rd.. </div>
                       </div>
                     </div>
@@ -83,40 +83,14 @@
                         <label for="address">State<strong>*</strong></label>
                       </div>
                       <div class="col-xs-3">
-                        <select type="text" class="form-control"  id="city" name="state" placeholder="State" value="{{form.state.data|default('',True)}}" required/>
-                          <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                          <option value="Andhra Pradesh">Andhra Pradesh</option>
-                          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                          <option value="Assam">Assam</option>
-                          <option value="Bihar">Bihar</option>
-                          <option value="Chhattisgarh">Chhattisgarh</option>
-                          <option value="Chandigarh">Chandigarh</option>
-                          <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                          <option value="Daman and Diu">Daman and Diu</option>
-                          <option value="Goa">Goa</option>
-                          <option value="Haryana">Haryana</option>
-                          <option value="Gujarat">Gujarat</option>
-                          <option value="Himachal Pradesh">Himachal Pradesh</option>
-                          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                          <option value="Jharkhand">Jharkhand</option>
-                          <option value="Karnataka">Karnataka</option>
-                          <option value="Kerala">Kerala</option>
-                          <option value="Lakshadweep">Lakshadweep</option>
-                          <option value="Madhya Pradesh">Madhya Pradesh</option>
-                          <option value="Maharashtra">Maharashtra</option>
-                          <option value="Manipur">Manipur</option>
-                          <option value="Meghalaya">Meghalaya</option>
-                          <option value="Nagaland">Nagaland</option>
-                          <option value="New Delhi">New Delhi</option>
-                          <option value="Orissa">Orissa</option>
-                          <option value="Puducherry">Puducherry</option>
-                          <option value="Punjab">Punjab</option>
-                          <option value="Rajasthan">Rajasthan</option>
-                          <option value="Sikkim">Sikkim</option>
-                          <option value="Tamilnadu">Tamilnadu</option>
-                          <option value="Uttar Pradesh">Uttar Pradesh</option>
-                          <option value="Uttarakhand">Uttarakhand</option>
-                          <option value="West Bengal">West Bengal</option>
+                        <select type="text" class="form-control"  id="state" name="state" placeholder="State" value="{{form.state.data|default('',True)}}" required/>
+                          {% for subfield in form.state %}
+                            {% if subfield.data == form.state.data %}
+                              <option selected="selected" value="{{subfield.data}}">{{subfield.label.text}}</option>
+                            {%else%}
+                              <option value="{{subfield.data}}">{{subfield.label.text}}</option>
+                            {%endif%}
+                          {% endfor %}
                         </select>
                       </div>
                       <div class="col-xs-3">
@@ -149,7 +123,7 @@
                         <label for="contactNumber">Pan Card<strong>*</strong></label>
                       </div>
                       <div class="col-xs-3">
-                        <input type="text" class="form-control"  id="identification_type" name="identification_type" placeholder="Enter Pan Card Number" value="{{form.pan_number.data|default('',True)}}" required/>
+                        <input type="text" class="form-control"  id="pan_number" name="pan_number" placeholder="Enter Pan Card Number" value="{{form.pan_number.data|default('',True)}}" required/>
                         <div class="alert alert-warning hide">Enter Pan Card Number</div>
                       </div>
                       <div class="form-group row">

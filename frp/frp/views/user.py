@@ -634,7 +634,7 @@ def donate_1(campaign_id):
                         state=form.state.data, 
                         city=form.city.data, 
                         confirmation=12345,
-                        identification_type=form.identification_type.data,
+                        identification_type="PAN Card",
                         identification=form.pan_number.data,
                         tax_exemption_certificate=form.tax_exemption_certificate.data,
                         ann_choice=form.ann_choice.data)
@@ -644,6 +644,10 @@ def donate_1(campaign_id):
                 old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
                 send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
                 return render_template('donor_form.html', form=form, campaign=campaign)
+            else:
+                print form.errors
+                return render_template('donor_form.html', form=form, campaign=campaign)
+
 
 @app.route("/memories",methods=['GET', 'POST'])
 def memories():

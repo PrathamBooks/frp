@@ -49,9 +49,6 @@ class DonorForm(wtforms.Form):
             label='Email',
             validators=[wtforms.validators.Required()])
 
-    identification_type = wtforms.SelectField(
-            label='',
-            choices=ID_TYPE)
     pan_number = wtforms.TextField(
             label='Pan Number',
             validators=[wtforms.validators.Required()])
@@ -69,6 +66,7 @@ class DonorForm(wtforms.Form):
     def set_data(self, user):
        self.first_name.data = user.first_name
        self.last_name.data = user.last_name
+       self.address.data = user.address
        self.state.data = user.state
        self.city.data = user.city
        self.pin.data = user.pin
