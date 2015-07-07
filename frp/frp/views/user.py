@@ -631,6 +631,7 @@ def donate_1(campaign_id):
                         first_name=form.first_name.data,
                         last_name=form.last_name.data,
                         campaign=campaign, 
+                        address=form.address.data,
                         state=form.state.data, 
                         city=form.city.data, 
                         confirmation=12345,
