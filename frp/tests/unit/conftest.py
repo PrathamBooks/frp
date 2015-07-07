@@ -78,7 +78,7 @@ def seed_db():
             image="1.jpg", status="Approved",approved_at=datetime.now()-timedelta(days=1),
             total_impact_on_children='2000', featured=False)
     donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
+            city="Bangalore", state="Karnataka", address="ABC", first_name="Sahil", identification="ABCDEF",
             identification_type="DL", ann_choice=False,
             tax_exemption_certificate=False)
     db.session.add(donation)
@@ -92,7 +92,7 @@ def seed_db():
             total_impact_on_children='1000', featured=True)
     db.session.add(campaign)
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
+            city="Bangalore", state="Karnataka", address="ABC", first_name="Sahil", identification="ABCDEF",
             identification_type="P", ann_choice=False,
             tax_exemption_certificate=True)
     db.session.add(donation)
@@ -219,7 +219,7 @@ def add_campaign(user, org):
 
 def add_donation(campaign, amount=1000):
     donation = Donation(donor=campaign.created_by, campaign=campaign, amount=amount, confirmation=53499, 
-            city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
+            city="Bangalore", state="Karnataka", address="ABC", first_name="Sahil", identification="ABCDEF",
             identification_type="DL", ann_choice=False,
             tax_exemption_certificate=False)
     db.session.add(donation)
