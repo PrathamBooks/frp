@@ -48,6 +48,7 @@ class Donation(BaseMixin, db.Model):
         return [self.first_name +' '+ self.last_name, 
                 self.city,
                 self.state,
+                self.address,
                 self.identification_type,
                 self.identification,
                 self.donor.email, 
