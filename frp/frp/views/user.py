@@ -488,7 +488,7 @@ def admin_dashboard():
 def download_donations():
     donations = Donation.query.all()
     donations_data = map(lambda x:x.donation_details(),donations)
-    header = ["Donor Name"," Donor City","Donor State", "Identification_Type","Identification","Donor Email", "Date", "Campaign Title", "Amount Donated",
+    header = ["Donor Name"," Donor City","Donor State","Donor Address","Identification_Type","Identification","Donor Email", "Date", "Campaign Title", "Amount Donated",
             "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
     donations_data.insert(0,header)
     return excel.make_response_from_array(donations_data, "xls")
