@@ -20,7 +20,26 @@
                     <h2>Donate: Help India’s children read!</h2>
                     <p>You are just a few steps away from gifting children the joyful experience of reading.</p>
                   </div><!-- Jumbo-->
-
+                  {% if admin_fields_enable%}
+                    <div class="well">
+                      <div class="form-group row">
+                        <div class="col-xs-3">
+                        <label for="name">User Email<strong>*</strong></label>
+                        </div>
+                        <div class="col-xs-3">
+                          <input type="text" class="form-control"  id="user_email"  name="user_email" placeholder="User Email" value="{{form.user_email.data|default('',True)}}" required />
+                          <div class="alert alert-warning hide">Enter Uesr Email Name</div>
+                        </div>
+                        <div class="col-xs-3">
+                        <label for="name">Confirmation<strong>*</strong></label>
+                        </div>
+                        <div class="col-xs-3">
+                          <input type="text" class="form-control"  id="confirmation"  name="confirmation" placeholder="Confirmation" value="{{form.confirmation.data|default('',True)}}" required />
+                          <div class="alert alert-warning hide">Enter Confirmation Message</div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif%}
                   <div class="well">
                     <h3>You are donating books to Campaign: 
                       <a href={{ url_for('campaign', id=campaign.id) }}>{{campaign.title}}</a>

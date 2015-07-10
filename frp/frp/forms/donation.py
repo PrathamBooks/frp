@@ -14,6 +14,12 @@ ID_TYPE = [(u'P', u'Passport'),
            (u'AADHAR', u'Aadhar Card')]
 
 class DonorForm(wtforms.Form):
+    user_email = wtforms.TextField(
+            label='User email',
+            validators=[wtforms.validators.Optional()])
+    confirmation = wtforms.TextField(
+            label='Confirmation',
+            validators=[wtforms.validators.Optional()])
     amount_choice = wtforms.RadioField(
             label='Donation amount',
             validators=[wtforms.validators.Optional()],
