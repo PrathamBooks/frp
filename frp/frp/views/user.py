@@ -307,12 +307,16 @@ def search():
 @app.route("/donate/<campaign_id>", methods=['GET', 'POST'])
 @login_required
 def donate(campaign_id):
+  if current_user.has_roles('admin'):
+    return redirect("/admin/donate/"+str(campaign_id))
+  else:  
     campaign = Campaign.query.get(campaign_id)
+    admin_fields_enable = False
     if request.method == 'GET':
         form = DonorForm()
         if current_user.is_active():
             form.set_data(current_user)
-        return render_template('donor_form.html', form=form, campaign=campaign)
+        return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
     elif request.method == 'POST':
         form = DonorForm(request.form)
         if form.validate():
@@ -324,7 +328,7 @@ def donate(campaign_id):
                 flash('Oops something went wrong, please try again')
 
         app.logger.warning(form.errors)
-        return render_template('donor_form.html', form=form, campaign=campaign)
+        return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
 
 @app.route("/change_featured",methods=['POST'])
 def change_featured():
@@ -607,6 +611,54 @@ def campaign(id):
                 flash('Oops something went wrong, please try again')
         return render_template('beneficiary_form.html', form=form)
 
+# This code has been added for alternate workflow for donations that directly come to PB
+@app.route("/admin/donate/<campaign_id>", methods=['GET', 'POST'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def donate_admin(campaign_id):
+    campaign = Campaign.query.get(campaign_id)
+    admin_fields_enable = True
+    if request.method == 'GET':
+        form = DonorForm()
+        if current_user.is_active():
+            form.set_data(current_user)
+            return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
+    elif request.method == 'POST':
+        form = DonorForm(request.form)
+        if form.validate():
+            amount = form.amount_choice.data
+            if not amount:
+                amount = form.customize_amount.data
+            donor = User.query.filter_by(email=form.user_email.data).first()
+            if donor:
+              donation = Donation(amount=amount,
+                      donor=donor,
+                      first_name=form.first_name.data,
+                      last_name=form.last_name.data,
+                      campaign=campaign,
+                      address=form.address.data,
+                      state=form.state.data,
+                      city=form.city.data,
+                      confirmation=form.confirmation.data,
+                      identification_type="PAN Card",
+                      identification=form.pan_number.data,
+                      tax_exemption_certificate=form.tax_exemption_certificate.data,
+                      ann_choice=form.ann_choice.data)
+              db.session.add(donation)
+              db.session.commit()
+              curr_percent = campaign.percent_funded()
+              old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
+              send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
+              flash('Successfully donated for this campaign')
+              return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
+            else:
+              flash('Unable to find donor in the system with the given email. Please try another email.')
+              return render_template("donor_form.html", form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
+        else:
+            print form.errors
+            return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
+
+
 
 # This code has been added for testing porpose only 
 @app.route("/donate_1/<campaign_id>", methods=['GET', 'POST'])
@@ -614,11 +666,12 @@ def campaign(id):
 def donate_1(campaign_id):
     if current_app.config.get('DEBUG', True):
         campaign = Campaign.query.get(campaign_id)
+        admin_fields_enable = False
         if request.method == 'GET':
             form = DonorForm()
             if current_user.is_active():
                 form.set_data(current_user)
-                return render_template('donor_form.html', form=form, campaign=campaign)
+                return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
         elif request.method == 'POST':
             form = DonorForm(request.form)
             if form.validate():
@@ -644,10 +697,10 @@ def donate_1(campaign_id):
                 curr_percent = campaign.percent_funded()
                 old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
                 send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
-                return render_template('donor_form.html', form=form, campaign=campaign)
+                return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
             else:
                 print form.errors
-                return render_template('donor_form.html', form=form, campaign=campaign)
+                return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
 
 
 @app.route("/memories",methods=['GET', 'POST'])
@@ -673,6 +726,5 @@ def memories():
             return render_template("memories.html", memories=all_memories)
         else:
             return render_template("memories.html", memories=all_memories, form=form)
-
 
 
