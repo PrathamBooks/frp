@@ -3296,6 +3296,10 @@ label.checkboxLabel {
   vertical-align: top;
   margin-top: 2px;
 }
+#campaigns .col-md-3 .browse-btn.browse-btn-disabled{
+  background-color: lightgray !important;
+}
+
 #campaigns .col-md-3 .browse-btn {
   background-color: #ffe538!important;
   border-radius: 3px!important;
@@ -4210,6 +4214,15 @@ footer .row {
   padding: 0 0 10px 20px;
   width: 36%;
 }
+
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5.amt.amt-disabled {
+  background-color: lightgray;
+}
+
+#internalCampaign.singleCamp .campaignTop .campaignInfo h5.amt.amt-disabled:hover {
+  background-color: lightgray;
+}
+
 #internalCampaign.singleCamp .campaignTop .campaignInfo h5.amt {
   background-color: #f68b1f;
   border-radius: 3px;

@@ -139,7 +139,7 @@ var DiscoverPage = function(args) {
       }
       else {
         var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
-          addClass('btn browse-btn').
+          addClass('btn browse-btn browse-btn-disabled').
           html('Donate').
           appendTo($div_md_3);
         $donate_link.tooltip({
