@@ -313,10 +313,13 @@ def donate(campaign_id):
     campaign = Campaign.query.get(campaign_id)
     admin_fields_enable = False
     if request.method == 'GET':
-        form = DonorForm()
-        if current_user.is_active():
-            form.set_data(current_user)
-        return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
+        if (campaign.needs() > 0):
+            form = DonorForm()
+            if current_user.is_active():
+                form.set_data(current_user)
+            return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
+        else:
+            return render_template('donor_form_full.html')
     elif request.method == 'POST':
         form = DonorForm(request.form)
         if form.validate():
