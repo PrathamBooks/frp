@@ -131,10 +131,25 @@ var DiscoverPage = function(args) {
         append($('<span/>').addClass('days').html(campaign.status)).
         append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
-      var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
-        addClass('btn browse-btn').
-        html('Donate').
-        appendTo($div_md_3);
+      if (percent_funded < 100.0) {
+        var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
+          addClass('btn browse-btn').
+          html('Donate').
+          appendTo($div_md_3);
+      }
+      else {
+        var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
+          addClass('btn browse-btn').
+          html('Donate').
+          appendTo($div_md_3);
+        $donate_link.tooltip({
+          title: "We are thankful to donors like you who helped this campaign reach its funding goal. You can help other campaigns similar to this one!."
+        });
+        $donate_link.click(function(e) {
+          e.preventDefault();
+          e.stopPropagation(); // Stop the click event propagating to the parent div
+        });
+      }
     }
   };
   this.show_next_campaigns = function() {
