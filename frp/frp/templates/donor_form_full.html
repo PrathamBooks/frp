@@ -1,0 +1,26 @@
+{% extends "partials/base.html" %}
+{% block content %}
+<div class="container internal">
+  <div id="pratham-form" class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-9">
+          <div id="internalContent" class="row beneficiary donor">
+            <div id="internalCampaign" class="row ">
+              <div class="col-md-9">
+                <section id="donate" class="tab-pane active">
+                  <div class="alert hide">&nbsp;</div>
+                  <!-- Step 1 starts here-->
+                  <div class="jumbotron row" tabindex="1">
+                    <h4>We are thankful to donors like you who helped this campaign reach its funding goal. You can help other campaigns similar to this one! Please click on the link below.</h4>
+                    <a type="button" href={{url_for('discover')}}><button class="btn browse-btn pull-right"> Donate to similar campaigns</button></a>
+                  </div><!-- Jumbo-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
