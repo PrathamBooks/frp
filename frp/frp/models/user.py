@@ -81,6 +81,12 @@ class User(UserMixin, db.Model):
         pos_of_at = self.email.find('@')
         return self.email[:pos_of_at]
 
+    @staticmethod
+    def admin_emails():
+        admin_role = Role.query.filter(Role.name == 'admin').first();
+        admins = admin_role.users
+        return map(lambda x : x.email, admins)
+
 # Define the UserAuth data model.
 class UserAuth(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

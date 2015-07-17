@@ -105,6 +105,13 @@ def send_mail(old_percent,curr_percent,campaign,donation):
       title=campaign.title,
       start_date=start_date)
     app.logger.warning("Sent 100% email")
+    mailer.send_email(to=User.admin_emails(),
+      subject="Campaign hit a century!",
+      template="campaign_success.html",
+      profile_name=campaign.created_by.profile_name(),
+      title=campaign.title,
+      start_date=start_date)
+    app.logger.warning("Sent 100% email")
     return
 
   if (old_percent == 0):
