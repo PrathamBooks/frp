@@ -496,6 +496,16 @@ def admin_dashboard():
     campaigns_data = Campaign.all_campaigns_data()
     return render_template('adminDashboard.html',campaigns_data=campaigns_data)
 
+@app.route("/admin/graphs", methods=['GET'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def admin_graphs():
+    users = User.users_by_date()
+    donations = Donation.donations_by_date()
+    campaigns = Campaign.campaigns_by_date()
+    return render_template('admin_graphs.html', users=users, donations=donations, 
+            campaigns=campaigns)
+
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
 @app.route("/download/donations",methods=['GET'])

@@ -149,6 +149,14 @@ class Campaign(BaseMixin, db.Model):
         return retval
 
     @staticmethod
+    def campaigns_by_date():
+        all_campaigns = Campaign.query.order_by(Campaign.created_at).all()
+        return map(lambda x : {"year" : x.created_at.date().year, 
+                               "month" : x.created_at.date().month, 
+                               "day" : x.created_at.date().day}, all_campaigns)
+
+
+    @staticmethod
     def last_day_today():
         campaigns = Campaign.query.filter_by(status='Approved').all()
         retval = list(filter(lambda x:(x.days_remaining()==0),campaigns))

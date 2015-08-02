@@ -54,6 +54,7 @@ def init_app(app, settings='settings/development.py'):
                     "js/donor_form.js",
                     "js/start.js",
                     "js/admin.js",
+                    "js/admin_graphs.js",
                     "js/discover.js",
                     "js/utils.js",
                     "js/tablesorter.js",

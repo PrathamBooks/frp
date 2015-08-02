@@ -87,6 +87,13 @@ class User(UserMixin, db.Model):
         admins = admin_role.users
         return map(lambda x : x.email, admins)
 
+    @staticmethod
+    def users_by_date():
+        all_users = User.query.filter(User.confirmed_at != None).order_by(User.confirmed_at).all()
+        return map(lambda x : {"year" : x.confirmed_at.date().year, 
+                               "month" : x.confirmed_at.date().month, 
+                               "day" : x.confirmed_at.date().day}, all_users)
+
 # Define the UserAuth data model.
 class UserAuth(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

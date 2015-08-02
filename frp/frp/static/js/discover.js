@@ -89,11 +89,12 @@ var DiscoverPage = function(args) {
         attr('src', '/static/uploads/uploads/' + campaign.image).
         attr('alt', 'campaign image').
         appendTo($h1);
+      var $icons = $('<div/>').addClass('campaign-icons').appendTo($div_md_3);
       if (campaign.target <= campaign.total_donations) {
-        $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($div_md_3);
+        $('<span/>').addClass('champion').html('Fully<br> Funded').appendTo($icons);
       }
       if (campaign.featured) {
-        $('<span/>').addClass('featured-campaign').html('Featured').appendTo($div_md_3);
+        $('<span/>').addClass('featured-campaign').html('Featured').appendTo($icons);
       }
       var $title = $('<h2/>').html('<strong>' + campaign.title + '</strong>').appendTo($div_md_3);
       var $campaignInfo = $('<div/>').addClass('campaignInfo').appendTo($div_md_3);
