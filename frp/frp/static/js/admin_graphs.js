@@ -13,24 +13,22 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
   this.get_dates = function(data) {
     var first_user = data[0];
-    var start_date = new Date();
-    start_date.setFullYear(first_user.year, first_user.month, first_user.day);
+    var start_date = new Date(first_user.year, first_user.month, first_user.day, 0, 0, 0);
 
     var last_user = data[data.length - 1];
-    var end_date = new Date();
-    end_date.setFullYear(last_user.year, last_user.month, last_user.day);
+    var end_date = new Date(last_user.year, last_user.month, last_user.day, 0, 0, 0);
 
     // Find all the dates from first user to last user
     var dates = [];
     for (var d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
       dates.push([new Date(d), 0]);
     }
-    var cur_user_date = new Date;
+    var cur_user_date;
     var cur_date_index;
     var i;
     for (i = 0, cur_date_index = 0; i < data.length; i++) {
       var cur_user = data[i];
-      cur_user_date.setFullYear(cur_user.year, cur_user.month, cur_user.day);
+      cur_user_date = new Date(cur_user.year, cur_user.month, cur_user.day, 0, 0, 0);
       while (dates[cur_date_index][0] < cur_user_date) {
         cur_date_index += 1;
       } 

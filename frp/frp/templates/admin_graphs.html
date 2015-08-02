@@ -35,7 +35,7 @@
     var donations_data = {{ donations|tojson }};
     var campaigns_data = {{ campaigns|tojson }};
     function drawChart() {
-      var admin_graphs = new AdminGraphs(users_data, donations_data, campaigns_data);
+      var admin_graphs = new AdminGraphs(users_data, campaigns_data, donations_data);
       admin_graphs.start();
     }
   </script>
