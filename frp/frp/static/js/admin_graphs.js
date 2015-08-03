@@ -6,10 +6,21 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
   this.start = function() {
     $graph_div = $('#graph');
-    this.user_graph(this.user_data, $('#user-graph'));
-    this.campaign_graph(this.campaign_data, $('#campaign-graph'));
-    this.donation_graph(this.donation_data, $('#donation-graph'));
-    this.donations_per_user_graph(this.donation_data, $('#donation-per-user-graph'));
+    this.user_graph(this.user_data, $('<div/>').attr('id','user-graph').appendTo($('#graphs')));
+    this.campaign_graph(this.campaign_data, $('<div/>').attr('id','campaign-graph').appendTo($('#graphs')));
+    this.donation_graph(this.donation_data, $('<div/>').attr('id','donation-graph').appendTo($('#graphs')));
+    this.donation_sum_graph(this.donation_data, $('<div/>').attr('id','donation-sum-graph').appendTo($('#graphs')));
+    this.donations_per_user_graph(this.donation_data, $('<div/>').attr('id','donation-per-user-graph').appendTo($('#graphs')));
+  };
+
+  this.default_user_options = {
+       'width':1200,
+       'height':300,
+       series: {
+         0: {axis: 'New'},
+         1: {axis: 'Total'}
+       },
+       'colors' : ['#ffc600', '#dd2300']
   };
 
   this.get_dates = function(data, init_func, add_func) {
@@ -38,18 +49,17 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
     var j;
     dates[0][0] = dates[0][0].getDate() + '/' + dates[0][0].getMonth();
+    dates[0][2] = dates[0][1];
     for (i = 1; i < dates.length; i++) {
       dates[i][0] = dates[i][0].getDate() + '/' + dates[i][0].getMonth();
-      for (j = 1; j < dates[1].length; j++) {
-        dates[i][j] += dates[i - 1][j];
-      }
+      dates[i][2] = dates[i - 1][2] + dates[i][1];
     }
 
     return dates;
   };
 
   this.base_init = function(d) {
-    return [new Date(d), 0];
+    return [new Date(d), 0, 0];
   };
 
   this.base_add = function(entry) {
@@ -62,17 +72,19 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
     // Create the data table.
     var user_chart_data = new google.visualization.DataTable();
     user_chart_data.addColumn('string', 'Date');
+    user_chart_data.addColumn('number', 'New Users');
     user_chart_data.addColumn('number', 'Users');
     user_chart_data.addRows(dates);
 
     // Set chart options
-    var user_options = {'title':'Users',
-      'width':1200,
-      'height':300,
-      'colors' : ['#ffc600']};
-      // Instantiate and draw our chart, passing in some options.
-      var user_chart = new google.charts.Bar($div.get(0));
-      user_chart.draw(user_chart_data, user_options);
+    var user_options = that.default_user_options;
+    user_options.axes = {
+      New: {label: "New Users"},
+      Total: {side: 'right', label: "Total Users"}
+    };
+    user_options.title = 'Users';
+    var user_chart = new google.charts.Bar($div.get(0));
+    user_chart.draw(user_chart_data, user_options);
   };
 
   this.campaign_graph = function(campaign_data, $div) {
@@ -82,101 +94,112 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
     // Create the data table.
     var user_chart_data = new google.visualization.DataTable();
     user_chart_data.addColumn('string', 'Date');
+    user_chart_data.addColumn('number', 'New Campaigns');
     user_chart_data.addColumn('number', 'Campaigns');
     user_chart_data.addRows(dates);
 
     // Set chart options
-    var user_options = {'title':'Campaigns',
+    var user_options = that.default_user_options;
+    user_options.axes = {
+      New: {label: "New Campaigns"},
+      Total: {side: 'right', label: "#Campaigns"}
+    };
+    user_options.title = 'Campaigns';
+    var user_chart = new google.charts.Bar($div.get(0));
+    user_chart.draw(user_chart_data, user_options);
+  };
+
+  this.donation_sum_graph = function(donation_data, $div) {
+    var add = function(entry, cur_data) {
+      entry[1] += cur_data.amount;
+    }
+
+    dates = that.get_dates(donation_data, that.base_init, add);
+    // dates will contain tuples with date and the number of users who signed up
+    // on that day
+    // Create the data table.
+    var user_chart_data = new google.visualization.DataTable();
+    user_chart_data.addColumn('string', 'Date');
+    user_chart_data.addColumn('number', 'New Donations');
+    user_chart_data.addColumn('number', 'Donations');
+    user_chart_data.addRows(dates);
+
+    // Set chart options
+    var user_options = that.default_user_options;
+    user_options.axes = {
+      New: {label: "New Donations"},
+      Total: {side: 'right', label: "Total Donations"}
+    };
+    // Instantiate and draw our chart, passing in some options.
+    var user_chart = new google.charts.Bar($div.get(0));
+    user_chart.draw(user_chart_data, user_options);
+  };
+
+
+  this.donation_graph = function(donation_data, $div) {
+    var add = function(entry, cur_data) {
+      entry[1] += 1;
+    }
+
+    dates = that.get_dates(donation_data, that.base_init, add);
+    // Create the data table.
+    var user_chart_data = new google.visualization.DataTable();
+    user_chart_data.addColumn('string', 'Date');
+    user_chart_data.addColumn('number', 'New #Donations');
+    user_chart_data.addColumn('number', '#Donations');
+    user_chart_data.addRows(dates);
+
+    // Set chart options
+    var user_options = that.default_user_options;
+    user_options.axes = {
+      New: {label: "New #Donations"},
+      Total: {side: 'right', label: "Total #Donations"}
+    };
+    // Instantiate and draw our chart, passing in some options.
+    var user_chart = new google.charts.Bar($div.get(0));
+    user_chart.draw(user_chart_data, user_options);
+  };
+
+  this.donations_per_user_graph = function(donation_data, $div) {
+    var donors = {};
+    var i;
+    _.each(donation_data, function(donation) {
+      if (!donors[donation.donor]) {
+        donors[donation.donor] = {number : 0,
+          amount : 0};
+      }
+      donors[donation.donor].number += 1;
+      donors[donation.donor].amount += donation.amount;
+    });
+
+    var max_num_donations = 0;
+    _.each(donors, function(data) {
+      max_num_donations = data.number > max_num_donations ? data.number : max_num_donations;
+    });
+
+    var chart_data = [];
+    for (i = 0; i <= max_num_donations; i++) {
+      chart_data.push([i, 0]);
+    };
+    _.each(donors, function(data) {
+      chart_data[data.number][1] += 1;
+    });
+
+    var user_chart_data = new google.visualization.DataTable();
+    user_chart_data.addColumn('number', '#Donations');
+    user_chart_data.addColumn('number', '#Users');
+    user_chart_data.addRows(chart_data);
+    var user_options = {
       'width':1200,
       'height':300,
-      'colors' : ['#ffc600']};
-      // Instantiate and draw our chart, passing in some options.
-      var user_chart = new google.charts.Bar($div.get(0));
-      user_chart.draw(user_chart_data, user_options);
-   };
-
-   this.donation_graph = function(donation_data, $div) {
-     var init = function(d) {
-       return [new Date(d), 0, 0];
-     };
-
-     var add = function(entry, cur_data) {
-       entry[1] += 1;
-       entry[2] += cur_data.amount;
-     }
-
-     dates = that.get_dates(donation_data, init, add);
-     // dates will contain tuples with date and the number of users who signed up
-     // on that day
-     // Create the data table.
-     var user_chart_data = new google.visualization.DataTable();
-     user_chart_data.addColumn('string', 'Date');
-     user_chart_data.addColumn('number', 'Number of Donations');
-     user_chart_data.addColumn('number', 'Sum Donations');
-     user_chart_data.addRows(dates);
-
-     // Set chart options
-     var user_options = {
-       'width':1200,
-       'height':300,
-       chart: {
-         'title':'Donations'
-       },
-       series: {
-         0: {axis: 'nDonations'},
-         1: {axis: 'Donations'}
-       },
-       axes: {
-         nDonations: {label: "Number of Donations"},
-         Donations: {side: 'right', label: "Amount of Donations"}
-       },
-       'colors' : ['#ffc600', '#dd2300']
-     };
-     // Instantiate and draw our chart, passing in some options.
-     var user_chart = new google.charts.Bar($div.get(0));
-     user_chart.draw(user_chart_data, user_options);
-   };
-
-   this.donations_per_user_graph = function(donation_data, $div) {
-     var donors = {};
-     var i;
-     _.each(donation_data, function(donation) {
-       if (!donors[donation.donor]) {
-         donors[donation.donor] = {number : 0,
-                                   amount : 0};
-       }
-       donors[donation.donor].number += 1;
-       donors[donation.donor].amount += donation.amount;
-     });
-
-     var max_num_donations = 0;
-     _.each(donors, function(data) {
-       max_num_donations = data.number > max_num_donations ? data.number : max_num_donations;
-     });
-
-     var chart_data = [];
-     for (i = 0; i <= max_num_donations; i++) {
-       chart_data.push([i, 0]);
-     };
-     _.each(donors, function(data) {
-       chart_data[data.number][1] += 1;
-     });
-
-     var user_chart_data = new google.visualization.DataTable();
-     user_chart_data.addColumn('number', '#Donations');
-     user_chart_data.addColumn('number', '#Users');
-     user_chart_data.addRows(chart_data);
-     var user_options = {
-       'width':1200,
-       'height':300,
-       chart: {
-         'title':'Donation Stats Per User'
-       },
-       'colors' : ['#ffc600', '#dd2300']
-     };
-     // Instantiate and draw our chart, passing in some options.
-     var user_chart = new google.charts.Bar($div.get(0));
-     user_chart.draw(user_chart_data, user_options);
-    }
+      chart: {
+        'title':'Donation Stats Per User'
+      },
+      'colors' : ['#ffc600', '#dd2300']
+    };
+    // Instantiate and draw our chart, passing in some options.
+    var user_chart = new google.charts.Bar($div.get(0));
+    user_chart.draw(user_chart_data, user_options);
+  }
 };
 
