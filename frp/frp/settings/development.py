@@ -24,6 +24,7 @@ GOOGLE_CLIENT_SECRET='NvAEJHMsjN3rT8y5UVXyvfNv'
 DEBUG = True
 SECRET_KEY = "Development key"
 COST_PER_BOOK=36.75
+COST_PER_LIC=5000
 
 SITE_NAME="Pratham Books Donate-A-Book"
 

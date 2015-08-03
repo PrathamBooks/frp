@@ -8,4 +8,5 @@ FACEBOOK_CONSUMER_KEY = "key"
 FACEBOOK_CONSUMER_SECRET = "secret"
 SITE_NAME = "Pratham Books Fund raising platform"
 COST_PER_BOOK=36.75
+COST_PER_LIC=5000
 

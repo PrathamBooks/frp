@@ -59,17 +59,26 @@ var Start = function() {
     }
 
     var count = 0;
+    var nlic = 0;
+    var nbooks = 0;
     $('#bookCounts input').each(function(i, e) {
       if (i==1) {
-        if (parseInt(e.value)) count += parseInt(e.value) * 125;
+        if (parseInt(e.value)) {
+          nlic = parseInt(e.value);
+          count += nlic * 125;
+        }
       } else {
-        if (parseInt(e.value)) count += parseInt(e.value);
+        if (parseInt(e.value)) {
+          nbooks = parseInt(e.value);
+          count += nbooks;
+        }
       }
     });
 
     var COST_PER_BOOK = 36.75;
-    $('#bookAmount').html('Rs. ' + count * COST_PER_BOOK);
-    $("input[name='fundingGoal']").attr('value', (count * COST_PER_BOOK));
+    var COST_PER_LIC = 5000;
+    $('#bookAmount').html('Rs. ' + (nlic * COST_PER_LIC + nbooks * COST_PER_BOOK));
+    $("input[name='fundingGoal']").attr('value', nlic * COST_PER_LIC + nbooks * COST_PER_BOOK);
     $('#noOfBooks').html(count);
     $('#booksLeft').html(count);
   };

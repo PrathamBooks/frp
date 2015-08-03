@@ -211,7 +211,8 @@ class Campaign(BaseMixin, db.Model):
         return self.nbooks + 125 * self.nlic
 
     def target(self):
-        return int(round(current_app.config.get('COST_PER_BOOK') * (self.nbooks + 125 * self.nlic)))
+        return int(round(current_app.config.get('COST_PER_BOOK') * self.nbooks +
+            current_app.config.get('COST_PER_LIC') * self.nlic))
 
     def total_donations(self):
         fdonations = filter(lambda x: x.confirmation, self.donations)
