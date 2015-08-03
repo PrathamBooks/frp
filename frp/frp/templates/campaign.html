@@ -50,7 +50,7 @@
               <span class="sr-only">{{campaign.percent_funded()}}% Complete</span>
             </div>
           </div>
-          <h5><span class="days">Active </span>
+          <h5><span class="days"> {{campaign.print_status()}} </span>
             <time><span>{{campaign.days_remaining()}}</span> Days Left</time>
           </h5>
           <div class="socialIcons">
