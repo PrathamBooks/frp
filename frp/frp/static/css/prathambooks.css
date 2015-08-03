@@ -1677,14 +1677,14 @@ span.fb:hover {
 }
 span.featured-campaign {
   background-image: url("../images/featured-champion.png");
-  background-position: right 5px;
+  background-position: right 6px;
   background-repeat: no-repeat;
   background-size: 41px auto;
   color: #222222;
   float: right;
   font-size: 8px;
-  margin: -25px -12px -20px 0;
-  padding: 28px 0 5px;
+  margin: 0;
+  padding: 30px 0 5px;
   position: relative;
   right: 0;
   text-transform: uppercase;
@@ -2612,8 +2612,15 @@ button.approve:hover {
 table td span.label {
   font-size: .95em;
 }
+.campaign-icons {
+  float: right;
+  margin-bottom: -26px;
+  margin-right: -12px;
+  margin-top: -27px;
+  position: relative;
+}
 .internal #internalCampaign.discover span.champion {
-  margin: -26px -12px -26px 15px;
+  margin: 0;
   position: relative;
   right: 0;
   width: 66px;

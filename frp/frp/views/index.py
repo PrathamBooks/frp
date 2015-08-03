@@ -12,7 +12,7 @@ from ..models import User, Donation,Campaign
 def index():
     filter_form = FilterForm()
     total_books_donated = Donation.total_books_donated
-    display_campaigns = Campaign.query.filter_by(featured=True).limit(6).all()
+    display_campaigns = Campaign.query.filter_by(featured=True).filter_by(status='Approved').limit(6).all()
     if len(display_campaigns)<6:
         # add other campaigns to make 6
         more_campaigns_needed = 6 - len(display_campaigns)

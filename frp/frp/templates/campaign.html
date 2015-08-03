@@ -57,7 +57,7 @@
             <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'I am helping India\'s children read. Donate books on @prathambooks Donate-a-Book. #donateabook')"></span>
             <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
           </div>
-          {% if campaign.percent_funded() >= 100 %}
+          {% if campaign.percent_funded() >= 100 or campaign.status != 'Approved' %}
             <h5 class="amt amt-disabled" data-toggle="modal" data-target="#no-donation-modal"> Donate To This Campaign </h5> </a>
           {% else %}
           <a href={{url_for('donate', campaign_id=campaign.id)}}>
@@ -156,7 +156,11 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <h4>We are thankful to donors like you who helped this campaign reach its funding goal. You can help other campaigns similar to this one! Please click on the link below.</h4>
+          {% if campaign.percent_funded() >= 100 %}
+            <h4>We are thankful to donors like you who helped this campaign reach its funding goal. You can help other campaigns similar to this one! Please click on the link below.</h4>
+          {% else %}
+            <h4>This campaign is not open for donations. You can help other campaigns similar to this one! Please click on the link below.</h4>
+          {% endif %}
         </div>
         <a type="button" href={{url_for('discover')}}><button class="btn browse-btn pull-right"> Donate to similar campaigns</button></a>
       </div>
