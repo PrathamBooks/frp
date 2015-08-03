@@ -16,10 +16,6 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
   this.default_user_options = {
        'width':1200,
        'height':300,
-       series: {
-         0: {axis: 'New'},
-         1: {axis: 'Total'}
-       },
        'colors' : ['#ffc600', '#dd2300']
   };
 
@@ -67,44 +63,40 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
   };
   this.user_graph = function(user_data, $div) {
     dates = that.get_dates(user_data, that.base_init, that.base_add);
+    dates = _.map(dates, function (d) {
+                 return [d[0], d[1]];
+              });
     // dates will contain tuples with date and the number of users who signed up
     // on that day
     // Create the data table.
     var user_chart_data = new google.visualization.DataTable();
     user_chart_data.addColumn('string', 'Date');
-    user_chart_data.addColumn('number', 'New Users');
     user_chart_data.addColumn('number', 'Users');
     user_chart_data.addRows(dates);
 
     // Set chart options
-    var user_options = that.default_user_options;
-    user_options.axes = {
-      New: {label: "New Users"},
-      Total: {side: 'right', label: "Total Users"}
-    };
-    user_options.title = 'Users';
+    var user_options = $.extend(true, {}, that.default_user_options);
+    user_options.chart = {title: 'Users'};
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
   };
 
   this.campaign_graph = function(campaign_data, $div) {
     dates = that.get_dates(campaign_data, that.base_init, that.base_add);
+    dates = _.map(dates, function (d) {
+                 return [d[0], d[1]];
+              });
     // dates will contain tuples with date and the number of users who signed up
     // on that day
     // Create the data table.
     var user_chart_data = new google.visualization.DataTable();
     user_chart_data.addColumn('string', 'Date');
-    user_chart_data.addColumn('number', 'New Campaigns');
     user_chart_data.addColumn('number', 'Campaigns');
     user_chart_data.addRows(dates);
 
     // Set chart options
-    var user_options = that.default_user_options;
-    user_options.axes = {
-      New: {label: "New Campaigns"},
-      Total: {side: 'right', label: "#Campaigns"}
-    };
-    user_options.title = 'Campaigns';
+    var user_options = $.extend(true, {}, that.default_user_options);
+    user_options.chart = {title : 'Campaigns'};
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
   };
@@ -115,21 +107,20 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
     }
 
     dates = that.get_dates(donation_data, that.base_init, add);
+    dates = _.map(dates, function (d) {
+                 return [d[0], d[1]];
+              });
     // dates will contain tuples with date and the number of users who signed up
     // on that day
     // Create the data table.
     var user_chart_data = new google.visualization.DataTable();
     user_chart_data.addColumn('string', 'Date');
-    user_chart_data.addColumn('number', 'New Donations');
     user_chart_data.addColumn('number', 'Donations');
     user_chart_data.addRows(dates);
 
     // Set chart options
-    var user_options = that.default_user_options;
-    user_options.axes = {
-      New: {label: "New Donations"},
-      Total: {side: 'right', label: "Total Donations"}
-    };
+    var user_options = $.extend(true, {}, that.default_user_options);
+    user_options.chart = {title : 'Donations Amount'};
     // Instantiate and draw our chart, passing in some options.
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
@@ -142,19 +133,18 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
     }
 
     dates = that.get_dates(donation_data, that.base_init, add);
+    dates = _.map(dates, function (d) {
+                 return [d[0], d[1]];
+              });
     // Create the data table.
     var user_chart_data = new google.visualization.DataTable();
     user_chart_data.addColumn('string', 'Date');
-    user_chart_data.addColumn('number', 'New #Donations');
     user_chart_data.addColumn('number', '#Donations');
     user_chart_data.addRows(dates);
 
     // Set chart options
-    var user_options = that.default_user_options;
-    user_options.axes = {
-      New: {label: "New #Donations"},
-      Total: {side: 'right', label: "Total #Donations"}
-    };
+    var user_options = $.extend(true, {}, that.default_user_options);
+    user_options.chart = {title : '#Donations'};
     // Instantiate and draw our chart, passing in some options.
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
@@ -189,14 +179,8 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
     user_chart_data.addColumn('number', '#Donations');
     user_chart_data.addColumn('number', '#Users');
     user_chart_data.addRows(chart_data);
-    var user_options = {
-      'width':1200,
-      'height':300,
-      chart: {
-        'title':'Donation Stats Per User'
-      },
-      'colors' : ['#ffc600', '#dd2300']
-    };
+    var user_options = $.extend(true, {}, that.default_user_options);
+    user_options.chart = {'title':'Donation Stats Per User'};
     // Instantiate and draw our chart, passing in some options.
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
