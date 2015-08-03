@@ -20,6 +20,8 @@
         </div>
         <div id='donation-graph'>
         </div>
+        <div id='donation-per-user-graph'>
+        </div>
       </div>
     </div><!--InternalCampaign-->
 </div>  
@@ -28,7 +30,7 @@
 {% block jsblock %}
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
-    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.load('visualization', '1.1', {'packages':['corechart', 'bar']});
     // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
     var users_data = {{ users|tojson }};
@@ -39,6 +41,9 @@
       admin_graphs.start();
     }
   </script>
+  {% assets "underscore" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"> </script>
+  {% endassets %}
 {% endblock %}
 
 

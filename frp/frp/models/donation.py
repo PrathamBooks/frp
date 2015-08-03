@@ -49,7 +49,10 @@ class Donation(BaseMixin, db.Model):
         return map(lambda x : {"year" : x.created_at.date().year,
                                "month" : x.created_at.date().month,
                                "day" : x.created_at.date().day,
-                               "amount" : x.amount}, all_donations)
+                               "amount" : x.amount,
+                               "donor" : x.donor.id
+                               }, 
+                               all_donations)
 
     def donation_details(self):
         return [self.first_name +' '+ self.last_name, 
