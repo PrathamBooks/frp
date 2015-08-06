@@ -579,12 +579,12 @@ def beneficiary_dashboard():
         if campaign.is_active():
             active_campaigns+=1
             active_donors+=campaign.donor_list()
-            total_active_amt+= sum(campaign.donations)
+            total_active_amt+= campaign.total_donations()
 
         else:
             closed_campaigns+=1
             closed_donors+=campaign.donor_list()
-            total_closed_amt+= sum(campaign.donations)
+            total_closed_amt+= campaign.total_donations()
 
     n_active_donors = len(sets.Set(active_donors))
     n_closed_donors = len(sets.Set(closed_donors))
