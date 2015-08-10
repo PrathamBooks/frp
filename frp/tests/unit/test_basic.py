@@ -55,4 +55,8 @@ def test_del_donations(test_db, seed_db, test_client):
         percent_funded = (total_donations*100.0)/campaign.target()
         assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'
 
+# Test that a closed campaign does not accept donations
 
+# Test that a campaign which reaches its goal is automatically closed
+
+# Test that an unapproved campaign does not accept donations

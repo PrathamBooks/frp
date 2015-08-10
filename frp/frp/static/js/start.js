@@ -75,10 +75,9 @@ var Start = function() {
       }
     });
 
-    var COST_PER_BOOK = 36.75;
-    var COST_PER_LIC = 5000;
-    $('#bookAmount').html('Rs. ' + (nlic * COST_PER_LIC + nbooks * COST_PER_BOOK));
-    $("input[name='fundingGoal']").attr('value', nlic * COST_PER_LIC + nbooks * COST_PER_BOOK);
+    var COST_PER_BOOK = 40.0;
+    $('#bookAmount').html('Rs. ' + ((nlic * 125 + nbooks) * COST_PER_BOOK));
+    $("input[name='fundingGoal']").attr('value', ((nlic * 125 + nbooks) * COST_PER_BOOK));
     $('#noOfBooks').html(count);
     $('#booksLeft').html(count);
   };
