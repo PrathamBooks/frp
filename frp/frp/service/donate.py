@@ -49,7 +49,7 @@ def create_donation(form, campaign):
     db.session.rollback()
     return {'error': True, 'exc': e}
   # Function "donation_validate will be called after 600 seconds that is 10 minutes 
-  threading.Timer(600,donation_validate,[donation.id]).start()
+  # threading.Timer(600,donation_validate,[donation.id]).start()
   return {'error': False,
           'donation': donation}
 
