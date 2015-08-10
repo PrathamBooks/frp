@@ -40,10 +40,6 @@ class Donation(BaseMixin, db.Model):
         return reduce(lambda x, y: x + y, donations, 0)
 
     @staticmethod
-    def total_books_donated():
-        return int(round(Donation.total_donated() / current_app.config.get('COST_PER_BOOK')))
-
-    @staticmethod
     def donations_by_date():
         all_donations = Donation.query.filter(Donation.confirmation != None).order_by(Donation.created_at).all()
         return map(lambda x : {"year" : x.created_at.date().year,

@@ -176,6 +176,12 @@ class Campaign(BaseMixin, db.Model):
         retval = map(lambda x:x.verbose_fields(),campaigns)
         return retval
 
+    @staticmethod
+    def total_books_donated():
+        books = map(lambda x: x.books_donated(), Campaign.query.all())
+        return reduce(lambda x, y: x + y, books, 0)
+
+
     def emails(self):
         mails = [self.created_by.email, self.org.info.email, self.org.info.person1_email]
         mails = filter(lambda x: x, mails)
@@ -210,23 +216,27 @@ class Campaign(BaseMixin, db.Model):
     def books_target(self):
         return self.nbooks + 125 * self.nlic
 
-    def target(self):
+    def cost_per_book(self):
         if (self.start_date() < date(2015, 8, 10)):
-            cost_per_book = current_app.config.get('OLD_COST_PER_BOOK')
+            return current_app.config.get('OLD_COST_PER_BOOK')
         else:
-            cost_per_book = current_app.config.get('COST_PER_BOOK')
-        return int(round(cost_per_book * (self.nbooks + 125 * self.nlic)))
+            return current_app.config.get('COST_PER_BOOK')
+
+    def target(self):
+        return int(round(self.cost_per_book() * (self.nbooks + 125 * self.nlic)))
 
     def total_donations(self):
         fdonations = filter(lambda x: x.confirmation, self.donations)
         return sum(map(lambda x: x.amount, fdonations))
+
+    def books_donated(self):
+        return self.total_donations / self.cost_per_book
 
     def print_status(self):
         if self.status == 'Approved':
             return 'Active'
         else:
             return self.status
-
 
     def verbose_fields(self):
         return {"id" : self.id,
