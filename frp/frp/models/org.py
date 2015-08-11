@@ -266,6 +266,7 @@ class Campaign(BaseMixin, db.Model):
                 self.target(),
                 self.nbooks,
                 self.nlic,
+                self.percent_funded(),
                 self.total_donations(),
                 self.status,
                 self.org.title,
