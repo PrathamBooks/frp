@@ -229,9 +229,6 @@ class Campaign(BaseMixin, db.Model):
         fdonations = filter(lambda x: x.confirmation, self.donations)
         return sum(map(lambda x: x.amount, fdonations))
 
-    def books_donated(self):
-        return self.total_donations / self.cost_per_book
-
     def print_status(self):
         if self.status == 'Approved':
             return 'Active'
@@ -299,7 +296,7 @@ class Campaign(BaseMixin, db.Model):
         return int(round((self.total_donations() * 100) /self.target()))
 
     def books_donated(self):
-        return int(round(self.total_donations()/current_app.config.get('COST_PER_BOOK')))
+        return int(round(self.total_donations() / self.cost_per_book()))
 
     def needs(self):
         needs = self.target() - self.total_donations() 

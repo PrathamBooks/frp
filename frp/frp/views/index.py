@@ -11,7 +11,7 @@ from ..models import User, Donation,Campaign
 @app.route("/")
 def index():
     filter_form = FilterForm()
-    total_books_donated = Campaign.total_books_donated
+    total_books_donated = Campaign.total_books_donated()
     display_campaigns = Campaign.query.filter_by(featured=True).filter_by(status='Approved').limit(6).all()
     if len(display_campaigns)<6:
         # add other campaigns to make 6
