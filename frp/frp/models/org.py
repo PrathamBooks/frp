@@ -274,7 +274,8 @@ class Campaign(BaseMixin, db.Model):
                 self.org.info.contact_number,
                 self.org.info.person1_email,
                 self.org.info.person1_phone,
-                self.languages]
+                self.languages,
+                self.total_impact_on_children]
 
     def donor_list(self):
         return map(lambda x: x.user_id, self.donations)
