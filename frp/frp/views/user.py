@@ -524,7 +524,7 @@ def download_donations():
 @roles_required('admin')    # Limits access to users with the 'admin' role
 @app.route("/download/campaigns",methods=['GET'])
 def download_campaigns():
-    campaigns = Campaign.query.all()
+    campaigns = Campaign.query.order_by(Campaign.created_at.desc()).all()
     campaigns_data = map(lambda x:x.campaign_details(),campaigns)
     header = ['Title','Start Date','Remaining Days','Number of Donors','Target amount','Books', 'LIC', 'Percentage', 'Funds Raised','Status','Name','Organization Email_Id','Organization Phone Numbers','Person Email_Id','Person Phone Number','Language', 'Children']
     campaigns_data.insert(0,header)
