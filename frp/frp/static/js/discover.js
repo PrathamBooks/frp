@@ -67,7 +67,7 @@ var DiscoverPage = function(args) {
       var $div_md_3 = $('<div/>').addClass('col-md-3').appendTo($campaigns);
       $div_md_3.click(function (campaign) {
         return function() {
-          window.location.href = '/campaign/' + campaign.id;
+          window.location.href = '/campaign/' + campaign.url;
         }
       }(campaign));
       $div_md_3.popover({
@@ -133,13 +133,13 @@ var DiscoverPage = function(args) {
         append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
       if (percent_funded < 100.0) {
-        var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
+        var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.url).
           addClass('btn browse-btn').
           html('Donate').
           appendTo($div_md_3);
       }
       else {
-        var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.id).
+        var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.url).
           addClass('btn browse-btn browse-btn-disabled').
           html('Donate').
           appendTo($div_md_3);

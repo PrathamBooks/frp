@@ -10,7 +10,7 @@
           <p> If you would like to try again, please click on the button below. </p>
 
           <div class="form-group row">
-            <a href={{ url_for('donate', campaign_id=campaign.id ) }} type="button" class="btn">Try Again</a>
+            <a href={{ url_for('donate', campaign_id=campaign.url() ) }} type="button" class="btn">Try Again</a>
           </div>
         </div>
       </div>

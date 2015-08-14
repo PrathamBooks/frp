@@ -1,6 +1,6 @@
 {% extends "partials/base.html" %}
 {% block meta_tags %}
-<meta property="og:url" content="http://donateabook.org.in/campaign/{{campaign.id}}"/>
+<meta property="og:url" content="http://donateabook.org.in/campaign/{{campaign.url()}}"/>
 <meta property="og:title" content="{{campaign.title}} on Pratham Books' Donate-a-Book"/>
 <meta property="og:image" content="http://donateabook.org.in/static/uploads/uploads/{{campaign.image}}"/>
 <meta property="og:description" content="Help India's children read. Donate books to a needy library."/>
@@ -9,7 +9,7 @@
 <meta name="twitter:title" content="{{campaign.title}} on Pratham Books' Donate-a-Book"/>
 <meta name="twitter:description" content="Help India's children read. Donate books to a needy library."/>
 <meta name="twitter:image" content="http://donateabook.org.in/static/uploads/uploads/{{campaign.image}}"/>
-<meta name="twitter:url" content="http://donateabook.org.in/campaign/{{campaign.id}}"/>
+<meta name="twitter:url" content="http://donateabook.org.in/campaign/{{campaign.url()}}"/>
 {% endblock %}
 {% block content %}
 <div class="container internal">
@@ -54,13 +54,13 @@
             <time><span>{{campaign.days_remaining()}}</span> Days Left</time>
           </h5>
           <div class="socialIcons">
-            <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'I am helping India\'s children read. Donate books on @prathambooks Donate-a-Book. #donateabook')"></span>
-            <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
+            <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.url()}}', 'I am helping India\'s children read. Donate books on @prathambooks Donate-a-Book. #donateabook')"></span>
+            <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.url()}}')"></span>
           </div>
           {% if campaign.percent_funded() >= 100 or campaign.status != 'Approved' %}
             <h5 class="amt amt-disabled" data-toggle="modal" data-target="#no-donation-modal"> Donate To This Campaign </h5> </a>
           {% else %}
-          <a href={{url_for('donate', campaign_id=campaign.id)}}>
+          <a href={{url_for('donate', campaign_id=campaign.url())}}>
             <h5 class="amt"> Donate To This Campaign </h5>
           </a>
           {% endif %}
@@ -128,7 +128,7 @@
                 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES * * */
                 var disqus_shortname = 'donateabook';
-                var disqus_identifier = 'campaign/{{campaign.id}}';
+                var disqus_identifier = 'campaign/{{campaign.url()}}';
                 var disqus_title = '{{campaign.title + " on Donate-a-Book" }}';
 
                 /* * * DON'T EDIT BELOW THIS LINE * * */

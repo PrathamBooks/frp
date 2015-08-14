@@ -3,6 +3,7 @@
 import os
 import sets
 import json
+import re
 from datetime import *
 import random
 import pyexcel_xls
@@ -74,7 +75,7 @@ def campaign_success():
 def donate_failure():
   donation_id, tracking_id, order_status = donate_service.ccavResponse(request.form['encResp']) 
   donation = Donation.query.get(int(donation_id))
-  campaign = donation.campaign  
+  campaign = donation.campaign
   db.session.delete(donation)
   db.session.commit()
   return render_template("donateFailure.html", campaign=campaign)
@@ -174,7 +175,7 @@ def donate_success():
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
 def campaign_edit(id):
-    campaign = Campaign.query.get(id)
+    campaign = campaign_from_url(id)
     if (campaign):
         form = BeneficiarySignupForm()
         form.set_edit_data(campaign)
@@ -317,7 +318,7 @@ def donate(campaign_id):
   if current_user.has_roles('admin'):
     return redirect("/admin/donate/"+str(campaign_id))
   else:  
-    campaign = Campaign.query.get(campaign_id)
+    campaign = campaign_from_url(campaign_id)
     admin_fields_enable = False
     if request.method == 'GET':
         if (campaign.status != 'Approved'):
@@ -345,7 +346,7 @@ def donate(campaign_id):
 @app.route("/change_featured",methods=['POST'])
 def change_featured():
     id = request.form['campaign_id']
-    campaign = Campaign.query.get(id)
+    campaign = campaign_from_url(id)
     campaign.featured = not campaign.featured
     db.session.add(campaign)
 
@@ -362,7 +363,7 @@ def change_featured():
 def change_status():
     id = request.form['campaign_id']
     status = request.form['updated_status']
-    campaign = Campaign.query.get(id)
+    campaign = campaign_from_url(id)
     old_status = campaign.status
     if (status != old_status):
         campaign.status = status
@@ -439,7 +440,7 @@ def add_comment():
     if request.method == "POST":
       id = request.form['campaign_id']
       new_comment = request.form['comment']
-      campaign = Campaign.query.get(id)
+      campaign = campaign_from_url(id)
       comment = Comment(comment_by=current_user, campaign_comment=campaign, comment=new_comment)
       db.session.add(comment)
       try:
@@ -453,7 +454,7 @@ def add_comment():
 
     if request.method == "GET":
       id = request.args['campaign_id']
-      campaign = Campaign.query.get(id)
+      campaign = campaign_from_url(id)
       comments = campaign.get_comments()
       return jsonify({"comments":comments})
 
@@ -611,9 +612,15 @@ def convertStatusTypeToString():
         return ORG_STATUS_CHOICES[status - 1]
     return dict(statusString=statusString)
 
+def campaign_from_url(url):
+    m = re.search('(\d+)', url)
+    id = m.group(0)
+    campaign = Campaign.query.get(id)
+    return campaign
+
 @app.route("/campaign/<id>", methods=['GET', 'POST'])
 def campaign(id):
-    campaign = Campaign.query.get(id)
+    campaign = campaign_from_url(id)
     if request.method == 'GET' or request.method == 'HEAD':
         return render_template('campaign.html', campaign=campaign)
     else:
@@ -638,7 +645,7 @@ def campaign(id):
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
 def donate_admin(campaign_id):
-    campaign = Campaign.query.get(campaign_id)
+    campaign = campaign_from_url(campaign_id)
     admin_fields_enable = True
     if request.method == 'GET':
         form = DonorForm()
@@ -687,7 +694,7 @@ def donate_admin(campaign_id):
 @login_required
 def donate_1(campaign_id):
     if current_app.config.get('DEBUG', True):
-        campaign = Campaign.query.get(campaign_id)
+        campaign = campaign_from_url(campaign_id)
         admin_fields_enable = False
         if request.method == 'GET':
             form = DonorForm()

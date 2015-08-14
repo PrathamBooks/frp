@@ -46,10 +46,10 @@
       </div>
     </div>
 
-    <div class="col-md-12 donorDash">  
+    <div class="col-md-12 donorDash">
       {% for campaign in campaigns %}
       <div class="col-md-3">
-        <h1> <a href={{ url_for('campaign',id=campaign.id) }}>{{ campaign.title[0:25] }}</a></h1>
+        <h1> <a href={{ url_for('campaign',id=campaign.url()) }}>{{ campaign.title[0:25] }}</a></h1>
         <div class="campaignInfo">
           <time><span>{{ campaign.days_remaining() }}</span> Days Left</time>
           <h4>{{ campaign.target() }} <span class="percentFunded"> {{ campaign.percent_funded() }} </span></h4>
@@ -58,10 +58,10 @@
           </div>
           <h5><span class="days">{{ "Active" if campaign.days_remaining() > 0 else "Inactive" }} </span> </h5>
           <div class="socialIcons">
-            <span class="tw"  onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.id}}', 'Help India\'s children read. Donate to a library on Pratham Donate-a-Book.')"></span>
-            <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.id}}')"></span>
+            <span class="tw"  onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.url()}}', 'Help India\'s children read. Donate to a library on Pratham Donate-a-Book.')"></span>
+            <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.url()}}')"></span>
           </div>
-          <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.id ) }}> Donate </a> </h5>
+          <h5 class="amt"> <a href={{ url_for('donate', campaign_id=campaign.url() ) }}> Donate </a> </h5>
         </div>
       </div>
       {% endfor %}

@@ -5,6 +5,7 @@ import inspect
 import sets
 from datetime import *
 from flask import current_app
+from string import split
 
 from . import db, BaseNameMixin, BaseMixin
 
@@ -255,7 +256,8 @@ class Campaign(BaseMixin, db.Model):
                 "status" : self.print_status(),
                 "featured" : self.featured,
                 "image" : self.image,
-                "funds_raised" :self.percent_funded()
+                "funds_raised" :self.percent_funded(),
+                "url" : self.url()
                 }
 
     def campaign_details(self):
@@ -304,5 +306,8 @@ class Campaign(BaseMixin, db.Model):
         needs = self.target() - self.total_donations() 
         needs = needs if needs > 0 else 0
         return needs
+
+    def url(self):
+        return str(self.id) + '-' + '-'.join(split(self.title, ' ')[0:3])
 
 

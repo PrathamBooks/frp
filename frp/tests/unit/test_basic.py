@@ -25,7 +25,7 @@ def test_add_campaign(test_db, seed_db, test_client):
     campaigns = Campaign.query.all()
     # Check Web
     for campaign in campaigns:
-        x = test_client.get("/campaign/"+str(campaign.id))
+        x = test_client.get("/campaign/"+str(campaign.url()))
         assert campaign.title in x.data.decode('utf-8')
 
 def test_add_donations(test_db, seed_db, test_client):
@@ -33,7 +33,7 @@ def test_add_donations(test_db, seed_db, test_client):
         campaign = Campaign.query.all()[0]
         total_donations = campaign.total_donations()
         donation = add_donation(campaign, 1000)
-        x = test_client.get("/campaign/"+str(donation.campaign.id))
+        x = test_client.get("/campaign/"+str(donation.campaign.url()))
         soup = BeautifulSoup(x.data)
         total_donations += donation.amount
         percent_funded = (total_donations*100.0)/campaign.target()
@@ -50,7 +50,7 @@ def test_del_donations(test_db, seed_db, test_client):
         total_donations -= donation.amount
         db.session.delete(donation)
         db.session.commit()
-        x = test_client.get("/campaign/"+str(campaign.id))
+        x = test_client.get("/campaign/"+str(campaign.url()))
         soup = BeautifulSoup(x.data)
         percent_funded = (total_donations*100.0)/campaign.target()
         assert soup.find('div', {'class': "funds-raised"}).contents[1].text == str(int(round(percent_funded)))+'%'

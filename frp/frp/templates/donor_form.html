@@ -42,7 +42,7 @@
                   {% endif%}
                   <div class="well">
                     <h3>You are donating books to Campaign: 
-                      <a href={{ url_for('campaign', id=campaign.id) }}>{{campaign.title}}</a>
+                      <a href={{ url_for('campaign', id=campaign.url()) }}>{{campaign.title}}</a>
                     </h3>
                     <h4> This campaign needs to raise Rs. {{campaign.needs()}} more to meet its target of {{campaign.books_target()}} books. </h4>
                     <div class="row form-group" >
