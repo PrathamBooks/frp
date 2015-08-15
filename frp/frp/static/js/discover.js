@@ -86,7 +86,7 @@ var DiscoverPage = function(args) {
       );
       var $h1 = $('<h1/>').appendTo($div_md_3);
       var $img = $('<img/>').
-        attr('src', '/static/uploads/uploads/' + campaign.image).
+        attr('src', '/static/uploads/size_2/' + campaign.image).
         attr('alt', 'campaign image').
         appendTo($h1);
       var $icons = $('<div/>').addClass('campaign-icons').appendTo($div_md_3);
