@@ -76,7 +76,7 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
     // Set chart options
     var user_options = $.extend(true, {}, that.default_user_options);
-    user_options.chart = {title: 'Users'};
+    user_options.chart = {title: 'Users (' + user_data.length + ')'};
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
   };
@@ -96,7 +96,7 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
     // Set chart options
     var user_options = $.extend(true, {}, that.default_user_options);
-    user_options.chart = {title : 'Campaigns'};
+    user_options.chart = {title : 'Campaigns (' + campaign_data.length + ')'};
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
   };
@@ -107,6 +107,7 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
     }
 
     dates = that.get_dates(donation_data, that.base_init, add);
+    var total_amount_raised = dates[dates.length - 1][2];
     dates = _.map(dates, function (d) {
                  return [d[0], d[1]];
               });
@@ -120,7 +121,7 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
     // Set chart options
     var user_options = $.extend(true, {}, that.default_user_options);
-    user_options.chart = {title : 'Donations Amount'};
+    user_options.chart = {title : 'Donations Amount (' + total_amount_raised + ')'};
     // Instantiate and draw our chart, passing in some options.
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
@@ -144,7 +145,7 @@ var AdminGraphs = function(user_data, campaign_data, donation_data) {
 
     // Set chart options
     var user_options = $.extend(true, {}, that.default_user_options);
-    user_options.chart = {title : '#Donations'};
+    user_options.chart = {title : '#Donations (' + donation_data.length + ')'};
     // Instantiate and draw our chart, passing in some options.
     var user_chart = new google.charts.Bar($div.get(0));
     user_chart.draw(user_chart_data, user_options);
