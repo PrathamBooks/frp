@@ -2941,7 +2941,7 @@ ul#socialThumbs li a.gPlus {
 }
 .socialIcons {
   float: left;
-  margin: 0 0 10px;
+  margin: 0 auto !important;
   width: 100%;
 }
 /****************************** login pages *************************************/
@@ -4036,6 +4036,21 @@ footer .row {
     margin-left: 10px;
   }
 }
+@media (max-width:991px) and (min-width:361px) {
+  .socialIcons {
+    float: left;
+    margin: 0 auto !important;
+    text-align: center;
+    width: 100%;
+  }
+  .campaignTop span.tw {
+    float: initial;
+  }
+  .campaignTop span.floatb {
+    float: initial;
+  }
+}
+
 @media screen and (min-width: 768px) and (max-width:991px) {
   header h1.logo {
     background-image: url("../images/pratham_logo.png");
@@ -4326,18 +4341,29 @@ i.location {
   letter-spacing: 1px;
 }
 .campaignTop span.tw {
-  background-image: url("../images/tw.png");
+  background-image: url("../images/tw-share.png");
   cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin: 6px 0 0;
+  height: 36px;
+  width: 118px;
 }
 .campaignTop span.tw:hover {
-  background-image: url("../images/twIconH.png");
+  background-image: url("../images/tw-share.png");
+  opacity: 0.7;
 }
 .campaignTop span.fb {
-  background-image: url("../images/fb.png");
+  background-image: url("../images/fb-share.png");
   cursor: pointer;
+  display: inline-blogIconck;
+  float: right;
+  height: 36px;
+  width: 118px;
 }
 .campaignTop span.fb:hover {
-  background-image: url("../images/fbIconH.png");
+  background-image: url("../images/fb-share.png");
+  opacity: 0.7;
 }
 @media screen and (min-width: 768px) and (max-width:991px) {
   .internal .col-md-9 .col-md-3 {
