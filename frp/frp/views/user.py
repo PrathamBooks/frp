@@ -248,6 +248,9 @@ def facebook_authorized(resp):
     data = facebook.get('me')
 
     user = signup_service.create_donor_from_facebook(data.data)
+    user.facebook_id = data.data['id']
+    db.session.add(user)
+    db.session.commit()
     login_user(user=user)
     return redirect(next_url)
 

@@ -50,6 +50,7 @@ class User(UserMixin, db.Model):
     contact_number = db.Column(db.String(15), nullable=True, default=u'')
     pan_number = db.Column(db.String(10), nullable=True, default=u'')
     need_80g_certificate = db.Column(db.Boolean, default=False,)
+    facebook_id = db.Column(db.String(100), nullable=True, default=u'')
 
     # Relationships
     user_auth = db.relationship('UserAuth', uselist=False)
