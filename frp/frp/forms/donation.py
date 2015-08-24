@@ -5,9 +5,9 @@ import coaster
 from .. import app
 from .signup import (STATES)
 
-AMOUNT_CHOICES = [(1000, u'Rs. 1000 (28 books)'), 
-                  (500, u'Rs. 500 (14 books)'),
-                  (250, u'Rs. 250 (7 books)')]
+AMOUNT_CHOICES = [(1000, u'Rs. 1000 (25 books)'), 
+                  (500, u'Rs. 500 (12 books)'),
+                  (250, u'Rs. 250 (6 books)')]
 ID_TYPE = [(u'P', u'Passport'),
            (u'DL', u'Driving License'),
            (u'PAN', u'PAN Card'),
