@@ -85,6 +85,10 @@ def edit_beneficiary(campaign, form, filename):
         new_file_name = str(campaign.id) + '.' + extension
         full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'uploads', new_file_name)
         copyfile(full_file_path, full_new_path)
+        full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'size_1', new_file_name)
+        copyfile(full_file_path, full_new_path)
+        full_new_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'size_2', new_file_name)
+        copyfile(full_file_path, full_new_path)
         campaign = Campaign.query.get(campaign.id)
         campaign.image = new_file_name
         db.session.add(campaign)
