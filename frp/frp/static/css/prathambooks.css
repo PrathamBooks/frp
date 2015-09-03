@@ -3386,6 +3386,29 @@ footer .row {
     background: rgba(0, 0, 0, 0) url("../images/caption.png") no-repeat scroll 0 0 / 93% auto;
   }
 }
+.socialshare {
+  float: left;
+  margin-top: 30px;
+  margin-topleft: 20px;
+}
+.socialshare span.tw {
+  background-image: url("../images/tw-share.png");
+  cursor: pointer;
+  display: inline-block;
+  float: left;block
+  margin: 6px 0 0px;
+  height: 36px;
+  width: 118px;
+}
+.socialshare span.fb {
+  background-image: url("../images/fb-share.png");
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  height: 36px;
+  width: 118px;
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {
   #featuredCampaign {
     height: auto;
@@ -4434,51 +4457,59 @@ i.location {
   label.checkboxLabel {
     width: 93%;
   }
-.beneficiary.donor .col-xs-4 {
-  width: 100%;
+  .beneficiary.donor .col-xs-4 {
+    width: 100%;
 
-}
+  }
+  .beneficiary.donor .col-xs-8 {
+    width: 100%;
 
-.beneficiary.donor .col-xs-8 {
-  width: 100%;
-
-}
-
-.beneficiary.donor  .col-xs-9 {
-  width: 100%;
-}
-
-.beneficiary.donor .col-xs-3 {
-  width: 100%;
-}
-#pratham-form .jumbotron h2 {
- 
-  font-size: 1.5em;
-margin-bottom:10px;
-}
-
-
-#pratham-form  .beneficiary.donor h3{ font-size: 2em;}
-
-#pratham-form  .beneficiary.donor h4 {
-  font-size: 1.5em;
-}
-
-#pratham-form .well p.help-block {
- 
-  padding: 0 0 0 15px;}
-
-
+  }
+  .beneficiary.donor  .col-xs-9 {
+    width: 100%;
+  }
+  .beneficiary.donor .col-xs-3 {
+    width: 100%;
+  }
+  #pratham-form .jumbotron h2 {
+    font-size: 1.5em;
+    margin-bottom:10px;
+  }
+  #pratham-form .beneficiary.donor h3 {
+    font-size: 2em;
+  }
+  #pratham-form  .beneficiary.donor h4 {
+    font-size: 1.5em;
+  }
+  #pratham-form .well p.help-block {
+    padding: 0 0 0 15px;
+  }
+  .socialshare {
+    float: inherit;
+    width: 260px;
+    margin: 0 auto 20px !important;
+  }
+  .socialshare span.tw,  .socialshare span.fb {
+    margin-bottomom: 15px;
+  }
+  .form-group.row.success .btn {
+    float: inherit !important;
+    width: 80% !important;
+    margin: 0 auto !important;
+    display: block;
+    text-align: center !important;
+    clear: both;
+    font-size: 15px !important;
+    line-height: 28px !important;
+  }
 }
 @media (max-width: 480px) {
   .internal .col-md-9 .col-md-3 {
     width: 85%;
   }
-
-#pratham-form .jumbotron h2 {
- 
- 
-  font-size: 1.5em;}
+  #pratham-form .jumbotron h2 {
+    font-size: 1.5em;
+  }
 }
 @media (max-width: 360px) {
   .internal .col-md-9 .col-md-3 {

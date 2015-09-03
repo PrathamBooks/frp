@@ -9,7 +9,11 @@
           <h4>Thank you for your donation to {{ campaign.title }} on Pratham Books’ <strong>Donate-a-Book</strong>. </h4>
           <p>If you chose to receive tax exemption certificate, you will hear from us soon.</p>
 
-          <div class="form-group row">
+          <div class="form-group row success">
+            <div class="socialshare">
+              <span class="tw" onclick="utils.twitter_share('http://donateabook.org.in/campaign/{{campaign.url()}}', 'I am helping India\'s children read. Donate books on @prathambooks Donate-a-Book. #donateabook')"></span>
+              <span class="fb" onclick="utils.fb_share('http://donateabook.org.in/campaign/{{campaign.url()}}')"></span>
+            </div>
             <a href="{{ url_for('discover') }}" type="button" class="btn">Donate to Similar Campaigns</a>
           </div>
         </div>

@@ -759,4 +759,10 @@ def memories():
         else:
             return render_template("memories.html", memories=all_memories, form=form)
 
+@app.route("/success",methods=['GET'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def success():
+    campaign = Campaign.query.all()[0]
+    return render_template('donateSuccess.html', campaign=campaign)
 
