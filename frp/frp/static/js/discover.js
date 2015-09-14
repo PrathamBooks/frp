@@ -43,19 +43,69 @@ var DiscoverPage = function(args) {
     var sort_by = $('input[name=sort-by]:checked').val();
     var sorted_data = filtered_data;
     if (sort_by === 'Featured') {
-      sorted_data = filtered_data.sort(function(a, b) { return (b.featured - a.featured) }); 
+      sorted_data = filtered_data.sort(function(a, b) {
+        if (a.status != b.status) {
+          if (a.status == 'Active') {
+            return -1;
+          }
+          if (a.status == 'Closed') {
+            return 1;
+          }
+        }
+        return (b.featured - a.featured);
+      });
     }
     else if (sort_by === 'Popular') {
-      sorted_data = filtered_data.sort(function(a, b) { return (b.num_donors - a.num_donors) }); 
+      sorted_data = filtered_data.sort(function(a, b) {
+        if (a.status != b.status) {
+          if (a.status == 'Active') {
+            return -1;
+          }
+          if (a.status == 'Closed') {
+            return 1;
+          }
+        }
+        return (b.num_donors - a.num_donors);
+      });
     }
     else if (sort_by === 'Recently Launched') {
-      sorted_data = filtered_data.sort(function(a, b) { return (b.days_remaining - a.days_remaining) }); 
+      sorted_data = filtered_data.sort(function(a, b) {
+        if (a.status != b.status) {
+          if (a.status == 'Active') {
+            return -1;
+          }
+          if (a.status == 'Closed') {
+            return 1;
+          }
+        }
+        return (b.days_remaining - a.days_remaining);
+      });
     }
     else if (sort_by == 'Ending Soon') {
-      sorted_data = filtered_data.sort(function(a, b) { return (a.days_remaining - b.days_remaining) }); 
+      sorted_data = filtered_data.sort(function(a, b) {
+        if (a.status != b.status) {
+          if (a.status == 'Active') {
+            return -1;
+          }
+          if (a.status == 'Closed') {
+            return 1;
+          }
+        }
+        return (a.days_remaining - b.days_remaining);
+      });
     }
     else if (sort_by == 'Most Funded') {
-      sorted_data = filtered_data.sort(function(a, b) { return (b.total_donations - a.total_donations) }); 
+      sorted_data = filtered_data.sort(function(a, b) {
+        if (a.status != b.status) {
+          if (a.status == 'Active') {
+            return -1;
+          }
+          if (a.status == 'Closed') {
+            return 1;
+          }
+        }
+        return (b.total_donations - a.total_donations);
+      });
     }
     that.show_after_filter_or_sort(sorted_data);
   }
@@ -132,7 +182,7 @@ var DiscoverPage = function(args) {
         append($('<span/>').addClass('days').html(campaign.status)).
         append($('<span/>').addClass('funders').html(campaign.num_donors)).
         appendTo($campaignInfo);
-      if (percent_funded < 100.0) {
+      if (percent_funded < 100.0 && campaign.status == 'Active') {
         var $donate_link = $('<a/>').attr('href', '/donate/'+campaign.url).
           addClass('btn browse-btn').
           html('Donate').
