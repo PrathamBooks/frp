@@ -681,6 +681,12 @@ def donate_admin(campaign_id):
               curr_percent = campaign.percent_funded()
               old_percent = curr_percent - int(round(donation.amount  * 100) /campaign.target())
               send_mail(old_percent=old_percent,curr_percent=curr_percent,campaign=campaign,donation=donation)
+
+              if (curr_percent >= 100):
+                campaign.status = 'Closed'
+                db.session.add(campaign)
+                db.session.commit()
+
               flash('Successfully donated for this campaign')
               return render_template('donor_form.html', form=form, campaign=campaign, admin_fields_enable=admin_fields_enable)
             else:
