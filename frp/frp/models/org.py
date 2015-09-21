@@ -262,7 +262,7 @@ class Campaign(BaseMixin, db.Model):
 
     def campaign_details(self):
         return [self.title,
-                "{:%B %d, %Y}".format(self.start_date()),
+                "{:%B %d, %Y}".format(self.end_date()),
                 self.days_remaining(),
                 self.num_donors(),
                 self.target(),
