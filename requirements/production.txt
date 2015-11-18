@@ -64,3 +64,5 @@ times==0.6.2
 webassets==0.8
 wsgiref==0.1.2
 gcs-oauth2-boto-plugin==1.8
+xhtml2pdf==0.0.6
+num2words==0.5.3
