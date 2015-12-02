@@ -1,13 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-  </head>
-
-  <body>
-    <p>
-      RECEIVED with thanks a sum of Rs.<strong>{{donation.amount}}</strong>(Rs. {{amount_string}}) from {{donation.donor.profile_name()}}
-      by way of online donation.
-    </p>
-  </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-tr>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Form</title>
+<style>
+body {
+    background: #fff none repeat scroll 0 0;
+    font-family: "Futura Lt BT Light";
+    font-size: 15px;
+    max-width: 800px;
+}
+#form {
+    margin: 0 auto;
+    padding: 1%;
+}
+.form-logo {
+    text-align: center;
+}
+.form-logo img {
+    max-width: 200px;
+}
+.form-header {
+    margin-bottom: 35px;
+    text-align: center;
+}
+.form-logo > p {
+    margin: 0 auto;
+    max-width: 510px;
+}
+.form-sign {
+    clear: both;
+    float: right;
+    margin: 1% 2% 2%;
+    max-width: 250px;
+    text-align: center;
+}
+.form-sign.img {
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+.grid_item.one-half {
+    width: 50%;
+}
+.grid.top_item {
+    float: left;
+    margin: 35px 0;
+    width: 100%;
+}
+.title {
+    display: inline-block;
+    margin-right: 5px;
+}
+.desc {
+    display: inline-block;
+}
+.grid {
+    clear: both;
+    margin: 35px 0;
+}
+.form-fotter {
+    background: #f8c301 none repeat scroll 0 0;
+    clear: both;
+    padding: 10px;
+    text-align: center;
+}
+.form-fotter > p {
+    margin: 0 auto;
+    max-width: 549px;
+}
+.left {
+    float: left;
+}
+.grid_item.one-half.right {
+    float: right;
+    text-align: right;
+}
+.form-cont {
+    margin: 0 10px;
+}
+.form-sign > img {
+    max-width: 70px;
+}
+.form-sign > p {
+    margin-top: 0;
+}
+</style>
+</head>
+<body>
+<div id="form">
+  <div class="form-header">
+    <div class="form-logo">
+      <img src="/home/infodigital/frp/frp/frp/static/images/pb_logo.png" title="logo" alt="Logo" />
+      <hr />
+      <p># 621, 2nd Floor, 5th Main, OMBR Layout, Banaswadi, Bengaluru - 560043
+        T: +91 80 42052574 / 41159009 |
+        <a href="http://www.prathambooks.org">www.prathambooks.org</a>
+      </p>
+    </div>
+  </div>
+  <div class="form-cont">
+    <div class="grid top_item">
+      <div class="grid_item one-half left">
+        <div class="title">
+          <strong> Dated: </strong>
+        </div>
+        <div class="desc">
+          26-11-2015
+        </div>
+      </div>
+      <div class="grid_item one-half right">
+        <div class="title">
+          <strong> Sr. No.: </strong>
+        </div>
+        <div class="desc">
+          PB0001/2015-16
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="grid_item">
+        <div class="title">
+          <strong> Received with thanks from: </strong>
+        </div>
+        <div class="desc">
+          {{donation.donor.profile_name()}}
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="grid_item">
+        <div class="title">
+          <strong> Amount: </strong>
+        </div>
+        <div class="desc">
+           Rs {{donation.amount}} (Rs. {{amount_string}} only) as a Donation towards <strong>Pratham Books' donate-a-book </strong>initiative.</p>
+        </div>
+    </div>
+    <div class="grid">
+      <div class="grid_item">
+        <div class="title">
+          <strong> Pan-Card: </strong>
+        </div>
+        <div class="desc">
+          {{donation.donor.pan_number}}
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="grid_item">
+        <div class="title">
+          <strong> Transaction number: </strong>
+        </div>
+        <div class="desc">
+          {{donation.confirmation}}
+        </div>
+      </div>
+    </div>
+    <div class="form-sign">
+      <p>For <strong>Pratham Books</strong>
+      </p>
+      <img src="/home/infodigital/frp/frp/frp/static/images/suzie_sign.jpg" title="Sign" alt="Sign" />
+      <p>
+        Chairperson, Pratham Books
+      </p>
+    </div>
+  </div>
+  <div class="form-fotter">
+    <p>Tax exemption u/s. 80(G) (S) (vi) of the I.T.Act 1961 as per ITO Letter No.
+      DIT(E)BLR/80G (R)/61/AAATP7221N/ITO (E)-2/Vol. 2012-13 dt. 16/07/2012 </p>
+  </div>
+</div>
+</body>
 </html>
+

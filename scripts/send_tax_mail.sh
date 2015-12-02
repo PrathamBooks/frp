@@ -12,4 +12,4 @@ VENV=/home/infodigital/frp-env
 # Activate virtualenv
 . ${VENV}/bin/activate
 
-python send_tax_mails.py mail
+python send_tax_mail.py mail
