@@ -11,7 +11,7 @@ from frp import app
 from frp.models import db
 from frp.models import (User, UserAuth, Role, USER_STATUS, is_email_exists,
                         Organization, OrganizationInfo, OrganizationWork, Campaign, 
-                        Donation, Comment, Memory)
+                        Donation, Comment, Memory, Receipt)
 from flask import current_app
 
 manager = Manager(app)
@@ -35,6 +35,12 @@ def resetdb():
     print "Creating them afresh"
     db.create_all()
     db.engine.execute('CREATE TRIGGER campaign_search_vector_trigger BEFORE UPDATE OR INSERT ON "campaign" FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(search_vector, \'pg_catalog.english\', title, description, who, impact, utilization, state, city, languages)')
+
+@manager.command
+def adddb():
+    global settings, db
+    print "Adding Tables"
+    db.create_all()
 
 @manager.command
 def seed():
@@ -108,7 +114,7 @@ def seed():
     donation = Donation(donor=user, campaign=campaign, amount=50000, confirmation=53499, 
             city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
             identification_type="DL", ann_choice=False,
-            tax_exemption_certificate=False)
+            tax_exemption_certificate=False, address="XYZ")
     db.session.add(donation)
     db.session.add(campaign)
 
@@ -122,7 +128,7 @@ def seed():
     donation = Donation(donor=user, campaign=campaign, amount=10000, confirmation=53499, 
             city="Bangalore", state="Karnataka", first_name="Sahil", identification="ABCDEF",
             identification_type="P", ann_choice=False,
-            tax_exemption_certificate=True)
+            tax_exemption_certificate=True, address="ABC")
     db.session.add(donation)
     comment = Comment(comment_by=user, campaign_comment=campaign, comment="[Dummy Comment 1]")
     db.session.add(comment)

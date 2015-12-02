@@ -23,6 +23,7 @@ class Donation(BaseMixin, db.Model):
     identification_type = db.Column(db.Unicode(10), nullable=False)
     ann_choice = db.Column(db.BOOLEAN,nullable=False)
     tax_exemption_certificate = db.Column(db.BOOLEAN,nullable=False)
+    receipt = db.relationship("Receipt", backref=db.backref("donation"))
 
     def __add__(self,o):
         return self.amount + o.amount
