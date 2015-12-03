@@ -1160,24 +1160,48 @@
 {% endblock %}
 {% block jsblock %}
 <script>
+
+// If the user put a #tab in the url, go to that tab
 var hash = document.location.hash;
 if (hash) {
    $('.nav-tabs a[href="'+hash+'"]').tab('show');
 } 
-$('a').click(function() {
-  var href = $(this).attr('href');
-  if (href.indexOf('/about#') == -1) {
-    return;
-  }
-  var hash = $(this).attr('href').replace('/about','');
-  $('.nav-tabs a[href="'+hash+'"]').tab('show');
-});
+
 $(function() {
     $("#accordion").accordion();
     $("#accordion2").accordion();
+
+    // Links from with in this page need to go to the tab
+    // as well.
+    $('a').click(function() {
+      var href = $(this).attr('href');
+      if (href.indexOf('/about#') == -1) {
+        return;
+      }
+      var hash = $(this).attr('href').replace('/about','');
+      $('.nav-tabs a[href="'+hash+'"]').tab('show');
+    });
+
+    // On click of a tab, change the url in the bar so that it can be cut/paste
+    // Put it in history so that back button can be made to work
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        window.history.pushState({}, '', e.target.href);
+    });
+
+    // When back button is pressed after a pushState, need to go the tab
+    // in the history
+    window.onpopstate = function(event) {
+      var href = document.location.href;
+      if (href.indexOf('/about#') == -1) {
+        return;
+      }
+      var hash = href.replace(/^.*about/,'');
+      $('.nav-tabs a[href="'+hash+'"]').tab('show');
+    }
 });
 
 (function($) {
+  // For responsive tabs
   fakewaffle.responsiveTabs(['xs', 'sm']);
 })(jQuery);
 </script>
