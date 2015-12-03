@@ -116,10 +116,13 @@ var DiscoverPage = function(args) {
       var campaign = data[i];
       var $div_md_3 = $('<div/>').addClass('col-md-3').appendTo($campaigns);
       $div_md_3.click(function (campaign) {
+        // From http://stackoverflow.com/questions/4907843/open-a-url-in-a-new-tab-and-not-a-new-window-using-javascript
         return function() {
-          window.location.href = '/campaign/' + campaign.url;
+          var url = '/campaign/' + campaign.url;
+          var win = window.open(url, '_blank');
+          win.focus();
         }
-      }(campaign));
+      } (campaign));
       $div_md_3.popover({
         title: campaign.title,
         container: 'body',
