@@ -477,6 +477,11 @@
                         </div>
 
                         <div class="form-group row">
+                          {{ render_url_field(form.twitter) }}
+                          <div class="alert alert-warning hide">Invalid Twitter link.</div>
+                        </div>
+
+                        <div class="form-group row">
                           {{ render_url_field(form.blog) }}
                           <div class="alert alert-warning hide">Invalid blog link.</div>
                         </div>
@@ -851,6 +856,12 @@
         </div>
         <div class="col-xs-6">
           <label id="facebook">Category</label>
+        </div>
+        <div class="col-xs-6">
+          <h5>Twitter link</h5>
+        </div>
+        <div class="col-xs-6">
+          <label id="twitter">Category</label>
         </div>
         <div class="col-xs-6">
           <h5>Blog link</h5>

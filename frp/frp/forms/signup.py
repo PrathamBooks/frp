@@ -114,6 +114,11 @@ class BeneficiarySignupForm(wtforms.Form):
             validators=[wtforms.validators.Optional(),
                 wtforms.validators.URL(),
                 wtforms.validators.Length(max=500)])
+    twitter = wtforms.TextField(
+            label='Twitter link', description=u'Twitter link should start with http://',
+            validators=[wtforms.validators.Optional(),
+                wtforms.validators.URL(),
+                wtforms.validators.Length(max=500)])
     blog = wtforms.TextField(
             label='Blog link', description=u'Blog link should start with http://',
             validators=[wtforms.validators.Optional(),
@@ -264,6 +269,7 @@ class BeneficiarySignupForm(wtforms.Form):
        self.contact_number.data = org.info.contact_number
        self.website.data = org.info.website
        self.facebook.data = org.info.facebook
+       self.twitter.data = org.info.twitter
        self.has_80g_certificate.data = org.info.has_80g_certificate
        self.person1_name.data = org.info.person1_name
        self.person1_position.data = org.info.person1_position

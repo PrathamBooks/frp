@@ -184,37 +184,6 @@ def campaign_edit(id):
             error_description="",
             error_uri=request.url)
 
-@app.route('/signup/beneficiary', methods=['GET', 'POST'])
-@login_required
-def signup_as_beneficiary():
-    if request.method == 'GET':
-        form = BeneficiarySignupForm()
-        if (current_user.organization_created):
-            form.set_data(current_user.organization_created[0])
-        return render_template('beneficiary_form.html', form=form)
-
-    elif request.method == 'POST':
-        form = BeneficiarySignupForm(request.form)
-        if form.validate():
-            image = request.files['imageUpload']
-            filename = secure_filename(image.filename)
-            if filename and allowed_file(filename):
-                full_save_path = os.path.join(app.config['UPLOAD_DIRECTORY'], 'tmp', filename)
-                image.save(full_save_path)
-
-            result = signup_service.create_beneficiary(form, filename)
-            if not result['error']:
-                mailer.send_email(to=current_user.email,
-                        subject="Congrats! You successfully created a campaign on Donate-a-Book!",
-                        template="new_campaign.html",
-                        profile_name=current_user.profile_name())
-                return redirect(url_for('campaign_success'))
-            else:
-                flash('Oops something went wrong, please try again')
-
-        print form.errors
-        return render_template('beneficiary_form.html', form=form)
-
 @app.route('/after_register')
 def after_register():
   # clear the flashes so that the message from flask_user does not show up on
@@ -403,7 +372,7 @@ class Start(views.MethodView):
     def get(self):
         form = BeneficiarySignupForm()
         if (current_user.is_active() and current_user.organization_created):
-            form.set_data(current_user.organization_created[0])
+            form.set_data(current_user.organization_created[-1])
         return render_template('start.html', form=form)
 
     @login_required

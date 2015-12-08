@@ -74,6 +74,11 @@
           <li><i class="languages"></i><span>Languages:</span> {{campaign.languages}} </li>
           <li><i class="beneficiary"></i><span>Beneficiary Type: </span>{{ statusString(campaign.org.info.status)[1] }} </li>
           <li><i class="location"></i><span>Location:</span> {{campaign.city}}, {{campaign.state}}</li>
+          {% if campaign.org.info.twitter != '' %}
+            <li><i class="twitter"></i><span>Twitter:</span>
+              <a href="{{campaign.org.info.twitter}}" target="_blank"> {{campaign.org.info.twitter}}</a>
+            </li>
+          {% endif %}
           {% if campaign.org.info.facebook != '' %}
             <li><i class="faceBook"></i><span>Facebook:</span>
               <a href="{{campaign.org.info.facebook}}" target="_blank"> {{campaign.org.info.facebook}}</a>

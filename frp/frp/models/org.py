@@ -85,6 +85,7 @@ class OrganizationInfo(BaseMixin, db.Model):
     contact_number = db.Column(db.String(15), nullable=True, default=u'')
     website = db.Column(db.Unicode(500), nullable=True, default=u'')
     facebook = db.Column(db.Unicode(500), nullable=True, default=u'')
+    twitter = db.Column(db.String(200), nullable=True, default=u'')
     blog = db.Column(db.Unicode(500), nullable=True, default=u'')
     has_80g_certificate = db.Column(db.Boolean(), nullable=False)
 

@@ -34,6 +34,7 @@ def edit_beneficiary(campaign, form, filename):
     info.email = form.email.data
     info.website = form.website.data
     info.facebook = form.facebook.data
+    info.twitter = form.twitter.data
     info.blog = form.blog.data
     info.has_80g_certificate = form.has_80g_certificate.data
     info.person1_name = form.person1_name.data
@@ -123,6 +124,7 @@ def create_beneficiary(form, filename):
     email = form.email.data
     website = form.website.data
     facebook = form.facebook.data
+    twitter = form.twitter.data
     blog = form.blog.data
     has_80g_certificate = form.has_80g_certificate.data
     person1_name = form.person1_name.data
@@ -142,7 +144,7 @@ def create_beneficiary(form, filename):
     # Create org info
     org_info = OrganizationInfo(
         org=org, email=email, category=category, status=status, address=address,
-        contact_number=contact_number, facebook=facebook, blog=blog,
+        contact_number=contact_number, facebook=facebook, twitter=twitter, blog=blog,
         website=website,
         has_80g_certificate=has_80g_certificate, person1_name=person1_name,
         person1_position=person1_position, person1_email=person1_email,

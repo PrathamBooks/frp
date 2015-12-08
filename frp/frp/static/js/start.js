@@ -123,6 +123,7 @@ var Start = function() {
       }
       $modal.find("#website").text($('input[name="website"]').val());
       $modal.find("#facebook").text($('input[name="facebook"]').val());
+      $modal.find("#twitter").text($('input[name="twitter"]').val());
       $modal.find("#blog").text($('input[name="blog"]').val());
       $modal.find("#target").text($("input[name='fundingGoal']").val());
       $modal.find("#who").text($("textarea[name='project_who_are_you']").val());
