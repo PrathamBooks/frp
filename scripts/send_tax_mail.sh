@@ -7,7 +7,7 @@ export FACEBOOK_CONSUMER_SECRET
 
 
 # Backup script for FRP, saves postgres and images to the cloud
-VENV=/home/infodigital/frp-env-new
+VENV=/home/infodigital/frp-env
 
 # Activate virtualenv
 . ${VENV}/bin/activate
