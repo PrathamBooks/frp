@@ -12,3 +12,4 @@ scratch
 /env_settings.sh
 scripts/tax_mail.html
 scripts/tax_mail.pdf
+*.log
