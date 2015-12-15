@@ -47,7 +47,12 @@
                     <h4> This campaign needs to raise Rs. {{campaign.needs()}} more to meet its target of {{campaign.books_target()}} books. </h4>
                     <div class="row form-group" >
                       <label for="amount_choice">Donation Amount<strong>*</strong></label>
-                      {{ render_bullets(form.amount_choice) }} 
+                      <div class="radio"><label><input type="radio" name="amount_choice" value="2500"> Rs. 2500 (62 books)</label></div>
+                      <div class="radio"><label><input type="radio" name="amount_choice" value="1000"> Rs. 1000 (25 books)</label></div>
+                      <div class="radio"><label> All donations above Rs. 1000 and made up till 22nd December will receive a limited edition Pratham Books 2016 Calendar. Conditions apply.</label></div>
+                      <div class="radio"><label><input type="radio" name="amount_choice" value="500"> Rs. 500 (12 books)</label></div>
+                      <div class="radio"><label><input type="radio" name="amount_choice" value="250"> Rs. 250 (6 books)</label></div>
+                      <!-- {{ render_bullets(form.amount_choice) }} -->
                       <div class="alert alert-warning hide">Select or Enter the donation amount</div>
                     </div>
 
