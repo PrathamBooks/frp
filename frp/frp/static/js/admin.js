@@ -12,15 +12,14 @@ var AdminPage = function(campaign_data)
           type: "POST",
           url: "/campaign/reopen",
           data: {
-            campaign_id: id,
-            updated_status: status
+            campaign_id: id
           },
           success: function(data) {
             alert("Campaign Reopened Succussfully");
             window.location= "/admin/dashboard"
           },
           error: function(errMsg) {
-            alert("errMsg");
+            alert(errMsg);
           }
         });
       }else{

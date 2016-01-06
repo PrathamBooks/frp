@@ -248,3 +248,37 @@ def create_donor_from_facebook(data):
 
     db.session.commit()
     return user
+
+def reopen(campaign):
+    new_target = campaign.target() - campaign.total_donations()
+    nbooks = int(round(new_target/40))
+    ###Find nbooks and nlic from new_target###########
+    new_campaign = Campaign(title=campaign.title,
+                           user_id=campaign.user_id,
+                           nbooks=nbooks,
+                           nlic=0,
+                           organization_id=campaign.organization_id,
+                           description=campaign.description,
+                           who=campaign.who,
+                           impact=campaign.impact,
+                           total_impact_on_children=campaign.total_impact_on_children,
+                           utilization=campaign.utilization,
+                           state=campaign.state,
+                           city=campaign.city,
+                           languages=campaign.languages,
+                           image=campaign.image,
+                           status="Approved",
+                           featured=campaign.featured,
+                           approved_at=datetime.datetime.now()
+                           )
+    db.session.add(new_campaign)
+    try:
+        db.session.commit()
+    except Exception as e:
+        app.logger.warning(e)
+        app.logger.warning('Unable to save campaign')
+        db.session.rollback()
+        return {'error': True, 'exc': e}
+
+    return {'error': False,
+            'new_campaign': new_campaign}
