@@ -184,6 +184,38 @@ def campaign_edit(id):
             error_description="",
             error_uri=request.url)
 
+@app.route("/campaign/reopen", methods=['POST'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def campaign_reopen():
+  id = request.form['campaign_id']
+  campaign = campaign_from_url(id)
+  new_target = (campaign.target()-campaign.total_donations())
+  nbooks = int(round(new_target/40))
+  ###Find nbooks and nlic from new_target###########
+  new_campaign = Campaign(title=campaign.title,
+                           user_id=campaign.user_id,
+                           nbooks = nbooks,
+                           nlic = "0",
+                           organization_id=campaign.organization_id,
+                           description=campaign.description,
+                           who=campaign.who,
+                           impact=campaign.impact,
+                           total_impact_on_children=campaign.total_impact_on_children,
+                           utilization=campaign.utilization,
+                           state=campaign.state,
+                           city=campaign.city,
+                           languages=campaign.languages,
+                           image = campaign.image,
+                           status = "Approved",
+                           featured = campaign.featured,
+                           approved_at = datetime.now(),
+                           search_vector = campaign.search_vector
+                           )
+  db.session.add(new_campaign)
+  db.session.commit()
+  return redirect('/admin/dashboard')
+
 @app.route('/after_register')
 def after_register():
   # clear the flashes so that the message from flask_user does not show up on
