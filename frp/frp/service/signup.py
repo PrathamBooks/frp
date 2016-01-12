@@ -252,7 +252,6 @@ def create_donor_from_facebook(data):
 def reopen(campaign):
     new_target = campaign.target() - campaign.total_donations()
     nbooks = int(round(new_target/40))
-    ###Find nbooks and nlic from new_target###########
     new_campaign = Campaign(title=campaign.title,
                            user_id=campaign.user_id,
                            nbooks=nbooks,
