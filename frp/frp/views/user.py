@@ -184,6 +184,19 @@ def campaign_edit(id):
             error_description="",
             error_uri=request.url)
 
+@app.route("/campaign/reopen", methods=['POST'])
+@login_required
+@roles_required('admin')    # Limits access to users with the 'admin' role
+def campaign_reopen():
+  id = request.form['campaign_id']
+  campaign = campaign_from_url(id)
+  if campaign.status == "Closed":
+    signup_service.reopen(campaign)
+    campaign.status="Reopened"
+    db.session.add(campaign)
+    db.session.commit()
+  return redirect('/admin/dashboard')
+
 @app.route('/after_register')
 def after_register():
   # clear the flashes so that the message from flask_user does not show up on

@@ -7,7 +7,23 @@ var AdminPage = function(campaign_data)
     $('#campaigns').on('change', 'select', function(e) {
       var id = parseInt($(this).parents('tr').attr('id').replace ( /[^\d.]/g, '' ),10);
       var status = $(this).val();
-      $.ajax({
+      if ($(this).val() == "Reopen"){
+          $.ajax({
+          type: "POST",
+          url: "/campaign/reopen",
+          data: {
+            campaign_id: id
+          },
+          success: function(data) {
+            alert("Campaign Reopened Succussfully");
+            window.location= "/admin/dashboard"
+          },
+          error: function(errMsg) {
+            alert(errMsg);
+          }
+        });
+      }else{
+        $.ajax({
         type: "POST",
         url: "/change_status",
         data: {
@@ -22,6 +38,7 @@ var AdminPage = function(campaign_data)
           alert(errMsg);
         }
       });
+      }  
     });
 
     $('#campaigns').on('click', '.glyphicon', function(e) {
@@ -133,7 +150,9 @@ var AdminPage = function(campaign_data)
       {val : 'Pending Approval', text: 'Pending Approval'},
       {val : 'Closed', text: 'Closed'}
     ];
-
+    if (data.status == "Closed"){
+      arr.push({val : 'Reopen', text: 'Reopen'})
+    }
     var $sel = $('<select/>').addClass('label label-info');
     $(arr).each(function() {
       $sel.append($("<option>").attr('value',this.val).text(this.text));
