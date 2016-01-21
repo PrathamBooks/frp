@@ -7,3 +7,4 @@ VENV=/home/infodigital/frp-env
 . ${VENV}/bin/activate
 
 python backup_db.py
+python backup_tax_receipts.py
