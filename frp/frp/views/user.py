@@ -195,7 +195,10 @@ def campaign_reopen():
     campaign.status="Reopened"
     db.session.add(campaign)
     db.session.commit()
-  return redirect('/admin/dashboard')
+    campaign_data = campaign.verbose_fields()
+    return jsonify(campaign_data)
+  else:
+    return "Cannot reopen a campaign that is not Closed", 500
 
 @app.route('/after_register')
 def after_register():

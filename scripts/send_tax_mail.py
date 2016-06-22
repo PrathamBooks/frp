@@ -88,12 +88,19 @@ def create_receipt_for_donation(donation):
         db.session.commit()
     return receipt
 
+def send_mails_for(useremail):
+    donor = User.query.filter(User.email == useremail).one()
+    donations = donor.donations
+    for donation in donations:
+        print str(donation.id) + ' ' + donation.donor.email + ' ' + donation.identification + ' ' + donation.confirmation + ' ' + str(donation.tax_exemption_certificate) + ' ' + "{:%B %d, %Y}".format(donation.created_at)
+        receipt = create_receipt_for_donation(donation)
+        send_mail_for_donation(donation, receipt)
+
+
 def send_mails_after(days):
     now = datetime.now()
     past_0 = now - timedelta(days=days)
     past_1 = now - timedelta(days=days+1)
-    print past_0
-    print past_1
     donations = Donation.query.filter(Donation.created_at <= past_0,
                                       Donation.created_at > past_1,
                                       Donation.confirmation != '',
@@ -101,9 +108,8 @@ def send_mails_after(days):
                                       Donation.confirmation != None).all()
     for donation in donations:
         print str(donation.id) + ' ' + donation.donor.email + ' ' + donation.identification + ' ' + donation.confirmation + ' ' + str(donation.tax_exemption_certificate) + ' ' + "{:%B %d, %Y}".format(donation.created_at)
-        # receipt = create_receipt_for_donation(donation)
-        # send_mail_for_donation(donation, receipt)
-        return
+        receipt = create_receipt_for_donation(donation)
+        send_mail_for_donation(donation, receipt)
 
 def send_old_mails():
     past_1 = datetime(2015, 9, 24)
@@ -131,16 +137,17 @@ def send_mail_for_donation(donation, receipt):
 
     # https://github.com/volker48/flask-mandrill
     mandrill.send_email(
-    	from_email='donateabook@prathambooks.org',
-     	subject='eReceipt of your donation on Donate-a-Book',
-     	to=[{'email': donation.donor.email}, {'email': 'ereceipts@prathambooks.org', 'type': 'cc'}],
-     	text="Dear " + donation.donor.profile_name() + ",\n\n" + "We wish to express our heartfelt gratitude for your contribution of Rs. " + str(donation.amount) + ". on " + "{:%d/%m/%Y}".format(donation.created_at) + " towards Pratham Books' Donate-a-Book platform. Your support has been significant in helping India's children read. \n\nYour donation is tax deductible in India. We've attached a PDF copy of your eReceipt with this email. For any further information on your donation, please contact donateabook@prathambooks.org.\n\nThanking You.\n\nRegards,\n\nTeam Donate-a-Book",
+     	from_email='donateabook@prathambooks.org',
+      	subject='eReceipt of your donation on Donate-a-Book',
+      	to=[{'email': donation.donor.email}, {'email': 'ereceipts@prathambooks.org', 'type': 'cc'}],
+      	text="Dear " + donation.donor.profile_name() + ",\n\n" + "We wish to express our heartfelt gratitude for your contribution of Rs. " + str(donation.amount) + ". on " + "{:%d/%m/%Y}".format(donation.created_at) + " towards Pratham Books' Donate-a-Book platform. Your support has been significant in helping India's children read. \n\nYour donation is tax deductible in India. We've attached a PDF copy of your eReceipt with this email. For any further information on your donation, please contact donateabook@prathambooks.org.\n\nThanking You.\n\nRegards,\n\nTeam Donate-a-Book",
         attachments=[{'type': 'application/pdf', 'name': pdf_file_name, 'content': pdf}]
     )
 
 @manager.command
 def mail():
     send_mails_after(30)
+    # send_mails_for("sapadmanab@yahoo.co.uk")
 
 if __name__ == '__main__':
      manager.run()
