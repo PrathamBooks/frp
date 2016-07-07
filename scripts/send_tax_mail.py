@@ -92,9 +92,10 @@ def send_mails_for(useremail):
     donor = User.query.filter(User.email == useremail).one()
     donations = donor.donations
     for donation in donations:
-        print str(donation.id) + ' ' + donation.donor.email + ' ' + donation.identification + ' ' + donation.confirmation + ' ' + str(donation.tax_exemption_certificate) + ' ' + "{:%B %d, %Y}".format(donation.created_at)
-        receipt = create_receipt_for_donation(donation)
-        send_mail_for_donation(donation, receipt)
+	if donation.confirmation != None:
+            print str(donation.id) + ' ' + donation.donor.email + ' ' + donation.identification + ' ' + donation.confirmation + ' ' + str(donation.tax_exemption_certificate) + ' ' + "{:%B %d, %Y}".format(donation.created_at)
+            receipt = create_receipt_for_donation(donation)
+            send_mail_for_donation(donation, receipt)
 
 
 def send_mails_after(days):
@@ -107,9 +108,10 @@ def send_mails_after(days):
                                       Donation.tax_exemption_certificate == True,
                                       Donation.confirmation != None).all()
     for donation in donations:
-        print str(donation.id) + ' ' + donation.donor.email + ' ' + donation.identification + ' ' + donation.confirmation + ' ' + str(donation.tax_exemption_certificate) + ' ' + "{:%B %d, %Y}".format(donation.created_at)
-        receipt = create_receipt_for_donation(donation)
-        send_mail_for_donation(donation, receipt)
+	if donation.confirmation != None:
+            print str(donation.id) + ' ' + donation.donor.email + ' ' + donation.identification + ' ' + donation.confirmation + ' ' + str(donation.tax_exemption_certificate) + ' ' + "{:%B %d, %Y}".format(donation.created_at)
+            receipt = create_receipt_for_donation(donation)
+            send_mail_for_donation(donation, receipt)
 
 def send_old_mails():
     past_1 = datetime(2015, 9, 24)
@@ -147,7 +149,8 @@ def send_mail_for_donation(donation, receipt):
 @manager.command
 def mail():
     send_mails_after(30)
-    # send_mails_for("sapadmanab@yahoo.co.uk")
+    # send_mails_for("senthilcool@gmail.com")
+    # send_mails_for("kuchlous@gmail.com")
 
 if __name__ == '__main__':
      manager.run()

@@ -105,7 +105,7 @@ body {
           <strong> Dated: </strong>
         </div>
         <div class="desc">
-          26-11-2015
+	  {{"{:%B %d, %Y}".format(donation.created_at.date())}}
         </div>
       </div>
       <div class="grid_item one-half right">
