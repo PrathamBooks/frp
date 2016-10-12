@@ -8,6 +8,33 @@ from logging import FileHandler
 from flask_mail import Mail
 from flask_user import UserManager, SQLAlchemyAdapter
 from ..models import db
+import jinja2
+
+_js_escapes = {
+        '\\': '\\u005C',
+        '\'': '\\u0027',
+        '"': '\\u0022',
+        '>': '\\u003E',
+        '<': '\\u003C',
+        '&': '\\u0026',
+        '=': '\\u003D',
+        '-': '\\u002D',
+        ';': '\\u003B',
+        u'\u2028': '\\u2028',
+        u'\u2029': '\\u2029'
+}
+# Escape every ASCII character with a value less than 32.
+_js_escapes.update(('%c' % z, '\\u%04X' % z) for z in xrange(32))
+
+def jinja2_escapejs_filter(value):
+        retval = []
+        for letter in value:
+                if _js_escapes.has_key(letter):
+                        retval.append(_js_escapes[letter])
+                else:
+                        retval.append(letter)
+
+        return jinja2.Markup("".join(retval))
 
 def init_app(app, settings='settings/development.py'):
     print "Loading config from %s" % settings
@@ -45,6 +72,7 @@ def init_app(app, settings='settings/development.py'):
                  "css/slider.css",
                  "css/fonts.css",
                  "css/prathambooks.css",
+		 filters="cssmin",
                  output='gen/all.css')
 
     underscore = Bundle("lib/underscore/underscore.js",
@@ -60,8 +88,10 @@ def init_app(app, settings='settings/development.py'):
                     "js/tablesorter.js",
                     "lib/bootstrap/bootstrap.file-input.js",
                     "js/responsive-tabs.js",
+                    filters="jsmin",
                     output="gen/lib.js")
 
     assets.register('css_site', css)
     assets.register('app_js', app_js)
     assets.register('underscore', underscore)
+    app.jinja_env.filters['escapejs'] = jinja2_escapejs_filter
