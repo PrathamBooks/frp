@@ -611,7 +611,7 @@ def campaign_from_url(url):
 def campaign(id):
     campaign = campaign_from_url(id)
     if request.method == 'GET' or request.method == 'HEAD':
-        return render_template('campaign.html', campaign=campaign)
+        return render_template('campaign.html', campaign=campaign, enable_inactive_campaign=current_user.is_active() and current_user.has_roles('admin'))
     else:
         form = BeneficiarySignupForm(request.form)
         if form.validate():
@@ -624,7 +624,7 @@ def campaign(id):
             result = signup_service.edit_beneficiary(campaign, form, filename)
             if not result['error']:
                 flash('You successfully edited the campaign')
-                return render_template('campaign.html', campaign=campaign)
+                return render_template('campaign.html', campaign=campaign, enable_inactive_campaign=current_user.is_active() and current_user.has_roles('admin'))
             else:
                 flash('Oops something went wrong, please try again')
         return render_template('beneficiary_form.html', form=form)
