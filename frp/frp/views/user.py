@@ -304,7 +304,9 @@ def search():
 @login_required
 def donate(campaign_id):
   if current_user.has_roles('admin'):
-    return redirect("/admin/donate/"+str(campaign_id))
+    m = re.search('(\d+)', campaign_id)
+    id = m.group(0)
+    return redirect("/admin/donate/"+str(id))
   else:  
     campaign = campaign_from_url(campaign_id)
     admin_fields_enable = False
