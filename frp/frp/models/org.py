@@ -298,7 +298,10 @@ class Campaign(BaseMixin, db.Model):
         return ((int (self.days_remaining())) > 0 )
 
     def percent_funded(self):
-        return int(round((self.total_donations() * 100) /self.target()))
+        if self.target() > 0:
+		return int(round((self.total_donations() * 100) /self.target()))
+	else:
+		return 100
 
     def books_donated(self):
         return int(round(self.total_donations() / self.cost_per_book()))
