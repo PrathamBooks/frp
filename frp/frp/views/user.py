@@ -230,7 +230,7 @@ def facebook_authorized(resp):
 
     session['logged_in'] = True
     session['facebook_token'] = (resp['access_token'], '')
-    data = facebook.get('me')
+    data = facebook.get('me?fields=name,email')
 
     user = signup_service.create_donor_from_facebook(data.data)
     user.facebook_id = data.data['id']
