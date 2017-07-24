@@ -32,6 +32,7 @@
             <div class="login-links">
               <a href="{{ url_for('user.register', next=form.next.data) }}" tabindex='190'> New here? Sign up.</a>
               <a href="{{ url_for('user.forgot_password') }}" >Forgot Password</a>
+              <a href="{{ url_for('user.resend_confirm_email') }}" > Didn't receive confirmation email?</a>
             </div>
           </div>
         </form>

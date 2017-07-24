@@ -631,6 +631,7 @@ def campaign(id):
                 flash('Oops something went wrong, please try again')
         return render_template('beneficiary_form.html', form=form)
 
+from sqlalchemy import func
 # This code has been added for alternate workflow for donations that directly come to PB
 @app.route("/admin/donate/<campaign_id>", methods=['GET', 'POST'])
 @login_required
@@ -649,7 +650,7 @@ def donate_admin(campaign_id):
             amount = form.amount_choice.data
             if not amount:
                 amount = form.customize_amount.data
-            donor = User.query.filter_by(email=form.user_email.data).first()
+            donor = User.query.filter(func.lower(email)==func.lower(form.user_email.data)).first()
             if donor:
               donation = Donation(amount=amount,
                       donor=donor,
