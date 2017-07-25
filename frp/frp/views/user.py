@@ -650,7 +650,7 @@ def donate_admin(campaign_id):
             amount = form.amount_choice.data
             if not amount:
                 amount = form.customize_amount.data
-            donor = User.query.filter(func.lower(email)==func.lower(form.user_email.data)).first()
+            donor = User.query.filter(func.lower(User.email)==func.lower(form.user_email.data)).first()
             if donor:
               donation = Donation(amount=amount,
                       donor=donor,
