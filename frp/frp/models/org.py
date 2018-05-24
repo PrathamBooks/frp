@@ -263,6 +263,7 @@ class Campaign(BaseMixin, db.Model):
 
     def campaign_details(self):
         return [self.title,
+                "{:%B %d, %Y}".format(self.start_date()),
                 "{:%B %d, %Y}".format(self.end_date()),
                 self.days_remaining(),
                 self.num_donors(),
@@ -278,7 +279,9 @@ class Campaign(BaseMixin, db.Model):
                 self.org.info.person1_email,
                 self.org.info.person1_phone,
                 self.languages,
-                self.total_impact_on_children]
+                self.total_impact_on_children,
+                self.state,
+                self.city]
 
     def donor_list(self):
         return map(lambda x: x.user_id, self.donations)
