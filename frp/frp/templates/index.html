@@ -17,10 +17,10 @@
       <a class="right carousel-control arrR" href="#carousel-banner" role="button" data-slide="next"></a>
       <div class="carousel-inner">
         <div class="item active">
-          <a href="{{url_for('discover')}}"> <img src="/static/images/DoB_Banner_donor.jpg"> </a>
+          <a href="{{url_for('discover')}}"> <img src="/static/images/book_monsoon.jpg"> </a>
         </div>
         <div class="item">
-          <a href="http://blog.prathambooks.org/2017/01/little-bookworms-at-akshay-school.html"> <img src="/static/images/DAB-Banner-Akshay-School.jpg"> </a>
+          <a href="{{url_for('discover')}}"> <img src="/static/images/DoB_Banner_donor.jpg"> </a>
         </div>
         <div class="item">
           <a href="{{url_for('discover')}}"> <img src="/static/images/DoB_Banner_donor2.jpg"> </a>
@@ -79,9 +79,9 @@
             {% if display_campaigns|length %}
               {% set i=0 %}
               {% for campaign in display_campaigns %}
-                {% if i%3 == 0 %}
+                {% if (loop.index - 1) % 3 == 0 %}
                   {% set active = "" %}
-                  {% if i == 0 %}
+                  {% if (loop.index - 1) == 0 %}
                     {% set active = "active" %}
                   {% endif %}
                   <div class="item {{active}}">
@@ -99,8 +99,7 @@
                     <a href={{ url_for('donate', campaign_id=campaign.url() ) }} class="btn browse-btn"> Donate </a>
                   </div>
                 </div>
-                {% set i = i+1 %}
-                {% if i%3 == 0 %}
+                {% if (loop.index % 3 == 0) %}
                   </div>
                 {% endif %}
               {% endfor %}

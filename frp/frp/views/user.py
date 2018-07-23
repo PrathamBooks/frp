@@ -6,7 +6,7 @@ import json
 import re
 from datetime import *
 import random
-import pyexcel_xls
+# import pyexcel_xls
 from flask import (render_template,
                    g,
                    url_for,
@@ -18,8 +18,8 @@ from flask import (render_template,
                    jsonify,
                    current_app,
                    get_flashed_messages)
-from flask.ext.oauth import OAuth
-from flask.ext import excel
+from flask_oauth import OAuth
+import flask_excel as excel
 from werkzeug import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
 from flask_login import login_user

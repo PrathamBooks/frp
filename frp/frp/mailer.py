@@ -6,7 +6,7 @@ import socket
 
 from flask import render_template, current_app
 from flask_mail import Mail as FlaskMail, Message as FlaskMailMessage
-from flask.ext.sendmail import Mail as FlaskSendmail, Message as FlaskSendmailMessage
+from flask_sendmail import Mail as FlaskSendmail, Message as FlaskSendmailMessage
 
 class Mailer(object):
     def send_email(self, to, subject, template, **vals):

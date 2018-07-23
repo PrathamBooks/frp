@@ -1,6 +1,6 @@
 import os
 
-from flask.ext.assets import Environment, Bundle
+from flask_assets import Environment, Bundle
 from ..settings._version import __version__
 import logging
 from logging.handlers import SMTPHandler

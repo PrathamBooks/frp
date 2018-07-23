@@ -9,7 +9,7 @@ from string import split
 
 from . import db, BaseNameMixin, BaseMixin
 
-from flask.ext.sqlalchemy import SQLAlchemy, BaseQuery
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
 from sqlalchemy_searchable import make_searchable
@@ -199,6 +199,8 @@ class Campaign(BaseMixin, db.Model):
     def approved_date_set(self):
         self.approved_at = datetime.now()
 
+    def add_days(self, days):
+        self.approved_at = self.approved_at + timedelta(days=days)
 
     def days_remaining(self):
         if (self.approved_at != None):

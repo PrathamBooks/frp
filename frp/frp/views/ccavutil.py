@@ -10,6 +10,7 @@ def pad(data):
 
 def encrypt(plainText,workingKey):
     	iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
+        plainText = plainText.encode('utf-8')
 	plainText = pad(plainText)
     	encDigest = md5.new ()
     	encDigest.update(workingKey)
