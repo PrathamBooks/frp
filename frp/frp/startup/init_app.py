@@ -9,6 +9,7 @@ from flask_mail import Mail
 from flask_user import UserManager, SQLAlchemyAdapter
 from ..models import db
 import jinja2
+import flask_excel as excel
 
 _js_escapes = {
         '\\': '\\u005C',
@@ -43,6 +44,7 @@ def init_app(app, settings='settings/development.py'):
 
     db.init_app(app)
     db.app = app
+    excel.init_excel(app)
 
     if not app.debug:
         file_handler = FileHandler('server.log')

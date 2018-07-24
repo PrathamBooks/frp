@@ -6,7 +6,7 @@ import json
 import re
 from datetime import *
 import random
-# import pyexcel_xls
+import pyexcel_xls
 from flask import (render_template,
                    g,
                    url_for,
@@ -509,7 +509,6 @@ def download_donations():
             "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
     donations_data.insert(0,header)
     return excel.make_response_from_array(donations_data, "xls")
-
 
 @login_required
 @roles_required('admin')    # Limits access to users with the 'admin' role
