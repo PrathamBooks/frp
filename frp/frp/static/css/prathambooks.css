@@ -1918,33 +1918,7 @@ span.featured-campaign {
   line-height: 35px;
   margin: 0 0 0 20px;
 }
-.startCampaign .faq .tou ul {
-  padding: 0;
-  margin: 0;
-  float: left;
-  width: 100%;
-}
-.startCampaign .faq .tou ul li strong {
-  float: left;
-  font-family: "ligurino-condensed", sans-serif !important;
-  font-size: 0.65em;
-  font-weight: normal;
-  letter-spacing: 1px;
-  padding: 10px 0 5px;
-  color: #6c5e26;
-}
-.startCampaign .faq .tou ul li p {
-  font-size: .6em;
-}
-.startCampaign .faq .tou ul li ul li {
-  font-size: .85em !important;
-}
-.startCampaign .faq .tou ul li ul li strong {
-  font-size: .6em !important;
-}
-.startCampaign .faq .tou ul li ul li p {
-  font-size: .45em;
-}
+
 .startCampaign .form .col-md-12 {
   padding: 0 15px !important;
 }
@@ -2132,14 +2106,14 @@ span.featured-campaign {
 .startCampaign #goal.well .form-group {
   padding: 5px 0;
 }
-.startCampaign #privacy h2 {
+.startCampaign #privacy h2, .startCampaign #terms h2 {
   width: 100%;
   color: #6c5e26;
   font-family: "ligurino-condensed", sans-serif !important;
   font-size: 1em !important;
   margin: 20px 0 10px;
 }
-.startCampaign #privacy ul {
+.startCampaign #privacy ul, .startCampaign #terms ul {
   color: #6c5e26;
   float: left;
   font-size: 0.8em;
@@ -2147,10 +2121,12 @@ span.featured-campaign {
   list-style-type: initial;
   width: 100%;
 }
-.startCampaign #privacy ul li {
-  line-height: 33px;
-  list-style-type: disc;
-  margin: 0 0 0 40px;
+.startCampaign #privacy ul li, .startCampaign #terms ul li {
+  line-height: 25px;
+  margin: 0 0 10px 40px;
+}
+.startCampaign #privacy ul li ul, .startCampaign #terms ul li ul {
+  font-size: 1em;
 }
 .startCampaign #contact address {
   float: left;
@@ -4628,11 +4604,11 @@ i.blog {
     padding-left: 20px!important;
     width: 100%;
   }
-  .startCampaign #privacy ul {
+  .startCampaign #privacy ul, .startCampaign #terms ul {
     line-height: 22px;
     font-size: 14px;
   }
-  .startCampaign #privacy ul li {
+  .startCampaign #privacy ul li, .startCampaign #terms ul li {
     line-height: 22px;
   }
   .startCampaign .faq .tou ul.alert-warning li {
