@@ -5,7 +5,8 @@ import coaster
 from .. import app
 from .signup import (STATES)
 
-AMOUNT_CHOICES = [(2500, u'Rs. 2500 (62 books)'),
+AMOUNT_CHOICES = [(5000, u'Rs. 5000 (125 books or 1 Library-in-a-Classroom kit)'),
+                  (2500, u'Rs. 2500 (62 books)'),
                   (1000, u'Rs. 1000 (25 books)'),
                   (500, u'Rs. 500 (12 books)'),
                   (250, u'Rs. 250 (6 books)')]
