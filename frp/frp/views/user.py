@@ -213,12 +213,14 @@ def login_via_facebook():
     if request.args.get('next'):
         return facebook.authorize(
             callback=url_for('facebook_authorized',
-                         next=request.args.get('next'),
-                         _external=True))
+                         # next=request.args.get('next'),
+                         _external=True,
+                         _scheme="https"))
     else:
         return facebook.authorize(
             callback=url_for('facebook_authorized',
-                         _external=True))
+                         _external=True,
+                          _scheme="https"))
 
 
 @app.route("/login/facebook_authorized")
@@ -504,9 +506,10 @@ def admin_graphs():
 @app.route("/download/donations",methods=['GET'])
 def download_donations():
     donations = Donation.query.all()
-    donations_data = map(lambda x:x.donation_details(),donations)
-    header = ["Donor Name"," Donor City","Donor State","Donor Address","Identification_Type","Identification","Donor Email", "Date", "Campaign Title", "Amount Donated",
-            "Anonymous Donor", "80 G Cert Requested", "Confirmation Number"]
+    donations_data = map(lambda x:x.donation_details() + x.donor.user_details(),donations)
+    header = ["Donor Name","Donor City","Donor State","Donor Address","Identification_Type","Identification","Donor Email", "Date", "Campaign Title", "Amount Donated",
+            "Anonymous Donor", "80 G Cert Requested", "Confirmation Number",
+            "User Name", "User Address", "User City", "User State", "User PIN", "User Phone"]
     donations_data.insert(0,header)
     return excel.make_response_from_array(donations_data, "xls")
 

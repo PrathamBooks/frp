@@ -82,6 +82,14 @@ class User(UserMixin, db.Model):
         pos_of_at = self.email.find('@')
         return self.email[:pos_of_at]
 
+    def user_details(self):
+      return [self.profile_name(),
+              self.address,
+              self.city,
+              self.state,
+              self.pin,
+              self.contact_number]      
+
     @staticmethod
     def admin_emails():
         admin_role = Role.query.filter(Role.name == 'admin').first();
