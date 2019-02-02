@@ -6,7 +6,6 @@ import json
 import re
 from datetime import *
 import random
-import pyexcel_xls
 from flask import (render_template,
                    g,
                    url_for,
